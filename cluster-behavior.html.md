@@ -2,12 +2,11 @@
 title: Cluster Scaling, Node Failure, and Quorum
 ---
 
-
 Documented here are scenarios in which the size of a cluster may change, how the cluster behaves, and how to restore service function when impacted. [Galera Cluster](http://galeracluster.com) is used to manage the [MariaDB](https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/) cluster in our release.
 
 ### Healthy Cluster
 
-Galera documentation refers to nodes in a healthy cluster as being part of a [primary component](http://galeracluster.com/documentation-webpages/glossary.html#term-primary-component). These nodes will respond normally to all queries, reads, writes and database modifications.
+Galera documentation refers to nodes in a healthy cluster as being part of a [primary component](http://galeracluster.com/documentation-webpages/glossary.html#term-primary-component). These nodes will respond normally to all queries, reads, writes, and database modifications.
 
 If an individual node is unable to connect to the rest of the cluster (ex: network partition) it becomes non-primary (stops accepting writes and database modifications). In this case, the rest of the cluster should continue to function normally. A non-primary node may eventually regain connectivity and rejoin the primary component.
 
@@ -69,7 +68,7 @@ Existing nodes restarted with monit should automatically join the cluster. If an
   - If deployed using a proxy, a continually inactive node will cause the proxy to fail over, selecting a different mysql node to route new queries to.
 
 ### Re-bootstrapping the cluster after quorum is lost
-  - The start script will currently bootstrap node 0 only on initial deploy. If bootstrapping is necessary at a later date, it must be done manually. For more information on manually bootstrapping a cluster, see [Bootstrapping Galera](bootstrapping.html).
+  - The start script will currently bootstrap node 0 only on initial deploy. If bootstrapping is necessary at a later date, it must be done manually. For more information about manually bootstrapping a cluster, see [Bootstrapping Galera](bootstrapping.html).
   - If the single node is bootstrapped, it will create a new one-node cluster that other nodes can join.
 
 ### Simulating node failure

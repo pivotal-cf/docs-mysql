@@ -1,5 +1,8 @@
 # Known Issues
 
+### MySQL Backups to AWS S3
+In versions of p-mysql 1.7.X and earlier, backups can only be sent to AWS S3 buckets that have been created in the [US Standard](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) region, aka, "us-east-1." This limitation will be addressed in future releases.
+
 ### Elastic Runtime HTTPS-only feature
 Support for the Experimental HTTPS-only feature is broken in p-mysql versions 1.6.X and earlier. The HTTPS-only feature works as designed in p-mysql 1.7.0 and later.
 

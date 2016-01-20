@@ -2,8 +2,8 @@
 title: Back Up MySQL for Pivotal Cloud Foundry&reg;
 ---
 
+## <a id="automated-backups"></a>Automated Backups ##
 
-# Automated Backups
 In versions of p-mysql 1.7.0.0 and higher, automated backups can be enabled in the "Configure Backups" section. Backups has the following features:
 
 - Periodically create and upload backup artifacts suitable for restoring the complete set of database instances allocated in the service.
@@ -20,8 +20,8 @@ Backups are enabled by default. If you do not wish for this deployment to be bac
 1. Switch to "Resource Config," section, and change the number of instances for `Backup Prepare Node` from 1 to 0.
 1. Return to the Installation Dashboard, and click `Apply Changes`.
 
+### <a id="configuring-step-by-step"></a>Configuring Backups Step-by-Step ###
 
-## Configuring Backups Step-by-Step
 For each step, refer to the screenshot above.
 
 1. Select "Enable Backups"
@@ -32,7 +32,8 @@ For each step, refer to the screenshot above.
 
 <p class="note"><strong>Note</strong>: For large databases, the default storage for the `Backup Prepare Node` may not be sufficient. In order to compress and encrypt backup artifacts, the VM must be configured with twice the amount of ephemeral disk space as the persistent disk space of the `MySQL Server` nodes.</p>
 
-## Understanding Backup Metadata
+### <a id="understanding-metadata"></a>Understanding Backup Metadata ###
+
 Along with each release, p-mysql will upload a `mysql-backup-XXXXXXXXXX.txt` file. The contents of that file will look something like this:
 
 ```
@@ -60,7 +61,7 @@ encrypted = N
 Within this file, the most important items are the `start_time` and the `server_version` entries. Transactions that have not been completed at the start of the backup effort will **not** be present in the restored artifact.
 
 
-## Restoring a Backup Artifact
+### <a id="restoring"></a>Restoring a Backup Artifact ###
 
 p-mysql is normally HA, in that it keeps at least two complete copies of the data. In most cases, if a cluster is still able to connect to persistent storage, you can restore a cluster to health using the [bootstrap process](bootstrapping.html). Before resorting to a database restore, please check with support to be sure that your existing cluster is beyond help.
 
@@ -108,7 +109,8 @@ In the event of a total cluster loss,the process to restore a backup artifact to
 
 ---
 
-# Manual Process
+## <a id="manual-process"></a>Manual Process ##
+
 If you do not wish to use the automated facility included in p-mysql, you can still perform backups manually.
 
 - Locate the IP address for the MySQL node in the Status tab.
@@ -119,7 +121,7 @@ If you do not wish to use the automated facility included in p-mysql, you can st
 
   ![MySQL Server Root Password](mysql-root-password.png)
 
-## Backup
+### <a id="manual-backup"></a>Manual Backup ###
 
   Manual backup can be performed with [mysqldump](https://mariadb.com/kb/en/mariadb/mysqldump/).
   This backup acquires a global read lock on all tables, but does not hold it for the entire duration of the dump.
@@ -136,7 +138,8 @@ If you do not wish to use the automated facility included in p-mysql, you can st
     $ mysqldump -u root -p -h $MHQL_NODE_IP $DB_NAME > user_databases.sql
     ```
 
-## Restore
+### <a id="manual-restore"></a>Manual Restore ###
+
   Restoring from a backup is the same whether one or multiple databases were backed up.
   Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
 
@@ -146,5 +149,6 @@ If you do not wish to use the automated facility included in p-mysql, you can st
     $ mysql -u root -p -h $MYSQL_NODE_IP < user_databases.sql
     ```
 
-### Examples
+
+### <a id="examples"></a>Examples ###
   More examples can be found in the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/mysqldump/#examples).

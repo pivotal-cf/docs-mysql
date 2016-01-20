@@ -2,13 +2,37 @@
 title: Release Notes
 ---
 
-## <a id="1-8-0"></a>1.8.0 **Beta**
+## <a id="1-8-0"></a>1.8.0-Edge.1
 
-Release date: **N/A**
+Release date: 20 January 2016
 
-Now introducing multiple service plans!
+Introducing three great new features:
+- Multiple service plans
+- `bosh` bootstrap errand
+- Arbitrator
 
 **Note**: On upgrade from a version of p-MySQL that offered only a single plan, the plan will be renamed. Regardless of the name of the previous plan (e.g., "100mb-dev"), the plan will now be named, `pre-existing-plan`. It's not possible to automatically reset the plan to the former name. If you wish to retain the same plan name, it's fine to edit that plan name before clicking 'Apply Changes' when upgrading to p-MySQL v1.8.0.
+
+## <a id="1-7-2"></a>1.7.2
+
+- See below, same update as [version 1.6.5](#1-6-5)
+
+## <a id="1-6-5"></a>1.6.5
+
+Release date: 18 January 2016
+
+- Updated stemcell to 3146.3. This is a security upgrade that resolves [CVE-2016-0715](https://pivotal.io/security/cve-2016-0715). Additional information can be found at https://pivotal.io/security.
+
+## <a id="1-7-1"></a>1.7.1
+
+- See below, same update as [version 1.6.4](#1-6-4)
+
+## <a id="1-6-4"></a>1.6.4
+
+Release date: 07 January 2016
+
+- Updated stemcell to 3146.2. This is a security upgrade that resolves the following Ubuntu Security Notices:
+  - USN-2857-1, USN-2842-1, USN-2842-2, USN-2836-1, USN-2834-1, USN-2830-1, and USN-2829-1
 
 ## <a id="1-7-0-4"></a>1.7.0.4
 
