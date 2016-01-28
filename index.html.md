@@ -4,14 +4,7 @@ title: MySQL
 
 This is documentation for the MySQL service for [Pivotal Cloud Foundry&reg;](https://network.pivotal.io/products/pivotal-cf).
 
-## <a id="edge-release"></a>Edge Release ##
-
-We're experimenting with Edge releases in order to give early adopters access to features before a release is Feature Complete.  With Edge releases, we can better follow the Semantic Versioning convention by avoiding introducing features in patch releases.
-
-If we stick with this pilot, an Edge release will expose our users to Pivotal's agile process. As we add features they'll be test-driven and have passed through continuous integration.  Edge releases are considered production quality. When a full release is Feature Complete, we'll drop the 'edge' moniker and release the minor, eg 1.9.0, version. Subsequent patch releases, 1.9.1, 1.9.2, etc. will contain only security and bug fixes. New features will be released in the next edge release, 1.10.0-Edge.1.
-
-
-## <a id="product-snapshot"></a>Product Snapshot ##
+## Product Snapshot
 
 Current MySQL for Pivotal Cloud Foundry&reg; Details
 <div style="line-height: 1; padding-left: 3em">
@@ -27,7 +20,7 @@ Current MySQL for Pivotal Cloud Foundry&reg; Details
 
 </div>
 
-## <a id="upgrading"></a>Upgrading to the Latest Version ##
+## Upgrading to the Latest Version
 Consider the following compatibility information before upgrading MySQL.
 
 For more information, refer to the full [Product Version Matrix](../compatibility-matrix.pdf).
