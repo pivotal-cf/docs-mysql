@@ -21,6 +21,7 @@ Release date: 20 January 2016
 - **New Feature:** Multiple service plans
   - **Note:** On upgrade from a version of p-MySQL that offered only a single plan, the default plan will be renamed. Regardless of the name of the previous plan (e.g., `100mb-dev`), the plan will now be named, `pre-existing-plan`. It's not possible to automatically reset the plan to the former name. If you wish to retain the same plan name, it's fine to edit that plan name before clicking 'Apply Changes' when upgrading to p-MySQL v1.8.0. See [the documentation](./index.html#service-plan) for more information.
 - **New Feature:** `bosh` bootstrap errand
+- MariaDB updated to version 10.0.22 and Galera 25.3.9.
 
 ## <a id="1-7-6"></a>1.7.6
 
