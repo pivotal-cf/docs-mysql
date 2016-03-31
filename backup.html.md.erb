@@ -1,5 +1,6 @@
 ---
 title: Back Up MySQL for Pivotal Cloud Foundry&reg;
+owner: MySQL
 ---
 
 ## <a id="automated-backups"></a>Automated Backups ##
@@ -71,14 +72,14 @@ In the event of a total cluster loss,the process to restore a backup artifact to
 
 - Discover the encryption keys in the `Credentials` tab of the p-mysql tile.
 
-1. If necessary, install the same version of the `p-mysql` product in OpsManager.
+1. If necessary, install the same version of the `p-mysql` product in Ops Manager.
 1. Reduce the size of the p-mysql cluster to a single node
     1. Select P-MySQL tile > Settings > Resource Config > MySQL Server > Instances, and set to 1
     1. Click "Save"
     1. Click "Back to Installation Dashboard," then "Apply Changes"
     1. Wait for deployment to succeed
 1. Prepare the first node for restoration
-    1. [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) onto the OpsManager Director
+    1. [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) onto the Ops Manager Director
     1. From there, use BOSH to the [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) onto first mysql job
         - IP address can be found in P-MySQL > Status > MySQL Server
         - VM credentials can be found in  P-MySQL > Credentials > MySQL Server > Vm Credentials
@@ -142,11 +143,26 @@ If you do not wish to use the automated facility included in p-mysql, you can st
 
   Restoring from a backup is the same whether one or multiple databases were backed up.
   Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
+  
+  **Warning**: Restoring a database will delete all data that existed in the database prior to the restore. If a full database server is restored (such as using `mysqldump --all-databases`), this will replace all existing database user permissions. 
 
   - Restore from the data dump:
 
     ```
     $ mysql -u root -p -h $MYSQL_NODE_IP < user_databases.sql
+    ```
+   
+  - Clear database permissions cache:
+    
+    ```
+    $ mysql -u root -p -h $MYSQL_NODE_IP -e 'FLUSH PRIVILEGES;'
+    ```
+   
+
+  - Flush privileges in order to re-apply user privilege grants. This needs to be done since the backup process ports over the system tables using INSERT statements (and not GRANTs):
+
+    ```
+    $ mysql -u root -p -h $MYSQL_NODE_IP -e "FLUSH PRIVILEGES"
     ```
 
 

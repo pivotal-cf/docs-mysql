@@ -1,5 +1,6 @@
 ---
 title: Cluster Scaling, Node Failure, and Quorum
+owner: MySQL
 ---
 
 Documented here are scenarios in which the size of a cluster may change, how the cluster behaves, and how to restore service function when impacted. [Galera Cluster](http://galeracluster.com) is used to manage the [MariaDB](https://mariadb.com/kb/en/mariadb/what-is-mariadb-galera-cluster/) cluster in our release.
