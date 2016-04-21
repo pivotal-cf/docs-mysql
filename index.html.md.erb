@@ -79,7 +79,7 @@ For more information, refer to the full [Product Version Matrix](../../compatibi
 		<td rowspan="2">1.6.1 - 1.6.9</td>
 		<td>Next 1.6.X release - 1.7.6</td>
 	  <tr>
-		  <td>1.8.0-edge.1 - 1.8.0-edge.3</td>
+		  <td>1.8.0-edge.1 - 1.8.0-edge.4</td>
 	  </tr>
 	</tr>
 
@@ -182,9 +182,11 @@ Provisioning a service instance from this plan creates a MySQL database on a mul
 ### <a id="Options and Features"></a>Options and Features ###
 
 In the `Database Configuration` pane, you can change the configuration of the following features:
-- Reverse DNS lookups
+
+- Disable Reverse DNS lookups
 
     This feature is normally turned off in p-mysql. Do not turn this feature off unless you intend to restrict access to the database based on hostname. This is not necessary during the normal operation of p-mysql, and will impose a small overhead on each new connection to the database.
+
 - Read-Only User Password
 
     Activates a special user, `roadmin`, a read-only administrator. Supply a special password, to be used only by administrators who require the ability to view all of the data maintained by the p-mysql installation. Leaving the field blank de-activates the read-only user.
