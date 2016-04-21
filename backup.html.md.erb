@@ -31,7 +31,7 @@ For each step, refer to the screenshot above.
 1. Provide an AWS Access Key and Secret Access Key in the following fields. We recommend that you create an [IAM](https://aws.amazon.com/iam/) credential that only has access to this bucket.
 1. Specify how often you'd like backups to occur in the final field, "Cron Schedule." The [syntax definition](http://godoc.org/github.com/robfig/cron) is similar to traditional cron, plus easy features such as, `@every 1d` to back up once per day.
 
-<p class="note"><strong>Note</strong>: For large databases, the default storage for the `Backup Prepare Node` may not be sufficient. In order to compress and encrypt backup artifacts, the VM must be configured with twice the amount of ephemeral disk space as the persistent disk space of the `MySQL Server` nodes.</p>
+<p class="note"><strong>Note</strong>: For large databases, the default storage for the <code>Backup Prepare Node</code> may not be sufficient. In order to compress and encrypt backup artifacts, the VM must be configured with twice the amount of ephemeral disk space as the persistent disk space of the <code>MySQL Server</code> nodes.</p>
 
 ### <a id="understanding-metadata"></a>Understanding Backup Metadata ###
 
@@ -61,7 +61,7 @@ encrypted = N
 
 Within this file, the most important items are the `start_time` and the `server_version` entries. Transactions that have not been completed at the start of the backup effort will **not** be present in the restored artifact.
 
-**Note**: Both `compressed` and `encrypted` show as `N` in this file, yet the artifact uploaded by p-mysql is both. This is a known defect, and will be fixed in a future release.
+<p class="note"><strong>Note</strong>: Both <code>compressed</code> and <code>encrypted</code> show as <code>N</code> in this file, yet the artifact uploaded by p-mysql is both. This is a known defect, and will be fixed in a future release.</p>
 
 ### <a id="restoring"></a>Restoring a Backup Artifact ###
 
@@ -146,7 +146,7 @@ If you do not wish to use the automated facility included in p-mysql, you can st
   Restoring from a backup is the same whether one or multiple databases were backed up.
   Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
 
-  <p class="note"><strong>Warning:</strong> Restoring a database will delete all data that existed in the database prior to the restore. Restoring a database using a full backup artifact, produced by `mysqldump --all-databases` for example, will replace all data and user permissions.</p>
+  <p class="note"><strong>Warning:</strong> Restoring a database will delete all data that existed in the database prior to the restore. Restoring a database using a full backup artifact, produced by <code>mysqldump --all-databases</code> for example, will replace all data and user permissions.</p>
 
   - Restore from the data dump:
 
