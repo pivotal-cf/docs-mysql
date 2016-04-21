@@ -1,5 +1,6 @@
 ---
 title: Bootstrapping a Galera Cluster
+owner: MySQL
 ---
 
 Bootstrapping is the process of (re)starting a Galera cluster.

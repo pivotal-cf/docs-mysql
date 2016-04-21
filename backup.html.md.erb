@@ -1,5 +1,6 @@
 ---
 title: Back Up MySQL for Pivotal Cloud Foundry&reg;
+owner: MySQL
 ---
 
 ## <a id="automated-backups"></a>Automated Backups ##
@@ -60,6 +61,7 @@ encrypted = N
 
 Within this file, the most important items are the `start_time` and the `server_version` entries. Transactions that have not been completed at the start of the backup effort will **not** be present in the restored artifact.
 
+**Note**: Both `compressed` and `encrypted` show as `N` in this file, yet the artifact uploaded by p-mysql is both. This is a known defect, and will be fixed in a future release.
 
 ### <a id="restoring"></a>Restoring a Backup Artifact ###
 
@@ -71,32 +73,33 @@ In the event of a total cluster loss,the process to restore a backup artifact to
 
 - Discover the encryption keys in the `Credentials` tab of the p-mysql tile.
 
-1. If necessary, install the same version of the `p-mysql` product in OpsManager.
+1. If necessary, install the same version of the `p-mysql` product in Ops Manager.
 1. Reduce the size of the p-mysql cluster to a single node
     1. Select P-MySQL tile > Settings > Resource Config > MySQL Server > Instances, and set to 1
     1. Click "Save"
     1. Click "Back to Installation Dashboard," then "Apply Changes"
     1. Wait for deployment to succeed
 1. Prepare the first node for restoration
-    1. [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) onto the OpsManager Director
+    1. [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) onto the Ops Manager Director
     1. From there, use BOSH to the [ssh](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh) onto first mysql job
         - IP address can be found in P-MySQL > Status > MySQL Server
         - VM credentials can be found in  P-MySQL > Credentials > MySQL Server > Vm Credentials
-    1. Become super user
-        > sudo su
-    1. Pause the local database server
-       > monit stop all
-    1. Use `watch monit summary` to confirm that all jobs are listed as 'not monitored'
-    1. Delete the existing mysql data which is stored on disk
-       > rm -rf /var/vcap/store/mysql/*
+    1. Become super user<br>
+      `sudo su`
+    1. Pause the local database server<br>
+      `monit stop all`
+    1. Confirm that all jobs are listed as 'not monitored'<br>
+      `watch monit summary`
+    1. Delete the existing mysql data which is stored on disk<br>
+      `rm -rf /var/vcap/store/mysql/*`
 1. Restore the backup
     1. Move the compressed backup (named e.g. `mysql-backup.tar.bzip2`) to the node (e.g. via `scp`)
-    1. Decrypt the file using the `gpg` command
-       > gpg mysql-backup-1444362715.tar.gpg
-    1. Expand the backup artifact into the data director of MySQL
-       > tar xvjf mysql-backup.tar.bzip2 --directory=/var/vcap/store/mysql
-    1. MySQL process expects data directory to be owned by a particular user
-       > chown -R vcap:vcap /var/vcap/store/mysql
+    1. Decrypt the file using the `gpg` command<br>
+      `gpg --decrypt mysql-backup-1444362715.tar.gpg`
+    1. Expand the backup artifact into the data director of MySQL<br>
+      `tar xvjf mysql-backup.tar.bzip2 --directory=/var/vcap/store/mysql`
+    1. MySQL process expects data directory to be owned by a particular user<br>
+      `chown -R vcap:vcap /var/vcap/store/mysql`
     1. `monit start all`
     1. `watch monit summary` until all jobs are listed as 'running'
     1. Exit out of the MySQL node
@@ -143,12 +146,21 @@ If you do not wish to use the automated facility included in p-mysql, you can st
   Restoring from a backup is the same whether one or multiple databases were backed up.
   Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
 
+  <p class="note"><strong>Warning:</strong> Restoring a database will delete all data that existed in the database prior to the restore. Restoring a database using a full backup artifact, produced by `mysqldump --all-databases` for example, will replace all data and user permissions.</p>
+
   - Restore from the data dump:
 
     ```
     $ mysql -u root -p -h $MYSQL_NODE_IP < user_databases.sql
     ```
 
+  - Re-apply users privileges:
+
+    ```
+    $ mysql -u root -p -h $MYSQL_NODE_IP -e "FLUSH PRIVILEGES"
+    ```
+    This command tells the cluster to re-load user permissions using the data that has just been restored.
 
 ### <a id="examples"></a>Examples ###
+
   More examples can be found in the [MariaDB documentation](http://mariadb.com/kb/en/mariadb/mysqldump/#examples).

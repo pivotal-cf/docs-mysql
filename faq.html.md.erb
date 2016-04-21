@@ -1,0 +1,26 @@
+---
+title: Frequently Asked Questions
+---
+
+### I see lots of replication errors in my logs! Is the cluster broken?
+
+Unless the GRA files show a clear execution error (e.g., out of disk space) this is a normal behavior, and it's nothing to worry about. We will be working on more advanced monitoring to detect the failure case, and alert Operators in the future.
+
+Occasionally, you'll see replication errors in the MySQL logs that will look something like this:
+```
+160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
+160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: 2ca8bf5f-eb92-11e5-8350-36d64912c596 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
+160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0750af39_1e8a_4d9f_8bcc_b983efe6a77a'. Query: 'ALTER TABLE ...'
+```
+
+What this is saying is that someone (probably an app) issued an "ALTER TABLE" command that failed to apply to the current schema. More often than not, this is user error.
+
+The node that receives the request processes it as any MySQL server will, if it fails, it just spits that failure back to the app, and the app needs to decide what to do next. That part is normal. HOWEVER, in a Galera cluster, all DDL is replicated, and all replication failures are logged. So in this case, the bad ALTER TABLE command will be run by both slave nodes, and if it fails, those slave nodes will log it as a "replication failure" since they can't tell the difference.
+
+It's really hard to get a valid DDL to work on some nodes, yet fail on others. Usually those cases are limited to out of disk space or working memory. We haven't duplicated that yet.
+
+#### But I found a blog article that suggests that the schemata can get out of sync?
+
+> https://www.percona.com/blog/2014/07/21/a-schema-change-inconsistency-with-galera-cluster-for-mysql/
+
+The key thing about this post is that he had to deliberately switch a node to RSU, which p-mysql never does except during SST. So this is a demonstration of what is possible, but does not explain how a customer may actually experience this in production.

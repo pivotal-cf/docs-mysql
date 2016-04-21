@@ -1,5 +1,6 @@
 ---
 title: Cluster Configuration
+owner: MySQL
 ---
 
 
@@ -14,7 +15,7 @@ The `rsync` method is usually fastest. The `xtrabackup` method has the advantage
 Our cluster defaults to 1GB for log file size to support larger blob.
 
 ### Max User Connections
-To ensure all users get fair access to system resources, we have capped each user's number of connections to 40.
+To ensure all users get fair access to system resources, we default each user's number of connections to 40. Operators can override this setting, per plan, in the Service Plans configuration pane.
 
 ### Skip External Locking
 Since each Virtual Machine only has one mysqld process running, we do not need external locking.
@@ -29,7 +30,12 @@ Innodb allows using either a single file to represent all data, or a separate fi
 To take advantage of all the extra features available with the `innodb_file_per_table = ON` option, we use the `Barracuda` file format.
 
 ### Temporary Tables
-
 MySQL is configured to convert temporary in-memory tables to temporary on-disk tables when a query EITHER generates more than 16 million rows of output or uses more than 32MB of data space.
 Users can see if a query is using a temporary table by using the EXPLAIN command and looking for "Using temporary," in the output.
 If the server processes very large queries that use /tmp space simultaneously, it is possible for queries to receive no space left errors.
+
+### Reverse Name resolution
+Since our connection authentication is implemented using user credentials, the default implementation does not restrict to host names from which a user may connect. To save time on each new connection, we've turned off reverse name resolution by default.
+
+### Large Data File Ingestion
+Now that a major bug has been fixed in MariaDB, we enable `wsrep_load_data_splitting` which splits large data imports into separate transactions to enable loading data into a MariaDB cluster.

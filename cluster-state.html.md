@@ -1,5 +1,6 @@
 ---
 title: Determining Cluster State
+owner: MySQL
 ---
 
 Connect to each MySQL node using a mysql client and check its status.

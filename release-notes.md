@@ -1,6 +1,20 @@
 ---
 title: Release Notes
+owner: MySQL
 ---
+
+## <a id="1-8-0-e4"></a>1.8.0-Edge.4
+
+Release date: 8 April 2016
+
+- Automated backups can now additionally target a Ceph back-end storage service or direct to another host via SCP.
+- New `Database Configuration` settings page
+  - Includes the option to enable a read-only user.
+  - Allows an override to activate DNS reverse name resolution.
+- Additional mysql server tuning tweaks to improve performance.
+- MariaDB updated to version 10.0.23.
+- **Bug fix:** Operator can now override the default number of open files while taking backups.
+- **Bug fix:** Allow Operator to override S3 endpoint default.
 
 ## <a id="1-8-0-e3"></a>1.8.0-Edge.3
 
@@ -21,6 +35,7 @@ Release date: 20 January 2016
 - **New Feature:** Multiple service plans
   - **Note:** On upgrade from a version of p-MySQL that offered only a single plan, the default plan will be renamed. Regardless of the name of the previous plan (e.g., `100mb-dev`), the plan will now be named, `pre-existing-plan`. It's not possible to automatically reset the plan to the former name. If you wish to retain the same plan name, it's fine to edit that plan name before clicking 'Apply Changes' when upgrading to p-MySQL v1.8.0. See [the documentation](./index.html#service-plan) for more information.
 - **New Feature:** `bosh` bootstrap errand
+- MariaDB updated to version 10.0.22 and Galera 25.3.9.
 
 ## <a id="1-7-6"></a>1.7.6
 
@@ -73,6 +88,7 @@ Release date: 2 February 2016
   - [USN-2882-1](http://www.ubuntu.com/usn/usn-2882-1)
   - [USN-2879-1](http://www.ubuntu.com/usn/usn-2879-1)
   - [USN-2875-1](http://www.ubuntu.com/usn/usn-2875-1)
+  - [USN-2874-1](http://www.ubuntu.com/usn/usn-2874-1)
   - [USN-2871-1](http://www.ubuntu.com/usn/usn-2871-1)
   - [USN-2868-1](http://www.ubuntu.com/usn/usn-2868-1)
   - [USN-2865-1](http://www.ubuntu.com/usn/usn-2865-1)
@@ -88,7 +104,11 @@ Additional information can be found at [https://pivotal.io/security](https://piv
 
 Release date: 18 January 2016
 
-- Updated stemcell to 3146.3. This is a security upgrade that resolves [CVE-2016-0715](https://pivotal.io/security/cve-2016-0715). Additional information can be found at https://pivotal.io/security.
+- Updated stemcell to 3146.3. This is a security upgrade that resolves the following:
+  - [USN-2869-1](http://www.ubuntu.com/usn/usn-2869-1)
+  - [CVE-2016-0715](https://pivotal.io/security/cve-2016-0715).
+
+Additional information can be found at https://pivotal.io/security.
 
 ## <a id="1-7-1"></a>1.7.1
 
