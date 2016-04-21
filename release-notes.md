@@ -3,6 +3,19 @@ title: Release Notes
 owner: MySQL
 ---
 
+## <a id="1-8-0-e4"></a>1.8.0-Edge.4
+
+Release date: 8 April 2016
+
+- Automated backups can now additionally target a Ceph back-end storage service or direct to another host via SCP.
+- New `Database Configuration` settings page
+  - Includes the option to enable a read-only user.
+  - Allows an override to activate DNS reverse name resolution.
+- Additional mysql server tuning tweaks to improve performance.
+- MariaDB updated to version 10.0.23.
+- **Bug fix:** Operator can now override the default number of open files while taking backups.
+- **Bug fix:** Allow Operator to override S3 endpoint default.
+
 ## <a id="1-8-0-e3"></a>1.8.0-Edge.3
 
 Release date: 16 March 2016

@@ -18,9 +18,9 @@ If we stick with this pilot, an Edge release will expose our users to Pivotal's 
 Current MySQL for Pivotal Cloud Foundry&reg; Details
 <div style="line-height: 1; padding-left: 3em">
 
-- **Version**: 1.8.0 - Edge.3
-- **Release Date**: 2016-03-16
-- **Software component versions**: MariaDB 10.0.22, Galera 25.3.9
+- **Version**: 1.8.0 - Edge.4
+- **Release Date**: 2016-04-08
+- **Software component versions**: MariaDB 10.0.23, Galera 25.3.9
 - **Compatible Ops Manager Version(s)**: 1.5.x, 1.6.x
 - **Compatible Elastic Runtime Version(s)**: 1.5.x, 1.6.x
 - **vSphere support?** Yes
@@ -87,17 +87,17 @@ For more information, refer to the full [Product Version Matrix](../../compatibi
 		<td rowspan="2">1.7.0 - 1.7.6</td>
 		<td>Next 1.7.X release - 1.7.6</td>
 	  <tr>
-		  <td>1.8.0-edge.1 - 1.8.0-edge.3</td>
+		  <td>1.8.0-edge.1 - 1.8.0-edge.4</td>
 	  </tr>
 	</tr>
 
 	<tr>
 		<td>1.7.6</td>
-		  <td>1.8.0-edge.1 - 1.8.0-edge.3</td>
+		  <td>1.8.0-edge.1 - 1.8.0-edge.4</td>
 	</tr>
 	<tr>
 		<td>1.8.0-e.1 - 1.8.0-e.3</td>
-		<td>Next 1.8.X release - 1.8.0-edge.3</td>
+		<td>Next 1.8.X release - 1.8.0-edge.4</td>
 	</tr>
 </tr>
 
@@ -178,6 +178,17 @@ The name of the plan is **100mb-dev** by default and is automatically updated if
 **Further Note**: Changing a plan's definition does not work properly in versions of p-mysql 1.6.3 and earlier. See the entry in [Known Issues](known-issues.html) for the recommended workaround.
 
 Provisioning a service instance from this plan creates a MySQL database on a multi-tenant server, suitable for development workloads. Binding applications to the instance creates unique credentials for each application to access the database.
+
+### <a id="Options and Features"></a>Options and Features ###
+
+In the `Database Configuration` pane, you can change the configuration of the following features:
+- Reverse DNS lookups
+
+    This feature is normally turned off in p-mysql. Do not turn this feature off unless you intend to restrict access to the database based on hostname. This is not necessary during the normal operation of p-mysql, and will impose a small overhead on each new connection to the database.
+- Read-Only User Password
+
+    Activates a special user, `roadmin`, a read-only administrator. Supply a special password, to be used only by administrators who require the ability to view all of the data maintained by the p-mysql installation. Leaving the field blank de-activates the read-only user.
+
 
 ### <a id="proxy"></a>Proxy ###
 
