@@ -196,7 +196,7 @@ In the `Database Configuration` pane, you can change the configuration of the fo
 
 The proxy tier is responsible for routing connections from applications to healthy MariaDB cluster nodes, even in the event of node failure.
 
-Applications are provided with a hostname or IP address to reach a database managed by the service. For more information, see [Application Binding](/pivotalcf/devguide/services/index.html#application-binding). By default, the MySQL service will provide bound applications with the IP of the first instance in the proxy tier. Even if additional proxy instances are deployed, client connections will not be routed through them. This means the first proxy instance is a single point of failure.
+Applications are provided with a hostname or IP address to reach a database managed by the service. For more information, see [Application Binding](http://docs.pivotal.io/pivotalcf/devguide/services/index.html#application-binding). By default, the MySQL service will provide bound applications with the IP of the first instance in the proxy tier. Even if additional proxy instances are deployed, client connections will not be routed through them. This means the first proxy instance is a single point of failure.
 
 **In order to eliminate the first proxy instance as a single point of failure, operators must configure a load balancer to route client connections to all proxy IPs, and configure the MySQL service to give bound applications a hostname or IP address that resolves to the load balancer.**
 
@@ -218,7 +218,7 @@ Configure your load balancer to route connections for a hostname or IP to the pr
 
 If v1.5.0 is initially deployed without a load balancer and without proxy IPs configured, a load balancer can be setup later to remove the proxy as a single point of failure. However, there are several implications to consider:
 
-- Applications will have to be rebound to receive the hostname or IP that resolves to the load balancer. To rebind: unbind your application from the service instance, bind it again, then restage your application. For more information see [Managing Service Instances with the CLI](/pivotalcf/devguide/services/managing-services.html). In order to avoid unnecessary rebinding, we recommend configuring a load balancer before deploying v1.5.0.
+- Applications will have to be rebound to receive the hostname or IP that resolves to the load balancer. To rebind: unbind your application from the service instance, bind it again, then restage your application. For more information see [Managing Service Instances with the CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html). In order to avoid unnecessary rebinding, we recommend configuring a load balancer before deploying v1.5.0.
 - Instead of configuring the proxy IPs in Operations manager, use the IPs that were dynamically assigned by looking at the **Status** page. Configuration of proxy IPs after the product is deployed with dynamically assigned IPs is not well supported; see [Known Issues](#known-issues).
 
 ### <a id="lifecycle-errands"></a>Lifecycle Errands ###
@@ -243,7 +243,7 @@ $ cf bind-service myapp mydb
 $ cf restart myapp
 </pre>
 
-For more information about the use of services, see the [Services Overview](/pivotalcf/devguide/services/).
+For more information about the use of services, see the [Services Overview](http://docs.pivotal.io/pivotalcf/devguide/services/).
 
 ## <a id="example-app"></a>Example Application ##
 
@@ -284,7 +284,7 @@ For more information about SwitchBoard, read the [proxy documentation](proxy.htm
 
   * [Notes on cluster configuration](cluster-config.html)
   * [Backing Up MySQL for PCF](backup.html)<br>
-    **Note**: For information about backing up your PCF installation, refer to [Backing Up and Restoring Pivotal Cloud Foundry&reg;](/pivotalcf/customizing/backup-restore/index.html).
+    **Note**: For information about backing up your PCF installation, refer to [Backing Up and Restoring Pivotal Cloud Foundry&reg;](http://docs.pivotal.io/pivotalcf/customizing/backup-restore/index.html).
   * [Determining MySQL cluster state](cluster-state.html)
   * [More on Cluster Scaling, Node Failure, and Quorum](cluster-behavior.html)
   * [Bootstrapping an ailing MySQL cluster](bootstrapping.html)

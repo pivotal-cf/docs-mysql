@@ -268,7 +268,7 @@ Release Date: 4 September 2015
 
     ### Notes on High Availability ###
 
-- When upgrading from an older version, applications must be rebound to take advantage of high availability features. To rebind: unbind your application from the service instance, bind it again, then restage your application. For more information see [Managing Service Instances with the CLI](/pivotalcf/devguide/services/managing-services.html).
+- When upgrading from an older version, applications must be rebound to take advantage of high availability features. To rebind: unbind your application from the service instance, bind it again, then restage your application. For more information see [Managing Service Instances with the CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
 - Elimination of the proxy as a single point of failure requires configuration of an external load balancer to route connections to proxy instances. For details, see [Proxy Settings](/p-mysql/index.html#proxy).
 - See [Known Issues](/p-mysql/#known-issues).
 
