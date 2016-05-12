@@ -3,6 +3,16 @@ title: Release Notes
 owner: MySQL
 ---
 
+## <a id="1-8-0-e5"></a>1.8.0-Edge.5
+
+Release date: 06 May 2016
+
+- Updated stemcell to 3232.2 This is a security upgrade that resolves the following:
+  - [USN-2959-1](http://www.ubuntu.com/usn/usn-2959-1/)
+- **Known Issue:** On PCF 1.7 only, the p-mysql acceptance test errand will not work on p-mysql 1.8.0-edge.1 through 1.8.0-edge.5. This will be fixed in the next release.
+
+Additional information can be found at https://pivotal.io/security.
+
 ## <a id="1-8-0-e4"></a>1.8.0-Edge.4
 
 Release date: 8 April 2016
@@ -13,6 +23,7 @@ Release date: 8 April 2016
   - Allows an override to activate DNS reverse name resolution.
 - Additional mysql server tuning tweaks to improve performance.
 - MariaDB updated to version 10.0.23.
+- **Bug fix**: Update `broker-registrar` to avoid runaway CPU condition on broker VMs.
 - **Bug fix:** Operator can now override the default number of open files while taking backups.
 - **Bug fix:** Allow Operator to override S3 endpoint default.
 
@@ -36,6 +47,21 @@ Release date: 20 January 2016
   - **Note:** On upgrade from a version of p-MySQL that offered only a single plan, the default plan will be renamed. Regardless of the name of the previous plan (e.g., `100mb-dev`), the plan will now be named, `pre-existing-plan`. It's not possible to automatically reset the plan to the former name. If you wish to retain the same plan name, it's fine to edit that plan name before clicking 'Apply Changes' when upgrading to p-MySQL v1.8.0. See [the documentation](./index.html#service-plan) for more information.
 - **New Feature:** `bosh` bootstrap errand
 - MariaDB updated to version 10.0.22 and Galera 25.3.9.
+
+## <a id="1-7-7"></a>1.7.7
+
+- See below, same update as [version 1.6.10](#1-6-10)
+
+## <a id="1-6-10"></a>1.6.10
+
+Release date: 06 May 2016
+
+- Updated stemcell to 3146.11 This is a security upgrade that resolves the following:
+  - [USN-2959-1](http://www.ubuntu.com/usn/usn-2959-1/)
+- **Bug fix**: Updated acceptance tests to pass on PCF-1.7.
+- **Bug fix**: Update `broker-registrar` to avoid runaway CPU condition on broker VMs.
+
+Additional information can be found at https://pivotal.io/security.
 
 ## <a id="1-7-6"></a>1.7.6
 
