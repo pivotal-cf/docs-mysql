@@ -37,6 +37,8 @@ Release date: 16 March 2016
 
 Release date: 02 March 2016
 
+- **Bug fix**: Enable Operator to specify S3 region.
+  - Before this configuration, uploads were limited to the S3 Standard region, 'us-east-1.'
 - See below, same security update as [version 1.6.8](#1-6-8)
 
 ## <a id="1-8-0-e1"></a>1.8.0-Edge.1
