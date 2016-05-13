@@ -175,7 +175,7 @@ In the `Database Configuration` pane, you can change the configuration of the fo
 
 - Disable Reverse DNS lookups
 
-    This feature is normally turned off in p-mysql. Do not turn this feature off unless you intend to restrict access to the database based on hostname. This is not necessary during the normal operation of p-mysql, and will impose a small overhead on each new connection to the database.
+    This feature is enabled by default, and improves performance. Un-checking this option causes the MySQL servers to perform a reverse DNS lookup on each new connection. It is only necessary when restricting access by hostname, which is not required in typical `p-mysql` installations.
 
 - Read-Only User Password
 
