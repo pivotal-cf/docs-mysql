@@ -25,7 +25,6 @@ Release date: 8 April 2016
 - MariaDB updated to version 10.0.23.
 - **Bug fix**: Update `broker-registrar` to avoid runaway CPU condition on broker VMs.
 - **Bug fix:** Operator can now override the default number of open files while taking backups.
-- **Bug fix:** Allow Operator to override S3 endpoint default.
 
 ## <a id="1-8-0-e3"></a>1.8.0-Edge.3
 
@@ -37,6 +36,10 @@ Release date: 16 March 2016
 
 Release date: 02 March 2016
 
+- p-mysql now skips reverse DNS resolution when accepting connections.
+  - This change improves performance, and is only necessary when restricting access by hostname, which is not required in typical `p-mysql` installations. You can override this value in the "Database Configuration" configuration pane.
+- **Bug fix**: Enable Operator to specify S3 region.
+  - Before this configuration, uploads were limited to the S3 Standard region, 'us-east-1.'
 - See below, same security update as [version 1.6.8](#1-6-8)
 
 ## <a id="1-8-0-e1"></a>1.8.0-Edge.1
@@ -104,12 +107,13 @@ Additional information can be found at https://pivotal.io/security.
 
 ## <a id="1-7-3"></a>1.7.3
 
-- See below, same security update as [version 1.6.6](#1-6-6)
+- See below, same **bug fix** and security update as [version 1.6.6](#1-6-6)
 
 ## <a id="1-6-6"></a>1.6.6
 
 Release date: 2 February 2016
 
+- **Bug fix:** Quota Enforcer now restores user write access in such a way that  privileges are properly replicated across the cluster.
 - Updated stemcell to 3146.6. This is a security upgrade that resolves the following:
   - [USN-2882-1](http://www.ubuntu.com/usn/usn-2882-1)
   - [USN-2879-1](http://www.ubuntu.com/usn/usn-2879-1)
