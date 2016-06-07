@@ -24,3 +24,14 @@ It's really hard to get a valid DDL to work on some nodes, yet fail on others. U
 > https://www.percona.com/blog/2014/07/21/a-schema-change-inconsistency-with-galera-cluster-for-mysql/
 
 The key thing about this post is that he had to deliberately switch a node to RSU, which p-mysql never does except during SST. So this is a demonstration of what is possible, but does not explain how a customer may actually experience this in production.
+
+### I see an error, "blocked because of many connection errors"
+
+There are times when MySQL will blacklist its own proxies:
+> OUT 07:44:02.070 [paasEnv=PCE orgName=PaaS spaceName=PROD appName=datacentre-routing appId=TSWM208037] [http-nio-8080-exec-5] ERROR o.h.e.jdbc.spi.SqlExceptionHelper - Host '172.17.0.98' is blocked because of many connection errors; unblock with 'mysqladmin flush-hosts'
+
+You can solve this by running the command `mysqladmin flush-hosts` on any of the MySQL job VMS.
+
+This is an artifact of a automatic polling-protection built into MySQL. It is usually triggered by a Load Balancer or System Monitoring software performing empty "port checks" against the MySQL proxies. This is why it is important to configure any Load Balancer to perform TCP checks against the proxy health-check port, default **1936**. Repeated port checks against **3306** will cause an outage for all p-mysql users.
+
+* Note: This issue has been disabled as of p-mysql v1.8.0-edge.4.
