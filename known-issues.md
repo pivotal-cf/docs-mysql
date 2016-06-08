@@ -3,13 +3,19 @@ title: Known Issues
 owner: MySQL
 ---
 
-### MySQL Backups to AWS S3 limited to Standard region
+## <a id="compile-fails"></a> Compile fails in environments that do not have access to the Internet ##
+
+In p-mysql `1.8.0-Edge.5` and `1.8.0-Edge.6`, there is a regression which will cause the compile stage to fail while installing the tile on environments that do not have access to the Internet. We regret the error.
+
+## <a id="s3-std-region"></a> MySQL Backups to AWS S3 limited to Standard region ##
+
 In p-mysql 1.7, backups are only sent to AWS S3 buckets that have been created in the [US Standard](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) region, "us-east-1." This limitation has been resolved in 1.8.0-Edge.2 and later.
 
-### Elastic Runtime HTTPS-only feature
+## <a id="https-only"></a> Elastic Runtime HTTPS-only feature ##
+
 Support for the Experimental HTTPS-only feature is broken in p-mysql versions 1.6.X and earlier. The HTTPS-only feature works as designed in p-mysql 1.7.0 and later.
 
-### Accidental deletion of a Service Plan
+## <a id="service-plan-deletion"></a> Accidental deletion of a Service Plan ##
 
 If and only if the Operator does all of these steps in sequence, a plan will become "unrecoverable":
 
@@ -27,7 +33,8 @@ If you have committed steps 1 and 2, but not 4, no problem. Do not hit the 'Save
 
 If you have committed steps 1, 2 and 3, do not click 'Apply Changes.' Instead, return to the Installation Dashboard and click the '**Revert**' button. Any accidental changes will be discarded.
 
-### Changing service plan definition
+## <a id="service-plan-definition"></a> Changing service plan definition ##
+
 In p-mysql versions 1.7.0 and earlier, there is only one service plan. Changing the definition of that plan, the number of megabytes, number of connections, or both, will make it so that any new service instances will have those characteristics.
 
 There is a bug in p-mysql versions 1.6.3 and earlier. Changing the plan does not change existing service instances. Existing plans will continue to be governed by the plan constraints effective at the time they were created. This is true regardless of whether or not an operator runs `cf update-service`.
@@ -56,22 +63,22 @@ Run this for each service instance to be updated.
     - Make sure to change `NEW_MAX_CONN_VALUE` to whatever new setting you've chosen.
   1. `exit;`
 
-### Proxies may write to different MySQL masters
+## <a id="proxy-sync"></a> Proxies may write to different MySQL masters ##
 All proxy instances use the same method to determine cluster health. However, certain conditions may cause the proxy instances to route to different nodes, for example after brief cluster node failures.
 
 This could be an issue for tables that receive many concurrent writes. Multiple clients writing to the same table could obtain locks on the same row, resulting in a deadlock. One commit will succeed and all others will fail and must be retried. This can be prevented by configuring your load balancer to route connections to **only one proxy instance at a time**.
 
-### Number of proxy instances cannot be reduced
+## <a id="proxy-instances"></a> Number of proxy instances cannot be reduced ##
 Once the product is deployed with operator-configured proxy IPs, the number of proxy instances can not be reduced, nor can the configured IPs be removed from the **Proxy IPs** field. If instead the product is initially deployed without proxy IPs, IPs added to the **Proxy IPs** field will only be used when adding additional proxy instances, scaling down is unpredictably permitted, and the first proxy instance can never be assigned an operator-configured IP.
 
-### Backups
+## <a id="backups-medata"></a> Backups Metadata ##
 In p-mysql 1.7.0, both `compressed` and `encrypted` show as `N` in the backup metadata file. This is due to the fact that p-mysql implements compression and encryption outside of the tool used to generate the file. This is a known defect, and will be corrected in future releases.
 
-### MyISAM tables
+## <a id="myisam"></a> MyISAM tables ##
 The clustering plugin used in this release (Galera) does not support replication of MyISAM Tables. However, the service does not prevent the creation of MyISAM tables. When MyISAM tables are created, the tables will be created on every node (DDL statements are replicated), but data written to a node won't be replicated. If the persistent disk is lost on the node where data is written to (for MyISAM tables only), data will be lost. To change a table from MyISAM to InnoDB, follow this [guide](http://dev.mysql.com/doc/refman/5.5/en/converting-tables-to-innodb.html).
 
-### Max user connections
-When updating the `max\_user\_connections` property for an existing plan, the connections currently open will not be affected. For example, if you have decreased from 20 to 40, users with 40 open connections will keep them open. To force the changes upon users with open connections, an operator can restart the proxy job. This will cause the connections to reconnect and stay within the limit. Otherwise, if any connection above the limit is reset, it won't be able to reconnect, so the number of connections will eventually converge on the new limit.
+## <a id="max-user-conn"></a> Max user connections ##
+When updating the `max_user_connections` property for an existing plan, the connections currently open will not be affected. For example, if you have decreased from 20 to 40, users with 40 open connections will keep them open. To force the changes upon users with open connections, an operator can restart the proxy job. This will cause the connections to reconnect and stay within the limit. Otherwise, if any connection above the limit is reset, it won't be able to reconnect, so the number of connections will eventually converge on the new limit.
 
-### Long SST transfers
+## <a id="long-sst"></a> Long SST transfers ##
 We provide a `database_startup_timeout` in our manifest which specifies how long to wait for the initial [SST](proxy.html#state-snapshot-transfer-sst) to complete (default is 150 seconds). If the SST takes longer than this amount of time, the job will report as failing. Versions before `cf-mysql-release v23` have a flaw in our startup script where it does not kill the mysqld process in this case. When monit restarts this process, it sees that mysql is still running and exits without writing a new pidfile. This means the job will continue to report as failing. The only way to fix this is to SSH onto the failing node, kill the mysqld process, and re-run `monit start mariadb_ctrl`.
