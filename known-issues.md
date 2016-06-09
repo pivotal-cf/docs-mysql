@@ -3,10 +3,6 @@ title: Known Issues
 owner: MySQL
 ---
 
-## <a id="compile-fails"></a> Compile fails in environments that do not have access to the Internet ##
-
-In p-mysql `1.8.0-Edge.5` and `1.8.0-Edge.6`, there is a regression which will cause the compile stage to fail while installing the tile on environments that do not have access to the Internet. We regret the error.
-
 ## <a id="s3-std-region"></a> MySQL Backups to AWS S3 limited to Standard region ##
 
 In p-mysql 1.7, backups are only sent to AWS S3 buckets that have been created in the [US Standard](http://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) region, "us-east-1." This limitation has been resolved in 1.8.0-Edge.2 and later.
