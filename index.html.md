@@ -95,9 +95,39 @@ For more information, refer to the full [Product Version Matrix](http://docs.piv
 
 Consult the [Release Notes](release-notes.html) for information about changes between versions of this product.
 
+## <a id="overview"></a> Overview ##
+
+The p-mysql product delivers a fully managed, "Database as a Service" to Cloud Foundry users. When installed, the tile deploys and maintains a single or three-node cluster running a recent release of [MariaDB](http://www.mariadb.org), SQL Proxies for super-fast failover, and Service Brokers for Cloud Foundry integration. We work hard to ship the service configured with sane defaults, following the principle of least surprise for a general-use relational database service.
+
+When installed, Developers can attach a database to their applications in as little as two commands, `cf create-service` and `cf bind-service`. Connection credentials are automatically provided in the [standard manner](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES). Developers can select from a menu of service plans options, which are configured by the platform operator.
+
+Two configurations are supported:
+
+<center>
+<table>
+  <tr><th></th><th>Single</th><th>Highly Available</th></tr>
+  <tr><td>**MySQL**</td><td>1 node</td><td>3-node cluster</td></tr>
+  <tr><td>**SQL Proxy**</td><td>1 node</td><td>2 nodes</td></tr>
+  <tr><td>**Service Broker**</td><td>1 node</td><td>2 nodes</td></tr>
+  <tr><td>High Availability</td><td>-</td><td>Yes</td></tr>
+  <tr><td>Multi-AZ Support</td><td>-</td><td>Yes</td></tr>
+  <tr><td>Rolling Upgrades</td><td>-</td><td>Yes</td></tr>
+  <tr><td>Automated Backups</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Customizable Plans</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Customizable VM Instances</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Plan Migrations</td><td>Yes</td><td>Yes</td></tr>
+  <tr><td>Encrypted Communication</td><td>Yes &#x271D;</td><td>Yes &#x271D;</td></tr>
+  <tr><td>Encrypted Data at-rest</td><td>-</td><td>-</td></tr>
+  <tr><td>Long-lived Canaries</td><td>-</td><td>-</td></tr>
+</table>
+</center>
+
+(&#x271D;) Requires IPSEC BOSH plug-in
+
 ## <a id="limitations"></a>Limitations ##
 
-- While two Proxy instances are deployed by default, there is no automation to direct clients from one to the other. See the note in the [Proxy](#proxy) section, as well as the entry in [Known Issues](known-issues.html).
+- Single and three-node clusters are the only supported topologies. OpsManager will allow the Operator to set the number of instances to other values, only one and three are advised. Please see the [note](cluster-behavior.html#even-number) in the Cluster Behavior document.
+- Although two Proxy instances are deployed by default, there is no automation to direct clients from one to the other. See the note in the [Proxy](#proxy) section, as well as the entry in [Known Issues](known-issues.html).
 - Only the InnoDB storage engine is supported; it is the default storage engine for new tables. Attempted use of other storage engines (including MyISAM) may result in data loss.
 - All databases are managed by shared, multi-tenant server processes. Although data is securely isolated between tenants using unique credentials, application performance may be impacted by noisy neighbors.
 - Round-trip latency between database nodes must be less than five seconds; if the latency is higher than this, nodes will become partitioned. If more than half of cluster nodes are partitioned, the cluster will lose quorum and become unusable until manually bootstrapped.
