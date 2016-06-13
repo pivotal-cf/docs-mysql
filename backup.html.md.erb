@@ -114,52 +114,53 @@ In the event of a total cluster loss,the process to restore a backup artifact to
 
 ## <a id="manual-process"></a>Manual Process ##
 
-If you do not wish to use the automated facility included in p-mysql, you can still perform backups manually.
+If you do not wish to use the automated facility included in p-mysql, you can still [perform backups manually](#manual-backup). If you need to restore from a manual backup, follow the instructions in the [manual restore](#manual-restore) section. 
 
-- Locate the IP address for the MySQL node in the Status tab.
+### <a id="prerequisites"></a>Prerequisites #####
 
-  ![MySQL Server IP](mysql-server-ip.png)
+* Locate the IP address for the MySQL node in the **Status** tab.
+  <%= image_tag("./mysql-server-ip.png") %>
 
-- Locate the root password for the MySQL server in the Credentials tab.
-
-  ![MySQL Server Root Password](mysql-root-password.png)
+* Locate the root password for the MySQL server in the **Credentials** tab.
+  <%= image_tag("./mysql-root-password.png") %>
 
 ### <a id="manual-backup"></a>Manual Backup ###
 
-  Manual backup can be performed with [mysqldump](https://mariadb.com/kb/en/mariadb/mysqldump/).
-  This backup acquires a global read lock on all tables, but does not hold it for the entire duration of the dump.
+This backup acquires a global read lock on all tables, but does not hold it for the entire duration of the dump.
 
-  - To backup **all** databases in the MySQL deployment, use `--all-databases`:
+<p class="note"><strong>Note</strong>: The procedure to manually backup MySQL below does not cover steps that are specific to a particular IaaS. It is important to tailor these instructions based on your infrastructure and configuration requirements. </p>
 
-    ```
-    $ mysqldump -u root -p -h $MYSQL_NODE_IP --all-databases > user_databases.sql
-    ```
+1. Spin up a virtual machine (VM). Ensure the VM has sufficient disk space to receive the data dump. Configure network access to your p-mysql deployment.
 
-  - To backup a single database, specify the database name:
+1. Install the [mysqldump](https://mariadb.com/kb/en/mariadb/mysqldump/) client of your choice.
 
-    ```
-    $ mysqldump -u root -p -h $MHQL_NODE_IP $DB_NAME > user_databases.sql
-    ```
+1. In a terminal window, execute the following command. To backup **all** databases in the MySQL deployment, use `--all-databases`:
+
+    <pre class="terminal">$ mysqldump -u root -p -h $MYSQL_NODE_IP --all-databases > user_databases.sql</pre>
+
+    To backup a single database, specify the database name:
+
+    <pre class="terminal">$ mysqldump -u root -p -h $MYSQL_NODE_IP $DB_NAME > user_databases.sql</pre>
+
+    <p class="note"><strong>Note</strong>: The backup data you obtain from running the command above is not encrypted nor compressed. Pivotal recommends encrypting the backup artifact before storing it off-site.</p>
+
+1. Store the backup in a different location than the MySQL primary storage, preferably off-site. 
 
 ### <a id="manual-restore"></a>Manual Restore ###
 
-  Restoring from a backup is the same whether one or multiple databases were backed up.
-  Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
+Restoring from a backup is the same whether one or multiple databases were backed up. Executing the SQL dump will drop, recreate, and refill the specified databases and tables.
 
   <p class="note"><strong>Warning:</strong> Restoring a database will delete all data that existed in the database prior to the restore. Restoring a database using a full backup artifact, produced by `mysqldump --all-databases` for example, will replace all data and user permissions.</p>
 
-  - Restore from the data dump:
+1. From the same VM you used to perform the manual backup or similar, restore from the data dump:
 
-    ```
-    $ mysql -u root -p -h $MYSQL_NODE_IP < user_databases.sql
-    ```
+  <pre class="terminal">$ mysql -u root -p -h $MYSQL_NODE_IP < user_databases.sql</pre>
 
-  - Re-apply users privileges:
+1. Re-apply user privileges:
 
-    ```
-    $ mysql -u root -p -h $MYSQL_NODE_IP -e "FLUSH PRIVILEGES"
-    ```
-    This command tells the cluster to re-load user permissions using the data that has just been restored.
+  <pre class="terminal">$ mysql -u root -p -h $MYSQL_NODE_IP -e "FLUSH PRIVILEGES"</pre>
+
+  This command tells the cluster to re-load user permissions using the data that has just been restored.
 
 ### <a id="examples"></a>Examples ###
 
