@@ -33,6 +33,9 @@ Unencrypted data is never transferred outside the <%= vars.product_short %> depl
 Developers can change the backup schedule for an individual service instance using
 an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
 
+Automated backups are not taken during service broker upgrades.
+For more information, see [Service Broker Upgrades](upgrade.html#upgrade-interruption)
+in _Upgrading <%= vars.product_full %>_.
 <p class="note"><strong>Note:</strong>
   You must configure backups in the <%= vars.product_short %> tile.
   You cannot be disable this feature.

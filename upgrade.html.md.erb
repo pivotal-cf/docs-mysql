@@ -74,8 +74,19 @@ in the <%= vars.product_short %> service, as described below.
 
 Read this section if:
 
++ You are planning an upgrade.
 + You are experiencing a service interruption and are wondering why.
 + You are planning to update or change a service instance and want to know if it might cause a service interruption.
+
+### <a id='upgrade-interruption'></a>Service Broker Upgrades
+
+Automated backups are not taken during service broker upgrades.
+
+This applies to both minor upgrades from v2.8.x to v2.9.x and point upgrades from v2.9.x to v2.9.y.
+Automated backups resume according to schedule after the service broker upgrade is complete.
+
+For general information about backups, see [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
+and [Configuring Automated Backups](automated-backup.html).
 
 ### <a id='service-update'></a>Stemcell or Service Update
 
