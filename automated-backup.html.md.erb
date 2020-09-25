@@ -242,24 +242,6 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
                 The fingerprint detects any changes to the destination VM.
             </td>
         </tr>
-        <tr>
-            <td>
-                <strong>Enable Email Alerts</strong>
-            </td>
-            <td>
-                Select to receive email notifications when a backup fails.
-                Also verify that:
-                <ul>
-                  <li>Email notifications are configured in
-                    <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-                      See <a href="https://docs.pivotal.io/platform/customizing/configure-pas.html#smtp">
-                      (Optional) Configure Email Notifications</a>.
-                  </li>
-                 <li>All users who need to be notified about failed backups
-                     have the Space Developer role in the system org and system space. The username must be an email address.</li>
-                </ul>
-            </td>
-        </tr>
       </table>
 
 ## <a id="ceph-or-s3"></a> Back Up to Amazon S3 or Ceph
@@ -399,6 +381,15 @@ you must have an S3 bucket in which to store the backups.
         </tr>
         <tr>
             <td>
+                <strong>Force path style access to bucket</strong>
+            </td>
+            <td>
+               Do not select this if you use Amazon S3.<br>
+               Select this if you use another S3-compatible endpoint such as Minio.
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <strong>Bucket Path</strong>
             </td>
             <td>
@@ -421,25 +412,6 @@ you must have an S3 bucket in which to store the backups.
                   <strong>Note:</strong> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
-            </td>
-        </tr>
-
-        <tr>
-            <td>
-                <strong>Enable Email Alerts</strong>
-            </td>
-            <td>
-                Select to receive email notifications when a backup fails.
-                Also verify that:
-                <ul>
-                  <li>Email notifications are configured in
-                    <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-                      See <a href="https://docs.pivotal.io/platform/customizing/configure-pas.html#smtp">
-                      (Optional) Configure Email Notifications</a>.
-                  </li>
-                 <li>All users who need to be notified about failed backups
-                     have the Space Developer role in the system org and system space. The username must be an email address.</li>
-                </ul>
             </td>
         </tr>
       </table>
@@ -634,14 +606,6 @@ To back up your database to your Azure Storage account:
         </tr>
         <tr>
             <td>
-                <strong>Destination Directory</strong>
-            </td>
-            <td>
-                Enter the directory that backups are uploaded to inside of the container.
-            </td>
-        </tr>
-        <tr>
-            <td>
                 <strong>Blob Store Base URL</strong>
             </td>
             <td>
@@ -663,24 +627,6 @@ To back up your database to your Azure Storage account:
                   <strong>Note:</strong> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Enable Email Alerts</strong>
-            </td>
-            <td>
-                Select to receive email notifications when a backup fails.
-                Also verify that:
-                <ul>
-                  <li>Email notifications are configured in
-                    <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-                      See <a href="https://docs.pivotal.io/platform/customizing/configure-pas.html#smtp">
-                      (Optional) Configure Email Notifications</a>.
-                  </li>
-                 <li>All users who need to be notified about failed backups
-                     have the Space Developer role in the system org and system space. The username must be an email address.</li>
-                </ul>
             </td>
         </tr>
       </table>
