@@ -509,24 +509,6 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
                 </p>
             </td>
         </tr>
-        <tr>
-            <td>
-                <strong>Enable Email Alerts</strong>
-            </td>
-            <td>
-                Select to receive email notifications when a backup fails.
-                Also verify that:
-                <ul>
-                  <li>Email notifications are configured in
-                    <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>).
-                      See <a href="https://docs.pivotal.io/platform/customizing/configure-pas.html#smtp">
-                      (Optional) Configure Email Notifications</a>.
-                  </li>
-                 <li>All users who need to be notified about failed backups
-                     have the Space Developer role in the system org and system space. The username must be an email address.</li>
-                </ul>
-            </td>
-        </tr>
       </table>
 
 ## <a id="azure"></a> Back Up to Azure Storage
