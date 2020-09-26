@@ -330,7 +330,8 @@ you must have an S3 bucket in which to store the backups.
 
 1. Select **Ceph or Amazon S3**.
 
-    ![S3 Backup Configuration Form](S3-backups.png)<%# Images require alt text that describes the image in detail. %>
+    <img alt="Backup configuration pane shows Ceph or Amazon S3 selected and the fields
+     The information depicted in the diagram is explained above." width="400" src="./images/S3-backups.png"/>
 
 1. Configure the fields as follows:
 
@@ -377,25 +378,6 @@ you must have an S3 bucket in which to store the backups.
                 Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
                 VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
                 For example, <code>sandbox-backups</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Force path style access to bucket</strong>
-            </td>
-            <td>
-               Do not select this if you use Amazon S3.<br>
-               Select this if you use another S3-compatible endpoint such as Minio.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Path</strong>
-            </td>
-            <td>
-               Enter the path in the bucket to store backups. <br>
-               Do not include a trailing <code>/</code>.
-               VMware recommends using <code>mysql-v2</code>.
             </td>
         </tr>
         <tr>
