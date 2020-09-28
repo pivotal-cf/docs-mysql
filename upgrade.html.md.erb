@@ -78,16 +78,6 @@ Read this section if:
 + You are experiencing a service interruption and are wondering why.
 + You are planning to update or change a service instance and want to know if it might cause a service interruption.
 
-### <a id='upgrade-interruption'></a>Service Broker Upgrades
-
-Automated backups are not taken during service broker upgrades.
-
-This applies to both minor upgrades from v2.8.x to v2.9.x and point upgrades from v2.9.x to v2.9.y.
-Automated backups resume according to schedule after the service broker upgrade is complete.
-
-For general information about backups, see [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
-and [Configuring Automated Backups](automated-backup.html).
-
 ### <a id='service-update'></a>Stemcell or Service Update
 
 An operator updates a stemcell version or their version of <%= vars.product_short %>.
@@ -106,3 +96,14 @@ updates the service instance they are bound to.
           The service should resume within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully,
 apps reconnect automatically.
+
+### <a id='upgrade-interruption'></a>Service Broker Deployments
+
+Automated backups are not taken during service broker deployments.
+
+When the service broker is unavailable, such as during upgrades and redeployments,
+automated backups fail.
+Automated backups resume according to schedule when the service broker is online again.
+
+For general information about backups, see [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
+and [Configuring Automated Backups](automated-backup.html).
