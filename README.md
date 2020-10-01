@@ -29,8 +29,7 @@ Docs for MySQL for VMware Tanzu
 
 ## Where is the book repository?
 
-~~The book repo associated with this content repo is [**docs-book-mysql**](https://github.com/pivotal-cf/docs-book-mysql).~~
-(Currently not working)
+The book repo associated with this content repo is [**docs-book-mysql**](https://github.com/pivotal-cf/docs-book-mysql).
 
 ## Partials
 
