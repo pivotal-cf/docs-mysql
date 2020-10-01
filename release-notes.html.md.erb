@@ -18,6 +18,44 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-8-3"></a> v2.8.3
+
+**Release Date: October 1, 2020**
+
+### Resolved Issues
+This release has the following fixes:
+
++ **Uppercase letters in the Service Network no longer prevents configuration of Multi-Site Replication:**
+  Previously, if you had configured the Services Network name with upper case letters in your environment, 
+multi-site replication could not be configured successfully.
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
+<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
+<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+  <tr><td>Stemcell</td><td>621.84*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.30-33</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.30-31.43</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.29.0*</td></tr>
+</table>
+
 ## <a id="2-8-2"></a> v2.8.2
 
 **Release Date: September 14, 2020**
