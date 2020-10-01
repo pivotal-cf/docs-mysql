@@ -141,7 +141,7 @@ To retrieve the backup encryption key:
     bosh deployments
     ```
 
-1. To SSH onto the broker VM, run:
+2. To SSH onto the broker VM, run:
 
     ```
     bosh -d pivotal-mysql-GUID ssh
@@ -153,19 +153,26 @@ To retrieve the backup encryption key:
 
     <pre class="terminal">$ bosh -d pivotal-mysql-f7f3ce3767943537c36a ssh</pre>
 
-2. Set the path for the CredHub CLI and run the post-start script to log in
-   to the <%= vars.runtime %> CredHub:
+3. Fetch the credentials to authenticate with the <%= vars.app_runtime_abbr %> CredHub. On <%= vars.ops_manager %>, visit the <%= vars.app_runtime_abbr %> tile and select the Credentials tab. Record the credentials for **Credhub Admin Client Client Credentials**.
+
+4. Set the path for the CredHub CLI and authenticate with <%= vars.app_runtime_abbr %> CredHub.
 
     ```
     export PATH=/var/vcap/packages/credhub-cli/bin:$PATH
-    /var/vcap/jobs/adbr-api/bin/post-start
+    credhub api https://credhub.service.cf.internal:8844 --ca-cert /var/vcap/jobs/adbr-api/config/credhub_ca.pem
+    credhub login --client-name CREDHUB-CLIENT --client-secret CREDHUB-CLIENT-SECRET
     ```
+
+    Where
+    + `CREDHUB-CLIENT` is the identity of the credential
+    + `CREDHUB-CLIENT-SECRET` is the password of the credential
 
     For example:
     <pre class="terminal">$ export PATH=/var/vcap/packages/credhub-cli/bin:$PATH
-    $ /var/vcap/jobs/adbr-api/bin/post-start</pre>
+    $ credhub api https://credhub.service.cf.internal:8844 --ca-cert /var/vcap/jobs/adbr-api/config/credhub_ca.pem
+    $ credhub login --client-name credhub_admin_client --client-secret o2i30fj2fjvjoi3j</pre>
 
-3. To obtain the encryption key for the backup, run:
+5. To obtain the encryption key for the backup, run:
 
     ```
     credhub get -n /tanzu-mysql/backups/BACKUP-ID
@@ -184,7 +191,7 @@ To retrieve the backup encryption key:
   version_created_at: "2020-08-21T22:37:20Z"
     </pre>
 
-4. Record the value of the password.
+6. Record the value of the password.
    This is the backup encryption key that need when you restore the backup.
 
     In this example, it is `NWjbvbB3pjOC`.
