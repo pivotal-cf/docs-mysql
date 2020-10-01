@@ -153,9 +153,15 @@ To retrieve the backup encryption key:
 
     <pre class="terminal">$ bosh -d pivotal-mysql-f7f3ce3767943537c36a ssh</pre>
 
-3. Fetch the credentials to authenticate with the <%= vars.app_runtime_abbr %> CredHub. On <%= vars.ops_manager %>, visit the <%= vars.app_runtime_abbr %> tile and select the Credentials tab. Record the credentials for **Credhub Admin Client Client Credentials**.
+3. Fetch the credentials to authenticate with the <%= vars.app_runtime_abbr %> CredHub:
 
-4. Set the path for the CredHub CLI and authenticate with <%= vars.app_runtime_abbr %> CredHub.
+    1. Navigate to the <%= vars.ops_manager %> Installation Dashboard.
+
+    2. In the <%= vars.app_runtime_abbr %> tile, click the **Credentials** tab.
+
+    3. Record the credentials for **Credhub Admin Client Client Credentials**.
+
+4. Set the path for the CredHub CLI and authenticate with runtime CredHub:
 
     ```
     export PATH=/var/vcap/packages/credhub-cli/bin:$PATH
@@ -163,13 +169,13 @@ To retrieve the backup encryption key:
     credhub login --client-name CREDHUB-CLIENT --client-secret CREDHUB-CLIENT-SECRET
     ```
 
-    Where
+    Where:
     + `CREDHUB-CLIENT` is the identity of the credential
     + `CREDHUB-CLIENT-SECRET` is the password of the credential
 
     For example:
     <pre class="terminal">$ export PATH=/var/vcap/packages/credhub-cli/bin:$PATH
-    $ credhub api https://credhub.service.cf.internal:8844 --ca-cert /var/vcap/jobs/adbr-api/config/credhub_ca.pem
+    $ credhub api https<span>:</span>//credhub.service.cf.internal:8844 --ca-cert /var/vcap/jobs/adbr-api/config/credhub_ca.pem
     $ credhub login --client-name credhub_admin_client --client-secret o2i30fj2fjvjoi3j</pre>
 
 5. To obtain the encryption key for the backup, run:
