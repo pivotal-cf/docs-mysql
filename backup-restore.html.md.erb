@@ -31,6 +31,89 @@ You might want to back up or restore a service instance in the following use cas
 + Troubleshooting
 + Testing
 
+
+## <a id="overview"></a>About Backups
+
+Automated backups do the following:
+
+- Periodically create and upload backups for restoring all of the databases used
+by a service instance.
+- Operate without locking apps out of the database. There is no downtime.
+- Include a metadata file that contains the critical details for the backup,
+including the calendar time of the backup.
+- Encrypt backups within the <%= vars.product_short %> VM.
+Unencrypted data is never transferred outside the <%= vars.product_short %> deployment.
+- Run at scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
+Developers can change the backup schedule for an individual service instance using
+an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
+
+Automated backups fail if the service broker is unavailable, such as during an upgrade.
+
+<p class="note"><strong>Note:</strong>
+  You must configure backups in the <%= vars.product_short %> tile.
+  You cannot be disable this feature.
+</p>
+
+<p class="note"><strong>Note:</strong>
+  As of v2.9, only the leader node is backed up for a leader-follower deployment.
+</p>
+
+<p class="note warning"><strong>Warning:</strong>
+  If <%= vars.product_short %> fails to upload a backup, the backup artifact remains on the persistent disk.
+  This can cause the persistent disk to fill up faster.
+  If the persistent disk is full, apps become inoperable.
+  For instructions on how to troubleshoot persistent disk errors,
+  see <a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.
+</p>
+
+## <a id="understanding-metadata"></a> About Backup Files and Metadata
+
+When <%= vars.product_short %> runs a backup,
+it uploads two files with Unix epoch-timestamped filenames:
+
+  * The encrypted data backup file, `mysql-backup-TIMESTAMP.tar.gpg`
+  * A metadata file, `mysql-backup-TIMESTAMP.txt`
+
+The metadata file contains information about the backup that looks similar to the following:
+
+```
+ibbackup_version = 2.4.5
+end_time = 2017-04-24 21:00:03
+lock_time = 0
+binlog_pos =
+incremental = N
+encrypted = N
+server_version = 5.7.16-10-log
+start_time = 2017-04-24 21:00:00
+tool_command = --user=admin --password=... --stream=tar tmp/
+innodb_from_lsn = 0
+innodb_to_lsn = 2491844
+format = tar
+compact = N
+name =
+tool_name = innobackupex
+partial = N
+compressed = N
+uuid = fd13cf26-2930-11e7-871e-42010a000807
+tool_version = 2.4.5
+```
+
+The most important entries in the metadata file are the following:
+
++ `start_time`: Use this to determine which transactions are captured in the backup.
++ `server_version`: Use this to determine potential incompatibilities
+when restoring an instance with the backup artifact.
+
+The backup process does not interrupt the MySQL service.
+However backups only reflect transactions that are completed before the `start_time`.
+
+<p class="note"><strong>Note:</strong>
+  The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
+  indicates that the backup is not compressed or encrypted.
+  However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted.
+  This is a known issue.
+</p>
+
 ## <a id='prerequisite'></a> Prerequisite: adbr Plugin
 
 Before you can manually back up or restore a service instance,
@@ -42,7 +125,6 @@ To install the plugin, run:
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 ```
-
 
 ## <a id="backup"></a> Manually Back Up a Service Instance
 
