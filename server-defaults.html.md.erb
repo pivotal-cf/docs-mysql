@@ -120,6 +120,15 @@ to all service plans.
         <td>This setting is dynamically configured to be 50% of the available memory on each
             service instance.</td>
     </tr>
+    <tr>
+        <td><strong>InnoDB Transaction Log Durability</strong></td>
+        <td><code>innodb_flush_log_at_trx_commit</code></td>
+        <td>1</td>
+        <td>At each transaction commit, logs are written and flushed to disk.
+            <br>For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">
+            MySQL documentation</a>.</td>
+     </tr>
      <tr>
         <td><strong>InnoDB Log Buffer Size</strong></td>
         <td><code>innodb-log-buffer-size</code></td>
@@ -271,7 +280,6 @@ HA cluster plans use the server defaults listed in the following table.
         <td>1024&nbsp;MB</td>
         <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.</td>
     </tr>
-
     <tr>
         <td><strong>Collation Server</strong></td>
         <td><code>collation-server</code></td>
