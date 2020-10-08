@@ -20,19 +20,41 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 ## <a id="2-10-X"></a> v2.10.0
 
-**Release Date: XXX X, 20XX**
+**Release Date: September 14, 2020**
+
+### <a name="2-9-0-breaking-changes"></a> Breaking Changes
+
+Breaking changes in this release:
+
++ **Location of backup artifact:**
+  Backups are no longer stored in a sub-directory in the storage destination.
+  Instead, they are stored at the root-level.
+
++ **Removed fields from tile configuration:**
+  The following properties have been removed from the tile configuration.
+  Remove them from any automation that configures the tile.
+  + `.properties.backups_selector.s3.enable_email_alerts`
+  + `.properties.backups_selector.scp.enable_email_alerts`
+  + `.properties.backups_selector.gcs.enable_email_alerts`
+  + `.properties.backups_selector.azure.enable_email_alerts`
+  + `.properties.backups_selector.s3.path`
+  + `.properties.backups_selector.azure.path`
 
 ### Features
 
 New features and changes in this release:
 
-+ 
++
 
 +
+
 
 ### Known Issues
 
 This release has the following issues:
+
++ **The `cf adbr list-backups` command fails to list backups saved in non-AWS S3-compatible blobstores.**
+  For example, the command shows an error message if the backups are in Minio S3-compatible storage.
 
 <%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
@@ -51,13 +73,13 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 
-  <tr><td>Stemcell</td><td></td></tr>
-  <tr><td>Percona Server</td><td></td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
-  <tr><td>Percona XtraBackup</td><td> </td></tr>
-  <tr><td>mysql-backup-release</td><td></td></tr>
-  <tr><td>mysql-monitoring-release</td><td></td></tr>
-  <tr><td>pxc-release</td><td></td></tr>
+  <tr><td>Stemcell</td><td>621.78*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.30–33</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.30–31.43</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.28.0</td></tr>
 
 </table>
 
