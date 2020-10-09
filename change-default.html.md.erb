@@ -404,3 +404,59 @@ The table below describes how to use the `backup-schedule` optional parameter:
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
 </table>
+
+## <a id='optimize_for_short_words'></a> Optimize for Short Words
+
+
+
+The table below describes how to use the `optimize_for_short_words` optional parameter:
+
+<table>
+  <tr>
+    <th colspan="2" style="text-align:center;">backup-schedule</th>
+  </tr>
+
+  <tr>
+    <th><strong>Type</strong></th>
+    <td>Boolean</td>
+  </tr>
+
+  <tr>
+    <th><strong>Default</strong></th>
+    <td><code>false</false></td>
+  </tr>
+
+  <tr>
+    <th><strong>Description</strong></th>
+    <td>
+    Set this parameter to <code>true</code> to change the MySQL system variable
+    <code>innodb_ft_min_token_size</code> to 1.
+    This allows shorter words to be stored in the InnoDB FULLTEXT index.
+    However, because this has the side effect of increasing the size of the index,
+    you must monitor the memory usage of the service instance and choose a larger VM type
+    when necessary.
+    Depending on the workload and how much data is changed in the FULLTEXT index,
+    the operator might need to perform index maintenance to avoid the index becoming ineffective.
+    <br><br>
+    To remove full-text index entries for deleted records or old records,
+    <code>OPTIMIZE TABLE</code> needs to be run on the indexed table(s) with
+    <code>innodb_optimize_fulltext_only=ON</code> to rebuild the full-text index.
+    <code>innodb_optimize_fulltext_only</code> should be disabled after the optimization is done
+    to allow the query to behave normally for other tables.
+    <code>innodb_optimize_fulltext_only</code> should be set in
+    <code>my.cnf</code> located in
+    <code>/var/vcap/jobs/JOB-NAME/config</code> where
+    <code>JOB-NAME</code> is <code>mysql</code> for single node and leader-follower plans
+    and <code>pxc-mysql</code> for HA Cluster and Multi-Site replication plans.
+    <br><br>
+    For more information,
+    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html">MySQL
+    documentation</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Usage</strong></th>
+    <td><code>create-service</code> or <code>update-service</code></td>
+  </tr>
+</table>
