@@ -435,9 +435,10 @@ The table below describes how to use the `optimize_for_short_words` optional par
     Because this has the side effect of increasing the size of the index,
     you must monitor the memory usage of the service instance and choose a larger VM type
     when necessary.
-    Depending on the workload and how much data is changed in the FULLTEXT index,
-    the operator needs to avoid the index becoming too large and ineffective
+    Also, the operator needs to prevent the index from becoming too large and ineffective
     by removing entries as described below.
+    How often this needs to be done depends on the workload and
+    how much data is changed in the FULLTEXT index.
     <br><br>
     To remove full-text index entries for deleted records or old records:<br><br>
     <ol>
