@@ -122,7 +122,9 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-400',
     description: '400',
-    symptom: vars.product_full + '<pre>Failed to backup service instance "test": failed due to server error, status code: 400</pre>',
+    symptom: '<p>When running <code>cf adbr backup</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre>Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 400</pre>',
     cause: 'Broker on the VM is not running, or is in an unhealthy state',
     solution: ''
 } %>
@@ -130,7 +132,9 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-500',
     description: '500',
-    symptom: vars.product_full + '<pre>Failed to backup service instance "test": failed due to server error, status code: 500</pre>',
+    symptom: '<p>When running <code>cf adbr backup</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre>Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 500</pre>',
     cause: 'Service Instance agent is not running, or is in an unhealthy state',
     solution: ''
 } %>
@@ -138,7 +142,9 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-502',
     description: '502',
-    symptom: vars.product_full + '<pre>Failed to backup service instance "test": failed due to server error, status code: 502</pre>',
+    symptom: '<p>When running <code>cf adbr backup SERVICE-INSTANCE-NAME</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre>Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 502</pre>',
     cause: 'VM is down, stopped, in an unhealthy state',
     solution: ''
 } %>
