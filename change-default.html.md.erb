@@ -423,7 +423,7 @@ The table below describes how to use the `optimize_for_short_words` optional par
 
   <tr>
     <th><strong>Default</strong></th>
-    <td><code>false</false></td>
+    <td><code>false</code></td>
   </tr>
 
   <tr>
@@ -431,7 +431,7 @@ The table below describes how to use the `optimize_for_short_words` optional par
     <td>
     Set this parameter to <code>true</code> to change the MySQL system variable
     <code>innodb_ft_min_token_size</code> to 1.
-    This allows shorter words to be stored in the InnoDB FULLTEXT index.
+    This allows shorter words to be stored in the InnoDB FULLTEXT index.<br><br>
     Because this has the side effect of increasing the size of the index,
     you must monitor the memory usage of the service instance and choose a larger VM type
     when necessary.
