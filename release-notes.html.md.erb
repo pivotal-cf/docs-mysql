@@ -40,6 +40,11 @@ Breaking changes in this release:
   + `.properties.backups_selector.s3.path`
   + `.properties.backups_selector.azure.path`
 
++ **Cron expressions for automated backups are validated:**
+  If your cron schedule is invalid in v2.8, the upgrade to v2.9 fails.
+  For information about cron schedules for automated backups,
+  see [Configuring Automated Backups](https://docs.pivotal.io/p-mysql/2-9/automated-backup.html).
+
 ### Features
 
 New features and changes in this release:
