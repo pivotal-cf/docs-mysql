@@ -124,10 +124,10 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     description: '"400" Error during Backup or Restore',
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
-    <pre>$ cf adbr backup SERVICE-INSTANCE-NAME
-      Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 400</pre>',
+    <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
+    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 400</pre>',
     cause: 'Broker on the VM is not running, or is in an unhealthy state',
-    solution: 'Verify the health of the VM and review the logs for the broker.'
+    solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
@@ -135,10 +135,10 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     description: '"500" Error during Backup or Restore',
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
-    <pre>$ cf adbr backup SERVICE-INSTANCE-NAME
-      Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 500</pre>',
+    <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
+    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 500</pre>',
     cause: 'Service Instance agent is not running, or is in an unhealthy state',
-    solution: 'Verify the health of the VM and review the logs for the mysql service instance'
+    solution: 'Verify the health of the service instance VM and review the logs for the mysql service instance.'
 } %>
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
@@ -147,9 +147,9 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
     <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
-      Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 502</pre>',
+    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 502</pre>',
     cause: 'VM is down, stopped, in an unhealthy state',
-    solution: 'Verify the health of the VM and review the logs for the broker or mysql service instance'
+    solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
 
 ## <a id="techniques"></a> Techniques for Troubleshooting
