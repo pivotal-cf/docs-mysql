@@ -117,16 +117,23 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     solution: 'To resolve this issue disable mTLS in your apps.'
 } %>
 
-### <a id="failed-adbr"></a> Failed Backups with adbr Plugin
+### <a id="failed-adbr"></a> Failed Backups with the adbr Plugin
+
+If you get HTTP error codes when working with the ApplicationDataBackupRestore (adbr) plugin
+for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
+
+- ["400" Error during Backup or Restore](#failed-adbr-400)
+- ["500" Error during Backup or Restore](#failed-adbr-500)
+- ["502" Error during Backup or Restore](#failed-adbr-502)
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-400',
     description: '"400" Error during Backup or Restore',
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
-    <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
-    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 400</pre>',
-    cause: 'Broker on the VM is not running, or is in an unhealthy state',
+    <pre class="terminal">$ cf adbr backup myDB
+    Failed to backup service instance "myDB": failed due to server error, status code: 400</pre>',
+    cause: 'The broker on the VM is not running or is in an unhealthy state.',
     solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
 
@@ -135,10 +142,10 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     description: '"500" Error during Backup or Restore',
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
-    <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
-    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 500</pre>',
-    cause: 'Service Instance agent is not running, or is in an unhealthy state',
-    solution: 'Verify the health of the service instance VM and review the logs for the mysql service instance.'
+    <pre class="terminal">$ cf adbr backup myDB
+    Failed to backup service instance "myDB": failed due to server error, status code: 500</pre>',
+    cause: 'The service instance agent is not running or is in an unhealthy state.',
+    solution: 'Verify the health of the service instance VM and review the logs for the service instance.'
 } %>
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
@@ -146,11 +153,14 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     description: '"502" Error during Backup or Restore',
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
-    <pre class="terminal">$ cf adbr backup SERVICE-INSTANCE-NAME
-    Failed to backup service instance "SERVICE-INSTANCE-NAME": failed due to server error, status code: 502</pre>',
-    cause: 'VM is down, stopped, in an unhealthy state',
+    <pre class="terminal">$ cf adbr backup myDB
+    Failed to backup service instance "myDB": failed due to server error, status code: 502</pre>',
+    cause: 'The VM is down, stopped, or in an unhealthy state.',
     solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
+
+For general information about the adbr plugin,
+see [Backing Up and Restoring <%= vars.product_full %>].
 
 ## <a id="techniques"></a> Techniques for Troubleshooting
 
