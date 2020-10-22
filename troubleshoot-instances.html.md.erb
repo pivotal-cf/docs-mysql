@@ -100,8 +100,8 @@ For more information about troubleshooting this problem, see
 the apps are using MySQL Connector/J v5.1.41 or earlier.</p>',
     cause: '<p>You see errors about certificates.</p>
 <p>For example:</p>
-<pre>Caused by: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate
-        at sun.security.ssl.Alerts.getSSLException(Alerts.java:192) ~[na:1.8.0_152]</pre>',
+<pre class="terminal">Caused by: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate
+  at sun.security.ssl.Alerts.getSSLException(Alerts.java:192) ~[na:1.8.0_152]</pre>',
     solution:'<p>If you cannot update the MySQL Connector/J, do the workaround in
 <a href="https://community.pivotal.io/s/article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack">
 How to disable KeyManager and TrustManager in Container Security Provider Framework in the
@@ -132,7 +132,7 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
     <pre class="terminal">$ cf adbr backup myDB
-    Failed to backup service instance "myDB": failed due to server error, status code: 400</pre>',
+  Failed to backup service instance "myDB": failed due to server error, status code: 400</pre>',
     cause: 'The broker on the VM is not running or is in an unhealthy state.',
     solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
@@ -143,7 +143,7 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
     <pre class="terminal">$ cf adbr backup myDB
-    Failed to backup service instance "myDB": failed due to server error, status code: 500</pre>',
+  Failed to backup service instance "myDB": failed due to server error, status code: 500</pre>',
     cause: 'The service instance agent is not running or is in an unhealthy state.',
     solution: 'Verify the health of the service instance VM and review the logs for the service instance.'
 } %>
@@ -154,13 +154,13 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
     symptom: '<p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
     <p>For example:</p>
     <pre class="terminal">$ cf adbr backup myDB
-    Failed to backup service instance "myDB": failed due to server error, status code: 502</pre>',
+  Failed to backup service instance "myDB": failed due to server error, status code: 502</pre>',
     cause: 'The VM is down, stopped, or in an unhealthy state.',
     solution: 'Verify the health of the broker VM and review the logs for the broker.'
 } %>
 
 For general information about the adbr plugin,
-see [Backing Up and Restoring <%= vars.product_full %>].
+see [Backing Up and Restoring <%= vars.product_full %>](./backup-restore.html).
 
 ## <a id="techniques"></a> Techniques for Troubleshooting
 
