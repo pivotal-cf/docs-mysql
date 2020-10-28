@@ -18,7 +18,71 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
-## <a id="2-10-X"></a> v2.10.0
+## <a id="2-9-1"></a> v2.9.1
+
+**Release Date: October 28, 2020**
+
+### Features
+
+New features and changes in this release:
+
++ **Support for both S3 path-style URLs and virtual hosted-style URLs:**
+  Amazon S3 plans to deprecate S3 path-style URLs in favor of virtual hosted-style URLs. To support this deprecation period, 
+  Operators can select "Force path style access to bucket" in Ops Manager to use old S3 path-style URLs when the Application 
+  Data Backup Restore (adbr) CF CLI plugin interacts with the S3 bucket. For more information on the deprecation of S3 path-style
+  URLs, see this [May 2019 Amazon blog post](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)
+  and the subsequent [September 2020 update post](https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/). 
+
++ **Support for tuning MySQL full-text search:**
+  Developers who would like to optimize MySQL's full-text search to allow for shorter words can do so by setting the 
+  `optimize_for_short_words` arbitrary parameter to `true`. This parameter sets the MySQL `innodb_ft_min_token_size` 
+  server setting to `1`. For more information, see 
+  [Changing Defaults Using Arbitrary Parameters](https://docs.pivotal.io/p-mysql/2-9/change-default.html#full-text-search).
+
+### Resolved Issues
+
+This release has the following fixes:
+
++ **Uppercase letters in the Service Network no longer prevents configuration of Multi-Site Replication:**
+  Previously, if you had configured the Services Network name with upper case letters in your environment, multi-site replication 
+  could not be configured successfully.
+
++ **The `cf adbr list-backups` command no longer fails to list backups for non-AWS S3-compatible blobstores.**
+  For example, the command now supports listing backups in Minio S3-compatible storage.
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
+<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
+
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.90*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.30–33</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.30–31.43</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.30.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
+## <a id="2-9-0"></a> v2.9.0
 
 **Release Date: September 14, 2020**
 
@@ -49,9 +113,41 @@ Breaking changes in this release:
 
 New features and changes in this release:
 
-+
++ **Improved backup and restore workflow:**
+Operators and developers can use the ApplicationDataBackupRestore (adbr) plugin
+with the Cloud Foundry Command Line Interface (cf CLI) to back up and
+restore service instances.
+For more information, see [Backing Up and Restoring <%= vars.product_full %>](./backup-restore.html)
+and [Manually Restoring from Backup](manual-restore.html).
 
-+
++ **VMware strongly recommends that if operators offer an HA cluster plan,
+  they also offer a <%= vars.single_leader_plan %> plan.**
+  To restore an HA cluster service instance from backup, developers need access
+  to a <%= vars.single_leader_plan %> plan.
+  For more information,
+  see [Restore a Service Instance](./backup-restore.html#restore) in _Backing Up and Restoring <%= vars.product_full %>_
+  and [Configure Service Plans](./install-config.html#active).
+
++ **A developer can change the backup schedule for an individual service instance using
+an arbitrary parameter:**
+For more information, see [Backup Schedule](./change-default.html#backup-schedule).
+
++ **Each backup artifact has a unique encryption key:**
+  Each backup of any MySQL service instance now uses a unique encryption key.
+
++ **SCP backups use SFTP:**
+  When Secure copy protocol (SCP) is configured as the external storage to upload backups,
+  it now relies on SSH File Transfer Protocol (SFTP).
+
++ **All service instances are provisioned with a DNS alias:**
+  This DNS alias is used as the hostname in new service keys.
+  Old service keys, which use the DNS address for the hostname, continue to work.
+
++ **The legacy workflow to enable TLS on a service instance has been removed:**
+  In the legacy workflow, which  was deprecated after MySQL for PCF v2.4,
+  developers had to run `cf update-service` to enable TLS on each service instance.
+  This workflow is no longer needed because MySQL connectors can use the DNS alias to connect
+  to the service instance over TLS.
 
 
 ### Known Issues
