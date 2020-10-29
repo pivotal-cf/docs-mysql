@@ -28,20 +28,22 @@ New features and changes in this release:
 
 + **Support for both S3 path-style URLs and virtual hosted-style URLs:**
   Amazon S3 plans to deprecate S3 path-style URLs in favor of virtual hosted-style URLs.
-  To support this deprecation period,
-  operators can select **Force path style access to bucket** in Ops Manager
-  to use old S3 path-style URLs when the Application
-  Data Backup Restore (adbr) CF CLI plugin interacts with the S3 bucket.
-  For more information on the deprecation of S3 path-style
+  However, some S3-compatible buckets from other providers still use path-style URLs.
+  If the S3-compatible bucket that you use for backup storage requires a path-style URL,
+  select **Force path style access to bucket** in Ops Manager.
+
+    For information on the deprecation of S3 path-style
   URLs, see AWS blog posts:
   [Amazon S3 Path Deprecation Plan – The Rest of the Story](https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/)
   and the subsequent [Update to Amazon S3 Path Deprecation Plan](https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/).
 
 + **Support for tuning MySQL full-text search:**
-  Developers who would like to optimize MySQL's full-text search to allow for shorter words can do so by setting the
-  `optimize_for_short_words` arbitrary parameter to `true`. This parameter sets the MySQL `innodb_ft_min_token_size`
+  Developers who want to optimize MySQL's full-text search to allow for shorter words
+  set the `optimize_for_short_words` arbitrary parameter to `true`.
+  This parameter sets the MySQL `innodb_ft_min_token_size`
   server setting to `1`. For more information, see
-  [Changing Defaults Using Arbitrary Parameters](https://docs.pivotal.io/p-mysql/2-9/change-default.html#full-text-search).
+  [Optimize for Short Words](change-default.html#optimize_for_short_words)
+  in _Changing Defaults Using Arbitrary Parameters_.
 
 ### Resolved Issues
 
