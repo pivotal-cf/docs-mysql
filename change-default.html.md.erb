@@ -402,3 +402,65 @@ The table below describes how to use the `backup-schedule` optional parameter:
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
 </table>
+
+## <a id='optimize_for_short_words'></a> Optimize for Short Words
+
+
+
+The table below describes how to use the `optimize_for_short_words` optional parameter:
+
+<table>
+  <tr>
+    <th colspan="2" style="text-align:center;">optimize_for_short_words</th>
+  </tr>
+
+  <tr>
+    <th><strong>Type</strong></th>
+    <td>Boolean</td>
+  </tr>
+
+  <tr>
+    <th><strong>Default</strong></th>
+    <td><code>false</code></td>
+  </tr>
+
+  <tr>
+    <th><strong>Description</strong></th>
+    <td>
+    Set this parameter to <code>true</code> to change the MySQL system variable
+    <code>innodb_ft_min_token_size</code> to 1.
+    This allows shorter words to be stored in the InnoDB FULLTEXT index.<br><br>
+    Because this has the side effect of increasing the size of the index,
+    you must monitor the memory usage of the service instance and choose a larger VM type
+    when necessary.
+    Also, the operator needs to prevent the index from becoming too large and ineffective
+    by removing entries as described below.
+    How often this needs to be done depends on the workload and
+    how much data is changed in the FULLTEXT index.
+    <br><br>
+    To remove full-text index entries for deleted records or old records:<br><br>
+    <ol>
+      <li>Edit <code>my.cnf</code> to set <code>innodb_optimize_fulltext_only=ON</code>.
+          <ul>
+            <li>For single node and leader-follower plans, the path to the file is
+          <code>/var/vcap/jobs/mysql/config/my.conf</code>.</li>
+            <li>For HA cluster and <%= vars.single_leader_plan %> plans the path to the file is
+          <code>/var/vcap/jobs/pxc-mysql/config/my.conf</code>.</li>
+          </ul>
+       </li>
+       <li>Run <code>OPTIMIZE TABLE</code> on the indexed tables.</li>
+       <li>When the optimization is done, set <code>innodb_optimize_fulltext_only=OFF</code>
+           so that the query behaves normally for other tables.</li>
+    </ol>
+
+    For more information,
+    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html">MySQL
+    documentation</a>.
+    </td>
+  </tr>
+
+  <tr>
+    <th><strong>Usage</strong></th>
+    <td><code>create-service</code> or <code>update-service</code></td>
+  </tr>
+</table>

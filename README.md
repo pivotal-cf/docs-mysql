@@ -10,6 +10,7 @@ Docs for MySQL for VMware Tanzu
 | Branch name | Use for… |
 |-------------| -------|
 | master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
+| 2.9         | [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
 | 2.8         | v2.8.x |
 | 2.7         | v2.7.x |
 | 2.6         | v2.6.x |

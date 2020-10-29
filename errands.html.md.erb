@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic describes each of the service broker errands and how 
+This topic describes each of the service broker errands and how
 to run an errand using the BOSH CLI.
 
 ## <a id="overview"></a> Overview
@@ -14,7 +14,7 @@ Errands can manage service brokers and run mass operations on service
 instances created by brokers.
 To run an errand, see [Run an Errand](#errand) below.
 
-For all supported <%= vars.product_full %> errands, 
+For all supported <%= vars.product_full %> errands,
 see the full errand list:
 
 + [find-deprecated-bindings](#find-deprecated-bindings)
@@ -63,8 +63,8 @@ you can run. To run an errand, see [Run an Errand](#errand) above.
 
 The `find-deprecated-bindings` errand does the following:
 
-- Lists app bindings and services keys 
-that are deprecated in <%= vars.product_short %> v<%= product_info['local_product_version'] %>. 
+- Lists app bindings and services keys
+that are deprecated in <%= vars.product_short %> v<%= product_info['local_product_version'] %>.
 The bindings are deprecated because they do not require TLS.
 
 - Exits whether or not a deprecated binding is found.
@@ -83,7 +83,7 @@ Stdout     +---------------------------+--------------------------------------+-
 </pre>
 
 
-VMware recommends that operators configure bindings to require TLS. For more information, 
+VMware recommends that operators configure bindings to require TLS. For more information,
 see [Configure TLS](./install-config.html#security).
 
 
@@ -106,7 +106,7 @@ The `configure-leader-follower` errand does the following:
 * Runs after every create or update of a leader-follower instance.
 * Fails and alerts operators with BOSH errand output if the service instance is in a unhealthy state.
 
-This errand is used to trigger a leader-follower failover. 
+This errand is used to trigger a leader-follower failover.
 You can also use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
@@ -119,7 +119,7 @@ The `make-leader` errand does the following:
   and sets the VM as writable.
 * Fails if the original leader is still writeable. This protects against data divergence.
 
-This errand is used to trigger a leader-follower failover. 
+This errand is used to trigger a leader-follower failover.
 You can also use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
@@ -130,10 +130,10 @@ The `make-read-only` errand does the following:
 
 * Demotes a leader VM to a follower.
 * Sets the VM to read-only and guarantees that apps no longer write to this VM.
-* Relays all in-flight transactions on the former leader VM to the follower VM 
+* Relays all in-flight transactions on the former leader VM to the follower VM
 if the follower VM is accessible.
 
-This errand is used to trigger a leader-follower failover. 
+This errand is used to trigger a leader-follower failover.
 You can also use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
@@ -179,13 +179,12 @@ Running this errand removes all service instances and their data.
 
 ### <a id="recreate-all-service-instances"></a> recreate-all-service-instances
 
-The `recreate-all-service-instances` errand recreates all service instance 
+The `recreate-all-service-instances` errand recreates all service instance
 VMs managed by an on-demand broker.
 
 You might want use this errand in the following cases:
 
 * Rotating the <%= vars.ops_manager %> root certificate authority (CA).
 For more information about rotating CAs, see
-[Rotate CAs and Leaf Certificates](https://docs.pivotal.io/ops-manager/security/pcf-infrastructure/api-cert-rotation.html#rotate-ca).
+[Rotating CAs and Leaf Certificates](https://docs.pivotal.io/ops-manager/security/pcf-infrastructure/rotate-cas-and-leaf-certs.html).
 * Fully restoring the platform during disaster recovery or migration.
-
