@@ -191,10 +191,7 @@ To back up your database to Amazon S3 or Ceph:
 VMware recommends that this account is only used by <%= vars.product_short %>.
 You must apply a minimal policy that enables the user account upload backups to your S3 bucket.
 
-Give the policy the following permissions:
-
-* List and upload to buckets
-* (Optional) Create buckets if they do not already exist
+Give the policy the permission to list and upload to buckets.
 
 The procedure in this section assumes that you are using an Amazon S3 bucket.
 If you are using a Ceph or another S3-compatible bucket to create the policy and access key,
@@ -222,7 +219,6 @@ To create a policy and access key in AWS:
             "s3:ListBucket",
             "s3:ListBucketMultipartUploads",
             "s3:ListMultipartUploadParts",
-            "s3:CreateBucket",
             "s3:PutObject"
           ],
           "Resource": [
