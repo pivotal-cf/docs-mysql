@@ -3,13 +3,14 @@ title: About Service-Gateway Access
 owner: MySQL
 ---
 
-Service-gateway access enables a MySQL service instance to
-connect to external components that are not on the same foundation as the service instance.
-This is also referred to as _off-platform access_ because the components,
-that are not hosted on the foundation, or platform,
+Service-gateway access enables external clients
+that are not on the same foundation as a service instance to connect to the service instance.
+This is also referred to as _off-platform access_ because the external clients,
+which are not hosted on the foundation, or platform,
 can access MySQL service instances that are on the platform.
 
-These components, typically apps, can be on another foundation or hosted outside of the foundation.
+The external clients are typically apps or administrative tools such as MySQL Workbench.
+They can be on another foundation or hosted outside of the foundation.
 
 For related procedures, see:
 
@@ -42,8 +43,10 @@ the TCP router.
 The TCP router internally load balances between the MySQL service instance nodes.
 
 The diagram below shows how the traffic is routed from apps to the MySQL service instance nodes in this case.
-All off-platform apps using this MySQL service instance follow the same route,
-irrespective of whether they are hosted on a different foundation or are hosted outside of a foundation.
+Apps that are hosted outside the foundation and apps that are hosted on different foundations,
+use this same route to access the service instance.
+Apps running on the same foundation connect directly to the service instance without going through
+the load balancer or router.
 
 ![Diagram showing an app that is external to the foundation sending traffic to the external load balancer.
 The load balancer sends the traffic to a MySQL tile port in the TCP router.
