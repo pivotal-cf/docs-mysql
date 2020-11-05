@@ -44,8 +44,8 @@ New features and changes in this release:
   Amazon S3 plans to deprecate S3 path-style URLs in favor of virtual hosted-style URLs.
   However, some S3-compatible buckets from other providers still use path-style URLs.
   If the S3-compatible bucket that you use for backup storage requires a path-style URL,
-  select **Force path style access to bucket** in Ops Manager.
-  See [Configure Backups in Ops Manager](automated-backup.html#configure-aws).
+  select **Force path style access to bucket** in <%= vars.ops_manager %>.
+  See [Configure Backups in <%= vars.ops_manager %>](automated-backup.html#configure-aws).
 
     For general information about the deprecation of S3 path-style
   URLs, see AWS blog posts:
@@ -65,8 +65,8 @@ New features and changes in this release:
 This release has the following fixes:
 
 + **Uppercase letters in the service network no longer prevents configuration of Multi-Site Replication:**
-  Previously, if you had configured the service network name with upper case letters in your environment, multi-site replication
-  could not be configured successfully.
+  Previously, if you had configured the service network name with uppercase letters in your environment,
+  multi-site replication could not be configured successfully.
 
 + **The `cf adbr list-backups` command no longer fails to list backups for non-AWS S3-compatible blobstores.**
   For example, the command now supports listing backups in Minio S3-compatible storage.
@@ -112,7 +112,7 @@ The following components are compatible with this release:
 Breaking changes in this release:
 
 + **Location of backup artifact:**
-  Backups are no longer stored in a sub-directory in the storage destination.
+  Backups are no longer stored in a subdirectory in the storage destination.
   Instead, they are stored at the root-level.
 
 + **Removed fields from tile configuration:**
