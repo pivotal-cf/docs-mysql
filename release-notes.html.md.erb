@@ -18,6 +18,52 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-8-4"></a> v2.8.4
+
+**Release Date: November 6, 2020**
+
+### Features
+
+New features and changes in this release:
+
++ **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available 
+  in this release. There have been no changes to the feature since v2.8.3.
++ **Removed Global Service Instance Quota Limit:** Previously, Operators could not set the maximum service 
+  instances quota higher than 500 service instances. This upper limit has been removed.
++ **Percona Server:** Upgraded to v5.7.31-34
++ **Percona XtraDB Cluster:** Upgraded to v5.7.31-34
+  + This Percona XtraDB Cluster version contains a patch for a remote code execution vulnerability, CVE-2020-15180.
+    For more information, see [Percona's blog post](https://www.percona.com/blog/2020/10/30/cve-2020-15180-affects-percona-xtradb-cluster/).
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
+<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
+<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+  <tr><td>Stemcell</td><td>621.90*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31-34*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.30.0*</td></tr>
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-8-3"></a> v2.8.3
 
 **Release Date: October 1, 2020**
