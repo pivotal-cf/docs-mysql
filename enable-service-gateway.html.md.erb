@@ -8,7 +8,7 @@ This topic explains how to enable service-gateway access.
 ## <a id='overview'></a> Overview
 
 Service-gateway access enables external clients to connect to a MySQL service.
-The clients are typically apps running external to the foundation or on a different foundation
+The clients are typically apps running external to the foundation, apps on a different foundation,
 and administrative tools such as MySQL Workbench.
 
 For a more detailed overview, see [Service-Gateway Access](./service-gateway-access.html).
@@ -45,9 +45,13 @@ TCP router.
     [Click here to view a larger version of the image above.](./images/TCP-router-CID.png)
 
 ## <a id='configure-firewall'></a> Configure the Firewall to Allow Incoming Traffic to the TCP Router
+
+The steps you take to allow traffic to the TCP router depend on your IaaS:
+
 1. Allow incoming traffic to the TCP router VM created in
 [Enable TCP Routing Using the <%= vars.app_runtime_abbr %> Tile](#tcp-routing) above.
-For information about how to do so, see the documentation for your IaaS.
+
+    For information about how to do so, see the documentation for your IaaS.
 
 ## <a id='configure-lb'></a> Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router
 
@@ -55,12 +59,15 @@ To configure the load balancer:
 
 1. Use the IaaS console and the CID that you recorded earlier to find the VM that runs the TCP router.
 1. Create an external TCP load balancer that points to the VM running the TCP router.
-1. Configure a distinct external port range that does not overlap with the TCP networking port
-   or port range that you configured in [Enable TCP Routing Using the <%= vars.app_runtime_abbr %>
+1. Configure a distinct external port range that does not overlap with either of the following:
+    +  The TCP networking port or port range that you configured in [Enable TCP Routing Using the <%= vars.app_runtime_abbr %>
    Tile](#tcp-routing) above.
+    + The port range configured for service-gateway access for other service tiles,
+      such as VMware Tanzu™ RabbitMQ® for VMs.
 
-    For example, if your TCP routing port range is `1024-1123`,
-     then your load balancer port range for service gateway must not overlap `1024-1123`.
+    For example, if your TCP routing port range is `1024–1123`,
+    and ports `1124–1223` are reserved for Tanzu RabbitMQ service instances,
+     then your load balancer port range for service gateway must not overlap `1024-1223`.
    <p class="note">
         <strong>Note:</strong> Each <%= vars.product_short %> service instance using service-gateway access requires a unique
         port. Ensure that the port range configured above has enough capacity to accommodate all the
@@ -69,7 +76,7 @@ To configure the load balancer:
    </p>
    ![Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
 using ports in the TAS LB port range through the TCP Router using ports in the TAS TCP port range.
-Traffic flows to the RabbitMQ for VMs service instances from the Load Balancer using ports
+Traffic flows to the MySQL service instances from the Load Balancer using ports
 in the Service Gateway LB port range through the TPC Router using ports in the Service Gateway TCP port range.
 ](images/service-gateway-ports.png)
 1. Record this port range.
@@ -99,50 +106,38 @@ To configure service-gateway access globally for the foundation:
     ![Example of the Settings pane.
       Enabled is selected to reveal the External TCP Domain field where the text tcp.turtlegreen.cf-app.com
       is entered and the External TCP Port Range field where the text 1024-1123 is entered]
-      (/images/global-settings-off-platform-access.png).
+      (/images/global-settings-off-platform-access.png)
+
      This enables the feature and makes the domain and port range fields visible.
 
 2. Configure the fields as follows:
 
     <table>
+       <col width="20%">
         <tr>
             <th>Field</th>
             <th>Instructions</th>
         </tr>
         <tr>
             <td>
-                <strong>Field Name</strong>
+                <strong>External TCP Domain</strong>
             </td>
             <td>
-                Instructions for how to complete the field
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Enabled</strong>
-            </td>
-            <td>
-                Select the **Enabled** radio button to enable the feature and make visible 
-                the domain and port range fields.
+               Set this to the DNS entry for the external load balancer
+               that you recorded in <a href="#create-dns-record">Create a DNS Record That Maps to the Load Balancer</a> above.
             </td>
         </tr>
         <tr>
             <td>
-                <strong>Enabled</strong>
+                <strong>External TCP Port Range</strong>
             </td>
             <td>
-                Select the **Enabled** radio button to enable the feature and make visible 
-                the domain and port range fields.
+               Set this to the range of ports you configured for the external load balancer for MySQL
+               service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
+               to Redirect Traffic to the TCP Router</a> above.
             </td>
         </tr>
       </table>
-
-    - **External TCP domain**: This must correspond to the DNS entry for the external load balancer,
-    recorded in [Create a DNS Record That Maps to the Load Balancer](#create-dns-record) above.
-    - **Port Range**: This is the range of ports you configured for the external load balancer for <%= vars.product_short %>
-    service instances in
-    [Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router](#configure-lb) above.
-
 
      <p class="note warning">
        <strong>Warning:</strong>
