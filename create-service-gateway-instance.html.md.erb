@@ -1,22 +1,22 @@
 ---
 breadcrumb: VMware Tanzu RabbitMQ for VMs Documentation
 title: Creating a Service Instance with Service-Gateway Access
-owner: London Services
+owner: MySQL
 ---
 
 This topic explains how to create a service instance with service-gateway access.
 
-Service-gateway access enables a <%= vars.product_full %> on-demand service instance to
+Service-gateway access enables a MySQL service instance to
 connect to external components that are not on the same foundation as the service instance.
 
 ## <a id='service-gateway'></a> Create a Service Instance with Service-Gateway Access
 
-This section assumes that you meet the prerequisites for using on-demand <%= vars.product_full %>.
+This section assumes that you meet the prerequisites for using <%= vars.product_full %>.
 For more information, see [Prerequisites](use.html#prereqs).
 
-If operators have enabled a service-gateway plan, you can create a service instance that can connect to
+If operators have enabled service-gateway access, you can create a service instance that can connect to
 components outside the your foundation.
-Contact your operator if you are unsure which plans have been enabled for service-gateway access.
+Contact your operator if you are unsure if the foundation has been enabled for service-gateway access.
 For information about the architecture and use cases, see [Service-Gateway Access](./service-gateway-access.html).
 
 To create a service instance that enables service-gateway access:
@@ -24,20 +24,23 @@ To create a service instance that enables service-gateway access:
 1. Create a service instance with the service-gateway plan by running:
 
     ```
-    cf create-service p.rabbitmq SERVICE-GATEWAY-PLAN SERVICE-INSTANCE-NAME -c '{"tls": true}'
+    cf create-service p.mysql PLAN SERVICE-INSTANCE -c '{"enable_external_access": true}'
     ```
 
-    <p class="note warning">
-      <strong>Warning:</strong> VMware recommends that you configure service-gateway access with TLS to
-      prevent man-in-the-middle attacks.
-      For instructions on using TLS on your platform, see <a href="./use.html#using-tls">Use Transport Layer Security</a>.
-    </p>
+    Where:
+    - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
+    - `SERVICE-INSTANCE` is a name you choose to identify the service instance.
+    This name appears under `service` in output from `cf services`.
 
 1. Obtain credentials by creating a service key:
 
     ```
-    cf create-service-key SERVICE-INSTANCE-NAME SERVICE-KEY-NAME
+    cf create-service-key SERVICE-INSTANCE SERVICE-KEY
     ```
+
+    Where:
+    - `SERVICE-INSTANCE` is the name of the instance you created above.
+    - `SERVICE-KEY` is a name you choose for the service key.
 
     The `uri` section of the service key contains the address to the TCP router and a port from the port range.
     You can use this URI to connect to the service instance from outside the foundation.
