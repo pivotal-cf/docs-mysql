@@ -5,18 +5,21 @@ owner: MySQL
 ---
 
 This topic explains how to create a service instance with service-gateway access.
+It also explains how to enable and disable service-gateway access on an exisiting service instance.
 
-For information about service-gateway architecture and use cases,
+For general information about service-gateway access,
+including about architecture and use cases,
 see [Service-Gateway Access](./service-gateway-access.html).
 
 If service-gateway access is enabled for the foundation,
-you can create MySQL service instances that can connect to
-components outside the foundation, also called _off-platform_ components.
+external components that are outside the foundation can connect to 
+MySQL service instances.
+These external components are also referred to as _off-platform_ components.
 
 These components are typically:
 
 + Apps running externally or running on other foundations
-+ Administrative and management tools, such as MySQL Workbench
++ Database administrative and management tools, such as MySQL Workbench
 
 
 <p class="note"><strong>Note:</strong>
@@ -54,7 +57,7 @@ To create a service instance that enables service-gateway access:
     - `SERVICE-INSTANCE-NAME` is a name you choose for the service instance.
     This name will appear under `service` in output from `cf services`.
 
-2. Obtain credentials by creating a service key by running:
+2. Obtain credentials by creating a service key. Run:
 
     ```
     cf create-service-key SERVICE-INSTANCE-NAME SERVICE-KEY
@@ -62,7 +65,8 @@ To create a service instance that enables service-gateway access:
 
     Where:
     - `SERVICE-INSTANCE-NAME` is the name of the instance you created above.
-    - `SERVICE-KEY` is a name you choose for the service key.
+    - `SERVICE-KEY` is a name you choose for the service key. Choose a name that
+      indicates that the key contains credentials for off-platform access.
 
     <p class="note">
       <strong>Note:</strong> If the operator disables and then re-enables service-gateway access
@@ -77,28 +81,28 @@ To create a service instance that enables service-gateway access:
 
     ```
     {
-     "hostname": "tcp.turtlegreen.pmysql.farm",
-     "jdbcUrl": "jdbc:mysql://tcp.turtlegreen.pmysql.farm:1035/service_instance_db?user=4801b239ba514be0be393cb33a0f3431\u0026password=g3mfwbz00byl6s5a\u0026sslMode=VERIFY_IDENTITY\u0026useSSL=true\u0026requireSSL=true\u0026enabledTLSProtocols=TLSv1.2\u0026serverSslCert=/etc/ssl/certs/ca-certificates.crt",
+     "hostname": "tcp.turtlegreen.cf-app.com",
+     "jdbcUrl": "jdbc:mysql://tcp.turtlegreen.cf-app.com:1035/service_instance_db?user=4801b239ba514be0be393cb33a0f3431\u0026password=g3mfwbz00byl6s5a\u0026sslMode=VERIFY_IDENTITY\u0026useSSL=true\u0026requireSSL=true\u0026enabledTLSProtocols=TLSv1.2\u0026serverSslCert=/etc/ssl/certs/ca-certificates.crt",
      "name": "service_instance_db",
      "password": "g3mfwbz00byl6s5a",
      "port": 1035,
-         "tls": {
-      "cert": {
-       "ca": "-----BEGIN CERTIFICATE-----\nMIIDLTCCAhWgAwIBAgIUTgFaBwCzHAZfdQ5gHtol0IjMUXIwDQYJKoZIhvcNAQEL\nBQAwJjEkMCIGA1UEAxMbZG0tcm9vdC5kZWRpY2F0ZWQtbXlzcWwuY29tMB4XDTIw\nMTEwMjE0MDUyNloXDTIxMTEwMjE0MDUyNlowJjEkMCIGA1UEAxMbZG0tcm9vdC5k\nZWRpY2F0ZWQtbXlzcWwuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\nAQEArLEuvd6HKVEgIs+SeZBMVVT7UafRQp2NWNV1mYS4zthXzP3q7MNPQr3Hr+qp\nANO95Mnq5bCxXAIHFIOUS4nHkSYPSNkaGmkRrUiDLkEH+xGodAKnmshPcfuhW8gO\nc5RTrqgCsNEzpAask7MQoj9njp8oQyNQ2qS7zm9t91XYiLc1RstKc9jnyU3xzJDr\n6+FBqC9uwyJIhV9fGsmUxnB7OMS8kx/uYmOPeNL6ywIAypQBaIIPs7THzqDPe+Qi\nY8o2J5ylFWXasz3tGjtTCetSmrfyBzZFNc1EmqzABkNTXi/qfRs5KtS+UtRqtIsF\nTgL/F0bBlZe15bv7MahMVRqeOwIDAQABo1MwUTAdBgNVHQ4EFgQUNdcf3u9oTtLl\noQ3Y7J5wCCtNKLAwHwYDVR0jBBgwFoAUNdcf3u9oTtLloQ3Y7J5wCCtNKLAwDwYD\nVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAFEkmfosL5eLIri6Wi2dQ\nva5olI5xMwaHAp7gaqp9rxPUlugMgSsiNqzS5fL/682HbsqLVQijEg4tbX5VeA/6\ndztZE58DUjXam1YOU6THUt8oeK6NtUJ3TmjTttFWB+x2yvQefJoldGslBh06HzBr\nY5CrlkVsiLek2JKmU9LQ2XQ7CIZEzz20MJp8CrDDsn1U3BjUrUVmlLdgAtIuWgJ7\nufmYar41bWcMjsNvETrOxWtY5uvErmP+Z+0GGdYEUimLgxCc6WfBWdhMbEygOS4G\n6amSkb/rZTHWr0z4swHdrNtP627jhtcdjlh5QFQYYxc8O/jeAehUdS06JjG9qUzP\nFQ==\n-----END CERTIFICATE-----\n"
-      }
+     "tls": {
+       "cert": {
+         "ca": "-----BEGIN CERTIFICATE-----\nMIIDLTCCAhWgAwIBAgIUTgFaBwCzHAZfdQ5gHtol0IjMUXIwDQYJKoZIhvcNAQEL\nBQAwJjEkMCIGA1UEAxMbZG0tcm9vdC5kZWRpY2F0ZWQtbXlzcWwuY29tMB4XDTIw\nMTEwMjE0MDUyNloXDTIxMTEwMjE0MDUyNlowJjEkMCIGA1UEAxMbZG0tcm9vdC5k\nZWRpY2F0ZWQtbXlzcWwuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC\nAQEArLEuvd6HKVEgIs+SeZBMVVT7UafRQp2NWNV1mYS4zthXzP3q7MNPQr3Hr+qp\nANO95Mnq5bCxXAIHFIOUS4nHkSYPSNkaGmkRrUiDLkEH+xGodAKnmshPcfuhW8gO\nc5RTrqgCsNEzpAask7MQoj9njp8oQyNQ2qS7zm9t91XYiLc1RstKc9jnyU3xzJDr\n6+FBqC9uwyJIhV9fGsmUxnB7OMS8kx/uYmOPeNL6ywIAypQBaIIPs7THzqDPe+Qi\nY8o2J5ylFWXasz3tGjtTCetSmrfyBzZFNc1EmqzABkNTXi/qfRs5KtS+UtRqtIsF\nTgL/F0bBlZe15bv7MahMVRqeOwIDAQABo1MwUTAdBgNVHQ4EFgQUNdcf3u9oTtLl\noQ3Y7J5wCCtNKLAwHwYDVR0jBBgwFoAUNdcf3u9oTtLloQ3Y7J5wCCtNKLAwDwYD\nVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQsFAAOCAQEAFEkmfosL5eLIri6Wi2dQ\nva5olI5xMwaHAp7gaqp9rxPUlugMgSsiNqzS5fL/682HbsqLVQijEg4tbX5VeA/6\ndztZE58DUjXam1YOU6THUt8oeK6NtUJ3TmjTttFWB+x2yvQefJoldGslBh06HzBr\nY5CrlkVsiLek2JKmU9LQ2XQ7CIZEzz20MJp8CrDDsn1U3BjUrUVmlLdgAtIuWgJ7\nufmYar41bWcMjsNvETrOxWtY5uvErmP+Z+0GGdYEUimLgxCc6WfBWdhMbEygOS4G\n6amSkb/rZTHWr0z4swHdrNtP627jhtcdjlh5QFQYYxc8O/jeAehUdS06JjG9qUzP\nFQ==\n-----END CERTIFICATE-----\n"
+       }
      },
-     "uri": "mysql://4801b239ba514be0be393cb33a0f3431:g3mfwbz00byl6s5a@tcp.turtlegreen.pmysql.farm:1035/service_instance_db?reconnect=true",
+     "uri": "mysql://4801b239ba514be0be393cb33a0f3431:g3mfwbz00byl6s5a@tcp.turtlegreen.cf-app.com:1035/service_instance_db?reconnect=true",
      "username": "4801b239ba514be0be393cb33a0f3431"
     }
     ```
 
     The four keys that change to include the TCP domain and TCP port are
     `hostname`, `jdbcUrl`, `port`, and `uri`.
-    The keys you need depend on the type of component that you are accessing 
+    The keys that you need depend on the type of component that you are accessing 
     the service instance from.
 
 
-## <a id='enable-service-gateway'></a> Enable a Service Instance for Off-Platform Access
+## <a id='enable-service-gateway'></a> Enable an Existing Service Instance for Off-Platform Access
 
 If you already have a MySQL service instance, you can make it accessible to external components
 by enabling service-gateway access.
@@ -108,12 +112,10 @@ To enable service-gateway access on an existing MySQL service instance:
 1. Run:
 
     ```
-    cf update-service p.mysql PLAN SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
+    cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
     ```
 
-    Where:
-    - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
-    - `SERVICE-INSTANCE-NAME` is a name of the service instance that you want to make available
+    Where `SERVICE-INSTANCE-NAME` is a name of the service instance that you want to make available
       for off-platform access.
       This name appears under `service` in output from `cf services`.
 
@@ -131,9 +133,7 @@ To disable service-gateway access on a MySQL service instance:
 1. Run:
 
     ```
-    cf update-service p.mysql PLAN SERVICE-INSTANCE-NAME -c '{"enable_external_access": false}'
+    cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": false}'
     ```
 
-    Where:
-    - `PLAN` is the name of the <%= vars.product_short %> plan that is used for the instance.
-    - `SERVICE-INSTANCE-NAME` is a name of the service instance for which you want to disable service-gateway access.
+    Where `SERVICE-INSTANCE-NAME` is a name of the service instance for which you want to disable service-gateway access.
