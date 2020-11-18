@@ -5,16 +5,8 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-<%# The below uses the local product variable and math so we do not need to edit it
-with every release %>
-<% previous_version = (product_info['local_product_version'].to_f - 0.1).round(2) %>
-<% current_version = product_info['local_product_version'] %>
-
-VMware recommends that you upgrade to the latest version of your current minor line,
-then upgrade to the latest available version of the new minor line.
-For example, if you use an older v<%= previous_version %>.x
-version, upgrade to the latest v<%= previous_version %>.x version
-before upgrading to the latest v<%= current_version %>.x version.
+VMware recommends that you upgrade to the latest patch for your current minor,
+then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
@@ -26,7 +18,7 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 New features and changes in this release:
 
-+ 
++
 
 +
 
