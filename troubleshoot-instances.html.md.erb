@@ -18,6 +18,36 @@ Start here if you are responding to a specific error or error messages.
 
 <%= partial vars.path_to_partials + '/services-tshoot/tshoot-no-metrics' %>
 
+
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+    id: 'no-service-gateway-ports',
+    description: 'create-service or update-service fail for service-gateway access',
+    symptom: 'When you run <code>cf create-service</code> or <code>cf update-service</code> with
+              <code>{"enable_external_access": true}</code>, you receive an error like this:
+              <pre class="terminal">Service broker error: contact your operator,<br>service configuration issue occurred</pre>',
+    cause: 'When off-platform access is set up for a foundation, a range of TCP ports is reserved for MySQL traffic.
+            Each service instance for which service-gateway access is enabled, requires one port.<br>
+            If all the ports in the range have been assigned to other service instances,
+            then you cannot create or update service instances to use service-gateway access.',
+    solution: 'To resolve this error, confirm that the problem is due to not enough ports 
+               and, if so, increase the port range:<br><br>
+                <ol>
+                 <li>
+                     Review the BOSH logs for the broker process
+                     on the MySQL broker deployment pivotal-mysql-GUID,
+                     and look for this error message:
+                     <code>Failed to update manifest: There are no free ports in range: […</code>
+                     For information about log access, see <a href="troubleshoot.html#bosh-cf-access">
+                     Access Broker and Instance Logs and VMs</a>.
+                  </li>
+                  <li> Ask the operator to increase the external TCP port range for off-platform access
+                       by editing the Settings pane.
+                       See <a href="enable-service-gateway.html#configure-service-gateway-plan">
+                       Enable Service-Gateway Access</a> in <em>Enabling Service-Gateway Access</em>.
+                  </li>
+                 </ol> '
+} %>
+
 ### <a id="inaccessible"></a>If Instances or Database are Inaccessible
 
 You might experience the following during upgrades or in a leader-follower topology:
