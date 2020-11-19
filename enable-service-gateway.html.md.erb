@@ -19,12 +19,13 @@ To enable service-gateway access for an on-demand offering:
 1. [Configure the firewall to allow incoming traffic to the TCP router](#configure-firewall)
 1. [Configure the load balancer in the IaaS to redirect traffic to the TCP router](#configure-lb)
 1. [Create a DNS record that maps to the load balancer](#create-dns-record)
-1. [Enable the service-gateway access](#configure-service-gateway-plan)
+1. [Enable service-gateway access](#configure-service-gateway-plan)
 
 <p class="note warning">
-  <strong>Warning:</strong> VMware recommends that you configure Transport Layer Security (TLS) alongside
-  service-gateway access to prevent man-in-the-middle attacks.
-  For instructions on how to configure TLS, see <a href="./install-config.html#security">Configure Security</a>.
+  <strong>Warning:</strong> VMware recommends that you configure Transport Layer Security (TLS)
+  alongside service-gateway access to prevent man-in-the-middle attacks.
+  For instructions on how to configure TLS, see
+  <a href="./install-config.html#security">Configure Security</a>.
 </p>
 
 
@@ -37,9 +38,10 @@ TCP routing is disabled by default. To enable TCP routing:
 **Enable TCP routing**.
 1. For TCP routing ports, enter one or more ports to which the load balancer forwards requests.
 For example, `1024` for a single port or `1024–1123` for a range of ports.
-1. Apply changes in <%= vars.ops_manager %> for the <%= vars.app_runtime_abbr %> tile to create the TCP router.
-1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of the
+1. Apply changes in <%= vars.ops_manager %> for the <%= vars.app_runtime_abbr %> tile to create the
 TCP router.
+1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
+the TCP router.
 
     ![Screenshot showing Ops Manager UI with the 'Status' tab selected.
     In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
@@ -62,7 +64,7 @@ To configure the load balancer:
 
 1. Use the IaaS console and the CID that you recorded earlier to find the VM that runs the TCP router.
 1. Create an external TCP load balancer that points to the VM running the TCP router.
-1. Configure a distinct external port range that does not overlap with either of the following:
+1. Configure a distinct external port range that does not overlap with any of the following:
     + The TCP networking port or port range that you configured in
       [Enable TCP Routing Using the <%= vars.app_runtime_abbr %> Tile](#tcp-routing) above.
     + The port range configured for service-gateway access for other service tiles,
@@ -99,7 +101,7 @@ external IP address of the load balancer created in
 
 When service-gateway access is enabled, all developers have the ability to create a service instance
 that is available to apps outside the foundation.
-This ability is global, independent of the service plan.
+This ability is global and independent of the service plan.
 
 
 To configure service-gateway access globally for the foundation:
