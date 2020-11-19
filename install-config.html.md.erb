@@ -379,7 +379,8 @@ To configure global settings for all service instances:
     <%= image_tag("global-settings.png", :alt => "global-settings.", :width => "350") %><%# Images require alt text that describes the image in detail. %>
 
 1. Configure the fields as follows:
-    <table>
+    <table class="nice">
+      <col width="30%">
       <tr><th>Field</th><th>Instructions</th></tr>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
           <td>Select this checkbox if either of the following apply:<ul>
@@ -393,6 +394,10 @@ To configure global settings for all service instances:
              </td></tr>
        <tr><td><strong>Email address</strong></td>
            <td>Enter an email address to send MySQL monitoring notifications to.
+              </td></tr>
+       <tr><td><strong>Enable off-platform access of MySQL service instances</strong></td>
+           <td>For information about configuring off-platform access,
+               see [Enabling Service-Gateway Access](enable-service-gateway.html).
               </td></tr>
     </table>
 
