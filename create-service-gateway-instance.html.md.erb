@@ -5,15 +5,13 @@ owner: MySQL
 ---
 
 This topic explains how to create a service instance with service-gateway access.
-It also explains how to enable and disable service-gateway access on an exisiting service instance.
+It also explains how to enable and disable service-gateway access on an existing service instance.
 
-For general information about service-gateway access,
-including about architecture and use cases,
+For general information about service-gateway access, including about architecture and use cases,
 see [Service-Gateway Access](./service-gateway-access.html).
 
-If service-gateway access is enabled for the foundation,
-external components that are outside the foundation can connect to 
-MySQL service instances.
+If service-gateway access is enabled for the foundation, external components that are outside the
+foundation can connect to MySQL service instances.
 These external components are also referred to as _off-platform_ components.
 
 These components are typically:
@@ -21,11 +19,11 @@ These components are typically:
 + Apps running externally or running on other foundations
 + Database administrative and management tools, such as MySQL Workbench
 
-
-<p class="note"><strong>Note:</strong>
-Apps that are deployed in the same foundation as the service instance,
-connect to the service instance directly, without going through the service-gateway.
+<p class="note">
+  <strong>Note:</strong> Apps that are deployed in the same foundation as the service instance,
+  connect to the service instance directly without going through the service-gateway.
 </p>
+
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -38,11 +36,11 @@ The procedures in this topic assume:
   If you do not know if the foundation is enabled for service-gateway access,
   contact your operator.
 
+
 ## <a id='create-service-gateway'></a> Create a Service Instance that Allows Off-Platform Access
 
-The procedure below describes how to create a new MySQL service instance that can be accessed
-by external components.
-
+The procedure below describes how to create a new MySQL service instance that can be accessed by
+external components.
 
 To create a service instance that enables service-gateway access:
 
@@ -51,18 +49,16 @@ To create a service instance that enables service-gateway access:
     ```
     cf create-service p.mysql PLAN SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
     ```
-
     Where:
     - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
     - `SERVICE-INSTANCE-NAME` is a name you choose for the service instance.
-    This name will appear under `service` in output from `cf services`.
+    This name appears under `service` in output from `cf services`.
 
 2. Obtain credentials by creating a service key. Run:
 
     ```
     cf create-service-key SERVICE-INSTANCE-NAME SERVICE-KEY
     ```
-
     Where:
     - `SERVICE-INSTANCE-NAME` is the name of the instance you created above.
     - `SERVICE-KEY` is a name you choose for the service key. Choose a name that
@@ -70,14 +66,14 @@ To create a service instance that enables service-gateway access:
 
     <p class="note">
       <strong>Note:</strong> If the operator disables and then re-enables service-gateway access
-      on the foundation, you must create new service keys to obtain a new set of credentials
-      for service-gateway access.
+      on the foundation, you must create new service keys to obtain a new set of credentials for
+      service-gateway access.
     </p>
 
 3. Use the keys in the service key to access the service instance
    from outside the foundation.<br><br>
 
-    An example of a service key:
+    An example of a service key is below:
 
     ```
     {
@@ -96,10 +92,10 @@ To create a service instance that enables service-gateway access:
     }
     ```
 
-    The four keys that change to include the TCP domain and TCP port are
-    `hostname`, `jdbcUrl`, `port`, and `uri`.
-    The keys that you need depend on the type of component that you are accessing 
-    the service instance from.
+    The four keys that change to include the TCP domain and TCP port are `hostname`, `jdbcUrl`,
+    `port`, and `uri`.
+    The keys that you need depend on the type of component that you are accessing the service
+    instance from.
 
 
 ## <a id='enable-service-gateway'></a> Enable an Existing Service Instance for Off-Platform Access
@@ -114,19 +110,19 @@ To enable service-gateway access on an existing MySQL service instance:
     ```
     cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
     ```
-
-    Where `SERVICE-INSTANCE-NAME` is a name of the service instance that you want to make available
-      for off-platform access.
-      This name appears under `service` in output from `cf services`.
+    Where `SERVICE-INSTANCE-NAME` is the name of the service instance that you want to make
+    available for off-platform access. This name appears under `service` in output from
+    `cf services`.
 
 2. Obtain credentials by creating a service key.
-   Follow steps 2 and 3 in [Create a Service Instance that Allows Off-Platform Access](#create-service-gateway) above.
+   Follow steps 2 and 3 in
+   [Create a Service Instance that Allows Off-Platform Access](#create-service-gateway) above.
 
 
 ## <a id='disable-service-gateway'></a> Disable Off-Platform Access on a Service Instance
 
 If you have a MySQL service instance that no longer needs to be accessed from outside the foundation,
-then disable service-gateway access for that service instance.
+disable service-gateway access for that service instance.
 
 To disable service-gateway access on a MySQL service instance:
 
@@ -135,5 +131,5 @@ To disable service-gateway access on a MySQL service instance:
     ```
     cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": false}'
     ```
-
-    Where `SERVICE-INSTANCE-NAME` is a name of the service instance for which you want to disable service-gateway access.
+    Where `SERVICE-INSTANCE-NAME` is the name of the service instance for which you want to disable
+    service-gateway access.
