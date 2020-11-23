@@ -8,7 +8,7 @@ This topic explains how to create a service instance with service-gateway access
 It also explains how to enable and disable service-gateway access on an existing service instance.
 
 For general information about service-gateway access, including about architecture and use cases,
-see [Service-Gateway Access](./service-gateway-access.html).
+see [About Service-Gateway Access](./service-gateway-access.html).
 
 If service-gateway access is enabled for the foundation, external components that are outside the
 foundation can connect to MySQL service instances.
@@ -52,7 +52,7 @@ To create a service instance that enables service-gateway access:
     Where:
     - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
     - `SERVICE-INSTANCE-NAME` is a name you choose for the service instance.
-    This name appears under `service` in output from `cf services`.
+    This name appears under `service` in the output from `cf services`.
 
 2. Obtain credentials by creating a service key. Run:
 
@@ -111,7 +111,7 @@ To enable service-gateway access on an existing MySQL service instance:
     cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
     ```
     Where `SERVICE-INSTANCE-NAME` is the name of the service instance that you want to make
-    available for off-platform access. This name appears under `service` in output from
+    available for off-platform access. This name appears under `service` in the output from
     `cf services`.
 
 2. Obtain credentials by creating a service key.
