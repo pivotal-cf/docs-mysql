@@ -11,7 +11,7 @@ Service-gateway access enables external clients to connect to a MySQL service.
 The clients are typically apps running external to the foundation, apps on a different foundation,
 and management tools such as MySQL Workbench.
 
-For a more detailed overview, see [Service-Gateway Access](./service-gateway-access.html).
+For a more detailed overview, see [About Service-Gateway Access](./service-gateway-access.html).
 
 To enable service-gateway access for an on-demand offering:
 
@@ -38,7 +38,8 @@ TCP routing is disabled by default. To enable TCP routing:
 **Enable TCP routing**.
 1. For TCP routing ports, enter one or more ports to which the load balancer forwards requests.
 For example, `1024` for a single port or `1024–1123` for a range of ports.
-1. Apply changes in <%= vars.ops_manager %> for the <%= vars.app_runtime_abbr %> tile to create the
+1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
+1. Click **Apply Changes** for the <%= vars.app_runtime_abbr %> tile to create the
 TCP router.
 1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
@@ -108,7 +109,9 @@ Access is not tied to certain service plans as in Tanzu RabbitMQ.
 
 To configure service-gateway access for the foundation:
 
-1. In the **Settings** pane in the <%= vars.product_short %> tile, click **Enabled**.
+1. Go to the **Settings** pane in the <%= vars.product_short %> tile.
+
+1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
 
     ![Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
     the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
@@ -178,7 +181,9 @@ To configure service-gateway access for the foundation:
 
 To disable service-gateway access:
 
-1. In the **Settings** pane in the <%= vars.product_short %> tile, click **Disabled**.
+1. Go to the **Settings** pane in the <%= vars.product_short %> tile.
+
+1. Under **Enable off-platform access of MySQL service instances**, click **Disabled**.
 
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 
