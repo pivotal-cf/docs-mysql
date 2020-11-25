@@ -45,7 +45,7 @@ To create an ASG for <%= vars.product_short %>:
 1. Click **Create Networks**.
 
 1. Click your services network and record the **CIDR**.
-    ![Reserved IP Ranges](opsman-dir-reserved-ips.png)<%# Images require alt text that describes the image in detail. %>
+    ![In the 'Create Networks' pane, in the 'Networks' section the 'services' network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are shown.](opsman-dir-reserved-ips.png)
 
 1. Create a JSON file named `mysql-asg.json` using the template below:
 
@@ -113,7 +113,7 @@ To download and import the <%= vars.product_short %> tile:
 
 1. Click the newly-added **<%= vars.product_short %>** tile to open its configuration panes.
 
-    ![AZ and Network Assignments pane](config-azs.png)<%# Images require alt text that describes the image in detail. %>
+    ![On the left side of the image, 'Assign AZs and Networks' is selected. The 'AZ and Network Assignments' configuration pane is shown. See the following section for a description of the fields in this pane.](config-azs.png)
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
@@ -202,7 +202,7 @@ For each plan that you want to use in your deployment:
 
 1. Select the plan for your desired topology.
 
-    <%= image_tag("plan-types-2-8.png", :alt => "image shows four plan types and inactive.", :width => "300") %>
+    <%= image_tag("plan-types-2-8.png", :alt => "The 'Plan' section is shown. The radio button for 'Inactive' is selected.", :width => "300") %>
 
 
     The tabs below expand to show an example screenshot of each plan:
@@ -279,16 +279,16 @@ For each plan that you want to use in your deployment:
 
 
     <div id="tab1" class="tabcontent" style="display:block">
-      <img src="./images/single-node-plan.png"><%# Images require alt text that describes the image in detail. %>
+      <img src="./images/single-node-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.">
     </div>
     <div id="tab2" class="tabcontent">
-      <img src="./images/leader-follower-plan.png"><%# Images require alt text that describes the image in detail. %>
+      <img src="./images/leader-follower-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.">
     </div>
     <div id="tab3" class="tabcontent">
-      <img src="./images/ha-plan.png"><%# Images require alt text that describes the image in detail. %>
+      <img src="./images/ha-plan.png" alt="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.">
     </div>
     <div id="tab4" class="tabcontent">
-      <img src="./images/multi-site-plan.png"><%# Images require alt text that describes the image in detail. %>
+      <img src="./images/multi-site-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.">
     </div>
 
 
@@ -376,7 +376,7 @@ To configure global settings for all service instances:
 
 1. Click **Settings**.
 
-    <%= image_tag("global-settings.png", :alt => "global-settings.", :width => "300") %><%# Images require alt text that describes the image in detail. %>
+    <%= image_tag("global-settings.png", :alt => "The 'Settings' pane. See the following step for a detailed description of the configurable fields.", :width => "300") %>
 
 1. Configure the fields as follows:
     <table>
@@ -402,9 +402,9 @@ To configure global settings for all service instances:
 
 To set MySQL defaults and enable developers to customize their instances:
 
-1. Click **Mysql Configuration**
+1. Click **Mysql Configuration**.
 
-    <%= image_tag("mysql-config.png", :alt => "mysql-config.", :width => "300") %><%# Images require alt text that describes the image in detail. %>
+    <%= image_tag("mysql-config.png", :alt => "The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields.", :width => "300") %>
 
 1. Configure the fields as follows:
   <table>
@@ -472,7 +472,7 @@ To configure the security settings for the MySQL service, do one or both:
 * Enable TLS for the MySQL service. See [Configure TLS](#security-tls) below.
 * Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds) below.
 
-![security](security.png)<%# Images require alt text that describes the image in detail. %>
+![The 'Security' pane. The following 'TLS Options' are listed: 'Not Configured', 'Optional - Developers may configure their service VMs to use TLS', and 'Required - All connections MUST use TLS. Any application that is not using TLS communcation with MySQL will break.'](security.png)
 
 ####<a id="security-tls"></a> Configure TLS
 
@@ -587,7 +587,7 @@ To enable RFC 5424 system logging for the MySQL broker and service instance VMs:
 
 1. Click **Yes**.
 
-    <%= image_tag("syslog.png", :alt => "Fields for configuring syslog.", :width => "550") %>
+    <%= image_tag("syslog.png", :alt => "Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields.", :width => "550") %>
 
 1. Configure the fields as follows:
   <table>
