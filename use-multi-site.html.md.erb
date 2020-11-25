@@ -136,10 +136,18 @@ You must not use these service keys for any other use case besides establishing
 
 The following diagram describes the workflow for configuring <%= vars.single_leader_plan_lc %>:
 
-![diagram summarizes the procedure below](configure-multi-site.png)<%# Images require alt text that describes the image in detail. %>
+![Two boxes are shown side by side, labeled 'Secondary Foundation' and 'Primary Foundation'. Six steps are shown. Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation', and Step 6 is in 'Secondary Foundation'. The steps are listed below.](configure-multi-site.png)
 
 <a href="./images/configure-multi-site.png" target="_blank">View a larger version of this diagram</a>
 
+The steps shown in the diagram are as follows:
+
+1. Create host-info service key.
+1. Record host-info service key.
+1. Update secondary service instance with host-info service key.
+1. Create credentials service key.
+1. Record credentials service key.
+1. Update primary service instance with credentials service key.
 
 <p class="note"><strong>Note:</strong> The below procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
