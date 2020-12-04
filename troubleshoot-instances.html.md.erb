@@ -16,9 +16,9 @@ Start here if you are responding to a specific error or error messages.
 
 Errors common to on-demand services are:
 
-+ No metrics from log cache
++ [No Metrics from Log Cache](#no-metrics)
 
-+ When using service-gateway access, create-service or update-service fail
++ [When Using Service-Gateway Access, create-service or update-service Fails](#no-service-gateway-ports)
 
 <%# The below partial is in https://github.com/pivotal-cf/docs-partials %>
 
@@ -26,32 +26,32 @@ Errors common to on-demand services are:
 
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
-    id: 'no-service-gateway-ports',
-    description: 'When using service-gateway access, create-service or update-service fail',
-    symptom: 'When you run <code>cf create-service</code> or <code>cf update-service</code> with
-              <code>{"enable_external_access": true}</code>, you receive an error like this:
-              <pre class="terminal">Service broker error: contact your operator,<br>service configuration issue occurred</pre>',
-    cause: 'When off-platform access is set up for a foundation, a range of TCP ports is reserved for MySQL traffic.
-            Each service instance for which service-gateway access is enabled, requires one port.<br>
-            If all the ports in the range have been assigned to other service instances,
-            then you cannot create or update service instances to use service-gateway access.',
-    solution: 'To resolve this error, confirm that the problem is due to not enough ports 
-               and, if so, increase the port range:<br><br>
+    id: "no-service-gateway-ports",
+    description: "When Using Service-Gateway Access, create-service or update-service Fails",
+    symptom: "<p>When you run <code>cf create-service</code> or <code>cf update-service</code> with
+              <code>{\"enable_external_access\": true}</code>, you receive an error like this:</p>
+              <pre class='terminal'>Service broker error: contact your operator,<br>service configuration issue occurred</pre>",
+    cause: "<p>When off-platform access is set up for a foundation, a range of TCP ports is reserved for MySQL traffic.
+            Each service instance for which service-gateway access is enabled requires one port.</p>
+            <p>If all the ports in the range have been assigned to other service instances,
+            then you cannot create or update service instances to use service-gateway access.</p>",
+    solution: "<p>To resolve this error, confirm that the problem is due to not enough ports
+               and, if so, increase the port range:</p>
                 <ol>
                  <li>
                      Review the BOSH logs on the MySQL service broker VM,
                      and, in the <code>broker.stdout.log</code> file look for this error message:
                      <code>Failed to update manifest: There are no free ports in range: […</code>
                      For information about how to download the service broker logs,
-                     see <a href="troubleshoot.html#bosh-cf-access">Access Broker Logs and VMs</a>.
+                     see <a href='troubleshoot.html#bosh-cf-access'>Access Broker Logs and VMs</a>.
                   </li>
                   <li> Ask the operator to increase the external TCP port range for off-platform access
-                       by editing the Settings pane on the Tanzu SQL for VMs tile.
+                       by editing the <strong>Settings</strong> pane on the #{vars.product_short} tile.
                        For information about the Settings pane,
-                       see <a href="enable-service-gateway.html#configure-service-gateway-plan">
+                       see <a href='enable-service-gateway.html#configure-service-gateway-plan'>
                        Enable Service-Gateway Access</a> in <em>Enabling Service-Gateway Access</em>.
                   </li>
-                 </ol> '
+                 </ol> "
 } %>
 
 ### <a id="inaccessible"></a>If Instances or Database are Inaccessible
