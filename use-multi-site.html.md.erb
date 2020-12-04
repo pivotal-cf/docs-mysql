@@ -134,11 +134,17 @@ between the leader and follower VMs.
 You must not use these service keys for any other use case besides establishing
 <%= vars.single_leader_plan_lc %>.
 
+#### Workflow for Configuring <%= vars.single_leader_plan %>
+
 The following diagram describes the workflow for configuring <%= vars.single_leader_plan_lc %>:
 
-![Two boxes are shown side by side, labeled 'Secondary Foundation' and 'Primary Foundation'. Six steps are shown. Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation', and Step 6 is in 'Secondary Foundation'. The steps are listed below.](configure-multi-site.png)
+![Two boxes are shown side by side, labeled 'Secondary Foundation' and 'Primary Foundation'.
+Six steps are shown.
+Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation',
+and Step 6 is in 'Secondary Foundation'.
+The steps are listed below.](configure-multi-site.png)
 
-<a href="./images/configure-multi-site.png" target="_blank">View a larger version of this diagram</a>
+<a href="./images/configure-multi-site.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
 The steps shown in the diagram are as follows:
 
@@ -149,12 +155,13 @@ The steps shown in the diagram are as follows:
 1. Record credentials service key.
 1. Update primary service instance with credentials service key.
 
+#### Procedure for Configuring <%= vars.single_leader_plan %>
+
 <p class="note"><strong>Note:</strong> The below procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 You created these service instances in
 <a href="#create-multi-dc">Create <%= vars.single_leader_plan %> Service Instances</a> above.
 </p>
-
 
 To configure replication for your <%= vars.single_leader_plan %> leader-follower service instance:
 
