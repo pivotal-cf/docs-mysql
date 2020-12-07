@@ -6,42 +6,43 @@ Owner: MySQL
 <strong><%= modified_date %></strong>
 
 VMware recommends that you upgrade to the latest patch for your current minor,
-then upgrade to the latest available patch for the new minor.
+and then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
 ## <a id="2-10-0"></a> v2.10.0
 
-**Release Date: December 7, 2020**
+**Release Date: December 8, 2020**
 
 ### Features
 
 New features and changes in this release:
 
-+ **External access to the MySQL database via Service Gateway:** Operators and developers can allow 
-  MySQL service instances to be accessible from outside the TAS platform by enabling Service Gateway
-  Access in the Ops Manager configuration pane and for individual service instances. For more information, 
-  see [About Service-Gateway Access](https://docs.pivotal.io/p-mysql/2-10/service-gateway-access.html).
++ **External access to the MySQL database through Service Gateway:** By enabling service-gateway access,
+  operators and developers can allow MySQL service instances to be accessed from outside
+  VMware Tanzu Application Service platform.
+  For more information, see [About Service-Gateway Access](./service-gateway-access.html).
 
-+ **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled, Operators can choose
-  to enforce TLS v1.2 as the minimum TLS version for client connections. Connections that use the TLS v1.1
-  protocol or older will be rejected by the MySQL server. 
++ **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled,
+  operators can choose to enforce TLS v1.2 as the minimum TLS version for client connections.
+  Connections that use the TLS v1.1 protocol or older are then rejected by the MySQL server. 
 
 + **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
-  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external
-  storage. After this change, backup artifacts are now stored under 
-  `p.mysql > service-instance_GUID > yyyy > mm > dd` for easier navigation. Old backup artifacts stored
-  in the root directory can still be accessable using the `cf adbr` CLI. 
+  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage. 
+  For easier navigation, backup artifacts are now stored under 
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.
+  Old backup artifacts stored in the root directory can still be accessed through the cf CLI
+  using the adbr plugin.
 
 + **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available in 
   this release. There have been no changes to the feature since v2.9.1.
 
-+ **Removed Global service instance quota limit:** Previously, operators could not set the maximum service 
-  instances quota higher than 500 service instances. This upper limit has been removed.
++ **Removed the global service instance quota limit:** Previously, operators could not set the service 
+  instances quota to above 500 service instances. This upper limit has been removed.
 
-+ **Percona Server:** Upgraded to v5.7.31-34
++ **Percona Server:** Upgraded to v5.7.31–34.
 
-+ **Percona XtraDB Cluster:** Upgraded to v5.7.31-34
++ **Percona XtraDB Cluster:** Upgraded to v5.7.31–34.
 
 ### Known Issues
 
@@ -51,8 +52,6 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
 <%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-
 
 ### Compatibility
 The following components are compatible with this release:
@@ -64,13 +63,13 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 
-  <tr><td>Stemcell</td><td>621.93</td></tr>
-  <tr><td>Percona Server</td><td>5.7.31-34</td></tr>
+  <tr><td>Stemcell</td><td>621.93*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
   <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
   <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
-  <tr><td>pxc-release</td><td>0.31.0</td></tr>
+  <tr><td>pxc-release</td><td>0.31.0*</td></tr>
 
 </table>
 
