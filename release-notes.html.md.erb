@@ -10,17 +10,38 @@ then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
-## <a id="2-10-X"></a> v2.10.0
+## <a id="2-10-0"></a> v2.10.0
 
-**Release Date: XXX X, 20XX**
+**Release Date: December 7, 2020**
 
 ### Features
 
 New features and changes in this release:
 
-+
++ **External access to the MySQL database via Service Gateway:** Operators and developers can allow 
+  MySQL service instances to be accessible from outside the TAS platform by enabling Service Gateway
+  Access in the Ops Manager configuration pane and for individual service instances. For more information, 
+  see [About Service-Gateway Access](https://docs.pivotal.io/p-mysql/2-10/service-gateway-access.html).
 
-+
++ **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled, Operators can choose
+  to enforce TLS v1.2 as the minimum TLS version for client connections. Connections that use the TLS v1.1
+  protocol or older will be rejected by the MySQL server. 
+
++ **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
+  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external
+  storage. After this change, backup artifacts are now stored under 
+  `p.mysql > service-instance_GUID > yyyy > mm > dd` for easier navigation. Old backup artifacts stored
+  in the root directory can still be accessable using the `cf adbr` CLI. 
+
++ **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available in 
+  this release. There have been no changes to the feature since v2.9.1.
+
++ **Removed Global service instance quota limit:** Previously, operators could not set the maximum service 
+  instances quota higher than 500 service instances. This upper limit has been removed.
+
++ **Percona Server:** Upgraded to v5.7.31-34
+
++ **Percona XtraDB Cluster:** Upgraded to v5.7.31-34
 
 ### Known Issues
 
@@ -43,13 +64,13 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 
-  <tr><td>Stemcell</td><td></td></tr>
-  <tr><td>Percona Server</td><td></td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
-  <tr><td>Percona XtraBackup</td><td> </td></tr>
-  <tr><td>mysql-backup-release</td><td></td></tr>
-  <tr><td>mysql-monitoring-release</td><td></td></tr>
-  <tr><td>pxc-release</td><td></td></tr>
+  <tr><td>Stemcell</td><td>621.93</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.31.0</td></tr>
 
 </table>
 
