@@ -18,9 +18,9 @@ and then upgrade to the latest available patch for the new minor.
 
 New features and changes in this release:
 
-+ **External access to the MySQL database through Service Gateway:** By enabling service-gateway access,
++ **External access to the MySQL database through Service-Gateway:** By enabling service-gateway access,
   operators and developers can allow MySQL service instances to be accessed from outside
-  VMware Tanzu Application Service platform.
+  <%= vars.app_runtime_full %> platform.
   For more information, see [About Service-Gateway Access](./service-gateway-access.html).
 
 + **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled,
@@ -34,7 +34,7 @@ New features and changes in this release:
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI
   using the adbr plugin.
 
-+ **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available in 
++ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in 
   this release. There have been no changes to the feature since v2.9.1.
 
 + **Removed the global service instance quota limit:** Previously, operators could not set the service 
