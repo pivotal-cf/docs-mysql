@@ -28,17 +28,19 @@ For more information, see [About Workload Types](./change-default.html#workload)
 The following diagram shows a leader-follower service instance in two availability
 zones (AZs):
 
-<!-- Edit in Google Slides: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing-->
+<%# Edit in Google Slides: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing %å>
 
 ![A leader-follower service instance. See below for a detailed image description.](l-f.png)
 
 <a href="./images/l-f.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
-In the above diagram, an app points to a box that contains a leader node and a follower node.
-The leader and follower nodes are each shown in their own AZ, separated by a dotted line.
+In the above diagram, the leader and follower nodes are each shown in their own AZ,
+separated by a dotted line.
 
-A two-way arrow connects the leader to the follower.
-The leader and the follower are each shown with their own disk.
+An app sends traffic to the leader node.
+A two-way arrow connects the leader to the follower indicating that
+any data that is written to the leader is replicated to the follower.
+The leader and the follower each have their own disk.
 
 ## <a id="failover"></a>About Failover
 

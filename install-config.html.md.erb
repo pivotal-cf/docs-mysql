@@ -45,7 +45,9 @@ To create an ASG for <%= vars.product_short %>:
 1. Click **Create Networks**.
 
 1. Click your services network and record the **CIDR**.
-    ![In the 'Create Networks' pane, in the 'Networks' section the 'services' network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are shown.](opsman-dir-reserved-ips.png)
+    ![In the 'Create Networks' pane, in the 'Networks' section the 'services'
+    network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are
+    shown.](opsman-dir-reserved-ips.png)
 
 1. Create a JSON file named `mysql-asg.json` using the template below:
 
@@ -113,7 +115,9 @@ To download and import the <%= vars.product_short %> tile:
 
 1. Click the newly-added **<%= vars.product_short %>** tile to open its configuration panes.
 
-    ![On the left side of the image, 'Assign AZs and Networks' is selected. The 'AZ and Network Assignments' configuration pane is shown. See the following section for a description of the fields in this pane.](config-azs.png)
+    ![On the left side of the image, 'Assign AZs and Networks' is selected.
+    The 'AZ and Network Assignments' configuration pane is shown.
+    See the following section for a description of the fields in this pane.](config-azs.png)
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
@@ -279,16 +283,24 @@ For each plan that you want to use in your deployment:
 
 
     <div id="tab1" class="tabcontent" style="display:block">
-      <img src="./images/single-node-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.">
+      <img src="./images/single-node-plan.png"
+      alt="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.
+      The table in the next step describes the fields that are revealed after selecting this plan.">
     </div>
     <div id="tab2" class="tabcontent">
-      <img src="./images/leader-follower-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.">
+      <img src="./images/leader-follower-plan.png"
+      alt="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.
+      The table in the next step describes the fields that are revealed after selecting this plan.">
     </div>
     <div id="tab3" class="tabcontent">
-      <img src="./images/ha-plan.png" alt="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.">
+      <img src="./images/ha-plan.png"
+      alt="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.
+      The table in the next step describes the fields that are revealed after selecting this plan.">
     </div>
     <div id="tab4" class="tabcontent">
-      <img src="./images/multi-site-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.">
+      <img src="./images/multi-site-plan.png"
+      alt="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.
+      The table in the next step describes the fields that are revealed after selecting this plan.">
     </div>
 
 
@@ -472,7 +484,10 @@ To configure the security settings for the MySQL service, do one or both:
 * Enable TLS for the MySQL service. See [Configure TLS](#security-tls) below.
 * Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds) below.
 
-![The 'Security' pane. The following 'TLS Options' are listed: 'Not Configured', 'Optional - Developers may configure their service VMs to use TLS', and 'Required - All connections MUST use TLS. Any application that is not using TLS communcation with MySQL will break.'](security.png)
+![The 'Security' pane. The following 'TLS Options' are listed: 'Not Configured',
+'Optional - Developers may configure their service VMs to use TLS', and
+'Required - All connections MUST use TLS.
+Any application that is not using TLS communcation with MySQL will break.'](security.png)
 
 ####<a id="security-tls"></a> Configure TLS
 
@@ -547,8 +562,9 @@ To enable monitoring and logging in the MySQL service:
 
 1. Click **Monitoring**.
 
-    <%= image_tag("monitoring.png", :alt => "The metrics polling interval defaults to 30
-        and the min is 10.", :width => "300") %>
+    <%= image_tag("monitoring.png",
+    :alt => "Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields.",
+    :width => "300") %>
 
 1. Configure the fields as follows:
   <table>
@@ -694,7 +710,10 @@ To review errands:
 
 1. Click **Errands**.
 
-    <%= image_tag("errands.png", :alt => "Errand list for VMware Tanzu SQL with MySQL for VMs.", :width => "250") %>
+    <%= image_tag("errands.png",
+    :alt => "Errand list for VMware Tanzu SQL with MySQL for VMs.
+    See the following step for detailed descriptions of the configurable dropdowns.",
+    :width => "250") %>
 
 1. Review the settings for the following errands:
   <table>

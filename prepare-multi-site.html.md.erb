@@ -41,7 +41,10 @@ See [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#
 
 1. Enable TLS for both foundations. When you paste the contents of your TLS CA certificate in [Preparing for TLS](./prepare-tls.html), paste both TLS CA certificates as shown below:
 
-    ![On the Security pane in the MySQL tile, a TLS CA certificate for the two different foundation are in the Trusted Certificates field.](./images/multi-site-ca.png)
+    ![On the Security pane in the MySQL tile, the TLS CA certificates for the two different
+    foundations are in the Trusted Certificates field.
+    The certificate for foundation 2 is on a new line directly after the certificate
+    for foundation 1.](./images/multi-site-ca.png)
 
 1. Configure a <%= vars.single_leader_plan %> plan on both foundations. See
 [Configure Service Plans](./install-config.html#active).
