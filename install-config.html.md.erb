@@ -27,8 +27,9 @@ Before you install the <%= vars.product_short %> tile, you must:
 
 + [Create an App Security Group for <%= vars.product_short %>](#asg).
 + [Enable the BOSH Resurrector](#resurrector).
-+ [(Optional) Preparing for TLS](./prepare-tls.html). Only required if you want to enable TLS.
-+ [(Optional) Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
++ [Prepare for TLS](./prepare-tls.html). Required to enable TLS and required for <%=vars.single_leader_plan %>
+  and HA cluster plans.
++ [Prepare for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
 want to replicate data across multiple foundations or data centers.
 
 ### <a id="asg"></a> Create an App Security Group for <%= vars.product_short %>
