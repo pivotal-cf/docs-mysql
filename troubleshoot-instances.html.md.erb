@@ -20,7 +20,8 @@ Start here if you are responding to a specific error or error messages.
 
 ### <a id="inaccessible"></a>If Instances or Database are Inaccessible
 
-You might experience the following during upgrades or in a leader-follower topology:
+You might experience the following in a leader-follower or <%= vars.single_leader_plan %>
+topology, or during upgrades:
 
 - [Temporary Outages](#outages)
 - [Apps Cannot Write to the Database](#read-only)
@@ -38,27 +39,26 @@ You might experience the following during upgrades or in a leader-follower topol
 } %>
 
 
-If you have a <%= vars.single_leader_plan %> topology
-and your apps can no longer write to the database, your leader VM might be down. To resolve this issue,
-you can trigger a failover to the follower VM.
-For more information about troubleshooting this problem,
-see [Triggering Multi-Site Replication Failover and Switchover](./multi-site-trigger-failover.html).
-
-
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'read-only',
     description: 'Apps Cannot Write to the Database',
-    symptom: 'You have a leader-follower topology and your apps can no
-    longer write to the database.',
-    cause: 'The leader VM might be read-only. If you can no longer read
-    to the database as well, your persistent disk might be full.',
-    solution: '<p>For more information about troubleshooting this problem, see
-    <a href="./troubleshoot.html#both-read-only">Both Leader and
-        Follower Instances Are Read-Only</a>.</p>
-<p>If you can no longer read to the database as well,
+    symptom: "You have a leader-follower or #{vars.single_leader_plan} topology, and your apps can no
+    longer write to the database.",
+    cause: "<p>If you have a leader-follower topology, the leader VM might be read-only. 
+    If you can no longer read to the database as well, your persistent disk might be full.</p>
+    <p>If you have a #{vars.single_leader_plan} topology, your leader VM might be down.</p>",
+    solution: "<p>If you have a leader-follower topology and the leader VM is read-only, for how to 
+    troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
+        Both Leader and Follower Instances Are Read-Only</a>.</p>
+    <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
-    troubleshooting inoperable apps, see <a href="#disk-full">Apps
-    are Inoperable</a>.</p>'
+    troubleshooting inoperable apps, see <a href='#disk-full'>
+        Apps are Inoperable</a>.</p>
+    <p>If you have a #{vars.single_leader_plan} topology and your leader VM is down, 
+    to resolve this issue, you can trigger a failover to the follower VM.
+    For more information about troubleshooting this problem,
+    see <a href='./multi-site-trigger-failover.html'>
+        Triggering Multi-Site Replication Failover and Switchover</a>.</p>"
 } %>
 
 
