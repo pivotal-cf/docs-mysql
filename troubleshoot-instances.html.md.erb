@@ -78,23 +78,23 @@ topology, or during upgrades:
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'read-only',
     description: 'Apps Cannot Write to the Database',
-    symptom: 'You have a leader-follower or #{vars.single_leader_plan} topology, and your apps can no
-    longer write to the database.',
-    cause: '<p>If you have a leader-follower topology, the leader VM might be read-only. 
+    symptom: "You have a leader-follower or #{vars.single_leader_plan} topology, and your apps can no
+    longer write to the database.",
+    cause: "<p>If you have a leader-follower topology, the leader VM might be read-only. 
     If you can no longer read to the database as well, your persistent disk might be full.</p>
-    <p>If you have a #{vars.single_leader_plan} topology, your leader VM might be down.</p>',
-    solution: '<p>If you have a leader-follower topology and the leader VM is read-only, for how to 
-    troubleshoot this problem, see <a href="./troubleshoot.html#both-read-only">
+    <p>If you have a #{vars.single_leader_plan} topology, your leader VM might be down.</p>",
+    solution: "<p>If you have a leader-follower topology and the leader VM is read-only, for how to 
+    troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
         Both Leader and Follower Instances Are Read-Only</a>.</p>
     <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
-    troubleshooting inoperable apps, see <a href="#disk-full">
+    troubleshooting inoperable apps, see <a href='#disk-full'>
         Apps are Inoperable</a>.</p>
     <p>If you have a #{vars.single_leader_plan} topology and your leader VM is down, 
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
-    see <a href="./multi-site-trigger-failover.html">
-        Triggering Multi-Site Replication Failover and Switchover</a>.</p>'
+    see <a href='./multi-site-trigger-failover.html'>
+        Triggering Multi-Site Replication Failover and Switchover</a>.</p>"
 } %>
 
 
