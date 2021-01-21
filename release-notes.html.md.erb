@@ -10,6 +10,40 @@ and then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-10-1"></a> v2.10.1
+
+**Release Date: January ??, 2021**
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **Correctly enforce TLS 1.2**: Previously, operators could not disable TLS 1.2 using the tile. Now, operators can
+    upgrade all service instances to disable TLS 1.2 based on the tile configuration.
+
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.95*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.31.0</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-0"></a> v2.10.0
 
 **Release Date: December 8, 2020**
