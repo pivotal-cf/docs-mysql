@@ -18,8 +18,10 @@ and then upgrade to the latest available patch for the new minor.
 
 This release has the following fix:
 
-+ **Correctly enforce TLS 1.2**: Previously, operators could not disable TLS 1.2 using the tile. Now, operators can
-    upgrade all service instances to disable TLS 1.2 based on the tile configuration.
++ **Correctly enforce TLS v1.2**: Previously, operators could not disable TLS v1.2 using the tile.
+    Now, operators can upgrade all service instances to disable TLS v1.2 based on the tile configuration.
+    <br><br>
+    This fix resolves the breaking change issue in v2.10.0. See [v2.10.0](#2-10-0).
 
 
 ### Compatibility
@@ -34,7 +36,7 @@ The following components are compatible with this release:
 
   <tr><td>Stemcell</td><td>621.95*</td></tr>
   <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31–34</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
   <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
