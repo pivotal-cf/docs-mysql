@@ -94,6 +94,8 @@ To trigger a failover:
 
 1. [Promote the Follower](#promote-failover)
 1. [Delete the Former Leader](#clean-up)
+1. [Create a Follower](#create-follower)
+1. [Re-Configure <%= vars.single_leader_plan %>](#restore-follower)
 
 
 ### <a id='promote-failover'></a> Promote the Follower
@@ -161,10 +163,10 @@ To promote the follower service instance to leader:
 1. Reconfigure your global DNS load balancer to direct all traffic to apps in your secondary foundation.
 See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.html#configure-glb).
 
-###<a id='clean-up'></a> Delete the Former Leader
+###<a id='clean-up'></a> Delete or Purge the Former Leader
 
 When you do a failover, the leader service instance cannot be manually recovered. After you promote the follower
-service instance to leader, you should delete the former leader service instance. Otherwise,
+service instance to leader, you should remove the former leader service instance. Otherwise,
 the service instance could recover in read-write mode.
 
 To delete the former leader service instance:
@@ -176,11 +178,34 @@ To delete the former leader service instance:
     ```
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
-1. Remove all bindings and service keys from the former leader service instance by
-    doing the procedure in [Unbind an App from a Service Instance](./use.html#unbind).
+1. Remove all app bindings in [Unbind an App from a Service Instance](./use.html#unbind).
 
-1. Delete the former leader service instance by doing the procedure in
-    [Delete a Service Instance](./use.html#delete).
+1. The service instance needs to be removed. This depends on whether the VM has been lost or not.
+
+   + **If the VM is lost**:
+
+     Purge the service instance by doing the procedure in [Purge a Service Instance](./use.html#purge).
+
+     <p class="note"><strong>Note:</strong>
+       If the foundation is lost, you should purge the service instance **after** following the steps to recover the
+       foundation's cloud controller database in
+       [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/restore-pcf-bbr.html)
+     </p>
+
+   + **If the VM is not lost**:
+
+     Delete the service keys from the former leader service instance and then the service instance by
+     doing the procedure in [Delete a Service Instance](./use.html#delete).
+
+###<a id='create-follower'></a> Create a Follower
+
+In order to re-configure <%= vars.single_leader_plan %> between two instances, a new follower without any data must be created
+in the primary foundation. See the procedure in [Create a Service Instance](./use.html#create)
+
+###<a id='restore-follower'></a> Re-Configure <%= vars.single_leader_plan %>
+
+The follower in the primary foundation needs to catch up to the newly promoted leader in the secondary
+foundation. This is achieved by following the steps in [Reconfigure <%= vars.single_leader_plan %>](#configure)
 
 ##<a id='switchover'></a> Trigger a Switchover
 
