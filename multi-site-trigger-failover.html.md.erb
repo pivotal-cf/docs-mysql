@@ -216,7 +216,7 @@ To make the leader read-only and promote the follower to leader in the secondary
 
     ```
     cf update-service PRIMARY-INSTANCE \
-      -c '{"initiate-failover":"make-leader-read-only"}
+      -c '{"initiate-failover":"make-leader-read-only"}'
     ```
 
     For example:
@@ -319,7 +319,7 @@ To reconfigure replication for the service instances:
 
     ```
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY \
-      -c '{"replication-request": "host-info"}
+      -c '{"replication-request": "host-info"}'
     ```
     Where:
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
@@ -377,7 +377,7 @@ To reconfigure replication for the service instances:
     + `HOST-INFO` is the output you recorded in step above.
 
     For example:
-    <pre class="terminal">$ cf update-service secondary-node -c {"replication":{ \
+    <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
       "peer-info":{ \
           "hostname": "primary.bosh", \
           "ip": "10.0.18.12", \
@@ -386,7 +386,7 @@ To reconfigure replication for the service instances:
         },\
       "role": "leader" \
       } \
-    }<br>
+    }'<br>
   Updating service instance secondary-node as admin...
   OK</pre>
 1.  Watch the progress of the service instance update by running:
@@ -402,7 +402,7 @@ To reconfigure replication for the service instances:
 
     ```
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY-NAME \
-      -c '{"replication-request": "credentials"}
+      -c '{"replication-request": "credentials"}'
     ```
     Where:
     + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
@@ -464,7 +464,7 @@ To reconfigure replication for the service instances:
     + `CREDENTIALS` is the output you recorded in the step above.
 
     For example:
-    <pre class="terminal">$ cf update-service primary-node -c {"replication": { \
+    <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \
         "credentials": { \
           "password": "a22aaa2a2a2aaaaa", \
           "username": "6bf07ae455a14064a9073cec8696366c" \
@@ -477,7 +477,7 @@ To reconfigure replication for the service instances:
         }, \
         "role": "follower" \
       } \
-    }<br>
+    }'<br>
   Updating service instance primary-node as admin...
   OK</pre>
 
