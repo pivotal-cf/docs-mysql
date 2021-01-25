@@ -86,8 +86,6 @@ If the service instance is `failing`, contact <a href="https://pivotal.io/suppor
 
 <p class="note warning"><strong>Warning:</strong> You should only trigger failover
   if you do not need to recover the leader service instance.
-  You cannot recover the downed leader service instance
-  or re-establish <%= vars.single_leader_plan_lc %> with the new leader service instance.
 </p>
 
 To trigger a failover:
@@ -178,8 +176,6 @@ To delete the former leader service instance:
     ```
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
-1. Remove all app bindings in [Unbind an App from a Service Instance](./use.html#unbind).
-
 1. The service instance needs to be removed. This depends on whether the VM has been lost or not.
 
    + **If the VM is lost**:
@@ -194,6 +190,8 @@ To delete the former leader service instance:
 
    + **If the VM is not lost**:
 
+     Remove all app bindings in [Unbind an App from a Service Instance](./use.html#unbind).
+
      Delete the service keys from the former leader service instance and then the service instance by
      doing the procedure in [Delete a Service Instance](./use.html#delete).
 
@@ -205,7 +203,7 @@ in the primary foundation. See the procedure in [Create a Service Instance](./us
 ###<a id='restore-follower'></a> Re-Configure <%= vars.single_leader_plan %>
 
 The follower in the primary foundation needs to catch up to the newly promoted leader in the secondary
-foundation. This is achieved by following the steps in [Reconfigure <%= vars.single_leader_plan %>](#configure)
+foundation. This is achieved by following the steps in [Reconfigure <%= vars.single_leader_plan %>](#reconfigure)
 
 ##<a id='switchover'></a> Trigger a Switchover
 
