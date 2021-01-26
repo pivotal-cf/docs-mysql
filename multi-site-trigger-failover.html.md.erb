@@ -91,9 +91,9 @@ If the service instance is `failing`, contact <a href="https://pivotal.io/suppor
 To trigger a failover:
 
 1. [Promote the Follower](#promote-failover)
-1. [Delete the Former Leader](#clean-up)
+1. [Delete or Purge the Former Leader](#clean-up)
 1. [Create a Follower](#create-follower)
-1. [Re-Configure <%= vars.single_leader_plan %>](#restore-follower)
+1. [Reconfigure <%= vars.single_leader_plan %>](#restore-follower)
 
 
 ### <a id='promote-failover'></a> Promote the Follower
@@ -164,10 +164,12 @@ See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.htm
 ###<a id='clean-up'></a> Delete or Purge the Former Leader
 
 When you do a failover, the leader service instance cannot be manually recovered. After you promote the follower
-service instance to leader, you should remove the former leader service instance. Otherwise,
-the service instance could recover in read-write mode.
+service instance to leader, you remove the former leader service instance. Otherwise,
+the service instance can recover in read-write mode.
 
-To delete the former leader service instance:
+The way you remove the service instance, depends on whether the VM has been lost or not.
+
+To remove the former leader service instance:
 
 1. Log in to the deployment for your primary foundation by running:
 
@@ -176,34 +178,56 @@ To delete the former leader service instance:
     ```
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
-1. The service instance needs to be removed. This depends on whether the VM has been lost or not.
 
-   + **If the VM is lost**:
-
-     Purge the service instance by doing the procedure in [Purge a Service Instance](./use.html#purge).
-
+2. Do one of the following:
+  + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
+    Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
      <p class="note"><strong>Note:</strong>
-       If the foundation is lost, you should purge the service instance **after** following the steps to recover the
+       If the foundation is lost, you purge the service instance **after** following the steps to recover the
        foundation's cloud controller database in
-       [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/restore-pcf-bbr.html)
+       [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/restore-pcf-bbr.html).
      </p>
+  * If the VM is not lost:
+      1. Remove all app bindings by following the procedure [Unbind an App
+    from a Service Instance](./use.html#unbind) in _Using <%= vars.product_full %>_.
 
-   + **If the VM is not lost**:
+      2. Delete the service keys from the former leader service instance.
 
-     Remove all app bindings in [Unbind an App from a Service Instance](./use.html#unbind).
-
-     Delete the service keys from the former leader service instance and then the service instance by
-     doing the procedure in [Delete a Service Instance](./use.html#delete).
+      3. Delete the service instance by folowing the procedure
+        [Delete a Service Instance](./use.html#delete) in _Using <%= vars.product_full %>_.
 
 ###<a id='create-follower'></a> Create a Follower
 
-In order to re-configure <%= vars.single_leader_plan %> between two instances, a new follower without any data must be created
-in the primary foundation. See the procedure in [Create a Service Instance](./use.html#create)
+To reconfigure <%= vars.single_leader_plan %> between two instances,
+a new follower without any data must be created in the primary foundation.
 
-###<a id='restore-follower'></a> Re-Configure <%= vars.single_leader_plan %>
+To create a follower: 
 
-The follower in the primary foundation needs to catch up to the newly promoted leader in the secondary
-foundation. This is achieved by following the steps in [Reconfigure <%= vars.single_leader_plan %>](#reconfigure)
+1. Log in to the deployment for your primary foundation by running:
+
+    ```
+    cf login PRIMARY-API-URL
+    ```
+    Where PRIMARY-API-URL is the API endpoint for the primary foundation.
+
+1. Create a service instance using the same <%= vars.single_leader_plan %> plan
+   that was used to create the original instance:
+   + Follow the procedure in [Create a Service Instance](./use.html#create)
+   in _Using <%=vars.product_full %>_. 
+  + Do not name your service instance `follower` because, if in the future
+    you trigger a failover or switchover, this instance will no longer be the follower.
+
+###<a id='restore-follower'></a> Reconfigure <%= vars.single_leader_plan %>
+
+The follower in the primary foundation needs to catch up to the newly promoted leader
+in the secondary foundation.
+
+You do this by reconfiguring <%= vars.single_leader_plan %> so that the follower
+in the primary foundation receives the data from the leader in the secondary foundation.
+
+To reconfigure:
+
+1. Follow the procedure in [Reconfigure <%= vars.single_leader_plan %>](#reconfigure).
 
 ##<a id='switchover'></a> Trigger a Switchover
 
@@ -216,7 +240,7 @@ To trigger a switchover:
 
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
-  or make it read-only you get an error message similar to the following:<br><br>
+  or make it, read-only you get an error message similar to the following:<br><br>
 <code>Updating service instance haDB as admin...
   FAILED
   Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
