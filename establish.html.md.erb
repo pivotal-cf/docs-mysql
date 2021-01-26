@@ -1,22 +1,23 @@
 ---
-title: Establishing a Connection from Outside a Deployment
+title: Using SSH to Connect from Outside a Deployment
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for developers for establishing a connection to a
+This topic provides instructions for developers for establishing an SSH tunnel connection to a
 <%= vars.product_full %> service instance from outside your deployment.
+
+<p class="note">
+   <strong>Note:</strong>
+In general, the preferred way you connect to a service instance from outside your deployment
+is through service-gateway access.
+For information, see <a href="create-service-gateway-instance.html">Creating a Service Instance with Service-Gateway Access</a>.
+</p>
 
 ## <a id='overview'></a>Overview
 
-If you want to connect to a MySQL service instance from outside the <%= vars.app_runtime_full %>
-deployment where your <%= vars.product_short %> service instance is located, you can do one of the following:
-
-+ [Connect Using an SSH Tunnel](#ssh-tunnel)
-+ [Connect Using an IP Address](#ip-address)
-
-You may want to use an SSH tunnel or IP address for establishing a connection in the following cases:
+You may want to use an SSH tunnel in the following cases:
 
 + Connecting from a local workstation. For more information, see [<%= vars.product_short %> Tools](./tools.html).
 + Connecting from outside where your <%= vars.product_short %> service instance is located.
@@ -24,218 +25,16 @@ You may want to use an SSH tunnel or IP address for establishing a connection in
 + Taking a manual backup to be stored locally.
   For more information, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
-## <a id='ssh-tunnel'></a> Connect Using an SSH Tunnel
-
 Any app deployed within your deployment can resolve BOSH DNS hostnames and forward
 traffic to MySQL service instances using an SSH tunnel.
 
-### Prerequisite
+##<a id='prereq'></a> Prerequisite
 
 To connect using an SSH tunnel, you must have SSH access to app containers.
 For more information, see [Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
 
-### Procedure
+##<a id='procedure'></a> Procedure
 
 To connect to a MySQL instance using an SSH tunnel, follow the procedures in
-[Accessing Services with SSH](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html)
+[Accessing Services with SSH](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html).
 
-##<a id='ip-address'></a> Connect Using an IP Address
-
-You can also connect remotely to the MySQL service instance by directly using its IP address.
-
-You can obtain the IP address using one the following methods:
-
-+  Using cf SSH. For more information, see
-[Obtain the IP Address Using cf SSH](#ip-address-cf-ssh).
-
-+  Using the DNS Lookup app. For more information, see
-[Obtain the IP Address Using the DNS Lookup App](#ip-address-lookup).
-
-+  Using the BOSH CLI. For more information, see
-[Obtain the IP Address Using the BOSH CLI](#ip-address-bosh).
-
-<p class="note"><strong>Note:</strong> By connecting to the MySQL service instance directly using its
-IP address, the client is responsible to handle cases in which the IP address of the service
-instance will change transparently. This can happen when a VM is recreated, or during a failover.</p>
-
-###<a id='ip-address-cf-ssh'></a> Obtain the IP Address Using cf SSH
-
-If you have limited access to the platform you can obtain the IP address through
-cf SSH.
-
-#### Prerequisites
-
-To obtain the IP address using cf SSH, you must have the following:
-
-+ SSH access to app containers. For more information, see
-[Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
-
-+ An app deployed on the same deployment as the MySQL service instance.
-
-#### Procedure
-
-To obtain the IP address using cf SSH, follow these steps:
-
-1. To retrieve your service key, run the following command:
-
-    ```
-    cf service-keys SERVICE-INSTANCE
-    ```
-    Where `SERVICE-INSTANCE` is the name of your <%= vars.product_short %> service instance.
-
-1. To obtain the BOSH DNS hostname of the MySQL service instance, run the following command:
-
-    ```
-    cf service-key SERVICE-INSTANCE SERVICE-KEY
-    ```
-
-     For example:
-
-    <pre class="terminal">
-    $ cf service-key my-mysql my-service-key
-    Getting key my-service-key for service instance my-mysql as admin...
-
-    {
-     "hostname": "q-n1a2b3.q-c456.bosh",
-     "jdbcUrl": "jdbc:mysql://10.10.10.5:3306/cf_e2d148a8_1baa_4961_b314_2431f57037e5?user=my_unique_name\u0026password=123456789",
-     "name": "cf_e2d148a8_1baa_4961_b314_2431f57037e5",
-     "password": "123456789",
-     "port": 3306,
-     "uri": "mysql://my_unique_name:123456789@10.10.10.5:3306/cf_e2d148a8_1baa_4961_b314_2431f57037e5?reconnect=true",
-     "username": "myuser"
-    }
-    </pre>
-
-1. Record the value of `hostname`.
-
-1. To SSH into the app, run the following command:
-
-    ```
-    $ cf ssh APP-NAME
-    ```
-
-    Where `APP-NAME` is the name of your app deployed on the same deployment as
-    the MySQL service instance.
-
-1. To obtain the IP address of the service instance, run the following command:
-
-    ```
-    $ dig +short BOSH-DNS-HOSTNAME
-    ```
-    Where `BOSH-DNS-HOSTNAME` is the BOSH DNS hostname that you retrieved from step 2.
-
-     The output of the command is the IP address.
-
-###<a id='ip-address-lookup'></a> Obtain the IP Address Using the DNS Lookup App
-
-See the following screenshot of the DNS Lookup UI:
-
-![The top of the image reads 'DNS Lookup'.
-Below the title is a gray box with two rows.
-The top row contains a field with an example hostname and a button labeled 'Resolve'.
-The bottom row has the IP address '10.10.40.32'.](dns-lookup-app.png)
-
-If your deployment has app SSH disabled, you can deploy the DNS Lookup app to your
-deployment. The DNS Lookup app resolves BOSH DNS hostnames.
-
-For more information, see the [dns-lookup](https://github.com/menicosia/dns-lookup)
-repository in GitHub.
-
-###<a id='ip-address-bosh'></a> Obtain the IP Address Using the BOSH CLI
-
-If you have access to the BOSH CLI, you can obtain the IP address through it.
-
-#### Prerequisite
-
-To connect using the BOSH CLI, you must have have access to the BOSH CLI. Ask
-your operator for access to the BOSH CLI.
-
-#### Procedure
-
-To connect using the BOSH CLI, follow these steps:
-
-1. To obtain the credentials and IP address needed to use the BOSH CLI, follow
-the procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
-
-1. To SSH into your <%= vars.ops_manager %> VM, follow the procedure in
-[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh)
-for your IaaS.
-
-1. To log in to your BOSH Director, follow the procedure in
-[Log in to the BOSH Director VM](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
-
-1. To obtain the MySQL service instance GUID, run the following command:
-
-      ```
-      cf service SERVICE-INSTANCE --guid
-      ```
-
-      Where `SERVICE-INSTANCE` is the name of your <%= vars.product_short %> service instance.
-
-1. To use the BOSH CLI to view the IP address, run one of the following
-commands depending on your topology:
-    + If your MySQL service instance topology is single node or highly available
-    (HA) cluster, run the following command:
-
-        ```
-        bosh -d service-instance_GUID instance
-        ```
-
-        Where `GUID` is the GUID of the service instance retrieved above. <br><br>
-
-        If you are using an HA cluster, record the IP address of any of your instances.<br><br>
-
-        For example:
-        <pre class="terminal">$ bosh -d service-instance\_b2e92d56-27e2-407e-90e0-c34612c10dba \
-            instances
-      Using environment 'https<span>:</span>//10.0.0.6:25555' as client 'admin'
-
-        Task 21409. Done
-
-        Deployment 'service-instance_0b26c8d1-2795-438e-bcbf-339e77daf88e'
-
-        Instance                                    Process State  AZ  IPs
-        mysql/1373022d-4eab-46d3-8fd1-a12067edf597  running        z2  10.0.17.14
-
-        1 instances
-
-        Succeeded
-        </pre>
-    + If your MySQL service instance topology is leader-follower, run the following
-    command:
-
-        ```
-        bosh -d service-instance_GUID run-errand inspect
-        ```
-
-        Record the IP address for the instance marked `Role: leader`. <br><br>
-
-        For example:
-        <pre class="terminal">
-        Instance   mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0
-        Exit Code  0
-        Stdout     2018/04/03 18:08:46 Started executing command: inspect
-                  2018/04/03 18:08:46
-                  IP Address: 10.0.8.11
-                  Role: leader
-                  Read Only: false
-                  Replication Configured: false
-                  Replication Mode: async
-                  Has Data: true
-                  GTID Executed: 82ddc607-710a-404e-b1b8-a7e3ea7ec063:1-18
-                  2018/04/03 18:08:46 Successfully executed command: inspect
-        Stderr     -
-        <br>
-        Instance   mysql/37e4b6bc-2ed6-4bd2-84d1-e59a91f5e7f8
-        Exit Code  0
-        Stdout     2018/04/03 18:08:46 Started executing command: inspect
-                  2018/04/03 18:08:46
-                  IP Address: 10.0.8.10
-                  Role: follower
-                  Read Only: true
-                  Replication Configured: true
-                  Replication Mode: async
-                  Has Data: true
-                  GTID Executed: 82ddc607-710a-404e-b1b8-a7e3ea7ec063:1-18
-                  2018/04/03 18:08:46 Successfully executed command: inspect
-        </pre>
