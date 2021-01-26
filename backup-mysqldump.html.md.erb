@@ -64,9 +64,9 @@ To back up your <%= vars.product_short %> data manually:
     * `username`: The username for the user that can be used for
      backups of the service instance database
 
-1. Connect to your service instance, by either using an SSH tunnel or by connecting directly to its IP address.
-For more information,
-see [Establish a Connection to a Service Instance from Outside Your Deployment](./establish.html).
+1. Connect to your service instance, by either service-gateway access or an SSH tunnel.
+   For more information, see [Creating a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html)
+   or [Using SSH to Connect from Outside a Deployment](./establish.html).
 
 1. View a list of your databases by running:
 <pre><code>mysql --user=USERNAME --password=PASSWORD \
@@ -133,10 +133,9 @@ do the procedure in [Create a Service Instance](./use.html#create).
 [Create a <%= vars.product_short %> Logical Backup](#create-backup) above.
 You can either restore the backup to an existing service instance or the one you created in step 1.
 
-1. Connect to your service instance,
-by either using an SSH tunnel or by connecting directly to its IP address.
-For more information,
-see [Establish a Connection to a Service Instance from Outside Your Deployment](./establish.html).
+1. Connect to your service instance, by either service-gateway access or an SSH tunnel.
+   For more information, see [Creating a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html)
+   or [Using SSH to Connect from Outside a Deployment](./establish.html).
 
 1. Restore your data from the SQL file on your local machine by running:
 
