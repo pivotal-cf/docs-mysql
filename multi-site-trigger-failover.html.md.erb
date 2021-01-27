@@ -100,7 +100,7 @@ To trigger a failover:
 
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
-  or make it read-only, you get an error message similar to the following: <br><br>
+  or make it read-only, you get an error message similar to:<br><br>
 <code>Updating service instance haDB as admin...
   FAILED
   Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
@@ -124,7 +124,7 @@ To promote the follower service instance to leader:
     ```
     For example:
     <pre class="terminal">$ cf update-service secondary-node \
-        -c '{"initiate-failover":"promote-follower-to-leader"}'<br>
+      -c '{"initiate-failover":"promote-follower-to-leader"}'<br>
     Updating service instance secondary-node as admin...
     OK</pre>
 
@@ -163,9 +163,9 @@ See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.htm
 
 ###<a id='clean-up'></a> Delete or Purge the Former Leader
 
-When you do a failover, the leader service instance cannot be manually recovered. After you promote the follower
-service instance to leader, you remove the former leader service instance. Otherwise,
-the service instance can recover in read-write mode.
+When you do a failover, you cannot manually recover the leader service instance.
+After you promote the follower service instance to leader, you remove the former leader service instance.
+Otherwise, the service instance can recover in read-write mode.
 
 The way you remove the service instance, depends on whether the VM has been lost or not.
 
@@ -184,8 +184,9 @@ To remove the former leader service instance:
     Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
      <p class="note"><strong>Note:</strong>
        If the foundation is lost, you purge the service instance **after** following the steps to recover the
-       foundation's cloud controller database in
-       [Restoring Deployments from Backup with BBR](https://docs.pivotal.io/ops-manager/2-10/install/backup-restore/restore-pcf-bbr.html).
+       foundation's Cloud Controller database in
+       <a href="https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html">
+         Restoring Deployments from Backup with BBR</a>.
      </p>
   * If the VM is not lost:
       1. Remove all app bindings by following the procedure [Unbind an App
@@ -201,7 +202,7 @@ To remove the former leader service instance:
 To reconfigure <%= vars.single_leader_plan %> between two instances,
 a new follower without any data must be created in the primary foundation.
 
-To create a follower: 
+To create a follower:
 
 1. Log in to the deployment for your primary foundation by running:
 
@@ -212,9 +213,9 @@ To create a follower:
 
 1. Create a service instance using the same <%= vars.single_leader_plan %> plan
    that was used to create the original instance:
-   + Follow the procedure in [Create a Service Instance](./use.html#create)
-   in _Using <%=vars.product_full %>_. 
-  + Do not name your service instance `follower` because, if in the future
+    + Follow the procedure in [Create a Service Instance](./use.html#create)
+    in _Using <%=vars.product_full %>_.
+    + Do not name your service instance `follower` because, if in the future
     you trigger a failover or switchover, this instance will no longer be the follower.
 
 ###<a id='restore-follower'></a> Reconfigure <%= vars.single_leader_plan %>
@@ -227,14 +228,14 @@ in the primary foundation receives the data from the leader in the secondary fou
 
 To reconfigure:
 
-1. Follow the procedure in [Reconfigure <%= vars.single_leader_plan %>](#reconfigure).
+1. Follow the procedure in [Reconfigure <%= vars.single_leader_plan %>](#reconfigure) below.
 
 ##<a id='switchover'></a> Trigger a Switchover
 
 To trigger a switchover:
 
 1. [Promote the Follower](#promote)
-1. [Reconfigure <%= vars.single_leader_plan %>](#configure)
+1. [Reconfigure <%= vars.single_leader_plan %>](#reconfigure)
 
 ### <a id='promote-switchover'></a> Promote the Follower
 
