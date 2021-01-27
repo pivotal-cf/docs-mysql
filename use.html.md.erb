@@ -473,18 +473,18 @@ that the instance no longer exists:
 
 ### <a id="purge"></a>Purge a Service Instance
 
-If the service instance VM is lost, then the service instance cannot be deleted.
-However, the cf CLI allows a service instance to be purged from the cloud controller database.
+If the service instance VM is lost, then you cannot delete the service instance.
+However, the cf CLI allows you to purge a service instance from the Cloud Controller database.
 
 To purge a service instance:
 
-1. Run the following command:
+1. Run:
 
     ```
-    cf purge-service-instance SERVICE-INSTANCE
+    cf purge-service-instance SERVICE-INSTANCE-NAME
     ```
 
-    Where `SERVICE-INSTANCE` is the name of the service instance to purge.
+    Where `SERVICE-INSTANCE-NAME` is the name of the service instance to purge.
     <br><br>
     For example:
 
