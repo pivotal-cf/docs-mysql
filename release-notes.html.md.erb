@@ -35,6 +35,10 @@ v2.8.x, v2.9.0, and v2.9.1:<br>
 For how to select <strong>Force path style access to bucket</strong>,
 see <a href="upgrade.html">Upgrading VMware Tanzu SQL with MySQL for VMs</a>.
 </div>
+<p class="note breaking"><strong>Breaking Changes:</strong>
+The breaking changes listed for v2.9.0 also apply if you are upgrading from v2.8 to v2.9.2.
+See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
+</p>
 
 ### Features
 
@@ -98,6 +102,11 @@ v2.8.x, v2.9.0, and v2.9.1:<br>
 For how to select <strong>Force path style access to bucket</strong>,
 see <a href="upgrade.html">Upgrading VMware Tanzu SQL with MySQL for VMs</a>.
 </div>
+
+<p class="note breaking"><strong>Breaking Changes:</strong>
+The breaking changes listed for v2.9.0 also apply if you are upgrading from v2.8 to v2.9.1.
+See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
+</p>
 
 ### Features
 
@@ -173,6 +182,14 @@ The following components are compatible with this release:
 ### <a name="2-9-0-breaking-changes"></a> Breaking Changes
 
 Breaking changes in this release:
+
++ **Additional Networking Port for Backup:**
+  Before upgrading from v2.8 to v2.9, ensure that port 2345 is open from <%= vars.app_runtime_abbr %>
+  to ODB.
+
+    For the complete list of ports that need to be open for <%=vars.product_short %>,
+  see [Required Networking Rules for Tanzu SQL for VMs <%=vars.product_short %>](about.html#mysql-ports)
+  in _On-Demand Networking_.
 
 + **Location of backup artifact:**
   Backups are no longer stored in a subdirectory in the storage destination.
