@@ -116,6 +116,13 @@ To ensure that connections are open, see the table below:
 		<td>This port allows <%= vars.app_runtime_abbr %> to communicate with the ODB component.</td>
 	</tr>
 	<tr>
+		<td><strong><%= vars.app_runtime_abbr %></strong></td>
+		<td><strong>ODB</strong></td>
+		<td>2345</td>
+		<td>This port allows <%= vars.app_runtime_abbr %> to communicate with the ODB component
+                    so that the ApplicationDataBackupRestore (adbr) API can take backups.</td>
+	</tr>
+	<tr>
 		<td><strong>Deployed apps on <%= vars.app_runtime_abbr %></strong></td>
 		<td><strong>Runtime CredHub</strong></td>
 		<td>8844</td>
