@@ -551,6 +551,38 @@ This section provides solutions for the following errands:
 
 } %>
 
+###  <a id="failed-adbr-backups"></a>Failed Backups
+
+If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plugin fails,
+check that the 2345 port from the <%= vars.app_runtime_abbr %> to the ODB component is open.
+
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+    id: "unable-to-determine",
+    description: "Automated Backups or adbr Plugin Backups Fail",
+    symptom: <<~DESC,
+    The following are true:<br><br>
+    <ul>
+      <li>The backup fails.</li>
+      <li>The adbr-api logs for the broker show:
+       <pre class="terminal">backup failed with response: 502 Bad Gateway: Registered endpoint failed to handle the request.</pre>
+      </li>
+      <li>The gorouter logs on the TAS for VMs deployment show:
+       <pre class="terminal">adbr-api.SYSTEM-DOMAIN - [2021-01-20T19:30:00.911080271Z] "POST /service_instances/acb85c98-151e-4f13-9f0f-de057ef18d67/backup HTTP/1.1" 502 ... x_cf_routererror:"endpoint_failure" ...</pre>
+       Where <code>SYSTEM-DOMAIN</code> is your system domain.
+      </li>
+    </ul>
+    DESC
+
+    cause: <<~DESC,
+      Port 2345 that allows communication between the TAS for VMs and ODB components is closed.
+      DESC
+
+    solution: <<~DESC,
+    Open port 2345 from the TAS for VMs component to the ODB component.
+    See <a href="about.html#mysql-ports">Required Networking Rules for Tanzu SQL for VMs</a>
+    in <em>On-Demand Networking</em>.
+      DESC
+} %>
 
 ##  <a id="components"></a>  Troubleshoot Components
 
