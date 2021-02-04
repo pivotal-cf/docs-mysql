@@ -167,7 +167,7 @@ If you want a different topology, update the instance after restoring the data:
 <col width="33%">
   <th>To restore to…</th>
   <th>First, restore to…</th>
-  <th>Then update to…</th>
+  <th>Then, update to…</th>
   <tr>
     <td>Leader-Follower</td>
     <td>Single node</td>
@@ -177,6 +177,16 @@ If you want a different topology, update the instance after restoring the data:
     <td>HA cluster</td>
     <td><%= vars.single_leader_plan %></td>
     <td>HA cluster</td>
+  </tr>
+  <tr>
+    <td><%= vars.single_leader_plan %></td>
+    <td><%= vars.single_leader_plan %></td>
+    <td><em>n/a</em></td>
+  </tr>
+  <tr>
+    <td>Single node</td>
+    <td>Single node</td>
+    <td><em>n/a</em></td>
   </tr>
 </table>
 
