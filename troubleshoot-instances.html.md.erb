@@ -103,7 +103,7 @@ topology, or during upgrades:
     description: 'Apps Are Inoperable',
     symptom: 'Your apps become inoperable. Read,
 write, and cf CLI operations do not work.',
-    cause: 'Your persistent disk might be full',
+    cause: 'Your persistent disk might be full.',
     solution: 'Contact your operator to check if your persistent disk is full.
 For more information about troubleshooting this problem, see
 <a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.'
@@ -161,7 +161,7 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
 - ["400" Error during Backup or Restore](#failed-adbr-400)
 - ["500" Error during Backup or Restore](#failed-adbr-500)
 - ["502" Error during Backup or Restore](#failed-adbr-502)
-- [Status: Restore failed after adbr Restore](#failed-restore)
+- ["Status: Restore failed" after adbr Restore](#failed-restore)
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-400',
@@ -198,24 +198,29 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-restore',
-    description: 'Status: Restore failed after adbr Restore',
-    symptom: '<p>When running <code>cf adbr get-status` after restoring to a service instance,
+    description: '"Status: Restore failed" after adbr Restore',
+    symptom: '<p>When running <code>cf adbr get-status</code> after restoring to a service instance,
                  adbr returns <code>Restore failed</code>.</p>
     <p>For example:</p>
     <pre class="terminal">$ cf adbr get-status myTargetDB
-Status: Restore failed</pre>',
-    cause: 'The database on the new service instance is not empty.
+Getting status of service instance myTargetDB in org my-org / space system as admin...
+[Thu Feb 25 22:33:58 UTC 2021] Status: Restore failed</pre>',
+    cause: 'A possible cause is that the database on the new service instance is not empty.
     For more information, see <a href="backup-restore.html#empty-database">The New Database Must Be Empty</a>
     in <em>Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs.</em>',
     solution: "<p>To resolve the error and complete the restore:</p>
                 <ol>
                  <li>
-                     Confirm that the database is note empty by reviewing the log <code>/var/vcap/sys/log/mysql-restore/mysql-restore.stderr.log</code>
-                     on the service instance.<br>
-                     If the log contains GTID, then the database has performed transactions and it is not empty.
+                     Determine if the database is empty by reviewing the log <code>/var/vcap/sys/log/mysql-restore/mysql-restore.stderr.log</code>
+                     on the service instance.
                   </li>
                   <li>
-                      Delete the service instance and create a new service instance to restore the backup to.
+                     If the log contains GTID, then the database is not empty.<br>
+                     Delete the service instance and create a new service instance to restore the backup to.
+                  </li>
+                  <li>
+                     If the log does not contain GTID, then the restore failed for another reason.
+                     Review other logs on the service instance and, if necessary, contact Support.
                   </li>
                  </ol> "
 } %>
