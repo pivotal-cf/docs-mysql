@@ -10,22 +10,127 @@ and then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
-## <a id="2-11-0"></a> v2.11.0
+## <a id="2-10-2"></a> v2.10.2
 
-**Release Date: MMM DD, YYYY**
+**Release Date: MMM DD, 2021**
 
 ### Features
 
 New features and changes in this release:
 
-+ **RUN-IN HEADING:** Feature description.
++ 
+
+### Resolved Issues
+
+This release has the following fix:
+
++ 
+
+
+### Compatibility
+
+[//]: # (NEED TO UPDATE FOR 2.10.2)
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.95</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31–34</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.31.0</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
+## <a id="2-10-1"></a> v2.10.1
+
+**Release Date: February 4, 2021**
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **Correctly enforce TLS v1.2**: Previously, operators could not disable TLS v1.2 using the tile.
+    Now, operators can upgrade all service instances to disable TLS v1.2 based on the tile configuration.
+    <br><br>
+    This fix resolves the breaking change issue in v2.10.0. See [v2.10.0](#2-10-0).
+
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.95*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31–34</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.31.0</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
+## <a id="2-10-0"></a> v2.10.0
+
+**Release Date: December 8, 2020**
+
+<p class="note breaking"><strong>Breaking Change</strong>:
+Before you upgrade to <%= vars.product_full %> v2.10, make sure that
+your apps support connecting to the MySQL database using TLS v1.2.
+This might require updating the MySQL connector.
+For example, if you are using MySQL Connector/J,
+use MySQL Connector/J v8.0.8 or later or v5.1.44 or later.
+</p>
+
+### Features
+
+New features and changes in this release:
+
++ **External access to the MySQL database through Service-Gateway:** By enabling service-gateway access,
+  operators and developers can allow MySQL service instances to be accessed from outside
+  <%= vars.app_runtime_full %> platform.
+  For more information, see [About Service-Gateway Access](./service-gateway-access.html).
+
++ **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled,
+  operators can choose to enforce TLS v1.2 as the minimum TLS version for client connections.
+  Connections that use the TLS v1.1 protocol or older are then rejected by the MySQL server. 
+
++ **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
+  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage. 
+  For easier navigation, backup artifacts are now stored under 
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.
+  Old backup artifacts stored in the root directory can still be accessed through the cf CLI
+  using the adbr plugin.
+
++ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in 
+  this release. There have been no changes to the feature since v2.9.1.
+
++ **Percona Server:** Upgraded to v5.7.31–34.
+
++ **Percona XtraDB Cluster:** Upgraded to v5.7.31–34.
 
 ### Known Issues
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
 <%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
