@@ -153,14 +153,15 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
     solution: 'To resolve this issue disable mTLS in your apps.'
 } %>
 
-### <a id="failed-adbr"></a> Failed Backups with the adbr Plugin
+### <a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plugin
 
-If you get HTTP error codes when working with the ApplicationDataBackupRestore (adbr) plugin
+If you get errors when working with the ApplicationDataBackupRestore (adbr) plugin
 for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
 
 - ["400" Error during Backup or Restore](#failed-adbr-400)
 - ["500" Error during Backup or Restore](#failed-adbr-500)
 - ["502" Error during Backup or Restore](#failed-adbr-502)
+- [Status: Restore failed after adbr Restore](#failed-restore)
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'failed-adbr-400',
@@ -193,6 +194,30 @@ for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
   Failed to backup service instance "myDB": failed due to server error, status code: 502</pre>',
     cause: 'The VM is down, stopped, or in an unhealthy state.',
     solution: 'Verify the health of the broker VM and review the logs for the broker.'
+} %>
+
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+    id: 'failed-restore',
+    description: 'Status: Restore failed after adbr Restore',
+    symptom: '<p>When running <code>cf adbr get-status` after restoring to a service instance,
+                 adbr returns <code>Restore failed</code>.</p>
+    <p>For example:</p>
+    <pre class="terminal">$ cf adbr get-status myTargetDB
+Status: Restore failed</pre>',
+    cause: 'The database on the new service instance is not empty.
+    For more information, see <a href="backup-restore.html#empty-database">The New Database Must Be Empty</a>
+    in <em>Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs.</em>',
+    solution: "<p>To resolve the error and complete the restore:</p>
+                <ol>
+                 <li>
+                     Confirm that the database is note empty by reviewing the log <code>/var/vcap/sys/log/mysql-restore/mysql-restore.stderr.log</code>
+                     on the service instance.<br>
+                     If the log contains GTID, then the database has performed transactions and it is not empty.
+                  </li>
+                  <li>
+                      Delete the service instance and create a new service instance to restore the backup to.
+                  </li>
+                 </ol> "
 } %>
 
 For general information about the adbr plugin,
