@@ -179,11 +179,11 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
                      on the service instance.
                   </li>
                   <li>
-                     If the log contains GTID, then the database is not empty.<br>
+                     If any GTIDs (global transaction identifiers) are printed in the logs, then the database is not empty.<br>
                      Delete the service instance and create a new service instance to restore the backup to.
                   </li>
                   <li>
-                     If the log does not contain GTID, then the restore failed for another reason.
+                     If the log does not contain any GTIDs, then the restore failed for another reason.
                      Review other logs on the service instance and, if necessary, contact Support.
                   </li>
                  </ol> "
