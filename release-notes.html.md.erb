@@ -18,7 +18,10 @@ and then upgrade to the latest available patch for the new minor.
 
 New features and changes in this release:
 
-+ 
++ **Avoid data loss on leader-follower and <%= vars.single_leader_plan %> instances with high transaction rates:**
+  A new checkbox restricts the space that the transaction logs can use on the persistent disk.
+  For more information, see [Limit binary log disk use to 33% of disk capacity](install-config.html#mysql)
+  in _Installing and Configuring_.
 
 ### Resolved Issues
 
