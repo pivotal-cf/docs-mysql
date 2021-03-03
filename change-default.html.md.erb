@@ -428,14 +428,18 @@ The table below describes how to use the `optimize_for_short_words` optional par
     <td>
     Set this parameter to <code>true</code> to change the MySQL system variable
     <code>innodb_ft_min_token_size</code> to 1.
-    This allows shorter words to be stored in the InnoDB FULLTEXT index.<br><br>
+    This allows shorter words to be stored in the InnoDB full-text index.<br><br>
     Because this has the side effect of increasing the size of the index,
     you must monitor the memory usage of the service instance and choose a larger VM type
     when necessary.
     Also, the operator needs to prevent the index from becoming too large and ineffective
     by removing entries as described below.
     How often this needs to be done depends on the workload and
-    how much data is changed in the FULLTEXT index.
+    how much data is changed in the full-text index.
+    <br>
+    For more information about the <code>innodb_ft_min_token_size</code> system variable,
+    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html">MySQL
+    documentation</a>.
     <br><br>
     To remove full-text index entries for deleted records or old records:<br><br>
     <ol>
@@ -452,8 +456,8 @@ The table below describes how to use the `optimize_for_short_words` optional par
            so that the query behaves normally for other tables.</li>
     </ol>
 
-    For more information,
-    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html">MySQL
+    For more information about InnoDB full-text index deletion,
+    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html#innodb-fulltext-index-deletion">MySQL
     documentation</a>.
     </td>
   </tr>
