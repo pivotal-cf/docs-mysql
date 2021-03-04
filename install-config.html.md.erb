@@ -446,15 +446,15 @@ after enabling lowercase table names.</p>
             review the security issues associated with <code>LOAD DATA LOCAL</code>.
             See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local.html">MySQL documentation</a>.
     </td></tr>
-    <tr><td><strong>Wait Timeout</strong></td>
-        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
-    </td></tr>
     <tr><td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
         <td>Select this checkbox if you have leader-follower or <%= vars.single_leader_plan %> instances
             with high-transaction rates.
             Limiting the size of the transaction logs reduces the risk of the persistent disk
             reaching capacity and causing service interruption.
+    </td></tr>
+    <tr><td><strong>Wait Timeout</strong></td>
+        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
+            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
     </td></tr>
   </table>
 
