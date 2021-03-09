@@ -41,44 +41,70 @@ to all service plans.
     <th>Default</th>
     <th width="45%">Notes</th>
     <tr>
-        <td><strong>Max Allowed Packet</strong></td>
-        <td><code>max-allowed-packet</code></td>
-        <td>256&nbsp;MB</td>
-        <td>If necessary, you can change this size in a session variable. </td>
-    </tr>
-     <tr>
-        <td><strong>Table Definition Cache</strong></td>
-        <td><code>table-definition-cache</code></td>
-        <td>8192</td>
-        <td>For information about changing this setting,
-            see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_definition_cache">
-                MySQL documentation</a>.
-        </td>
-    </tr>
-     <tr>
-        <td><strong>Reverse Name Resolution</strong></td>
-        <td><code>skip-name-resolve</code></td>
-        <td>ON</td>
+        <td><strong>Audit Log</strong></td>
+        <td><code>audit-log</code></td>
+        <td>OFF</td>
         <td>
-            This disables reverse DNS lookups to improve performance.
-            <%= vars.product_short %> uses user credentials, rather than hostnames, to authenticate access.
-            Therefore, most deployments do not need reverse DNS lookups.<br><br>
-            To enable reverse name resolution, clear this option.
+            To set to <code>ON</code>, select <strong>Enable Server Activity Logging</strong> in <a href="./install-config.html#monitoring">Monitoring</a>.
+            Logs are written in JSON to
+            <code>/var/vcap/store/mysql_audit_logs/mysql_server_audit.log</code>.
         </td>
     </tr>
     <tr>
-        <td><strong>Skip Symbolic Links</strong></td>
-        <td><code>symbolic-links</code></td>
-        <td>OFF</td>
+        <td><strong>Character Set</strong></td>
+        <td><code>character-set-server</code></td>
+        <td><code>utf8</code></td>
+        <td>This setting defaults all character sets. You can override this during a session.</td>
+    </tr>
+    <tr>
+        <td><strong>Binary Log Removal</strong></td>
+        <td><code>expire_log_days</code></td>
+        <td>3</td>
+        <td>This setting is the number of days before binary log files are automatically removed. <br>
+        For more information, see
+        the <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_expire_logs_days">MySQL documentation</a>.</td>
+    </tr>
+    <tr>
+        <td><strong>InnoDB Transaction Log Durability</strong></td>
+        <td><code>innodb_flush_log_at_trx_commit</code></td>
+        <td>1</td>
+        <td>At each transaction commit, logs are written and flushed to disk.
+            <br>For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">
+            MySQL documentation</a>.</td>
+     </tr>
+    <tr>
+        <td><strong>InnoDB Flush Method</strong></td>
+        <td><code>innodb_flush_method</code></td>
+        <td><code>fsync</code></td>
         <td>
-            <%= vars.product_short %> is configured to prevent the use of symlinks to tables.
-            VMware recommends this security setting to prevent users from manipulating
-            files on the server file system. <br>
-            For more information, see
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/security-against-attack.html">
-                Making MySQL Secure Against Attackers</a>.
+          This setting defines the method used to flush data to InnoDB data and log files. <br>
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_method">MySQL documentation</a>.
+    </tr>
+    <tr>
+        <td><strong>InnoDB Auto Increment Lock Mode</strong></td>
+        <td><code>innodb-autoinc-lock-mode</code></td>
+        <td>2</td>
+        <td>
+            This setting uses the interleaved mode.
+            This enables multiple statements to execute at the same time.
+            There can be gaps in auto-incrementing columns.
         </td>
+    </tr>
+    <tr>
+        <td><strong>InnoDB Buffer Pool Size</strong></td>
+        <td><code>innodb-buffer-pool-size</code></td>
+        <td>50% of the available memory on each service instance</td>
+        <td>This setting is dynamically configured to be 50% of the available memory on each
+            service instance.</td>
+    </tr>
+     <tr>
+        <td><strong>InnoDB Log Buffer Size</strong></td>
+        <td><code>innodb-log-buffer-size</code></td>
+        <td>32&nbsp;MB</td>
+        <td>This setting defaults to 32&nbsp;MB to avoid excessive disk I/O when
+            issuing large transactions.</td>
     </tr>
     <tr>
         <td><strong>Log Bin Trust Function Creators</strong></td>
@@ -107,70 +133,44 @@ to all service plans.
         </td>
     </tr>
     <tr>
-        <td><strong>Audit Log</strong></td>
-        <td><code>audit-log</code></td>
+        <td><strong>Max Allowed Packet</strong></td>
+        <td><code>max-allowed-packet</code></td>
+        <td>256&nbsp;MB</td>
+        <td>If necessary, you can change this size in a session variable. </td>
+    </tr>
+     <tr>
+        <td><strong>Reverse Name Resolution</strong></td>
+        <td><code>skip-name-resolve</code></td>
+        <td>ON</td>
+        <td>
+            This disables reverse DNS lookups to improve performance.
+            <%= vars.product_short %> uses user credentials, rather than hostnames, to authenticate access.
+            Therefore, most deployments do not need reverse DNS lookups.<br><br>
+            To enable reverse name resolution, clear this option.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>Skip Symbolic Links</strong></td>
+        <td><code>symbolic-links</code></td>
         <td>OFF</td>
         <td>
-            To set to <code>ON</code>, select <strong>Enable Server Activity Logging</strong> in <a href="./install-config.html#monitoring">Monitoring</a>.
-            Logs are written in JSON to
-            <code>/var/vcap/store/mysql_audit_logs/mysql_server_audit.log</code>.
+            <%= vars.product_short %> is configured to prevent the use of symlinks to tables.
+            VMware recommends this security setting to prevent users from manipulating
+            files on the server file system. <br>
+            For more information, see
+            <a href="https://dev.mysql.com/doc/refman/5.7/en/security-against-attack.html">
+                Making MySQL Secure Against Attackers</a>.
         </td>
     </tr>
-    <tr>
-        <td><strong>InnoDB Buffer Pool Size</strong></td>
-        <td><code>innodb-buffer-pool-size</code></td>
-        <td>50% of the available memory on each service instance</td>
-        <td>This setting is dynamically configured to be 50% of the available memory on each
-            service instance.</td>
-    </tr>
-    <tr>
-        <td><strong>InnoDB Transaction Log Durability</strong></td>
-        <td><code>innodb_flush_log_at_trx_commit</code></td>
-        <td>1</td>
-        <td>At each transaction commit, logs are written and flushed to disk.
-            <br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">
-            MySQL documentation</a>.</td>
-     </tr>
      <tr>
-        <td><strong>InnoDB Log Buffer Size</strong></td>
-        <td><code>innodb-log-buffer-size</code></td>
-        <td>32&nbsp;MB</td>
-        <td>This setting defaults to 32&nbsp;MB to avoid excessive disk I/O when
-            issuing large transactions.</td>
-    </tr>
-    <tr>
-        <td><strong>InnoDB Auto Increment Lock Mode</strong></td>
-        <td><code>innodb-autoinc-lock-mode</code></td>
-        <td>2</td>
-        <td>
-            This setting uses the interleaved mode.
-            This enables multiple statements to execute at the same time.
-            There can be gaps in auto-incrementing columns.
+        <td><strong>Table Definition Cache</strong></td>
+        <td><code>table-definition-cache</code></td>
+        <td>8192</td>
+        <td>For information about changing this setting,
+            see the
+            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_definition_cache">
+                MySQL documentation</a>.
         </td>
-    </tr>
-    <tr>
-        <td><strong>InnoDB Flush Method</strong></td>
-        <td><code>innodb_flush_method</code></td>
-        <td><code>fsync</code></td>
-        <td>
-          This setting defines the method used to flush data to InnoDB data and log files. <br>
-          For more information, see the
-          <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_method">MySQL documentation</a>.
-    </tr>
-    <tr>
-        <td><strong>Character Set</strong></td>
-        <td><code>character-set-server</code></td>
-        <td><code>utf8</code></td>
-        <td>This setting defaults all character sets. You can override this during a session.</td>
-    </tr>
-    <tr>
-        <td><strong>Binary Log Removal</strong></td>
-        <td><code>expire_log_days</code></td>
-        <td>3</td>
-        <td>This setting is the number of days before binary log files are automatically removed. <br>
-        For more information, see
-        the <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_expire_logs_days">MySQL documentation</a>.</td>
     </tr>
 </table>
 
