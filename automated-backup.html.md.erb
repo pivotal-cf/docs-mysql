@@ -197,7 +197,7 @@ follow the documentation for your storage solution.
 For more information about Ceph S3 bucket policies,
 see the [Ceph documentation](https://docs.ceph.com/docs/master/radosgw/bucketpolicy/).
 
-To create a policy and access key in AWS:
+To create a policy and access key in Amazon Web Services (AWS):
 
 1. Create a policy for your <%= vars.product_short %> user account. <br><br>
 
@@ -324,6 +324,156 @@ you must have an S3 bucket in which to store the backups.
             </td>
         </tr>
       </table>
+
+
+## <a id="ip-configure"></a> Back Up to an Amazon S3 with Instance Profile
+When you configure backups for an Amazon S3 with Instance Profile, <%= vars.product_short %> allows the Identity and Access Management (IAM) user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
+
+The procedure in this section allows <%= vars.product_short %> to upload backups to Amazon S3 without Static Credentials (Access and Secret Access Key ID).
+
+<%# For information about Backing Up Amazon EC2 Resources, see the [AWS documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/working-with-other-services.html#working-with-ec2). %>
+
+**Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS
+
+To configure backups for an Amazon S3 with Instance Profile:
+
+* [Create an IAM Role with a Custom Policy](#ip-iam)
+* [Add Policy to Existing <%= vars.ops_manager %> User/Role](#ip-configure-ops)
+* [Configure VM Extension](#ip-configure-vm)
+ * [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
+ * [Apply VM extension to dedicated-mysql-broker job of <%= vars.product_short %>](#ip-vm-job)
+ * [Set VM extension name in <%= vars.product_short %> tile](#ip-vm-tile)
+* [Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances](#ip-apply-upgrade)
+* [(Optional) Verify the IAM role is associated with the MySQL Service Instances](#ip-verify-instances)
+
+
+### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
+
+  <p class="note">
+    <strong>Note:</strong> Operators must run the <code>upgrade-all-service-instances</code> errand in this <strong>Apply Changes</strong>.
+    This allows the service instances to begin using the instance profile instead of static credentials for backup and restore. <br><br>
+    Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
+  </p>
+
+The first thing you must do is create a policy for your <%= vars.product_short %> user account.
+
+For more information about AWS identity and access management, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the AWS documentation.
+<br><br>
+For more information about users, groups, and roles in AWS, see [IAM Identities (users, groups, and roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the AWS documentation.
+
+To create an IAM Role with a custom policy:
+
+1.  In AWS, create an IAM role with a new custom policy by following this procedure in the
+    [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-json-editor).
+    <br><br>
+    Paste in the following permissions:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Action": [
+              "s3:GetObject",
+              "s3:PutObject",
+              "s3:ListBucket",
+              "s3:ListBucketVersions",
+              "s3:ListObjects"
+          ],
+          "Resource": [
+              "arn:aws:s3:::BUCKET-NAME",
+              "arn:aws:s3:::BUCKET-NAME/*"
+          ]
+        }
+      ]
+    }
+    ```
+    Where `BUCKET-NAME` is the name of the bucket.
+
+1. Record the Amazon Resource Name (ARN) of this new IAM role.
+
+
+### <a id="ip-add-policy"></a> Add Policy to Existing <%= vars.ops_manager %> User/Role
+Add a new policy to the existing <%= vars.ops_manager %> IAM User/Role that is described in the AWS Config.
+
+This policy allows the IAM user/role used by BOSH to pass the new backups IAM role to a new EC2 instance.
+
+You can find the existing IAM user/role in the <%= vars.ops_manager %> dashboard > BOSH tile -> AWS Config.
+For more information about this user/role, see [Step 3: Create an IAM User for <%= vars.ops_manager %>](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam.) in the <%= vars.ops_manager %> documentation.
+
+1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
+1. Click the **BOSH Director for AWS** tile.
+1. Select **AWS Config**.
+1. Find the existing IAM user/role in the <%= vars.ops_manager %> dashboard
+1. In AWS, add a new policy to that IAM User/Role:
+
+    ```json
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowToCreateInstanceWithMySQLBackupstInstanceProfile",
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": [
+                "arn:aws:iam::540390724081:role/MYSQL-BACKUPS-ROLE"
+          ]
+        }
+      ]
+    }
+    ```
+    Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous section.
+
+
+### <a id="ip-configure-vm"></a> Configure VM Extension
+#### <a id="ip-vm-ops"></a> Create VM Extension in <%= vars.ops_manager %>
+2 methods:
+
+**Using the <%= vars.ops_manager %> API directly.**
+For more information, see [Create or Update a VM Extension](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#create-vm-extension) in the <%= vars.ops_manager %> documentation.
+
+**Using the <%= vars.ops_manager %> CLI (om) to create the VM extension.**
+For information about `create-vm-extension`, see the [README](https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md) in GitHub.
+
+Example JSON to specify the instance profile name:
+
+    ```json
+    {
+      "name": "VM-EXTENSION-NAME",
+      "cloud_properties": {
+        "iam_instance_profile": "INSTANCE-PROFILE-NAME"
+      }
+    }
+    ```
+    Where:
+    * `VM-EXTENSION-NAME` is the unique VM extension name that is managed by <%= vars.ops_manager %>
+    * `INSTANCE-PROFILE-NAME` is the name of the instance profile created in the first step
+
+
+#### <a id="ip-vm-job"></a> Apply VM extension to dedicated-mysql-broker job of <%= vars.product_short %> tile
+2 methods:
+
+**Using the <%= vars.ops_manager %> API directly.** For more information, see [Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions) in the <%= vars.ops_manager %> documentation.
+
+**Using the om CLI to configure the tile.** Add the `additional_vm_extensions key` in the resource-config section of the product configuration and use the om CLI. See om configure-product in GitHub.
+
+
+#### <a id="ip-vm-tile"></a> Set VM extension name in <%= vars.product_short %> tile
+Navigate to the <%= vars.ops_manager %> dashboard and visit the MySQL for VMs tile. In the Backups pane, select the Amazon S3 (with Instance Profiles) option and fill in the VM extension name created above. See `VM-EXTENSION-NAME from [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops) above.
+
+
+### <a id="ip-apply-upgrade"></a> Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances
+
+<p class="note">
+  <strong>Note:</strong> Admin must run the upgrade-all-service-instances errand in this Apply Changes.
+  This allows the service instances to begin using the instance profile instead of static credentials for backup and restore. <br><br>
+  Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
+</p>
+
+### <a id="ip-verify-instances"></a> (Optional) Verify the IAM role is associated with the MySQL Service Instances
+On the AWS Management Console, find any EC2 instance that begins with `mysql/GUID` and verify the IAM Role in the Details for the instance.
+
 
 ## <a id="gcs"></a> Back Up to GCS
 
