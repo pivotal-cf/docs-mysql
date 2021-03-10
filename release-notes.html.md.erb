@@ -10,6 +10,60 @@ and then upgrade to the latest available patch for the new minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-10-2"></a> v2.10.2
+
+**Release Date: March 11, 2021**
+
+New features and changes in this release:
+
++ **Support Instance Profiles for backups to S3**
+  A new radio button has been added to the Backups pane that allows for backups to Amazon S3 without
+  using static credentials. For more information on prerequisites, see
+  [Back Up to Amazon S3 with Instance Profile](automated-backup.html#ip-configure)
+
++ **Avoid filling up the persistent disk with binary logs:**
+  A new checkbox restricts the space that the binary logs can use on the persistent disk. For databases with a high
+  transaction rate, this change will prevent database failures due to the disk running out of space.
+  For more information, see [Limit binary log disk use to 33% of disk capacity](install-config.html#mysql)
+  in _Installing and Configuring_.
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **ADBR does not show error status during restore operation**: Previously, the ADBR plugin would show an error
+  status during a restore while the database was unavailable. Now, the ADBR plugin will report the restore status
+  as being in progress.
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.101*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.32–35*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.32–31*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.21*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.16.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.33.0</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-1"></a> v2.10.1
 
 **Release Date: February 4, 2021**
@@ -23,6 +77,12 @@ This release has the following fix:
     <br><br>
     This fix resolves the breaking change issue in v2.10.0. See [v2.10.0](#2-10-0).
 
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
