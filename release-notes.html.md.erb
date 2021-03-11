@@ -16,14 +16,14 @@ and then upgrade to the latest available patch for the new minor.
 
 New features and changes in this release:
 
-+ **Support Instance Profiles for backups to S3**
-  Added a radio button to the **Backups** pane that allows for backups to Amazon S3 without
++ **Support Instance Profiles for backups to S3:**
+  A radio button on the **Backups** pane allows for backups to Amazon S3 without
   using static credentials.
-  For more information about prerequisites, see
-  [Back Up to Amazon S3 with Instance Profile](automated-backup.html#ip-configure)
+  For more information, see
+  [Back Up to Amazon S3 with Instance Profile](automated-backup.html#instance-profile).
 
 + **Avoid filling up the Persistent Disk with Binary Logs:**
-  Added a checkbox to restrict the space that binary logs can use on the persistent disk.
+  A checkbox restricts the space that binary logs can use on the persistent disk.
   For databases with a high transaction rate, this change prevents database failures due
   to the disk running out of space.
   For more information,
@@ -34,8 +34,8 @@ New features and changes in this release:
 
 This release has the following fix:
 
-+ **ADBR does not show error Status during Restore Operation**:
-  Previously, the ADBR plugin would show an error status during a restore while the database was unavailable.
++ **ADBR does not show error "Status during Restore Operation"**:
+  Previously, the ADBR plugin showed an error status during a restore when the database was unavailable.
   Now, the ADBR plugin reports the restore status as being in progress.
 
 ### Known Issues
