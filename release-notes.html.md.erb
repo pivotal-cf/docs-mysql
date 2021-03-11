@@ -26,12 +26,13 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 New features and changes in this release:
 
-+ **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
-  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage.
++ **Backup Artifacts are organized under Subfolders in External Storage:**
+  Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+  artifacts in the root directory in external storage.
   For easier navigation, backup artifacts are now stored under
   `p.mysql > service-instance_GUID > yyyy > mm > dd`.
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI
-  using the adbr plugin.
+  using the `adbr` plugin.
 
 ### Known Issues
 
@@ -54,8 +55,8 @@ The following components are compatible with this release:
   </tr>
 
   <tr><td>Stemcell</td><td>621.101*</td></tr>
-  <tr><td>Percona Server</td><td>5.7.32-35*</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.32-31*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.32&ndash;35*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.32&ndash;31*</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.21*</td></tr>
   <tr><td>mysql-backup-release</td><td>2.16.0*</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
