@@ -326,8 +326,8 @@ you must have an S3 bucket in which to store the backups.
       </table>
 
 
-## <a id="ip-configure"></a> Back Up to an Amazon S3 with Instance Profile
-When you configure backups for an Amazon S3 with Instance Profile, <%= vars.product_short %> allows the Identity and Access Management (IAM) user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
+## <a id="ip-configure"></a> Back Up to Amazon S3 with Instance Profile
+When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %> allows the Identity and Access Management (IAM) user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
 
 The procedure in this section allows <%= vars.product_short %> to upload backups to Amazon S3 without Static Credentials (Access and Secret Access Key ID).
 
@@ -456,11 +456,11 @@ Example JSON to specify the instance profile name:
 
 **Using the <%= vars.ops_manager %> API directly.** For more information, see [Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions) in the <%= vars.ops_manager %> documentation.
 
-**Using the om CLI to configure the tile.** Add the `additional_vm_extensions key` in the resource-config section of the product configuration and use the om CLI. See om configure-product in GitHub.
+**Using the om CLI to configure the tile.** Add the `additional_vm_extensions key` in the resource-config section of the product configuration and use the om CLI. See [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file) in GitHub.
 
 
 #### <a id="ip-vm-tile"></a> Set VM extension name in <%= vars.product_short %> tile
-Navigate to the <%= vars.ops_manager %> dashboard and visit the MySQL for VMs tile. In the Backups pane, select the Amazon S3 (with Instance Profiles) option and fill in the VM extension name created above. See `VM-EXTENSION-NAME from [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops) above.
+Navigate to the <%= vars.ops_manager %> dashboard and visit the MySQL for VMs tile. In the Backups pane, select the Amazon S3 (with Instance Profiles) option and fill in the VM extension name created above. See `VM-EXTENSION-NAME` from [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops) above.
 
 
 ### <a id="ip-apply-upgrade"></a> Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances
