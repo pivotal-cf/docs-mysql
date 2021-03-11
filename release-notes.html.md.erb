@@ -24,15 +24,16 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 ### Features
 
-New features and changes in this release:
+New feature in this release:
 
 + **Backup Artifacts are organized under Subfolders in External Storage:**
   Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
   artifacts in the root directory in external storage.
   For easier navigation, backup artifacts are now stored under
-  `p.mysql > service-instance_GUID > yyyy > mm > dd`.
-  Old backup artifacts stored in the root directory can still be accessed through the cf CLI
-  using the `adbr` plugin.
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
+
+    Old backup artifacts stored in the root directory can still be accessed through the cf CLI
+    using the `adbr` plugin.
 
 ### Known Issues
 
