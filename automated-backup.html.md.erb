@@ -36,6 +36,7 @@ To configure backups, follow the procedure for your external storage solution:
 
 + [Back Up Using SCP](#scp)
 + [Back Up to Amazon S3 or Ceph](#ceph-or-s3)
++ [Back Up to Amazon S3 with Instance Profile](#instance-profile)
 + [Back Up to GCS](#gcs)
 + [Back Up to Azure Storage](#azure)
 
@@ -326,7 +327,7 @@ you must have an S3 bucket in which to store the backups.
       </table>
 
 
-## <a id="ip-configure"></a> Back Up to Amazon S3 with Instance Profile
+## <a id="instance-profile"></a> Back Up to Amazon S3 with Instance Profile
 When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %> allows the Identity and Access Management (IAM) user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
 
 The procedure in this section allows <%= vars.product_short %> to upload backups to Amazon S3 without Static Credentials (Access and Secret Access Key ID).
@@ -337,14 +338,14 @@ The procedure in this section allows <%= vars.product_short %> to upload backups
 
 To configure backups for an Amazon S3 with Instance Profile:
 
-* [Create an IAM Role with a Custom Policy](#ip-iam)
-* [Add Policy to Existing <%= vars.ops_manager %> User/Role](#ip-configure-ops)
-* [Configure VM Extension](#ip-configure-vm)
- * [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
- * [Apply VM extension to dedicated-mysql-broker job of <%= vars.product_short %>](#ip-vm-job)
- * [Set VM extension name in <%= vars.product_short %> tile](#ip-vm-tile)
-* [Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances](#ip-apply-upgrade)
-* [(Optional) Verify the IAM role is associated with the MySQL Service Instances](#ip-verify-instances)
+1. [Create an IAM Role with a Custom Policy](#ip-iam)
+1. [Add Policy to Existing <%= vars.ops_manager %> User/Role](#ip-configure-ops)
+1. [Configure VM Extension](#ip-configure-vm)
+ 1. [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
+ 1. [Apply VM extension to dedicated-mysql-broker job of <%= vars.product_short %>](#ip-vm-job)
+ 1. [Set VM extension name in <%= vars.product_short %> tile](#ip-vm-tile)
+1. [Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances](#ip-apply-upgrade)
+1. [(Optional) Verify the IAM role is associated with the MySQL Service Instances](#ip-verify-instances)
 
 
 ### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
@@ -431,12 +432,12 @@ Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous sectio
 
 ### <a id="ip-configure-vm"></a> Configure VM Extension
 #### <a id="ip-vm-ops"></a> Create VM Extension in <%= vars.ops_manager %>
-There are 2 methods that you can use to create a VM Extension in <%= vars.ops_manager %>:
+There are two methods that you can use to create a VM Extension in <%= vars.ops_manager %>:
 
-**Using the <%= vars.ops_manager %> API directly.**
+* **Using the <%= vars.ops_manager %> API directly.**
 For more information, see [Create or Update a VM Extension](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#create-vm-extension) in the <%= vars.ops_manager %> documentation.
 
-**Using the <%= vars.ops_manager %> CLI (om) to create the VM extension.**
+* **Using the <%= vars.ops_manager %> CLI (om) to create the VM extension.**
 For information about `create-vm-extension`, see the [README](https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md) in GitHub.
 
 Example JSON to specify the instance profile name:
@@ -456,11 +457,11 @@ Where:
 
 
 #### <a id="ip-vm-job"></a> Apply VM extension to `dedicated-mysql-broker` job of <%= vars.product_short %> tile
-There are 2 methods that you can use to apply the VM extension to the `dedicated-mysql-broker` job:
+There are two methods that you can use to apply the VM extension to the `dedicated-mysql-broker` job:
 
-**Using the <%= vars.ops_manager %> API directly.** For more information, see [Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions) in the <%= vars.ops_manager %> documentation.
+* **Using the <%= vars.ops_manager %> API directly.** For more information, see [Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions) in the <%= vars.ops_manager %> documentation.
 
-**Using the om CLI to configure the tile.** Add the `additional_vm_extensions` key in the `resource-config` section of the product configuration and use the om CLI. For information about configuring using a YAML configuration file, see [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file) in GitHub.
+* **Using the om CLI to configure the tile.** Add the `additional_vm_extensions` key in the `resource-config` section of the product configuration and use the om CLI. For information about configuring using a YAML configuration file, see [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file) in GitHub.
 
 
 #### <a id="ip-vm-tile"></a> Set VM extension name in <%= vars.product_short %> tile
