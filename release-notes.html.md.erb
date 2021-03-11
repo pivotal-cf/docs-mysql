@@ -17,23 +17,26 @@ and then upgrade to the latest available patch for the new minor.
 New features and changes in this release:
 
 + **Support Instance Profiles for backups to S3**
-  A new radio button has been added to the Backups pane that allows for backups to Amazon S3 without
-  using static credentials. For more information on prerequisites, see
+  Added a radio button to the **Backups** pane that allows for backups to Amazon S3 without
+  using static credentials.
+  For more information about prerequisites, see
   [Back Up to Amazon S3 with Instance Profile](automated-backup.html#ip-configure)
 
-+ **Avoid filling up the persistent disk with binary logs:**
-  A new checkbox restricts the space that the binary logs can use on the persistent disk. For databases with a high
-  transaction rate, this change will prevent database failures due to the disk running out of space.
-  For more information, see [Limit binary log disk use to 33% of disk capacity](install-config.html#mysql)
++ **Avoid filling up the Persistent Disk with Binary Logs:**
+  Added a checkbox to restrict the space that binary logs can use on the persistent disk.
+  For databases with a high transaction rate, this change prevents database failures due
+  to the disk running out of space.
+  For more information,
+  see [Limit binary log disk use to 33% of disk capacity](./install-config.html#mysql)
   in _Installing and Configuring_.
 
 ### Resolved Issues
 
 This release has the following fix:
 
-+ **ADBR does not show error status during restore operation**: Previously, the ADBR plugin would show an error
-  status during a restore while the database was unavailable. Now, the ADBR plugin will report the restore status
-  as being in progress.
++ **ADBR does not show error Status during Restore Operation**:
+  Previously, the ADBR plugin would show an error status during a restore while the database was unavailable.
+  Now, the ADBR plugin reports the restore status as being in progress.
 
 ### Known Issues
 
