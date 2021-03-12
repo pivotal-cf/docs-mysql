@@ -334,9 +334,9 @@ The procedure in this section allows <%= vars.product_short %> to upload backups
 
 <%# For information about Backing Up Amazon EC2 Resources, see the [AWS documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/working-with-other-services.html#working-with-ec2). %>
 
-**Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS
+**Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
 
-To configure backups for an Amazon S3 with Instance Profile:
+The process for configuring backups for an Amazon S3 with Instance Profile is:
 
 1. [Create an IAM Role with a Custom Policy](#ip-iam)
 1. [Add Policy to Existing <%= vars.ops_manager %> User/Role](#ip-configure-ops)
@@ -412,22 +412,22 @@ To find the existing user/role and add a policy:
 For more information about this user/role, see [Step 3: Create an IAM User for <%= vars.ops_manager %>](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam) in the <%= vars.ops_manager %> documentation.
 1. On the AWS Management Console, add a new policy to that IAM User/Role:
 
-```json
-{
-  "Version": "2012-10-17",
-  "Statement": [
+    ```json
     {
-      "Sid": "AllowToCreateInstanceWithMySQLBackupstInstanceProfile",
-      "Effect": "Allow",
-      "Action": "iam:PassRole",
-      "Resource": [
-            "arn:aws:iam::540390724081:role/MYSQL-BACKUPS-ROLE"
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "AllowToCreateInstanceWithMySQLBackupstInstanceProfile",
+          "Effect": "Allow",
+          "Action": "iam:PassRole",
+          "Resource": [
+                "arn:aws:iam::540390724081:role/MYSQL-BACKUPS-ROLE"
+          ]
+        }
       ]
     }
-  ]
-}
-```
-Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous section.
+    ```
+    Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous section.
 
 
 ### <a id="ip-configure-vm"></a> Configure VM Extension
@@ -485,15 +485,23 @@ For more information, see [Create VM Extension in <%= vars.ops_manager %>](#ip-v
 
 
 ### <a id="ip-apply-upgrade"></a> Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances
+The changes to your service instances are not complete until you apply your configuration changes.
+<br><br>
+This allows the service instances to begin using the instance profile instead of static credentials for backup and restore.
+Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
 
-<p class="note">
-  <strong>Note:</strong> Operators must run the <code>upgrade-all-service-instances</code> errand in this <strong>Apply Changes</strong>.
-  This allows the service instances to begin using the instance profile instead of static credentials for backup and restore.<br>
-  Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
-</p>
+To do this:
 
-### <a id="ip-verify-instances"></a> (Optional) Verify that the IAM role is associated with the MySQL Service Instances
-1. On the AWS Management Console, find any EC2 instance that begins with `mysql/GUID`
+1. Return to the <%= vars.ops_manager %> Installation Dashboard.
+1. Click **Review Pending Changes**.
+1. Unselect all products except **BOSH Director** and **<%= vars.product_full %>** and click **Apply Changes**.
+1. Verify that the checkbox for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
+1. Click **Apply Changes**.
+
+### <a id="ip-verify-instances"></a> (Optional) Verify IAM Role Association with the Service Instances
+Verify that the IAM role is associated with the MySQL service instances:
+
+1. On the AWS Management Console, find any EC2 instance that begins with `mysql/GUID`.
 1. Verify that the IAM Role is present in the details for the instance.
 
 
