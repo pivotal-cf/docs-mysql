@@ -19,7 +19,9 @@ and then upgrade to the latest available patch for the new minor.
 New features and changes in this release:
 
 + **Support Instance Profiles for backups to S3:**
-  A radio button on the **Backups** pane allows for backups to Amazon S3 without
+  <%= vars.product_short %> now supports using instance profiles for backups to Amazon S3.
+  <br>
+  This is enabled by a radio button on the **Backups** pane of the **<%= vars.product_full %>** tile. Configuring the fields under this option allows for backups to Amazon S3 without
   using static credentials.
   For more information, see
   [Back Up to Amazon S3 with Instance Profile](automated-backup.html#instance-profile).
@@ -29,7 +31,7 @@ New features and changes in this release:
   For databases with a high transaction rate, this change prevents database failures due
   to the disk running out of space.
   For more information,
-  see [Limit binary log disk use to 33% of disk capacity](./install-config.html#mysql)
+  see [Limit binary log disk use to 33% of disk capacity](./install-config.html#limit-disk-use)
   in _Installing and Configuring_.
 
 ### Resolved Issues
