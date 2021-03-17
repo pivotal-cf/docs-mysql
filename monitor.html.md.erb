@@ -66,7 +66,7 @@ metrics are shown as graphs over time.](indicator-dash.png)
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
 ### <a id="log-cache"></a>Use Log Cache
-<%= partial vars.path_to_partials + '/services/log-cache-cli-plugin',
+<%= partial '/services/log-cache-cli-plugin',
 :locals => {:service_name => vars.product_short} %>
 
 
@@ -87,7 +87,7 @@ You can also create your KPIs that are specific to your environment using the av
 
 For a list of all the <%= vars.product_short %> component metrics, see [Component Metrics](#component-metrics) below.
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/all-kpis' %>
+<%= partial '/mysql/monitoring/kpis-metrics/all-kpis' %>
 
 ## <a id="component-metrics"></a>Component Metrics
 
@@ -102,22 +102,22 @@ In addition to the above KPIs, the MySQL service emits the followings metrics fo
 
 The metrics that all <%= vars.product_short %> service instances emit:
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/mysql-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/mysql-metrics' %>
 
 ### <a id="disk-metrics"></a>Disk Metrics
 
 The disk usage metrics that all <%= vars.product_short %> services emit:
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/disk-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/disk-metrics' %>
 
 ### <a id="l-f-metrics"></a>Leader-Follower Metrics
 
 The metrics that leader-follower VMs emit:
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/l-f-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/l-f-metrics' %>
 
 ### <a id="ha-metrics"></a>Highly Available Cluster Metrics
 
 The metrics that HA clusters emit:
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/ha-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/ha-metrics' %>

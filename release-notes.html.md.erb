@@ -16,7 +16,7 @@ For example, if you use an older v<%= previous_version %>.x
 version, upgrade to the latest v<%= previous_version %>.x version
 before upgrading to the latest v<%= current_version %>.x version.
 
-<%= partial vars.path_to_partials + '/upgrade-planner' %>
+<%= partial '/upgrade-planner' %>
 
 ## <a id="2-8-4"></a> v2.8.4
 
@@ -39,10 +39,10 @@ New features and changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 
@@ -79,10 +79,10 @@ multi-site replication could not be configured successfully.
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 
@@ -119,11 +119,11 @@ New features and changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 
@@ -181,12 +181,12 @@ Now, <%= vars.product_short %> uploads both the leader and follower backup artif
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 
 ### Compatibility
@@ -234,7 +234,7 @@ service instances in realtime using `cf tail`.
 
 #### Additional New Features
 
-<%= partial vars.path_to_partials + '/services/you-can-upgrade-one-si' %>
+<%= partial '/services/you-can-upgrade-one-si' %>
 
 + **Telemetry data:** <%= vars.product_short %> sends Telemetry data when the Telemetry tile is enabled in your foundation.
   For more information about the Telemetry tile,
@@ -265,7 +265,7 @@ The error message shows the valid characters for custom schema names.
 in BOSH DNS hostname resolution. This issue has been resolved for app and service key
 bindings to service instances of all plan types.
 
-<%= partial vars.path_to_partials + "/services/feature-ops-manager-syslog" %>
+<%= partial "/services/feature-ops-manager-syslog" %>
 
 
 ### Security Fix
@@ -279,15 +279,15 @@ are stored on HA cluster service instances.
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 
