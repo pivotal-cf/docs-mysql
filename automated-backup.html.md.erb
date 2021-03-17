@@ -405,67 +405,8 @@ To find the existing user/role and add a policy:
 1. Click the **BOSH Director for AWS** tile.
 1. Select **AWS Config**.
 
-    <img alt="AWS Management Console Config pane shows Amazon S3 (with Instance Profiles) selected and the fields in the pane are described in the table below."
+    <img alt="AWS Management Console Config pane shows Amazon S3 (with Instance Profiles) selected."
     width="400" src="./images/aws-config.png"/>
-
-1. Configure the fields as follows:
-
-    <table>
-      <tr>
-          <th>Field</th>
-          <th>Instructions</th>
-      </tr>
-      <tr>
-          <td>
-              <strong>Security Group ID</strong>
-          </td>
-          <td>
-              Enter the <strong>Group ID</strong> of the <code>pcf-vms-security-group</code> you created for your <%= vars.platform_name %> VMs in
-              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#pcfaws-om-ersecgrp">Step 6: Configure a Security Group for BOSH-Deployed VMs</a> in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
-              <br>
-              Locate the Group ID in the <strong>Security Groups</strong> tab of your EC2 Dashboard.
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <strong>Key Pair Name</strong>
-          </td>
-          <td>
-              <span style="color: #f54242;">Enter <code>pcf-ops-manager-key</code>.</span>
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <strong>SSH Private Key</strong>
-          </td>
-          <td>
-              Open the AWS key pair <code>pcf-ops-manager-keys.pem</code> file you generated in
-              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
-              in <em>Preparing to Deploy Ops Manager on AWS Manually</em>.
-              <br>
-              Copy the contents of the <code>.pem</code> file and paste it into the <strong>SSH Private Key</strong> field.
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <strong>Region</strong>
-          </td>
-          <td>
-              Select the region where you deployed <%= vars.ops_manager %>.
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <strong>Encrypt Linux EBS Volumes</strong>
-          </td>
-          <td>
-            Select this checkbox to enable full encryption on persistent disks of all BOSH-deployed VMs except the <%= vars.ops_manager %> VM and Director VM. For more information about using EBS encryption, see
-            <a href="https://docs.pivotal.io/ops-manager/install/cloudform-om-ebs-config.html">Configuring Amazon EBS Encryption for <%= vars.platform_name %> on AWS</a>.
-
-            <p class="note"><strong>Note:</strong> Enabling EBS encryption only encrypts Linux VMs. The Windows VMs deployed with <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) for Windows are not encrypted.</p>
-          </td>
-      </tr>
-    </table>
 
 1. Find the existing IAM user/role in the **AWS IAM Instance Profile** field.<br>
 For more information about this user/role, see [Step 3: Create an IAM User for <%= vars.ops_manager %>](https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam) in the <%= vars.ops_manager %> documentation.
