@@ -1,0 +1,19 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/kpis', locals: {
+    kpis: [
+    {
+      metric: '/p.mysql/last_successful_backup',
+      description: <<~DESC,
+        Using the configured backup schedule for the service instance as a threshold, this metric shows how many hours have passed since the last successful backup.
+    DESC
+      measurement: 'Hours elapsed since the last successful backup',
+      alert: <<~DESC,
+        <strong>Red critical</strong>: Backup did not run on schedule.
+    DESC
+      response: 'Check the adbr-agent logs for the service instance to determine why recent automated backups are failing.',
+      id: 'last-successful-backup',
+      header: 'Hours Since Last Successful Backup'
+    }
+
+  ]
+
+} %>

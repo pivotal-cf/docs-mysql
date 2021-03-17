@@ -1,0 +1,53 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/metrics', locals: {
+    metrics: [
+
+    {
+      source: 'follower/is\_follower',
+      description: 'Shows whether a node is the follower VM.',
+      unit: 'boolean',
+      tag: 'is-follower'
+    },
+
+    {
+      source: 'follower/seconds\_behind\_master',
+      description: 'The number of seconds the follower is behind in applying writes from
+      the leader.
+      For example, a follower might have copied writes from the leader that are timestamped up to 11:00am,
+      but has only applied writes up to 8:00am. Normal values for this metric depend on your apps.',
+      unit: 'seconds',
+      tag: 'seconds-behind'
+    },
+
+    {
+      source: 'follower/seconds\_since\_leader\_heartbeat',
+      description: 'The number of seconds that elapse between the leader heartbeat and the
+      replication of the heartbeat in the follower.
+      You can use this metric to determine how far behind the follower is from the leader.
+      Normal values for this metric depends on your app.',
+      unit: 'seconds',
+      tag: 'seconds-since'
+    },
+
+    {
+      source: 'follower/relay\_log\_space',
+      description: 'The total size of all existing relay log files.',
+      unit: 'bytes',
+      tag: 'log-space'
+    },
+
+    {
+      source: 'follower/slave\_io\_running',
+      description: 'Shows whether the I/O thread has started and has connected to the leader VM.',
+      unit: 'boolean',
+      tag: 'io-running'
+    },
+
+    {
+      source: 'follower/slave\_sql\_running',
+      description: 'Shows whether the SQL thread has started.',
+      unit: 'boolean',
+      tag: 'sql-running'
+    }
+
+  ]
+} %>

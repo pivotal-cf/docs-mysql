@@ -1,0 +1,7 @@
+* **Leader-follower backups are overwritten:**
+For leader-follower automated backups, <%= vars.product_short %> might store only one backup file
+  from a random node.
+  This issue occurs because leader and follower backup files are timestamped
+  and stored in the same location.
+  This can cause the files to overwrite each other. For information about backup files,
+  see [Backup Files and Metadata](./backup.html#understanding-metadata).
