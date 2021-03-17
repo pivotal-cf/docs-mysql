@@ -1,0 +1,73 @@
+<table>
+	<tr>
+     <th width="130px"><strong>Data Source</strong></th>
+     <th width="380px"><strong>Description</strong></th>
+  	 <th><strong>Metric Unit</strong>
+  	 </th>
+  	</tr>
+ <tbody>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_ready</code></td>
+ 	<td>Shows whether the node can accept queries.</td>
+ 	<td>boolean</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_cluster_size</code></td>
+ 	<td>The current number of nodes in the Galera cluster.</td>
+ 	<td>nodes</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_cluster_status</code></td>
+ 	<td>Shows the primary status of the cluster component that the node is in. 
+ 		Possible values are: 
+ 		<ul>
+ 			<li>Primary = 1</li>
+ 			<li>Non-primary = 0</li>
+ 			<li>Disconnected = -1</li>
+ 		</ul>
+ 	    See <a href="https://mariadb.com/kb/en/mariadb/galera-cluster-status-variables/">Galera Cluster Status Variables</a> 
+ 	    in the <i>MariaDB Documentation</i>. </td>
+ 	<td>State ID
+ 	</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_flow_control_paused</code></td>
+ 	<td>Fraction of time that replication was paused due to flow control since the 
+ 		server started or last <code>FLUSH STATUS</code>. 
+ 	    This metric is a measure of how much replication lag is slowing down the cluster.</td>
+ 	<td>float</td>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_flow_control_sent</code></td>
+ 	<td>Number of <code>FC_PAUSE</code> or flow control pause events sent by this node. Unlike many status variables, 
+ 	the counter for this metric does not reset every time you run the query. </td>
+ 	<td>count</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_local_recv_queue_avg</code></td>
+ 	<td>Shows the average size of the local received queue since the last status query.</td>
+ 	<td>float</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_local_send_queue_avg</code></td>
+ 	<td>Shows the average size of the local sent queue since the last status query.</td>
+ 	<td>float</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_local_index</code></td>
+ 	<td>This node index in the cluster (base 0). </td>
+ 	<td>int</td>
+ </tr>
+ <tr>
+ 	<td><code><%= vars.mysql_metrics_origin %>/galera/wsrep_local_state</code></td>
+ 	<td>The local state of the node. Possible states include: 
+ 		<ul>
+ 			<li>1 = <code>JOINING</code></li>
+ 			<li>2 = <code>DONOR/DESYNCED</code></li>
+ 			<li>3 = <code>JOINED</code></li>
+ 			<li>4 = <code>SYNCED</code></li>
+ 		</ul>
+ 	</td>
+ 	<td>int</td>
+</tr>
+</tbody>
+</table>

@@ -9,20 +9,20 @@ This topic describes networking for on-demand services, including MySQL for Pivo
 
 ## <a id="service-network"></a>Service Network Requirement
 
-<%= partial vars.path_to_partials + '/services/service-networks-v3' %>
+<%= partial '/services/service-networks-v3' %>
 
 ## <a id='on-demand'></a>Default Network and Service Network
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial vars.path_to_partials + '/services/on_demand_architecture', :locals => {
+<%= partial '/services/on_demand_architecture', :locals => {
   :product_short => "MySQL for PCF"} %>
 
 ## <a id="rules"></a> Required Networking Rules for On-Demand Services
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial vars.path_to_partials + '/services/service_networks_table', :locals => {
+<%= partial '/services/service_networks_table', :locals => {
 	:app_runtime_full => vars.app_runtime_full,
 	:product_short => "MySQL"} %>
 
@@ -142,7 +142,7 @@ In addition to the networking rules required for MySQL for PCF, if you are using
 cluster service plan, the operator must ensure network rules are set up so that connections are open
 as described in the table below.
 
-<%= partial vars.path_to_partials + "/mysql/galera_beta" %>
+<%= partial "/mysql/galera_beta" %>
 
 <table class="nice">
 	<th>Source VM</th>

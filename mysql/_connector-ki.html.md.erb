@@ -1,0 +1,7 @@
++ **MySQL Connector/J 8.0.13 and later does not verify TLS connections:**
+  If you use MySQL Connector/J 8.0.13 or later with <%= vars.product_short %>,
+  you must modify the JDBC URL in `VCAP_SERVICES` to include `sslMode=VERIFY_IDENTITY`
+  and `verifyServerCertificate=true`. <br><br>
+  For more information about JDBC URL syntax, see the
+  [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html).
+  For more information about `VCAP_SERVICES`, see [MySQL Environment Variables](./use.html#vcap).

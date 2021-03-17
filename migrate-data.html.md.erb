@@ -8,7 +8,7 @@ owner: MySQL
 This topic describes how to migrate the data from any MySQL database to a MySQL
 for PCF v2.x service instance.
 
-<%= partial vars.path_to_partials + "/mysql/galera_beta" %>
+<%= partial "/mysql/galera_beta" %>
 
 ## <a id='overview'></a>Overview
 
@@ -434,7 +434,7 @@ following sections of [Accessing Services with SSH](https://docs.pivotal.io/pivo
 
 To complete the migration, rebind and restage any apps that had been bound to the original MySQL for PCF service instance.
 
-<%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
+<%= partial "/mysql/rebind-warning" %>
 
 Do the following to rebind and restage your apps:
 

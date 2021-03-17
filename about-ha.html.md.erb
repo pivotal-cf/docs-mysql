@@ -6,7 +6,7 @@ tile: true
 
 <strong><%= modified_date %></strong>
 
-<%= partial vars.path_to_partials + "/mysql/galera_beta" %>
+<%= partial "/mysql/galera_beta" %>
 
 This topic describes how highly available (HA) clusters work in MySQL for Pivotal
 Cloud Foundry (PCF) and contains information to help you decide whether to use
@@ -186,4 +186,4 @@ For more information, see [wsrep\_max\_ws\_rows](https://www.percona.com/doc/per
 
 ## <a id="proxy"></a>MySQL Proxy
 
-<%= partial '../../p-mysql/partials/mysql/mysql-proxy' %>
+<%= partial '/mysql/mysql-proxy' %>

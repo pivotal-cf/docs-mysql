@@ -1,0 +1,126 @@
+## <a id="node-health"></a> Node Health
+
+When determining where to route traffic, the proxy queries an HTTP health check process running on the node. This health check can return as either healthy or unhealthy, or the node can be unresponsive.
+
+### <a id="healthy"></a> Healthy
+
+If the health check process returns HTTP status code `200`, the proxy includes the node in its pool of healthy nodes.
+
+When a new or resurrected nodes rejoin the cluster, the proxy continues to route all connections to the currently active node. In the case of failover, the proxy considers all healthy nodes as candidates for new connections.
+
+<%= image_tag "images/switchboard-all-healthy.png" %><%# Images require alt text that describes the image in detail. %>
+
+### <a id="unhealthy"></a> Unhealthy
+
+If the health check returns HTTP status code `503`, the proxy considers the node unhealthy.
+
+<!-- We will eventually move the following link to a troubleshooting topic in 2.5 -->
+
+This happens when a node becomes non-primary. For more information, see [Cluster Scaling Behavior](https://docs.pivotal.io/p-mysql/1-10/architecture.html#scale-behavior).
+
+The proxy severs existing connections to newly unhealthy node. The proxy routes new connections to a healthy node, assuming such a node exists. Clients are expected to handle reconnecting on connection failure should the entire cluster become inaccessible.
+
+<%= image_tag "images/switchboard-unhealthy.png" %><%# Images require alt text that describes the image in detail. %>
+
+### <a id="unresponsive"></a> Unresponsive
+
+If node health cannot be determined due to an unreachable or unresponsive health check endpoint, the proxy considers the node unhealthy. This may happen if there is a network partition or if the VM running the node and healthcheck died.
+
+
+## <a id="monitor"></a> Monitor Node Health
+
+You can monitor the health status of your nodes by doing one of the following:
+
++ [Monitor Node Health Using the Dashboard](#dashboard)
++ [Monitor Node Health Using the API](#proxy-api)
+
+### <a id='dashboard'></a> Monitor Node Health Using the Dashboard
+
+#### <a id='dashboard-url'></a> Construct the URL for the Dashboard
+
+Each MySQL Proxy instance has its own Switchboard dashboard. To access the dashboard, you must construct the dashboard URL.
+
+To construct the URL for the Switchboard dashboard:
+
+1. Find and record the system domain on the **Domains** pane in the <%= vars.app_runtime_abbr %> tile.
+
+1. Find and record the number of MySQL Proxy VM instances in your deployment in the **Resource Config** pane.
+
+1. Use the above information to build the Switchboard dashboard URL as follows: `https://[PROXY-VM-INDEX]-proxy-p-mysql-ert.[SYSTEM-DOMAIN]`
+
+#### <a id='dashboard-login'></a> Log In to the Dashboard
+
+To log into the Switchboard dashboard:
+
+1. In the <%= vars.app_runtime_abbr %> tile, the URL in your browser contains the <%= vars.ops_manager %> fully qualified domain name (FQDN) and the <%= vars.app_runtime_abbr %> product GUID, as in the following example: `https://OPS-MANAGER-FQDN/products/APPLICTION-SERVICE-PRODUCT-GUID/az_and_network_assignments/edit`<br>
+To log into the dashboard, you need the username and password for the MySQL Proxy VM that are stored in the BOSH Director CredHub.<br>
+To obtain them, enter `https://[OPS-MANAGER-FQDN]/api/v0/deployed/products/[APPLICTION-SERVICE-PRODUCT-GUID]/variables?name=mysql-proxy-dashboard-credentials` into your browser and record the username and password.
+
+1. Enter the dashboard URL you constructed into your browser and log in using the credentials you obtained in [Construct the URL for the Dashboard](#dashboard-url).
+
+#### <a id="use-dashboard"></a> Use the Dashboard
+
+To monitor node health using the Switchboard dashboard:
+
+1. To view a list of proxies in your browser, navigate to the URL that you created in [Construct the URL for the Dashboard](#dashboard-url).
+
+1. When prompted, enter the username and password that you recorded in [Log In to the Dashboard](#dashboard-login).
+
+1. Click the link for the proxy that you want to use to monitor node health.
+
+1. If you are prompted, enter the username and password that you recorded in [Log In to the Dashboard](#dashboard-login).
+
+    <%= image_tag "images/switchboard-all-healthy.png" %><%# Images require alt text that describes the image in detail. %>
+
+### <a id="proxy-api"></a> Monitor Node Health Using the API
+
+You can also use the Switchboard API to obtain the information that is shown on the Switchboard dashboard. For example, you might want to use the API to write your own app to monitor the cluster.
+
+To monitor node health using the Switchboard API:
+
+1. To monitor node health, run:
+
+    ```
+    curl https://USERNAME:PASSWORD@N-HOSTNAME/v0/backends
+    ```
+
+    Where:
+    + `USERNAME` is the `username` you recorded in [Log In to the Dashboard](#dashboard-login).
+    + `PASSWORD` is the `password` you recorded in [Log In to the Dashboard](#dashboard-login).
+    + `N` is either 0, 1, or 2 depending on the proxy you want to connect to.
+    + `HOSTNAME` is the IP address of the **Database** found in the **Status** tab of your <%= vars.app_runtime_abbr %> tile.
+
+    The above command outputs a JSON object similar to:
+
+    <pre class="terminal">
+    $ curl https://abcdefghijklmno:012345678912345@0-proxy.123abc45-67d8-912e-34f5-g34612c10dba.org.dedicated-mysql.cf-app.com/v0/backends
+    [
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-0",
+        "currentSessionCount": 0,
+        "active": true,
+        "trafficEnabled": true
+      },
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-1",
+        "currentSessionCount": 0,
+        "active": false,
+        "trafficEnabled": true
+      },
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-2",
+        "currentSessionCount": 0,
+        "active": false,
+        "trafficEnabled": true
+      }
+    ]
+    </pre>

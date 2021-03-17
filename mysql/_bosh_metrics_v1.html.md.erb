@@ -1,0 +1,28 @@
+#### <a id="ram"></a> RAM
+
+|| **system.mem.percent** |
+| --- | --- |
+| **Description** | RAM being consumed by the MySQL cluster node.<br><br> **Use:** MySQL increases its memory usage as the data set increases. This is normal, as much of that RAM is used to buffer IO. As long as there is enough remaining RAM for other processes on the instance, the MySQL server should be OK.<br><br> **Origin:** JMX Bridge or BOSH HM<br> **Type:** percentage<br> **Frequency:** 60 s |
+| **Recommended measurement** | Average over the last 10 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** > 95%<br> **Red critical:** > 99% |
+| **Recommended response** | Update the cluster to use VMs that offer more RAM. |
+
+
+#### <a id="cpu"></a> CPU
+
+|| **system.cpu.percent** |
+| --- | --- |
+| **Description** | CPU time being consumed by the MySQL cluster.<br><br> **Use:** A node that experiences context switching or high CPU usage will become unresponsive. This also affects the ability of the node to report metrics.<br><br> **Origin:** JMX Bridge or BOSH HM<br>**Type:** percent<br> **Frequency:** 60 s |
+| **Recommended measurement** | Average over the last 10 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** > 80%<br> **Red critical:** > 90% |
+| **Recommended response** | Determine what is using so much CPU. If it is from normal processes, update the service instance to use a VM with larger CPU capacity. |
+
+
+#### <a id="persistent-disk"></a> Persistent Disk
+
+|| **persistent.disk.percent** |
+| --- | --- |
+| **Description** | Persistent disk being consumed by the MySQL cluster nodes.<br><br> **Use:** If the persistent disk fills up, MySQL will be unable to process queries and recovery is difficult.<br><br> **Origin:** JMX Bridge or BOSH HM<br> **Type:** percent<br> **Frequency:** 60 s |
+| **Recommended measurement** | Average over the last 10 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** > 75%<br> **Red critical:** > 90% |
+| **Recommended response** | Update the deployment with larger persistent disks. This process might take some time, because the data is copied from the original persistent disk to a new one. For more information, see [Redeploying with Larger Persistent Disks](./configuring.html#disk).|

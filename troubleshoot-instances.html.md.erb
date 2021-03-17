@@ -14,11 +14,11 @@ Start here if you are responding to a specific error or error messages.
 ### <a id="x-product"></a> Common Service Errors
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-<%= partial vars.path_to_partials + '/services-tshoot/tshoot-no-metrics' %>
+<%= partial '/services-tshoot/tshoot-no-metrics' %>
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial '../../p-mysql/partials/services-tshoot/tshoot-credhub-failing-credentials' %>
+<%= partial '/services-tshoot/tshoot-credhub-failing-credentials' %>
 
 
 ### <a id="inaccessible"></a>If Instances or Database are Inaccessible
@@ -33,7 +33,7 @@ You might experience the following during upgrades or in a leader-follower topol
 - [Mutual TLS](#m-tls)
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'outages',
     description: 'Temporary Outages',
     symptom: vars.product_full + ' service instances can become temporarily inaccessible during upgrades and VM or network failures.',
@@ -42,7 +42,7 @@ You might experience the following during upgrades or in a leader-follower topol
 
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'read-only',
     description: 'Apps Cannot Write to the Database',
     symptom: 'You have a leader-follower topology and your apps can no 
@@ -59,7 +59,7 @@ You might experience the following during upgrades or in a leader-follower topol
 } %>
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'disk-full',
     description: 'Apps Are Inoperable',
     symptom: 'Your apps become inoperable. Read,
@@ -72,7 +72,7 @@ For more information about troubleshooting this problem, see
 
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'm-tls-error',
     description: 'Apps Cannot Connect to the Database',
     symptom: 'Apps can fail to connect to the database.',
@@ -90,7 +90,7 @@ For more information about troubleshooting this problem, see
 
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'connecter',
     description: 'MySQL Connector/J v5.1.41 or Earlier',
     symptom: '<p>Apps cannot connect to the database when TLS is enabled and
@@ -106,7 +106,7 @@ Javanbuildpack</a> in the Pivotal Support knowledge base.</p>'
 } %>
 
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+<%= partial "/troubleshoot-template", locals: {
     id: 'm-tls',
     description: 'Mutual TLS',
     symptom: 'Apps cannot connect to the database when TLS is enabled and your apps uses mTLS.',
@@ -129,7 +129,7 @@ Basic cf CLI operations include `create`, `update`, `bind`, `unbind`, and `delet
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial '../../p-mysql/partials/services-tshoot/tshoot-tech-parse-error' %>
+<%= partial '/services-tshoot/tshoot-tech-parse-error' %>
 
 ### <a id="instance"></a> Find Information about Your Service Instance
 
@@ -164,10 +164,10 @@ The service instances are listed in the `name` column.
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial '../../p-mysql/partials/services-tshoot/tshoot-kb' %>
+<%= partial '/services-tshoot/tshoot-kb' %>
 
 ## <a id="support"></a>File a Support Ticket
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial '../../p-mysql/partials/services-tshoot/tshoot-support-dev' %>
+<%= partial '/services-tshoot/tshoot-support-dev' %>

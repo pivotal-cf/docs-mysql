@@ -78,7 +78,7 @@ readiness, cluster size, and cluster status.
 
 ### <a id="log-cache"></a>Use Log Cache
 
-<%= partial vars.path_to_partials + '/services/log-cache-cli-plugin',
+<%= partial '/services/log-cache-cli-plugin',
 :locals => {:service_name => vars.product_short} %>
 
 
@@ -104,7 +104,7 @@ For a list of all the MySQL for PCF component metrics, see [Component Metrics](#
 
 <%# If you are confused about how to edit the following HA partials see the Tile Dev partials topic in the wiki  %>
 
-<%= partial '../../p-mysql/partials/mysql/monitoring/kpis-metrics/all-kpis' %>
+<%= partial '/mysql/monitoring/kpis-metrics/all-kpis' %>
 
 ## <a id="component-metrics"></a>Component Metrics
 
@@ -119,22 +119,22 @@ In addition to the above KPIs, the MySQL service emits the followings metrics fo
 
 The metrics that all MySQL for PCF service instances emit:
 
-<%= partial '../../p-mysql/partials/mysql/monitoring/kpis-metrics/mysql-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/mysql-metrics' %>
 
 ### <a id="disk-metrics"></a>Disk Metrics
 
 The disk usage metrics that all MySQL for PCF services emit:
 
-<%= partial '../../p-mysql/partials/mysql/monitoring/kpis-metrics/disk-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/disk-metrics' %>
 
 ### <a id="l-f-metrics"></a>Leader-Follower Metrics
 
 The metrics that leader-follower VMs emit:
 
-<%= partial '../../p-mysql/partials/mysql/monitoring/kpis-metrics/l-f-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/l-f-metrics' %>
 
 ### <a id="ha-metrics"></a>Highly Available Cluster Metrics
 
 The metrics that HA clusters emit:
 
-<%= partial '../../p-mysql/partials/mysql/monitoring/kpis-metrics/ha-metrics' %>
+<%= partial '/mysql/monitoring/kpis-metrics/ha-metrics' %>

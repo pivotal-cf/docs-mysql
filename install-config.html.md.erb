@@ -145,7 +145,7 @@ Follow the steps below to choose an availability zone (AZ) to run the service br
 
 ###<a id="active"></a> Configure Service Plans
 
-<%= partial vars.path_to_partials + "/mysql/galera_beta" %>
+<%= partial "/mysql/galera_beta" %>
 
 MySQL for PCF enables you to configure as many as nine service plans.
 Each service plan has a corresponding section in the tile configuration, such as **Plan 1**, **Plan 2**, and so on.
@@ -490,7 +490,7 @@ To do so, do the following steps:
     [...]
     </pre>
 
-<%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
+<%= partial "/mysql/rebind-warning" %>
 
 ###<a id="monitoring"></a> Configure Monitoring
 

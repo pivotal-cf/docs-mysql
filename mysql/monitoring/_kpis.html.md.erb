@@ -1,0 +1,29 @@
+<% kpis.each do |kpi| %>
+
+### <a id="<%= kpi[:id] %>"></a> <%= kpi[:header] %>
+
+<table class="nice">
+  <tr>
+  <th colspan="2" style="text-align: center;"> <br>
+    <%= vars.mysql_metrics_origin_v2 %><%= kpi[:metric] %>
+  <br><br></th>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td><%= kpi[:description] %></td>
+  </tr>
+  <tr>
+    <th>Recommended measurement</th>
+    <td><%= kpi[:measurement] %></td>
+  </tr>
+  <tr>
+    <th>Recommended alert thresholds</th>
+    <td><%= kpi[:alert] %></td>
+  </tr>
+  <tr>
+    <th>Recommended response</th>
+    <td><%= kpi[:response] %></td>
+  </tr>
+</table>
+
+<% end %>

@@ -8,7 +8,7 @@ Owner: MySQL
 Pivotal recommends that you upgrade to the latest version of your current minor line, then upgrade to the latest available version of the new minor line. For example, if you use an older v2.5
 .x version, upgrade to the latest v2.5.x version before upgrading to the latest v2.6.x version.
 
-<%= partial vars.path_to_partials + "/upgrade-planner" %>
+<%= partial "/upgrade-planner" %>
 
 ## <a id="2-6-8"></a> v2.6.8
 
@@ -36,9 +36,9 @@ Now, <%= vars.product_short %> uploads both the leader and follower backup artif
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -95,11 +95,11 @@ between a highly available (HA) cluster plan and a plan of another topology.
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 
 + For <%= vars.ops_manager %> v2.6 and earlier, automated backups using SCP silently fail.
@@ -150,12 +150,12 @@ This release has the following fix:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -215,13 +215,13 @@ This release has the following fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -273,15 +273,15 @@ For more information, see [Share Service Instances](./use.html#share).
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -334,16 +334,16 @@ Previously, a regression caused the leader or follower node to take a backup of 
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/instance-sharing" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/instance-sharing" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 
 ### Compatibility
@@ -395,16 +395,16 @@ This release has the following fix:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/instance-sharing" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/instance-sharing" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -472,16 +472,16 @@ This release has the following fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/instance-sharing" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/instance-sharing" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:

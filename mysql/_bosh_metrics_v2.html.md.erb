@@ -1,0 +1,93 @@
+#### <a id="persistent-disk"></a> Persistent Disk
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> persistent.disk.percent<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>Persistent disk being consumed by the MySQL service instance.<br><br>
+      <strong>Use</strong>: If the persistent disk fills up, MySQL will be unable to process queries and recovery is difficult.
+      <br><br>
+      <strong>Origin</strong>: JMX Bridge or BOSH HM<br>
+      <strong>Type</strong>: percent<br>
+      <strong>Frequency</strong>: 60 s (default)
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 10 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: &gt; 75 <br>
+      <strong>Red critical</strong>: &gt; 90</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>Update the service instance to use a plan with a larger persistent disk. This process may take some time,
+        as the data is copied from the original persistent disk to a new one.
+      </td>
+   </tr>
+</table>
+
+#### <a id="ram"></a> RAM
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> system.mem.percent <br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>RAM being consumed by the MySQL service instance.<br><br>
+
+      <strong>Use</strong>: MySQL increases its memory usage as the data set increases.
+         This is normal, as much of that RAM is used to buffer IO.
+         As long as there is enough remaining RAM for other processes on the instance, the MySQL server should be OK.
+      <br><br>
+      <strong>Origin</strong>: JMX Bridge or BOSH HM<br>
+      <strong>Type</strong>: percentage<br>
+      <strong>Frequency</strong>: 60 s (default)
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 10 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: &gt; 95 <br>
+      <strong>Red critical</strong>: &gt; 99</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>Update the service instance to a plan with more RAM.
+      </td>
+   </tr>
+</table>
+
+#### <a id="cpu"></a> CPU
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> system.cpu.percent<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>CPU time being consumed by the MySQL service.<br><br>
+
+      <strong>Use</strong>: A node that experiences context switching or high CPU usage will become unresponsive.
+      This also affects the ability of the node to report metrics.
+      <br><br>
+      <strong>Origin</strong>: JMX Bridge or BOSH HM<br>
+      <strong>Type</strong>: percent<br>
+      <strong>Frequency</strong>: 60 s (default)
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 10 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: &gt; 80 <br>
+      <strong>Red critical</strong>: &gt; 90</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td> Determine what is using so much CPU. If it is from normal processes, update the service instance to use
+      a plan with larger CPU capacity.
+      </td>
+   </tr>
+</table>
