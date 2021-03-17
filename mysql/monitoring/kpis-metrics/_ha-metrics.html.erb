@@ -1,0 +1,97 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/metrics', locals: {
+    metrics: [
+
+      {
+        source: 'galera/wsrep&#95;cluster&#95;size',
+        description: 'The current number of nodes in the HA cluster.',
+        unit: 'count',
+        tag: 'size'
+      },
+
+      {
+        source: 'galera/wsrep\_local\_recv\_queue',
+        description: 'The current length of the local receive queue, in messages.',
+        unit: 'count',
+        tag: 'queue'
+      },
+
+      {
+        source: 'galera/wsrep\_local\_send\_queue',
+        description: 'The current length of the local send queue, in messages.',
+        unit: 'count',
+        tag: 'send-queue'
+      },
+
+      {
+        source: 'galera/wsrep\_local\_index',
+        description: 'This node index in the cluster (base 0).',
+        unit: 'count',
+        tag: 'local-index'
+      },
+
+      {
+        source: 'galera/wsrep\_local\_state',
+        description: <<~DESC,
+            The local state of the node. Possible states include:
+            <ul>
+            <li>1 = <code>JOINING</code></li>
+            <li>2 = <code>DONOR/DESYNCED</code></li>
+            <li>3 = <code>JOINED</code></li>
+            <li>4 = <code>SYNCED</code></li>
+            </ul>
+        DESC
+        unit: 'integer',
+        tag: 'local-state'
+      },
+
+      {
+        source: 'galera/wsrep\_ready',
+        description: 'Shows whether the node can accept queries.',
+        unit: 'boolean',
+        tag: 'ready'
+      },
+
+      {
+        source: 'galera/wsrep&#95;cluster&#95;status',
+        description: <<~DESC,
+            Shows the primary status of the cluster component that the node is in. Values are:
+             <ul>
+               <li> <code>Primary</code>: Node has a quorum.</li>
+               <li> <code>Non-primary</code>:  Node has lost a quorum. </li>
+               <li> <code>Disconnected</code>: Node is unable to connect to other nodes.</li>
+              </ul>
+        DESC
+        unit: 'Status code',
+        tag: 'status'
+      },
+
+      {
+        source: 'galera/wsrep\_flow\_control\_paused',
+        description: <<~DESC,
+            Proportion of time, as a unit interval (0 to 1), that replication was paused due to flow control since the server started or last <code>FLUSH STATUS</code>. This metric is a measure of how much replication lag is slowing down the cluster.
+        DESC
+        unit: 'float',
+        tag: 'flow-control'
+      },
+
+      {
+        source: 'galera/wsrep\_flow\_control\_sent',
+        description: <<~DESC,
+            Number of <code>FC_PAUSE</code> or flow control pause events sent by this node. Unlike many status variables, the counter for this metric does not reset every time you run the query.
+        DESC
+        unit: 'count',
+        tga: 'control-sent'
+      },
+
+      {
+        source: 'galera/wsrep\_flow\_control\_recv',
+        description: <<~DESC,
+            Number of <code>FC_PAUSE</code> or flow control pause events received by this node. Unlike many status variables, the counter for this metric does not reset every time you run the query.
+        DESC
+        unit: 'count',
+        tag: 'control-recv'
+      }
+
+  ]
+
+} %>

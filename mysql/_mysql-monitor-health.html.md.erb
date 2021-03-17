@@ -1,0 +1,168 @@
+## <a id="monitor"></a> Monitor Node Health
+
+You can monitor the health status of your nodes by doing one of the following:
+
++ [Monitor Node Health Using the Dashboard](#dashboard)
++ [Monitor Node Health Using the API](#proxy-api)
+
+### <a id="prereq"></a> Prerequisite
+
+To connect to Switchboard, you must obtain credentials.
+
+To obtain credentials for accessing the Switchboard dashboard and API, do the following:
+
+1. Run the following command:
+
+    ```
+    cf service YOUR-HA
+    ```
+
+    Where `YOUR-HA` is the name of your HA cluster.
+
+    <pre class="terminal"> $ cf service myHA
+    Showing info of service myHA in org acceptance / space example as admin...
+
+    name:         myHA
+    service:      p.mysql
+    tags:
+    plan:         db-ha-small
+    description:  Dedicated instances of MySQL
+    documentation:
+    dashboard:    proxy.123abc45-67d8-912e-34f5-g34612c10dba.org.dedicated-mysql.cf-app.com
+    (username: 'abcdefghijklmno', password: '012345678912345')
+
+    Showing status of last operation from service myHA...
+
+    status:    update succeeded
+    message:   Instance update completed
+    started:   2018-11-20T01:25:55Z
+    updated:   2018-11-20T01:30:33Z
+    </pre>
+
+1. Record the dashboard hostname, username, and password.
+
+### <a id="dashboard"></a> Monitor Node Health Using the Dashboard
+
+To monitor node health using the Switchboard dashboard, do the following:
+
+1. To view a list of proxies in your browser, navigate to the hostname that you recorded in
+[Prerequisite](#prereq) above. For example, `proxy.123abc45-67d8-912e-34f5-g34612c10dba.org.dedicated-mysql.cf-app.com`
+
+2. When prompted, enter the username and password that you recorded in
+[Prerequisite](#prereq) above.
+
+2. Click the link for the proxy that you want to use to monitor node health.
+
+2. If you are prompted, enter the username and password that you recorded in
+[Prerequisite](#prereq) above.
+
+    <%= image_tag "switchboard-all-healthy.png",
+    :alt => "Screenshot of the Switchboard dashboard.
+    At the top, there is a banner with the message 'all nodes are healthy'.
+    Below this is a table with the headings nodes, status, current sessions, and IP address.
+    For each node in the table, the status column is marked healthy." %>
+
+### <a id="proxy-api"></a> Monitor Node Health Using the API
+
+You can also use the Switchboard API to obtain the information that is shown on the Switchboard dashboard.
+
+For example, you might want to use the API to write your own app to monitor the cluster.
+
+To monitor node health using the Switchboard API, do the following:
+
+1. To monitor node health, run the following command:
+
+    ```
+    curl https://USERNAME:PASSWORD@N-HOSTNAME/v0/backends
+    ```
+
+    Where:
+    + `USERNAME` is the `username` you recorded in [Prerequisite](#prereq) above.
+    + `PASSWORD` is the `password` you recorded in [Prerequisite](#prereq) above.
+    + `N` is either 0, 1, or 2 depending on the proxy you want to connect to.
+    + `HOSTNAME` is the `hostname` you recorded in [Prerequisite](#prereq) above.
+
+    The above command outputs a JSON object similar to the following:
+
+    <pre class="terminal">
+    $ curl https://abcdefghijklmno:012345678912345@0-proxy.123abc45-67d8-912e-34f5-g34612c10dba.org.dedicated-mysql.cf-app.com/v0/backends
+    [
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-0",
+        "currentSessionCount": 0,
+        "active": true,
+        "trafficEnabled": true
+      },
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-1",
+        "currentSessionCount": 0,
+        "active": false,
+        "trafficEnabled": true
+      },
+      {
+        "host": "a-b1234c5d6.e-f891.bosh",
+        "port": 6033,
+        "healthy": true,
+        "name": "backend-2",
+        "currentSessionCount": 0,
+        "active": false,
+        "trafficEnabled": true
+      }
+    ]
+    </pre>
+
+## <a id="node-health"></a> Node Health Status
+
+When determining where to route traffic, the proxy queries an HTTP healthcheck
+process running on the node. This healthcheck can return as either
+healthy or unhealthy, or the node can be unresponsive.
+
+### <a id="healthy"></a> Healthy
+
+If the healthcheck process returns HTTP status code `200`, the proxy includes
+the node in its pool of healthy nodes.
+
+When a new or resurrected nodes rejoin the cluster, the proxy continues to
+route all connections to the currently active node. In the case of failover,
+the proxy considers all healthy nodes as candidates for new connections.
+
+<%= image_tag "images/switchboard-all-healthy.png",
+:alt => "Screenshot of the Switchboard dashboard.
+At the top, there is a banner with the message 'all nodes are healthy'.
+Below this is a table with the headings nodes, status, current sessions, and IP address.
+For each node in the table, the status column is marked healthy."%>
+
+### <a id="unhealthy"></a> Unhealthy
+
+If the healthcheck returns HTTP status code `503`, the proxy considers the node
+unhealthy.
+
+<!-- We will eventually move the following link to a troubleshooting topic in 2.5 -->
+
+This happens when a node becomes non-primary. For more information, see
+[Cluster Scaling Behavior](https://docs.pivotal.io/p-mysql/1-10/architecture.html#scale-behavior).
+
+The proxy severs existing connections to newly unhealthy node. The proxy routes
+new connections to a healthy node, assuming such a node exists. Clients are
+expected to handle reconnecting on connection failure should the entire cluster
+become inaccessible.
+
+<%= image_tag "images/switchboard-unhealthy.png",
+:alt => "Screenshot of the Switchboard dashboard.
+At the top, there is a banner with the message '2 out of 3 nodes are unhealthy'.
+Below this is a table with the headings nodes, status, current sessions, and IP address.
+For first node in the table, the status column is marked healthy.
+For the following two nodes, the status column is marked unhealthy." %>
+
+### <a id="unresponsive"></a> Unresponsive
+
+If node health cannot be determined due to an unreachable or unresponsive
+healthcheck endpoint, the proxy considers the node unhealthy. This may happen
+if there is a network partition or if the VM running the node and
+healthcheck died.

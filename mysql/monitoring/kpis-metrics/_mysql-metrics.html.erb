@@ -1,0 +1,360 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/metrics', locals: {
+    metrics: [
+      {
+        source: 'available',
+        description: 'Indicates if the local database server is available and responding.',
+        unit: 'boolean',
+        tag: 'available-metrics'
+      },
+
+      {
+        source: 'variables/max\_connections',
+        description: 'The maximum permitted number of simultaneous client connections.',
+        unit: 'count',
+        tag: 'max-connections'
+      },
+
+      {
+        source: 'variables/open\_files\_limit',
+        description: 'The number of files that the operating system permits mysqld to open.',
+        unit: 'files',
+        tag: 'open-files-limit'
+      },
+
+      {
+        source: 'variables/read\_only',
+        description: 'Whether the server is in read-only mode',
+        unit: 'boolean',
+        tag: 'read-only'
+      },
+
+      {
+        source: 'performance/questions',
+        description: <<~DESC,
+          The number of statements executed by the server since the server started or the last <code>FLUSH STATUS</code>. This includes only statements sent to the server by clients and not statements executed within stored programs, unlike the <code>queries</code> variable.
+        DESC
+
+        unit: 'count',
+        tag: 'questions-metrics'
+      },
+
+      {
+        source: 'performance/queries',
+        description: <<~DESC,
+          The number of statements executed by the server, excluding <code>COM&#95;PING</code> and <code>COM&#95;STATISTICS</code>. Differs from <code>questions</code> in that it also counts statements executed within stored programs. Not affected by <code>FLUSH STATUS</code>.
+        DESC
+
+        unit: 'count',
+        tag: 'queries'
+      },
+
+      {
+        source: 'performance/queries\_delta',
+        description: <<~DESC,
+          The change in the <code>/performance/queries</code> metric since the last time it was emitted.
+        DESC
+
+        unit: 'integer greater than or equal to zero',
+        tag: 'queries-delta'
+      },
+
+      {
+        source: 'innodb/buffer\_pool\_pages\_free',
+        description: 'The amount of free space, measured in pages, in the InnoDB Buffer Pool.',
+        unit: 'count',
+        tag: 'buffer-pool-free'
+      },
+
+      {
+        source: 'innodb/buffer\_pool\_pages\_total',
+        description: 'The total amount of free space, measured in pages, in the InnoDB Buffer Pool containing data.',
+        unit: 'count',
+        tag: 'buffer-pool-total'
+      },
+
+      {
+        source: 'innodb/buffer\_pool\_pages\_data',
+        description: 'The number of pages in the InnoDB Buffer Pool containing data. The number includes both dirty and clean pages.',
+        unit: 'count',
+        tag: 'buffer-pool-data'
+      },
+
+      {
+        source: 'innodb/row\_lock\_current\_waits',
+        description: 'The number of row locks currently being waited for by operations on InnoDB tables.',
+        unit: 'count',
+        tag: 'row-current-wait'
+      },
+
+      {
+        source: 'innodb/data\_read',
+        description: 'The amount of data read since the server started.',
+        unit: 'bytes',
+        tag: 'data-read'
+      },
+
+      {
+        source: 'innodb/data\_written',
+        description: 'The amount of data written since the server started.',
+        unit: 'bytes',
+        tag: 'data-written'
+      },
+
+      {
+        source: 'innodb/mutex\_os\_waits',
+        description: 'The number of mutex OS waits.',
+        unit: 'events/second',
+        tag: 'os-waits'
+      },
+
+      {
+        source: 'innodb/mutex\_spin\_rounds',
+        description: 'The number of mutex spin rounds.',
+        unit: 'events/second',
+        tag: 'spin-rounds'
+      },
+
+      {
+        source: 'innodb/mutex\_spin\_waits',
+        description: 'The number of mutex spin waits.',
+        unit: 'events/second',
+        tag: 'spin-waits'
+      },
+
+      {
+        source: 'innodb/os\_log\_fsyncs',
+        description: 'The number of fsync() writes done to the InnoDB redo log files.',
+        unit: 'count',
+        tag: 'log-fsyncs'
+      },
+
+      {
+        source: 'innodb/row\_lock\_time',
+        description: 'Total time spent in acquiring row locks.',
+        unit: 'milliseconds',
+        tag: 'row-time'
+      },
+
+      {
+        source: 'innodb/row\_lock\_waits',
+        description: 'The number of times a row lock had to be waited for since the server started.',
+        unit: 'count',
+        tag: 'row-wait'
+      },
+
+      {
+        source: 'net/connections',
+        description: 'The number of connection attempts to the server, both successful and unsuccessful, to the MySQL server.',
+        unit: 'count',
+        tag: 'connections-metrics'
+      },
+
+      {
+        source: 'net/max\_used\_connections',
+        description: 'The maximum number of connections that have been in use simultaneously since the server started.',
+        unit: 'count',
+        tag: 'used-connections'
+      },
+
+      {
+        source: 'performance/com\_delete',
+        description: <<~DESC,
+          The number of delete commands since the server started or the last <code>FLUSH STATUS</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-delete'
+      },
+
+      {
+        source: 'performance/com\_delete\_multi',
+        description: <<~DESC,
+          The number of delete-multi commands since the server started or the last <code>FLUSH STATUS</code>. Applies to DELETE statements that use multiple-table syntax.
+        DESC
+        unit: 'count',
+        tag: 'com-delete-multi'
+      },
+
+      {
+        source: 'performance/com\_insert',
+        description: <<~DESC,
+          The number of insert commands since the server started or the last <code>FLUSH STATUS</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-insert'
+      },
+
+      {
+        source: 'performance/com\_insert\_select',
+        description: <<~DESC,
+          The number of insert-select commands since the server started or the last <code>FLUSH STATUS</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-insert-select'
+      },
+
+      {
+        source: 'performance/com\_replace\_select',
+        description: <<~DESC,
+          The number of replace-select commands since the server started or the last <code>FLUSH STATUS</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-replace'
+      },
+
+      {
+        source: 'performance/com\_select',
+        description: <<~DESC,
+          The number of select commands since the server started or the last <code>FLUSH STATUS</code>. If a query result is returned from query cache, the server increments the <code>qcache&#95;hits</code> status variable, not <code>com&#95;select</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-select'
+      },
+
+      {
+        source: 'performance/com\_update',
+        description: <<~DESC,
+          The number of update commands since the server started or the last <code>FLUSH STATUS</code>.
+        DESC
+        unit: 'count',
+        tag: 'com-update'
+      },
+
+      {
+        source: 'performance/com\_update\_multi',
+        description: <<~DESC,
+          The number of update-multi commands since the server started or the last <code>FLUSH STATUS</code>. Applies to UPDATE statements that use multiple-table syntax.
+        DESC
+        unit: 'count',
+        tag: 'com-update-multi'
+      },
+
+      {
+        source: 'performance/created\_tmp\_disk\_tables',
+        description:'The number of internal on-disk temporary tables created by the server while executing statements.',
+        unit: 'count',
+        tag: 'tmp-tables'
+      },
+
+      {
+        source: 'performance/created\_tmp\_files',
+        description:'The number of temporary files created by mysqld.',
+        unit: 'count',
+        tag: 'tmp-files'
+      },
+
+      {
+        source: 'performance/created\_tmp\_tables',
+        description:'The number of internal temporary tables created by the server while executing statements.',
+        unit: 'count',
+        tag: 'created-tables'
+      },
+
+      {
+        source: 'performance/cpu\_utilization\_percent',
+        description:'The percent of the CPU in use by all processes on the MySQL node.',
+        unit: 'percent',
+        tag: 'cpu-util-per'
+      },
+
+      {
+        source: 'performance/open\_files',
+        description:'The number of regular files currently open, which were opened by the server.',
+        unit: 'count',
+        tag: 'open-files'
+      },
+
+      {
+        source: 'performance/open\_tables',
+        description:'The number of tables that are currently open.',
+        unit: 'count',
+        tag: 'open-tables'
+      },
+
+      {
+        source: 'performance/opened\_tables',
+        description: 'The number of tables that have been opened.',
+        unit: 'count',
+        tag: 'opened-tables'
+      },
+
+      {
+        source: 'performance/open\_table\_definitions',
+        description: <<~DESC,
+          The number of currently cached table definitions or <code>.frm</code> files.
+        DESC
+        unit: 'count',
+        tag: 'table-def'
+      },
+
+      {
+        source: 'performance/opened\_table\_definitions',
+        description: <<~DESC,
+          The number of <code>.frm</code> files that have been cached.
+        DESC
+        unit: 'count',
+        tag: 'opened-def'
+      },
+
+      {
+        source: 'performance/qcache\_hits',
+        description: 'The number of query cache hits. The query cache and qcache_hits metric is deprecated as of MySQL v5.7.20.',
+        unit: 'count',
+        tag: 'qcache-hits'
+      },
+
+      {
+        source: 'performance/slow\_queries',
+        description: <<~DESC,
+          The number of queries that have taken more than <code>long&#95;query&#95;time</code> seconds.
+        DESC
+        unit: 'count',
+        tag: 'slow-queries'
+      },
+
+      {
+        source: 'performance/table\_locks\_waited',
+        description: 'The total number of times that a request for a table lock could not be granted immediately and a wait was needed.',
+        unit: 'count',
+        tag: 'locks-waited'
+      },
+
+      {
+        source: 'performance/threads\_connected',
+        description: 'The number of currently open connections.',
+        unit: 'count',
+        tag: 'threads-connected'
+      },
+
+      {
+        source: 'performance/threads\_running',
+        description: 'The number of threads that are not sleeping.',
+        unit: 'count',
+        tag: 'threads-run'
+      },
+
+      {
+        source: 'rpl\_semi\_sync\_master\_tx\_avg\_wait\_time',
+        description: 'The average time the leader has waited for the follower to accept transactions.',
+        unit: 'microseconds',
+        tag: 'rpl-wait-time'
+      },
+
+      {
+        source: 'rpl\_semi\_sync\_master\_no\_tx',
+        description: 'The number of transactions committed without follower acknowledgement.',
+        unit: 'count',
+        tag: 'rpl-no-tax'
+      },
+
+      {
+        source: 'rpl\_semi\_sync\_master\_wait\_sessions',
+        description: <<~DESC,
+          The current number of connections waiting for a sync commit. For more information about sync replication, see <a href="./change-default.html#synchronous-replication">About Synchronous Replication</a>.
+        DESC
+        unit: 'count',
+        tag: 'rpl-wait-sessions'
+      },
+
+  ]
+
+} %>

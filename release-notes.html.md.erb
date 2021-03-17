@@ -3,14 +3,14 @@ title: Release Notes
 Owner: MySQL
 ---
 
-<%= partial '../../p-mysql/partials/branding-change'%>
-<%= partial '../../p-mysql/partials/pcf-name-change'%>
+<%= partial '/branding-change'%>
+<%= partial '/pcf-name-change'%>
 
 <strong><%= modified_date %></strong>
 
 Pivotal recommends that you upgrade to the latest version of your current minor line,
 then upgrade to the latest available version of the new minor line.
-<%= partial vars.path_to_partials + '/upgrade-planner' %>
+<%= partial '/upgrade-planner' %>
 
 ## <a id="2-7-10"></a> v2.7.10
 
@@ -29,11 +29,11 @@ New features and changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -71,11 +71,11 @@ New features and changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -140,12 +140,12 @@ Now, <%= vars.product_short %> uploads both the leader and follower backup artif
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 
 ### Compatibility
@@ -184,16 +184,16 @@ This release has the following fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -251,17 +251,17 @@ between a highly available (HA) cluster plan and a plan of another topology.
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/broken-s3-endpoint" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/broken-s3-endpoint" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 
 ### Compatibility
@@ -308,18 +308,18 @@ This release has the following fix:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/broken-s3-endpoint" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/broken-s3-endpoint" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -352,7 +352,7 @@ The following components are compatible with this release:
 New features and changes in this release:
 
 * <%= vars.single_leader_plan %> plans support failover to a follower service instance in a different data center.
-  <%= partial '../../p-mysql/partials/mysql/multi_site_beta' %>
+  <%= partial '/mysql/multi_site_beta' %>
 * Operators can monitor MySQL metrics on the Healthwatch Indicator Protocol dashboard.
 For more information, see [Use the Indicator Protocol Dashboard](./monitor.html#indicator).
 * Highly available (HA) cluster plans only retain three days of binary logs.
@@ -386,18 +386,18 @@ This release has the following fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -434,7 +434,7 @@ following features:
     + Replication across two routable <%= vars.app_runtime_full %> foundations secured over mTLS.
     The primary node in a foundation only trusts the secondary node in another foundation.
     + The ability to bind and push apps to a primary node in a foundation and a secondary node in another foundation.
-    <%= partial '../../p-mysql/partials/mysql/multi_site_beta' %>
+    <%= partial '/mysql/multi_site_beta' %>
 * Highly available (HA) cluster plans are now in general availability (GA).
 * Updates Percona Server to v5.7.26-29.
 * Updates pxc-release to v0.20.0.
@@ -460,20 +460,20 @@ For more information, see [Share Service Instances](./use.html#share).
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/metrics-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/metrics-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -512,7 +512,7 @@ following features:
     + Replication across two routable <%= vars.app_runtime_full %> foundations secured over mTLS.
     The primary node in a foundation only trusts the secondary node in another foundation.
     + The ability to bind and push apps to a primary node in a foundation and a secondary node in another foundation.
-    <%= partial '../../p-mysql/partials/mysql/multi_site_beta' %>
+    <%= partial '/mysql/multi_site_beta' %>
 * Highly available (HA) cluster plans are now in general availability (GA).
 * Updates Percona Server to v5.7.26-29.
 * Updates pxc-release to v0.20.0.
@@ -537,20 +537,20 @@ For more information, see [Share Service Instances](./use.html#share).
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/metrics-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/metrics-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 * Smoke tests fail when TLS is not configured.
 
 ### Compatibility
@@ -602,21 +602,21 @@ This release includes the following security fix:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/multi-site-incompatibility" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-ki" %>
-<%= partial vars.path_to_partials + "/mysql/lf-backups-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups" %>
-<%= partial vars.path_to_partials + "/mysql/instance-sharing" %>
-<%= partial vars.path_to_partials + "/mysql/broker-ki" %>
-<%= partial vars.path_to_partials + "/mysql/migrate-ha" %>
-<%= partial vars.path_to_partials + "/mysql/smoke-test-error-ki" %>
-<%= partial vars.path_to_partials + "/mysql/metrics-ki" %>
-<%= partial vars.path_to_partials + "/mysql/audit-logs-ki" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
-<%= partial vars.path_to_partials + "/mysql/broker-requests-ki" %>
-<%= partial vars.path_to_partials + "/mysql/enable-lowercase" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/multi-site-incompatibility" %>
+<%= partial "/mysql/smoke-test-ki" %>
+<%= partial "/mysql/lf-backups-ki" %>
+<%= partial "/mysql/scp-backups" %>
+<%= partial "/mysql/instance-sharing" %>
+<%= partial "/mysql/broker-ki" %>
+<%= partial "/mysql/migrate-ha" %>
+<%= partial "/mysql/smoke-test-error-ki" %>
+<%= partial "/mysql/metrics-ki" %>
+<%= partial "/mysql/audit-logs-ki" %>
+<%= partial "/mysql/connector-ki" %>
+<%= partial "/mysql/broker-requests-ki" %>
+<%= partial "/mysql/enable-lowercase" %>
+<%= partial "/mysql/disable-plan-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:

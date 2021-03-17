@@ -1,0 +1,75 @@
+#### <a id="server-heartbeat"></a> Server Availability
+
+|| **<%= vars.mysql_metrics_origin %>/available** |
+| --- | --- |
+| **Description** | The MySQL Server is currently responding to requests, which indicates that the server is running.<br><br> **Use:** This metric is especially useful in single-node mode, where cluster metrics are not relevant. If the server does not emit heartbeats, it is offline.<br><br>**Origin:** Doppler/Firehose<br> **Type:** boolean<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | Average over the last 5 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** N/A<br> **Red critical:** < 1  |
+| **Recommended response** | Run `mysql-diag` and check the MySQL Server logs for errors.  |
+
+#### <a id="wsrep-ready"></a> Galera WSREP Ready
+
+|| **<%= vars.mysql_metrics_origin %>/galera/wsrep_ready** |
+| --- | --- |
+| **Description** | Shows whether each cluster node can accept queries. Returns only 0 or 1. When this metric is 0, almost all queries to that node fail with the error:<br> ```ERROR 1047 (08501) Unknown Command```<br><br> **Use:** Discover when nodes of a cluster have been unable to communicate and, thus, unable to accept transactions.<br><br>**Origin:** Doppler/Firehose<br> **Type:** boolean<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | Average of values of each cluster node, over the last 5 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** < 1.0<br> **Red critical:** 0 (cluster is down)  |
+| **Recommended response** | - Run `mysql-diag` and check the MySQL Server logs for errors.<br> - Make sure there has been no infrastructure event that affects intra-cluster communication.<br>- Ensure that `wsrep_ready` has not been set to off by using the query:<br>```SHOW STATUS LIKE 'wsrep_ready';``` |
+
+
+#### <a id="wsrep-cluster-size"></a> Galera WSREP Cluster Size
+
+|| **<%= vars.mysql_metrics_origin %>/galera/wsrep\_cluster\_size** |
+| --- | --- |
+| **Description** | The number of cluster nodes with which each node is communicating normally.<br><br> **Use:** When running in a multi-node configuration, this metric indicates if each member of the cluster is communicating normally with all other nodes.<br><br>**Origin:** Doppler/Firehose<br> **Type:** count<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | (Average of the values of each node / cluster size), over the last 5 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** < 3.0 (availability compromised)<br> **Red critical:** < 1.0 (cluster unavailable) |
+| **Recommended response** | Run `mysql-diag` and check the MySQL Server logs for errors.  |
+
+
+#### <a id="wsrep-cluster-status"></a> Galera WSREP Cluster Status
+
+|| **<%= vars.mysql_metrics_origin %>/galera/wsrep\_cluster\_status** |
+| --- | --- |
+| **Description** | Shows the primary status of the cluster component that the node is in.<br>Values are:<br> - Primary = 1<br> - Non-primary = 0<br> - Disconnected = -1<br> See [Galera Cluster Status Variables](https://mariadb.com/kb/en/mariadb/galera-cluster-status-variables/) in the MariaDB documentation. <br><br> **Use:** Any value other than "Primary" indicates that the node is part of a nonoperational component. This occurs in cases of multiple membership changes that result in a loss of quorum.<br><br>**Origin:** Doppler/Firehose<br> **Type:** integer (see above)<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | Sum of each of the nodes, over the last 5 minutes |
+| **Recommended alert thresholds** | **Yellow warning:** < 3 <br> **Red critical:** < 1  |
+| **Recommended response** | - Check node status to ensure that they are all in working order and able to receive write-sets.<br> - Run `mysql-diag` and check the MySQL Server logs for errors.  |
+
+
+#### <a id="disk-free"></a> Persistent and Ephemeral Disk Used
+
+|| **<%= vars.mysql_metrics_origin %>/system/persistent\_disk\_used\_percent**<br>**<%= vars.mysql_metrics_origin %>/system/ephemeral\_disk\_used\_percent** |
+| --- | --- |
+| **Description** | The percentage of disk used on the persistent and ephemeral file systems. <br><br> **Use:** MySQL cannot function correctly if there isn't sufficient free space on the file systems. Use these metrics to ensure that you have disks large enough for your user base.<br><br>**Origin:** Doppler/Firehose<br> **Type:** Percent<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | Max of persistent disk used of all of nodes<br>and<br>Maximum ephemeral disk used of all nodes |
+| **Recommended alert thresholds** | **Yellow warning:** > 80% <br> **Red critical:** > 90%  |
+| **Recommended response** | - Audit plan allocation by your users, recommend deletion of unused service instances.<br> - Redeploy with larger disks. |
+
+#### <a id="broker-plans-allocated"></a> Service Plans Allocated
+
+|| **<%= vars.mysql_metrics_origin %>/broker/disk\_allocated\_service\_plans** |
+| --- | --- |
+| **Description** |  The number of megabytes allocated by the broker for all service plans, current and allocated. <br><br> **Use:** The service broker will not allow new service instances to be created if there isn't sufficient unreserved space remaining on the persistent disk. <br><br>**Origin:** Doppler/Firehose<br> **Type:** Megabytes<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | disk allocated / persistent disk size  |
+| **Recommended alert thresholds** | **Yellow warning:** < 80% <br> **Red critical:** < 90%  |
+| **Recommended response** | - Audit plan allocation by your users, recommend deletion of unused service instances.<br> - Redeploy with larger persistent disks |
+
+#### <a id="connections"></a> Connections
+
+|| **<%= vars.mysql_metrics_origin %>/net/connections** |
+| --- | --- |
+| **Description** | Connections per second made to the server.<br><br> **Use:** If the number of connections drastically changes or if apps are unable to connect, there might be a network or app issue.<br><br> **Origin:** Doppler/Firehose<br> **Type:** count<br> **Frequency:** 30 s (default) |
+| **Recommended measurement** | The maximum number of connections of any node / `max connections`, over last 1 minute |
+| **Recommended alert thresholds** | **Yellow warning:** > 80%<br> **Red critical:** > 90% |
+| **Recommended response** | When connections per second approaches `max connections`, apps might experience times when they cannot connect to the database. The number of connections per second for the cluster varies based on application instances and app utilization. If this threshold is met or exceeded for an extended period of time, monitor app usage to ensure everything is behaving as expected. |
+
+
+#### <a id="questions"></a> Questions
+
+|| **<%= vars.mysql_metrics_origin %>/performance/questions** |
+| --- | --- |
+| **Description** | The number of statements executed by the server, excluding statements executed within stored programs.<br><br> **Use:** The cluster should always be processing some queries, if just as part of the internal automation. <br><br> **Origin:** Firehose<br> **Envelope Type:** Gauge<br> **Unit:** count<br>**Frequency:** 30 s (default) |
+| **Recommended measurement** | Change in number between the current and previous polling period |
+| **Recommended alert thresholds** | **Yellow warning:** 0 for 90 s <br>**Red critical:** 0 for 120 s|
+| **Recommended response** | If the rate is ever zero for an extended time, run `mysql-diag` and investigate the MySQL server logs to understand why query rate changed and determine appropriate action. |

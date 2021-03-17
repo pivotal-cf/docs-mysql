@@ -1,0 +1,111 @@
+This topic discusses how to use the `mysql-diag` tool in  <%= vars.product_full  %>.
+`mysql-diag` prints the state of your MySQL highly available (HA) cluster and
+suggests solutions if your node fails. VMware recommends running this tool against
+your HA cluster before all deployments.
+
+`mysql-diag` checks the following information about the status of your HA cluster:
+
+- Membership status of all nodes
+- Size as it appears to all nodes
+- If it needs to be bootstrapped
+- If replication is working
+- Used disk space and inodes per server
+
+
+## <a id='bosh-v2'></a>Run mysql-diag Using the BOSH Command Line Interface (CLI)
+
+To use the BOSH CLI to run `mysql-diag`, do the following:
+
+1. Obtain the information needed to use the BOSH CLI by doing the procedure in
+[Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+
+1. SSH into your <%= vars.ops_manager %> VM by doing the procedure in
+[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh)
+for your IaaS.
+
+1. Log in to your BOSH Director by doing the procedure in
+[Log in to the BOSH Director](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
+
+1. Identify the VM to log in to with SSH by running the following command:
+
+    ```
+    bosh -e MY-ENV -d MY-DEPLOYMENT vms
+    ```
+
+    Where:
+    + `MY-ENV` is the name of your environment.
+    + `MY-DEPLOYMENT` is the name of your deployment.
+
+1. Record the GUID associated with the `mysql-monitor` VM, also known as the jumpbox VM.
+
+1. SSH into your `mysql-monitor` VM by running the following command:
+
+    ```
+    bosh -e MY-ENV -d MY-DEP ssh mysql-monitor/GUID
+    ```
+
+    Where:
+    + `MY-ENV` is the name of your environment.
+    + `MY-DEPLOYMENT` is the name of your deployment.
+    + `GUID` is the GUID you recorded in the previous step.
+
+1. View the status of your HA cluster by running the following command:
+
+    ```
+    mysql-diag
+    ```
+
+
+## <a id="healthy"></a> Example Healthy Output ##
+
+The `mysql-diag` command returns the following message if your canary status is healthy:
+
+<pre class="terminal">Checking canary status...healthy</pre>
+
+Here is a sample `mysql-diag` output after the tool identified a healthy HA cluster:
+
+<%= image_tag('mysql-diag-healthy-screen-shot.png',
+:alt => "Screenshot of terminal output after running mysql-diag.
+The output contains the date on the first line.
+The following line checks the canary status, which is healthy.
+The following lines check the cluster status of the three service instances and stops when
+the three are marked with 'done'.
+The following lines contain a table with the headings Host, Name/UUID, WSREP Local State,
+WSREP Cluster Status, and WSREP Cluster Size.
+The table has three rows.
+In each row, the value for WSREP Local State is 'Synced'.
+In each row, the value for WSREP Cluster Status is 'Primary'.
+In each row, the value for WSREP Cluster Size is '3'.
+The following lines check the disk status of the six services instances and the final three are marked with 'done'.
+The final lines contain a table with the headings host, name/UUID, persistent disk used, and ephemeral disk used.") %>
+<a href="images/mysql-diag-healthy-screen-shot.png" target="_blank">View a larger version of this image.</a>
+
+
+## <a id="unhealthy"></a> Example Unhealthy Output ##
+
+The `mysql-diag` command returns the following message if your canary status is unhealthy:
+
+<pre class="terminal">Checking canary status...unhealthy</pre>
+
+In the event of a broken HA cluster, running `mysql-diag` outputs actionable steps meant
+to expedite the recovery of that HA cluster.
+Below is a sample `mysql-diag` output after the tool identified an unhealthy HA cluster:
+
+<%= image_tag('mysql-diag-unhealthy-screen-shot.png',
+:alt => "Screenshot of terminal output after running mysql-diag.
+The output contains the date on the first line.
+The following line checks the canary status, which is healthy.
+The following lines check the cluster status of three service instances and the final
+state of three is 'connection refused'.
+The following lines contain a table with the headings Host, Name/UUID, WSREP Local State,
+WSREP Cluster Status, and WSREP Cluster Size.
+The table has three rows.
+In each row, the value for WSREP Local State, WSREP Cluster Status, and WSREP
+Cluster Size are 'N/A - Error'.
+The following lines check the disk status of the three services instances. There are six lines.
+Each service instance is checked twice.
+The final three lines are marked with 'done'.
+The following lines contain a table with the headings host, name/UUID, persistent disk used, and ephemeral disk used.
+The output ends with messages marked as 'Critical' containing instructions for
+what you should and should not do to resolve the issues.") %>
+<a href="images/mysql-diag-unhealthy-screen-shot.png" target="_blank">View a larger version of this image.</a>
