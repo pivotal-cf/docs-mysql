@@ -12,13 +12,12 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 | master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
 | 2.9         | Docs for [v2.10.x](https://docs.pivotal.io/p-mysql/2-10) |
 | 2.9         | Docs for [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
-| 2.8.3-174881244 | This is a temporary feature branch to prep for v2.8.3. |
-| 2.8         | Docs for [v2.8.x](https://docs.pivotal.io/p-mysql/2-8) |
-| 2.7         | Docs for [v2.7.x](https://docs.pivotal.io/p-mysql/2-7) |
-| 2.6         | Docs for [v2.6.x](https://docs.pivotal.io/p-mysql/2-6) |
-| 2.5         | DEPRECATED. DO NOT USE. |
-| 2.4         | DEPRECATED. DO NOT USE. |
-| 2.3         | DEPRECATED. DO NOT USE. |
+| 2.8         | DEPRECATED. DO NOT USE. Docs for [v2.8.x](https://docs.pivotal.io/p-mysql/2-8) |
+| 2.7         | DEPRECATED. DO NOT USE. Docs for [v2.7.x](https://docs.pivotal.io/p-mysql/2-7) |
+| 2.6         | DEPRECATED. DO NOT USE. Docs for [v2.6.x](https://docs.pivotal.io/p-mysql/2-6) |
+| 2.5         | DEPRECATED. DO NOT USE. Docs for [v2.5.x](https://docs.pivotal.io/p-mysql/2-5)|
+| 2.4         | DEPRECATED. DO NOT USE. Docs for [v2.4.x](https://docs.pivotal.io/p-mysql/2-4)|
+| 2.3         | DEPRECATED. DO NOT USE. Docs for [v2.3.x](https://docs.pivotal.io/p-mysql/2-3)|
 | 2.2         | v2.2.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.2.pdf |
 | 2.1         | v2.1.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.1.pdf |
 | 2.0         | v2.0.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.0.pdf |
