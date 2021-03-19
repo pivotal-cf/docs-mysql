@@ -332,8 +332,6 @@ When you configure backups for Amazon S3 with Instance Profile, <%= vars.product
 
 The procedure in this section allows <%= vars.product_short %> to upload backups to Amazon S3 without Static Credentials (Access and Secret Access Key ID).
 
-<%# For information about Backing Up Amazon EC2 Resources, see the [AWS documentation](https://docs.aws.amazon.com/aws-backup/latest/devguide/working-with-other-services.html#working-with-ec2). %>
-
 **Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
 
 The process for configuring backups for an Amazon S3 with Instance Profile is:
@@ -407,6 +405,10 @@ To find the existing user/role and add a policy:
 The tabs below expand to show instructions for each type of AWS Config. <br><br>
 
     <style>
+    .btn.btn-default,
+    .tab .tablinks {
+    color: #2185c5;
+    }
     .tab {
         overflow: hidden;
         border: 1px solid #ccc;
@@ -474,8 +476,8 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
       width="400" src="./images/aws-config-aws-keys.png"/>
       <p>
         <ul>
-          <li>Find the existing IAM user/role configured with the static credentials.
-              This is not listed here in the tile UI.
+          <li>Find the existing IAM user associated with the static credentials being used here.
+              The name of the IAM user is not listed here in the tile UI.
               <br><br>
               To retrieve your AWS key information, use the AWS Identity and Access Management (IAM) credentials
               that you generated in <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a> in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
@@ -491,7 +493,7 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
         <ul>
           <li>Find the existing IAM user/role in the <strong>AWS IAM Instance Profile</strong> field.
               <br><br>
-              For more information about this user/role, see <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a> in the
+              For more information about this role, see <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a> in the
               <%= vars.ops_manager %> documentation.
       </p>
     </div>
