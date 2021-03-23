@@ -303,9 +303,21 @@ you must have an S3 bucket in which to store the backups.
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
-               Do not select this if you use Amazon S3.<br>
-               Select this if you use another S3-compatible endpoint such as Minio
-               that requires path-style URLs.
+              You should select this checkbox if you use:
+
+              <ul>
+                <li>
+                   Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
+                </li>
+                <li>
+                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                </li>
+              </ul>
+
+               For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
+               <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
+               and the subsequent
+               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.
             </td>
         </tr>
         <tr>
@@ -617,9 +629,21 @@ To set the VM extension name:
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
-               Do not select this if you use Amazon S3.<br>
-               Select this if you use another S3-compatible endpoint such as Minio
-               that requires path-style URLs.
+              You should select this checkbox if you use:
+
+              <ul>
+                <li>
+                   Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
+                </li>
+                <li>
+                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                </li>
+              </ul>
+
+               For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
+               <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
+               and the subsequent
+               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.
             </td>
         </tr>
         <tr>
