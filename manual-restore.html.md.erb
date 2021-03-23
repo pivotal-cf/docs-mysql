@@ -54,9 +54,13 @@ The instructions on this section decribe how to find these things
 and then download the backup artifact.
 
 1. Find the GUID of the service instance by searching the broker logs.
-   For example, try searching the broker log for entries about deleted deployments:
+   Try searching the broker log for entries about deleted deployments, such as:
 
-    <pre class="terminal">Description: delete deployment service_instance_<font color="red">6c1db434-29ef-47c4-9f22-59fe53676b07</font></pre>
+    <pre class="terminal">[on-demand-service-broker] 2020/08/21 23:48:04.821405 Request DELETE /v2/service_instances/6c1db434-29ef-47c4-9f22-59fe53676b07 Completed 202 in 545.989368ms | Start Time: 2020/08/21 23:48:04.275382</font></pre>
+    or
+    <pre class="terminal">[on-demand-service-broker] [8db9f496-e83f-4aa6-82f0-528ddbff4c0a] 2020/08/21 23:53:09.978376 BOSH task ID 348 status: done delete deployment for instance 6c1db434-29ef-47c4-9f22-59fe53676b07: Description: delete deployment service-instance_6c1db434-29ef-47c4-9f22-59fe53676b07 Result: /deployments/service-instance_6c1db434-29ef-47c4-9f22-59fe53676b07</font></pre>
+
+    In the example log entries above, the GUID of the service instance begins with `6c1db`.
 
     For information about broker logs,
     see [Access Broker and Instance Logs and VMs](troubleshoot.html#bosh-cf-access).
