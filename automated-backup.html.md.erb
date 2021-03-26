@@ -310,7 +310,7 @@ you must have an S3 bucket in which to store the backups.
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                   An S3-compatible endpoint such as Minio that requires path-style URLs.
                 </li>
               </ul>
 
@@ -340,37 +340,45 @@ you must have an S3 bucket in which to store the backups.
 
 
 ## <a id="instance-profile"></a> Back Up to Amazon S3 with Instance Profile
-When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %> allows the Identity and Access Management (IAM) user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
 
-The procedure in this section allows <%= vars.product_short %> to upload backups to Amazon S3 without Static Credentials (Access and Secret Access Key ID).
+When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %>
+allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
+new backups IAM role to a new EC2 instance.
+
+The procedure in this section allows <%= vars.product_short %> to upload backups to
+Amazon S3 without static credentials (Access and Secret Access Key ID).
 
 **Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
 
 The process for configuring backups for an Amazon S3 with Instance Profile is:
 
-1. [Create an IAM Role with a Custom Policy](#ip-iam)
-1. [Add Policy to Existing <%= vars.ops_manager %> User/Role](#ip-configure-ops)
-1. [Configure VM Extension](#ip-configure-vm)
- 1. [Create VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
- 1. [Apply VM extension to dedicated-mysql-broker job of <%= vars.product_short %>](#ip-vm-job)
- 1. [Set VM extension name in <%= vars.product_short %> tile](#ip-vm-tile)
-1. [Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances](#ip-apply-upgrade)
-1. [(Optional) Verify the IAM role is associated with the MySQL Service Instances](#ip-verify-instances)
+1. [Create an IAM Role with a Custom Policy](#ip-create-policy)
+1. [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy)
+1. [Configure a VM Extension](#ip-configure-vm)
+ 1. [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
+ 1. [Apply the VM Extension to the dedicated-mysql-broker Job](#ip-vm-job)
+ 1. [Set the VM Extension Name](#ip-vm-tile)
+1. [Apply Changes and Upgrade all Service Instances](#ip-apply-upgrade)
+1. [(Optional) Verify the IAM Role is Association with MySQL Service Instances](#ip-verify-instances)
 
 
 ### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
 
   <p class="note">
-    <strong>Note:</strong> Operators must run the <code>upgrade-all-service-instances</code> errand in this <strong>Apply Changes</strong>.
-    This allows the service instances to begin using the instance profile instead of static credentials for backup and restore.<br>
-    Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
+    <strong>Note:</strong> Operators must run the <code>upgrade-all-service-instances</code>
+    errand in this <strong>Apply Changes</strong>.
+    This allows the service instances to begin using the instance profile instead
+    of static credentials for backup and restore.<br>
+    Static credentials are not provided to existing service instances and backups
+    fail until the service instance is upgraded.
   </p>
 
-The first thing you must do is create a policy for your <%= vars.product_short %> user account.
+First, you must create a policy for your <%= vars.product_short %> user account.
 
-For more information about AWS identity and access management, see [What is IAM?](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html) in the AWS documentation.
-<br><br>
-For more information about users, groups, and roles in AWS, see [IAM Identities (users, groups, and roles)](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the AWS documentation.
+For more information about AWS identity and access management, see the
+[AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).<br>
+For more information about users, groups, and roles in AWS, see the
+[AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html).
 
 To create an IAM Role with a custom policy:
 
@@ -405,15 +413,17 @@ To create an IAM Role with a custom policy:
 1. Record the Amazon Resource Name (ARN) of this new IAM role.
 
 
-### <a id="ip-add-policy"></a> Add Policy to Existing <%= vars.ops_manager %> User/Role
-The next thing to do is to add a new policy to the existing <%= vars.ops_manager %> IAM user/role that is described in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
-This policy allows the IAM user/role used by BOSH to pass the new backups IAM role to a new EC2 instance.
+### <a id="ip-add-policy"></a> Add a Policy to the Existing <%= vars.ops_manager %> User or Role
 
-To find the existing user/role and add a policy:
+Next, add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
+is described in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
+This policy allows the IAM user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
+
+To find the existing user or role and add a policy:
 
 1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
 1. Click the **BOSH Director for AWS** tile.
-1. Select **AWS Config**.
+1. Select **AWS Config**.<br><br>
 The tabs below expand to show instructions for each type of AWS Config. <br><br>
 
     <style>
@@ -484,33 +494,36 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
     </div>
 
     <div id="tab1" class="tabcontent">
-      <img alt="AWS Management Console Config pane shows Amazon S3 (with Instance Profiles) selected."
+      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Keys radio button is selected."
       width="400" src="./images/aws-config-aws-keys.png"/>
       <p>
         <ul>
-          <li>Find the existing IAM user associated with the static credentials being used here.
+          <li>Find the existing IAM user associated with the static credentials used here.
               The name of the IAM user is not listed here in the tile UI.
               <br><br>
               To retrieve your AWS key information, use the AWS Identity and Access Management (IAM) credentials
-              that you generated in <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a> in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
+              that you generated in
+              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+              in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
           </li>
         </ul>
       </p>
     </div>
 
     <div id="tab2" class="tabcontent" style="display:block">
-      <img alt="AWS Management Console Config pane shows Amazon S3 (with Instance Profiles) selected."
+      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Instance Profiles radio button is selected."
       width="400" src="./images/aws-config-instance-profile.png"/>
       <p>
         <ul>
-          <li>Find the existing IAM user/role in the <strong>AWS IAM Instance Profile</strong> field.
+          <li>Find the existing IAM user or role in the <strong>AWS IAM Instance Profile</strong> field.
               <br><br>
-              For more information about this role, see <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a> in the
-              <%= vars.ops_manager %> documentation.
+              For more information about this role, see
+              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+              in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
       </p>
     </div>
 
-1. On the AWS Management Console, add a new policy to that IAM User/Role:
+1. On the AWS Management Console, add a new policy to that IAM User or Role:
 
     ```json
     {
@@ -530,15 +543,20 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
     Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous section.
 
 
-### <a id="ip-configure-vm"></a> Configure VM Extension
-#### <a id="ip-vm-ops"></a> Create VM Extension in <%= vars.ops_manager %>
+### <a id="ip-configure-vm"></a> Configure a VM Extension
+
+#### <a id="ip-vm-ops"></a> Create a VM Extension in <%= vars.ops_manager %>
+
 There are two methods that you can use to create a VM Extension in <%= vars.ops_manager %>:
 
 * **Using the <%= vars.ops_manager %> API directly.**
-For more information, see [Create or Update a VM Extension](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#create-vm-extension) in the <%= vars.ops_manager %> documentation.
+For more information, see
+[Create or Update a VM Extension](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#create-vm-extension)
+in the <%= vars.ops_manager %> documentation.
 
 * **Using the <%= vars.ops_manager %> CLI (om) to create the VM extension.**
-For information about `create-vm-extension`, see the [README](https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md) in GitHub.
+For information about `create-vm-extension`, see
+[om create-vm-extension](https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md) in GitHub.
 
 Example JSON to specify the instance profile name:
 
@@ -556,16 +574,25 @@ Where:
 * `INSTANCE-PROFILE-NAME` is the name of the instance profile created in the first step
 
 
-#### <a id="ip-vm-job"></a> Apply VM extension to `dedicated-mysql-broker` job of <%= vars.product_short %> tile
-There are two methods that you can use to apply the VM extension to the `dedicated-mysql-broker` job:
+#### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker Job
 
-* **Using the <%= vars.ops_manager %> API directly.** For more information, see [Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions) in the <%= vars.ops_manager %> documentation.
+There are two methods that you can use to apply the VM extension to the `dedicated-mysql-broker`
+job in the <%= vars.product_short %> tile:
 
-* **Using the om CLI to configure the tile.** Add the `additional_vm_extensions` key in the `resource-config` section of the product configuration and use the om CLI. For information about configuring using a YAML configuration file, see [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file) in GitHub.
+* **Using the <%= vars.ops_manager %> API directly.** For more information, see
+[Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions)
+in the <%= vars.ops_manager %> documentation.
+
+* **Using the om CLI to configure the tile.** Add the `additional_vm_extensions`
+key in the `resource-config` section of the product configuration and use the om CLI.
+For information about configuring using a YAML configuration file, see
+[om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file)
+in GitHub.
 
 
-#### <a id="ip-vm-tile"></a> Set VM extension name in <%= vars.product_short %> tile
-Now that the VM extension has been created and applied, you must set it in the <%= vars.product_short %> tile.
+#### <a id="ip-vm-tile"></a> Set the VM Extension Name
+
+Now that you have created and applied the VM extension, you must set it in the <%= vars.product_short %> tile.
 
 To set the VM extension name:
 
@@ -574,7 +601,7 @@ To set the VM extension name:
 1. Select **Backups**.
 1. Select **Amazon S3 (with Instance Profiles)**
 
-    <img alt="Configure blob store for MySQL backups pane shows Amazon S3 (with Instance Profiles) selected and the fields in the pane are described in the table below."
+    <img alt="Configure blobstore for MySQL backups pane shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are described in the table below."
     width="400" src="./images/S3-instance-profiles.png"/>
 
 1. Configure the fields as follows:
@@ -589,7 +616,8 @@ To set the VM extension name:
                 <strong>Instance Profile VM Extension Name</strong>
             </td>
             <td>
-                Enter the <code>VM-EXTENSION-NAME</code> that you created in <a href="#ip-vm-ops">Create VM Extension in <%= vars.ops_manager %></a> above.
+                Enter the <code>VM-EXTENSION-NAME</code> that you created in
+                <a href="#ip-vm-ops">Create a VM Extension in <%= vars.ops_manager %></a> above.
             </td>
         </tr>
         <tr>
@@ -636,7 +664,7 @@ To set the VM extension name:
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                   An S3-compatible endpoint such as Minio that requires path-style URLs.
                 </li>
               </ul>
 
@@ -664,30 +692,30 @@ To set the VM extension name:
         </tr>
       </table>
 
-
-
-
-
-
 1. Click **Save**.
 
 
-### <a id="ip-apply-upgrade"></a> Apply Changes for <%= vars.product_short %> and Upgrade all Service Instances
-The changes to your service instances are not complete until you apply your configuration changes.
-<br><br>
-This allows the service instances to begin using the instance profile instead of static credentials for backup and restore.
-Static credentials are not provided to existing service instances and backups fail until the service instance is upgraded.
+### <a id="ip-apply-upgrade"></a> Apply Changes and Upgrade all Service Instances
 
-To do this:
+The changes to your service instances are not complete until you apply your configuration changes.
+
+This allows the service instances to begin using the instance profile instead of
+static credentials for backup and restore.
+Static credentials are not provided to existing service instances and backups fail
+until you upgrade the service instances.
+
+To apply changes and upgrade all service instances for <%= vars.product_short %>:
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 1. Click **Review Pending Changes**.
-1. Unselect all products except **BOSH Director** and **<%= vars.product_full %>** and click **Apply Changes**.
+1. Clear the checkboxes for all products except **BOSH Director** and
+**<%= vars.product_full %>** and click **Apply Changes**.
 1. Verify that the checkbox for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
 1. Click **Apply Changes**.
 
-### <a id="ip-verify-instances"></a> (Optional) Verify IAM Role Association with the Service Instances
-Verify that the IAM role is associated with the MySQL service instances:
+### <a id="ip-verify-instances"></a> (Optional) Verify IAM Role Association with MySQL Service Instances
+
+To verify that the IAM role is associated with the MySQL service instances:
 
 1. On the AWS Management Console, find any EC2 instance that begins with `mysql/GUID`.
 1. Verify that the IAM Role is present in the details for the instance.
