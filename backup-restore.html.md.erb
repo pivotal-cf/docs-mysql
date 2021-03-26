@@ -13,6 +13,18 @@ owner: MySQL
   see <a href="./manual-restore.html">Manually Restoring From Backup</a>.
 </p>
 
+<p class="note">
+  <strong>Note:</strong> In <%= vars.product_short %> v2.9.0 to v2.9.2, the Application Developer Backup and
+  Restore (ADBR) feature stored backup artifacts in the <i>root</i> directory in external storage.
+  <br><br>
+  As of v2.9.3, backup artifacts are organized under subfolders in external storage.
+  They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
+  <br><br>
+  Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
+  <code>adbr</code> plugin.
+</p>
+
+
 This topic describes how to back up and restore a physical backup
 to a <%= vars.product_full %> service instance.
 Both operators and developers can use the procedures in this topic.
@@ -22,7 +34,7 @@ Operators can configure automated backups in the <%= vars.product_short %> tile 
 
 Developers can manually take physical backups by following the procedure in this topic.
 Developers can also create logical backups using `mysqldump`.
-For information logical backups, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
+For more information about logical backups, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
 ## <a id="overview"></a> Overview
 
@@ -122,10 +134,10 @@ However backups only reflect transactions that are completed before the `start_t
   This is a known issue.
 </p>
 
-## <a id='prerequisite'></a> Prerequisite: adbr Plugin
+## <a id='prerequisite'></a> Prerequisite: `adbr` Plugin
 
 Before you can manually back up or restore a service instance,
-you must have installed the ApplicationDataBackupRestore (adbr) plugin
+you must have installed the Application Data Backup and Restore (ADBR) plugin
 for the Cloud Foundry Command Line Interface (cf CLI) tool.
 
 To install the plugin, run:
