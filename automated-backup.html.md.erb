@@ -414,8 +414,9 @@ To find the existing user or role and add a policy:
 
 1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
 1. Click the **BOSH Director for AWS** tile.
-1. Select **AWS Config**.<br><br>
-The tabs below expand to show instructions for each type of AWS Config. <br><br>
+1. Select **AWS Config**.
+<br><br>
+The tabs below expand to show instructions for each type of AWS Config: <br><br>
 
     <style>
     .btn.btn-default,
@@ -485,12 +486,10 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
     </div>
 
     <div id="tab1" class="tabcontent">
-      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Keys radio button is selected."
-      width="400" src="./images/aws-config-aws-keys.png"/>
       <p>
         <ul>
           <li>Find the existing IAM user associated with the static credentials used here.
-              The name of the IAM user is not listed here in the tile UI.
+              The name of the IAM user is not listed here in the <i>BOSH Director for AWS</i> tile UI.
               <br><br>
               To retrieve your AWS key information, use the AWS Identity and Access Management (IAM) credentials
               that you generated in
@@ -499,11 +498,11 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
           </li>
         </ul>
       </p>
+      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Keys radio button is selected."
+      width="400" src="./images/aws-config-aws-keys.png"/>
     </div>
 
     <div id="tab2" class="tabcontent" style="display:block">
-      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Instance Profiles radio button is selected."
-      width="400" src="./images/aws-config-instance-profile.png"/>
       <p>
         <ul>
           <li>Find the existing IAM user or role in the <strong>AWS IAM Instance Profile</strong> field.
@@ -511,7 +510,10 @@ The tabs below expand to show instructions for each type of AWS Config. <br><br>
               For more information about this role, see
               <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
               in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
+        </ul>
       </p>
+      <img alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Instance Profile radio button is selected."
+      width="400" src="./images/aws-config-instance-profile.png"/>
     </div>
 
 1. On the AWS Management Console, add a new policy to that IAM User or Role:
@@ -700,7 +702,7 @@ To apply changes and upgrade all service instances for <%= vars.product_short %>
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 1. Click **Review Pending Changes**.
 1. Clear the checkboxes for all products except **BOSH Director** and
-**<%= vars.product_full %>** and click **Apply Changes**.
+**<%= vars.product_full %>**.
 1. Verify that the checkbox for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
 1. Click **Apply Changes**.
 
