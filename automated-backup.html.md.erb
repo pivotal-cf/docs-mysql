@@ -364,15 +364,6 @@ The process for configuring backups for an Amazon S3 with Instance Profile is:
 
 ### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
 
-  <p class="note">
-    <strong>Note:</strong> Operators must run the <code>upgrade-all-service-instances</code>
-    errand in this <strong>Apply Changes</strong>.
-    This allows the service instances to begin using the instance profile instead
-    of static credentials for backup and restore.<br>
-    Static credentials are not provided to existing service instances and backups
-    fail until the service instance is upgraded.
-  </p>
-
 First, you must create a policy for your <%= vars.product_short %> user account.
 
 For more information about AWS identity and access management, see the
