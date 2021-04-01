@@ -341,6 +341,15 @@ you must have an S3 bucket in which to store the backups.
 
 ## <a id="instance-profile"></a> Back Up to Amazon S3 with Instance Profile
 
+  <p class="note warning">
+   <strong>Warning:</strong> Configuring this backup method requires operators to run the
+   <code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.
+   <br><br>
+   Backups <i>fail</i> until the service instance is upgraded.
+  </p>
+
+
+
 When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %>
 allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
 new backups IAM role to a new EC2 instance.
