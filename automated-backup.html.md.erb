@@ -402,21 +402,25 @@ To create an IAM Role with a custom policy:
     Where `BUCKET-NAME` is the name of the bucket.
 
 1. Record the Amazon Resource Name (ARN) of this new IAM role.
+   This will be used in [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy) below.
+1. Record the name of the Instance Profile associated with this new IAM role.
+   This will be used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops) below.
 
 
 ### <a id="ip-add-policy"></a> Add a Policy to the Existing <%= vars.ops_manager %> User or Role
 
-Next, add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
-is described in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
+Next, you must add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
+is configured in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
 This policy allows the IAM user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
 
+Depending on your configuration, this is either a user or a role.
 To find the existing user or role and add a policy:
 
 1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
 1. Click the **BOSH Director for AWS** tile.
 1. Select **AWS Config**.
 <br><br>
-The tabs below expand to show instructions for each type of AWS Config: <br><br>
+The tabs below expand to show instructions depending on the type of **AWS Config** that is already configured: <br><br>
 
     <style>
     .btn.btn-default,
@@ -488,12 +492,13 @@ The tabs below expand to show instructions for each type of AWS Config: <br><br>
     <div id="tab1" class="tabcontent">
       <p>
         <ul>
-          <li>Find the existing IAM user associated with the static credentials used here.
-              The name of the IAM user is not listed here in the <i>BOSH Director for AWS</i> tile UI.
+          <li>You must find the existing IAM user associated with the static credentials that are used here.
+              The name of the IAM user is <i>not</i> listed here in the <strong>BOSH Director for AWS</strong> tile UI.
               <br><br>
-              To retrieve your AWS key information, use the AWS Identity and Access Management (IAM) credentials
-              that you generated in
-              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+              To find retrieve your AWS Key information and fid the existing IAM user,
+              use the AWS Identity and Access Management (IAM) credentials that you generated in
+              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">
+              Step 3: Create an IAM User for <%= vars.ops_manager %></a>
               in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
           </li>
         </ul>
@@ -505,7 +510,7 @@ The tabs below expand to show instructions for each type of AWS Config: <br><br>
     <div id="tab2" class="tabcontent" style="display:block">
       <p>
         <ul>
-          <li>Find the existing IAM user or role in the <strong>AWS IAM Instance Profile</strong> field.
+          <li>Find the name of the existing IAM role in the <strong>AWS IAM Instance Profile</strong> field.
               <br><br>
               For more information about this role, see
               <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
@@ -564,8 +569,8 @@ Example JSON to specify the instance profile name:
 Where:
 
 * `VM-EXTENSION-NAME` is the unique VM extension name that <%= vars.ops_manager %> manages
-* `INSTANCE-PROFILE-NAME` is the name of the instance profile created in the first step
-
+* `INSTANCE-PROFILE-NAME` is the name of the instance profile created in
+  [Create an IAM Role with a Custom Policy](#ip-create-policy) above.
 
 #### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker Job
 
