@@ -27,7 +27,7 @@ New features and changes in this release:
 
 This release has the following fix:
 
-+ 
++
 
 
 ### Compatibility
@@ -114,16 +114,18 @@ New features and changes in this release:
 
 + **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled,
   operators can choose to enforce TLS v1.2 as the minimum TLS version for client connections.
-  Connections that use the TLS v1.1 protocol or older are then rejected by the MySQL server. 
+  Connections that use the TLS v1.1 protocol or older are then rejected by the MySQL server.
+  For more information, see [Configure TLS](install-config.html#security-tls)
+  in _Installing and Configuring_.
 
 + **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
-  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage. 
-  For easier navigation, backup artifacts are now stored under 
+  Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage.
+  For easier navigation, backup artifacts are now stored under
   `p.mysql > service-instance_GUID > yyyy > mm > dd`.
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI
   using the adbr plugin.
 
-+ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in 
++ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in
   this release. There have been no changes to the feature since v2.9.1.
 
 + **Percona Server:** Upgraded to v5.7.31–34.
