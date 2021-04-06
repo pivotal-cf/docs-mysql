@@ -38,9 +38,13 @@ New features and changes in this release:
 
 This release has the following fix:
 
+<<<<<<< HEAD
 + **ADBR does not show error "Status during Restore Operation"**:
   Previously, the ADBR plugin showed an error status during a restore when the database was unavailable.
   Now, the ADBR plugin reports the restore status as being in progress.
+=======
++
+>>>>>>> c423fd2d... [#176073055] Add mention of TLS 1.2 checkbox to docs
 
 ### Known Issues
 
@@ -138,6 +142,8 @@ New features and changes in this release:
 + **Option to restrict MySQL client connections to TLS v1.2:** When TLS is enabled,
   operators can choose to enforce TLS v1.2 as the minimum TLS version for client connections.
   Connections that use the TLS v1.1 protocol or older are then rejected by the MySQL server.
+  For more information, see [Configure TLS](install-config.html#security-tls)
+  in _Installing and Configuring_.
 
 + **Backup artifacts are organized under subfolders in external storage:** Previously, the Application
   Developer Backup and Restore (ADBR) feature stored backup artifacts in the root directory in external storage.
