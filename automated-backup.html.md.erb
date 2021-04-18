@@ -303,6 +303,7 @@ you must have an S3 bucket in which to store the backups.
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
+              The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
               You should select this checkbox if you use:
 
               <ul>
@@ -310,14 +311,20 @@ you must have an S3 bucket in which to store the backups.
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that requires path-style URLs.
+                   An S3-compatible endpoint such as Minio that may require path-style URLs.
                 </li>
               </ul>
+
+              <p class="note">
+                <strong>Note:</strong> If you are using a blobstore that uses a specific set of domains in its
+                server certificate, add a new wildcard domain or use path-style URLs if supported by the
+                blobstore.
+              </p>
 
                For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
                <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
                and the subsequent
-               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.
+               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
             </td>
         </tr>
         <tr>
@@ -662,6 +669,7 @@ To set the VM extension name:
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
+              The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
               You should select this checkbox if you use:
 
               <ul>
@@ -669,14 +677,20 @@ To set the VM extension name:
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that requires path-style URLs.
+                   An S3-compatible endpoint such as Minio that may require path-style URLs.
                 </li>
               </ul>
+
+              <p class="note">
+                <strong>Note:</strong> If you are using a blobstore that uses a specific set of domains in its
+                server certificate, add a new wildcard domain or use path-style URLs if supported by the
+                blobstore.
+              </p>
 
                For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
                <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
                and the subsequent
-               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.
+               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
             </td>
         </tr>
         <tr>
