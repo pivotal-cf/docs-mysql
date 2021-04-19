@@ -539,12 +539,13 @@ To enable TLS for the MySQL service:
           </td></tr>
     </table>
 
-    <div class="note warning"><strong>Warning:</strong> Enforcing TLS v1.2 potentially has the following effects:
+    <div class="note warning"><strong>Warning:</strong> Enforcing TLS v1.2 has the following effects:
       <ul>
-        <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps may break.</li>
-        <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers will have to rebind their apps.</li>
+        <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
+        <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
       </ul>
-      TLS 1.2 restriction is a global setting, so it applies to every service instance. Any apps in the foundation using an old version of MySQL Connector/J fails to connect to MySQL after this new setting is applied.
+      The TLS v1.2 restriction is a global setting, so it applies to every service instance.
+      Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
     </div>
 
 
