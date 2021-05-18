@@ -124,7 +124,7 @@ If all nodes crash simultaneously, it is possible to lose up to a second of tran
 The last second's transactions are not flushed to disk **only** if all nodes in the cluster crash simultaneously.
 
 * When set to `2`, the buffer is flushed at commit but it is not synced.
-This means that you can safely kill `mysqld`, but if the OS or the host crashes, you might lose some transactions on the local node.
+This means that you can safely stop `mysqld`, but if the OS or the host crashes, you might lose some transactions on the local node.
 
 * For full ACID compliance, set this policy to `1`, which flushes to disk after every commit.
 Previous versions of MySQL for PCF v1 used `1`.
