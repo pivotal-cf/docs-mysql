@@ -452,7 +452,7 @@ For each node in the cluster, to find its `seqno`:
 1. Do one of the following, based on the last and highest `seqno` value in the `grep` output above:
   - **If `seqno` is a positive integer**, then the node shut down gracefully.
     Record this number for comparison with the latest `seqno` of other nodes in the cluster.
-  - **If `seqno` is `-1`**, then the node crashed or was killed.
+  - **If `seqno` is `-1`**, then the node crashed or was stopped.
     Proceed as follows to attempt to recover the `seqno` from the database:
       1. Temporarily start the database and append the last sequence number to its error log by running:
 
