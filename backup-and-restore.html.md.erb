@@ -70,7 +70,7 @@ MySQL for PCF automatically backs up databases to external storage.
     This is the fastest option.
   - [Option 2: Back up to Ceph or S3](#ceph-or-s3)---MySQL for PCF runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
     that saves backups to an S3 bucket,
-    a [Ceph](http://docs.ceph.com/docs/master/) storage cluster, or another S3-compatible endpoint certified by Pivotal.
+    a [Ceph](http://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by Pivotal.
   - [Option 3: Back up to GCS](#gcs)---MySQL for PCF runs an [GCS](https://cloud.google.com/storage/) SDK
     that saves backups to an Google Cloud Storage bucket.
   - [Option 4: Back up to Azure Storage](#azure)---MySQL for PCF runs an [Azure](https://docs.microsoft.com/en-us/azure/storage/)
@@ -405,8 +405,8 @@ For more information, see [Establish a Connection to a Service Instance from Out
     * `MYSQL-IP` is the MySQL IP address.
     * `DB-NAME` is the name of the database.
     * `BACKUP` is a name you create for the backup file. Use a different filename for each backup.
-    
-    The `--set-gtid-purged=off` flag enables you to restore the backup without admin privileges. <br><br> 
+
+    The `--set-gtid-purged=off` flag enables you to restore the backup without admin privileges. <br><br>
 
     For example:
     <pre class="terminal">
