@@ -30,6 +30,7 @@ topology, or during upgrades:
 - [Apps Cannot Connect to the Database after Upgrade from v2.8](#connector-8.0.13)
 - [MySQL Connector/J v5.1.41 or Earlier](#connecter)
 - [Mutual TLS](#m-tls)
+- [Java Apps Cannot Connect after Buildpack Update](#java-buildpack)
 
 
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
@@ -81,13 +82,14 @@ For more information about troubleshooting this problem, see
     description: 'Apps Cannot Connect to the Database',
     symptom: 'Apps can fail to connect to the database.',
     cause: '<ul>
-    <li>When your app uses MySQL Connector/J v5.1.41 or earlier.
-    </li>
+    <li>When your app uses an incompatible version of MySQL Connector/J.</li>
     <li>When your app uses mutual TLS (mTLS).</li>
 </ul>',
     solution: '<ul>
+    <li>See <a href="#connector-8.0.13">Apps Requiring TLS Cannot Connect to the Database after Upgrade from v2.8</a> below.</li>
     <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a> below.</li>
     <li>See <a href="#m-tls">Mutual TLS</a> below.</li>
+    <li>See <a href="#m-tls">Java Apps Cannot Connect after Buildpack Update</a> below.</li>
 </ul>'
 } %>
 
@@ -97,7 +99,7 @@ For more information about troubleshooting this problem, see
     id: 'connector-8.0.13',
     description: 'Apps Requiring TLS Cannot Connect to the Database after Upgrade from v2.8',
     symptom: '<p>Apps fail to connect to the database,
-                 and, in the apps, logs you see certificate errors such as:</p>
+                 and, in the app logs, you see certificate errors such as:</p>
               <pre class="terminal">java.security.cert.CertificateException: Server certificate identity check failed.</pre>
               <p>And, the following are true:</p>
               <ul>
@@ -137,10 +139,24 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
 <%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
     id: 'm-tls',
     description: 'Mutual TLS',
-    symptom: 'Apps cannot connect to the database when TLS is enabled and your apps uses mTLS.',
+    symptom: 'Apps cannot connect to the database when TLS is enabled and your apps use mTLS.',
     cause: 'You see network errors in your app logs.',
     solution: 'To resolve this issue disable mTLS in your apps.'
 } %>
+
+
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+    id: 'java-buildpack',
+    description: 'Java Apps Cannot Connect after Buildpack Update',
+    symptom: 'After updating a Java app to use Java buildpack v4.38 or later,
+             the app cannot connect to the database over TLS.
+             <p>In the app logs, you see errors such as:</p>
+              <pre class="terminal">javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)</pre> ',
+    cause: 'By default, the new version of Java disables TLS v1.0 and v1.1.',
+    solution: 'Update the app to use MySQL Connector/J 5.1.49 or later or MySQL Connector/J 8.0.19 or later.
+               This ensures that TLS v1.2 is used.'
+} %>
+
 
 ### <a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plugin
 
