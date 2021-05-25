@@ -27,6 +27,7 @@ topology, or during upgrades:
 - [Apps Cannot Write to the Database](#read-only)
 - [Apps Are Inoperable](#disk-full)
 - [Apps Cannot Connect to the Database](#m-tls-error)
+- [Apps Cannot Connect to the Database after Upgrade from v2.8](#connector-8.0.13)
 - [MySQL Connector/J v5.1.41 or Earlier](#connecter)
 - [Mutual TLS](#m-tls)
 
@@ -90,6 +91,30 @@ For more information about troubleshooting this problem, see
 </ul>'
 } %>
 
+
+
+<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
+    id: 'connector-8.0.13',
+    description: 'Apps Requiring TLS Cannot Connect to the Database after Upgrade from v2.8',
+    symptom: '<p>Apps fail to connect to the database,
+                 and, in the apps, logs you see certificate errors such as:</p>
+              <pre class="terminal">java.security.cert.CertificateException: Server certificate identity check failed.</pre>
+              <p>And, the following are true:</p>
+              <ul>
+                <li>MySQL Connector/J v8.0.13–21 is used.</li>
+                <li>TLS is enabled for the apps.</li>
+                <li>Tanzu SQL for VM was recently upgraded from v2.8.</li>
+              </ul> ',
+    cause: 'Versions 8.0.13 to 8.0.21 of the MySQL Connector/J do not support wildcards
+            or subject alternative names (SANs) in the TLS certificate.',
+    solution: '<p>To resolve the error:</p>
+               <ol>
+                 <li>Ensure that the service instance has been upgraded to v2.9.
+                     For information about upgrading instances,
+                     see <a href="upgrade.html">Upgrading VMware Tanzu SQL with MySQL for VMs.</a></li>
+                 <li> Rebind the apps to the upgraded instances.</li>
+               </ol>'
+} %>
 
 
 
