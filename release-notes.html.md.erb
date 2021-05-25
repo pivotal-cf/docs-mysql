@@ -22,6 +22,11 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 **Release Date: March 11, 2021**
 
+<p class="note breaking"><strong>Breaking Changes:</strong>
+The breaking changes listed for v2.9.0 also apply if you are upgrading from v2.8 to v2.9.3.
+See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
+</p>
+
 ### Features
 
 New feature in this release:
@@ -40,7 +45,6 @@ New feature in this release:
 This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
@@ -108,7 +112,6 @@ New features and changes in this release:
 This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
@@ -199,7 +202,6 @@ This release has the following fixes:
 This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
@@ -261,6 +263,13 @@ Breaking changes in this release:
   For information about cron schedules for automated backups,
   see [Configuring Automated Backups](https://docs.pivotal.io/p-mysql/2-9/automated-backup.html).
 
+* **Update the MySQL Connector/J:** If you use MySQL Connector/J v8.0.13–8.0.21 and TLS,
+   then update the MySQL Connector to v8.0.22 or later before upgrading <%=vars.product_short %>.
+   The older versions of the MySQL Connector do not support verifying TLS connections with wildcard domains.
+
+     For more information, see <a href="troubleshoot-instances.html#connector-8.0.13">Apps
+   Requiring TLS Cannot Connect to the Database after Upgrade from v2.8</a> in _Troubleshooting Instances_.
+
 ### Features
 
 New features and changes in this release:
@@ -311,7 +320,6 @@ This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/connector-ki" %>
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
