@@ -14,34 +14,41 @@ and then upgrade to the latest available patch for the next minor.
 
 **Release Date: May 28, 2021**
 
+<p class="note breaking"><strong>Breaking Change:</strong>
+The breaking change listed for v2.10.0 also applies if you are upgrading from v2.9 to v2.10.3.
+See <a href="#2-10-0">Breaking Change</a> below.
+</p>
+
 ### Features
 
 New feature in this release:
 
 + **List as many backups as needed:**
-  Previously, the Application Developer Backup and Restore (ADBR) plugin would always list the 5 most recent backups.
+  Previously, the Application Developer Backup and Restore (ADBR) plugin always listed the five most recent backups.
 
-  Now, the ADBR plugin accepts an integer parameter to specify how many backups to list. The plugin will continue to 
-  list 5 backups by default.
+    Now, the ADBR plugin accepts an integer parameter to specify how many backups to list.
+    The plugin continues to list five backups by default.
 
-  See https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore to install the new plugin.
+    To install the new plugin, see [ApplicationDataBackupRestore](https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore)
+    on the Cloud Foundry Community cf CLI Plugins website.
 
 + **Configure backup location with bucket path:**
-  The tile now accepts an optional field for bucket path. This will allow backups to be stored with a path like:
-  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.<br><br>
+  The tile now accepts an optional field for bucket path.
+  This allows backups to be stored with a path like:
+  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.
 
-  Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
-  artifacts with a path like:
-  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
+    Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+    artifacts with a path like:
+    `p.mysql > service-instance_GUID > yyyy > mm > dd`.
 
-  Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
+    Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
 
 ### Resolved Issues
 
 This release has the following fix:
 
 + **ADBR API only accepts TLS 1.2 connections**:
-  Previously, the ADBR API was accepting all TLS connections regardless of version.
+  Previously, the ADBR API accepted all TLS connections, regardless of version.
 
 ### Known Issues
 
@@ -74,6 +81,11 @@ The following components are compatible with this release:
 ## <a id="2-10-2"></a> v2.10.2
 
 **Release Date: March 11, 2021**
+
+<p class="note breaking"><strong>Breaking Change:</strong>
+The breaking change listed for v2.10.0 also applies if you are upgrading from v2.9 to v2.10.2.
+See <a href="#2-10-0">Breaking Change</a> below.
+</p>
 
 ### Features
 
@@ -134,6 +146,11 @@ The following components are compatible with this release:
 ## <a id="2-10-1"></a> v2.10.1
 
 **Release Date: February 4, 2021**
+
+<p class="note breaking"><strong>Breaking Change:</strong>
+The breaking change listed for v2.10.0 also applies if you are upgrading from v2.9 to v2.10.1.
+See <a href="#2-10-0">Breaking Change</a> below.
+</p>
 
 ### Resolved Issues
 
