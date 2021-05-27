@@ -10,6 +10,67 @@ and then upgrade to the latest available patch for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-10-3"></a> v2.10.3
+
+**Release Date: May 28, 2021**
+
+### Features
+
+New feature in this release:
+
++ **List as many backups as needed:**
+  Previously, the Application Developer Backup and Restore (ADBR) plugin would always list the 5 most recent backups.
+
+  Now, the ADBR plugin accepts an integer parameter to specify how many backups to list. The plugin will continue to 
+  list 5 backups by default.
+
+  See https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore to install the new plugin.
+
++ **Configure backup location with bucket path:**
+  The tile now accepts an optional field for bucket path. This will allow backups to be stored with a path like:
+  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.<br><br>
+
+  Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+  artifacts with a path like:
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
+
+  Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **ADBR API only accepts TLS 1.2 connections**:
+  Previously, the ADBR API was accepting all TLS connections regardless of version.
+
+### Known Issues
+
+This release has the following issue:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.125*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.33–36*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.33–33*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.21</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.16.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.34.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-2"></a> v2.10.2
 
 **Release Date: March 11, 2021**
