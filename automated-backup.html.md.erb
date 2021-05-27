@@ -329,6 +329,17 @@ you must have an S3 bucket in which to store the backups.
         </tr>
         <tr>
             <td>
+                <strong>Bucket Path</strong>
+            </td>
+            <td>
+              (Optional) Enter the path in the bucket to store backups.<br>
+              You can use this to keep the backups from this foundation separate from those of other
+              foundations that might also backup to this bucket.
+              For example, <code>Foundation-1</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <strong>Cron Schedule</strong>
             </td>
             <td>
@@ -695,6 +706,17 @@ To set the VM extension name:
         </tr>
         <tr>
             <td>
+                <strong>Bucket Path</strong>
+            </td>
+            <td>
+              (Optional) Enter the path in the bucket to store backups.<br>
+              You can use this to keep the backups from this foundation separate from those of other
+              foundations that might also backup to this bucket.
+              For example, <code>Foundation-1</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <strong>Cron Schedule</strong>
             </td>
             <td>
@@ -811,6 +833,17 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
         </tr>
         <tr>
             <td>
+                <strong>Bucket Path</strong>
+            </td>
+            <td>
+              (Optional) Enter the path in the bucket to store backups.<br>
+              You can use this to keep the backups from this foundation separate from those of other
+              foundations that might also backup to this bucket.
+              For example, <code>Foundation-1</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <strong>Service Account JSON</strong>
             </td>
             <td>
@@ -921,6 +954,17 @@ To back up your database to your Azure Storage account:
             <td>
               To use an on-premise blob storage, enter the hostname of the blob storage.
                By default, backups are sent to the public Azure blob storage.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Bucket Path</strong>
+            </td>
+            <td>
+              (Optional) Enter the path in the bucket to store backups.<br>
+              You can use this to keep the backups from this foundation separate from those of other
+              foundations that might also backup to this bucket.
+              For example, <code>Foundation-1</code>.
             </td>
         </tr>
         <tr>
