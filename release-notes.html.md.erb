@@ -18,6 +18,76 @@ before upgrading to the latest v<%= current_version %>.x version.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
+## <a id="2-9-4"></a> v2.9.4
+
+**Release Date: May 28, 2021**
+
+<p class="note breaking"><strong>Breaking Changes:</strong>
+The breaking changes listed for v2.9.0 also apply if you are upgrading from v2.8 to v2.9.3.
+See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
+</p>
+
+### Features
+
+New feature in this release:
+
++ **List as many backups as needed:**
+  Previously, the Application Developer Backup and Restore (ADBR) plugin would always list the 5 most recent backups.
+  
+  Now, the ADBR plugin accepts an integer parameter to specify how many backups to list. The plugin will continue to 
+  list 5 backups by default.
+
+  See https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore to install the new plugin.
+
++ **Configure backup location with bucket path:**
+  The tile now accepts an optional field for bucket path. This will allow backups to be stored with a path like: 
+  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.<br><br>
+
+  Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+  artifacts with a path like:
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
+  
+  Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **ADBR API only accepts TLS 1.2 connections**:
+  Previously, the ADBR API was accepting all TLS connections regardless of protocol version.
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
+<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+
+
+### Compatibility
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.125*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.33&ndash;36*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.33&ndash;36*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.21</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.16.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.34.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-9-3"></a> v2.9.3
 
 **Release Date: March 11, 2021**
