@@ -32,29 +32,32 @@ See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
 New feature in this release:
 
 + **List as many backups as needed:**
-  Previously, the Application Developer Backup and Restore (ADBR) plugin would always list the 5 most recent backups.
-  
-  Now, the ADBR plugin accepts an integer parameter to specify how many backups to list. The plugin will continue to 
-  list 5 backups by default.
+  Previously, the Application Developer Backup and Restore (ADBR) plugin always listed the five most recent backups.
 
-  See https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore to install the new plugin.
+    Now, the ADBR plugin accepts an integer parameter to specify how many backups to list.
+    The plugin continues to list five backups by default.
+
+    To install the new plugin, see [ApplicationDataBackupRestore](https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore)
+    on the Cloud Foundry Community cf CLI Plugins website.
 
 + **Configure backup location with bucket path:**
-  The tile now accepts an optional field for bucket path. This will allow backups to be stored with a path like: 
-  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.<br><br>
+  The tile now accepts an optional field for bucket path.
+  This allows backups to be stored with a path like:
+  `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.
 
-  Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
-  artifacts with a path like:
-  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
-  
-  Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
+    Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+    artifacts with a path like:
+    `p.mysql > service-instance_GUID > yyyy > mm > dd`.
+
+    Existing backup artifacts can still be accessed through the cf CLI using the `adbr` plugin.
+
 
 ### Resolved Issues
 
 This release has the following fix:
 
 + **ADBR API only accepts TLS 1.2 connections**:
-  Previously, the ADBR API was accepting all TLS connections regardless of protocol version.
+  Previously, the ADBR API accepted all TLS connections, regardless of version.
 
 ### Known Issues
 
