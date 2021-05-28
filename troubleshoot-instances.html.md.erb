@@ -46,17 +46,17 @@ topology, or during upgrades:
     description: 'Apps Cannot Write to the Database',
     symptom: "You have a leader-follower or #{vars.single_leader_plan} topology, and your apps can no
     longer write to the database.",
-    cause: "<p>If you have a leader-follower topology, the leader VM might be read-only. 
+    cause: "<p>If you have a leader-follower topology, the leader VM might be read-only.
     If you can no longer read to the database as well, your persistent disk might be full.</p>
     <p>If you have a #{vars.single_leader_plan} topology, your leader VM might be down.</p>",
-    solution: "<p>If you have a leader-follower topology and the leader VM is read-only, for how to 
+    solution: "<p>If you have a leader-follower topology and the leader VM is read-only, for how to
     troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
         Both Leader and Follower Instances Are Read-Only</a>.</p>
     <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
     troubleshooting inoperable apps, see <a href='#disk-full'>
         Apps are Inoperable</a>.</p>
-    <p>If you have a #{vars.single_leader_plan} topology and your leader VM is down, 
+    <p>If you have a #{vars.single_leader_plan} topology and your leader VM is down,
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
     see <a href='./multi-site-trigger-failover.html'>
@@ -153,7 +153,7 @@ Javanbuildpack</a> in the Support knowledge base.</p>'
              <p>In the app logs, you see errors such as:</p>
               <pre class="terminal">javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)</pre> ',
     cause: 'By default, the new version of Java disables TLS v1.0 and v1.1.',
-    solution: 'Update the app to use MySQL Connector/J 5.1.49 or later or MySQL Connector/J 8.0.19 or later.
+    solution: 'Update the app to use MySQL Connector/J v5.1.49 or later or MySQL Connector/J v8.0.19 or later.
                This ensures that TLS v1.2 is used.'
 } %>
 
@@ -244,7 +244,7 @@ then you might need to optimize indexed tables.
     id: 'shrink-index',
     description: 'Persistent Disk Usage Is Increasing',
     symptom: '<p>You have set the <code>optimize_for_short_words</code> optional parameter to <code>true</code>
-    and the persistent disk is filling up. 
+    and the persistent disk is filling up.
       </p>
       For information about the parameter,
       see <a href="change-default.html#optimize_for_short_words">Optimize for Short Words</a>.',
