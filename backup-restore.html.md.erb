@@ -167,7 +167,7 @@ To manually trigger a backup outside of the configured schedule:
 
     <pre class="terminal">$ cf adbr get-status myDB
       Getting status of service instance myDB in org my-org / space my-space as user...
-      [Mon May 18 18:08:25 UTC 2020] Status: Backup was successful. Uploaded 3.2M</pre>
+      [Fri May 28 18:08:25 UTC 2021] Status: Backup was successful. Uploaded 3.2M</pre>
 
 ## <a id="restore"></a> Restore a Service Instance
 
@@ -288,16 +288,19 @@ To restore a service instance:
 1. View the available backup artifacts for your service instance by running:
 
     ```
-    cf adbr list-backups SOURCE-INSTANCE
+    cf adbr list-backups SOURCE-INSTANCE --limit NUM
     ```
 
-    Where `SOURCE-INSTANCE` is the name of the service instance.
+    Where:
+    * `SOURCE-INSTANCE` is the name of the service instance.
+    * `--limit NUM` is an optional flag to specify how many backups to list.
+      Without the flag, the command lists five backups.  
 
     For example:
-    <pre class="terminal">$ cf adbr list-backups myDB
+    <pre class="terminal">$ cf adbr list-backups myDB --limit 1
       Getting backups of service instance myDB in org my-org / space my-space as user...
       Backup ID                                         Time of Backup
-      a41bf723-2538-4020-9d16-50cccb7b7c8d_1589825284   Mon May 18 18:08:04 UTC 2020</pre>
+      a41bf723-2538-4020-9d16-50cccb7b7c8d_1589825284   Fri May 28 18:08:04 UTC 2021</pre>
 
       Record the `Backup ID` from the above output.
 
@@ -322,7 +325,7 @@ To restore a service instance:
 
     <pre class="terminal">$ cf adbr get-status myTargetDB
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
-      [Fri Jun 5 22:29:24 UTC 2020] Status: Restore was successful </pre>
+      [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
     If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database) above.
 
@@ -394,20 +397,23 @@ The list includes both automated and manual backups.
 1. List the backups for an instance using the `adbr` plugin by running:
 
     ```
-    cf adbr list-backups SOURCE-INSTANCE
+    cf adbr list-backups SOURCE-INSTANCE --limit NUM
     ```
 
-    Where `SOURCE-INSTANCE` is the name of the service instance.
+    Where:
+    * `SOURCE-INSTANCE` is the name of the service instance.
+    * `--limit NUM` is an optional flag to specify how many backups to list.
+      Without the flag, the command lists five backups.  
 
     For example:
     <pre class="terminal">$ cf adbr list-backups myDB
     Getting backups of service instance myDB in org my-org / space my-space as admin...
     Backup ID                                         Time of Backup
-    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675600   Thu Aug  6 01:00:00 UTC 2020
-    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675420   Thu Aug  6 00:57:00 UTC 2020
-    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675240   Thu Aug  6 00:54:00 UTC 2020
-    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675000   Thu Aug  6 00:50:00 UTC 2020
-    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596674700   Thu Aug  6 00:45:00 UTC 2020
+    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675600   Wed Jun  2 01:00:00 UTC 2021
+    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675420   Wed Jun  2 00:57:00 UTC 2021
+    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675240   Wed Jun  2 00:54:00 UTC 2021
+    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596675000   Wed Jun  2 00:50:00 UTC 2021
+    f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596674700   Wed Jun  2 00:45:00 UTC 2021
     </pre>
 
 ### <a id="use-healthwatch"></a> Use Healthwatch to Confirm Automated Backups
