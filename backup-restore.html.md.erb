@@ -21,7 +21,7 @@ owner: MySQL
   They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
   <br><br>
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
-  <code>adbr</code> plugin.
+  adbr plugin.
 </p>
 
 
@@ -145,6 +145,11 @@ To install the plugin, run:
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 ```
+
+<p class="note">
+   <strong>Note:</strong> The procedures on this page assume that
+   you are using the adbr plugin v0.3.0 or later.
+</p>
 
 ## <a id="backup"></a> Manually Back Up a Service Instance
 
