@@ -150,15 +150,27 @@ To bootstrap in this scenario:
     Where `PATH-TO-DEPLOYMENT-MANIFEST` is the path to your deployment manifest.
 %>
 
-1. Run the bootstrap errand by running:
+1. Run the bootstrap errand on the VM where the bootstrap errand is co-located, by running:
 
+<% if vars.product_full.include?("MySQL") %>
     ```
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT run-errand bootstrap
+    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT --instance=mysql/0 run-errand bootstrap
     ```
 
     Where:
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
+<% else %>
+    ```
+    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT --instance=VM run-errand bootstrap
+    ```
+
+    Where:
+    + `YOUR-ENV` is the name of your environment.
+    + `YOUR-DEPLOYMENT` is the name of your deployment.
+    + `VM` is `clock_global/0` if you use TAS for VMs and
+      `control/0` if you use Small Footprint TAS for VMs.
+<% end %>
 
     <p class="note"><strong>Note:</strong> The errand runs for a long time, during which no output is returned.</p>
 
