@@ -53,8 +53,8 @@ The dotted lines indicate data replication from the primary to the secondary dat
 Traffic from apps and clients is sent round-robin to the proxies on all nodes over BOSH DNS.
 The proxies direct their traffic to the server on the primary node.
 
-The HA cluster sends data to the jumpbox, and the jumpbox sends data to a database
-for backups.
+If the primary server fails, a secondary node is promoted to become the new primary.
+The proxies will update to ensure that traffic is sent to the new primary.
 
 For more information about other availability options supported by <%= vars.product_short %>,
 see [Availability Options](availability-options.html).
