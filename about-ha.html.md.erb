@@ -48,6 +48,10 @@ The diagram shows an app communicating with a MySQL cluster using BOSH DNS.
 Each of the three MySQL nodes is located in its own AZ.
 Each MySQL node contains a proxy and a server, and has its own disk.
 Arrows are shown connecting the MySQL nodes, indicating that they can communicate with each other across AZs.
+The dotted lines indicate data replication from the primary to the secondary databases.
+
+Traffic from apps and clients is sent round-robin to the proxies on all nodes over BOSH DNS.
+The proxies direct their traffic to the server on the primary node.
 
 The HA cluster sends data to the jumpbox, and the jumpbox sends data to a database
 for backups.
