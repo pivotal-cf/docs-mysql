@@ -89,9 +89,9 @@ See <a href="#2-10-0">Breaking Change</a> below.
 New feature in this release:
 
 + **List as many backups as needed:**
-  Previously, the Application Developer Backup and Restore (ADBR) plugin always listed the five most recent backups.
+  Previously, the ApplicationDeveloperBackupRestore (adbr) plugin always listed the five most recent backups.
 
-    Now, the ADBR plugin accepts an integer parameter to specify how many backups to list.
+    Now, the adbr plugin accepts an integer parameter to specify how many backups to list.
     The plugin continues to list five backups by default.
 
     To install the new plugin, see [ApplicationDataBackupRestore](https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore)
@@ -105,7 +105,7 @@ New feature in this release:
   This allows backups to be stored with a path like:
   `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.
 
-    Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+    Previously, the ApplicationDeveloperBackupRestore (adbr) feature stored backup
     artifacts with a path like:
     `p.mysql > service-instance_GUID > yyyy > mm > dd`.
 
@@ -118,8 +118,8 @@ New feature in this release:
 
 This release has the following fix:
 
-+ **ADBR API only accepts TLS 1.2 connections**:
-  Previously, the ADBR API accepted all TLS connections, regardless of version.
++ **ApplicationDataBackupRestore (adbr) API only accepts TLS 1.2 connections**:
+  Previously, the adbr API accepted all TLS connections, regardless of version.
 
 ### Known Issues
 
