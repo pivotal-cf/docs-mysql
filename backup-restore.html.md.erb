@@ -14,8 +14,8 @@ owner: MySQL
 </p>
 
 <p class="note">
-  <strong>Note:</strong> In <%= vars.product_short %> v2.9.0 to v2.9.2, the Application Developer Backup and
-  Restore (ADBR) feature stored backup artifacts in the <i>root</i> directory in external storage.
+  <strong>Note:</strong> In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore
+  (adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
   <br><br>
   As of v2.9.3, backup artifacts are organized under subfolders in external storage.
   They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
@@ -137,7 +137,7 @@ However backups only reflect transactions that are completed before the `start_t
 ## <a id='prerequisite'></a> Prerequisite: adbr Plugin
 
 Before you can manually back up or restore a service instance,
-you must have installed the Application Data Backup and Restore (ADBR) plugin
+you must have installed the ApplicationDataBackupRestore (adbr) plugin
 for the Cloud Foundry Command Line Interface (cf CLI) tool.
 
 To install the plugin, run:
