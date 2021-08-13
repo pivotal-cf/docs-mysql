@@ -16,7 +16,7 @@ Tanzu SQL with MySQL for VMs containing that patch.
 
 ## <a id="2-10-4"></a> v2.10.4
 
-**Release Date: August 10, 2021**
+**Release Date: August 17, 2021**
 
 ### Security Fixes
 
@@ -30,17 +30,17 @@ This release includes the following security fix:
 
 This release has the following fixes:
 
-+ **ApplicationDataBackupRestore (adbr) plugin only accepts TLS 1.2 connections**:
-  Previously, the adbr plugin accepted all TLS connections, regardless of version.
++ **ApplicationDataBackupRestore (adbr) processes running on the service instances
+  only accept TLS v1.2 connections**:
+  Previously, these adbr processes accepted all TLS connections, regardless of version.
 
 + **Smoke test errands no longer leave orphan routes:**
    Do a one-time cleanup of orphan routes from earlier versions of Tanzu SQL with MySQL for VMs by running:
   
     ```
-    cf target -o ORG -s pivotal-services
+    cf target -o system -s pivotal-services
     cf delete-orphaned-routes
     ```
-    Where is `ORG` is ....
 
 ### Known Issues
 
@@ -58,13 +58,13 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 
-  <tr><td>Stemcell</td><td>621.125</td></tr>
+  <tr><td>Stemcell</td><td>621.135*</td></tr>
   <tr><td>Percona Server</td><td>5.7.34–37*</td></tr>
   <tr><td>Percona XtraDB Cluster</td><td>5.7.34–31.51*</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.23*</td></tr>
-  <tr><td>mysql-backup-release</td><td>2.16.0</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.17.0*</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
-  <tr><td>pxc-release</td><td>0.34.0</td></tr>
+  <tr><td>pxc-release</td><td>0.37.0*</td></tr>
 
 </table>
 
@@ -108,8 +108,9 @@ New feature in this release:
 
 This release has the following fix:
 
-+ **ApplicationDataBackupRestore (adbr) API only accepts TLS 1.2 connections**:
-  Previously, the adbr API accepted all TLS connections, regardless of version.
++ **ApplicationDataBackupRestore (adbr) processes running on the service broker
+  only accept TLS v1.2 connections**:
+  Previously, these adbr processes accepted all TLS connections, regardless of version.
 
 ### Known Issues
 
