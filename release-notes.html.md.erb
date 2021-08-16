@@ -36,8 +36,8 @@ This release has the following fixes:
 
 + **Smoke test errands no longer leave orphan routes:**
    Do a one-time cleanup of orphan routes from earlier versions of Tanzu SQL with MySQL for VMs by running:
-  
-    ```
+
+    ```bash
     cf target -o system -s pivotal-services
     cf delete-orphaned-routes
     ```
@@ -49,6 +49,7 @@ This release has the following issue:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -119,6 +120,7 @@ This release has the following issue:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -151,8 +153,8 @@ New features and changes in this release:
 + **Support Instance Profiles for backups to S3:**
   <%= vars.product_short %> now supports using instance profiles for backups to Amazon S3.
   <br>
-  This is enabled by a radio button on the **Backups** pane of the **<%= vars.product_full %>** tile. Configuring the fields under this option allows for backups to Amazon S3 without
-  using static credentials.
+  This is enabled by a radio button on the **Backups** pane of the **<%= vars.product_full %>** tile.
+  Configuring the fields under this option allows for backups to Amazon S3 without using static credentials.
   For more information, see
   [Back Up to Amazon S3 with Instance Profile](automated-backup.html#instance-profile).
 
@@ -179,6 +181,7 @@ This release has the following issue:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -221,6 +224,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -247,7 +251,7 @@ The following components are compatible with this release:
 **Release Date: December 8, 2020**
 
 <p class="note breaking"><strong>Breaking Change</strong>:
-Before you upgrade to <%= vars.product_full %> v2.10, make sure that
+Before you upgrade to <%= vars.product_full %> v2.10, ensure that
 your apps support connecting to the MySQL database using TLS v1.2.
 This might require updating the MySQL connector.
 For example, if you are using MySQL Connector/J,
@@ -276,8 +280,8 @@ New features and changes in this release:
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI
   using the adbr plugin.
 
-+ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in
-  this release. There have been no changes to the feature since v2.9.1.
++ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially
+  generally available in this release. There have been no changes to the feature since v2.9.1.
 
 + **Percona Server:** Upgraded to v5.7.31–34.
 
@@ -291,6 +295,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -301,8 +306,8 @@ The following components are compatible with this release:
   </tr>
 
   <tr><td>Stemcell</td><td>621.93*</td></tr>
-  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31&ndash;34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31&ndash;34</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
   <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
