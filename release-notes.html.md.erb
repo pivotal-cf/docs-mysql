@@ -14,6 +14,63 @@ Because VMware uses the Percona Distribution for MySQL,
 expect a time lag between Oracle releasing a MySQL patch and VMware releasing
 Tanzu SQL with MySQL for VMs containing that patch.
 
+## <a id="2-10-4"></a> v2.10.4
+
+**Release Date: August 17, 2021**
+
+### Security Fixes
+
+This release includes the following security fix:
+
++ **On Multi-Site Replication instances, the admin port on service instances has been removed:**
+  Now, Envoy only listens on the MySQL port,
+  and multi-site instances do not have any externally available admin interfaces.
+
+### Resolved Issues
+
+This release has the following fixes:
+
++ **ApplicationDataBackupRestore (adbr) processes running on the service instances
+  only accept TLS v1.2 connections**:
+  Previously, these adbr processes accepted all TLS connections, regardless of version.
+
++ **Smoke test errands no longer leave orphan routes:**
+   Do a one-time cleanup of orphan routes from earlier versions of Tanzu SQL with MySQL for VMs by running:
+
+    ```bash
+    cf target -o system -s pivotal-services
+    cf delete-orphaned-routes
+    ```
+
+### Known Issues
+
+This release has the following issue:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.135*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.34–37*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.34–31.51*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.23*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.17.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.37.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-3"></a> v2.10.3
 
 **Release Date: May 28, 2021**
@@ -23,9 +80,9 @@ Tanzu SQL with MySQL for VMs containing that patch.
 New feature in this release:
 
 + **List as many backups as needed:**
-  Previously, the Application Developer Backup and Restore (ADBR) plugin always listed the five most recent backups.
+  Previously, the ApplicationDeveloperBackupRestore (adbr) plugin always listed the five most recent backups.
 
-    Now, the ADBR plugin accepts an integer parameter to specify how many backups to list.
+    Now, the adbr plugin accepts an integer parameter to specify how many backups to list.
     The plugin continues to list five backups by default.
 
     To install the new plugin, see [ApplicationDataBackupRestore](https://plugins.cloudfoundry.org/#ApplicationDataBackupRestore)
@@ -39,7 +96,7 @@ New feature in this release:
   This allows backups to be stored with a path like:
   `p.mysql > BUCKET-PATH > service-instance_GUID > yyyy > mm > dd`.
 
-    Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
+    Previously, the ApplicationDeveloperBackupRestore (adbr) feature stored backup
     artifacts with a path like:
     `p.mysql > service-instance_GUID > yyyy > mm > dd`.
 
@@ -52,8 +109,9 @@ New feature in this release:
 
 This release has the following fix:
 
-+ **ADBR API only accepts TLS 1.2 connections**:
-  Previously, the ADBR API accepted all TLS connections, regardless of version.
++ **ApplicationDataBackupRestore (adbr) processes running on the service broker
+  only accept TLS v1.2 connections**:
+  Previously, these adbr processes accepted all TLS connections, regardless of version.
 
 ### Known Issues
 
@@ -62,6 +120,7 @@ This release has the following issue:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -94,8 +153,8 @@ New features and changes in this release:
 + **Support Instance Profiles for backups to S3:**
   <%= vars.product_short %> now supports using instance profiles for backups to Amazon S3.
   <br>
-  This is enabled by a radio button on the **Backups** pane of the **<%= vars.product_full %>** tile. Configuring the fields under this option allows for backups to Amazon S3 without
-  using static credentials.
+  This is enabled by a radio button on the **Backups** pane of the **<%= vars.product_full %>** tile.
+  Configuring the fields under this option allows for backups to Amazon S3 without using static credentials.
   For more information, see
   [Back Up to Amazon S3 with Instance Profile](automated-backup.html#instance-profile).
 
@@ -122,6 +181,7 @@ This release has the following issue:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -164,6 +224,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -190,7 +251,7 @@ The following components are compatible with this release:
 **Release Date: December 8, 2020**
 
 <p class="note breaking"><strong>Breaking Change</strong>:
-Before you upgrade to <%= vars.product_full %> v2.10, make sure that
+Before you upgrade to <%= vars.product_full %> v2.10, ensure that
 your apps support connecting to the MySQL database using TLS v1.2.
 This might require updating the MySQL connector.
 For example, if you are using MySQL Connector/J,
@@ -219,8 +280,8 @@ New features and changes in this release:
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI
   using the adbr plugin.
 
-+ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially generally available in
-  this release. There have been no changes to the feature since v2.9.1.
++ **<%= vars.single_leader_plan %> GA:** The <%= vars.single_leader_plan %> feature is officially
+  generally available in this release. There have been no changes to the feature since v2.9.1.
 
 + **Percona Server:** Upgraded to v5.7.31–34.
 
@@ -234,6 +295,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
 
 ### Compatibility
+
 The following components are compatible with this release:
 
 <table border="1" class="nice">
@@ -244,8 +306,8 @@ The following components are compatible with this release:
   </tr>
 
   <tr><td>Stemcell</td><td>621.93*</td></tr>
-  <tr><td>Percona Server</td><td>5.7.31–34</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.31-34</td></tr>
+  <tr><td>Percona Server</td><td>5.7.31&ndash;34</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.31&ndash;34</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.20</td></tr>
   <tr><td>mysql-backup-release</td><td>2.15.0</td></tr>
   <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
