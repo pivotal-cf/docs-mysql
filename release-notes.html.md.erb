@@ -22,6 +22,11 @@ Because VMware uses the Percona Distribution for MySQL,
 expect a time lag between Oracle releasing a MySQL patch and VMware releasing
 Tanzu SQL with MySQL for VMs containing that patch.
 
+<p class="note warning">
+   <strong> Warning:</strong> Do not use stemcell 621.141 with
+   Tanzu SQL with MySQL for VMs.
+</p>
+
 ## <a id="2-9-4"></a> v2.9.4
 
 **Release Date: May 28, 2021**
@@ -77,6 +82,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -131,6 +137,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -198,6 +205,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -288,6 +296,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -406,6 +415,7 @@ This release has the following issues:
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
+<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
