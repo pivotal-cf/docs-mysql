@@ -1,0 +1,6 @@
+
+- **Known Issue:** More than one `mariadb_ctrl` process can run at the same time.  
+This can lead to:  
+      - One `mariadb_ctrl` process stopping another `mariadb_ctrl` process
+      - `mariadb_ctrl` processes waiting indefinitely for MySQl to start 
+      - Other issues when starting `mariadb_ctrl` processes

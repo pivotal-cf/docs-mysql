@@ -1,0 +1,259 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/kpis', locals: {
+    kpis: [
+      {
+        metric: '/available',
+        description:<<~DESC,
+         If the MySQL Server is currently responding to requests. This indicates if the component is available.<br><br>
+         <strong>Use</strong>: If the server does not emit heartbeats, it is offline.
+         <br><br>
+         <strong>Origin</strong>: Doppler/Firehose<br>
+         <strong>Type</strong>: boolean<br>
+         <strong>Frequency</strong>: 30 s
+
+         DESC
+         measurement:'Average over last 5 minutes',
+         alert: <<~DESC,
+           <strong>Yellow warning</strong>: N/A<br>
+           <strong>Red critical</strong>: &lt; 1
+         DESC
+         response: <<~DESC,
+         Check the MySQL Server logs for errors.
+         You can find the instance by targeting your MySQL deployment with BOSH
+         and inspecting logs for the instance.
+         For more information,
+         see <a href="https://docs.pivotal.io/p-mysql/troubleshoot.html#failing-jobs">Failing Jobs and Unhealthy Instances</a>.
+         <br><br>
+        If your service plan is an highly available (HA) cluster, you can also
+        run <code>mysql-diag</code> to check logs for errors.
+        DESC
+        id:'server-heartbeat',
+        header: 'Server Availability'
+      },
+
+      {
+        metric: '/system/persistent_disk_used_percent',
+        description:<<~DESC,
+        The percentage of disk used on the persistent file system. <br ><br>
+        <strong>Use</strong>: MySQL cannot function correctly if there is not sufficient
+        free space on the file systems. Use these metrics to ensure that you
+         have disks large enough for your user base.<br>
+        <strong>Origin</strong>: Doppler/Firehose<br>
+        <strong>Type</strong>: Percent<br>
+        <strong>Frequency</strong>: 30 s (default)<br>
+         DESC
+
+         measurement:'Maximum of persistent disk used of all of
+           nodes',
+         alert: <<~DESC,
+         <strong>Single Node and Leader Follower:</strong>
+           <ul>
+         <li><strong>Yellow warning:</strong> > 25%</li>
+         <li><strong>Red critical:</strong> > 30%</li>
+         </ul>
+       <strong>Highly Available Cluster:</strong>
+       <ul>
+         <li><strong>Yellow warning:</strong> > 80%</li>
+         <li><strong>Red critical:</strong> > 90%</td></li>
+       </ul>
+         DESC
+
+         response: 'Upgrade the service instance to a plan with larger disk capacity.<br><br>
+                    For Tanzu SQL for VMs v2.9 and later,
+                       if you set the <code>optimize_for_short_words</code> parameter to <code>true</code>,
+                       then see <a href="https://docs.pivotal.io/p-mysql/troubleshoot-instances.html#disk-usage-increases">Persistent
+                       Disk Usage Is Increasing</a> before upgrading the service.</strong>
+                    ',
+         id:'persistent-used',
+         header: 'Persistent Disk Used'
+      },
+
+
+      {
+        metric: '/system/ephemeral_disk_used_percent' ,
+        description: <<~DESC,
+          The percentage of disk used on the ephemeral file system. <br ><br>
+          <strong>Use</strong>: MySQL cannot function correctly if there is not sufficient
+          free space on the file systems. Use these metrics to ensure that you
+           have disks large enough for your user base.<br>
+          <strong>Origin</strong>: Doppler/Firehose<br>
+          <strong>Type</strong>: Percent<br>
+          <strong>Frequency</strong>: 30 s (default)<br>
+        DESC
+
+        measurement: 	'Maximum disk used of all nodes',
+        alert: <<~DESC,
+          <strong>Yellow warning</strong>: > 80% <br>
+          <strong>Red critical</strong>: > 95%
+        DESC
+        response: 'Upgrade the service instance to a plan with larger disk capacity.',
+        id: 'ephemeral-used',
+        header: 'Ephemeral Disk Used'
+    },
+
+      {
+        metric: '/performance/cpu_utilization_percent',
+        description:<<~DESC,
+        CPU time being consumed by the MySQL service. <br ><br>
+        <strong>Use</strong>: A node that experiences context switching or high CPU usage becomes unresponsive. This also affects the ability of the node to report metrics. <br>
+        <strong>Origin</strong>: Doppler/Firehose<br>
+        <strong>Type</strong>: Percent<br>
+        <strong>Frequency</strong>: 30 s (default)<br>
+         DESC
+
+         measurement:'Average over last 10 minutes',
+         alert: <<~DESC,
+         <strong>Yellow warning:</strong> > 80
+         <strong>Red critical:</strong> > 90
+         DESC
+
+         response: 'Determine what is using so much CPU. If it is from normal processes, update the service instance to use a plan with larger CPU capacity.
+',
+         id:'cpu-utilization-percent',
+         header: 'CPU Utilization Percent'
+      },
+
+    {
+      metric: <<~DESC,
+        /variables/max_connections<br><br>
+        /p.mysql/net/max_used_connections
+      DESC
+
+      description: <<~DESC,
+        The maximum number of connections used over the maximum permitted number of simultaneous client connections.<br><br>
+
+        <strong>Use</strong>: If the number of connections drastically changes or if apps are unable to connect, there might be  a network or app issue.<br>
+        <strong>Origin</strong>: Doppler/Firehose<br>
+        <strong>Type</strong>: count<br>
+        <strong>Frequency</strong>: 30 s
+      DESC
+
+      measurement: <<~DESC,
+        <code>max_used_connections</code> / <code>max_connections</code>
+      DESC
+
+      alert: <<~DESC,
+        <strong>Yellow warning</strong>: &gt; 80 %<br>
+        <strong>Red critical</strong>: &gt; 90 %
+      DESC
+      response: 'If this measurement mets or exceeds
+          80% with exponential growth, monitor app usage to ensure everything
+          is working. <br><br>
+          When approaching 100% of max connections, apps may be experiencing times when they
+          cannot connect to the database.
+          The connections/second for a service instance vary based on app instances and app utilization.',
+      id: 'connections',
+      header: 'Connections'
+    },
+
+    {
+      metric: '/performance/queries_delta' ,
+      description: <<~DESC,
+        The number of statements executed by the server over the last 30 seconds.<br><br>
+
+        <strong>Use</strong>: The server should always be processing some queries. If the server does not process any queries, the server is non-functional.
+        <br><br>
+        <strong>Origin</strong>: Doppler/Firehose<br>
+        <strong>Type</strong>: count<br>
+        <strong>Frequency</strong>: 30 s
+      DESC
+
+      measurement: 	'Average over last 2 minutes',
+      alert: <<~DESC,
+        <strong>Red critical</strong>: 0
+      DESC
+      response: 'Investigate the MySQL server logs, such as the audit log, to understand
+        why query rate changed and determine appropriate action.',
+      id: 'queries-delta',
+      header: 'Queries Delta'
+    },
+
+    {
+      metric: '/galera/wsrep_ready' ,
+      description: <<~DESC,
+        Shows whether each cluster node can accept queries. Returns only 0 or 1.
+         When this metric is 0, almost all queries to that node fail with the
+         error:<br> <code>ERROR 1047 (08501) Unknown Command</code><br><br>
+         <strong>Use:</strong> Discover when nodes of a cluster have been unable to
+         communicate and accept transactions.
+         <br><br><strong>Origin:</strong> Doppler/Firehose<br>
+         <strong>Type:</strong> boolean<br><strong>Frequency:</strong> 30 s (default)
+      DESC
+      measurement: 	'Average of values of each cluster node, over the last 5 minutes',
+      alert: <<~DESC,
+        <strong>Yellow warning:</strong> < 1 <br> <strong>Red critical:</strong> 0 (cluster is down)
+      DESC
+      response: <<~DESC,
+        <ul>
+          <li> Run <code>mysql-diag</code> and check the MySQL Server logs for errors.</li>
+          <li> Ensure no infrastructure event is affecting intra-cluster
+            communication.</li>
+          <li> Ensure that <code>wsrep_ready</code> is not set to off by using the
+             query:<br>
+             <code>SHOW STATUS LIKE 'wsrep_ready';</code>. </li>
+        </ul>
+      DESC
+      id: 'wsrep-ready',
+      header: 'Highly Available Cluster WSREP Ready'
+
+    },
+
+    {
+      metric: '/galera/wsrep_cluster_size' ,
+      description: <<~DESC,
+        The number of cluster nodes with which each node is communicating normally.
+        <br><br> <strong>Use:</strong> When running in a multi-node configuration, this metric
+        indicates if each member of the cluster is communicating normally with all
+        other nodes.<br><br><strong>Origin:</strong> Doppler/Firehose<br> <strong>Type:</strong> count
+        <br><strong>Frequency:</strong> 30 s (default)
+      DESC
+
+      measurement: 	'(Average of the values of each node / cluster size), over the last 5 minutes',
+      alert: <<~DESC,
+        <strong>Yellow warning:</strong> < 3 (availability compromised)<br>
+        <strong>Red critical:</strong> < 1 (cluster unavailable)
+      DESC
+      response: <<~DESC,
+        Run <code>mysql-diag</code> and check the MySQL Server logs for errors.
+      DESC
+      id: 'wsrep-cluster-size',
+      header: 'Highly Available Cluster WSREP Cluster Size'
+    },
+
+    {
+      metric: '/galera/wsrep_cluster_status' ,
+      description: <<~DESC,
+         Shows the primary status of the cluster component that the node is in.
+         <br>Values are:
+         <ul>
+           <li> <code>Primary</code>: Node has a quorum.</li>
+           <li> <code>Non-primary</code>:  Node has lost a quorum. </li>
+           <li> <code>Disconnected</code>: Node is unable to connect to other nodes.</li>
+          </ul>
+          <strong>Use:</strong> Any value other than <code>Primary</code> indicates that the node is
+         part of a non-operational component. This occurs in cases of multiple
+         membership changes that result in a loss of quorum.
+         <br><br><strong>Origin:</strong> Doppler/Firehose
+         <br> <strong>Type:</strong> integer (see above)
+         <br><strong>Frequency:</strong> 30 s (default)
+      DESC
+
+      measurement: 	'Sum of each of the nodes, over the last 5 minutes',
+      alert: <<~DESC,
+        <strong>Yellow warning:</strong> < 3 <br>
+        <strong>Red critical:</strong> < 1
+      DESC
+      response: <<~DESC,
+        <ul>
+          <li>Check node status to ensure that they are all in working order and able
+         to receive write-sets</li>
+         <li> Run <code>mysql-diag</code> and check the MySQL Server logs for errors</li>
+         </ul>
+      DESC
+
+      id: 'wsrep-cluster-status',
+      header: 'Highly Available Cluster WSREP Cluster Status'
+    }
+
+  ]
+
+} %>

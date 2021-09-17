@@ -1,0 +1,91 @@
+<%= partial vars.path_to_partials + '/mysql/monitoring/metrics', locals: {
+    metrics: [
+
+    {
+      source: 'system/persistent\_disk\_used\_percent',
+      description: 'The percentage of disk used on the persistent file system.',
+      unit: 'percent',
+      tag: 'disk-used-percent'
+    },
+
+    {
+      source: 'system/persistent\_disk\_used',
+      description: 'The amount of space used on the persistent disk.',
+      unit: 'KB',
+      tag: 'disk-used'
+    },
+
+    {
+      source: 'system/persistent\_disk\_free',
+      description: 'The amount of space available on the persistent disk.',
+      unit: 'KB',
+      tag: 'disk-free'
+    },
+
+    {
+      source: 'system/persistent\_disk\_inodes\_used\_percent',
+      description: 'The percentage of persistent disk inodes used by both the
+      system and user applications.',
+      unit: 'percent',
+      tag: 'inodes-used-percent'
+    },
+
+    {
+      source: 'system/persistent\_disk\_inodes\_used',
+      description: 'The number of inodes used on the persistent disk.',
+      unit: 'count',
+      tag: 'inodes-used'
+    },
+
+    {
+      source: 'system/persistent\_disk\_inodes\_free',
+      description: 'The number of inodes available on the persistent disk.',
+      unit: 'count',
+      tag: 'inodes-free'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_used\_percent',
+      description: 'The percentage of disk used on the ephemeral file system.',
+      unit: 'percent',
+      tag: 'eph-inodes-used-percent'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_used',
+      description: 'The amount of space used on the ephemeral disk.',
+      unit: 'KB',
+      tag: 'eph-disk-used'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_free',
+      description: 'The amount of space available on the ephemeral disk.',
+      unit: 'KB',
+      tag: 'eph-disk-free'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_inodes\_used\_percent',
+      description: 'The percentage of ephemeral disk inodes used by both the
+      system and user applications.',
+      unit: 'percent',
+      tag: 'eph-inodes-percent'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_inodes\_used',
+      description: 'The number of inodes used on the ephemeral disk.',
+      unit: 'count',
+      tag: 'eph-inodes-used'
+    },
+
+    {
+      source: 'system/ephemeral\_disk\_inodes\_free',
+      description: 'The number of inodes available on the ephemeral disk.',
+      unit: 'count',
+      tag: 'eph-inodes-free'
+    }
+
+    ]
+  } %>

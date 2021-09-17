@@ -1,0 +1,153 @@
+#### <a id="server-heartbeat"></a> Server Availability
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> <%= vars.mysql_metrics_origin_v2 %>/available<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>MySQL Server is currently responding to requests, which indicates if the component is available.<br><br>
+
+      <strong>Use</strong>: If the server does not emit heartbeats, it is offline.
+      <br><br>
+      <strong>Origin</strong>: Doppler/Firehose<br>
+      <strong>Type</strong>: boolean<br>
+      <strong>Frequency</strong>: 30 s
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 5 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: N/A<br>
+      <strong>Red critical</strong>: &lt; 1</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>
+         Check the MySQL Server logs for errors.
+         You can find the instance by targeting your MySQL deployment with BOSH and inspecting logs for the instance.
+         For more information, see <a href="https://docs.pivotal.io/p-mysql/troubleshoot.html#failing-jobs">Failing Jobs and Unhealthy Instances</a>.
+      </td>
+   </tr>
+</table>
+
+#### <a id="disk-free"></a> Persistent and Ephemeral Disk Used
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br><%= vars.mysql_metrics_origin_v2 %>/system/persistent_disk_used_percent and <%= vars.mysql_metrics_origin_v2 %>/system/ephemeral_disk_used_percent<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>The percentage of disk used on the persistent and ephemeral file systems. <br /><br />
+      <strong>Use</strong>: MySQL cannot function correctly if there isn't sufficient free space on the file systems. Use these metrics to ensure that you have disks large enough for your user base.</p>
+      <strong>Origin</strong>: Doppler/Firehose<br>
+      <strong>Type</strong>: Percent<br>
+      <strong>Frequency</strong>: 30 s (default)<br>
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Max of persistent disk used of all of nodes<br>and<br>Maximum ephemeral disk used of all nodes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: > 40% <br><br>
+      <strong>Red critical</strong>: > 45%</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>Upgrade the service instance to a plan with larger disk capacity.</td>
+   </tr>
+</table>
+
+#### <a id="connections"></a> Connections
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> <%= vars.mysql_metrics_origin_v2 %>/variables/max_connections<br>
+     <%= vars.mysql_metrics_origin_v2 %>/net/max_used_connections <br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>The maximum number of connections used over the maximum permitted number of simultaneous client connections.<br><br>
+
+      <strong>Use</strong>: If the number of connections drastically changes or if apps are unable
+      to connect, there might be a network or app issue.</p>
+      <strong>Origin</strong>: Doppler/Firehose<br>
+      <strong>Type</strong>: count<br>
+      <strong>Frequency</strong>: 30 s<br>
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td><code>max_used_connections</code> / <code>max_connections</code></td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <td><strong>Yellow warning</strong>: &gt; 80 % <br>
+      <strong>Red critical</strong>: &gt; 90 %</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>If this measurement mets or exceeds 80% with linear growth,
+          increase the value of <code>max_connections</code>. <br><br> If this measurement mets or exceeds
+          80% with exponential growth, monitor app usage to ensure everything
+          is behaving as expected. <br><br>
+          When approaching 100% of max connections, apps may be experiencing times when they
+          cannot connect to the database.
+          The connections/second for a service instance vary based on app instances and app utilization.
+      </td>
+   </tr>
+</table>
+
+#### <a id="cpu-utilization-percent"></a> CPU Utilization Percent
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> <%= vars.mysql_metrics_origin_v2 %>/performance/cpu_utilization_percent<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>CPU time being consumed by the MySQL service.<br><br>
+
+      <strong>Use</strong>: A node that experiences context switching or high CPU usage will become unresponsive. This also affects the ability of the node to report metrics.
+      <br><br>
+      <strong>Origin</strong>: Doppler/Firehose<br>
+      <strong>Type</strong>: Percent<br>
+      <strong>Frequency</strong>: 30 s (default)
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 10 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <strong>Yellow warning</strong>: > 80</td>
+      <strong>Red critical</strong>: > 90</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>Determine what is using so much CPU. If it is from normal processes, update the service instance to use a plan with larger CPU capacity.</td>
+   </tr>
+</table>
+
+#### <a id="open-files"></a> Queries Delta
+
+<table>
+   <tr><th colspan="2" style="text-align: center;"><br> <%= vars.mysql_metrics_origin_v2 %>/performance/queries_delta<br><br></th></tr>
+   <tr>
+      <th width="25%">Description</th>
+      <td>The number of statements executed by the server over the last 30 seconds.<br><br>
+
+      <strong>Use</strong>: The server should always be processing some queries. If the server does not process any queries, the server is non-functional.
+      <br><br>
+      <strong>Origin</strong>: Doppler/Firehose<br>
+      <strong>Type</strong>: count<br>
+      <strong>Frequency</strong>: 30 s
+   </tr>
+   <tr>
+      <th>Recommended measurement</th>
+      <td>Average over last 2 minutes</td>
+   </tr>
+   <tr>
+      <th>Recommended alert thresholds</th>
+      <strong>Red critical</strong>: 0</td>
+   </tr>
+   <tr>
+      <th>Recommended response</th>
+      <td>Investigate the MySQL server logs, such as the audit log, to understand why query rate changed and determine appropriate action.</td>
+   </tr>
+</table>

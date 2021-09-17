@@ -1,0 +1,36 @@
+<%= vars.product_full %> uses a proxy to send client connections
+to the healthy MySQL database cluster nodes in a highly available cluster plan.
+Using a proxy gracefully handles failure of nodes, enabling fast,
+failover to other nodes within the cluster. When a
+node becomes unhealthy, the proxy closes all connections to the unhealthy node
+and re-routes all subsequent connections to a healthy node.
+
+The proxy used in <%= vars.product_short %> is Switchboard.
+Switchboard was developed to replace HAProxy as the proxy tier for the high
+availability cluster for MySQL databases in <%= vars.product_short %>.
+
+<% if current_page.data.tile %>
+
+<%= image_tag "switchboard-all-healthy.png",
+:alt => "Screenshot of the Switchboard dashboard.
+At the top, there is a banner with the message 'all nodes are healthy'.
+Below this is a table with the headings nodes, status, current sessions, and IP address.
+For each node in the table, the status column is marked healthy." %>
+
+<%end%>
+
+Switchboard offers the following features:
+
+- **MySQL Server Access**
+
+    MySQL clients communicate with nodes through this network port.
+    These connections are automatically passed through to the nodes.
+
+- **Switchboard and API**
+
+    Operators can connect to Switchboard to view the state of the nodes.
+
+    <% if current_page.data.tile %>
+    For more information about monitoring proxy health status, see
+    [Monitoring Node Health](./monitor-health.html).
+    <%end%>
