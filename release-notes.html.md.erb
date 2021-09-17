@@ -16,7 +16,7 @@ For example, if you use an older v<%= previous_version %>.x
 version, upgrade to the latest v<%= previous_version %>.x version
 before upgrading to the latest v<%= current_version %>.x version.
 
-<%= partial vars.path_to_partials + '/upgrade-planner' %>
+<%= partial '/upgrade-planner' %>
 
 Because VMware uses the Percona Distribution for MySQL,
 expect a time lag between Oracle releasing a MySQL patch and VMware releasing
@@ -78,11 +78,11 @@ This release has the following fix:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
-<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/ki-adbr-db-status" %>
+<%= partial "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -133,11 +133,11 @@ New feature in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
-<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/ki-adbr-db-status" %>
+<%= partial "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -201,11 +201,11 @@ New features and changes in this release:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
-<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/ki-adbr-db-status" %>
+<%= partial "/mysql/stemcell-incompatible-ki" %>
 
 
 ### Compatibility
@@ -292,11 +292,11 @@ This release has the following fixes:
 
 This release has the following issues:
 
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
-<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/ki-adbr-db-status" %>
+<%= partial "/mysql/stemcell-incompatible-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:
@@ -410,12 +410,12 @@ This release has the following issues:
 + **The `cf adbr list-backups` command fails to list backups saved in non-AWS S3-compatible blobstores.**
   For example, the command shows an error message if the backups are in Minio S3-compatible storage.
 
-<%= partial vars.path_to_partials + "/mysql/multi-site-network-name-ki" %>
-<%= partial vars.path_to_partials + "/mysql/ki-multi-site-not-supported" %>
-<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-<%= partial vars.path_to_partials + "/mysql/scp-backups-2-6" %>
-<%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
-<%= partial vars.path_to_partials + "/mysql/stemcell-incompatible-ki" %>
+<%= partial "/mysql/multi-site-network-name-ki" %>
+<%= partial "/mysql/ki-multi-site-not-supported" %>
+<%= partial "/mysql/disable-plan-ki" %>
+<%= partial "/mysql/scp-backups-2-6" %>
+<%= partial "/mysql/ki-adbr-db-status" %>
+<%= partial "/mysql/stemcell-incompatible-ki" %>
 
 ### Compatibility
 The following components are compatible with this release:

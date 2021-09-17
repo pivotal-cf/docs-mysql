@@ -46,7 +46,7 @@ For more information, see
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
-<%= partial vars.path_to_partials + "/services/developer-prereqs" %>
+<%= partial "/services/developer-prereqs" %>
 
 ## <a id='marketplace'></a>Confirm the <%= vars.product_short %> Service Availability
 
@@ -282,7 +282,7 @@ your app to apply the changes to `VCAP_SERVICES`.
   <a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">MySQL documentation</a>.
 </p>
 
-<%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
+<%= partial "/mysql/rebind-warning" %>
 
 ## <a id="manage"></a>Manage a Service Instance
 
@@ -371,7 +371,7 @@ To migrate a service instance to another plan:
 
 ### <a id="single"></a> Upgrade an Individual Service Instance
 
-<%= partial vars.path_to_partials + '/services/upgrade-one-si' %>
+<%= partial '/services/upgrade-one-si' %>
 
 
 ###<a id="share"></a> Share Service Instances
@@ -439,7 +439,7 @@ If you want stop an app from using a service you must unbind the app from the se
     OK
     </pre>
 
-<%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
+<%= partial "/mysql/rebind-warning" %>
 
 ### <a id="delete"></a>Delete a Service Instance
 
