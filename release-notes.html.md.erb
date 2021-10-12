@@ -5,22 +5,24 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-VMware recommends that you upgrade to the latest patch for your current minor,
-and then upgrade to the latest available patch for the next minor.
+VMware recommends that you upgrade to the latest patch for your current minor, and then upgrade to the
+latest available patch for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
-Because VMware uses the Percona Distribution for MySQL,
-expect a time lag between Oracle releasing a MySQL patch and VMware releasing
-Tanzu SQL with MySQL for VMs containing that patch.
+Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
+MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that patch.
 
 ## <a id="2-10-5"></a> v2.10.5
 
 **Release Date: MONTH DD, YYYY**
 
 ### Features
+
 + **Added custom tags for on-demand MySQL service instance VMs:**
-There is a new field in the MySQL tile Settings page to enter tags. Those tags are then applied to the Cloud Provider. The accepted format is dependent on the underlying Cloud Provider. E.g. GCP will not allow uppercase characters.  
+There is a new field in the MySQL tile **Settings** page for tags that apply to the Cloud Provider.
+The accepted format depends on the underlying Cloud Provider. <!-- Needs xref -->
+For example, Google Cloud Platform does not allow uppercase characters.
 
 ### Security Fixes
 
@@ -33,12 +35,13 @@ This release includes the following security fix:
 
 This release has the following fix:
 
-+ **Fixed incompatibility with stemcell v621.141:**
-  There was an incompatibility in the stemcell v621.141. This impacted the MySQL product in 2 ways: 
-  + The restore procedure that makes API calls to monit to stop/start/restart the MySQL process. 
-  + The bootstrap errand that recovers a HA cluster that has lost quorum.
-+ **Backups larger that 50GB will now succeed**
-There was a known issue of backups larger than 50GB failing to complete. Backups can now be as large as 1000GB bytes.
++ **Fixed incompatibility with stemcell v621.141:** <!-- We need to add this as a KI to earlier patches; which ones did it apply to? -->
+Incompatibility with stemcell v621.141 interfered with two aspects:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
++ **Backups larger that 50&nbsp;GB now succeed** <!-- We need to add this as a KI to earlier patches; which ones did it apply to? -->
+There was a known issue of backups larger than 50&nbsp;GB failing to complete.
+Backups can now be as large as 1000&nbsp;GB.
 
 ### Known Issues
 
