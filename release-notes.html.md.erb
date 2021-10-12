@@ -18,6 +18,10 @@ Tanzu SQL with MySQL for VMs containing that patch.
 
 **Release Date: MONTH DD, YYYY**
 
+### Features
++ **Added custom tags for on-demand MySQL service instance VMs:**
+There is a new field in the MySQL tile Settings page to enter tags. Those tags are then applied to the Cloud Provider. The accepted format is dependent on the underlying Cloud Provider. E.g. GCP will not allow uppercase characters.  
+
 ### Security Fixes
 
 This release includes the following security fix:
@@ -29,8 +33,12 @@ This release includes the following security fix:
 
 This release has the following fix:
 
-+ **SHORT DESCRIPTION:**
-  FULL DESCRIPTION
++ **Fixed incompatibility with stemcell v621.141:**
+  There was an incompatibility in the stemcell v621.141. This impacted the MySQL product in 2 ways: 
+  + The restore procedure that makes API calls to monit to stop/start/restart the MySQL process. 
+  + The bootstrap errand that recovers a HA cluster that has lost quorum.
++ **Backups larger that 50GB will now succeed**
+There was a known issue of backups larger than 50GB failing to complete. Backups can now be as large as 1000GB bytes.
 
 ### Known Issues
 
