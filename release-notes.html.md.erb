@@ -21,7 +21,7 @@ MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that pa
 
 + **Added custom tags for on-demand MySQL service instance VMs:**
 There is a new field in the MySQL tile **Settings** page for tags that apply to the Cloud Provider.
-The accepted format depends on the underlying Cloud Provider. <!-- Needs xref -->
+The accepted format depends on the underlying Cloud Provider.
 For example, Google Cloud Platform does not allow uppercase characters.
 
 ### Security Fixes
@@ -35,11 +35,11 @@ This release includes the following security fix:
 
 This release has the following fix:
 
-+ **Fixed incompatibility with stemcell v621.141:** <!-- We need to add this as a KI to earlier patches; which ones did it apply to? -->
-Incompatibility with stemcell v621.141 interfered with two aspects:
++ **Fixed incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interfered with two processes:
     + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
     + The bootstrap errand that recovers an HA cluster that has lost quorum.
-+ **Backups larger that 50&nbsp;GB now succeed** <!-- We need to add this as a KI to earlier patches; which ones did it apply to? -->
++ **Backups larger that 50&nbsp;GB now succeed**
 There was a known issue of backups larger than 50&nbsp;GB failing to complete.
 Backups can now be as large as 1000&nbsp;GB.
 
@@ -105,6 +105,14 @@ This release has the following fixes:
 This release has the following issue:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
++ **Incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interferes with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
+This issue is fixed in v2.10.5.
++ **Backups larger than 50&nbsp;GB fail:**
+Backups larger than 50&nbsp;GB fail to complete.
+As of v2.10.5, backups can be as large as 1000&nbsp;GB.
 
 ### Compatibility
 
@@ -176,6 +184,14 @@ This release has the following fix:
 This release has the following issue:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
++ **Incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interferes with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
+This issue is fixed in v2.10.5.
++ **Backups larger than 50&nbsp;GB fail:**
+Backups larger than 50&nbsp;GB fail to complete.
+As of v2.10.5, backups can be as large as 1000&nbsp;GB.
 
 ### Compatibility
 
@@ -237,6 +253,14 @@ This release has the following fix:
 This release has the following issue:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
++ **Incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interferes with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
+This issue is fixed in v2.10.5.
++ **Backups larger than 50&nbsp;GB fail:**
+Backups larger than 50&nbsp;GB fail to complete.
+As of v2.10.5, backups can be as large as 1000&nbsp;GB.
 
 ### Compatibility
 
@@ -280,6 +304,14 @@ This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
++ **Incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interferes with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
+This issue is fixed in v2.10.5.
++ **Backups larger than 50&nbsp;GB fail:**
+Backups larger than 50&nbsp;GB fail to complete.
+As of v2.10.5, backups can be as large as 1000&nbsp;GB.
 
 ### Compatibility
 
@@ -351,6 +383,14 @@ This release has the following issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-db-status" %>
++ **Incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interferes with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
+This issue is fixed in v2.10.5.
++ **Backups larger than 50&nbsp;GB fail:**
+Backups larger than 50&nbsp;GB fail to complete.
+As of v2.10.5, backups can be as large as 1000&nbsp;GB.
 
 ### Compatibility
 
