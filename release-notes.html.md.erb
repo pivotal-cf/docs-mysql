@@ -10,14 +10,8 @@ and then upgrade to the latest available patch for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
-Because VMware uses the Percona Distribution for MySQL,
-expect a time lag between Oracle releasing a MySQL patch and VMware releasing
-Tanzu SQL with MySQL for VMs containing that patch.
-
-<p class="note warning">
-   <strong>Warning:</strong> Do not use stemcell v621.141 or later with
-   <%= vars.product_full %>.
-</p>
+Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
+MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that patch.
 
 ## <a id="2-10-5"></a> v2.10.5
 
@@ -25,27 +19,23 @@ Tanzu SQL with MySQL for VMs containing that patch.
 
 ### Features
 
+This release has the following new feature:
+
 + **Added custom tags for on-demand MySQL service instance VMs:**
+
 There is a new field in the MySQL tile **Settings** page for tags that apply to the Cloud Provider.
 The accepted format depends on the underlying Cloud Provider.
 For example, Google Cloud Platform does not allow uppercase characters.
 
-### Security Fixes
-
-This release includes the following security fix:
-
-+ **SHORT DESCRIPTION:**
-  FULL DESCRIPTION
-
 ### Resolved Issues
 
-This release has the following fix:
+This release has the following fixes:
 
 + **Fixed incompatibility with stemcell v621.141:**
 Incompatibility with stemcell v621.141 interfered with two processes:
     + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
     + The bootstrap errand that recovers an HA cluster that has lost quorum.
-+ **Backups larger that 50&nbsp;GB now succeed**
++ **Backups larger that 50&nbsp;GB now succeed:**
 There was a known issue of backups larger than 50&nbsp;GB failing to complete.
 Backups can now be as large as 1000&nbsp;GB.
 
@@ -66,13 +56,13 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 
-  <tr><td>Stemcell</td><td></td></tr>
-  <tr><td>Percona Server</td><td></td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
-  <tr><td>Percona XtraBackup</td><td></td></tr>
-  <tr><td>mysql-backup-release</td><td></td></tr>
-  <tr><td>mysql-monitoring-release</td><td></td></tr>
-  <tr><td>pxc-release</td><td></td></tr>
+  <tr><td>Stemcell</td><td>621.141*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.34–37</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.34–31.51</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.23</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.17.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.37.0</td></tr>
 
 </table>
 
