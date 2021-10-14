@@ -19,6 +19,65 @@ Tanzu SQL with MySQL for VMs containing that patch.
    <%= vars.product_full %>.
 </p>
 
+## <a id="2-10-5"></a> v2.10.5
+
+**Release Date: October 14, 2021**
+
+### Features
+
++ **Added custom tags for on-demand MySQL service instance VMs:**
+There is a new field in the MySQL tile **Settings** page for tags that apply to the Cloud Provider.
+The accepted format depends on the underlying Cloud Provider.
+For example, Google Cloud Platform does not allow uppercase characters.
+
+### Security Fixes
+
+This release includes the following security fix:
+
++ **SHORT DESCRIPTION:**
+  FULL DESCRIPTION
+
+### Resolved Issues
+
+This release has the following fix:
+
++ **Fixed incompatibility with stemcell v621.141:**
+Incompatibility with stemcell v621.141 interfered with two processes:
+    + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
+    + The bootstrap errand that recovers an HA cluster that has lost quorum.
++ **Backups larger that 50&nbsp;GB now succeed**
+There was a known issue of backups larger than 50&nbsp;GB failing to complete.
+Backups can now be as large as 1000&nbsp;GB.
+
+### Known Issues
+
+This release has the following issue:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td></td></tr>
+  <tr><td>Percona Server</td><td></td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
+  <tr><td>Percona XtraBackup</td><td></td></tr>
+  <tr><td>mysql-backup-release</td><td></td></tr>
+  <tr><td>mysql-monitoring-release</td><td></td></tr>
+  <tr><td>pxc-release</td><td></td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-4"></a> v2.10.4
 
 **Release Date: August 17, 2021**
