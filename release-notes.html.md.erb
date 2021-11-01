@@ -31,7 +31,7 @@ For example, Google Cloud Platform does not allow uppercase characters.
 This release has the following fixes:
 
 + **Fixed incompatibility with stemcell v621.141:**
-Incompatibility with stemcell v621.141 interfered with two processes:
+Incompatibility with stemcell v621.141 or later interfered with two processes:
     + The restore procedure that makes API calls to monit to stop, start, or restart the MySQL process.
     + The bootstrap errand that recovers an HA cluster that has lost quorum.
 + **Backups larger than 50&nbsp;GB now succeed:**
