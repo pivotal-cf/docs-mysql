@@ -11,7 +11,7 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 |-------------| -------|
 | master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
 | 2.10        | Docs for [v2.10.x](https://docs.pivotal.io/p-mysql/2-10) |
-| 2.9         | Docs for [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
+| 2.9         | DEPRECATED. DO NOT USE. Docs for [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
 | 2.8         | DEPRECATED. DO NOT USE. Docs for [v2.8.x](https://docs.pivotal.io/p-mysql/2-8) |
 | 2.7         | DEPRECATED. DO NOT USE. Docs for [v2.7.x](https://docs.pivotal.io/p-mysql/2-7) |
 | 2.6         | DEPRECATED. DO NOT USE. Docs for [v2.6.x](https://docs.pivotal.io/p-mysql/2-6) |
