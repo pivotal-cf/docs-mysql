@@ -13,6 +13,50 @@ and then upgrade to the latest available patch for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="2-10-6"></a> v2.10.6
+
+**Release Date: MONTH DD, YYYY**
+
+### Features
+
+### Security Fixes
+
+This release includes the following security fix:
+
++ **CVE-2021-44228 - Remote code injection in Log4j2:**
+  Bumped log4j to 2.15.0 as message lookup substitution behavior has been disabled by default. 
+
+### Resolved Issues
+
+### Known Issues
+
+This release has the following issues:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td></td></tr>
+  <tr><td>Percona Server</td><td></td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
+  <tr><td>Percona XtraBackup</td><td></td></tr>
+  <tr><td>mysql-backup-release</td><td></td></tr>
+  <tr><td>mysql-monitoring-release</td><td></td></tr>
+  <tr><td>pxc-release</td><td></td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
 ## <a id="2-10-5"></a> v2.10.5
 
 **Release Date: October 14, 2021**
