@@ -30,6 +30,7 @@ This release includes the following security fix:
 + The on-demand broker now communicates with the Cloud Foundry Cloud Controller over TLS.
 
 ### Resolved Issues
+Requests to the CloudFoundry router destined for an HA mysql service instance can have a header `X-Forwarded-Proto: https`. Previously such requests would have caused an infinite redirect.
 
 ### Known Issues
 
