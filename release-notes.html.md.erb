@@ -17,23 +17,23 @@ MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that pa
 
 **Release Date: MONTH DD, YYYY**
 
-### Features
-
 ### Security Fixes
 
-This release includes the following security fix:
+This release includes the following security fixes:
 
 + **[CVE-2021-44228](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-44228) / [CVE 2021-45046](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45046) / [CVE 2021-45105](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-45105) - Remote code injection in Log4j2:**
 
-  Bumped log4j to v2.17.0 in the sample spring app used in the smoke tests errand.
+  This release updates log4j to v2.17.0 in the sample spring app that is used in the smoke tests errand.
 
 + The on-demand broker now communicates with the Cloud Foundry Cloud Controller over TLS.
 
 ### Resolved Issues
 
+Requests to the CloudFoundry router destined for an HA mysql service instance can now have a header `X-Forwarded-Proto: https`. Previously such requests would have caused an infinite redirect. 
+
 ### Known Issues
 
-This release has the following issues:
+This release has the following known issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
