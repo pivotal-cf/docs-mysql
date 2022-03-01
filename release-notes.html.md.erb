@@ -13,6 +13,47 @@ latest available patch for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that patch.
 
+## <a id="2-10-7"></a> v2.10.7
+
+**Release Date: MONTH DD, YYYY**
+
+### Security Fixes
+
+### Resolved Issues
+
++ **Azure Backups larger than 50&nbsp;GB now succeed**
+  There was a known issue of backups larger than 50&nbsp;GB failing to complete when uploading to an Azure blobstore.
+  Backups as large as 1000&nbsp;GB can now be uploaded to an Azure Blob Store.
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td></td></tr>
+  <tr><td>Percona Server</td><td></td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td></td></tr>
+  <tr><td>Percona XtraBackup</td><td></td></tr>
+  <tr><td>mysql-backup-release</td><td></td></tr>
+  <tr><td>mysql-monitoring-release</td><td></td></tr>
+  <tr><td>pxc-release</td><td></td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
 ## <a id="2-10-6"></a> v2.10.6
 
 **Release Date: MONTH DD, YYYY**
