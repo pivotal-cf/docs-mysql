@@ -15,15 +15,13 @@ MySQL patch and VMware releasing Tanzu SQL with MySQL for VMs containing that pa
 
 ## <a id="2-10-7"></a> v2.10.7
 
-**Release Date: MONTH DD, YYYY**
-
-### Security Fixes
+**Release Date: March 02, 2022**
 
 ### Resolved Issues
 
-+ **Azure Backups larger than 50&nbsp;GB now succeed**
-  There was a known issue of backups larger than 50&nbsp;GB failing to complete when uploading to an Azure blobstore.
-  Backups as large as 1000&nbsp;GB can now be uploaded to an Azure Blob Store.
++ **Backups to an Azure blobstore can now be larger than 50&nbsp;GB**
+  Uploading backups larger than 50&nbsp;GB to an Azure blobstore was failing. 
+  This release supports backups as large as 1000&nbsp;GB to an Azure blobstore.
 
 ### Known Issues
 
@@ -54,6 +52,7 @@ The following components are compatible with this release:
 </table>
 
 &#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-6"></a> v2.10.6
 
 **Release Date: MONTH DD, YYYY**
