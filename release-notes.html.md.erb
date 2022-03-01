@@ -13,6 +13,44 @@ and then upgrade to the latest available patch for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="2-10-7"></a> v2.10.7
+
+**Release Date: March 02, 2022**
+
+### Resolved Issues
+
++ **Backups to an Azure blobstore can now be larger than 50&nbsp;GB**
+  Uploading backups larger than 50&nbsp;GB to an Azure blobstore was failing. 
+  This release now supports backups as large as 1000&nbsp;GB to an Azure blobstore.
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
+<%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.196+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.35-38</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.35-31.53</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.24</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.18.0</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.15.0</td></tr>
+  <tr><td>pxc-release</td><td>0.41.0</td></tr>
+
+</table>
+
 ## <a id="2-10-6"></a> v2.10.6
 
 **Release Date: January 24, 2022**
