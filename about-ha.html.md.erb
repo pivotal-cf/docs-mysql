@@ -193,4 +193,30 @@ For more information, see [wsrep\_max\_ws\_rows](https://www.percona.com/doc/per
 
 ## <a id="proxy"></a>MySQL Proxy
 
-<%= partial '../../p-mysql/partials/mysql/mysql-proxy' %>
+<%= vars.product_full %> uses a proxy to send client connections
+to the healthy MySQL database cluster nodes in a highly available cluster plan.
+Using a proxy gracefully handles failure of nodes, enabling fast,
+failover to other nodes within the cluster. When a
+node becomes unhealthy, the proxy closes all connections to the unhealthy node
+and re-routes all subsequent connections to a healthy node.
+
+The proxy used in <%= vars.product_short %> is Switchboard.
+Switchboard was developed to replace HAProxy as the proxy tier for the high
+availability cluster for MySQL databases in <%= vars.product_short %>.
+
+<a href="./images/switchboard-all-healthy.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+Switchboard offers the following features:
+
+- **MySQL Server Access**
+
+    MySQL clients communicate with nodes through this network port.
+    These connections are automatically passed through to the nodes.
+
+- **Switchboard and API**
+
+    Operators can connect to Switchboard to view the state of the nodes.
+
+    For more information about monitoring proxy health status, see
+    [Monitoring Node Health](./monitor-health.html).
+    
