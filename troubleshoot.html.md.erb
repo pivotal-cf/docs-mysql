@@ -133,7 +133,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
-        <pre class="terminal">Instance provisioning failed: There was a problem completing your request. Please contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</code></td>
+        <pre class="terminal">Instance provisioning failed: There was a problem completing your request. Please contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</pre></td>
   </tr>
 
   <tr>
@@ -216,7 +216,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
-        <pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</code></td>
+        <pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</pre></td>
   </tr>
 
   <tr>
@@ -280,7 +280,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
-        <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</code></td>
+        <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</pre></td>
   </tr>
 
   <tr>
@@ -346,7 +346,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
-    <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</code></td>
+    <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</pre></td>
   </tr>
 
   <tr>
@@ -663,7 +663,7 @@ errand fails because it cannot determine the VM roles. <br><br>
 The <code>configure-leader-follower</code> errand exits with <code>1</code>
 and the errand logs contain the following:
 
-<pre class="terminal">$ Unable to determine leader and follower based on transaction history.</code>
+<pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
 </td>
   </tr>
 
@@ -712,7 +712,8 @@ and topology without operator intervention to resolve the issue.
                GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
                Replication Configured: true
       2 errand(s)
-      Succeeded</code>
+      Succeeded</pre>
+
         In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
@@ -731,7 +732,7 @@ and topology without operator intervention to resolve the issue.
 
         <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
           run-errand configure-leader-follower &#92;
-          --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</code>
+          --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</pre>
       </li>
     </ol></td>
   </tr>
@@ -772,7 +773,7 @@ main table {
 The <code>configure–leader-follower</code> errand exits with <code>1</code>
 and the errand logs contain the following:
 
-<pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</code>
+<pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</pre>
 </td>
   </tr>
 
@@ -819,7 +820,7 @@ and the errand logs contain the following:
                  Replication Configured: false<br /><br />
         2 errand(s)<br />
         Succeeded
-      </code>
+      </pre>
           If the GTID Executed sets for both instances are the same, continue to Step 2. If they are different, continue to Step 4.</li>
         <li>Look at the value of GTID Executed for both instances.
           <ul>
@@ -838,7 +839,7 @@ and the errand logs contain the following:
               run-errand make-read-only &#92;
               --instance=mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
             [...]
-            succeeded</code>
+            succeeded</pre>
         </li>
         <li>If the GTID Executed sets are neither equivalent nor subsets, data has diverged and you must determine what data has diverged as part of the procedure below:
           <ol>
@@ -853,7 +854,7 @@ and the errand logs contain the following:
                   run-errand make-read-only &#92;
                   --instance=mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
                   [...]
-                  succeeded</code>
+                  succeeded</pre>
             </li>
             <li>Take a backup of both instances using the
               <a href="./backup-mysqldump.html#create-backup"> Create a Tanzu SQL for VMs Logical Backup</a>
@@ -863,7 +864,7 @@ and the errand logs contain the following:
             <li>After putting all data on the leader, ssh onto the follower:
               <code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code>
               For example:
-              <pre class="terminal">$ bosh -e my-env -d my-dep ssh mysql/e0b94ade-0114-4d49-a929-ce1616d8beda</code>
+              <pre class="terminal">$ bosh -e my-env -d my-dep ssh mysql/e0b94ade-0114-4d49-a929-ce1616d8beda</pre>
             </li>
             <li>Become root with the command
               <code>sudo su</code>.<br></li>
@@ -882,7 +883,7 @@ and the errand logs contain the following:
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
                 run-errand configure-leader-follower &#92;
-                --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</code>
+                --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</pre>
             </li>
           </ol>
         </li>
@@ -966,7 +967,7 @@ main table {
              Replication Configured: false<br /><br />
     2 errand(s)<br />
     Succeeded
-    </code>
+    </pre>
       </li>
       <li>
         If Read Only is set to
@@ -980,7 +981,7 @@ main table {
     $ bosh -e my-env -d my-dep &#92;
       run-errand configure-leader-follower &#92;
       --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
-    </code>
+    </pre>
       </li>
     </ol>
    </td>
@@ -1197,11 +1198,11 @@ main table {
     <td>
     A client connected to a Tanzu SQL for VMs cluster node reports the following error:
 
-    <pre class="terminal">WSREP has not yet prepared this node for application use</code>
+    <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
-    </code>
+    </pre>
     </td>
   </tr>
 
@@ -1304,7 +1305,7 @@ main table {
 160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
 160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
 160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
-</code>
+</pre>
 </td>
   </tr>
 
@@ -1389,10 +1390,10 @@ main table {
 <ul>
   <li>The backup fails.</li>
   <li>The adbr-api logs for the broker show:
-   <pre class="terminal">backup failed with response: 502 Bad Gateway: Registered endpoint failed to handle the request.</code>
+   <pre class="terminal">backup failed with response: 502 Bad Gateway: Registered endpoint failed to handle the request.</pre>
   </li>
   <li>The gorouter logs on the TAS for VMs deployment show:
-   <pre class="terminal">adbr-api.SYSTEM-DOMAIN - [2021-01-20T19:30:00.911080271Z] "POST /service_instances/acb85c98-151e-4f13-9f0f-de057ef18d67/backup HTTP/1.1" 502 ... x_cf_routererror:"endpoint_failure" ...</code>
+   <pre class="terminal">adbr-api.SYSTEM-DOMAIN - [2021-01-20T19:30:00.911080271Z] "POST /service_instances/acb85c98-151e-4f13-9f0f-de057ef18d67/backup HTTP/1.1" 502 ... x_cf_routererror:"endpoint_failure" ...</pre>
    Where <code>SYSTEM-DOMAIN</code> is your system domain.
   </li>
 </ul>
@@ -1611,7 +1612,7 @@ instance BOSH deployments, and on performing general maintenance and housekeepin
   You can retrieve the error message later by running the cf CLI command <code>cf service INSTANCE-NAME</code>.
 </p>
 
-<pre class="terminal">
+```
 $ cf service myservice
 
 Service instance: myservice
@@ -1634,7 +1635,7 @@ Message: Instance provisioning failed: There was a problem completing your reque
      operation: create
 Started: 2017-03-13T10:16:55Z
 Updated: 2017-03-13T10:17:58Z
-</code>
+```
 
 <p>
   Use the information in the <code>Message</code> field to debug further.
@@ -1817,7 +1818,7 @@ Updated: 2017-03-13T10:17:58Z
   For example:
 </p>
 
-<pre class="terminal">bosh -d my-deployment run-errand deregister-broker</code>
+<pre class="terminal">bosh -d my-deployment run-errand deregister-broker</pre>
 
 <h4 id="-register-broker"><a id="register-broker"></a> Register Broker</h4>
 
@@ -1990,7 +1991,7 @@ Updated: 2017-03-13T10:17:58Z
 Orphan BOSH deployments detected with no corresponding service instance in Cloud Foundry. Before deleting any deployment it is recommended to verify the service instance no longer exists in Cloud Foundry and any data is safe to delete.
 
 Errand 'orphan-deployments' completed with error (exit code 10)
-</code>
+</pre>
 
 <p>
   These details will also be available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
@@ -2006,7 +2007,7 @@ $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-i
     "blobstore_id": "d830c4bf-8086-4bc2-8c1d-54d3a3c6d88d"
   }
 }
-</code>
+</pre>
 
 <p>
   <strong>If no orphan deployments exist</strong>&mdash;The errand script does the following:
@@ -2026,7 +2027,7 @@ $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-i
 None
 
 Errand 'orphan-deployments' completed successfully (exit code 0)
-</code>
+</pre>
 
 <p>
   <strong>If the errand encounters an error during running</strong>&mdash;The errand script does the following:
@@ -2386,7 +2387,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
   |  4 | dummy data           |
   |  7 | more dummy data      |
   | 10 | even more dummy data |
-  +----+----------------------+</code>
+  +----+----------------------+</pre>
   </li>
   <li>
     Verify that the other nodes contain the same dummy data
@@ -2424,7 +2425,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
     |  4 | dummy data           |
     |  7 | more dummy data      |
     | 10 | even more dummy data |
-    +----+----------------------+ </code>
+    +----+----------------------+ </pre>
       </li>
     </ol>
   </li>
@@ -2480,7 +2481,8 @@ For example:
   BOSH_CLIENT_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
   BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate \
   BOSH_ENVIRONMENT=10.0.0.5 \
-  BOSH_DEPLOYMENT=pivotal-mysql-14c4</code></p></li>
+  BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
+  </p></li>
 <li><p>Run the <code>download-logs</code> script by running:</p>
 <pre class="highlight plaintext"><code>./download-logs -o .
 </code>
@@ -2506,9 +2508,6 @@ and suggests recovery actions if the cluster fails.</p>
 </p>
 
 <h2 id="-file-a-support-ticket"><a id="support"></a>  File a Support Ticket</h2>
-
-<%= partial '../../p-mysql/partials/services-tshoot/tshoot-support' %>
-
 
 You can file a ticket with [Support](https://support.pivotal.io/). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
 
