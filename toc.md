@@ -26,9 +26,9 @@
         *   [Resolving Service Interruptions](./interruptions.html)
         *   [Running Errands](./errands.html)
         *   [Troubleshooting](./troubleshoot.html)
-        *   Leader-Follower Procedures
+        *   [Leader-Follower Procedures](./leader-follower-prodedures.html)
             *   [Triggering a Leader-Follower Failover](./leader-follower-failover.html)
-        *   Highly Available Clusters Procedures
+        *   [Highly Available Clusters Procedures](./ha-procedures.html)
             *   [Bootstrapping](./bootstrapping.html)
             *   [Running mysql-diag](./mysql-diag.html)
             *   [About the Replication Canary](./replication-canary.html)
