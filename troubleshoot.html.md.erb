@@ -14,4 +14,91 @@ This section provides information on how to troubleshoot specific errors or erro
 
 ### <a id="x-product"></a> Common Services Errors
 
+The following errors occur in multiple services:
 
+*   [Failed Installation](#install-fail)
+*   [Cannot Create or Delete Service Instances](#cannot-create-delete)
+*   [Broker Request Timeouts](#timeouts)
+*   [Instance Does Not Exist](#instance-not-exist)
+*   [Cannot Bind to or Unbind from Service Instances](#cannot-bind)
+*   [Cannot Connect to a Service Instance](#cannot-connect)
+*   [Upgrade All Service Instances Errand Fails](#upgrade-all-fails)
+*   [Missing Logs and Metrics](#missing-logs)
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="install-fail"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Failed Installation
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Tanzu SQL for VMs fails to install.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Reasons for a failed installation include:
+    <ul>
+    <li>
+    Certificate issues: The on-demand broker (ODB) requires valid certificates.
+    </li>
+    <li>Deploy fails. This could be due to a variety of reasons.
+    </li>
+    <li>Networking problems: </li>
+    <ul>
+    <li>Cloud Foundry cannot reach the Tanzu SQL for VMs broker</li>
+    <li>Cloud Foundry cannot reach the service instances</li>
+    <li>The service network cannot access the BOSH director </li>
+    </ul>
+    <li>The Register broker errand fails.</li>
+    <li>The smoke test errand fails.</li>
+    <li>
+    Resource sizing issues: These occur when the resource sizes selected for a
+    given plan are less than Tanzu SQL for VMs requires to function.
+    </li>
+    <li>Other service-specific issues.</li>
+    </ul></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ul>
+    <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
+    To generate new certificates, contact <a href="https://support.pivotal.io">Support</a>.</li>
+
+    <li>Deploy fails: View the logs using Ops Manager to determine why the deploy is failing.</li>
+
+    <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li>
+
+    <li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li>
+
+    <li>Resource sizing issues: Check your resource configuration in Ops Manager and ensure that the
+    configuration matches that recommended by the service.</li>
+    </ul></td>
+  </tr>
+
+</table>
+</div>
