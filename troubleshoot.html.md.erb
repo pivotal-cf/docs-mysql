@@ -2507,34 +2507,9 @@ and suggests recovery actions if the cluster fails.</p>
 
 <h2 id="-file-a-support-ticket"><a id="support"></a>  File a Support Ticket</h2>
 
+<%= partial '../../p-mysql/partials/services-tshoot/tshoot-support' %>
 
 
-<p>
-  You can file a ticket with <a href="https://support.pivotal.io/">Support</a>.
-  Be sure to provide the error message from <code>cf service YOUR-SERVICE-INSTANCE</code>.
-</p>
+You can file a ticket with [Support](https://support.pivotal.io/). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
 
-<p>
-  To expedite troubleshooting, provide your service broker logs and your service instance logs.
-  If your <code>cf service YOUR-SERVICE-INSTANCE</code> output includes a
-  <code>task-id</code>, provide the BOSH task output.
-</p>
-
-          <div><a id='repo-link' href='http://github.com/pivotal-cf/docs-mysql/tree/2.10/troubleshoot.html.md.erb'>Create a pull request or raise an issue on the source for this page in GitHub</a></div>
-
-          <footer class="site-footer-links">
-            <div class="copyright">
-  <a href='https://www.vmware.com/help/privacy.html'  target="_blank">Privacy Policy</a> | 
-  <a href='https://www.vmware.com/help/legal.html'  target="_blank">Terms of Use</a> | 
-	<a href="https://www.vmware.com/help/privacy/california-privacy-rights.html">Your California Privacy Rights</a> | 
-	<a class="ot-sdk-show-settings">Cookie Settings</a>
-
-  <br/>
-  Copyright &copy; 2022 <a href='https://vmware.com' target="_blank">VMware</a>, Inc. or its affiliates. All Rights Reserved.
-  <br/>
-  <br/>
-</div>
-<div class="support">
-  Need help? <a href="https://tanzu.vmware.com/support" target="_blank">Visit Support</a>
-</div>
-
+To expedite troubleshooting, provide your service broker logs and your service instance logs. If your `cf service YOUR-SERVICE-INSTANCE` output includes a `task-id`, provide the BOSH task output.
