@@ -2320,124 +2320,78 @@ To manually force a node to rejoin the cluster, do the following:</p>
 
 <h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check Replication Status in a Highly Available Cluster</h3>
 
-<p>If you see stale data in your cluster, you can check whether replication is functioning normally.</p>
+If you see stale data in your cluster, you can check whether replication is functioning normally.
 
-<p>To check the replication status, do the following:</p>
+To check the replication status, do the following:
 
-<ol>
-  <li>To log in to the BOSH Director VM, do the following:
-    <ol>
-      <li>Gather the information needed to log in to the BOSH Director VM by doing the
-        procedure in
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather">Gather Credential and IP Address Information</a>.
-      </li>
-      <li>Log in to the Ops Manager VM by doing the procedure in
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh">Log in to the Ops Manager VM with SSH</a>.
-      </li>
-    </ol>
-  </li>
-  <li>
-    Create a dummy database in the first node by running:
-    <code>mysql -h FIRST-NODE-IP-ADDRESS \
-       -u YOUR-IDENTITY \
-       -p -e "create database verify_healthy;"</code>
+1.  To log in to the BOSH Director VM, do the following:
+    1.  Gather the information needed to log in to the BOSH Director VM by doing the procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+    2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+2.  Create a dummy database in the first node by running: 
+    
+    ```
+    mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -e "create database verify_healthy;"
+    ```
+
     Where:
-    <ul>
-      <li>
-        <code>FIRST-NODE-IP-ADDRESS</code>
-        is the IP address of the first node you recorded in step 1.
-      </li>
-      <li>
-        <code>YOUR-IDENTITY</code> is the value of <code>identity</code>
-        that you recorded in step 1.
-      </li>
-    </ul>
-  </li>
-  <li>
-    Create a dummy table in the dummy database by running:
-    <code>mysql -h FIRST-NODE-IP-ADDRESS \
-      -u your-identity \
-      -p -D verify_healthy \
-      -e "create table dummy_table (id int not null primary key auto_increment, info text) \
-      engine='innodb';"</code>
-  </li>
-  <li>
-    Insert data into the dummy table by running:
-    <code>mysql -h FIRST-NODE-IP-ADDRESS \
-      -u YOUR-IDENTITY \
-      -p -D verify_healthy \
-      -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"</code>
-  </li>
-  <li>
-    <p>
-      Query the table and verify that the three rows of dummy data exist on the first node by running:
-    </p>
-    <code>mysql -h FIRST-NODE-IP-ADDRESS \
-      -u YOUR-IDENTITY \
-      -p -D verify_healthy \
-      -e "select * from dummy_table;"</code>
+    *   `FIRST-NODE-IP-ADDRESS` is the IP address of the first node you recorded in step 1.
+    *   `YOUR-IDENTITY` is the value of `identity` that you recorded in step 1.
 
-    When prompted for a password, provide the <code>password</code>
-    value recorded in step 1.<br>
+3.  Create a dummy table in the dummy database by running:  
+
+    ```
+    mysql -h FIRST-NODE-IP-ADDRESS \ -u your-identity \ -p -D verify_healthy \ -e "create table dummy_table (id int not null primary key auto_increment, info text) \ engine='innodb';"
+    ```
+
+4.  Insert data into the dummy table by running:  
+
+    ```
+    mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"
+    ```
+
+5.  Query the table and verify that the three rows of dummy data exist on the first node by running:
+    
+    ```
+    mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "select * from dummy_table;"
+    ```
+    
+    When prompted for a password, provide the `password` value recorded in step 1.  
     The above command returns output similar to the following:
-    <pre class="terminal">
-  +----+----------------------+
-  | id | info                 |
-  +----+----------------------+
-  |  4 | dummy data           |
-  |  7 | more dummy data      |
-  | 10 | even more dummy data |
-  +----+----------------------+</pre>
-  </li>
-  <li>
-    Verify that the other nodes contain the same dummy data
-    by doing the following for each of the remaining MySQL server IP addresses:
-    <ol>
-      <li>Query the dummy table by running :
-        <code>mysql -h NEXT-NODE-IP-ADDRESS \
-          -u YOUR-IDENTITY \
-          -p -D verify\_healthy \
-          -e "select * from dummy_table;"</code>
+    
+     +----+----------------------+
+      | id | info                 |
+      +----+----------------------+
+      |  4 | dummy data           |
+      |  7 | more dummy data      |
+      | 10 | even more dummy data |
+      +----+----------------------+
+    
+6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
+    1.  Query the dummy table by running : `mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"` When prompted for a password, provide the `password` value recorded in step 1.
+    2.  Verify that the node contains the same three rows of dummy data as the other nodes by running:
+        
+        ```
+        mysql -h NEXT-NODE-IP-ADDRESS \\
+                  -u YOUR-IDENTITY \\
+                  -p -D verify\\\_healthy \\
+                  -e "select \* from dummy\\\_table;"
+        ```
+        When prompted for a password, provide the `password` value recorded in step 1.
+                
+        
+    3.  Verify that the above command returns output similar to the following:
+        
+            +----+----------------------+
+            | id | info                 |
+            +----+----------------------+
+            |  4 | dummy data           |
+            |  7 | more dummy data      |
+            | 10 | even more dummy data |
+            +----+----------------------+ 
+        
+7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://support.pivotal.io/)  
+    **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
-        When prompted for a password, provide the
-        <code>password</code>
-        value recorded in step 1.
-      </li>
-      <li>
-        Verify that the node contains the same three rows of dummy data as the other nodes
-        by running:
-
-        <pre >mysql -h NEXT-NODE-IP-ADDRESS \
-          -u YOUR-IDENTITY \
-          -p -D verify\_healthy \
-          -e "select * from dummy\_table;"</code>
-
-        When prompted for a password, provide the
-        <code>password</code>
-        value recorded in step
-        </li>
-
-        <li>Verify that the above command returns output similar to the following:
-        <pre class="terminal">
-    +----+----------------------+
-    | id | info                 |
-    +----+----------------------+
-    |  4 | dummy data           |
-    |  7 | more dummy data      |
-    | 10 | even more dummy data |
-    +----+----------------------+ </pre>
-      </li>
-    </ol>
-  </li>
-  <li>
-    <strong>If each MySQL server instance does not return the same result,</strong> before proceeding
-    further or making any changes to your deployment, contact
-    <a href="https://support.pivotal.io/">Support</a>
-    <br>
-    <strong>If each MySQL server instance returns the same result,</strong> then you can safely proceed
-    to scaling down your cluster to a single node.
-  </li>
-</ol>
 
 <h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for Troubleshooting</h2>
 
@@ -2465,8 +2419,7 @@ the jumpbox VM.</p>
 <li><code>BOSH_ENVIRONMENT</code></li>
 </ul></li>
 <li><p>From the BOSH CLI, view the name of the BOSH deployment for Tanzu SQL for VMs by running:</p>
-<pre class="highlight plaintext"><code>bosh deployments
-</code>
+<code>bosh deployments</code>
 
 <p>Record the name of the BOSH deployment.</p></li>
 <li><p>SSH into your Ops Manager VM by doing the procedures in
@@ -2484,22 +2437,20 @@ For example:
   BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
   </p></li>
 <li><p>Run the <code>download-logs</code> script by running:</p>
-<pre class="highlight plaintext"><code>./download-logs -o .
-</code>
+<code>./download-logs -o .</code>
 
 <p>The script saves a compressed file of logs combined from all Tanzu SQL for VMs VMs.
 The filename has the form <code>TIMESTAMP-mysql-logs.tar.gz.gpg</code>.</p></li>
 </ol>
 
-<h3 id="-mysql-diag"><a id="mysql-diag"></a> mysql-diag</h3>
 
-<p>The <code>mysql-diag</code> tools outputs the current status of a highly available (HA) Tanzu SQL for VMs cluster
-and suggests recovery actions if the cluster fails.</p>
+### <a id="mysql-diag"></a>mysql-diag
 
-<p>For more information, see <a href="/p-mysql/2-10/mysql-diag.html">Running mysql-diag</a>.</p>
+The `mysql-diag` tools outputs the current status of a highly available (HA) Tanzu SQL for VMs cluster and suggests recovery actions if the cluster fails.
+
+For more information, see [Running mysql-diag](/p-mysql/2-10/mysql-diag.html).
 
 <h2 id="-knowledge-base-(community)"><a id="kb"></a> Knowledge Base (Community)</h2>
-
 
 
 <p>
