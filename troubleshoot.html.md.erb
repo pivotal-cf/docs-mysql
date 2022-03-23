@@ -1473,9 +1473,7 @@ in <em>On-Demand Networking</em>.
     tab of the VMware Tanzu Application Service for VMs tile.
 </p>
 
-<h3 id="-networking"><a id="network"></a>  Networking</h3>
-
-
+<h3 id="-networking"><a id="network"></a>  Networking</h3> 
 
 <p>
     Common issues with networking include:
@@ -1537,82 +1535,61 @@ To validate connectivity, do the following:
   <code>VCAP_SERVICES</code> environment variable.
 </p>
 
-<h3 id="-quotas"><a id="quotas"></a>  Quotas</h3>
+### <a id="quotas"></a> Quotas
 
-<h4 id="-plan-quota-issues"><a id="plan-quotas"></a> Plan Quota Issues</h4>
+#### Plan Quota Issues
 
+If developers report errors such as:
 
-<p>
-  If developers report errors such as:
-</p>
-
-<pre class="terminal">
+```
 Message: Service broker error: The quota for this service plan has been exceeded.
 Please contact your Operator for help.
-</pre>
+```
 
-<ol>
-  <li>Check your current plan quota.</li>
-  <li>Increase the plan quota.</li>
-  <li>Log in to Ops Manager.</li>
-  <li>Reconfigure the quota on the plan page.</li>
-  <li>Deploy the tile.</li>
-  <li>Find who is using the plan quota and take the appropriate action.</li>
-</ol>
+1.  Check your current plan quota.
+2.  Increase the plan quota.
+3.  Log in to Ops Manager.
+4.  Reconfigure the quota on the plan page.
+5.  Deploy the tile.
+6.  Find who is using the plan quota and take the appropriate action.
 
-<h4 id="-global-quota-issues"><a id="global-quotas"></a>  Global Quota Issues</h4>
+#### Global Quota Issues
 
+If developers report errors such as:
 
-<p>
-  If developers report errors such as:
-</p>
-
-<pre class="terminal">
+```
 Message: Service broker error: The quota for this service has been exceeded.
 Please contact your Operator for help.
-</pre>
+```
 
-<ol>
-  <li>Check your current global quota.</li>
-  <li>Increase the global quota.</li>
-  <li>Log in to Ops Manager.</li>
-  <li>Reconfigure the quota on the on-demand settings page.</li>
-  <li>Deploy the tile.</li>
-  <li>Find out who is using the quota and take the appropriate action.</li>
-</ol>
+1.  Check your current global quota.
+2.  Increase the global quota.
+3.  Log in to Ops Manager.
+4.  Reconfigure the quota on the on-demand settings page.
+5.  Deploy the tile.
+6.  Find out who is using the quota and take the appropriate action.
 
 <h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a>  Failing Jobs and Unhealthy Instances</h3>
 
 
-<p>
-  To determine whether there is an issue with the Tanzu SQL for VMs
-  deployment: 
-</p>
+To determine whether there is an issue with the Tanzu SQL for VMs deployment:
 
-<ol>
-  <li>
-    <p>
-      Inspect the VMs by running:
-    </p>
-    <pre><code>bosh -d service-instance_GUID vms --vitals</code></pre>
-  </li>
-  <li>
-    <p>
-      For additional information, run:
-    </p>
-    <pre><code>bosh -d service-instance_GUID instances --ps --vitals</code></pre>
-  </li>
-</ol>
+1.  Inspect the VMs by running:
+    
+    ```
+    bosh -d service-instance_GUID vms --vitals
+    ```
 
-<p>
-  If the VM is failing, follow the service-specific information.
-  Any unadvised corrective actions (such as running BOSH <code>restart</code> on
-  a VM) can cause issues in the service instance.
-</p>
+2.  For additional information, run:
+    
+    ```
+    bosh -d service-instance_GUID instances --ps --vitals
+    ```
 
-<p>A failing process or failing VM might come back automatically after a temporary service outage. See
-<a href="./interruptions.html#process-fail">VM Process Failure</a>
-and <a href="./interruptions.html#vm-fail">VM Failure</a>.</p>
+If the VM is failing, follow the service-specific information. Any unadvised corrective actions (such as running BOSH `restart` on a VM) can cause issues in the service instance.
+
+A failing process or failing VM might come back automatically after a temporary service outage. See [VM Process Failure](./interruptions.html#process-fail) and [VM Failure](./interruptions.html#vm-fail).
+
 
 <h3 id="-az-or-region-failure"><a id="az-region-fail"></a>  AZ or Region Failure</h3>
 
