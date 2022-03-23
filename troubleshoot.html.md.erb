@@ -2358,16 +2358,23 @@ To check the replication status, do the following:
     When prompted for a password, provide the `password` value recorded in step 1.  
     The above command returns output similar to the following:
     
-     +----+----------------------+
-      | id | info                 |
-      +----+----------------------+
-      |  4 | dummy data           |
-      |  7 | more dummy data      |
-      | 10 | even more dummy data |
-      +----+----------------------+
+    <pre class="terminal">
+    +----+----------------------+
+     | id | info                 |
+    +----+----------------------+
+    |  4 | dummy data           |
+    |  7 | more dummy data      |
+    | 10 | even more dummy data |
+    +----+----------------------+
+    </pre>
     
 6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
-    1.  Query the dummy table by running : `mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"` When prompted for a password, provide the `password` value recorded in step 1.
+    1.  Query the dummy table by running : 
+        ```
+        mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"
+        ```
+        When prompted for a password, provide the `password` value recorded in step 1.
+        
     2.  Verify that the node contains the same three rows of dummy data as the other nodes by running:
         
         ```
