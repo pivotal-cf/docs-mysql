@@ -1508,33 +1508,25 @@ in <em>On-Demand Networking</em>.
     </tr>
 </table>
 
-<h4 id="-validate-service-broker-connectivity-to-service-instances"><a id="broker-to-instances"></a>  Validate Service Broker Connectivity to Service Instances</h4>
+#### Validate Service Broker Connectivity to Service Instances
+
+To validate connectivity, do the following:
+
+1.  View the BOSH deployment name for your service broker by running:
+    
+    ```
+    bosh deployments
+    ```
+    
+2.  SSH into the Tanzu SQL for VMs service broker by running:
+    
+    ```
+    bosh -d DEPLOYMENT-NAME ssh
+    ```
+    
+3.  If no BOSH `task-id` appears in the error message, look in the broker log using the `broker-request-id` from the task.
 
 
-<p>
-    To validate connectivity, do the following:
-</p>
-
-<ol>
-    <li>
-        <p>
-            View the BOSH deployment name for your service broker by running:
-        </p>
-        <pre><code>bosh deployments</code></pre>
-    </li>
-    <li>
-        <p>
-            SSH into the Tanzu SQL for VMs service broker by running:
-        </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME ssh</code></pre>
-    </li>
-    <li>
-        <p>
-            If no BOSH <code>task-id</code> appears in the error message, look in the
-            broker log using the <code>broker-request-id</code> from the task.
-        </p>
-    </li>
-</ol>
 
 <h4 id="-validate-app-access-to-service-instance"><a id="app-to-instances"></a>  Validate App Access to Service Instance</h4>
 
