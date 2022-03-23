@@ -169,7 +169,7 @@ main table {
         <p>
         Retrieve the BOSH task ID from the error message and run the following command:
         </p>
-        <pre><code>bosh task TASK-ID</code></pre>
+        <code>bosh task TASK-ID</code>
         </li>
         <li>
         <p>
@@ -235,7 +235,7 @@ main table {
         Check the BOSH queue size:
         <ol>
         <li>Log in to BOSH as an admin.</li>
-        <li>Run <pre><code>bosh tasks</code></pre></li>
+        <li>Run <code>bosh tasks</code></li>
         </ol>
     If there are a large number of queued tasks, the system may be under too much load.
         BOSH is configured with two workers and one status worker, which might not be
@@ -297,13 +297,13 @@ main table {
         Confirm that the Tanzu SQL for VMs instance exists in BOSH and
         obtain the GUID CF by running:
         </p>
-        <pre><code>cf service MY-INSTANCE --guid</code></pre>
+        <code>cf service MY-INSTANCE --guid</code>
         </li>
         <li>
         <p>
         Using the GUID obtained above, run:
         </p>
-        <pre><code>bosh -d service-instance_GUID vms</code></pre>
+        <code>bosh -d service-instance_GUID vms</code>
         </li>
         </ol>
 
@@ -597,13 +597,13 @@ main table {
     <p>
     Find the GUID for your service instance by running:
     </p>
-    <pre><code>cf service SERVICE-INSTANCE --guid</code></pre>
+    <code>cf service SERVICE-INSTANCE --guid</code>
     </li>
     <li>
     <p>
     Find logs from your service instance by running:
     </p>
-    <pre><code>cf log-stream | grep "SERVICE-GUID"</code></pre>
+    <code>cf log-stream | grep "SERVICE-GUID"</code>
     </li>
     <li>If no metrics appear within five minutes, verify that the broker network has access
     to the Loggregator system on all required ports.</li>
@@ -830,9 +830,9 @@ and the errand logs contain the following:
         <li>Based on the information you gathered in the step above, run the
           <code>make-read-only</code>
           errand to make the appropriate instance read-only:
-          <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+          <code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
             run-errand make-read-only &#92;
-            --instance=mysql/MYSQL-SUBSET-INSTANCE</code></pre>
+            --instance=mysql/MYSQL-SUBSET-INSTANCE</code>
           For example:
           <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
               run-errand make-read-only &#92;
@@ -845,9 +845,9 @@ and the errand logs contain the following:
             <li>Use the
               <code>make-read-only</code>
               errand to set both instances to read-only to prevent further data divergence.
-              <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+              <code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
                 run-errand make-read-only &#92;
-                --instance=mysql/MYSQL-INSTANCE</code></pre>
+                --instance=mysql/MYSQL-INSTANCE</code>
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
                   run-errand make-read-only &#92;
@@ -861,7 +861,7 @@ and the errand logs contain the following:
             <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and will be the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
             <li>After putting all data on the leader, ssh onto the follower:
-              <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code></pre>
+              <code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code>
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep ssh mysql/e0b94ade-0114-4d49-a929-ce1616d8beda</pre>
             </li>
@@ -876,9 +876,9 @@ and the errand logs contain the following:
             <li>Use the
               <code>configure-leader-follower</code>
               errand to copy the leader data to the follower and resume replication:
-              <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+              <code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
                 run-errand configure-leader-follower &#92;
-                --instance=mysql/GUID-OF-LEADER</code></pre>
+                --instance=mysql/GUID-OF-LEADER</code>
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
                 run-errand configure-leader-follower &#92;
@@ -1681,25 +1681,25 @@ Updated: 2017-03-13T10:17:58Z
         <p>
             Identify the on-demand broker (ODB) deployment by running the following command:
         </p>
-        <pre><code>bosh deployments</code></pre>
+        <code>bosh deployments</code>
     </li>
     <li>
         <p>
             View VMs in the deployment by running the following command:
         </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME instances</code></pre>
+        <code>bosh -d DEPLOYMENT-NAME instances</code>
     </li>
     <li>
         <p>
             SSH onto the VM by running the following command:
         </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME ssh</code></pre>
+        <code>bosh -d DEPLOYMENT-NAME ssh</code>
     </li>
     <li>
         <p>
             Download the broker logs by running the following command:
         </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME logs</code></pre>
+        <code>bosh -d DEPLOYMENT-NAME logs</code>
     </li>
 </ol>
 
@@ -1744,25 +1744,25 @@ Updated: 2017-03-13T10:17:58Z
             To target an individual service instance deployment, retrieve the GUID of your
             service instance with the following cf CLI command:
         </p>
-        <pre><code>cf service MY-SERVICE --guid</code></pre>
+        <code>cf service MY-SERVICE --guid</code>
     </li>
     <li>
         <p>
             To view VMs in the deployment, run the following command:
         </p>
-        <pre><code>bosh -d service-instance_GUID instances</code></pre>
+        <code>bosh -d service-instance_GUID instances</code>
     </li>
     <li>
         <p>
             To SSH into a VM, run the following command:
         </p>
-        <pre><code>bosh -d service-instance_GUID ssh</code></pre>
+        <code>bosh -d service-instance_GUID ssh</code>
     </li>
     <li>
         <p>
             To download the instance logs, run the following command:
         </p>
-        <pre><code>bosh -d service-instance_GUID logs</code></pre>
+        <code>bosh -d service-instance_GUID logs</code>
     </li>
 </ol>
 
@@ -1811,7 +1811,7 @@ Updated: 2017-03-13T10:17:58Z
   To run an errand, run the following command:
 </p>
 
-<pre><code>bosh -d DEPLOYMENT-NAME run-errand ERRAND-NAME</code></pre>
+<code>bosh -d DEPLOYMENT-NAME run-errand ERRAND-NAME</code>
 
 <p>
   For example:
@@ -1871,7 +1871,7 @@ Updated: 2017-03-13T10:17:58Z
   To run the errand, run the following command:
 </p>
 
-<pre><code>bosh -d DEPLOYMENT-NAME run-errand deregister-broker</code></pre>
+<code>bosh -d DEPLOYMENT-NAME run-errand deregister-broker</code>
 
 <h4 id="-upgrade-all-service-instances"><a id="upgrade-all"></a> Upgrade All Service Instances</h4>
 
@@ -1946,7 +1946,7 @@ Updated: 2017-03-13T10:17:58Z
   To run the errand, run the following command:
 </p>
 
-<pre><code>bosh -d service-instance_GUID delete-deployment</code></pre>
+<code>bosh -d service-instance_GUID delete-deployment</code>
 
 <h3 id="-detect-orphaned-service-instances"><a id="detect-orphans"></a> Detect Orphaned Service Instances</h3>
 
@@ -1966,7 +1966,7 @@ Updated: 2017-03-13T10:17:58Z
   To run the errand, run the following command:
 </p>
 
-<pre><code>bosh -d DEPLOYMENT-NAME run-errand orphan-deployments</code></pre>
+<code>bosh -d DEPLOYMENT-NAME run-errand orphan-deployments</code>
 
 <p>
   <strong>If orphan deployments exist</strong>&mdash;The errand script does the following:
@@ -2046,7 +2046,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
   <strong>WARNING: </strong> Running this command may leave IaaS resources in an unusable state.
 </p>
 
-<pre><code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code></pre>
+<code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
 
 <h3 id="-reinstall-a-tile"><a id="reinstall"></a>  Reinstall a Tile</h3>
 
@@ -2065,13 +2065,13 @@ in the Support knowledge base.</p>
         <p>
             Run the following command:
         </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME vms --vitals</code></pre>
+        <code>bosh -d DEPLOYMENT-NAME vms --vitals</code>
     </li>
     <li>
         <p>
             To view process-level information, run:
         </p>
-        <pre><code>bosh -d DEPLOYMENT-NAME instances --ps</code></pre>
+        <code>bosh -d DEPLOYMENT-NAME instances --ps</code>
     </li>
 </ol>
 
@@ -2088,7 +2088,7 @@ in the Support knowledge base.</p>
   <li>Log in to CF as an admin.</li>
   <li>
     Obtain a list of all service bindings by running the following:
-    <pre><code>cf curl /v2/service_instances/GUID/service_bindings</code></pre>
+    <code>cf curl /v2/service_instances/GUID/service_bindings</code>
   </li>
   <li>
     The output from the above curl gives you a list of <code>resources</code>,
@@ -2465,7 +2465,7 @@ the jumpbox VM.</p>
 </ul></li>
 <li><p>From the BOSH CLI, view the name of the BOSH deployment for Tanzu SQL for VMs by running:</p>
 <pre class="highlight plaintext"><code>bosh deployments
-</code></pre>
+</code>
 
 <p>Record the name of the BOSH deployment.</p></li>
 <li><p>SSH into your Ops Manager VM by doing the procedures in
@@ -2483,7 +2483,7 @@ For example:
   BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre></p></li>
 <li><p>Run the <code>download-logs</code> script by running:</p>
 <pre class="highlight plaintext"><code>./download-logs -o .
-</code></pre>
+</code>
 
 <p>The script saves a compressed file of logs combined from all Tanzu SQL for VMs VMs.
 The filename has the form <code>TIMESTAMP-mysql-logs.tar.gz.gpg</code>.</p></li>
