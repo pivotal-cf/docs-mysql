@@ -48,7 +48,7 @@ To create an ASG for <%= vars.product_short %>:
 1. Click your services network and record the **CIDR**.
     ![In the 'Create Networks' pane, in the 'Networks' section the 'services'
     network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are
-    shown.](opsman-dir-reserved-ips.png)
+    shown.](images/opsman-dir-reserved-ips.png)
 
 1. Create a JSON file named `mysql-asg.json` using the template below:
 
