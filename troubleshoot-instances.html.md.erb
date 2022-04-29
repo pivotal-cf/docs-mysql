@@ -3,32 +3,36 @@ title: Troubleshooting On-Demand Instances
 owner: MySQL
 ---
 
+<p>This topic provides techniques that app developers can use to begin troubleshooting
+ on-demand instances.</p>
 
-This topic provides techniques that app developers can use to begin troubleshooting
- on-demand instances.
+<h2 id="-troubleshoot-errors"><a id="errors"></a> Troubleshoot Errors</h2>
 
-## <a id="errors"></a> Troubleshoot Errors
+<p>Start here if you are responding to a specific error or error messages.</p>
 
-Start here if you are responding to a specific error or error messages.
+<h3 id="-common-service-errors"><a id="x-product"></a> Common Service Errors</h3>
 
-### <a id="x-product"></a> Common Service Errors
+<p>Errors common to on-demand services are:</p>
 
-Errors common to on-demand services are:
-
-+ [No Metrics from Log Cache](#no-metrics)
-
-+ [When Using Service-Gateway Access, create-service or update-service Fails](#no-service-gateway-ports)
-
-[//]: # (The below partial is in https://github.com/pivotal-cf/docs-partials)
+<ul>
+<li><p><a href="#no-metrics">No Metrics from Log Cache</a></p></li>
+<li><p><a href="#no-service-gateway-ports">When Using Service-Gateway Access, create-service or update-service Fails</a></p></li>
+</ul>
 
 <style>
+
+
 main table {
   table-layout: fixed;
 }
+
 </style>
 
+<p><a name="no-metrics"></a></p>
+
 <div>
-<table class="nice" id="no-metrics">
+
+  <table class="nice">
     <style>
       main table {
         table-layout: fixed;
@@ -37,32 +41,46 @@ main table {
   <col width="20%">
   <col width="80%">
   <tr>
-    <th colspan="2" style="text-align: left;"> <br>No Metrics from Log Cache<br><br></th>
+  <th colspan="2" style="text-align: left;"> <br>
+    No Metrics from Log Cache
+  <br><br></th>
   </tr>
+
   <tr>
     <th>Symptom</th>
     <td>You receive no metrics when running the <code>cf tail</code> command.</td>
   </tr>
+
   <tr>
     <th>Cause</th>
     <td>This might be because the Firehose is disabled in the TAS for VMs tile.</td>
   </tr>
+
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>Ask your operator to ensure that the V2 Firehose checkbox is enabled, and the Enable Log Cache syslog ingestion checkbox is disabled in the TAS for VMs tile. For more information about configuring these checkboxes, see
-    <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a></td>
+    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> checkbox is enabled,
+  and the <strong>Enable Log Cache syslog ingestion</strong> checkbox is disabled in the TAS for VMs tile.
+  For more information about configuring these checkboxes, see
+  <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
   </tr>
+
 </table>
 </div>
 
 <style>
+
+
 main table {
   table-layout: fixed;
 }
+
 </style>
 
+<p><a name="no-service-gateway-ports"></a></p>
+
 <div>
-<table class="nice" id="no-service-gateway-ports">
+
+  <table class="nice">
     <style>
       main table {
         table-layout: fixed;
@@ -71,15 +89,18 @@ main table {
   <col width="20%">
   <col width="80%">
   <tr>
-    <th colspan="2" style="text-align: left;"> <br>When Using Service-Gateway Access, create-service or update-service Fails<br><br></th>
+  <th colspan="2" style="text-align: left;"> <br>
+    When Using Service-Gateway Access, create-service or update-service Fails
+  <br><br></th>
   </tr>
+
   <tr>
     <th>Symptom</th>
     <td><p>When you run <code>cf create-service</code> or <code>cf update-service</code> with
-        <code>{\"enable_external_access\": true}</code>, you receive an error like this:</p>
-        <pre class='terminal'>Service broker error: contact your operator,<br>service configuration issue occurred</pre>
-    </td>
+              <code>{"enable_external_access": true}</code>, you receive an error like this:</p>
+              <pre class='terminal'>Service broker error: contact your operator,<br>service configuration issue occurred</pre></td>
   </tr>
+
   <tr>
     <th>Cause</th>
     <td><p>When off-platform access is set up for a foundation, a range of TCP ports is reserved for MySQL traffic.
@@ -87,6 +108,7 @@ main table {
             <p>If all the ports in the range have been assigned to other service instances,
             then you cannot create or update service instances to use service-gateway access.</p></td>
   </tr>
+
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td><p>To resolve this error, confirm that the problem is due to not enough ports
@@ -100,27 +122,767 @@ main table {
                      see <a href='troubleshoot.html#bosh-cf-access'>Access Broker Logs and VMs</a>.
                   </li>
                   <li> Ask the operator to increase the external TCP port range for off-platform access
-                       by editing the <strong>Settings</strong> pane on the #{vars.product_short} tile.
+                       by editing the <strong>Settings</strong> pane on the Tanzu SQL for VMs tile.
                        For information about the Settings pane,
                        see <a href='enable-service-gateway.html#configure-service-gateway-plan'>
                        Enable Service-Gateway Access</a> in <em>Enabling Service-Gateway Access</em>.
                   </li>
-                 </ol></td>
+                 </ol> </td>
   </tr>
+
 </table>
 </div>
 
+<h3 id="if-instances-or-database-are-inaccessible"><a id="inaccessible"></a>If Instances or Database are Inaccessible</h3>
+
+<p>You might experience the following in a leader-follower or Multi&#8209;Site Replication
+topology, or during upgrades:</p>
+
+<ul>
+<li><a href="#outages">Temporary Outages</a></li>
+<li><a href="#read-only">Apps Cannot Write to the Database</a></li>
+<li><a href="#disk-full">Apps Are Inoperable</a></li>
+<li><a href="#m-tls-error">Apps Cannot Connect to the Database</a></li>
+<li><a href="#connecter">MySQL Connector/J v5.1.41 or Earlier</a></li>
+<li><a href="#m-tls">Mutual TLS</a></li>
+<li><a href="#java-buildpack">Java Apps Cannot Connect after Buildpack Update</a></li>
+</ul>
+
+<style>
 
 
-### <a id="inaccessible"></a>If Instances or Database are Inaccessible
+main table {
+  table-layout: fixed;
+}
 
-You might experience the following in a leader-follower or <%= vars.single_leader_plan %>
-topology, or during upgrades:
+</style>
 
-- [Temporary Outages](#outages)
-- [Apps Cannot Write to the Database](#read-only)
-- [Apps Are Inoperable](#disk-full)
-- [Apps Cannot Connect to the Database](#m-tls-error)
-- [MySQL Connector/J v5.1.41 or Earlier](#connecter)
-- [Mutual TLS](#m-tls)
-- [Java Apps Cannot Connect after Buildpack Update](#java-buildpack)
+<p><a name="outages"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Temporary Outages
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>VMware Tanzu SQL with MySQL for VMs service instances can become temporarily inaccessible during upgrades and VM or network failures.</td>
+  </tr>
+
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>For more information, see <a href="./upgrade.html#interruptions">Service Interruptions</a>.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="read-only"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Cannot Write to the Database
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>You have a leader-follower or Multi&#8209;Site Replication topology, and your apps can no
+    longer write to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>If you have a leader-follower topology, the leader VM might be read-only.
+    If you can no longer read to the database as well, your persistent disk might be full.</p>
+    <p>If you have a Multi&#8209;Site Replication topology, your leader VM might be down.</p></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>If you have a leader-follower topology and the leader VM is read-only, for how to
+    troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
+        Both Leader and Follower Instances Are Read-Only</a>.</p>
+    <p>If your apps can no longer read to the database as well,
+    your persistent disk might be full. For more information about
+    troubleshooting inoperable apps, see <a href='#disk-full'>
+        Apps are Inoperable</a>.</p>
+    <p>If you have a Multi&#8209;Site Replication topology and your leader VM is down,
+    to resolve this issue, you can trigger a failover to the follower VM.
+    For more information about troubleshooting this problem,
+    see <a href='./multi-site-trigger-failover.html'>
+        Triggering Multi-Site Replication Failover and Switchover</a>.</p></td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="disk-full"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Are Inoperable
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Your apps become inoperable. Read,
+write, and cf CLI operations do not work.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Your persistent disk might be full.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Contact your operator to check if your persistent disk is full.
+For more information about troubleshooting this problem, see
+<a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="m-tls-error"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Cannot Connect to the Database
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Apps can fail to connect to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><ul>
+    <li>When your app uses an incompatible version of MySQL Connector/J.</li>
+    <li>When your app uses mutual TLS (mTLS).</li>
+</ul></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><ul>
+    <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a> below.</li>
+    <li>See <a href="#m-tls">Mutual TLS</a> below.</li>
+    <li>See <a href="#m-tls">Java Apps Cannot Connect after Buildpack Update</a> below.</li>
+</ul></td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="connecter"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    MySQL Connector/J v5.1.41 or Earlier
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>Apps cannot connect to the database when TLS is enabled and
+the apps are using MySQL Connector/J v5.1.41 or earlier.</p></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>You see errors about certificates.</p>
+<p>For example:</p>
+<pre class="terminal">Caused by: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate
+  at sun.security.ssl.Alerts.getSSLException(Alerts.java:192) ~[na:1.8.0_152]</pre></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>If you cannot update the MySQL Connector/J, do the workaround in
+<a href="https://community.pivotal.io/s/article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack">
+How to disable KeyManager and TrustManager in Container Security Provider Framework in the
+Javanbuildpack</a> in the Support knowledge base.</p></td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="m-tls"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Mutual TLS
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Apps cannot connect to the database when TLS is enabled and your apps use mTLS.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>You see network errors in your app logs.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To resolve this issue disable mTLS in your apps.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="java-buildpack"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Java Apps Cannot Connect after Buildpack Update
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>After updating a Java app to use Java buildpack v4.38 or later,
+             the app cannot connect to the database over TLS.
+             <p>In the app logs, you see errors such as:</p>
+              <pre class="terminal">javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)</pre> </td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>By default, the new version of Java disables TLS v1.0 and v1.1.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Update the app to use MySQL Connector/J v5.1.49 or later or MySQL Connector/J v8.0.19 or later.
+               This ensures that TLS v1.2 is used.</td>
+  </tr>
+
+</table>
+</div>
+
+<h3 id="-failed-backup-or-restore-with-the-adbr-plugin"><a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plugin</h3>
+
+<p>If you get errors when working with the ApplicationDataBackupRestore (adbr) plugin
+for the Cloud Foundry Command Line Interface (cf CLI) tool, see:</p>
+
+<ul>
+<li><a href="#failed-adbr-400">&ldquo;400&rdquo; Error during Backup or Restore</a></li>
+<li><a href="#failed-adbr-500">&ldquo;500&rdquo; Error during Backup or Restore</a></li>
+<li><a href="#failed-adbr-502">&ldquo;502&rdquo; Error during Backup or Restore</a></li>
+<li><a href="#failed-restore">&ldquo;Status: Restore failed&rdquo; after adbr Restore</a></li>
+</ul>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="failed-adbr-400"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    &ldquo;400&rdquo; Error during Backup or Restore
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre class="terminal">$ cf adbr backup myDB
+  Failed to backup service instance "myDB": failed due to server error, status code: 400</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The broker on the VM is not running or is in an unhealthy state.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Verify the health of the broker VM and review the logs for the broker.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="failed-adbr-500"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    &ldquo;500&rdquo; Error during Backup or Restore
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre class="terminal">$ cf adbr backup myDB
+  Failed to backup service instance "myDB": failed due to server error, status code: 500</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The service instance agent is not running or is in an unhealthy state.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Verify the health of the service instance VM and review the logs for the service instance.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="failed-adbr-502"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    &ldquo;502&rdquo; Error during Backup or Restore
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>When running <code>cf adbr backup</code> or <code>cf adbr restore</code>, an error occurs.</p>
+    <p>For example:</p>
+    <pre class="terminal">$ cf adbr backup myDB
+  Failed to backup service instance "myDB": failed due to server error, status code: 502</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The VM is down, stopped, or in an unhealthy state.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Verify the health of the broker VM and review the logs for the broker.</td>
+  </tr>
+
+</table>
+</div>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="failed-restore"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    &ldquo;Status: Restore failed&rdquo; after adbr Restore
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>When running <code>cf adbr get-status</code> after restoring to a service instance,
+                 adbr returns <code>Restore failed</code>.</p>
+    <p>For example:</p>
+    <pre class="terminal">$ cf adbr get-status myTargetDB
+Getting status of service instance myTargetDB in org my-org / space system as admin...
+[Thu Feb 25 22:33:58 UTC 2021] Status: Restore failed</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>A possible cause is that the database on the new service instance is not empty.
+    For more information, see <a href="backup-restore.html#empty-database">The New Database Must Be Empty</a>
+    in <em>Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs.</em></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>To resolve the error and complete the restore:</p>
+                <ol>
+                 <li>
+                     Determine if the database is empty by reviewing the log <code>/var/vcap/sys/log/mysql-restore/mysql-restore.stderr.log</code>
+                     on the service instance.
+                  </li>
+                  <li>
+                     If any GTIDs (global transaction identifiers) are printed in the logs, then the database is not empty.<br>
+                     Delete the service instance and create a new service instance to restore the backup to.
+                  </li>
+                  <li>
+                     If the log does not contain any GTIDs, then the restore failed for another reason.
+                     Review other logs on the service instance and, if necessary, contact Support.
+                  </li>
+                 </ol> </td>
+  </tr>
+
+</table>
+</div>
+
+<p>For general information about the adbr plugin,
+see <a href="/p-mysql/2-10/backup-restore.html">Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
+
+<h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent Disk Usage Is Increasing</h3>
+
+<p>If you have set the <code>optimize_for_short_words</code> parameter to <code>true</code> and
+you are alerted that persistent disk usage is high,
+then you might need to optimize indexed tables.</p>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="shrink-index"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Persistent Disk Usage Is Increasing
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>You have set the <code>optimize_for_short_words</code> optional parameter to <code>true</code>
+    and the persistent disk is filling up.
+      </p>
+      For information about the parameter,
+      see <a href="change-default.html#optimize_for_short_words">Optimize for Short Words</a>.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Over time, data has been deleted from your database and
+            the full-text index has become too large.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Remove full-text entries for deleted or old records by following the instructions
+               in <a href="change-default.html#optimize_for_short_words">Optimize for Short Words</a>.</td>
+  </tr>
+
+</table>
+</div>
+
+<p>For information about monitoring disk usage, see <a href="/p-mysql/2-10/monitor.html">Monitoring and KPIs</a>.</p>
+
+<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a> Techniques for Troubleshooting</h2>
+
+<p>See the following sections for troubleshooting techniques when using
+the Cloud Foundry Command-Line Interface (cf CLI) to perform basic
+operations on a Tanzu SQL for VMs service instance.</p>
+
+<p>Basic cf CLI operations include <code>create</code>, <code>update</code>, <code>bind</code>, <code>unbind</code>, and <code>delete</code>.</p>
+
+<h3 id="understand-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Understand a Cloud Foundry (CF) Error Message</h3>
+
+<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+
+<p>
+  Failed operations (create, update, bind, unbind, delete) result in an error message.
+  You can retrieve the error message later by running the cf CLI command <code>cf service INSTANCE-NAME</code>.
+</p>
+
+<pre class="terminal">
+$ cf service myservice
+
+Service instance: myservice
+Service: super-db
+Bound apps:
+Tags:
+Plan: dedicated-vm
+Description: Dedicated Instance
+Documentation url:
+Dashboard:
+
+Last Operation
+Status: create failed
+Message: Instance provisioning failed: There was a problem completing your request.
+     Please contact your operations team providing the following information:
+     service: redis-acceptance,
+     service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089,
+     broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac,
+     task-id: 442,
+     operation: create
+Started: 2017-03-13T10:16:55Z
+Updated: 2017-03-13T10:17:58Z
+</pre>
+
+<p>
+  Use the information in the <code>Message</code> field to debug further.
+  Provide this information to Support when filing a ticket.
+</p>
+
+<p>
+  The <code>task-id</code> field maps to the BOSH task ID.
+  For more information on a failed BOSH task, use the <code>bosh task TASK-ID</code>.
+</p>
+
+<p>
+  The <code>broker-request-guid</code> maps to the portion of the On-Demand Broker log
+  containing the failed step.
+  Access the broker log through your syslog aggregator, or access BOSH logs for
+  the broker by typing <code>bosh logs broker 0</code>.
+  If you have more than one broker instance, repeat this process for each instance.
+</p>
+
+<h3 id="-find-information-about-your-service-instance"><a id="instance"></a> Find Information about Your Service Instance</h3>
+
+<p>You might need to find the name, GUID, or other information about a service instance.
+To find this information, do the following:</p>
+
+<ol>
+<li><p>Log into the space containing the instance or failed instance.
+<pre class="terminal">
+$ cf login
+</pre></p></li>
+<li><p>If you do not know the name of the service instance, run <code>cf services</code> to see a listing of all service instances in the space.
+The service instances are listed in the <code>name</code> column.
+<pre class="terminal">
+$ cf services
+Getting services in org my-org / space my-space as user<span>@</span>example.com...
+OK
+name          service      plan        bound apps    last operation
+my-instance   p.mysql      db-small                  create succeeded
+</pre></p></li>
+<li><p>To retrieve more information about a specific instance, run <code>cf service SERVICE-INSTANCE-NAME</code></p></li>
+<li><p>To retrieve the GUID of the instance, run <code>cf service SERVICE-INSTANCE-NAME --guid</code></p></li>
+</ol>
+
+<p>The GUID is useful for debugging.</p>
+
+<h2 id="use-the-knowledge-base-(community)"><a id="kb"></a>Use the Knowledge Base (Community)</h2>
+
+<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+
+<p>
+  Find the answer to your question and browse product discussions and solutions by
+  searching the <a href="https://community.pivotal.io/s/">VMware Tanzu Knowledge Base</a>.
+</p>
+
+<h2 id="file-a-support-ticket"><a id="support"></a>File a Support Ticket</h2>
+
+<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+
+<p>
+  You can file a support ticket <a href="https://support.pivotal.io/">here</a>.
+  Be sure to provide the error message from <code>cf service YOUR-SERVICE-INSTANCE</code>.
+</p>
+
+<p>
+  To expedite troubleshooting, if possible, provide your service broker logs,
+  service instance logs, and BOSH task output.
+  Your cloud operator should be able to obtain these from your error message.
+</p>
