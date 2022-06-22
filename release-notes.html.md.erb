@@ -29,6 +29,7 @@ This release has the following known issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
++ When using TAS 2.13, the MySQL tile metrics are not available when using cf tail. The metrics are still available to other external services such as Healthwatch.
 
 ### Compatibility
 
