@@ -336,6 +336,8 @@ you must have an S3 bucket in which to store the backups.
               You can use this to keep the backups from this foundation separate from those of other
               foundations that might also backup to this bucket.
               For example, <code>Foundation-1</code>.
+
+              This field is only available as of v2.10.3.
             </td>
         </tr>
         <tr>
@@ -373,7 +375,7 @@ new backups IAM role to a new EC2 instance.
 The procedure in this section allows <%= vars.product_short %> to upload backups to
 Amazon S3 without static credentials (Access and Secret Access Key ID).
 
-**Prerequisite:** You must be running <%= vars.app_runtime_first %> on AWS.
+**Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
 
 The process for configuring backups for an Amazon S3 with Instance Profile is:
 
@@ -713,6 +715,8 @@ To set the VM extension name:
               You can use this to keep the backups from this foundation separate from those of other
               foundations that might also backup to this bucket.
               For example, <code>Foundation-1</code>.
+
+              This field is only available as of v2.10.3.
             </td>
         </tr>
         <tr>
@@ -840,6 +844,8 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
               You can use this to keep the backups from this foundation separate from those of other
               foundations that might also backup to this bucket.
               For example, <code>Foundation-1</code>.
+
+              This field is only available as of v2.10.3.
             </td>
         </tr>
         <tr>
@@ -967,6 +973,8 @@ To back up your database to your Azure Storage account:
               You can use this to keep the backups from this foundation separate from those of other
               foundations that might also backup to this bucket.
               For example, <code>Foundation-1</code>.
+
+              This field is only available as of v2.10.3.
             </td>
         </tr>
         <tr>
