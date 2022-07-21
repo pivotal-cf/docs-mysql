@@ -10,14 +10,14 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 | Branch name | Use for… |
 |-------------| -------|
 | master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
-| 2.10        | Docs for [v2.10.x](https://docs.pivotal.io/p-mysql/2-10) |
-| 2.9         | DEPRECATED. DO NOT USE. Docs for [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
-| 2.8         | DEPRECATED. DO NOT USE. Docs for [v2.8.x](https://docs.pivotal.io/p-mysql/2-8) |
-| 2.7         | DEPRECATED. DO NOT USE. Docs for [v2.7.x](https://docs.pivotal.io/p-mysql/2-7) |
-| 2.6         | DEPRECATED. DO NOT USE. Docs for [v2.6.x](https://docs.pivotal.io/p-mysql/2-6) |
-| 2.5         | DEPRECATED. DO NOT USE. Docs for [v2.5.x](https://docs.pivotal.io/p-mysql/2-5)|
-| 2.4         | DEPRECATED. DO NOT USE. Docs for [v2.4.x](https://docs.pivotal.io/p-mysql/2-4)|
-| 2.3         | DEPRECATED. DO NOT USE. Docs for [v2.3.x](https://docs.pivotal.io/p-mysql/2-3)|
+| 2.9         | [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
+| 2.8.3-174881244 | This is a temporary feature branch to prep for v2.8.3. |
+| 2.8         | v2.8.x |
+| 2.7         | v2.7.x |
+| 2.6         | v2.6.x |
+| 2.5         | DEPRECATED. DO NOT USE. |
+| 2.4         | DEPRECATED. DO NOT USE. |
+| 2.3         | DEPRECATED. DO NOT USE. |
 | 2.2         | v2.2.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.2.pdf |
 | 2.1         | v2.1.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.1.pdf |
 | 2.0         | v2.0.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.0.pdf |
@@ -33,7 +33,7 @@ The private book repo associated with this content repo is [**docs-book-mysql**]
 
 ## Partials
 
-Cross-product partials for **VMware Tanzu SQL with MySQL for VMs** are single-sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
+Cross-product partials for **VMware Tanzu SQL with MySQL for VMs** are single sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
 
 Previously, these partials were sourced from the v018.x branch of the [On Demand Service Broker SDK](https://github.com/pivotal-cf/docs-on-demand-service-broker/tree/v0.18.x) content repo.
 

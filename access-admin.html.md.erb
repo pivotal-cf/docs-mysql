@@ -33,23 +33,9 @@ See [Connect to MySQL with CredHub Credentials](#instance-creds) below.
 
 To connect to MySQL with BOSH SSH:
 
-1. BOSH SSH into your node by running:
-
-    ```
-    bosh -e MY-ENV -d MY-DEPLOYMENT ssh mysql/GUID
-    ```
-    Where:
-    * `MY-ENV` is the name of your environment.
-    * `MY-DEPLOYMENT` is the name of your deployment.  
-    * `GUID` is the GUID for node.
-
-    For example:
-
-    <pre class="terminal">$ bosh -e my-env -d my-dep ssh mysql/abcd0123-a012-b345-c678-9def01234567</pre> 
-
-    For more information about BOSH SSH,
-    see [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
-    in the <%= vars.ops_manager %> documentation.
+1. BOSH SSH into your node by following the procedure in
+[BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh)
+in the <%= vars.ops_manager %> documentation.
 
 1. Connect to your MySQL VM by running:
 
