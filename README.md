@@ -33,7 +33,7 @@ The private book repo associated with this content repo is [**docs-book-mysql**]
 
 ## Partials
 
-Cross-product partials for **VMware Tanzu SQL with MySQL for VMs** are single sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
+Cross-product partials for **VMware Tanzu SQL with MySQL for VMs** are single-sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
 
 Previously, these partials were sourced from the v018.x branch of the [On Demand Service Broker SDK](https://github.com/pivotal-cf/docs-on-demand-service-broker/tree/v0.18.x) content repo.
 
