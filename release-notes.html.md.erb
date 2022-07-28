@@ -5,8 +5,8 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-VMware recommends that you upgrade to the latest patch for your current minor,
-and then upgrade to the latest available patch for the next minor.
+VMware recommends that you upgrade to the latest patch available for your current minor,
+and then upgrade to the latest patch available for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
@@ -19,7 +19,9 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ### Resolved Issues
 
-+ **Azure blobs can now use container name without specifying it in the base url**
+This release resolves the following issues:
+
++ **Azure blobs can now use container name without specifying it in the base URL**:
   Fixed a bug that prevented a custom domain name from being used with Azure.
 
 ### Known Issues
@@ -27,7 +29,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 This release has the following known issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
-+ When using TAS 2.13, the MySQL tile metrics are not available when using cf tail. The metrics are still available to other external services such as Healthwatch.
++ **In TAS 2.13, the MySQL tile metrics are not available when using cf tail.** The metrics are still available to other external services such as Healthwatch.
 
 ### Compatibility
 
