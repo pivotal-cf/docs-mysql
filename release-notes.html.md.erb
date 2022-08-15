@@ -23,7 +23,10 @@ This release resolves the following issues:
 
 + **Azure blobs can now use container name without specifying it in the base URL**:
   Fixed an issue that prevented a custom domain name from being used with Azure.
-
++ **My TAS pxc-mysql/mysql.err.log is flooded with "Access denied for user 'cluster-health-logger'@'localhost'" messages**
+  Fixed an issue that produced excessive "Access denied for user" messages
+  [Knowledge Base article number: 13857](https://community.pivotal.io/s/article/My-TAS-pxc-mysql-mysql-err-log-is-flooded-with-Access-denied-for-user-cluster-health-logger-localhost-messages?language=en_US)
+  
 ### Known Issues
 
 This release has the following known issues:
