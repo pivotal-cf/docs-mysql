@@ -5,13 +5,57 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-VMware recommends that you upgrade to the latest patch for your current minor,
-and then upgrade to the latest available patch for the next minor.
+VMware recommends that you upgrade to the latest patch available for your current minor,
+and then upgrade to the latest patch available for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
+
+## <a id="2-10-8"></a> v2.10.8
+
+**Release Date: August 9, 2022**
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ **Azure blobs can now use container name without specifying it in the base URL**:
+  Fixed an issue that prevented a custom domain name from being used with Azure.
++ **My TAS pxc-mysql/mysql.err.log is flooded with "Access denied for user 'cluster-health-logger'@'localhost'" messages**
+  Fixed an issue that produced excessive "Access denied for user" messages
+  [Knowledge Base article number: 13857](https://community.pivotal.io/s/article/My-TAS-pxc-mysql-mysql-err-log-is-flooded-with-Access-denied-for-user-cluster-health-logger-localhost-messages?language=en_US)
+  
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using cf tail.** The metrics are still available to other external services such as Healthwatch.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.261+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.37-40*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.37-31.57*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.26*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.19.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.16.0*</td></tr>
+  <tr><td>pxc-release</td><td>0.43.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
 
 ## <a id="2-10-7"></a> v2.10.7
 
