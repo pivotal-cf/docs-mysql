@@ -30,14 +30,31 @@ origin:"p.mysql" eventType:ValueMetric timestamp:1496776477930669688 deployment:
 
 To access MySQL metrics:
 
-+ [Use the Indicator Protocol Dashboard](#indicator)
++ [Use the Indicator Protocol Dashboard](#indicator). This method requires Healthwatch v1.x.
++ [Use Grafana](#grafana). This method requires Healthwatch v2.x.
 + [Use Log Cache](#log-cache)
+
+###  <a id="grafana"></a>Use Grafana
+
+You can use Grafana to visually view metrics for <%= vars.product_short %> service instances. 
+
+<p class='note'><strong>Note:</strong> This section requires Healthwatch v2.x.</p>
+
+1. Install the Healthwatch tile in <%= vars.ops_manager %>. For information about installing Healthwatch, see the [Healthwatch for VMware Tanzu documentation](https://docs.pivotal.io/healthwatch/2-2/installing/installing-manually.html).
+2. View the Grafana dashboard by navigating to:
+
+    ```
+    https://grafana.YOUR-SYSTEM-DOMAIN
+    ```
+
+For more information about using Grafana dashboards, see the [Healthwatch for VMware Tanzu documentation](https://docs.pivotal.io/healthwatch/2-2/using-grafana.html).
 
 ###  <a id="indicator"></a>Use the Indicator Protocol Dashboard
 
+<p class='note'><strong>Note:</strong> This section requires Healthwatch v1.x.</p>
+
 You can use the Indicator Protocol dashboard to view Key Performance Indicators (KPIs)
 for <%= vars.product_short %> service instances. The dashboard includes a graphical representation of the KPIs and information about recommended alert thresholds.
-
 For more information about the Indicator Protocol dashboard, see [Indicator Protocol Dashboard
 (Beta)](https://docs.pivotal.io/platform/healthwatch/indicator-protocol.html).
 For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi) below.
@@ -64,7 +81,6 @@ metrics are shown as graphs over time.](indicator-dash.png)
 <a href="./images/indicator-dash.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
 ### <a id="log-cache"></a>Use Log Cache
 <%= partial vars.path_to_partials + '/services/log-cache-cli-plugin',
 :locals => {:service_name => vars.product_short} %>
