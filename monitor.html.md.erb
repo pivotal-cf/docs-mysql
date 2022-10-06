@@ -30,14 +30,27 @@ origin:"p.mysql" eventType:ValueMetric timestamp:1496776477930669688 deployment:
 
 To access MySQL metrics:
 
-+ [Use the Indicator Protocol Dashboard](#indicator)
++ [Use the Indicator Protocol Dashboard](#indicator) #OBSOLETE
++ [Use Grafana](#grafana)
 + [Use Log Cache](#log-cache)
 
-###  <a id="indicator"></a>Use the Indicator Protocol Dashboard
 
+###  <a id="grafana"></a>Use Grafana
+You can use Grafana to visually view metrics for <%= vars.product_short %> service instances. 
+
+NOTE: ensure you are installing Healthwatch version 2+. Not Healthwatch 1
+1. Install the Healthwatch tile in <%= vars.ops_manager %>. See [Installing
+   and Configuring Healthwatch](https://docs.pivotal.io/healthwatch/2-2/installing/installing-manually.html).
+2. View the Grafana Dashboard by navigating to:
+
+    ```
+    https://grafana.YOUR-SYSTEM-DOMAIN
+    ```
+3. For more information about using Grafana dashboards, see [Using Healthwatch Dashboards in the Grafana UI](https://docs.pivotal.io/healthwatch/2-2/using-grafana.html) 
+
+###  <a id="indicator"></a>Use the Indicator Protocol Dashboard #OBSOLETE
 You can use the Indicator Protocol dashboard to view Key Performance Indicators (KPIs)
 for <%= vars.product_short %> service instances. The dashboard includes a graphical representation of the KPIs and information about recommended alert thresholds.
-
 For more information about the Indicator Protocol dashboard, see [Indicator Protocol Dashboard
 (Beta)](https://docs.pivotal.io/platform/healthwatch/indicator-protocol.html).
 For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi) below.
@@ -64,7 +77,6 @@ metrics are shown as graphs over time.](indicator-dash.png)
 <a href="./images/indicator-dash.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
 ### <a id="log-cache"></a>Use Log Cache
 <%= partial vars.path_to_partials + '/services/log-cache-cli-plugin',
 :locals => {:service_name => vars.product_short} %>
