@@ -17,11 +17,23 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: October 6, 2022**
 
+### Features
+
+This release includes the following new features:
+
++ It is important to install this version of Percona Server (5.7.39-42) before upgrading to version 3.x of the MySQL tile. Version 3.x of the MySQL tile will upgrade Percona Server to 8.x from 5.7.x. Upgrading to version 5.7.39-42 of Percona Server now ensures that you can complete the upgrade to Percona Server 8.x with minimal downtime.
++ pxc-release bump to golang 1.19.1
++ dedicated-mysql-adapter bump to golang 1.19.1
++ mysql-monitoring uses bpm
++ adbr bump to golang 1.19.1
+
 ### Known Issues
 
 This release has the following known issues:
 
 <%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using the `cf tail` command.** The metrics are still available to other external services such as Healthwatch.
++ **Issue with Hitachi Content Platform HS3:** Ensure that you configure the storage device to use a *flat space*, not a *structured space*.
 
 ### Compatibility
 
