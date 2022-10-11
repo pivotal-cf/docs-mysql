@@ -13,6 +13,53 @@ and then upgrade to the latest patch available for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="2-10-9"></a> v2.10.9
+
+**Release Date: TBD**
+
+### Features
+
+This release has the following new features:
++ This version of Percona Server (5.7.39-42) is important to install before upgrading to version 3.* of the Tile. Version 3.* of the Tile will upgrade Percona Server to 8.* from 5.7.*  Version 5.7.39-42 of Percona Server will ensure the upgrade to Percona Server 8.* is completed with minimal downtime.
++ pxc-release bump to golang 1.19.1
++ dedicated-mysql-adapter bump to golang 1.19.1
++ mysql-monitoring uses bpm
++ adbr bump to golang 1.19.1
+
+### Resolved Issues
+
+This release resolves the following issues:
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using cf tail.** The metrics are still available to other external services such as Healthwatch.
++ **Issue with Hitachi Content Platform HS3** Ensure to configure the storage device to use a *flat space* not a *structured space*
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.261+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.39-42*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.39-31.61*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.26</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.20.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.21.0*</td></tr>
+  <tr><td>pxc-release</td><td>0.46.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-8"></a> v2.10.8
 
 **Release Date: August 9, 2022**
