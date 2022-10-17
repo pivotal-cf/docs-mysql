@@ -5,13 +5,99 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-VMware recommends that you upgrade to the latest patch for your current minor,
-and then upgrade to the latest available patch for the next minor.
+VMware recommends that you upgrade to the latest patch available for your current minor,
+and then upgrade to the latest patch available for the next minor.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
+
+## <a id="2-10-9"></a> v2.10.9
+
+**Release Date: October 11, 2022**
+
+### Features
+
+This release includes the following new features:
+
++ It is important to install this version of Percona Server (5.7.39-42) before upgrading to version 3.x of the MySQL tile. Version 3.x of the MySQL tile will upgrade Percona Server to 8.x from 5.7.x. Upgrading to version 5.7.39-42 of Percona Server now ensures that you can complete the upgrade to Percona Server 8.x with minimal downtime.
++ pxc-release bump to golang 1.19.1
++ dedicated-mysql-adapter bump to golang 1.19.1
++ mysql-monitoring uses bpm
++ adbr bump to golang 1.19.1
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using the `cf tail` command.** The metrics are still available to other external services such as Healthwatch.
++ **Issue with Hitachi Content Platform HS3:** Ensure that you configure the storage device to use a *flat space*, not a *structured space*.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.261+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.39-42*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.39-31.61*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.26</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.20.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.21.0*</td></tr>
+  <tr><td>pxc-release</td><td>0.46.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
+## <a id="2-10-8"></a> v2.10.8
+
+**Release Date: August 9, 2022**
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ **Azure blobs can now use container name without specifying it in the base URL**:
+  Fixed an issue that prevented a custom domain name from being used with Azure.
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using cf tail.** The metrics are still available to other external services such as Healthwatch.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.261+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.38-41*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.38-31.59*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.26*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.19.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.16.0*</td></tr>
+  <tr><td>pxc-release</td><td>0.43.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
 
 ## <a id="2-10-7"></a> v2.10.7
 
@@ -29,6 +115,7 @@ This release has the following known issues:
 
 <%= partial vars.path_to_partials + "/mysql/disable-plan-ki" %>
 <%= partial vars.path_to_partials + "/mysql/ki-adbr-blob-store-base-url" %>
++ When using TAS 2.13, the MySQL tile metrics are not available when using cf tail. The metrics are still available to other external services such as Healthwatch.
 
 ### Compatibility
 
