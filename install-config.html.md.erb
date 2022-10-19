@@ -435,12 +435,10 @@ To set MySQL defaults and enable developers to customize their instances:
     <tr><td><strong>Enable Lower Case Table Names</strong></td>
         <td>Select this checkbox to store all table names in lowercase.
             This sets the MySQL server system variable
-            <code>lower\_case\_table\_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
+            <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the checkbox below. <br>
-            For more information about <code>lower\_case\_table\_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you enable this feature,
-ensure all tables have lowercase names. Tables with uppercase names are inaccessible
-after enabling lowercase table names.</p>
+            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
+            <p class="note warning"><strong>Warning:</strong> Before you enable this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this checkbox to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
