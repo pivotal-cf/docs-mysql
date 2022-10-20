@@ -247,6 +247,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     ```
 
      Where:
+
      + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
      + `CID`: This is the CID of the failing former leader VM retrieved above.
 
@@ -259,6 +260,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     bosh -d service-instance_GUID orphan-disk DISK-CID
     ```
    Where:
+
    + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
    + `DISK-CID`: This is the disk CID of the failing former leader VM retrieved above.
 
@@ -281,6 +283,7 @@ To restart the former leader VM and configure it as the new follower:
       mysql/INDEX
     ```
    Where:
+
    + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
    + `INDEX`: This is the index of the former leader VM that you are re-creating
    </ul>
@@ -334,8 +337,8 @@ To unbind and rebind your app:
     cf unbind-service APP-NAME  SERVICE-INSTANCE-NAME
     ```
    Where:
-   <ul><li>`APP-NAME `: This is the name of the app bound to the leader-follower service instance.</li>
-   <li>`SERVICE-INSTANCE-NAME `: This is the name of the leader-follower service instance.</li></ul>
+   <ul><li><code>APP-NAME </code>: This is the name of the app bound to the leader-follower service instance.</li>
+   <li><code>SERVICE-INSTANCE-NAME </code>: This is the name of the leader-follower service instance.</li></ul>
 
 1. Rebind the app to the leader-follower service instance by running:
 
