@@ -226,9 +226,11 @@ To prepare a new service instance for restore:
     ```
 
     Where:
+
     + `NEW-PLAN` is the name of the service plan for your new service instance.
         The plan you choose depends on the service instance topology that you are
         restoring. If the topology that you are restoring is:
+
           + **Single node or leader-follower:** Select a single node plan.
           + **<%= vars.single_leader_plan %> or HA cluster:**
               Select a <%= vars.single_leader_plan %> plan.
