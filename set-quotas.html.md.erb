@@ -69,29 +69,30 @@ To create and set an org-level quota, do the following:
 
 1. Run this command to create a quota for service instances at the org level:
 
-	<pre>
-	cf create-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
-	</pre>
+  <pre>
+  cf create-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
+  </pre>
 
-	Where:
-	* `QUOTA-NAME`---A name for this quota
-	* `TOTAL-MEMORY`---Maximum memory used by all service instances combined
-	* `INSTANCE-MEMORY`---Maximum memory used by any single service instance
-	* `ROUTES`---Maximum number of routes allowed for all service instances combined
-	* `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
+  Where:
 
-	For example:
-	<pre class="terminal">cf create-quota myquota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
+  * `QUOTA-NAME`---A name for this quota
+  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined
+  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance
+  * `ROUTES`---Maximum number of routes allowed for all service instances combined
+  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
+
+  For example:
+  <pre class="terminal">cf create-quota myquota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
 
 2. Associate the quota you created above with a specific org by running the following command:
 
-	<pre>
-	cf set-quota ORG-NAME QUOTA-NAME
-	</pre>
+  <pre>
+  cf set-quota ORG-NAME QUOTA-NAME
+  </pre>
 
-	For example:
+  For example:
 
-	<pre class="terminal">cf set-quota dev_org myquota</pre>
+  <pre class="terminal">cf set-quota dev_org myquota</pre>
 
 For more information on managing org-level quotas,
 see [Creating and Modifying Quota Plans](https://docs.pivotal.io/pivotalcf/1-12/adminguide/quota-plans.html).
@@ -113,31 +114,31 @@ To create and set a space-level quota, do the following:
 
 1. Run the following command to create the quota:
 
-	<pre>
-	cf create-space-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
-	</pre>
+  <pre>
+  cf create-space-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
+  </pre>
 
-	Where:
-	* `QUOTA-NAME`---A name for this quota
-	* `TOTAL-MEMORY`---Maximum memory used by all service instances combined
-	* `INSTANCE-MEMORY`---Maximum memory used by any single service instance
-	* `ROUTES`---Maximum number of routes allowed for all service instances combined
-	* `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
+  Where:
+  * `QUOTA-NAME`---A name for this quota
+  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined
+  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance
+  * `ROUTES`---Maximum number of routes allowed for all service instances combined
+  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
 
-	For example:
+  For example:
 
-	<pre class="terminal">cf create-space-quota myspacequota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
+  <pre class="terminal">cf create-space-quota myspacequota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
 
 
 2. Associate the quota you created above with a specific space by running the following command:
 
-	<pre>
-	cf set-space-quota SPACE-NAME QUOTA-NAME
-	</pre>
+  <pre>
+  cf set-space-quota SPACE-NAME QUOTA-NAME
+  </pre>
 
-	For example:
+  For example:
 
-	<pre class="terminal">cf set-space-quota myspace myspacequota</pre>
+  <pre class="terminal">cf set-space-quota myspace myspacequota</pre>
 
 For more information on managing space-level quotas,
 see [Creating and Modifying Quota Plans](https://docs.pivotal.io/pivotalcf/1-12/adminguide/quota-plans.html).
@@ -166,30 +167,30 @@ are available through the on-demand broker metrics emitted to Loggregator.
 These metrics are listed below:
 
 <table>
-	<tr>
-		<th width=60%><b>Metric Name</b></th>
-		<th width=40%><b>Description</b></th>
-	</tr>
-	<tr>
-		<td><code>on-demand-broker/SERVICE-NAME/quota_remaining</code></td>
-		<td>Quota remaining for all instances across all plans</td>
-	</tr>
-	<tr>
-		<td><code>on-demand-broker/SERVICE-NAME/PLAN-NAME/<br>quota_remaining</code> </td>
-		<td>Quota remaining for a specific plan</td>
-	</tr>
-	<tr>
-		<td><code>on-demand-broker/SERVICE-NAME/total_instances</code> </td>
-		<td>Total instances created across all plans</td>
-	</tr>
-	<tr>
-		<td><code>on-demand-broker/SERVICE-NAME/PLAN-NAME/<br>total_instances</code> </td>
-		<td>Total instances created for a specific plan</td>
-	</tr>
+  <tr>
+    <th width=60%><b>Metric Name</b></th>
+    <th width=40%><b>Description</b></th>
+  </tr>
+  <tr>
+    <td><code>on-demand-broker/SERVICE-NAME/quota_remaining</code></td>
+    <td>Quota remaining for all instances across all plans</td>
+  </tr>
+  <tr>
+    <td><code>on-demand-broker/SERVICE-NAME/PLAN-NAME/<br>quota_remaining</code> </td>
+    <td>Quota remaining for a specific plan</td>
+  </tr>
+  <tr>
+    <td><code>on-demand-broker/SERVICE-NAME/total_instances</code> </td>
+    <td>Total instances created across all plans</td>
+  </tr>
+  <tr>
+    <td><code>on-demand-broker/SERVICE-NAME/PLAN-NAME/<br>total_instances</code> </td>
+    <td>Total instances created for a specific plan</td>
+  </tr>
 </table>
 
 <p class="note"><strong>Note:</strong> Quota metrics are not emitted if no quota
-	has been set.</p>
+  has been set.</p>
 
 You can also view service instance usage information in Apps Manager. For more information,
 see [Reporting Instance Usage with Apps Manager](https://docs.pivotal.io/pivotalcf/opsguide/accounting-report-apps-man.html).
@@ -273,21 +274,21 @@ function openDocs(evt, docsName) {
 </div>
 <div id="tab1" class="tabcontent" style="display:block">
   <img src="./images/sn-lf-plan.png"
-	alt="Screenshot of an example plan quota configuration showing the plan quota
-	field set to 15, VM type set to micro, and persistent disk type set to 20 GB">
+  alt="Screenshot of an example plan quota configuration showing the plan quota
+  field set to 15, VM type set to micro, and persistent disk type set to 20 GB">
 </div>
 <div id="tab2" class="tabcontent">
   <img src="./images/galera-plan.png"
-	alt="Screenshot of an example plan quota configuration showing the plan quota
-	field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
-	MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB">
+  alt="Screenshot of an example plan quota configuration showing the plan quota
+  field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
+  MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB">
 </div>
 
 <p class="note"><strong>Note:</strong>
-	Although operators can limit on-demand instances with plan quotas and a global
-	quota, as described in the above topics,
+  Although operators can limit on-demand instances with plan quotas and a global
+  quota, as described in the above topics,
         IaaS resource usage still varies based on the number of on-demand instances
-				provisioned.</p>
+        provisioned.</p>
 
 
 ### <a id="calculate-per-plan"></a> Calculate Maximum Resource Cost Per On-Demand Plan
