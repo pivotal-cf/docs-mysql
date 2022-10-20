@@ -264,10 +264,10 @@ If you are triggering a failover in response to a failing leader VM, to clean up
    + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
    + `DISK-CID`: This is the disk CID of the failing former leader VM retrieved above.
 
-     For example:
-     <pre class="terminal">
-     $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
-        orphan-disk b-1db9ede6</pre>
+   For example:
+   <pre class="terminal">
+   $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
+      orphan-disk b-1db9ede6</pre>
    Orphaning a disk rather than deleting it preserves the disk for possible recovery.
    After performing recovery operations, you can reattach the disk to a VM. BOSH deletes orphaned disks after five days by default.
 
