@@ -701,34 +701,34 @@ To configure service instance upgrades.
     <%= image_tag("images/service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below. ") %>
 
 1. Configure the fields as follows:
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr>
-        <td><strong>Number of simultaneous upgrades</strong></td>
-        <td>Enter the maximum number of service instances that can upgrade at the same time.
-        The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
-        <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, navigate to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
-        </p>
-        </td>
-    </tr>
-    <tr><td><strong>Number of upgrade canary instances</td>
-        <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
-            Increasing this value enables service instance upgrades to fail faster.</td>
-    </tr>
-    <tr><td><strong>BOSH Upgrade Timeout</td>
-        <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
-            Increasing this value enables service instance upgrades to fail faster.</td>
-    </tr>
-    <tr>
-      <td>
-        <strong>Please type 'X' to acknowledge that you have run...</strong>
-      </td>
+    <table>
+      <tr><th>Field</th><th>Instructions</th></tr>
+      <tr>
+          <td><strong>Number of simultaneous upgrades</strong></td>
+          <td>Enter the maximum number of service instances that can upgrade at the same time.
+          The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
+          <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, navigate to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
+          </p>
+          </td>
+      </tr>
+      <tr><td><strong>Number of upgrade canary instances</td>
+          <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
+              Increasing this value enables service instance upgrades to fail faster.</td>
+      </tr>
+      <tr><td><strong>BOSH Upgrade Timeout</td>
+          <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
+              Increasing this value enables service instance upgrades to fail faster.</td>
+      </tr>
+      <tr>
         <td>
-          If this is a fresh installation, enter `X`. Do not be concerned with the
-          label instructions.
+          <strong>Please type 'X' to acknowledge that you have run...</strong>
         </td>
-    </tr>
-</table>
+          <td>
+            If this is a fresh installation, enter `X`. Do not be concerned with the
+            label instructions.
+          </td>
+      </tr>
+    </table>
 
 1. Click **Save**.
 
