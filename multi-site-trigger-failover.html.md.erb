@@ -371,6 +371,7 @@ To reconfigure replication for the service instances:
       -c '{"replication-request": "host-info"}'
     ```
     Where:
+    
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
 
@@ -387,6 +388,7 @@ To reconfigure replication for the service instances:
     cf service-key PRIMARY-INSTANCE SERVICE-KEY
     ```
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is the name of the host-info service key you created in step above.
 
@@ -422,6 +424,7 @@ To reconfigure replication for the service instances:
     cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `HOST-INFO` is the output you recorded in step above.
 
@@ -454,6 +457,7 @@ To reconfigure replication for the service instances:
       -c '{"replication-request": "credentials"}'
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
@@ -472,6 +476,7 @@ To reconfigure replication for the service instances:
     cf service-key SECONDARY-INSTANCE SERVICE-KEY-NAME
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
 
@@ -509,6 +514,7 @@ To reconfigure replication for the service instances:
     cf update-service PRIMARY-INSTANCE -c CREDENTIALS
     ```
     Where:
+
     + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
     + `CREDENTIALS` is the output you recorded in the step above.
 
@@ -542,9 +548,10 @@ To reconfigure replication for the service instances:
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
+
     + If your follower service instance is more than 3 days behind leader,
     you get error message similar to  the following:
-      <pre class=terminal>$ cf update-service primary-node -c /tmp/credentials-key.json
+      <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
       Server error, status code: 502, error code: 10001, message: Service broker error: Establishing Replication Failed - follower is too far behind Leader to start replication
