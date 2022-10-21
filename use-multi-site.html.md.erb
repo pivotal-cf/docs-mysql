@@ -118,7 +118,8 @@ To create a multi-site replication service instance in both foundations:
         OK
         name           service       plan        bound apps    last operation
         primary-node   p.mysql       db-small                  create succeeded
-      </pre>
+        </pre>
+
         If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
 
 1. Create a <%= vars.single_leader_plan %> service instance in your secondary
@@ -178,6 +179,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
     <br><br>
+
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node host-info \
            -c '{"replication-request": "host-info" }'<br>
