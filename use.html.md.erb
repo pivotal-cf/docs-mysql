@@ -124,6 +124,7 @@ To create an instance of the <%= vars.product_short %> service:
     ```
 
     Where:
+
     - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
     - `SERVICE-INSTANCE` is a name you choose to identify the service instance.
     This name appears under `service` in output from `cf services`.
@@ -170,6 +171,7 @@ To push and bind an app to a <%= vars.product_short %> instance run the followin
     ```
 
     Where:<br>
+
     - `APP` is the app you want to use the MySQL service instance.<br>
     - `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
 
@@ -218,6 +220,7 @@ see [MySQL Environment Variables](#vcap) below.
       ```
 
     Where:
+
     - `APP` is the app you want to use the custom schema.
     - `SERVICE-INSTANCE` is the name of your service instance.
     - `CUSTOM-SCHEMA` is the name of your custom schema. Valid characters include uppercase and lowercase
@@ -392,6 +395,7 @@ To share a service instance:
     ```
 
     Where:
+
     + `SOURCE-ORG` is the source org for your service instance.
     + `SOURCE-SPACE` is the source space for your service instance.
 
@@ -402,6 +406,7 @@ To share a service instance:
     ```
 
     Where:
+
     + `SERVICE-INSTANCE` is the service instance you want to share.
     + `DESTINATION-ORG` is the destination org for the service instance.
     + `DESTINATION-SPACE` is the destination space for the service instance.
@@ -429,6 +434,7 @@ If you want stop an app from using a service you must unbind the app from the se
     cf unbind-service APP SERVICE-INSTANCE
     ```
     Where:
+
     - `APP` is the app you want to stop using the MySQL service instance.
     - `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
 
