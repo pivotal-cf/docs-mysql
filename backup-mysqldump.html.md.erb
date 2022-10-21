@@ -69,11 +69,13 @@ To back up your <%= vars.product_short %> data manually:
    or [Using SSH to Connect from Outside a Deployment](./establish.html).
 
 1. View a list of your databases by running:
-<pre><code>mysql --user=USERNAME --password=PASSWORD \
---host=MYSQL-IP \
---silent --execute='show databases'</code></pre>
+
+    <pre><code>mysql --user=USERNAME --password=PASSWORD \
+    --host=MYSQL-IP \
+    --silent --execute='show databases'</code></pre>
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address. This value is `0` if you are connecting using an SSH tunnel.
@@ -86,6 +88,7 @@ To back up your <%= vars.product_short %> data manually:
     </pre>
 
 1. Do not back up the following databases:
+
     * `cf_metadata`
     * `information_schema`
     * `mysql`
@@ -102,6 +105,7 @@ To back up your <%= vars.product_short %> data manually:
     ```
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
@@ -143,6 +147,7 @@ You can either restore the backup to an existing service instance or the one you
     mysql --user=USERNAME --password=PASSWORD --host=MYSQL-IP  < BACKUP-FILE
     ```
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
