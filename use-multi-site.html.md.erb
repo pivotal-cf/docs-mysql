@@ -260,6 +260,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     name           service       plan        bound apps    last operation
     primary-node   p.mysql       db-small                  update succeeded
   </pre>
+
     If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
 1.  Create a credentials service key for the service instance in your primary foundation by
     running:
@@ -274,6 +275,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
     <br><br>
+
     For example:
     <pre class="terminal">$ cf create-service-key primary-node cred-key \
           -c '{"replication-request": "credentials" }' <br>
