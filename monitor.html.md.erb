@@ -120,7 +120,19 @@ In addition to the above KPIs, the MySQL service emits the followings metrics fo
 
 The metrics that all <%= vars.product_short %> service instances emit:
 
-<%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/mysql-metrics' %>
+  <table class="nice">
+  <tr>
+  <th colspan="2" style="text-align: center;"><a name="tmp-files"></a>/p.mysql/performance/created_tmp_files</th>
+  </tr>
+  <tr>
+    <th width="20%">Description</th>
+    <td>The number of temporary files created by mysqld. </td>
+  </tr>
+  <tr>
+    <th width="15%">Unit</th>
+    <td>count</td>
+  </tr>
+</table>
 
 ### <a id="disk-metrics"></a>Disk Metrics
 
