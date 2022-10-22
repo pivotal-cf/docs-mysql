@@ -120,7 +120,7 @@ In addition to the above KPIs, the MySQL service emits the followings metrics fo
 
 The metrics that all <%= vars.product_short %> service instances emit:
 
-<p><table class="nice">
+<table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="available-metrics"></a>/p.mysql/available</th>
   </tr>
@@ -133,7 +133,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>boolean</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="max-connections"></a>/p.mysql/variables/max_connections</th>
@@ -147,7 +146,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="open-files-limit"></a>/p.mysql/variables/open_files_limit</th>
@@ -161,7 +159,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>files</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="read-only"></a>/p.mysql/variables/read_only</th>
@@ -175,7 +172,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>boolean</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="questions-metrics"></a>/p.mysql/performance/questions</th>
@@ -190,7 +186,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="queries"></a>/p.mysql/performance/queries</th>
@@ -205,7 +200,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="queries-delta"></a>/p.mysql/performance/queries_delta</th>
@@ -220,7 +214,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>integer greater than or equal to zero</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-free"></a>/p.mysql/innodb/buffer_pool_pages_free</th>
@@ -234,7 +227,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-total"></a>/p.mysql/innodb/buffer_pool_pages_total</th>
@@ -248,7 +240,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-data"></a>/p.mysql/innodb/buffer_pool_pages_data</th>
@@ -262,7 +253,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="row-current-wait"></a>/p.mysql/innodb/row_lock_current_waits</th>
@@ -276,7 +266,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="data-read"></a>/p.mysql/innodb/data_read</th>
@@ -290,7 +279,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>bytes</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="data-written"></a>/p.mysql/innodb/data_written</th>
@@ -304,7 +292,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>bytes</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="os-waits"></a>/p.mysql/innodb/mutex_os_waits</th>
@@ -318,7 +305,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="spin-rounds"></a>/p.mysql/innodb/mutex_spin_rounds</th>
@@ -332,7 +318,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="spin-waits"></a>/p.mysql/innodb/mutex_spin_waits</th>
@@ -346,7 +331,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="log-fsyncs"></a>/p.mysql/innodb/os_log_fsyncs</th>
@@ -360,7 +344,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="row-time"></a>/p.mysql/innodb/row_lock_time</th>
@@ -374,7 +357,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>milliseconds</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="row-wait"></a>/p.mysql/innodb/row_lock_waits</th>
@@ -388,7 +370,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="connections-metrics"></a>/p.mysql/net/connections</th>
@@ -402,7 +383,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="used-connections"></a>/p.mysql/net/max_used_connections</th>
@@ -416,7 +396,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-delete"></a>/p.mysql/performance/com_delete</th>
@@ -431,7 +410,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-delete-multi"></a>/p.mysql/performance/com_delete_multi</th>
@@ -446,7 +424,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-insert"></a>/p.mysql/performance/com_insert</th>
@@ -461,7 +438,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-insert-select"></a>/p.mysql/performance/com_insert_select</th>
@@ -476,7 +452,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-replace"></a>/p.mysql/performance/com_replace_select</th>
@@ -491,7 +466,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-select"></a>/p.mysql/performance/com_select</th>
@@ -506,7 +480,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-update"></a>/p.mysql/performance/com_update</th>
@@ -521,7 +494,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="com-update-multi"></a>/p.mysql/performance/com_update_multi</th>
@@ -536,7 +508,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="tmp-tables"></a>/p.mysql/performance/created_tmp_disk_tables</th>
@@ -550,7 +521,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="tmp-files"></a>/p.mysql/performance/created_tmp_files</th>
@@ -564,7 +534,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="created-tables"></a>/p.mysql/performance/created_tmp_tables</th>
@@ -578,7 +547,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="cpu-util-per"></a>/p.mysql/performance/cpu_utilization_percent</th>
@@ -592,7 +560,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>percent</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="open-files"></a>/p.mysql/performance/open_files</th>
@@ -606,7 +573,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="open-tables"></a>/p.mysql/performance/open_tables</th>
@@ -620,7 +586,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="opened-tables"></a>/p.mysql/performance/opened_tables</th>
@@ -634,7 +599,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="table-def"></a>/p.mysql/performance/open_table_definitions</th>
@@ -649,7 +613,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="opened-def"></a>/p.mysql/performance/opened_table_definitions</th>
@@ -664,7 +627,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="qcache-hits"></a>/p.mysql/performance/qcache_hits</th>
@@ -678,7 +640,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="slow-queries"></a>/p.mysql/performance/slow_queries</th>
@@ -693,7 +654,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="locks-waited"></a>/p.mysql/performance/table_locks_waited</th>
@@ -707,7 +667,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="threads-connected"></a>/p.mysql/performance/threads_connected</th>
@@ -721,7 +680,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="threads-run"></a>/p.mysql/performance/threads_running</th>
@@ -735,7 +693,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-wait-time"></a>/p.mysql/rpl_semi_sync_master_tx_avg_wait_time</th>
@@ -749,7 +706,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>microseconds</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-no-tax"></a>/p.mysql/rpl_semi_sync_master_no_tx</th>
@@ -763,7 +719,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
-<br>
   <table class="nice">
   <tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-wait-sessions"></a>/p.mysql/rpl_semi_sync_master_wait_sessions</th>
@@ -772,181 +727,6 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <th width="20%">Description</th>
     <td>The current number of connections waiting for a sync commit. For more information about sync replication, see <a href="./change-default.html#synchronous-replication">About Synchronous Replication</a>.
  </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>count</td>
-  </tr>
-</table>
-<br></p>
-
-<h3 id="disk-metrics"><a id="disk-metrics"></a>Disk Metrics</h3>
-
-<p>The disk usage metrics that all Tanzu SQL for VMs services emit:</p>
-
-<p><table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="disk-used-percent"></a>/p.mysql/system/persistent_disk_used_percent</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The percentage of disk used on the persistent file system. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>percent</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="disk-used"></a>/p.mysql/system/persistent_disk_used</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The amount of space used on the persistent disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>KB</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="disk-free"></a>/p.mysql/system/persistent_disk_free</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The amount of space available on the persistent disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>KB</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="inodes-used-percent"></a>/p.mysql/system/persistent_disk_inodes_used_percent</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The percentage of persistent disk inodes used by both the
-      system and user applications. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>percent</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="inodes-used"></a>/p.mysql/system/persistent_disk_inodes_used</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The number of inodes used on the persistent disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>count</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="inodes-free"></a>/p.mysql/system/persistent_disk_inodes_free</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The number of inodes available on the persistent disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>count</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-inodes-used-percent"></a>/p.mysql/system/ephemeral_disk_used_percent</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The percentage of disk used on the ephemeral file system. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>percent</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-disk-used"></a>/p.mysql/system/ephemeral_disk_used</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The amount of space used on the ephemeral disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>KB</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-disk-free"></a>/p.mysql/system/ephemeral_disk_free</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The amount of space available on the ephemeral disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>KB</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-inodes-percent"></a>/p.mysql/system/ephemeral_disk_inodes_used_percent</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The percentage of ephemeral disk inodes used by both the
-      system and user applications. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>percent</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-inodes-used"></a>/p.mysql/system/ephemeral_disk_inodes_used</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The number of inodes used on the ephemeral disk. </td>
-  </tr>
-  <tr>
-    <th width="15%">Unit</th>
-    <td>count</td>
-  </tr>
-</table>
-<br>
-  <table class="nice">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="eph-inodes-free"></a>/p.mysql/system/ephemeral_disk_inodes_free</th>
-  </tr>
-  <tr>
-    <th width="20%">Description</th>
-    <td>The number of inodes available on the ephemeral disk. </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
