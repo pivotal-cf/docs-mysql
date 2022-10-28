@@ -465,3 +465,40 @@ The table below describes how to use the `optimize_for_short_words` optional par
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
 </table>
+
+## <a id='wsrep_applier_threads'></a> WSREP Applier Threads
+
+The table below describes how to use the `wsrep_applier_threads` optional parameter:
+
+<table>
+  <tr>
+    <th colspan="2" style="text-align:center;">wsrep_applier_threads</th>
+  </tr>
+
+  <tr>
+    <th><strong>Type</strong></th>
+    <td>Integer</td>
+  </tr>
+
+  <tr>
+    <th><strong>Default</strong></th>
+    <td>4</td>
+  </tr>
+
+  <tr>
+    <th><strong>Description</strong></th>
+    <td>
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster.
+
+      For further details, see the [Percona XtraDB Cluster Docs](https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads).
+
+      <p class="note">
+        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans and will be rejected for service plans using other topologies.
+      </p>
+    </td>
+
+  <tr>
+    <th><strong>Usage</strong></th>
+    <td><code>create-service</code> or <code>update-service</code></td>
+  </tr>
+</table>
