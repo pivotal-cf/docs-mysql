@@ -12,14 +12,15 @@ This topic provides instructions for how to use optional parameters to change se
 You can configure optional parameters to change certain <%= vars.product_full %> server defaults.
 You might want to configure optional parameters in the following cases:
 
-+ You have a read-heavy or write-heavy app.
-See [Workloads](#workload) below.
++ You have a read-heavy or write-heavy application.
+See [Workloads](#workload).
 + You are migrating from a case-insensitive database.
-See [Lowercase Table Names](#lowercase) below.
+See [Lowercase Table Names](#lowercase).
 + You want to use a different character set or collation than the default.
-See [Character Sets](#character) below.
+See [Character Sets](#character).
 + You want to configure leader-follower replication.
-See [Synchronous Replication](#synchronous-replication) below.
+See [Synchronous Replication](#synchronous-replication).
++ You have heavy traffic, or spikes in traffic, while using a high availability topology. See [WSREP Applier Threads](#wsrep-applier-threads).
 
 The procedures in this topic use the Cloud Foundry Command Line Interface
 ([cf CLI](https://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html)).
