@@ -489,18 +489,18 @@ The table below describes how to use the `wsrep_applier_threads` optional parame
   <tr>
     <th><strong>Description</strong></th>
     <td>
-      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster.
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to 4 threads, whereas Percona XtraDB Cluster 5.7 defaults to 1. 
 
       For further details, see the 
       <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster Docs</a>.
 
       <p class="note caution">
-        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans and will be rejected for service plans using other topologies.
+        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans, and will be rejected for service plans using other topologies.
       </p>
     </td>
 
   <tr>
     <th><strong>Usage</strong></th>
-    <td><code>create-service</code> or <code>update-service</code></td>
+    <td><code>create-service</code> or <code>update-service</code> as per <a href="#parameters">Set Optional Parameters</a></td>
   </tr>
 </table>
