@@ -15,13 +15,14 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="2-10-10"></a> v2.10.10
 
-**Release Date: Nov 29, 2022**
+**Release Date: Dec 5th, 2022**
 
-### Features
+### Changes
 
-This release includes the following new features:
+This release includes the following changes:
 
-+ Increases default value for max-connections, <a href="server-defaults.html">About MySQL Server Defaults.</a>
++ Increases the default value for max-connections from 750 to 5000. For details refer to [About MySQL Server Defaults](./server-defaults.html).
++ This release adds support for the optional parameter `wsrep_applier_threads`. For details refer to [](./change-default.html#wsrep_applier_threads).
 + pxc-release bump to golang 1.19.3
 + dedicated-mysql-release bump to golang 1.19.2
 + dedicated-mysql-adapter bump to golang 1.19.3
