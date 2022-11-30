@@ -183,7 +183,7 @@ To remove the former leader service instance:
   + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
     Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
      <p class="note"><strong>Note:</strong>
-       If the foundation is lost, you purge the service instance **after** following the steps to recover the
+       If the foundation is lost, you purge the service instance <strong>after</strong> following the steps to recover the
        foundation's Cloud Controller database in
        <a href="https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html">
          Restoring Deployments from Backup with BBR</a>.
@@ -296,6 +296,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
 
     If the above command fails, do one of the following:
+
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
         <pre class=terminal>Updating service instance secondary-node as admin...
@@ -325,7 +326,7 @@ in the secondary foundation is the leader.
 
 <p class='note warning'><strong>Warning:</strong>
 To successfully trigger a switchover the follower dataset must be a subset of the leader dataset.
-This means that <% vars.product_short %> has not written new data to the follower.
+This means that <%= vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
 create a new <%= vars.single_leader_plan %> service instance and reconfigure replication using this new,
@@ -340,7 +341,7 @@ The following diagram describes the workflow for reconfiguring multi-site replic
 Six steps are shown. Steps 1 and 2 are in 'Primary Foundation';
 Steps 3, 4, and 5 are in 'Secondary Foundation',
 and Step 6 is in 'Primary Foundation'.
-The steps are listed below.](switchover.png)
+The steps are listed below.](images/switchover.png)
 
 <a href="./images/switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -370,6 +371,7 @@ To reconfigure replication for the service instances:
       -c '{"replication-request": "host-info"}'
     ```
     Where:
+    
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
 
@@ -386,6 +388,7 @@ To reconfigure replication for the service instances:
     cf service-key PRIMARY-INSTANCE SERVICE-KEY
     ```
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is the name of the host-info service key you created in step above.
 
@@ -421,6 +424,7 @@ To reconfigure replication for the service instances:
     cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `HOST-INFO` is the output you recorded in step above.
 
@@ -453,6 +457,7 @@ To reconfigure replication for the service instances:
       -c '{"replication-request": "credentials"}'
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
@@ -471,6 +476,7 @@ To reconfigure replication for the service instances:
     cf service-key SECONDARY-INSTANCE SERVICE-KEY-NAME
     ```
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
 
@@ -508,6 +514,7 @@ To reconfigure replication for the service instances:
     cf update-service PRIMARY-INSTANCE -c CREDENTIALS
     ```
     Where:
+
     + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
     + `CREDENTIALS` is the output you recorded in the step above.
 
@@ -541,9 +548,10 @@ To reconfigure replication for the service instances:
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
+
     + If your follower service instance is more than 3 days behind leader,
     you get error message similar to  the following:
-      <pre class=terminal>$ cf update-service primary-node -c /tmp/credentials-key.json
+      <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
       Server error, status code: 502, error code: 10001, message: Service broker error: Establishing Replication Failed - follower is too far behind Leader to start replication

@@ -4,8 +4,6 @@ owner: MySQL
 tile: true
 ---
 
-<strong><%= modified_date %></strong>
-
 This topic describes how highly available (HA) clusters work in <%= vars.product_full %>
 and contains information to help you decide whether to use HA clusters.
 
@@ -39,8 +37,8 @@ For more information about `mysql-diag`, see [Running mysql-diag](./mysql-diag.h
 
 The following diagram shows an HA cluster in three availability zones (AZs):
 
-<%# Edit in Google Slides: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing %>
-![An HA MySQL cluster. See below for a detailed image description.](ha-clusters.png)
+
+![An HA MySQL cluster. See below for a detailed image description.](./images/ha-clusters.png)
 
 <a href="./images/ha-clusters.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -195,4 +193,33 @@ For more information, see [wsrep\_max\_ws\_rows](https://www.percona.com/doc/per
 
 ## <a id="proxy"></a>MySQL Proxy
 
-<%= partial '../../p-mysql/partials/mysql/mysql-proxy' %>
+<%= vars.product_full %> uses a proxy to send client connections
+to the healthy MySQL database cluster nodes in a highly available cluster plan.
+Using a proxy gracefully handles failure of nodes, enabling fast,
+failover to other nodes within the cluster. When a
+node becomes unhealthy, the proxy closes all connections to the unhealthy node
+and re-routes all subsequent connections to a healthy node.
+
+The proxy used in <%= vars.product_short %> is Switchboard.
+Switchboard was developed to replace HAProxy as the proxy tier for the high
+availability cluster for MySQL databases in <%= vars.product_short %>.
+
+
+![Switchboard. See below for a detailed image description.](./images/switchboard-all-healthy.png)
+
+<a href="./images/switchboard-all-healthy.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+Switchboard offers the following features:
+
+- **MySQL Server Access**
+
+    MySQL clients communicate with nodes through this network port.
+    These connections are automatically passed through to the nodes.
+
+- **Switchboard and API**
+
+    Operators can connect to Switchboard to view the state of the nodes.
+
+    For more information about monitoring proxy health status, see
+    [Monitoring Node Health](./monitor-health.html).
+    

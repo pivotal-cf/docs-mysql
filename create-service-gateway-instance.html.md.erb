@@ -50,6 +50,7 @@ To create a service instance that enables service-gateway access:
     cf create-service p.mysql PLAN SERVICE-INSTANCE-NAME -c '{"enable_external_access": true}'
     ```
     Where:
+
     - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
     - `SERVICE-INSTANCE-NAME` is a name you choose for the service instance.
     This name appears under `service` in the output from `cf services`.
@@ -60,6 +61,7 @@ To create a service instance that enables service-gateway access:
     cf create-service-key SERVICE-INSTANCE-NAME SERVICE-KEY
     ```
     Where:
+
     - `SERVICE-INSTANCE-NAME` is the name of the instance you created above.
     - `SERVICE-KEY` is a name you choose for the service key. Choose a name that
       indicates that the key contains credentials for off-platform access.

@@ -3,22 +3,6 @@ title: On-Demand Networking
 owner: MySQL
 ---
 
-<strong><%= modified_date %></strong>
-
-<div class="quick-links">
-    <ul>
-        <li><a href="#service-network">Service Network Requirement</a></li>
-        <li><a href="#on-demand">Default Network and Service Network</a></li>
-        <li><a href="#rules">Required Networking Rules for On-Demand Services</a></li>
-				<li><a href="#mysql-ports"> Required Networking Rules for <%= vars.product_short %></a>
-						<ul>
-							<li><a href='#lf-ports'>Required Networking Rules for Leader-Follower Plans</a></li>
-							<li><a href='#hac-ports'>Required Networking Rules for Highly Available (HA) Cluster Plans</a></li>
-              <li><a href='#multi-site-ports'>Required Networking Rules for <%= vars.single_leader_plan %></a></li>
-						</ul>
-				</li>
-    </ul>
-</div>
 
 This topic describes networking for on-demand services, including <%= vars.product_full %>.
 
@@ -30,10 +14,22 @@ This topic describes networking for on-demand services, including <%= vars.produ
 
 <h2> <a id='on-demand'></a>Default Network and Service Network </h2>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+On-demand <%= vars.product_short %> services use BOSH to dynamically deploy VMs and create single-tenant service instances in a dedicated network. On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs. These worker VMs run as service instances within development spaces.
 
-<%= partial vars.path_to_partials + '/services/on_demand_architecture', :locals => {
-  :product_short => vars.product_short} %>
+This on-demand architecture has the following advantages:
+
+*   Developers can provision IaaS resources for their services instances when the instances are created. This removes the need for operators to pre-provision a fixed amount of IaaS resources when they deploy the service broker.
+*   Service instances run on a dedicated VM and do not share VMs with unrelated processes. This removes the "noisy neighbor" problem, where an app monopolizes resources on a shared cluster.
+*   Single-tenant services can support regulatory compliances where sensitive data must be separated across different machines.
+
+An on-demand service separates operations between the default network and the service network. Shared service components, such as executive controllers and databases, Cloud Controller, UAA, and other on-demand components, run on the default network. Worker pools deployed to specific spaces run on the service network.
+
+The diagram below shows worker VMs in an on-demand service instance running on a separate services network, while other components run on the default network.
+
+<p><img src="./images/odb-architecture-vmware.png"
+alt="Diagram of the default network and services network as described in this section.">
+<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a></p>
+
 
 <h2> <a id="rules"></a> Required Networking Rules for On-Demand Services </h2>
 

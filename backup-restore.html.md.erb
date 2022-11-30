@@ -279,6 +279,7 @@ To restore a service instance:
     ```
 
     Where:
+
     + `NEW-PLAN` is the name of the service plan for your new service instance.
         The plan you choose depends on the service instance topology that you are
         restoring. If the topology that you are restoring is:
@@ -297,6 +298,7 @@ To restore a service instance:
     ```
 
     Where:
+
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
       Without the flag, the command lists five backups.  
@@ -406,6 +408,7 @@ The list includes both automated and manual backups.
     ```
 
     Where:
+
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
       Without the flag, the command lists five backups.  
@@ -443,6 +446,6 @@ called `last_successful_backup`.
     The dotted red line represents the scheduled time when an automated backup is expected to occur.
     When a backup is taken, the time elapsed resets to zero.
 
-    <%= image_tag("metric-since-last-backup-healthy.png", :alt => "A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again.", :width => "720") %>
+    <%= image_tag("images/metric-since-last-backup-healthy.png", :alt => "A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again.", :width => "720") %>
 
     <a href="./images/metric-since-last-backup-healthy.png" target="_blank" aria-hidden="true">View a larger version of this image</a>

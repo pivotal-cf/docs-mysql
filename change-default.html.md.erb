@@ -12,14 +12,15 @@ This topic provides instructions for how to use optional parameters to change se
 You can configure optional parameters to change certain <%= vars.product_full %> server defaults.
 You might want to configure optional parameters in the following cases:
 
-+ You have a read-heavy or write-heavy app.
-See [Workloads](#workload) below.
++ You have a read-heavy or write-heavy application.
+See [Workloads](#workload).
 + You are migrating from a case-insensitive database.
-See [Lowercase Table Names](#lowercase) below.
+See [Lowercase Table Names](#lowercase).
 + You want to use a different character set or collation than the default.
-See [Character Sets](#character) below.
+See [Character Sets](#character).
 + You want to configure leader-follower replication.
-See [Synchronous Replication](#synchronous-replication) below.
+See [Synchronous Replication](#synchronous-replication).
++ You have heavy traffic, or spikes in traffic, while using a high availability topology. See [WSREP Applier Threads](#wsrep_applier_threads).
 
 The procedures in this topic use the Cloud Foundry Command Line Interface
 ([cf CLI](https://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html)).
@@ -39,6 +40,8 @@ see <a href="server-defaults.html">About MySQL Server Defaults.</a>
 You can change the default configuration of optional parameters by creating a new service instance or
 updating an existing service instance.
 
+The available optional parameters include [`workload`](#workload), [`enable_lower_case_table_names`](#lowercase), [`default-charset` and  `default-collation`](#character), [`replication_mode`](#synchronous-replication), [`backup-schedule`](#backup-schedule), [`optimize_for_short_words`](#optimize_for_short_words), and [`wsrep_applier_threads`](#wsrep_applier_threads).
+
 To set optional parameters:
 
 1. Do one of the following:
@@ -48,14 +51,13 @@ To set optional parameters:
         cf create-service p.mysql PLAN SERVICE-INSTANCE \
           -c '{ "PARAMETER": "PARAMETER-VALUE"}'
           ```
-    +  <strong>If you want to update an existing service instance,</strong> run:
+    +  **If you want to update an existing service instance,** run:
 
           ```
         cf update-service p.mysql PLAN SERVICE-INSTANCE \
           -c '{ "PARAMETER": "PARAMETER-VALUE"}'
           ```
 
-      For a list of available optional parameters, see [Optional Parameters](#configuring) below.
       The `-c` flag accepts a valid JSON object containing service-specific configuration parameters,
       provided either in-line or in a file.<br>
 
@@ -463,5 +465,43 @@ The table below describes how to use the `optimize_for_short_words` optional par
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
+  </tr>
+</table>
+
+## <a id='wsrep_applier_threads'></a> WSREP Applier Threads
+
+The table below describes how to use the `wsrep_applier_threads` optional parameter:
+
+<table>
+  <tr>
+    <th colspan="2" style="text-align:center;">wsrep_applier_threads</th>
+  </tr>
+
+  <tr>
+    <th><strong>Type</strong></th>
+    <td>Integer</td>
+  </tr>
+
+  <tr>
+    <th><strong>Default</strong></th>
+    <td>4</td>
+  </tr>
+
+  <tr>
+    <th><strong>Description</strong></th>
+    <td>
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to 4 threads, whereas Percona XtraDB Cluster 5.7 defaults to 1. 
+
+      For further details, see the 
+      <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster Docs</a>.
+
+      <p class="note caution">
+        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans, and will be rejected for service plans using other topologies.
+      </p>
+    </td>
+
+  <tr>
+    <th><strong>Usage</strong></th>
+    <td><code>create-service</code> or <code>update-service</code> as per <a href="#parameters">Set Optional Parameters</a></td>
   </tr>
 </table>

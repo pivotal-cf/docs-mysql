@@ -1,47 +1,6 @@
 ---
 title: VMware Tanzu SQL with MySQL for VMs Recommended Usage and Limitations
-owner: MySQL
-disk_requirements:
-  - header: "Single Node and Leader-Follower"
-    inline_name: "single node or leader-follower"
-    id: "single-node"
-    innodb: "512 MB"
-    minimum_disk_size: "5 GB"
-    n_is:
-      - "Maximum app data. Remember to include binlogs in your size estimate for app data."
-      - "Data for copied backups."
-      - "Data for compression and encryption."
-    diagram_filename: "persistent-disk-single-node.png"
-  - header: "Multi-Site Replication"
-    inline_name: "Multi-Site Replication"
-    id: "multi-site"
-    innodb: "2 GB"
-    minimum_disk_size: "5 GB"
-    n_is:
-      - "Maximum app data. Remember to include binlogs in your size estimate for app data."
-      - "Data for copied backups."
-      - "Data for compression and encryption."
-    diagram_filename: "persistent-disk-multi-site.png"
-  - header: "HA Cluster Jumpbox"
-    inline_name: "HA cluster jumpbox"
-    id: "ha-cluster-jumpbox"
-    innodb: "2 GB"
-    minimum_disk_size: "10 GB"
-    n_is:
-      - "Data for copied backups."
-      - "Data for compression and encryption."
-    diagram_filename: "persistent-disk-ha-jumpbox.png"
-  - header: "HA Cluster Node"
-    inline_name: "HA cluster node"
-    id: "ha-cluster-node"
-    innodb: "2 GB"
-    minimum_disk_size: "5 GB"
-    n_is:
-      - "maximum app data. Remember to include binlogs in your size estimate for app data."
-    diagram_filename: "persistent-disk-ha-node.png"
 ---
-
-<strong><%= modified_date %></strong>
 
 ## <a id="usecases"></a> Recommended Use Cases
 
@@ -109,23 +68,18 @@ InnoDB redo logs use a static amount of disk size.
 If your app is write-heavy,
 increase your persistent disk to accommodate the binlogs.
 
-For the amount of persistent disk required for your service plan, see the below sections:
+For the amount of persistent disk required for your service plan, see the following sections:
 
+* [Single Node and Leader-Follower](#single-node)
+* [Multi-Site Replication](#multi-site)
+* [HA Cluster Jumpbox](#ha-cluster-jumpbox)
+* [HA Cluster Node](#ha-cluster-node)
 
-<%# The following sections loop through the `disk_requirements` list defined in the frontmatter.
+[//]: # (Edit the below diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing) 
 
-To update the data for each plan, edit the frontmatter at the top of this file. %>
+<h3> <a id="single-node"></a> Single Node and Leader-Follower</h3>
 
-<% current_page.data.disk_requirements.each do |plan| %>
-* [<%= plan.header %>](#<%= plan.id %>)
-<% end %>
-
-
-<% current_page.data.disk_requirements.each do |plan| %>
-
-<h3> <a id="<%= plan.id%>"></a> <%= plan.header %></h3>
-
-You can configure the persistent disk size for <%= plan.inline_name %> VMs. For 
+You can configure the persistent disk size for single node or leader-follower VMs. For 
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -137,41 +91,156 @@ Use the following table to determine the amount of persistent disk space you nee
     <th>Minimum Total Disk Size</th>
   </tr>
   <tr>
-    <td><%= plan.innodb %></td>
-    <td><%= plan.n_is.length === 1 ? '' : plan.n_is.length %>N + <%= plan.innodb %></td>
-    <td><%= plan.minimum_disk_size %></td>
+    <td>512 MB</td>
+    <td>3N + 512MB</td>
+    <td>5 GB</td>
   </tr>
 </table>
 
 
-<% if plan.n_is.length === 1 %>
+In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
 
-In the **Total Disk Size** formula from the table above, `N` represents <%= plan.n_is[0] %>
+- Maximum app data. Remember to include binlogs in your size estimate for app data.
+- Data for copied backups.
+- Data for compression and encryption.
 
-<% else %>
+Each `N` combined makes `3N`, as seen in the formula.
 
-In the **Total Disk Size** formula from the table above, each `N` represents the following items 
-in equal value:
+The following diagram shows how persistent disk space is used:
 
-<% plan.n_is.each do |n| %>
-- <%= n %>
-<% end %>
+<img alt="Persistent Disk diagram.
+    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-single-node.png"/>
 
-Each `N` combined makes `<%= plan.n_is.length %>N`, as seen in the formula.
+<h3> <a id="multi-site"></a> Multi-Site Replication </h3>
 
-<% end %>
+You can configure the persistent disk size for Multi-Site Replication VMs. For 
+instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
+
+Use the following table to determine the amount of persistent disk space you need:
+
+<table>
+  <tr>
+    <th>InnoDB Redo Logs</th>
+    <th>Total Disk Size</th>
+    <th>Minimum Total Disk Size</th>
+  </tr>
+  <tr>
+    <td>2 GB</td>
+    <td>3N + 2 GB</td>
+    <td>5 GB</td>
+  </tr>
+</table>
 
 
-<% if plan.diagram_filename %>
-  The following diagram shows how persistent disk space is used:
+In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
 
-  <%# Edit the below diagram here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing %>
+- Maximum app data. Remember to include binlogs in your size estimate for app data.
+- Data for copied backups.
+- Data for compression and encryption.
+
+Each `N` combined makes `3N`, as seen in the formula.
+
+The following diagram shows how persistent disk space is used:
+
+<img alt="Persistent Disk diagram.
+    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
+
+<h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
+
+You can configure the persistent disk size for HA cluster jumpbox VMs. For 
+instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
+
+Use the following table to determine the amount of persistent disk space you need:
+
+<table>
+  <tr>
+    <th>InnoDB Redo Logs</th>
+    <th>Total Disk Size</th>
+    <th>Minimum Total Disk Size</th>
+  </tr>
+  <tr>
+    <td>2 GB</td>
+    <td>2N + 2 GB</td>
+    <td>10 GB</td>
+  </tr>
+</table>
+
+
+In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+
+- Data for copied backups.
+- Data for compression and encryption.
+
+Each `N` combined makes `2N`, as seen in the formula.
+
+The following diagram shows how persistent disk space is used:
+
+<img alt="Persistent Disk diagram.
+    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
+
+
+<h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
+
+You can configure the persistent disk size for HA cluster jumpbox VMs. For 
+instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
+
+Use the following table to determine the amount of persistent disk space you need:
+
+<table>
+  <tr>
+    <th>InnoDB Redo Logs</th>
+    <th>Total Disk Size</th>
+    <th>Minimum Total Disk Size</th>
+  </tr>
+  <tr>
+    <td>2 GB</td>
+    <td>2N + 2 GB</td>
+    <td>10 GB</td>
+  </tr>
+</table>
+
+
+In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+
+- Data for copied backups.
+- Data for compression and encryption.
+
+Each `N` combined makes `2N`, as seen in the formula.
+
+The following diagram shows how persistent disk space is used:
+
+<img alt="Persistent Disk diagram.
+    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
+
+
+<h3> <a id="ha-cluster-node"></a> HA Cluster Node </h3>
+
+You can configure the persistent disk size for HA cluster node VMs. For 
+instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
+
+Use the following table to determine the amount of persistent disk space you need:
+
+<table>
+  <tr>
+    <th>InnoDB Redo Logs</th>
+    <th>Total Disk Size</th>
+    <th>Minimum Total Disk Size</th>
+  </tr>
+  <tr>
+    <td>2 GB</td>
+    <td>N + 2 GB</td>
+    <td>5 GB</td>
+  </tr>
+</table>
+
+In the **Total Disk Size** formula from the table above, `N` represents maximum app data. Remember to include binlogs in your size estimate for app data.
+
+The following diagram shows how persistent disk space is used:
+
+<img alt="Persistent Disk diagram.
+    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-ha-node.png"/>
+
+
 
   
-  <img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/<%= plan.diagram_filename %>"/>
-<% end %>
-
-<% end %>
-
 
