@@ -40,6 +40,8 @@ see <a href="server-defaults.html">About MySQL Server Defaults.</a>
 You can change the default configuration of optional parameters by creating a new service instance or
 updating an existing service instance.
 
+The available optional parameters include [`workload`](#workload), [`enable_lower_case_table_names`](#lowercase), [`default-charset` and  `default-collation`](#character), [`replication_mode`](#synchronous-replication), [`backup-schedule`](#backup-schedule), [`optimize_for_short_words`](#optimize_for_short_words), and [`wsrep_applier_threads`](#wsrep_applier_threads).
+
 To set optional parameters:
 
 1. Do one of the following:
@@ -49,14 +51,13 @@ To set optional parameters:
         cf create-service p.mysql PLAN SERVICE-INSTANCE \
           -c '{ "PARAMETER": "PARAMETER-VALUE"}'
           ```
-    +  <strong>If you want to update an existing service instance,</strong> run:
+    +  **If you want to update an existing service instance,** run:
 
           ```
         cf update-service p.mysql PLAN SERVICE-INSTANCE \
           -c '{ "PARAMETER": "PARAMETER-VALUE"}'
           ```
 
-      For a list of available optional parameters, see [Optional Parameters](#configuring) below.
       The `-c` flag accepts a valid JSON object containing service-specific configuration parameters,
       provided either in-line or in a file.<br>
 
