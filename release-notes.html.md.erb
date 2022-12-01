@@ -22,7 +22,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 This release includes the following changes:
 
 + Increases the default value for max-connections to 5000. For details refer to [About MySQL Server Defaults](./server-defaults.html).
-+ This release adds support for the optional parameter `wsrep_applier_threads`. For details refer to [](./change-default.html#wsrep_applier_threads).
++ This release exposes the optional parameter `wsrep_applier_threads`, sets the default to 4, and allows users to customize it. For details refer to [](./change-default.html#wsrep_applier_threads).
 + pxc-release bump to golang 1.19.3
 + dedicated-mysql-release bump to golang 1.19.2
 + dedicated-mysql-adapter bump to golang 1.19.3
