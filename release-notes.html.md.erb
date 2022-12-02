@@ -13,6 +13,53 @@ and then upgrade to the latest patch available for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="2-10-10"></a> v2.10.10
+
+**Release Date: Dec 5th, 2022**
+
+### Changes
+
+This release includes the following changes:
+
++ Increases the default value for max-connections to 5000. For details refer to [About MySQL Server Defaults](./server-defaults.html).
++ This release exposes the optional parameter `wsrep_applier_threads`. The default is set to 4, and users can customize it. For details refer to [Changing Defaults Using Arbitrary Parameters](./change-default.html#wsrep_applier_threads).
++ pxc-release bump to golang 1.19.3
++ dedicated-mysql-release bump to golang 1.19.2
++ dedicated-mysql-adapter bump to golang 1.19.3
++ mysql-monitoring bump to golang 1.19.2
++ adbr bump to golang 1.19.3, bug fix for error users may have seen when backup up database with a large number of tables
+
+### Known Issues
+
+This release has the following known issues:
+
+<%= partial vars.path_to_partials + '/mysql/disable-plan-ki' %>
++ **In TAS 2.13, the MySQL tile metrics are not available when using the `cf tail` command.** The metrics are still available to other external services such as Healthwatch.
++ **Issue with Hitachi Content Platform HS3:** Ensure that you configure the storage device to use a *flat space*, not a *structured space*.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.330+</td></tr>
+  <tr><td>Percona Server</td><td>5.7.40-43*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.39-31.61</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.26</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.22.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>9.22.0*</td></tr>
+  <tr><td>pxc-release</td><td>0.48.0*</td></tr>
+
+</table>
+
+&#42; _Components marked with an asterisk have been updated_
+
 ## <a id="2-10-9"></a> v2.10.9
 
 **Release Date: October 11, 2022**
@@ -21,7 +68,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 This release includes the following new features:
 
-+ Improves the Percona Server upgrade process, which reduces downtime during MySQL for VMs tile upgrades.
++ Improves the Percona Server upgrade process, which reduces downtime during future MySQL for VMs tile upgrades.
 + pxc-release bump to golang 1.19.1
 + dedicated-mysql-adapter bump to golang 1.19.1
 + mysql-monitoring uses bpm
