@@ -442,12 +442,12 @@ To set MySQL defaults and enable developers to customize their instances:
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this checkbox to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
-            For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
+            For more information, see <a href="./change-default.html#parameters">Set Optional Parameters</a> in _Changing Defaults Using Arbitrary Parameters_.</td></tr>
     <tr><td><strong>Enable Local Infile</strong></td>
         <td>Select this checkbox to enable data downloading from the local file system of the client.
             VMware discourages selecting this checkbox. Before you enable local in-file,
             review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local.html">MySQL documentation</a>.
+            See the <a href="https://dev.mysql.com/doc/refman/5.6/en/load-data-local-security.html">MySQL documentation</a>.
     </td></tr>
     <tr>
       <a name="limit-disk-use"></a>
@@ -459,7 +459,7 @@ To set MySQL defaults and enable developers to customize their instances:
     </td></tr>
     <tr><td><strong>Wait Timeout</strong></td>
         <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+            For more information about <code>wait_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
     </td></tr>
   </table>
 
