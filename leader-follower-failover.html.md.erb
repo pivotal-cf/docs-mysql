@@ -313,6 +313,7 @@ To restart the former leader VM and configure it as the new follower:
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
        run-errand inspect</pre>
+
    If the output displays one instance marked `Role: leader` and another instance marked `Role: follower`,
    then leader-follower replication and high availability are resumed.
    The deployment should be in its original, working state.
