@@ -5,16 +5,11 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-<%# The below uses the local product variable and math so we do not need to edit it
-with every release %>
-<% previous_version = (product_info['local_product_version'].to_f - 0.1).round(2) %>
-<% current_version = product_info['local_product_version'] %>
-
 VMware recommends that you upgrade to the latest version of your current minor line,
 then upgrade to the latest available version of the next minor line.
-For example, if you use an older v<%= previous_version %>.x
-version, upgrade to the latest v<%= previous_version %>.x version
-before upgrading to the latest v<%= current_version %>.x version.
+For example, if you use an older v2.8.x
+version, upgrade to the latest v2.8.x version
+before upgrading to the latest v2.9.x version.
 
 <%= partial '/upgrade-planner' %>
 
