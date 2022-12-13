@@ -40,9 +40,7 @@ A service may offer one or more plans.
 You can set a separate quota per plan so that instances of that plan cannot exceed the plan quota.
 For a service with multiple plans, the total number of instances created for all
 plans combined cannot exceed the [global quota](#global) for the service.
-<% if product_short.include?("SQL") %>
 If the plan quota field is blank, the plan quota is set to the global quota by default.
-<%end%>
 
 When the plan quota is reached, no more instances of that plan can be created
 unless the plan quota is increased or some instances of that plan are deleted.
@@ -196,41 +194,17 @@ configuration(s).
 The specific costs depend on your IaaS.
 
 
-To view configurations for your <%= product_short %> on-demand plan, do the following:
+To view configurations for your <%= vars.product_short %> on-demand plan, do the following:
 
-1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **<%= tile_name %>** > **Settings**.
+1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **<%= vars.tile_name %>** > **Settings**.
 
-<%# Case statement to change the instructions to satisfy each service %>
-<% if product_short.include?("RabbitMQ") %>
-
-1. Click the section for the plan you want to view. For example, **On Demand Instance: Plan 1**.
-
-<% elsif product_short.include?("SQL")%>
 
 1. Click the section for the plan you want to view. For example, **Plan 1**.
 
-<% elsif product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-1. Click the section for the plan you want to view. For example, **Plan 1**.
-
-<% elsif product_short.include?("Redis")%>
-<%# Redis has different instructions in v2.3 and later %>
-<% if product_info['local_product_version'] == '2.1' || product_info['local_product_version'] == '2.2' %>
-1. Click the section for the plan you want to view. For example, **On-Demand Plan 1**.
-<% else %>
-1. Click **On-Demand Plans**.
-1. Click the dropdown for the plan you want to view. For example, **on-demand-cache**.
-<% end %>
-
-<% end %>
 
 The image below shows an example that includes the VM type and persistent disk
 selected for the server VMs, as well as the quota for this plan.
-<% if product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-The quota is shown in the **Maximum service instances** field.
-<% end %>
 
-<%# Tabbed table to display image for MySQL, otherwise display image plainly with different alt text for each service. %>
-<% if current_page.data.galera %>
 Click the tabs below to show an example of each plan:
 
 <style>
@@ -315,29 +289,6 @@ function openDocs(evt, docsName) {
 </div>
 
 
-<% elsif product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the maximum service instances
-field set to 15, VM type for the locator VMs set to micro.cpu, persistent disk type for the locator VMs set to 10 GB,
-VM type for the server VMs set to micro, and persistent disk type for server VMs set to 20 GB",
-:width => "400") %>
-
-<% elsif product_short.include?("RabbitMQ")%>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the plan quota
-field set to 15, RabbitMQ VM type set to micro, and Persistent disk type set to 20 GB",
-:width => "400") %>
-
-<% elsif product_short.include?("Redis")%>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the plan quota
-field set to 15, server VM type set to micro, and server disk type set to 20 GB",
-:width => "400") %>
-
-<% end %>
 
 <p class="note"><strong>Note:</strong>
 	Although operators can limit on-demand instances with plan quotas and a global
