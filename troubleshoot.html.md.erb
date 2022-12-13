@@ -26,7 +26,74 @@ The following errors occur in multiple services:
 + [Upgrade All Service Instances Errand Fails](#upgrade-all-fails)
 + [Missing Logs and Metrics](#missing-logs)
 
-<%= partial '/services-tshoot/tshoot-err-install-fail' %>
+<a name="install-fail"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Failed Installation
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><%= vars.product_short %> fails to install.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Reasons for a failed installation include:
+    <ul>
+    <li>
+    Certificate issues: The on-demand broker (ODB) requires valid certificates.
+    </li>
+    <li>Deploy fails. This could be due to a variety of reasons.
+    </li>
+    <li>Networking problems: </li>
+    <ul>
+    <li>Cloud Foundry cannot reach the <%= vars.product_short %> broker</li>
+    <li>Cloud Foundry cannot reach the service instances</li>
+    <li>The service network cannot access the BOSH director </li>
+    </ul>
+    <li>The Register broker errand fails.</li>
+    <li>The smoke test errand fails.</li>
+    <li>
+    Resource sizing issues: These occur when the resource sizes selected for a
+    given plan are less than <%= vars.product_short %> requires to function.
+    </li>
+    <li>Other service-specific issues.</li>
+    </ul></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ul>
+    <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
+    To generate new certificates, contact <a href="https://support.pivotal.io">Support</a>.</li>
+
+    <li>Deploy fails: View the logs using <%= vars.ops_manager %> to determine why the deploy is failing.</li>
+
+    <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li>
+
+    <li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li>
+
+    <li>Resource sizing issues: Check your resource configuration in <%= vars.ops_manager %> and ensure that the
+    configuration matches that recommended by the service.</li>
+    </ul></td>
+  </tr>
+
+</table>
+</div>
 
 <%= partial '/services-tshoot/tshoot-err-cannot-create-delete' %>
 
