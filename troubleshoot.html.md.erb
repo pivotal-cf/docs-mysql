@@ -227,7 +227,62 @@ The following errors occur in multiple services:
 </table>
 </div>
 
-<%= partial '/services-tshoot/tshoot-err-instance-not-exist' %>
+<a name="instance-not-exist"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Instance Does Not Exist
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The instance might have been deleted.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		<p>
+    Confirm that the <%= vars.product_short %> instance exists in BOSH and
+		obtain the GUID CF by running:
+		</p>
+		<pre><code>cf service MY-INSTANCE --guid</code></pre>
+		</li>
+		<li>
+		<p>
+		Using the GUID obtained above, run:
+		</p>
+		<pre><code>bosh -d service-instance_GUID vms</code></pre>
+		</li>
+		</ol>
+
+		<p>
+		If the BOSH deployment is not found, it has been deleted from BOSH.
+		Contact Support for further assistance.
+		</p></td>
+  </tr>
+
+</table>
+</div>
 
 <%= partial '/services-tshoot/tshoot-err-other-errors' %>
 
