@@ -419,7 +419,51 @@ The following errors occur in multiple services:
   See <a href="./upgrade.html#interruptions">Service Interruptions</a> for more information.
 </p>
 
-<%= partial '/services-tshoot/tshoot-err-upgrade-all-fails' %>
+<a name="upgrade-all-fails"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Upgrade All Service Instances Errand Fails
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>There might be a problem with a particular instance.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ol>
+    <li>Look at the errand output in the <%= vars.ops_manager %> log.</li>
+
+    <li>If an instance has failed to upgrade, debug and fix it before running the errand again
+    to prevent any failure issues from spreading to other on-demand instances.</li>
+
+    <li>After the <%= vars.ops_manager %> log no longer lists the deployment as <code>failing</code>,
+    <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
+    </ol>
+</td>
+  </tr>
+
+</table>
+</div>
 
 <%= partial '/services-tshoot/tshoot-err-missing-logs' %>
 
