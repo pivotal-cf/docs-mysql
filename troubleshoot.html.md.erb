@@ -347,7 +347,72 @@ The following errors occur in multiple services:
 </table>
 </div>
 
-<%= partial '/services-tshoot/tshoot-err-cannot-connect' %>
+<a name="cannot-connect"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Connect to a Service Instance
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that their app cannot use service instances that they have
+    successfully created and bound.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The error might originate from the service or be network related.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To solve this issue, ask the user to send application logs that show the connection error.
+    If the error originates from the service, then follow <%= vars.product_short %>-specific instructions.
+    If the issue appears to be network-related, then:
+    <ol>
+    <li>
+    <p>
+    Check that <a href="https://docs.pivotal.io/application-service/operating/app-sec-groups.html"/>application security groups</a>
+    are configured correctly.
+    Access should be configured for the service network that the tile is deployed to.
+    </p>
+    </li>
+    <li>
+    <p>
+    Ensure that the network the <%= vars.app_runtime_abbr %> tile is deployed
+    to has network access to the service network. You can find the network definition
+    for this service network in the BOSH Director tile.
+    </p>
+    </li>
+    <li>
+    <p>
+    In <%= vars.ops_manager %> go into the service tile and see the service network that is
+    configured in the networks tab.
+    </p>
+    </li>
+    <li>
+    <p>
+    In <%= vars.ops_manager %> go into the <%= vars.app_runtime_abbr %> tile and see the network it is assigned to.
+    Make sure that these networks can access each other.
+    </p>
+    </li>
+    </ol></td>
+  </tr>
+
+</table>
+</div>
 
 <p class="note"><strong>Note:</strong>
   Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
