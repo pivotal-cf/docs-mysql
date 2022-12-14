@@ -284,7 +284,68 @@ The following errors occur in multiple services:
 </table>
 </div>
 
-<%= partial '/services-tshoot/tshoot-err-other-errors' %>
+<a name="cannot-bind"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Bind to or Unbind from Service Instances
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+    <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This might be due to authentication or network errors.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To find out the exact issue with the binding process:
+    <ol>
+    <li>
+    <p>
+      <a href="#access-broker">Access the service broker logs</a>.
+    </p>
+    </li>
+    <li>
+    <p>
+      Search the logs for the <code>broker-request-id</code> string listed in the error message above.
+    </p>
+    </li>
+    <li>
+    <p>
+      Check for:
+    </p>
+    </li>
+    <ul>
+    <li><a href="#auth">Authentication errors</a></li>
+    <li><a href="#network">Network errors</a></li>
+    </ul>
+    <li>
+    <p>
+    Contact Support for further assistance if you are unable to resolve the problem.
+    </p>
+    </li>
+    </ol></td>
+  </tr>
+
+</table>
+</div>
 
 <%= partial '/services-tshoot/tshoot-err-cannot-connect' %>
 
