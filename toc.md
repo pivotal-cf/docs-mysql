@@ -14,7 +14,6 @@
         *   [Preparing for Multi-Site Replication](./prepare-multi-site.html)
         *   [Preparing for TLS](./prepare-tls.html)
         *   [Setting Limits for On-Demand Instances](./set-quotas.html)
-        *   [Enabling Service-Gateway Access](./enable-service-gateway.html)
         *   [Controlling Access to Service Plans by Org](./service-plan.html)
     *   [Managing Tanzu MySQL for VMs](./managing_mysql_vms.html) 
         *   [Upgrading](./upgrade.html)
