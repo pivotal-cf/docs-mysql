@@ -9,15 +9,11 @@ The proxy used in <%= vars.product_short %> is Switchboard.
 Switchboard was developed to replace HAProxy as the proxy tier for the high
 availability cluster for MySQL databases in <%= vars.product_short %>.
 
-<% if current_page.data.tile %>
-
 <%= image_tag "switchboard-all-healthy.png",
 :alt => "Screenshot of the Switchboard dashboard.
 At the top, there is a banner with the message 'all nodes are healthy'.
 Below this is a table with the headings nodes, status, current sessions, and IP address.
 For each node in the table, the status column is marked healthy." %>
-
-<%end%>
 
 Switchboard offers the following features:
 
@@ -30,7 +26,5 @@ Switchboard offers the following features:
 
     Operators can connect to Switchboard to view the state of the nodes.
 
-    <% if current_page.data.tile %>
     For more information about monitoring proxy health status, see
     [Monitoring Node Health](./monitor-health.html).
-    <%end%>
