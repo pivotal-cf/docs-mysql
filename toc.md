@@ -7,7 +7,6 @@
     *   [About Leader-Follower](./about-leader-follower.html)
     *   [About Highly Available Clusters](./about-ha.html)
     *   [About Multi-Site Replication](./about-multi-site.html)
-    *   [About Service-Gateway Access](./service-gateway-access.html)
     *   [Recommended Usage and Limitations](./recommended.html)
 *   [Operator Guide](./operator_guide.html)
     *   [Getting Started](./operator_getting_started.html)
