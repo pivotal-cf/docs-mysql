@@ -1,8 +1,6 @@
 <p>
   To use <%= vars.product_short %> with your <%= vars.app_runtime_abbr %> apps, you must:
   <ul>
-    <% if vars.product_short.include?("SQL") %>
-        <% if product_info['local_product_version'].to_f >= 2.8 %>
           <li>
             Decide what type of plan you want from the following options: single node, leader-follower,
             highly available (HA) cluster, and <%= vars.single_leader_plan %>.
@@ -16,19 +14,10 @@
             For more information, see <a href="./about-multi-site.html#limitations"><%= vars.single_leader_plan %> Limitations</a>.
           </li>
 
-        <% elsif product_info['local_product_version'].to_f <= 2.7 %>
-          <li>
-            Decide what type of plan you want from the following options: single node, leader-follower,
-            and highly available (HA) cluster.
-            Your marketplace might not offer all of these plan types.<br>
-            For information about service plans,  see <a href="./availability-options.html">Availability Options</a>.
-          </li>
-        <% end %>
         <li>
           If you intend to use an HA cluster plan, review the limitations associated with this plan type.<br>
           For more information, see <a href="./about-ha.html#limitations">Highly Available Cluster Limitations</a>.
         </li>
-    <% end %>
 
     <li>Have an <%= vars.ops_manager %> installation with <%= vars.product_short %> installed and listed in the Marketplace.<br>
     For how to verify availability in the Marketplace, see <a href="#marketplace">Confirm Service Availability</a> below.</li>
