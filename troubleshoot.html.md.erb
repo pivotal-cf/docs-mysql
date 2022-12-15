@@ -557,27 +557,47 @@ This section provides solutions for the following errands:
 + [Both Leader and Follower Instances Are Writable](#both-writable)
 + [Both Leader and Follower Instances Are Read-Only](#both-read-only)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unable-to-determine",
-    description: "Unable to Determine Leader and Follower",
-    symptom: <<~DESC,
-    This problem happens when the <code>configure-leader-follower</code>
+<a name="unable-to-determine"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Unable to Determine Leader and Follower
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>This problem happens when the <code>configure-leader-follower</code>
     errand fails because it cannot determine the VM roles. <br><br>
 
     The <code>configure-leader-follower</code> errand exits with <code>1</code>
     and the errand logs contain the following:
 
     <pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
-    DESC
+</td>
+  </tr>
 
-    cause: <<~DESC,
-
-      Something has happened to the instances, such as a failure or manual intervention.
+  <tr>
+    <th>Cause</th>
+    <td>Something has happened to the instances, such as a failure or manual intervention.
       As a result, there is not enough information available to determine the correct state
       and topology without operator intervention to resolve the issue.
-      DESC
+</td>
+  </tr>
 
-    solution: 'Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
     <a href="./about-leader-follower.html#errands">orchestration</a>
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
     <code>configure-leader-follower</code> errand. This is shown in the example below.<br><br>
@@ -615,10 +635,10 @@ This section provides solutions for the following errands:
         In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
-        <a href="./backup-mysqldump.html#create-backup">Create a ' + vars.product_short + ' Logical Backup</a>
+        <a href="./backup-mysqldump.html#create-backup">Create a <%= vars.product_short %> Logical Backup</a>
         steps.</li>
       <li>Restore the backup artifact to the first instance using the
-        <a href="./backup-mysqldump.html#restore-backup">Restore from a ' + vars.product_short + ' Logical Backup</a>
+        <a href="./backup-mysqldump.html#restore-backup">Restore from a <%= vars.product_short %> Logical Backup</a>
         steps.<br>
         At this point, the instances have equivalent data.</li>
       <li>
@@ -632,34 +652,55 @@ This section provides solutions for the following errands:
           run-errand configure-leader-follower &#92;
           --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</pre>
       </li>
-    </ol>'
+    </ol></td>
+  </tr>
 
-} %>
+</table>
+</div>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "both-writable",
+<a name="both-writable"></a>
 
-    description: "Both Leader and Follower Instances Are Writable",
+<div>
 
-    symptom: <<~DESC ,
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Both Leader and Follower Instances Are Writable
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     This problem happens when the<code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
     The <code>configure–leader-follower</code> errand exits with <code>1</code>
     and the errand logs contain the following:
 
     <pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</pre>
-    DESC
+</td>
+  </tr>
 
-    cause:
-      vars.product_short + ' tries to ensure that there is only one writable instance of the
+  <tr>
+    <th>Cause</th>
+    <td><%= vars.product_short %> tries to ensure that there is only one writable instance of the
       leader-follower pair at any given time. However, in certain situations, such as
       network partitions, or manual intervention outside of the provided bosh
       errands, it is possible for both instances to be writable. <br><br>
       The service instances remain in this state until an operator resolves the issue
-      to ensure that the correct instance is promoted and reduce the potential for data divergence.
-    ',
+      to ensure that the correct instance is promoted and reduce the potential for data divergence.</td>
+  </tr>
 
-    solution: '
-      <ol>
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    <ol>
         <li>
           Use the
           <code>inspect</code> errand to retrieve the GTID Executed set for each VM:
@@ -725,7 +766,7 @@ This section provides solutions for the following errands:
                   succeeded</pre>
             </li>
             <li>Take a backup of both instances using the
-              <a href="./backup-mysqldump.html#create-backup"> Create a ' + vars.product_short + ' Logical Backup</a>
+              <a href="./backup-mysqldump.html#create-backup"> Create a <%= vars.product_short %> Logical Backup</a>
               steps.</li>
             <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead---this instance has the higher GTID Executed set, and will be the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
@@ -756,17 +797,45 @@ This section provides solutions for the following errands:
           </ol>
         </li>
       </ol>
-    '
-} %>
+    </td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "both-read-only",
-    description: "Both Leader and Follower Instances Are Read-Only",
-    symptom: "Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
-    However if both VMs are read only, apps cannot write to the database.",
-    cause: "This problem happens if the leader VM fails and the BOSH Resurrector is enabled.
-    When the leader is resurrected, it is set as read-only.",
-    solution:'
+</table>
+</div>
+
+<a name="both-read-only"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Both Leader and Follower Instances Are Read-Only
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
+    However if both VMs are read only, apps cannot write to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens if the leader VM fails and the BOSH Resurrector is enabled.
+    When the leader is resurrected, it is set as read-only.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
     <ol>
       <li>
         Use the
@@ -774,8 +843,8 @@ This section provides solutions for the following errands:
         errand to confirm that both VMs are in a read-only state:
         <pre>bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
       </li>
-      <li>Examine the output and locate the information about the leader-follower ' +
-        vars.product_short+ ' VMs:
+      <li>Examine the output and locate the information about the leader-follower 
+        <%= vars.product_short %> VMs:
         <pre class="terminal">
     Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
     Exit Code  0
@@ -816,8 +885,11 @@ This section provides solutions for the following errands:
     </pre>
       </li>
     </ol>
-   '
-} %>
+   </td>
+  </tr>
+
+</table>
+</div>
 
 ###<a id="apps-inoperable"></a>Inoperable App and Database Errors
 
@@ -826,22 +898,47 @@ This section provides a solution for the following errors:
 + [Persistent Disk is Full](#persistent-disk)
 + [Cannot Access Database Table](#access-table)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "persistent-disk",
-    description: "Persistent Disk is Full",
-    symptom: 'Developers report that read, write, and cf CLI operations do not work.
-    Developers cannot upgrade to a larger ' + vars.product_short + ' service plan to free up disk space. <br><br>
+<a name="persistent-disk"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Persistent Disk is Full
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that read, write, and cf CLI operations do not work.
+    Developers cannot upgrade to a larger <%= vars.product_short %> service plan to free up disk space. <br><br>
     If your persistent disk is full, apps become inoperable.
-    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.',
-    cause: 'This problem happens if your persistent disk is full.
+    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens if your persistent disk is full.
     When you use the BOSH CLI to target your deployment, you see that instances are at 100% persistent disk usage. <br><br>
     Available disk space can be increased by deleting log files.
-    After deleting logs, you can then upgrade to a larger ' + vars.product_short + ' service plan.
+    After deleting logs, you can then upgrade to a larger <%= vars.product_short %> service plan.
     <br><br>
     You can also turn off binary logging before developers do large data uploads or if their
-    databases have a high transaction volume.',
-    solution: '
-      To resolve this issue, do one of the following:<br><br>
+    databases have a high transaction volume.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    To resolve this issue, do one of the following:<br><br>
           <ul>
             <li><strong>If your persistent disk is already full,</strong> delete binary logs.
               See
@@ -859,16 +956,41 @@ This section provides a solution for the following errors:
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
               in the Knowledge Base..
             </li>
-          </ul>'
-} %>
+            </ul>
+            </td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "access-table",
-    description: "Cannot Access Database Table",
-    symptom: "When you query an existing table, you see an error similar to
+</table>
+</div>
+
+<a name="access-table"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Access Database Table
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>When you query an existing table, you see an error similar to
     the following:
-    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre>",
-    cause: "<p>This error occurs if you created an uppercase table name and then
+    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>This error occurs if you created an uppercase table name and then
       enabled lowercase table names.</p>
 
     <p>You enable lowercase table names either by:</p>
@@ -884,8 +1006,12 @@ This section provides a solution for the following errors:
       information about this configuration,
       see <a href='./install-config.html#mysql'>Configure MySQL</a>.</li>
     </ul>
-",
-    solution: "<p>To resolve this issue:</p>
+</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>To resolve this issue:</p>
     <ol>
       <li>Disable lowercase table names by doing one of the following:
           <ul>
@@ -896,7 +1022,7 @@ This section provides a solution for the following errors:
               <ol>
               <li>Deselect <strong>Enable Lower Case Table Names</strong> in
             the <strong>Mysql Configuration</strong> pane of the tile.</li>
-              <li> Navigate to the " + vars.ops_manager + " Installation Dashboard,
+              <li> Navigate to the <%= vars.ops_manager %> Installation Dashboard,
         click <strong>Review Pending Changes</strong>, and then click
         <strong>Apply Changes</strong>.</li>
             </ol></li>
@@ -907,8 +1033,12 @@ This section provides a solution for the following errors:
         (Optional) If you want to re-enable lowercase table names,
         re-name your table to lowercase and then enable lowercase table names.
       </li>
-    </ol>"
-} %>
+      </ol>
+      </td>
+  </tr>
+
+</table>
+</div>
 
 
 ###<a id="ha"></a>Highly Available Cluster Errors
@@ -918,24 +1048,46 @@ This section provides solutions for the following errands:
 + [Unresponsive Node in a Highly Available Cluster](#unresponsive)
 + [Many Replication Errors in Logs for Highly Available Clusters](#replication-errors)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unresponsive",
-    description: "Unresponsive Node in a Highly Available Cluster",
-    symptom:'
-    A client connected to a ' + vars.product_short + ' cluster node reports the following error:
+<a name="unresponsive"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Unresponsive Node in a Highly Available Cluster
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
+    A client connected to a <%= vars.product_short %> cluster node reports the following error:
 
     <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
     </pre>
-    ',
+    </td>
+  </tr>
 
-    cause: 'If the client is connected to a ' + vars.product_short + ' cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
-    re-routes further connections to a different node.',
+  <tr>
+    <th>Cause</th>
+    <td>If the client is connected to a <%= vars.product_short %> cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
+    re-routes further connections to a different node.</td>
+  </tr>
 
-    solution: <<~DESC,
-    A node can become unresponsive for a number of reasons. For solutions, see the following:
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>A node can become unresponsive for a number of reasons. For solutions, see the following:
 
     <ul>
       <li>
@@ -985,13 +1137,33 @@ This section provides solutions for the following errands:
         </ul>
       </li>
     </ul>
-    DESC
-} %>
+</td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "replication-errors",
-    description: "Many Replication Errors in Logs for Highly Available Clusters",
-    symptom: <<~DESC,
+</table>
+</div>
+
+<a name="replication-errors"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Many Replication Errors in Logs for Highly Available Clusters
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     You see many replication errors in the MySQL logs, like the following:
 
     <pre class="terminal">
@@ -999,10 +1171,18 @@ This section provides solutions for the following errands:
     160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
     160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
     </pre>
-    DESC
-    cause: "This problem happens when there are errors in SQL statements.",
-    solution: <<~DESC,
-      For solutions for replication errors in MySQL log files, see the table below.
+    </td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens when there are errors in SQL statements.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    For solutions for replication errors in MySQL log files, see the table below.
 
       <table class="nice">
         <tr>
@@ -1032,19 +1212,38 @@ This section provides solutions for the following errands:
 
       If you see replication errors, but no <code>ALTER TABLE</code>
       or persistent disk or memory issues, you can ignore the replication errors.
-    DESC
+    </td>
+  </tr>
 
-} %>
+</table>
+</div>
 
 ###  <a id="failed-adbr-backups"></a>Failed Backups
 
 If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plugin fails,
 check that the 2345 port from the <%= vars.app_runtime_abbr %> to the ODB component is open.
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unable-to-determine",
-    description: "Automated Backups or adbr Plugin Backups Fail",
-    symptom: <<~DESC,
+<a name="unable-to-determine"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Automated Backups or adbr Plugin Backups Fail
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     The following are true:<br><br>
     <ul>
       <li>The backup fails.</li>
@@ -1056,18 +1255,27 @@ check that the 2345 port from the <%= vars.app_runtime_abbr %> to the ODB compon
        Where <code>SYSTEM-DOMAIN</code> is your system domain.
       </li>
     </ul>
-    DESC
+    </td>
+  </tr>
 
-    cause: <<~DESC,
+  <tr>
+    <th>Cause</th>
+    <td>
       Port 2345 that allows communication between the TAS for VMs and ODB components is closed.
-      DESC
+      </td>
+  </tr>
 
-    solution: <<~DESC,
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
     Open port 2345 from the TAS for VMs component to the ODB component.
     See <a href="about.html#mysql-ports">Required Networking Rules for Tanzu SQL for VMs</a>
     in <em>On-Demand Networking</em>.
-      DESC
-} %>
+      </td>
+  </tr>
+
+</table>
+</div>
 
 ##  <a id="components"></a>  Troubleshoot Components
 
