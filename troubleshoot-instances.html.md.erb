@@ -14,9 +14,45 @@ Start here if you are responding to a specific error or error messages.
 
 ### <a id="x-product"></a> Common Service Errors
 
-<%# The below partial is in https://github.com/pivotal-cf/docs-partials %>
+<a name="no-metrics"></a>
 
-<%= partial '/services-tshoot/tshoot-no-metrics' %>
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    No Metrics from Log Cache
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>You receive no metrics when running the <code>cf tail</code> command.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This might be because the Firehose is disabled in the <%= vars.app_runtime_abbr %> tile.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> checkbox is enabled,
+  and the <strong>Enable Log Cache syslog ingestion</strong> checkbox is disabled in the 
+  <%=	vars.app_runtime_abbr %> tile.
+  For more information about configuring these checkboxes, see
+  <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
+  </tr>
+
+</table>
+</div>
 
 ### <a id="inaccessible"></a>If Instances or Database are Inaccessible
 
@@ -27,96 +63,255 @@ topology, or during upgrades:
 - [Apps Cannot Write to the Database](#read-only)
 - [Apps Are Inoperable](#disk-full)
 - [Apps Cannot Connect to the Database](#m-tls-error)
-- [MySQL Connector/J v5.1.41 or Earlier](#connecter)
+- [MySQL Connector/J v5.1.41 or Earlier](#connector)
 - [Mutual TLS](#m-tls)
 
 
-<%= partial  "/troubleshoot-template", locals: {
-    id: 'outages',
-    description: 'Temporary Outages',
-    symptom: vars.product_full + ' service instances can become temporarily inaccessible during upgrades and VM or network failures.',
-    solution: 'For more information, see <a href="./upgrade.html#interruptions">Service Interruptions</a>.'
-} %>
+<a name="outages"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Temporary Outages
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><%= vars.product_full %> service instances can become temporarily inaccessible during upgrades and VM or network failures.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>For more information, see <a href="./upgrade.html#interruptions">Service Interruptions</a>.</td>
+  </tr>
+
+</table>
+</div>
 
 
-<%= partial  "/troubleshoot-template", locals: {
-    id: 'read-only',
-    description: 'Apps Cannot Write to the Database',
-    symptom: "You have a leader-follower or #{vars.single_leader_plan} topology, and your apps can no
-    longer write to the database.",
-    cause: "<p>If you have a leader-follower topology, the leader VM might be read-only. 
+<a name="read-only"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Cannot Write to the Database
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>You have a leader-follower or <%= vars.single_leader_plan %> topology, and your apps can no
+    longer write to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>If you have a leader-follower topology, the leader VM might be read-only. 
     If you can no longer read to the database as well, your persistent disk might be full.</p>
-    <p>If you have a #{vars.single_leader_plan} topology, your leader VM might be down.</p>",
-    solution: "<p>If you have a leader-follower topology and the leader VM is read-only, for how to 
+    <p>If you have a <%= vars.single_leader_plan %> topology, your leader VM might be down.</p></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>If you have a leader-follower topology and the leader VM is read-only, for how to 
     troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
         Both Leader and Follower Instances Are Read-Only</a>.</p>
     <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
     troubleshooting inoperable apps, see <a href='#disk-full'>
         Apps are Inoperable</a>.</p>
-    <p>If you have a #{vars.single_leader_plan} topology and your leader VM is down, 
+    <p>If you have a <%= vars.single_leader_plan %> topology and your leader VM is down, 
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
     see <a href='./multi-site-trigger-failover.html'>
-        Triggering Multi-Site Replication Failover and Switchover</a>.</p>"
-} %>
+        Triggering Multi-Site Replication Failover and Switchover</a>.</p></td>
+  </tr>
+
+</table>
+</div>
 
 
-<%= partial  "/troubleshoot-template", locals: {
-    id: 'disk-full',
-    description: 'Apps Are Inoperable',
-    symptom: 'Your apps become inoperable. Read,
-write, and cf CLI operations do not work.',
-    cause: 'Your persistent disk might be full',
-    solution: 'Contact your operator to check if your persistent disk is full.
+<a name="disk-full"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Are Inoperable
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Your apps become inoperable. Read,
+write, and cf CLI operations do not work.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Your persistent disk might be full</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Contact your operator to check if your persistent disk is full.
 For more information about troubleshooting this problem, see
-<a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.'
-} %>
+<a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.</td>
+  </tr>
 
+</table>
+</div>
 
+<a name="m-tls-error"></a>
 
-<%= partial  "/troubleshoot-template", locals: {
-    id: 'm-tls-error',
-    description: 'Apps Cannot Connect to the Database',
-    symptom: 'Apps can fail to connect to the database.',
-    cause: '<ul>
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Apps Cannot Connect to the Database
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Apps can fail to connect to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><ul>
     <li>When your app uses MySQL Connector/J v5.1.41 or earlier.
     </li>
     <li>When your app uses mutual TLS (mTLS).</li>
-</ul>',
-    solution: '<ul>
+</ul></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><ul>
     <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a> below.</li>
     <li>See <a href="#m-tls">Mutual TLS</a> below.</li>
-</ul>'
-} %>
+</ul></td>
+  </tr>
+
+</table>
+</div>
 
 
+<a name="connector"></a>
 
+<div>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: 'connecter',
-    description: 'MySQL Connector/J v5.1.41 or Earlier',
-    symptom: '<p>Apps cannot connect to the database when TLS is enabled and
-the apps are using MySQL Connector/J v5.1.41 or earlier.</p>',
-    cause: '<p>You see errors about certificates.</p>
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    MySQL Connector/J v5.1.41 or Earlier
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td><p>Apps cannot connect to the database when TLS is enabled and
+the apps are using MySQL Connector/J v5.1.41 or earlier.</p></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>You see errors about certificates.</p>
 <p>For example:</p>
 <pre>Caused by: javax.net.ssl.SSLHandshakeException: Received fatal alert: bad_certificate
-        at sun.security.ssl.Alerts.getSSLException(Alerts.java:192) ~[na:1.8.0_152]</pre>',
-    solution:'<p>If you cannot update the MySQL Connector/J, do the workaround in
+        at sun.security.ssl.Alerts.getSSLException(Alerts.java:192) ~[na:1.8.0_152]</pre></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>If you cannot update the MySQL Connector/J, do the workaround in
 <a href="https://community.pivotal.io/s/article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack">
 How to disable KeyManager and TrustManager in Container Security Provider Framework in the
-Javanbuildpack</a> in the Support knowledge base.</p>'
-} %>
+Javanbuildpack</a> in the Support knowledge base.</p></td>
+  </tr>
+
+</table>
+</div>
 
 
-<%= partial  "/troubleshoot-template", locals: {
-    id: 'm-tls',
-    description: 'Mutual TLS',
-    symptom: 'Apps cannot connect to the database when TLS is enabled and your apps uses mTLS.',
-    cause: 'You see network errors in your app logs.',
-    solution: 'To resolve this issue disable mTLS in your apps.'
-} %>
+<a name="m-tls"></a>
 
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Mutual TLS
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Apps cannot connect to the database when TLS is enabled and your apps uses mTLS.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>You see network errors in your app logs.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To resolve this issue disable mTLS in your apps.</td>
+  </tr>
+
+</table>
+</div>
 
 
 ## <a id="techniques"></a> Techniques for Troubleshooting
