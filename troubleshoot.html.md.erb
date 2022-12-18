@@ -26,8 +26,6 @@ The following errors occur in multiple services:
 + [Upgrade All Service Instances Errand Fails](#upgrade-all-fails)
 + [Missing Logs and Metrics](#missing-logs)
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
 <a name="install-fail"></a>
 
 <div>
@@ -96,8 +94,6 @@ The following errors occur in multiple services:
 
 </table>
 </div>
-
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <a name="cannot-create-delete"></a>
 
@@ -230,8 +226,6 @@ The following errors occur in multiple services:
 
 </table>
 </div>
-
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <a name="instance-not-exist"></a>
 
@@ -908,21 +902,46 @@ This section provides a solution for the following errors:
 + [Persistent Disk is Full](#persistent-disk)
 + [Cannot Access Database Table](#access-table)
 
-<%= partial vars.path_to_partials + "/troubleshoot-template", locals: {
-    id: "persistent-disk",
-    description: "Persistent Disk is Full",
-    symptom: 'Developers report that read, write, and cf CLI operations do not work.
-    Developers cannot upgrade to a larger ' + vars.product_short + ' service plan to free up disk space. <br><br>
+<a name="persistent-disk"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Persistent Disk is Full
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that read, write, and cf CLI operations do not work.
+    Developers cannot upgrade to a larger <%= vars.product_short %> service plan to free up disk space. <br><br>
     If your persistent disk is full, apps become inoperable.
-    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.',
-    cause: 'This problem happens if your persistent disk is full.
+    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens if your persistent disk is full.
     When you use the BOSH CLI to target your deployment, you see that instances are at 100% persistent disk usage. <br><br>
     Available disk space can be increased by deleting log files.
-    After deleting logs, you can then upgrade to a larger ' + vars.product_short + ' service plan.
+    After deleting logs, you can then upgrade to a larger <%= vars.product_short %> service plan.
     <br><br>
     You can also turn off binary logging before developers do large data uploads or if their
-    databases have a high transaction volume.',
-    solution: '
+    databases have a high transaction volume.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
       To resolve this issue, do one of the following:<br><br>
           <ul>
             <li><strong>If your persistent disk is already full,</strong> delete binary logs.
@@ -941,8 +960,11 @@ This section provides a solution for the following errors:
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
               in the Knowledge Base..
             </li>
-          </ul>'
-} %>
+          </ul></td>
+  </tr>
+
+</table>
+</div>
 
 <a name="access-table"></a>
 
@@ -1224,56 +1246,166 @@ This section provides guidance on checking for and fixing issues in on-demand se
 
 #### <a id="uaa-change"></a> UAA Changes
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+	If you have rotated any UAA user credentials then you may see authentication
+	issues in the service broker logs.
+</p>
 
-<%= partial '/services-tshoot/tshoot-comp-uaa-change' %>
+<p>
+	To resolve this, redeploy the <%= vars.product_short %> tile in <%= vars.ops_manager %>.
+	This provides the broker with the latest configuration.
+</p>
+
+<p class="note">
+    <strong>Note</strong>: You must ensure that any changes to UAA
+    credentials are reflected in the <%= vars.ops_manager %> <code>credentials</code>
+    tab of the <%= vars.app_runtime_full %> tile.
+</p>
 
 
 ###  <a id="network"></a>  Networking
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+	Common issues with networking include:
+</p>
 
-<%= partial '/services-tshoot/tshoot-comp-network' %>
+<table class="nice">
+	<col width="50%">
+	<col width="50%">
+	<th>Issue</th>
+	<th>Solution</th>
+	<tr>
+		<td>Latency when connecting to the <%= vars.product_short %> service instance to create or delete a binding.</td>
+		<td>Try again or improve network performance.</td>
+	</tr>
+	<tr>
+		<td>Firewall rules are blocking connections from the <%= vars.product_short %> service broker to the service instance.</td>
+		<td>Open the <%= vars.product_short %> tile in <%= vars.ops_manager %> and check the two networks configured in the <strong>Networks</strong> pane. Ensure that these networks allow access to each other.</td>
+	</tr>
+	<tr>
+		<td>Firewall rules are blocking connections from the service network to the BOSH director network.</td>
+		<td>Ensure that service instances can access the Director so that the BOSH agents can report in.</td>
+	</tr>
+	<tr>
+		<td>Apps cannot access the service network.</td>
+		<td>Configure Cloud Foundry application security groups to allow runtime access to the service network.</td>
+	</tr>
+	<tr>
+		<td>Problems accessing BOSH’s UAA or the BOSH director.</td>
+		<td>Follow network troubleshooting and check that the BOSH director is online</td>
+	</tr>
+</table>
 
 
 ####  <a id="broker-to-instances"></a>  Validate Service Broker Connectivity to Service Instances
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+	To validate connectivity, do the following:
+</p>
 
-<%= partial '/services-tshoot/tshoot-comp-broker-to-instances' %>
+<ol>
+	<li>
+		<p>
+			View the BOSH deployment name for your service broker by running:
+		</p>
+		<pre><code>bosh deployments</code></pre>
+	</li>
+	<li>
+		<p>
+			SSH into the <%= vars.product_short %> service broker by running:
+		</p>
+		<pre><code>bosh -d DEPLOYMENT-NAME ssh</code></pre>
+	</li>
+	<li>
+		<p>
+			If no BOSH <code>task-id</code> appears in the error message, look in the
+			broker log using the <code>broker-request-id</code> from the task.
+		</p>
+	</li>
+</ol>
 
 
 ####  <a id="app-to-instances"></a>  Validate App Access to Service Instance
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
-<%= partial '/services-tshoot/tshoot-comp-app-to-instances' %>
+<p>
+  Use <code>cf ssh</code> to access to the app container, then try connecting to
+  the <%= vars.product_short %> service instance using the binding included in the
+  <code>VCAP_SERVICES</code> environment variable.
+</p>
 
 
 ###  <a id="quotas"></a>  Quotas
 
 #### <a id="plan-quotas"></a> Plan Quota Issues
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  If developers report errors such as:
+</p>
 
-<%= partial '/services-tshoot/tshoot-comp-plan-quotas' %>
+<pre class="terminal">
+Message: Service broker error: The quota for this service plan has been exceeded.
+Please contact your Operator for help.
+</pre>
+
+<ol>
+  <li>Check your current plan quota.</li>
+  <li>Increase the plan quota.</li>
+  <li>Log in to <%= vars.ops_manager %>.</li>
+  <li>Reconfigure the quota on the plan page.</li>
+  <li>Deploy the tile.</li>
+  <li>Find who is using the plan quota and take the appropriate action.</li>
+</ol>
 
 
 ####  <a id="global-quotas"></a>  Global Quota Issues
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  If developers report errors such as:
+</p>
 
-<%= partial '/services-tshoot/tshoot-comp-global-quotas' %>
+<pre class="terminal">
+Message: Service broker error: The quota for this service has been exceeded.
+Please contact your Operator for help.
+</pre>
+
+<ol>
+  <li>Check your current global quota.</li>
+  <li>Increase the global quota.</li>
+  <li>Log in to <%= vars.ops_manager %>.</li>
+  <li>Reconfigure the quota on the on-demand settings page.</li>
+  <li>Deploy the tile.</li>
+  <li>Find out who is using the quota and take the appropriate action.</li>
+</ol>
 
 
 ###  <a id="failing-jobs"></a>  Failing Jobs and Unhealthy Instances
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
-<%= partial '/services-tshoot/tshoot-comp-failing-jobs' %>
+<p>
+  To determine whether there is an issue with the <%= vars.product_short %>
+  deployment: 
+</p>
+<ol>
+  <li>
+    <p>
+      Inspect the VMs by running:
+    </p>
+    <pre><code>bosh -d service-instance_GUID vms --vitals</code></pre>
+  </li>
+  <li>
+    <p>
+      For additional information, run:
+    </p>
+    <pre><code>bosh -d service-instance_GUID instances --ps --vitals</code></pre>
+  </li>
+</ol>
+<p>
+  If the VM is failing, follow the service-specific information.
+  Any unadvised corrective actions (such as running BOSH <code>restart</code> on
+  a VM) can cause issues in the service instance.
+</p>
 
 A failing process or failing VM might come back automatically after a temporary service outage. See
 <a href="./interruptions.html#process-fail">VM Process Failure</a>
@@ -1292,57 +1424,299 @@ instance BOSH deployments, and on performing general maintenance and housekeepin
 
 ### <a id="parse-error"></a> Parse a Cloud Foundry (CF) Error Message
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  Failed operations (create, update, bind, unbind, delete) result in an error message.
+  You can retrieve the error message later by running the cf CLI command <code>cf service INSTANCE-NAME</code>.
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-parse-error' %>
+<pre class="terminal">
+$ cf service myservice
+
+Service instance: myservice
+Service: super-db
+Bound apps:
+Tags:
+Plan: dedicated-vm
+Description: Dedicated Instance
+Documentation url:
+Dashboard:
+
+Last Operation
+Status: create failed
+Message: Instance provisioning failed: There was a problem completing your request.
+     Please contact your operations team providing the following information:
+     service: redis-acceptance,
+     service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089,
+     broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac,
+     task-id: 442,
+     operation: create
+Started: 2017-03-13T10:16:55Z
+Updated: 2017-03-13T10:17:58Z
+</pre>
+
+<p>
+  Use the information in the <code>Message</code> field to debug further.
+  Provide this information to Support when filing a ticket.
+</p>
+
+<p>
+  The <code>task-id</code> field maps to the BOSH task ID.
+  For more information on a failed BOSH task, use the <code>bosh task TASK-ID</code>.
+</p>
+
+<p>
+  The <code>broker-request-guid</code> maps to the portion of the On-Demand Broker log
+  containing the failed step.
+  Access the broker log through your syslog aggregator, or access BOSH logs for
+  the broker by typing <code>bosh logs broker 0</code>.
+  If you have more than one broker instance, repeat this process for each instance.
+</p>
 
 
 ###  <a id="bosh-cf-access"></a>  Access Broker and Instance Logs and VMs
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
-<%= partial '/services-tshoot/tshoot-tech-bosh-cf-access' %>
+<p>
+  Before following the procedures below, log in to the
+  <a href="https://docs.pivotal.io/pivotalcf/cf-cli/getting-started.html">cf CLI</a> and the
+  <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#prepare">BOSH CLI</a>.
+</p>
 
 
 ####  <a id="access-broker"></a>  Access Broker Logs and VMs
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+	You can <a href="https://docs.pivotal.io/pivotalcf/customizing/troubleshooting.html#component_logs">access logs using <%= vars.ops_manager %></a>
+	by clicking on the <strong>Logs</strong> tab in the tile and downloading the broker logs.
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-access-broker' %>
+<p>
+	To access logs using the BOSH CLI, do the following:
+</p>
+
+<ol>
+	<li>
+		<p>
+			Identify the on-demand broker (ODB) deployment by running the following command:
+		</p>
+		<pre><code>bosh deployments</code></pre>
+	</li>
+	<li>
+		<p>
+			View VMs in the deployment by running the following command:
+		</p>
+		<pre><code>bosh -d DEPLOYMENT-NAME instances</code></pre>
+	</li>
+	<li>
+		<p>
+			SSH onto the VM by running the following command:
+		</p>
+		<pre><code>bosh -d DEPLOYMENT-NAME ssh</code></pre>
+	</li>
+	<li>
+		<p>
+			Download the broker logs by running the following command:
+		</p>
+		<pre><code>bosh -d DEPLOYMENT-NAME logs</code></pre>
+	</li>
+</ol>
+
+<p>
+	The archive generated by BOSH includes the following logs:
+</p>
+
+<table class="nice">
+	<th>Log Name</th>
+	<th>Description</th>
+	<tr>
+		<td>broker.stdout.log</td>
+		<td>Requests to the on-demand broker and the actions the broker performs
+			while orchestrating the request (e.g. generating a manifest and calling BOSH).
+			Start here when troubleshooting.</td>
+	</tr>
+	<tr>
+		<td>bpm.log</td>
+		<td>Control script logs for starting and stopping the on-demand broker.</td>
+	</tr>
+	<tr>
+		<td>post-start.stderr.log</td>
+		<td>Errors that occur during post-start verification.</td>
+	</tr>
+	<tr>
+		<td>post-start.stdout.log</td>
+		<td>Post-start verification.</td>
+	</tr>
+	<tr>
+		<td>drain.stderr.log</td>
+		<td>Errors that occur while running the drain script.</td>
+	</tr>
+</table>
 
 
 ####  <a id="access-instance"></a>  Access Service Instance Logs and VMs
 
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
-<%= partial '/services-tshoot/tshoot-tech-access-instance' %>
+<ol>
+	<li>
+		<p>
+			To target an individual service instance deployment, retrieve the GUID of your
+			service instance with the following cf CLI command:
+		</p>
+		<pre><code>cf service MY-SERVICE --guid</code></pre>
+	</li>
+	<li>
+		<p>
+			To view VMs in the deployment, run the following command:
+		</p>
+		<pre><code>bosh -d service-instance_GUID instances</code></pre>
+	</li>
+	<li>
+		<p>
+			To SSH into a VM, run the following command:
+		</p>
+		<pre><code>bosh -d service-instance_GUID ssh</code></pre>
+	</li>
+	<li>
+		<p>
+			To download the instance logs, run the following command:
+		</p>
+		<pre><code>bosh -d service-instance_GUID logs</code></pre>
+	</li>
+</ol>
 
 ### <a id="broker-errands"></a> Run Service Broker Errands to Manage Brokers and Instances
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  From the BOSH CLI, you can run service broker errands that manage the service
+  brokers and perform mass operations on the service instances that the brokers created.
+  These service broker errands include:
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-broker-errands' %>
+<ul>
+  <li>
+    <p>
+      <a href="#register-broker"><code>register-broker</code></a> registers a broker with the Cloud Controller
+      and lists it in the Marketplace.
+    </p>
+  </li>
+  <li>
+    <p>
+      <a href="#deregister-broker"><code>deregister-broker</code></a> deregisters a broker with the Cloud
+      Controller and removes it from the Marketplace.
+    </p>
+  </li>
+  <li>
+    <p>
+      <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> upgrades existing instances of
+      a service to its latest installed version.
+    </p>
+  </li>
+  <li>
+    <p>
+      <a href="#delete-all"><code>delete-all-service-instances</code></a> deletes all instances of service.
+    </p>
+  </li>
+  <li>
+    <p>
+      <a href="#detect-orphans"><code>orphan-deployments</code></a> detects "orphan" instances that are
+      running on BOSH but not registered with the Cloud Controller.
+    </p>
+  </li>
+</ul>
+
+<p>
+  To run an errand, run the following command:
+</p>
+
+<pre><code>bosh -d DEPLOYMENT-NAME run-errand ERRAND-NAME</code></pre>
+
+<p>
+  For example:
+</p>
+
+<pre class="terminal">bosh -d my-deployment run-errand deregister-broker</pre>
 
 #### <a id="register-broker"></a> Register Broker
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  The <code>register-broker</code> errand does the following:
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-register-broker' %>
+<ul>
+  <li>Registers the service broker with Cloud Controller.</li>
+  <li>
+    Enables service access for any plans that are enabled on the tile.
+  </li>
+  <li>Disables service access for any plans that are disabled on the tile.
+  </li>
+  <li>Does nothing for any plans that are set to manual on the tile.</li>
+</ul>
+
+<p>
+  You should run this errand whenever the broker is re-deployed with new catalog metadata to
+  update the Marketplace.
+</p>
+
+<p>
+  Plans with disabled service access are only visible to admin Cloud Foundry
+  users. Non-admin Cloud Foundry users, including Org Managers and Space Managers, cannot
+  see these plans.
+</p>
+
+
+
 
 #### <a id="deregister-broker"></a> Deregister Broker
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+  This errand deregisters a broker from Cloud Foundry.
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-deregister-broker' %>
+<p>
+  The errand does the following:
+</p>
+
+<ul>
+  <li>Deletes the service broker from Cloud Controller</li>
+  <li>Fails if there are any service instances, with or without bindings</li>
+</ul>
+
+<p>Use the <a href="#delete-all">
+  Delete All Service Instances errand</a> to delete any existing service instances.
+</p>
+
+<p>
+  To run the errand, run the following command:
+</p>
+
+<pre><code>bosh -d DEPLOYMENT-NAME run-errand deregister-broker</code></pre>
 
 #### <a id="upgrade-all"></a> Upgrade All Service Instances
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<p>
+	The <code>upgrade-all-service-instances</code> errand does the following:
+</p>
 
-<%= partial '/services-tshoot/tshoot-tech-upgrade-all' %>
+<ul>
+	<li>Collects all of the service instances that the on-demand broker has registered.</li>
+	<li>Issues an upgrade command and deploys the a new manifest to the on-demand broker for each 
+		service instance.</li>
+	<li>Adds to a retry list any instances that have ongoing BOSH tasks at the time of upgrade.</li>
+	<li>Retries any instances in the retry list until all instances are upgraded.</li>
+</ul>
+
+<p>
+	When you make changes to the plan configuration, the errand
+	upgrades all the <%= vars.product_short %> service instances to the latest version of the plan.
+</p>
+
+<p>
+	If any instance fails to upgrade, the errand fails immediately.
+	This prevents systemic problems from spreading to the rest of your service instances.
+</p>
+
+
 
 #### <a id="delete-all"></a> Delete All Service Instances
 
