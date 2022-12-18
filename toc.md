@@ -17,7 +17,6 @@
         *   [Controlling Access to Service Plans by Org](./service-plan.html)
     *   [Managing VMware Tanzu SQL with MySQL for VMs](./managing_mysql_vms.html) 
         *   [Upgrading](./upgrade.html)
-        *   [Configuring Automated Backups](./automated-backup.html)
         *   [Manually Restoring from Backup](./manual-restore.html)
         *   [Accessing a Database as an Admin User](./access-admin.html)
         *   [Rotating Certificates](./rotating-ca.html)
