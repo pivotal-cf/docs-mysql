@@ -48,5 +48,4 @@
         *   [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
         *   [Monitoring Node Health for HA Clusters](./monitor-health.html)
         *   [Troubleshooting Instances](./troubleshoot-instances.html)
-*   [Backing up and Restoring VMware Tanzu SQL with MySQL for VMs](./backup-restore.html)
 *   [Monitoring and KPIs](./monitor.html)
