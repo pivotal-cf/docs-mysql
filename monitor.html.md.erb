@@ -73,12 +73,63 @@ Indicator Protocol dashboard does not include ephemeral and persistent disk usag
 readiness, cluster size, and cluster status.
 </p>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
-
 ### <a id="log-cache"></a>Use Log Cache
 
-<%= partial '/services/log-cache-cli-plugin',
-:locals => {:service_name => vars.product_short} %>
+<p>
+To access metrics for <%= service_name %> service instances, you can use Loggregator's Log
+Cache feature with the Log Cache CLI plugin.
+Log Cache is enabled by default.
+</p>
+<p class='note'>
+  <strong>Note:</strong> To use this feature the <strong>V2 Firehose</strong> must be enabled
+  and <strong>Enable Log Cache syslog ingestion</strong> must be disabled in the <%= vars.app_runtime_abbr %> tile.
+  For more information about configuring these checkboxes, see
+  <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.
+</p>
+<p>
+  To access metrics for on-demand service instances:
+</p>
+<ol>
+  <li>
+    Install the cf CLI plugin by running:
+    <pre><code>cf install-plugin -r CF-Community "log-cache"</code></pre>
+  </li>
+  <li>
+    To access metrics for a service instance, run:
+        <pre><code>cf tail SERVICE-INSTANCE-NAME</code></pre>
+        Two useful flags to append to this command are:
+        <ul>
+          <li>
+            <code>-f</code>, <code>--follow</code>: Append metrics logs to stdout as
+            they are generated, rather than returning a fixed number of metrics or metrics over a fixed interval.
+          </li>
+          <li>
+            <code>--json</code>: Output metrics logs as envelopes in JSON format.
+            For a complete list of <code>cf tail</code> options, see the
+            <a href="https://github.com/cloudfoundry/log-cache-cli#usage">Log Cache CLI repository</a> in GitHub.
+          </li>
+        </ul>
+        Where <code>SERVICE-INSTANCE-NAME</code> is the name of your service instance.
+        <br><br>
+      For example:
+
+      <pre class="terminal">
+$ cf tail -f my-instance | egrep 'connected|available|persistent_disk_used_percent'
+2019-05-17T11:25:59.48-0700 [my-instance] GAUGE /p.mysql/available:1.000000 boolean
+2019-05-17T11:26:29.49-0700 [my-instance] GAUGE /p.mysql/system/persistent_disk_used_percent:17.000000 percentage
+2019-05-17T11:26:29.49-0700 [my-instance] GAUGE /p.mysql/performance/threads_connected:**6**.000000 connection
+2019-05-17T11:26:59.50-0700 [my-instance] GAUGE /p.mysql/available:1.000000 boolean
+2019-05-17T11:27:29.50-0700 [my-instance] GAUGE /p.mysql/system/persistent_disk_used_percent:17.000000 percentage
+2019-05-17T11:27:29.50-0700 [my-instance] GAUGE /p.mysql/performance/threads_connected:**7**.000000 connection
+</pre>
+      For more information about the metrics output, see
+      the <a href="#kpi">Key Performance Indicators</a> and <a href="#component-metrics">Component Metrics</a> sections below.
+  </li>
+</ol>
+<p>
+  For more information about how to enable Log Cache and about the <code>cf tail</code> command,
+  see <a href="https://docs.pivotal.io/pivotalcf/opsguide/logging-config-opsman.html#log-cache">Enable Log Cache</a>.
+</p>
 
 
 ## <a id="kpi"></a>KPIs for MySQL Service Instances
