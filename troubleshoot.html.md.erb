@@ -1047,24 +1047,46 @@ This section provides solutions for the following errands:
 + [Unresponsive Node in a Highly Available Cluster](#unresponsive)
 + [Many Replication Errors in Logs for Highly Available Clusters](#replication-errors)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unresponsive",
-    description: "Unresponsive Node in a Highly Available Cluster",
-    symptom:'
-    A client connected to a ' + vars.product_short + ' cluster node reports the following error:
+<a name="unresponsive"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Unresponsive Node in a Highly Available Cluster
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
+    A client connected to a <%= vars.product_short %> cluster node reports the following error:
 
     <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
     </pre>
-    ',
+    </td>
+  </tr>
 
-    cause: 'If the client is connected to a ' + vars.product_short + ' cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
-    re-routes further connections to a different node.',
+  <tr>
+    <th>Cause</th>
+    <td>If the client is connected to a <%= vars.product_short %> cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
+    re-routes further connections to a different node.</td>
+  </tr>
 
-    solution: <<~DESC,
-    A node can become unresponsive for a number of reasons. For solutions, see the following:
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>A node can become unresponsive for a number of reasons. For solutions, see the following:
 
     <ul>
       <li>
@@ -1114,13 +1136,33 @@ This section provides solutions for the following errands:
         </ul>
       </li>
     </ul>
-    DESC
-} %>
+</td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "replication-errors",
-    description: "Many Replication Errors in Logs for Highly Available Clusters",
-    symptom: <<~DESC,
+</table>
+</div>
+
+<a name="replication-errors"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Many Replication Errors in Logs for Highly Available Clusters
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     You see many replication errors in the MySQL logs, like the following:
 
     <pre class="terminal">
@@ -1128,10 +1170,17 @@ This section provides solutions for the following errands:
     160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
     160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
     </pre>
-    DESC
-    cause: "This problem happens when there are errors in SQL statements.",
-    solution: <<~DESC,
-      For solutions for replication errors in MySQL log files, see the table below.
+    </td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens when there are errors in SQL statements.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>For solutions for replication errors in MySQL log files, see the table below.
 
       <table class="nice">
         <tr>
@@ -1161,9 +1210,11 @@ This section provides solutions for the following errands:
 
       If you see replication errors, but no <code>ALTER TABLE</code>
       or persistent disk or memory issues, you can ignore the replication errors.
-    DESC
+    </td>
+  </tr>
 
-} %>
+</table>
+</div>
 
 
 ##  <a id="components"></a>  Troubleshoot Components
