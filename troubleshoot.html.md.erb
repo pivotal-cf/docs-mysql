@@ -95,21 +95,257 @@ The following errors occur in multiple services:
 </table>
 </div>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<a name="cannot-create-delete"></a>
 
-<%= partial '/services-tshoot/tshoot-err-cannot-create-delete' %>
+<div>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Create or Delete Service Instances
+  <br><br></th>
+  </tr>
 
-<%= partial '/services-tshoot/tshoot-err-timeouts' %>
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Instance provisioning failed: There was a problem completing your request. Please contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</pre></td>
+  </tr>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+  <tr>
+    <th>Cause</th>
+    <td>Reasons include:
+    <ul>
+      <li>Problems with the deployment manifest</li>
+      <li>Authentication errors</li>
+      <li>Network errors</li>
+      <li>Quota errors</li>
+    </ul></td>
+  </tr>
 
-<%= partial '/services-tshoot/tshoot-err-instance-not-exist' %>
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		<p>
+		If the BOSH error shows a problem with the deployment manifest, open the
+		manifest in a text editor to inspect it.
+		</p>
+		</li>
+		<li>
+		<p>
+		To continue troubleshooting,
+		<a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in">Log in to BOSH</a>
+    and target the <%= vars.product_short %> instance using the instructions
+		on <a href="#parse-error">parsing a Cloud Foundry error message</a>.
+		</p>
+		</li>
+		<li>
+		<p>
+		Retrieve the BOSH task ID from the error message and run the following command:
+		</p>
+		<pre><code>bosh task TASK-ID</code></pre>
+		</li>
+		<li>
+		<p>
+		If you need more information, <a href="#access-broker">access the broker logs</a> and
+		use the <code>broker-request-id</code> from the error message above to search the logs for
+		more information. Check for:
+		</p>
+		</li>
+		<ul>
+		<li><a href="#auth">Authentication errors</a></li>
+		<li><a href="#network">Network errors</a></li>
+		<li><a href="#quotas">Quota errors</a></li>
+		</ul>
+		</ol></td>
+  </tr>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+</table>
+</div>
 
-<%= partial '/services-tshoot/tshoot-err-other-errors' %>
+<a name="timeouts"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Broker Request Timeouts
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Cloud Foundry might not be connected to the service broker, or there might be a large number of queued tasks.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		Confirm that Cloud Foundry (CF) is <a href="#network">connected to the service broker</a>.
+		</li>
+		<li>
+		Check the BOSH queue size:
+		<ol>
+		<li>Log in to BOSH as an admin.</li>
+		<li>Run <pre><code>bosh tasks</code></pre></li>
+		</ol>
+    If there are a large number of queued tasks, the system may be under too much load.
+		BOSH is configured with two workers and one status worker, which might not be
+		sufficient resources for the level of load.
+		</li>
+		<li>
+		If the task queue is long, advise app developers to try again once the system is under less load.
+		</li>
+		</ol></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="instance-not-exist"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Instance Does Not Exist
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The instance might have been deleted.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		<p>
+    Confirm that the <%= vars.product_short %> instance exists in BOSH and
+		obtain the GUID CF by running:
+		</p>
+		<pre><code>cf service MY-INSTANCE --guid</code></pre>
+		</li>
+		<li>
+		<p>
+		Using the GUID obtained above, run:
+		</p>
+		<pre><code>bosh -d service-instance_GUID vms</code></pre>
+		</li>
+		</ol>
+
+		<p>
+		If the BOSH deployment is not found, it has been deleted from BOSH.
+		Contact Support for further assistance.
+		</p></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="cannot-bind"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Bind to or Unbind from Service Instances
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+    <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This might be due to authentication or network errors.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To find out the exact issue with the binding process:
+    <ol>
+    <li>
+    <p>
+      <a href="#access-broker">Access the service broker logs</a>.
+    </p>
+    </li>
+    <li>
+    <p>
+      Search the logs for the <code>broker-request-id</code> string listed in the error message above.
+    </p>
+    </li>
+    <li>
+    <p>
+      Check for:
+    </p>
+    </li>
+    <ul>
+    <li><a href="#auth">Authentication errors</a></li>
+    <li><a href="#network">Network errors</a></li>
+    </ul>
+    <li>
+    <p>
+    Contact Support for further assistance if you are unable to resolve the problem.
+    </p>
+    </li>
+    </ol></td>
+  </tr>
+
+</table>
+</div>
 
 <!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
 
