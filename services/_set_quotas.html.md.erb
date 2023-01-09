@@ -59,11 +59,12 @@ To create and set an org-level quota, do the following:
 
 1. Run this command to create a quota for service instances at the org level:
 
-	<pre>
+	<pre class="terminal">
 	cf create-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
 	</pre>
 
 	Where:
+
 	* `QUOTA-NAME`---A name for this quota
 	* `TOTAL-MEMORY`---Maximum memory used by all service instances combined
 	* `INSTANCE-MEMORY`---Maximum memory used by any single service instance
@@ -75,7 +76,7 @@ To create and set an org-level quota, do the following:
 
 2. Associate the quota you created above with a specific org by running the following command:
 
-	<pre>
+	<pre class="terminal">
 	cf set-quota ORG-NAME QUOTA-NAME
 	</pre>
 
@@ -103,11 +104,12 @@ To create and set a space-level quota, do the following:
 
 1. Run the following command to create the quota:
 
-	<pre>
+	<pre class="terminal">
 	cf create-space-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
 	</pre>
 
 	Where:
+
 	* `QUOTA-NAME`---A name for this quota
 	* `TOTAL-MEMORY`---Maximum memory used by all service instances combined
 	* `INSTANCE-MEMORY`---Maximum memory used by any single service instance
@@ -121,7 +123,7 @@ To create and set a space-level quota, do the following:
 
 2. Associate the quota you created above with a specific space by running the following command:
 
-	<pre>
+	<pre class="terminal">
 	cf set-space-quota SPACE-NAME QUOTA-NAME
 	</pre>
 
