@@ -100,7 +100,7 @@ and a timestamp for the backup.
     cf service SERVICE-INSTANCE-NAME --guid
     ```
 
-    Where is `SERVICE-INSTANCE-NAME` is the service instance from which the back up was taken.
+    Where `SERVICE-INSTANCE-NAME` is the service instance from which the back up was taken.
 
     For example:
 
@@ -114,7 +114,7 @@ and a timestamp for the backup.
     cf adbr list-backups SERVICE-INSTANCE-NAME
     ```
 
-    Where is `SERVICE-INSTANCE-NAME` is the service instance from which the back up was taken.
+    Where `SERVICE-INSTANCE-NAME` is the service instance from which the back up was taken.
 
     For example:
 
@@ -151,7 +151,7 @@ To retrieve the backup encryption key:
     bosh -d pivotal-mysql-GUID ssh
     ```
 
-    Where is `GUID` is the GUID recorded in step 1 above.
+    Where `GUID` is the GUID recorded in step 1 above.
 
     For example:
 
@@ -174,6 +174,7 @@ To retrieve the backup encryption key:
     ```
 
     Where:
+
     + `CREDHUB-CLIENT` is the identity of the credential
     + `CREDHUB-CLIENT-SECRET` is the password of the credential
 
@@ -188,7 +189,7 @@ To retrieve the backup encryption key:
     credhub get -n /tanzu-mysql/backups/BACKUP-ID
     ```
 
-    Where is `BACKUP-ID` is the name of the backup artifact identified above.
+    Where `BACKUP-ID` is the name of the backup artifact identified above.
 
     For example:
 
@@ -225,6 +226,7 @@ To prepare a new service instance for restore:
     ```
 
     Where:
+
     + `NEW-PLAN` is the name of the service plan for your new service instance.
         The plan you choose depends on the service instance topology that you are
         restoring. If the topology that you are restoring is:
@@ -272,6 +274,7 @@ To prepare a new service instance for restore:
     ```
 
     Where:
+
     - `GUID` is the service instance GUID.
     - `mysql-backup-STRING.tar.gpg` is the backup file you downloaded
        in [Identify and Download the Backup Artifact](#download) above.
@@ -318,6 +321,7 @@ in [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.htm
     ```
 
     Where:
+
     + `ENCRYPTION-KEY` is the backup encryption key you recorded in
         [Retrieve Backup Encryption Key](#retrieve-key) above.
     + `RESTORE-FILE-PATH` is the full path on the BOSH VM where the backup artifact exists.
