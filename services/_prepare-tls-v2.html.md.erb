@@ -123,9 +123,10 @@ To find the BOSH CredHub client name and client secret:
 1. In the <%= vars.ops_manager %> Installation Dashboard, click the BOSH Director tile.
 1. Click the **Credentials** tab.
 1. In the BOSH Director section, click the link to the **BOSH Commandline Credentials**.
+
 	![Screenshot of the BOSH Director section of the credentials tab in the BOSH Director tile.
 	A red box indicates the location of 'BOSH Commandline Credentials', which is 14 rows
-	down underneath 'UAA BBR Client Credentials'. Each row has a link titled 'Link to credentials'.](credhub-creds.png)
+	down underneath 'UAA BBR Client Credentials'. Each row has a link titled 'Link to credentials'.](images/credhub-creds.png)
 	<a href="./images/credhub-creds.png" target="_blank" aria-hidden="true">
     Click here to view a larger version of this image</a>
 1. Record the values for `BOSH_CLIENT` and `BOSH_CLIENT_SECRET`.
@@ -182,6 +183,7 @@ To add a custom CA Certificate to CredHub:
 		--client-secret=CREDHUB-CLIENT-SECRET
     ```
     Where
+
     * `CREDHUB-CLIENT-NAME` is the value you recorded for `BOSH_CLIENT` in
 		[Find the CredHub Credentials in <%= vars.ops_manager %>](#credhub-creds) above.
     * `CREDHUB-CLIENT-SECRET` is the value you recorded for `BOSH_CLIENT_SECRET` in
@@ -196,9 +198,11 @@ To add a custom CA Certificate to CredHub:
     <p class="note"><strong>Note</strong>: Your deployment can have
 			multiple CA certificates.
        VMware recommends a dedicated CA certificate for services.</p>
+
     Create a new file called `root.pem` with the contents of the certificate.
     Then, run the following command, specifying the path to `root.pem` and
 		the private key for the certificate. For example:
+
 	    <pre class="terminal">$ credhub set \
 	        --name="/services/tls_ca" \
 	        --type="certificate" \
