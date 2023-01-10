@@ -248,7 +248,7 @@ The following errors occur in multiple services:
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
-		<pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</pre></td>
+		<pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist</pre></td>
   </tr>
 
   <tr>
@@ -643,7 +643,7 @@ This section provides solutions for the following errands:
         At this point, the instances have equivalent data.</li>
       <li>
         Run the <code>configure-leader-follower</code> errand to reconfigure replication:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
         For example:
