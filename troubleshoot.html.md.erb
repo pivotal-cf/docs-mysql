@@ -954,7 +954,7 @@ This section provides a solution for the following errors:
               turn off binary logging.
               See
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base..
+              in the Knowledge Base.
             </li>
             </ul>
             </td>
@@ -985,7 +985,7 @@ This section provides a solution for the following errors:
     <th>Symptom</th>
     <td>When you query an existing table, you see an error similar to
     the following:
-    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre></td>
+    <pre class="terminal">ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre></td>
   </tr>
 
   <tr>
@@ -1526,26 +1526,26 @@ To manually force a node to rejoin the cluster, do the following:
   </li>
   <li>
     Become root by running:
-    <pre> sudo su</pre>
+    <pre class="terminal"> sudo su</pre>
   </li>
   <li>
     Shut down the
     <code>mysqld</code>
     process on the node by running:
-    <pre>  monit stop galera-init </pre>
+    <pre class="terminal">  monit stop galera-init </pre>
   </li>
   <li>
     Remove the unsynchronized data on the node by running:
-    <pre>  rm -rf /var/vcap/store/pxc-mysql</pre>
+    <pre class="terminal">  rm -rf /var/vcap/store/pxc-mysql</pre>
   </li>
   <li>
     Prepare the node before restarting by running:
-    <pre>  /var/vcap/jobs/pxc-mysql/bin/pre-start</pre>
+    <pre class="terminal">  /var/vcap/jobs/pxc-mysql/bin/pre-start</pre>
   </li>
   <li>Restart the
     <code>mysqld</code>
     process by running:
-    <pre> monit start galera-init</pre>
+    <pre class="terminal"> monit start galera-init</pre>
   </li>
 </ol>
 
@@ -1605,7 +1605,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Create a dummy database in the first node by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
        -u YOUR-IDENTITY \
        -p -e "create database verify_healthy;"</pre>
     Where:
@@ -1622,7 +1622,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Create a dummy table in the dummy database by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u your-identity \
       -p -D verify_healthy \
       -e "create table dummy_table (id int not null primary key auto_increment, info text) \
@@ -1630,7 +1630,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Insert data into the dummy table by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u YOUR-IDENTITY \
       -p -D verify_healthy \
       -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"</pre>
@@ -1639,7 +1639,7 @@ To check the replication status, do the following:
     <p>
       Query the table and verify that the three rows of dummy data exist on the first node by running:
     </p>
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u YOUR-IDENTITY \
       -p -D verify_healthy \
       -e "select * from dummy_table;"</pre>
@@ -1661,7 +1661,7 @@ To check the replication status, do the following:
     by doing the following for each of the remaining MySQL server IP addresses:
     <ol>
       <li>Query the dummy table by running :
-        <pre>mysql -h NEXT-NODE-IP-ADDRESS \
+        <pre class="terminal">mysql -h NEXT-NODE-IP-ADDRESS \
           -u YOUR-IDENTITY \
           -p -D verify\_healthy \
           -e "select * from dummy_table;"</pre>
@@ -1674,7 +1674,7 @@ To check the replication status, do the following:
         Verify that the node contains the same three rows of dummy data as the other nodes
         by running:
 
-        <pre >mysql -h NEXT-NODE-IP-ADDRESS \
+        <pre class="terminal">mysql -h NEXT-NODE-IP-ADDRESS \
           -u YOUR-IDENTITY \
           -p -D verify\_healthy \
           -e "select * from dummy\_table;"</pre>
