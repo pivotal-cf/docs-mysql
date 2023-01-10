@@ -68,11 +68,12 @@ for stopping the leader and promoting the follower:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the leader-follower service instance.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf service my-lf-instance --guid
     82ddc607-710a-404e-b1b8-a7e3ea7ec063
     </pre>
+
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
 1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather)
@@ -87,14 +88,17 @@ for stopping the leader and promoting the follower:
     bosh -d service-instance_GUID run-errand inspect
     ```
   Where `GUID` is the GUID of the leader-follower service instance you recorded.
-  <br><br>
+
     For example:
     <pre class="terminal">
     $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         run-errand inspect</pre>
 
 1. See the output about the leader-follower MySQL VMs and identify
-the instance marked `Role: leader`.<br><br>For example output:
+the instance marked `Role: leader`.
+
+  For example output:
+
   <pre class="terminal">
   Instance   mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0
   Exit Code  0
@@ -161,6 +165,7 @@ To stop the leader VM and promote the follower VM to the new leader:
     ```
 
      Where:
+
      + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
      + `INDEX`: This is the index of the leader VM retrieved above.
 
@@ -174,16 +179,17 @@ To stop the leader VM and promote the follower VM to the new leader:
       bosh -d service-instance_GUID stop mysql/INDEX
       ```
       Use the index of the leader VM retrieved above.
-      <br><br>
-     For example:
-     <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
-        stop mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
+
+      For example:
+
+      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
+         stop mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
 1. Set the follower VM as writable by running:
 
     ```
     bosh -d service-instance_GUID run-errand make-leader --instance=mysql/INDEX
     ```
-    Use the index of the follower VM retrieved above. <br>
+    Use the index of the follower VM retrieved above.
 
     For example:
    <pre class="terminal">$ bosh -d service-instance\_82dc607-710a-404e-b1b8-a7e3ea7ec063 \
@@ -246,6 +252,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     ```
 
      Where:
+
      + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
      + `CID`: This is the CID of the failing former leader VM retrieved above.
 
@@ -258,6 +265,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     bosh -d service-instance_GUID orphan-disk DISK-CID
     ```
    Where:
+
    + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
    + `DISK-CID`: This is the disk CID of the failing former leader VM retrieved above.
 
@@ -279,15 +287,18 @@ To restart the former leader VM and configure it as the new follower:
       recreate \
       mysql/INDEX
     ```
-   Where:
-   + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
-   + `INDEX`: This is the index of the former leader VM that you are re-creating
-   </ul>
-   For example:
-   <pre class="terminal">
-   $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
-     recreate \
-     mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd01.
+
+    Where:
+
+    + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
+    + `INDEX`: This is the index of the former leader VM that you are re-creating
+
+    For example:
+
+    <pre class="terminal">
+    $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
+      recreate \
+      mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd01.
 1. Set the former leader VM as a follower, using the same values as above, by running:
 
     ```
@@ -308,6 +319,7 @@ To restart the former leader VM and configure it as the new follower:
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
        run-errand inspect</pre>
+
    If the output displays one instance marked `Role: leader` and another instance marked `Role: follower`,
    then leader-follower replication and high availability are resumed.
    The deployment should be in its original, working state.
@@ -332,9 +344,11 @@ To unbind and rebind your app:
     ```
     cf unbind-service APP-NAME  SERVICE-INSTANCE-NAME
     ```
-   Where:
-   <ul><li>`APP-NAME `: This is the name of the app bound to the leader-follower service instance.</li>
-   <li>`SERVICE-INSTANCE-NAME `: This is the name of the leader-follower service instance.</li></ul>
+
+    Where:
+
+    + `APP-NAME `: This is the name of the app bound to the leader-follower service instance.
+    + `SERVICE-INSTANCE-NAME `: This is the name of the leader-follower service instance.
 
 1. Rebind the app to the leader-follower service instance by running:
 
