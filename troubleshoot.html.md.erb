@@ -679,7 +679,7 @@ This section provides solutions for the following errands:
   <tr>
     <th>Symptom</th>
     <td>
-    This problem happens when the<code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
+    This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
     The <code>configure–leader-follower</code> errand exits with <code>1</code>
     and the errand logs contain the following:
 
@@ -841,7 +841,7 @@ This section provides solutions for the following errands:
         Use the
         <code>inspect</code>
         errand to confirm that both VMs are in a read-only state:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
       </li>
       <li>Examine the output and locate the information about the leader-follower 
         <%= vars.product_short %> VMs:
@@ -874,15 +874,15 @@ This section provides solutions for the following errands:
         If Read Only is set to
         <code>true</code>
         for both VMs, make the leader writable using the following command:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
         For example, if the second instance above is the leader:
         <pre class="terminal">
-    $ bosh -e my-env -d my-dep &#92;
-      run-errand configure-leader-follower &#92;
-      --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
-    </pre>
+        $ bosh -e my-env -d my-dep &#92;
+          run-errand configure-leader-follower &#92;
+          --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
+        </pre>
       </li>
     </ol>
    </td>
