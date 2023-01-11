@@ -94,6 +94,7 @@ To install the `mysql-tools` cf CLI plugin:
     ```
     cf install-plugin -r CF-Community "MysqlTools"
     ```
+
 2. Confirm that the plugin has installed successfully by running:
 
     ```
@@ -164,11 +165,14 @@ These values usually include:
     ```
     cf cups CF-DB-INSTANCE -p CREDS-STRUCT
     ```
+
     Where:
+
     * `CF-DB-INSTANCE` is the name that you want to give to the new database service instance that you are migrating to.
     * `CREDS-STRUCT` is a JSON structure that contains the off-platform database access values you recorded in the above step.
 
     For example:
+
     <pre class="terminal noselect">$ cf cups migrating-db -p '{"hostname": "34.192.88.212", "name": "my\_db", \
     "username": "root", "password": "P455w0rD", "port": 3306}' <br>
     Creating user provided service migrating-db in org my-org / space my-space as admin...
@@ -201,6 +205,7 @@ To stop and unbind your apps:
     ```
     cf login API-URL
     ```
+
     When prompted, enter your credentials.
 
 1. Target the org and space for the new destination service instance by running:
@@ -214,10 +219,12 @@ To stop and unbind your apps:
     ```
     cf services
     ```
+
     Your apps are listed the `bound apps` column.
 
 
 1. For each bound app you recorded in the above step:
+
     1. Stop the app by running:
 
         ```
@@ -229,7 +236,9 @@ To stop and unbind your apps:
         ```
         cf unbind-service APP SOURCE-INSTANCE
         ```
+
         Where:
+
         * `APP` is the name of your app.
         * `SOURCE-INSTANCE` is the name of your source <%= vars.product_short %> service instance.
 
@@ -247,6 +256,7 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
     ```
     cf marketplace
     ```
+
     <%= vars.product_short %> v2 service plans are under  `p.mysql`.
 
 1. Migrate your data by running:
@@ -254,12 +264,15 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
     ```
     cf mysql-tools migrate SOURCE-INSTANCE V2-PLAN
     ```
+
     Where:
+
     * `SOURCE-INSTANCE` is the name of your source MySQL service instance
      or user-provided service instance.
     * `V2-PLAN` is the name of the service plan that you selected above.
 
     For example:
+
     <pre class="terminal">$ cf mysql-tools migrate my-instance db-small <br>
     2018/04/24 11:31:19 Creating new service instance "my-instance" for service p.mysql using plan db-small
     2018/04/24 11:41:01 Unpacking assets for migration to /var/folders/dm/66n2j9xx02l8vs58q2whz4080000gn/T/migrate\_app\_101341527
@@ -322,10 +335,12 @@ To rebind and re-stage your apps and delete the source database instance:
     ```
 
     Where:
+
     * `APP` is the name of your app.
     * `V2-INSTANCE` is the name of your <%= vars.product_short %> v2.x service instance.
 
     For example:
+
     <pre class="terminal">$ cf bind-service my-app my-v2-instance
     Binding service my-v2-instance to app my-app in org my-org / space my-space as user<span>@</span>example.com...
     OK
@@ -336,6 +351,7 @@ To rebind and re-stage your apps and delete the source database instance:
     ```
     cf restage APP
     ```
+
     The app is now using your new <%= vars.product_short %> v2.x service instance and should be operational again.
 
 1. (Optional) Delete your source database. If your source database is deployed on <%= vars.ops_manager %>,
@@ -344,4 +360,5 @@ To rebind and re-stage your apps and delete the source database instance:
     ```
     cf delete-service SOURCE-INSTANCE
     ```
+
     Where `SOURCE-INSTANCE` is the name of your source <%= vars.product_short %> service instance.
