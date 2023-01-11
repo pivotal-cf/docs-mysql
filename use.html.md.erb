@@ -40,7 +40,7 @@ The below procedures use the Cloud Foundry Command Line Interface (cf CLI). For 
 see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
 You can also use Apps Manager to do the same tasks using a graphical UI.
 For more information, see
-[Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/pivotalcf/console/manage-apps.html)
+[Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/pivotalcf/console/manage-apps.html).
 
 ## <a id="prereqs"></a>Prerequisites
 
@@ -92,8 +92,9 @@ To confirm that a <%= vars.product_short %> instance is running in the space:
     cf services
     ```
 1. Any `p.mysql` listings in the `service` column are service instances of <%= vars.product_short %> in the space.
-<br><br>
-For example:
+
+    For example:
+
     <pre class="terminal">
     $ cf services
     Getting services in org my-org / space my-space as user<span>@</span>example.com...
@@ -101,6 +102,7 @@ For example:
     name          service     plan        bound apps    last operation
     my-instance   p.mysql     db-small                  create succeeded
     </pre>
+
     You can [bind](#bind) your app to an existing instance or [create](#create) a new instance to bind to your app.
 
 ## <a id='create'></a>Create a Service Instance
@@ -123,6 +125,7 @@ To create an instance of the <%= vars.product_short %> service:
     ```
 
     Where:
+
     - `PLAN` is the name of the <%= vars.product_short %> plan you want to use.
     - `SERVICE-INSTANCE` is a name you choose to identify the service instance.
     This name appears under `service` in output from `cf services`.
@@ -145,7 +148,7 @@ your instance to show as `create succeeded`.
     OK
     name          service       plan        bound apps    last operation
     my-instance   p.mysql       db-small                  create succeeded
-</pre>
+    </pre>
 
     If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
 
@@ -168,7 +171,8 @@ To push and bind an app to a <%= vars.product_short %> instance run the followin
     cf bind-service APP SERVICE-INSTANCE
     ```
 
-    Where:<br>
+    Where:
+
     - `APP` is the app you want to use the MySQL service instance.<br>
     - `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
 
@@ -198,7 +202,8 @@ To access the MySQL service from your app:
 `VCAP_SERVICES` > `credentials` object for your app. For information about `VCAP_SERVICES`,
 see [MySQL Environment Variables](#vcap) below.
 
-1. In your app code, call the MySQL service using the connection strings.<br><br>
+1. In your app code, call the MySQL service using the connection strings.
+
   See this example [Node.js code](./using-tls.html#call-service).
 
 
@@ -217,6 +222,7 @@ see [MySQL Environment Variables](#vcap) below.
       ```
 
     Where:
+
     - `APP` is the app you want to use the custom schema.
     - `SERVICE-INSTANCE` is the name of your service instance.
     - `CUSTOM-SCHEMA` is the name of your custom schema. Valid characters include uppercase and lowercase
@@ -292,7 +298,7 @@ You can manage service instances in the following ways:
 + Upgrade service instance individually to the latest version of <%= vars.product_short %>.
 See [Upgrade an Individual Service Instance](#single) below.
 + Change the default parameters for an existing service instance.
-See [Change Default Parameters on an Existing Service Instance](./change-default.html# updating).
+See [Change Default Parameters on an Existing Service Instance](./change-default.html#updating).
 + Share service instances between orgs and spaces. See [Share Service Instances](#share) below.
 + Remove access to a service from an app that no longer needs it.
 See [Unbind an App from a Service Instance](#unbind) below.
@@ -362,7 +368,7 @@ To migrate a service instance to another plan:
     ```
 
     Where `PLAN` is the plan you want to update the service instance to.
-    <br><br>
+
     For example:
 
     <pre class="terminal">
@@ -391,6 +397,7 @@ To share a service instance:
     ```
 
     Where:
+
     + `SOURCE-ORG` is the source org for your service instance.
     + `SOURCE-SPACE` is the source space for your service instance.
 
@@ -401,6 +408,7 @@ To share a service instance:
     ```
 
     Where:
+
     + `SERVICE-INSTANCE` is the service instance you want to share.
     + `DESTINATION-ORG` is the destination org for the service instance.
     + `DESTINATION-SPACE` is the destination space for the service instance.
@@ -427,7 +435,9 @@ If you want stop an app from using a service you must unbind the app from the se
     ```
     cf unbind-service APP SERVICE-INSTANCE
     ```
+
     Where:
+
     - `APP` is the app you want to stop using the MySQL service instance.
     - `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
 
@@ -454,7 +464,7 @@ To delete a service instance:
     ```
 
     Where `SERVICE-INSTANCE` is the name of the service to delete.
-    <br><br>
+
     For example:
 
     <pre class="terminal">
@@ -485,7 +495,7 @@ To purge a service instance:
     ```
 
     Where `SERVICE-INSTANCE-NAME` is the name of the service instance to purge.
-    <br><br>
+
     For example:
 
     <pre class="terminal">
