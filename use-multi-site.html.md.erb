@@ -76,6 +76,7 @@ To create a multi-site replication service instance in both foundations:
         ```
         cf login PRIMARY-API-URL
         ```
+
         Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
     1. Create a primary service instance by running:
@@ -85,6 +86,7 @@ To create a multi-site replication service instance in both foundations:
         ```
 
         Where:
+
         - `PLAN` is the name of the <%= vars.single_leader_plan %> plan you want to use.
         - `PRIMARY-INSTANCE` is a name you choose to identify the service instance.
         This name appears under `service` in output from `cf services`.
@@ -142,7 +144,7 @@ The following diagram describes the workflow for configuring <%= vars.single_lea
 Six steps are shown.
 Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation',
 and Step 6 is in 'Secondary Foundation'.
-The steps are listed below.](configure-multi-site.png)
+The steps are listed below.](images/configure-multi-site.png)
 
 <a href="./images/configure-multi-site.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -171,7 +173,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
@@ -188,7 +192,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     cf service-key SECONDARY-INSTANCE SERVICE-KEY
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is the name of the host-info service key you created in step 1, above.
@@ -220,7 +226,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     cf update-service PRIMARY-INSTANCE -c HOST-INFO
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `HOST-INFO` is the output you recorded in step 3, above.
@@ -262,7 +270,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
@@ -280,7 +290,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY-NAME
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in step 1
     of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 6, above.
@@ -317,7 +329,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     cf update-service SECONDARY-INSTANCE -c CREDENTIALS
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is name of the secondary service instance you created in step 2 of
     [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `CREDENTIALS` is the output you recorded in step 8, above.
