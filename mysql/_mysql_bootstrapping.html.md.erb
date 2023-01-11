@@ -577,7 +577,7 @@ then redeploy the <code>mysqld</code> software to your bootstrap node as follows
   For nodes all nodes except the bootstrap node you identified above, run:
 
      <pre class="terminal">bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
-  bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</pre>
+      bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</pre>
 
      Where `N` and `M` are the numbers of the non-bootstrapped nodes.
      For example, if you bootstrap node 0, then `M`=1 and `N`=2.
