@@ -587,8 +587,9 @@ then redeploy the <code>mysqld</code> software to your bootstrap node as follows
      <pre class="terminal">bosh update-resurrection off</pre>
 
   1. Use the BOSH manifest to bootstrap your bootstrap machine by running:
-    <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml</code></pre>
+
+     <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
+     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml</code></pre>
 
 ### <a id="restart-nodes"></a>Restart Remaining Nodes ###
 
