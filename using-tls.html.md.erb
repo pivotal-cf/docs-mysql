@@ -182,6 +182,7 @@ enabled. For more information about how to enable TLS for a service instance, se
 To establish a TLS connection to a service instance:
 
 1. Create a new service key for the service instance with TLS enabled. For example:
+
   <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
   {
    "hostname": "q-n3s3y1.q-g693.bosh",
@@ -198,6 +199,7 @@ To establish a TLS connection to a service instance:
    "username": "6bf07ae455a14064a9073cec8696366c"
   }
   </pre>
+
   If the service key does not have a CA certificate under `tls.cert.ca`, the service key may be stale.
   Create a new one.
 
@@ -220,11 +222,12 @@ To establish a TLS connection to a service instance:
     * `USERNAME` is the value for `username` retrieved above.
     * `PASSWORD` is the value for `password` retrieved above.
 
-For example:
-<pre class="terminal">
-$ mysql --hostname=q-n3s3y1.q-g693.bosh \
-  --user=6bf07ae455a14064a9073cec8696366c \
-  --password=a22aaa2a2a2aaaaa \
-  --ssl-ca=root.pem \
-  --ssl-verify-server-cert
-</pre>
+  For example:
+
+  <pre class="terminal">
+  $ mysql --hostname=q-n3s3y1.q-g693.bosh \
+    --user=6bf07ae455a14064a9073cec8696366c \
+    --password=a22aaa2a2a2aaaaa \
+    --ssl-ca=root.pem \
+    --ssl-verify-server-cert
+  </pre>
