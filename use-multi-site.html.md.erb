@@ -180,7 +180,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node host-info \
            -c '{"replication-request": "host-info" }'<br>
@@ -279,7 +279,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf create-service-key primary-node cred-key \
           -c '{"replication-request": "credentials" }' <br>
