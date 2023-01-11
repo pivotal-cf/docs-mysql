@@ -19,10 +19,10 @@ To check whether your cluster has lost quorum, look for the following symptoms:
 - All nodes appear "Unhealthy" on the proxy dashboard.
 The proxy dashboard is viewable at <%= vars.switchboard_url %>.
 
-![Screenshot of the Switchboard dashboard.
-At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
-Below this is a table with the headings nodes, status, current sessions, and IP address.
-For each node in the table, the status column is marked unhealthy.](images/quorum-lost.png)
+  ![Screenshot of the Switchboard dashboard.
+  At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
+  Below this is a table with the headings nodes, status, current sessions, and IP address.
+  For each node in the table, the status column is marked unhealthy.](images/quorum-lost.png)
 
 - All responsive nodes report the value of `wsrep_cluster_status` as `non-Primary`:
     <pre class="terminal">
