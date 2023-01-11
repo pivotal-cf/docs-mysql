@@ -421,15 +421,15 @@ For each node, record if the `monit stop` command was successful:
 4. Record if the monit command succeeds or exits with an error:
     + **If monit succeeds in stopping `galera-init`,** then you can use monit to restart this node.
      Follow all the steps below including the steps marked **Monit Restart**
-     but omitting the steps marked **Manual Redeploy**.<br><br>
+     but omitting the steps marked **Manual Redeploy**.
     + **If monit exits with the following error,** then you must manually deploy this node:
 
         <pre class="terminal">
         Warning: include files not found '/var/vcap/monit/job/*.monitrc'
         monit: action failed -- There is no service by that name
         </pre>
-        Follow all the steps below including the steps marked **Manual Redeploy**
-        but omitting the steps marked **Monit Restart**.
+        Follow all the steps below including the steps marked <strong>Manual Redeploy</strong>
+        but omitting the steps marked <strong>Monit Restart</strong>.
 
 
 ### <a id="choose-node"></a> Determine which Node to Bootstrap
