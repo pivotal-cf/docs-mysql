@@ -111,7 +111,7 @@ To create a multi-site replication service instance in both foundations:
         ```
 
         Wait for the `last operation` for your instance to show as `create succeeded`.
-        <br><br>
+
         For example:
 
         <pre class="terminal">$ watch cf services<br>
@@ -119,7 +119,8 @@ To create a multi-site replication service instance in both foundations:
         OK
         name           service       plan        bound apps    last operation
         primary-node   p.mysql       db-small                  create succeeded
-      </pre>
+        </pre>
+
         If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
 
 1. Create a <%= vars.single_leader_plan %> service instance in your secondary
@@ -253,7 +254,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -261,8 +262,10 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     OK
     name           service       plan        bound apps    last operation
     primary-node   p.mysql       db-small                  update succeeded
-  </pre>
+    </pre>
+
     If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
+
 1.  Create a credentials service key for the service instance in your primary foundation by
     running:
 
