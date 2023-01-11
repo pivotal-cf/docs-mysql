@@ -576,15 +576,15 @@ then redeploy the <code>mysqld</code> software to your bootstrap node as follows
   1. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
   For nodes all nodes except the bootstrap node you identified above, run:
 
-        <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</code></pre>
+     <pre class="terminal">bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
+  bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</pre>
 
-        Where `N` and `M` are the numbers of the non-bootstrapped nodes.
-        For example, if you bootstrap node 0, then `M`=1 and `N`=2.
+     Where `N` and `M` are the numbers of the non-bootstrapped nodes.
+     For example, if you bootstrap node 0, then `M`=1 and `N`=2.
 
   1. Turn off the BOSH Resurrector by running:
 
-        <pre><code>bosh update-resurrection off</code></pre>
+     <pre class="terminal">bosh update-resurrection off</pre>
 
   1. Use the BOSH manifest to bootstrap your bootstrap machine by running:
     <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
