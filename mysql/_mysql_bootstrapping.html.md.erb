@@ -15,7 +15,7 @@ You must bootstrap a cluster that loses quorum. A cluster loses quorum when fewe
 
 To check whether your cluster has lost quorum, look for the following symptoms:
 
-- All nodes appear "Unhealthy" on the proxy dashboard. 
+- All nodes appear "Unhealthy" on the proxy dashboard.
 The proxy dashboard is viewable at <%= vars.switchboard_url %>.
 
 ![Screenshot of the Switchboard dashboard.
@@ -69,8 +69,9 @@ To determine which set of instructions to follow:
     ```
 
     Where:
-    - `YOUR-ENV` is the environment where you deployed the cluster.
-    - `YOUR-DEPLOYMENT` is the deployment cluster name.
+
+    * `YOUR-ENV` is the environment where you deployed the cluster.
+    * `YOUR-DEPLOYMENT` is the deployment cluster name.
 
     For example:
     <pre class="terminal">
@@ -118,6 +119,7 @@ To bootstrap in this scenario:
     ```
     bosh deployment PATH-TO-DEPLOYMENT-MANIFEST
     ```
+
     Where `PATH-TO-DEPLOYMENT-MANIFEST` is the path to your deployment manifest.
 %>
 
@@ -128,8 +130,9 @@ To bootstrap in this scenario:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
     <p class="note"><strong>Note:</strong> The errand runs for a long time, during which no output is returned.</p>
 
@@ -211,8 +214,9 @@ To re-create your missing VMs:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 1. Redeploy deployment by running:
 
@@ -221,8 +225,9 @@ To re-create your missing VMs:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
     <p class="note"><strong>Note:</strong> Expect one of the MySQL VMs to fail. Deploying causes BOSH
       to create new VMs and install the software. Forming a cluster is in a
@@ -235,8 +240,9 @@ To re-create your missing VMs:
       ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
     Record the instance GUID, which is the string after `mysql/` in your BOSH instances output.
 
@@ -247,9 +253,10 @@ To re-create your missing VMs:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
-    + `INSTANCE-GUID` is the GUID of your instance you recorded in the above step.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
+    * `INSTANCE-GUID` is the GUID of your instance you recorded in the above step.
 
 1. Repeat steps 4 through 6 until all instances have attempted to start.
 
@@ -269,8 +276,9 @@ To re-create your missing VMs:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 #### <a id="run-the-errand"></a> Run the Bootstrap Errand
 
@@ -286,8 +294,9 @@ To bootstrap:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
     <p class="note"><strong>Note:</strong> The errand runs for a long time,
       during which no output is returned.</p>
@@ -331,10 +340,12 @@ unignores each instance that was previously ignored:
     ```
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/INSTANCE-GUID
     ```
+
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
-    + `INSTANCE-GUID` is the GUID of your instance.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
+    * `INSTANCE-GUID` is the GUID of your instance.
 
 1. Redeploy your deployment by running:
 
@@ -343,8 +354,9 @@ unignores each instance that was previously ignored:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 1. Verify that all `mysql` instances are in a `running` state by running:
 
@@ -353,8 +365,9 @@ unignores each instance that was previously ignored:
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+    * `YOUR-ENV` is the name of your environment.
+    * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 ## <a id="manual-bootstrap"></a>Bootstrap Manually
 
@@ -611,8 +624,9 @@ the highest `sequence_number` is `mysql/0`. <br><br>
         ```
 
         Where:
-        + `YOUR-ENV` is the name of your environment.
-        + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+        * `YOUR-ENV` is the name of your environment.
+        * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 
     1. Navigate to <%= vars.ops_manager %> in a browser, log in, and click **Apply Changes**.
@@ -624,8 +638,9 @@ the highest `sequence_number` is `mysql/0`. <br><br>
         ```
 
         Where:
-        + `YOUR-ENV` is the name of your environment.
-        + `YOUR-DEPLOYMENT` is the name of your deployment.
+
+        * `YOUR-ENV` is the name of your environment.
+        * `YOUR-DEPLOYMENT` is the name of your deployment.
 
 
 #### <a id="manual-redeploy"></a> Manual Redeploy

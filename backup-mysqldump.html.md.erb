@@ -71,6 +71,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
 --silent --execute='show databases'</code></pre>
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address. This value is `0` if you are connecting using an SSH tunnel.
@@ -99,6 +100,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     ```
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
@@ -140,7 +142,9 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     ```
     mysql --user=USERNAME --password=PASSWORD --host=MYSQL-IP  < BACKUP-FILE
     ```
+
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
@@ -173,8 +177,8 @@ your backup artifact.
     ```
     bosh -d service-instance_GUID scp ./BACKUP-FILE mysql:/tmp/
     ```
-    Where `GUID` is the GUID you recorded in the previous step.
 
+    Where `GUID` is the GUID you recorded in the previous step.
 
 1. SSH into the service instance by running:
 

@@ -68,7 +68,7 @@ for stopping the leader and promoting the follower:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the leader-follower service instance.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf service my-lf-instance --guid
     82ddc607-710a-404e-b1b8-a7e3ea7ec063
@@ -86,8 +86,9 @@ for stopping the leader and promoting the follower:
     ```
     bosh -d service-instance_GUID run-errand inspect
     ```
-  Where `GUID` is the GUID of the leader-follower service instance you recorded.
-  <br><br>
+
+    Where `GUID` is the GUID of the leader-follower service instance you recorded.
+
     For example:
     <pre class="terminal">
     $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
@@ -161,8 +162,9 @@ To stop the leader VM and promote the follower VM to the new leader:
     ```
 
      Where:
-     + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
-     + `INDEX`: This is the index of the leader VM retrieved above.
+
+     * `GUID`: This is the GUID of the leader-follower service instance retrieved above.
+     * `INDEX`: This is the index of the leader VM retrieved above.
 
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
@@ -173,8 +175,9 @@ To stop the leader VM and promote the follower VM to the new leader:
       ```
       bosh -d service-instance_GUID stop mysql/INDEX
       ```
+
       Use the index of the leader VM retrieved above.
-      <br><br>
+
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         stop mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
@@ -246,8 +249,9 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     ```
 
      Where:
-     + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
-     + `CID`: This is the CID of the failing former leader VM retrieved above.
+
+     * `GUID`: This is the GUID of the leader-follower service instance retrieved above.
+     * `CID`: This is the CID of the failing former leader VM retrieved above.
 
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
@@ -257,9 +261,11 @@ If you are triggering a failover in response to a failing leader VM, to clean up
     ```
     bosh -d service-instance_GUID orphan-disk DISK-CID
     ```
+
    Where:
-   + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
-   + `DISK-CID`: This is the disk CID of the failing former leader VM retrieved above.
+
+   * `GUID`: This is the GUID of the leader-follower service instance retrieved above.
+   * `DISK-CID`: This is the disk CID of the failing former leader VM retrieved above.
 
      For example:
      <pre class="terminal">
@@ -279,10 +285,12 @@ To restart the former leader VM and configure it as the new follower:
       recreate \
       mysql/INDEX
     ```
+
    Where:
-   + `GUID`: This is the GUID of the leader-follower service instance retrieved above.
-   + `INDEX`: This is the index of the former leader VM that you are re-creating
-   </ul>
+
+   * `GUID`: This is the GUID of the leader-follower service instance retrieved above.
+   * `INDEX`: This is the index of the former leader VM that you are re-creating
+
    For example:
    <pre class="terminal">
    $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
@@ -332,9 +340,11 @@ To unbind and rebind your app:
     ```
     cf unbind-service APP-NAME  SERVICE-INSTANCE-NAME
     ```
+
    Where:
-   <ul><li>`APP-NAME `: This is the name of the app bound to the leader-follower service instance.</li>
-   <li>`SERVICE-INSTANCE-NAME `: This is the name of the leader-follower service instance.</li></ul>
+
+   * `APP-NAME `: This is the name of the app bound to the leader-follower service instance.
+   * `SERVICE-INSTANCE-NAME `: This is the name of the leader-follower service instance.
 
 1. Rebind the app to the leader-follower service instance by running:
 

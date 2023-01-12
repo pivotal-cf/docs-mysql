@@ -35,6 +35,7 @@ To verify the service instance:
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Record the GUID of the follower service instance by running:
@@ -44,7 +45,7 @@ To verify the service instance:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the follower service instance.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf service my-follower --guid
       12345678-90ab-cdef-1234-567890abcdef
@@ -114,6 +115,7 @@ To promote the follower service instance to leader:
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation. <br>
 
 1. Promote the follower service instance to leader by running:
@@ -176,8 +178,8 @@ To remove the former leader service instance:
     ```
     cf login PRIMARY-API-URL
     ```
-    Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
+    Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 2. Do one of the following:
   + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
@@ -209,6 +211,7 @@ To create a follower:
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Create a service instance using the same <%= vars.single_leader_plan %> plan
@@ -258,6 +261,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Set the service instance that is currently the leader to read-only by running:
@@ -286,6 +290,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the service instance in the secondary foundation to leader by running:
@@ -352,9 +357,11 @@ To reconfigure replication for the service instances:
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
+
     Where:
-    + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
-    + `SERVICE-KEY` is a name you choose for the host-info service key.
+
+    * `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
+    * `SERVICE-KEY` is a name you choose for the host-info service key.
 
     For example:
     <pre class="terminal">$ cf create-service-key primary-node host-info \
@@ -368,9 +375,11 @@ To reconfigure replication for the service instances:
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY
     ```
+
     Where:
-    + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
-    + `SERVICE-KEY` is the name of the host-info service key you created in step above.
+
+    * `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
+    * `SERVICE-KEY` is the name of the host-info service key you created in step above.
 
     For example:
 
@@ -403,9 +412,11 @@ To reconfigure replication for the service instances:
     ```
     cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
+
     Where:
-    + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
-    + `HOST-INFO` is the output you recorded in step above.
+
+    * `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
+    * `HOST-INFO` is the output you recorded in step above.
 
     For example:
     <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
@@ -435,9 +446,11 @@ To reconfigure replication for the service instances:
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
-    + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
-    + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
+
+    * `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
+    * `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node cred-key \
@@ -453,9 +466,11 @@ To reconfigure replication for the service instances:
     ```
     cf service-key SECONDARY-INSTANCE SERVICE-KEY-NAME
     ```
+
     Where:
-    + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
-    + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
+
+    * `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
+    * `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
 
     For example:
 
@@ -490,9 +505,11 @@ To reconfigure replication for the service instances:
     ```
     cf update-service PRIMARY-INSTANCE -c CREDENTIALS
     ```
+
     Where:
-    + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
-    + `CREDENTIALS` is the output you recorded in the step above.
+
+    * `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
+    * `CREDENTIALS` is the output you recorded in the step above.
 
     For example:
     <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \

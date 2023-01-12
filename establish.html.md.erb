@@ -81,6 +81,7 @@ To obtain the IP address using cf SSH, follow these steps:
     ```
     cf service-keys SERVICE-INSTANCE
     ```
+
     Where `SERVICE-INSTANCE` is the name of your <%= vars.product_short %> service instance.
 
 1. To obtain the BOSH DNS hostname of the MySQL service instance, run the following command:
@@ -122,6 +123,7 @@ To obtain the IP address using cf SSH, follow these steps:
     ```
     $ dig +short BOSH-DNS-HOSTNAME
     ```
+
     Where `BOSH-DNS-HOSTNAME` is the BOSH DNS hostname that you retrieved from step 2.
 
      The output of the command is the IP address.
