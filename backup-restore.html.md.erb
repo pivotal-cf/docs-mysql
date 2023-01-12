@@ -318,7 +318,7 @@ To restore a service instance:
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
     ```
-    Where is `BACKUP-ID` is the ID you recorded in the above step. 
+    Where `BACKUP-ID` is the ID you recorded in the above step. 
 
     For example:
 
@@ -368,8 +368,6 @@ To restore a service instance:
     cf unbind-service APP-NAME SOURCE-INSTANCE
     ```
 
-    <%= partial "/mysql/rebind-warning" %>
-
 1. Update your app to bind to the new service instance by running:
 
     ```
@@ -381,6 +379,8 @@ To restore a service instance:
     ```
     cf restage APP-NAME
     ```
+
+<%= partial "/mysql/rebind-warning" %>
 
 ##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr Plugin
 
