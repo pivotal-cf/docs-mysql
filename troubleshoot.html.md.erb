@@ -847,7 +847,7 @@ This section provides solutions for the following errands:
         errand to confirm that both VMs are in a read-only state:
         <pre>bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
       </li>
-      <li>Examine the output and locate the information about the leader-follower 
+      <li>Examine the output and locate the information about the leader-follower
         <%= vars.product_short %> VMs:
         <pre class="terminal">
     Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
@@ -948,7 +948,7 @@ This section provides a solution for the following errors:
               See
               <a href="https://community.pivotal.io/s/article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full">MySQL for PCF hangs when server VM persistent disk is full</a>
               in the Knowledge Base.
-              <p class="note warning"><strong>Warning:</strong>
+              <p class="note caution"><strong>Caution:</strong>
                 Deleting binary logs is a destructive procedure and can result in MySQL data loss.
                 Only do this procedure with the assistance of <a href="https://pivotal.io/support">Support</a>.
               </p>
@@ -1130,8 +1130,7 @@ This section provides solutions for the following errands:
             the node to rejoin the cluster. This removes all of the unsynchronized data
             from the detached server node and creates a new copy of the cluster data on the node. For more
             information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a> below.
-            <p class="note warning">
-              <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
+            <p class="note caution"><strong>Caution:</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
               <a href="https://support.pivotal.io">Support</a>.
             </p>
           </li>
@@ -1169,7 +1168,7 @@ This section provides solutions for the following errands:
 
     <pre class="terminal">
     160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
-    160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
+    160318 9:25:16 [] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
     160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
     </pre>
 </td>
@@ -1385,7 +1384,7 @@ Please contact your Operator for help.
 
 <p>
   To determine whether there is an issue with the <%= vars.product_short %>
-  deployment: 
+  deployment:
 </p>
 <ol>
   <li>
@@ -1700,7 +1699,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <ul>
 	<li>Collects all of the service instances that the on-demand broker has registered.</li>
-	<li>Issues an upgrade command and deploys the a new manifest to the on-demand broker for each 
+	<li>Issues an upgrade command and deploys the a new manifest to the on-demand broker for each
 		service instance.</li>
 	<li>Adds to a retry list any instances that have ongoing BOSH tasks at the time of upgrade.</li>
 	<li>Retries any instances in the retry list until all instances are upgraded.</li>
@@ -1835,8 +1834,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
   </li>
 </ol>
 
-<p class="note warning">
-  <strong>Warning:</strong>
+<p class="note caution"><strong>Caution:</strong>
   Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
   <a href="https://support.pivotal.io/">Support</a>.
 </p>
@@ -1850,8 +1848,7 @@ This procedure removes all the data on the node, forces the node to join the clu
 and creates a new copy of the cluster data on the node.
 
 
-<p class="note warning">
-  <strong>Warning:</strong>
+<p class="note caution"><strong>Caution:</strong>
   If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
   <a href="https://support.pivotal.io">Support</a>.
 </p>
@@ -1913,12 +1910,10 @@ To re-create a corrupted VM:
     <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#cck">BOSH Cloudcheck</a>
     and run
     <code>Recreate VM using last known apply spec</code>.
-    <p class="note warning">
-      <strong>Warning:</strong>
+    <p class="note caution"><strong>Caution:</strong>
       Recreating a node will clear its logs. Ensure the node is completely down before recreating it.
     </p>
-    <p class="note warning">
-      <strong>Warning:</strong>
+    <p class="note caution"><strong>Caution:</strong>
       Only re-create one node. Do not re-create the entire cluster. If more than one node is down, contact
       <a href="https://support.pivotal.io">Support</a>.
     </p>

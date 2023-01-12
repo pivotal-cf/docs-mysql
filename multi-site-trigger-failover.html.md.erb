@@ -85,7 +85,7 @@ If the service instance is `failing`, contact <a href="https://pivotal.io/suppor
 
 ##<a id='failover'></a> Trigger a Failover
 
-<p class="note warning"><strong>Warning:</strong> You should only trigger failover
+<p class="note caution"><strong>Caution:</strong> You should only trigger failover
   if you do not need to recover the leader service instance.
 </p>
 
@@ -328,7 +328,7 @@ you must reconfigure replication. Reconfiguring replication is similar to the pr
 service instance in the primary foundation is the follower and the service instance
 in the secondary foundation is the leader.
 
-<p class='note warning'><strong>Warning:</strong>
+<p class="note caution"><strong>Caution:</strong>
 To successfully trigger a switchover the follower dataset must be a subset of the leader dataset.
 This means that <% vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>

@@ -176,7 +176,7 @@ in the `failing` state, continue similarly to [Scenario 1](#cluster-disrupted) a
 1. [Restore the BOSH Configuration](#reset-deployment): Go back to unignoring all
 instances and redeploy. This is a critical and mandatory step.
 
-<p class="warning note"><strong>Warning:</strong>
+<p class="note caution"><strong>Caution:</strong>
   If you do not set each of your ignored instances to <code>unignore</code>,
   your instances are not updated in future deploys.
   You must follow the procedure in the final section of <em>Scenario 2</em>,
@@ -327,8 +327,7 @@ To bootstrap:
 
 #### <a id="reset-deployment"></a> Restore the BOSH Configuration
 
-<p class="note warning">
-  <strong>Warning:</strong> If you do not set each of your ignored instances
+<p class="note caution"><strong>Caution:</strong> If you do not set each of your ignored instances
   to <code>unignore</code>, your instances are never updated in future deploys.
 </p>
 
@@ -376,8 +375,7 @@ you need to do the steps manually.
 
 Follow the procedures in the sections below to manually bootstrap your cluster.
 
-<p class="note warning">
-  <strong>Warning</strong>: The following procedures are prone to user-error
+<p class="note caution"><strong>Caution:</strong> The following procedures are prone to user-error
   and can result in lost data if followed incorrectly.
   Follow the procedure in <a href="#assisted-bootstrap">Bootstrap with the BOSH Errand</a>
   above first, and only resort to the manual process if the errand fails to repair the cluster.
@@ -598,8 +596,7 @@ If in [Shut Down MySQL](#shut-down) above you successfully used `monit` to shut 
     follow the manual procedure to force the node to rejoin the cluster.
     See [How to manually force a MySQL node to rejoin if a node cannot rejoin the HA (Galera) cluster](https://community.pivotal.io/s/article/How-to-Manually-Force-a-MySQL-Node-to-Rejoin-if-a-Node-Cannot-Rejoin-the-HA-Galera-Cluster) in the Support knowledge base.<%# Type |in the VMware Tanzu Support knowledge base| somewhere in the cross-reference sentence. %>
 
-    <p class="note warning">
-      <strong>Warning:</strong> Forcing a node to rejoin the cluster is a destructive procedure.
+    <p class="note caution"><strong>Caution:</strong> Forcing a node to rejoin the cluster is a destructive procedure.
        Only follow the procedure with the assistance of
        <a href="https://support.pivotal.io">Support</a>.</p>
 

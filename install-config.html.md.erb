@@ -147,7 +147,7 @@ and networks for the broker and MySQL service instances:
             to avoid conflicts with services that are not IPsec compatible.
          </td></tr>
   </table>
-    <p class="note warning"><strong>Warning:</strong> You cannot change the regions or networks
+    <p class="note caution"><strong>Caution:</strong> You cannot change the regions or networks
     after you <strong>Apply Changes</strong>.
   </p>
 
@@ -162,12 +162,12 @@ Each service plan has a corresponding section in the tile configuration, such as
 By default, plans 1 through 3 are active and plans 4 through 9 are inactive.
 The procedures below describe how to change these defaults.
 
-<p class="note warning"><strong>Warning:</strong>
+<p class="note caution"><strong>Caution:</strong>
   You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
   If you deactivate <strong>Plan 1</strong>, your installation fails when you apply changes.
 </p>
 
-<p class="note warning"><strong>Warning:</strong> You must configure one of your service plans as
+<p class="note caution"><strong>Caution:</strong> You must configure one of your service plans as
 a single node plan. This is because you can only restore a leader-follower service instance to a single node plan.
 Ensure that the persistent disk in the single node plan is at
 least as large as the persistent disk of your largest leader-follower plan.
@@ -324,7 +324,7 @@ For each plan that you want to use in your deployment:
   </table>
 1. Click **Save**.
 
-<p class="note warning"><strong>Warning:</strong> If you expect your developers
+<p class="note caution"><strong>Caution:</strong> If you expect your developers
   to upgrade from one plan to another, do not place the plans in separate AZs.
   For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
   an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
@@ -394,7 +394,8 @@ To set MySQL defaults and enable developers to customize their instances:
             <code>lower\_case\_table\_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the checkbox below. <br>
             For more information about <code>lower\_case\_table\_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you enable this feature,
+
+            <p class="note caution"><strong>Caution:</strong> Before you enable this feature,
 ensure all tables have lowercase names. Tables with uppercase names are inaccessible
 after enabling lowercase table names.</p>
          </td></tr>
@@ -461,9 +462,10 @@ To enable TLS for the MySQL service:
 1. Under **TLS Options**, select one of the following:
   *  **Optional**: This enables developers to configure their MySQL service VMs to use TLS.
   * **Required**: This enables developers to configure their MySQL service VMs to use TLS and requires all MySQL service VMs to only accept secure connections.
-<p class="note warning"><strong>Warning:</strong> Selecting <strong>Required</strong> breaks any apps that are not currently connecting over TLS.</p>
+
+<p class="note caution"><strong>Caution:</strong> Selecting <strong>Required</strong> breaks any apps that are not currently connecting over TLS.</p>
 1. Click **Save**.
-1. After deploying the tile, notify your developers that they must enable TLS for their service instances and activate TLS for their apps.
+2. After deploying the tile, notify your developers that they must enable TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
 
 ####<a id="security-service-instance-creds"></a> Configure Secure Service Instance Credentials
@@ -647,7 +649,7 @@ Errands are scripts that run at specfic times to do various tasks.
 <%= vars.product_short %> can run errands to manage the broker and service instances.
 You do not need to change the default configurations for errands.
 
-<p class="note warning"><strong>Warning:</strong> The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
+<p class="note caution"><strong>Caution:</strong> The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
 necessary cleanup tasks when you delete the <%= vars.product_short %> tile or re-define plans. Setting this errand to <strong>Off</strong> can cause
 problems when attempting to reinstall the tile or re-define plans. VMware recommends that you do not set this errand to <strong>Off</strong>.
 </p>
