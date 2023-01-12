@@ -37,7 +37,7 @@ For more information, see [Configuring SSH Access for <%= vars.app_runtime_abbr 
 ### Procedure
 
 To connect to a MySQL instance using an SSH tunnel, follow the procedures in
-[Accessing Services with SSH](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html)
+[Accessing Services with SSH](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html).
 
 ##<a id='ip-address'></a> Connect Using an IP Address
 
@@ -133,7 +133,7 @@ See the following screenshot of the DNS Lookup UI:
 ![The top of the image reads 'DNS Lookup'.
 Below the title is a gray box with two rows.
 The top row contains a field with an example hostname and a button labeled 'Resolve'.
-The bottom row has the IP address '10.10.40.32'.](dns-lookup-app.png)
+The bottom row has the IP address '10.10.40.32'.](images/dns-lookup-app.png)
 
 If your deployment has app SSH disabled, you can deploy the DNS Lookup app to your
 deployment. The DNS Lookup app resolves BOSH DNS hostnames.
@@ -147,7 +147,7 @@ If you have access to the BOSH CLI, you can obtain the IP address through it.
 
 #### Prerequisite
 
-To connect using the BOSH CLI, you must have have access to the BOSH CLI. Ask
+To connect using the BOSH CLI, you must have access to the BOSH CLI. Ask
 your operator for access to the BOSH CLI.
 
 #### Procedure
@@ -181,9 +181,9 @@ commands depending on your topology:
         bosh -d service-instance_GUID instance
         ```
 
-        Where `GUID` is the GUID of the service instance retrieved above. <br><br>
+        Where `GUID` is the GUID of the service instance retrieved above.
 
-        If you are using an HA cluster, record the IP address of any of your instances.<br><br>
+        If you are using an HA cluster, record the IP address of any of your instances.
 
         For example:
         <pre class="terminal">$ bosh -d service-instance\_b2e92d56-27e2-407e-90e0-c34612c10dba \
@@ -208,7 +208,7 @@ commands depending on your topology:
         bosh -d service-instance_GUID run-errand inspect
         ```
 
-        Record the IP address for the instance marked `Role: leader`. <br><br>
+        Record the IP address for the instance marked `Role: leader`. 
 
         For example:
         <pre class="terminal">
