@@ -44,7 +44,7 @@ To verify the service instance:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the follower service instance.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf service my-follower --guid
       12345678-90ab-cdef-1234-567890abcdef
@@ -101,10 +101,10 @@ To trigger a failover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to:<br><br>
-<code>Updating service instance haDB as admin...
+<pre class="terminal">Updating service instance haDB as admin...
   FAILED
   Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
-      * the configuration parameter 'initiate-failover' is not a valid option</code>
+      * the configuration parameter 'initiate-failover' is not a valid option</pre>
 </p>
 
 To promote the follower service instance to leader:
@@ -114,7 +114,8 @@ To promote the follower service instance to leader:
     ```
     cf login SECONDARY-API-URL
     ```
-    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation. <br>
+
+    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the follower service instance to leader by running:
 
@@ -148,7 +149,7 @@ To promote the follower service instance to leader:
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+    
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -242,10 +243,10 @@ To trigger a switchover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to the following:<br><br>
-<code>Updating service instance haDB as admin...
+<pre class="terminal">Updating service instance haDB as admin...
   FAILED
   Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
-      * the configuration parameter 'initiate-failover' is not a valid option</code>
+      * the configuration parameter 'initiate-failover' is not a valid option</pre>
 </p>
 
 Before you promote the follower service instance,
@@ -258,6 +259,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Set the service instance that is currently the leader to read-only by running:
@@ -268,6 +270,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
 
     For example:
+
     <pre class="terminal">$ cf update-service primary-node \
         -c '{"initiate-failover":"make-leader-read-only"}'<br>
     Updating service instance primary-node as admin...
@@ -286,6 +289,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the service instance in the secondary foundation to leader by running:
@@ -535,9 +539,11 @@ To reconfigure replication for the service instances:
     watch cf services
     ```
 
-    Wait for the `last operation` for your instance to show as `update succeeded`. <br><br>
+    Wait for the `last operation` for your instance to show as `update succeeded`.
+
     You should now have a leader-follower service instance successfully configured,
-    where the leader is in your secondary foundation and your follower is in the primary foundation. <br><br>
+    where the leader is in your secondary foundation and your follower is in the primary foundation.
+
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
