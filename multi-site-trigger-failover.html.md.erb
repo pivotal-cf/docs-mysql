@@ -35,6 +35,7 @@ To verify the service instance:
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Record the GUID of the follower service instance by running:
@@ -130,6 +131,7 @@ To promote the follower service instance to leader:
     OK</pre>
 
 1. If the above command fails, do one of the following:
+
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
 
@@ -138,6 +140,7 @@ To promote the follower service instance to leader:
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
         [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
+
           <pre class="terminal">
         Updating service instance secondary-node as admin...
         FAILED
@@ -178,10 +181,12 @@ To remove the former leader service instance:
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 
 2. Do one of the following:
+
   + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
     Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
      <p class="note"><strong>Note:</strong>
@@ -211,10 +216,12 @@ To create a follower:
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Create a service instance using the same <%= vars.single_leader_plan %> plan
    that was used to create the original instance:
+
     + Follow the procedure in [Create a Service Instance](./use.html#create)
     in _Using <%=vars.product_full %>_.
     + Do not name your service instance `follower` because, if in the future
@@ -301,6 +308,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
 
     If the above command fails, do one of the following:
+
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
         <pre class="terminal">Updating service instance secondary-node as admin...
@@ -308,6 +316,7 @@ To make the leader read-only and promote the follower to leader in the secondary
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
         [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
+
           <pre class="terminal">
         Updating service instance secondary-node as admin...
         FAILED
@@ -374,11 +383,14 @@ To reconfigure replication for the service instances:
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
 
     For example:
+
     <pre class="terminal">$ cf create-service-key primary-node host-info \
           -c '{"replication-request": "host-info" }' <br>
     Creating service key host-info for service instance primary-node as admin...
@@ -390,7 +402,9 @@ To reconfigure replication for the service instances:
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is the name of the host-info service key you created in step above.
 
@@ -425,11 +439,14 @@ To reconfigure replication for the service instances:
     ```
     cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `HOST-INFO` is the output you recorded in step above.
 
     For example:
+
     <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
       "peer-info":{ \
           "hostname": "primary.bosh", \
@@ -457,11 +474,14 @@ To reconfigure replication for the service instances:
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
     For example:
+
     <pre class="terminal">$ cf create-service-key secondary-node cred-key \
         -c '{"replication-request": "credentials" }'<br>
     Creating service key cred-key for service instance secondary-node as user<span>@</span>example.com...
@@ -475,7 +495,9 @@ To reconfigure replication for the service instances:
     ```
     cf service-key SECONDARY-INSTANCE SERVICE-KEY-NAME
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
 
@@ -512,11 +534,14 @@ To reconfigure replication for the service instances:
     ```
     cf update-service PRIMARY-INSTANCE -c CREDENTIALS
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
     + `CREDENTIALS` is the output you recorded in the step above.
 
     For example:
+
     <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \
         "credentials": { \
           "password": "a22aaa2a2a2aaaaa", \
@@ -548,8 +573,10 @@ To reconfigure replication for the service instances:
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
+
     + If your follower service instance is more than 3 days behind leader,
     you get error message similar to  the following:
+
       <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
@@ -557,8 +584,10 @@ To reconfigure replication for the service instances:
       Leader GTIDs offering: "487e6056-6e93-11ea-8c96-42010a010806:5-9"
       Follower GTIDs missed: "487e6056-6e93-11ea-8c96-42010a010806:1-9"
       Try again with an empty instance or contact your operator to troubleshoot</pre>
+
     + If your follower has a divergent dataset from the leader,
     you get error message similar to the following:
+
       <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
