@@ -102,9 +102,9 @@ To trigger a failover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin... <br />
+  FAILED<br />
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred: <br />
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -251,9 +251,9 @@ To trigger a switchover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to the following:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin...<br />
+  FAILED<br />
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:<br />
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -311,16 +311,18 @@ To make the leader read-only and promote the follower to leader in the secondary
 
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
+
         <pre class="terminal">Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
         [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
 
-          <pre class="terminal">
+        <pre class="terminal">
         Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - the leader is still writable</pre>
+
 1.  Watch the progress of the service instance update by running:
 
     ```
