@@ -33,11 +33,10 @@ Log Cache is enabled by default.
           </li>
         </ul>
         Where <code>SERVICE-INSTANCE-NAME</code> is the name of your service instance.
-        <br><br>
+
       For example:
 
       <pre class="terminal">
-      <%# Switch output for different services %>
 $ cf tail -f my-instance | egrep 'connected|available|persistent_disk_used_percent'
 2019-05-17T11:25:59.48-0700 [my-instance] GAUGE /p.mysql/available:1.000000 boolean
 2019-05-17T11:26:29.49-0700 [my-instance] GAUGE /p.mysql/system/persistent_disk_used_percent:17.000000 percentage
@@ -47,7 +46,6 @@ $ cf tail -f my-instance | egrep 'connected|available|persistent_disk_used_perce
 2019-05-17T11:27:29.50-0700 [my-instance] GAUGE /p.mysql/performance/threads_connected:**7**.000000 connection
 </pre>
       For more information about the metrics output, see
-    <%# Switch links for different services %>
       the <a href="#kpi">Key Performance Indicators</a> and <a href="#component-metrics">Component Metrics</a> sections below.
   </li>
 </ol>
