@@ -69,16 +69,19 @@ For more information,
 see [Establish a Connection to a Service Instance from Outside Your Deployment](./establish.html).
 
 1. View a list of your databases by running:
-<pre><code>mysql --user=USERNAME --password=PASSWORD \
---host=MYSQL-IP \
---silent --execute='show databases'</code></pre>
+
+    <pre><code>mysql --user=USERNAME --password=PASSWORD \
+    --host=MYSQL-IP \
+    --silent --execute='show databases'</code></pre>
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address. This value is `0` if you are connecting using an SSH tunnel.
 
     For example:
+
     <pre class="terminal">
     $ mysql --user=abcdefghijklm --password=123456789 \
     --host=10.10.10.5 \
@@ -86,6 +89,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     </pre>
 
 1. Do not back up the following databases:
+
     * `cf_metadata`
     * `information_schema`
     * `mysql`
@@ -102,6 +106,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     ```
 
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
@@ -111,6 +116,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     The `--set-gtid-purged=off` flag enables you to restore the backup without admin privileges. <br><br>
 
     For example:
+
     <pre class="terminal">
     $ mysqldump --set-gtid-purged=off --single-transaction \
     --user=abcdefghijklm --password=123456789 \
@@ -143,12 +149,13 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     ```
     mysql --user=USERNAME --password=PASSWORD --host=MYSQL-IP  < BACKUP-FILE
     ```
+
     Where:
+
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
     * `BACKUP-FILE` is the name of your backup artifact.
-
 
 ## <a id="external"></a> Restore from an Off-Platform Logical Backup
 
@@ -169,6 +176,7 @@ your backup artifact.
     ```
     cf service SERVICE-INSTANCE-NAME --guid
     ```
+
     Record the output.
 
 1. Copy the backup artifact to the service instance by running:
@@ -176,6 +184,7 @@ your backup artifact.
     ```
     bosh -d service-instance_GUID scp ./BACKUP-FILE mysql:/tmp/
     ```
+
     Where `GUID` is the GUID you recorded in the previous step.
 
 
