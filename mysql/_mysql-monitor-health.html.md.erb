@@ -56,11 +56,10 @@ To monitor node health using the Switchboard dashboard, do the following:
 2. If you are prompted, enter the username and password that you recorded in
 [Prerequisite](#prereq) above.
 
-    <%= image_tag "switchboard-all-healthy.png",
-    :alt => "Screenshot of the Switchboard dashboard.
+    ![Screenshot of the Switchboard dashboard.
     At the top, there is a banner with the message 'all nodes are healthy'.
     Below this is a table with the headings nodes, status, current sessions, and IP address.
-    For each node in the table, the status column is marked healthy." %>
+    For each node in the table, the status column is marked healthy.](images/switchboard-all-healthy.png)
 
 ### <a id="proxy-api"></a> Monitor Node Health Using the API
 
@@ -77,6 +76,7 @@ To monitor node health using the Switchboard API, do the following:
     ```
 
     Where:
+
     + `USERNAME` is the `username` you recorded in [Prerequisite](#prereq) above.
     + `PASSWORD` is the `password` you recorded in [Prerequisite](#prereq) above.
     + `N` is either 0, 1, or 2 depending on the proxy you want to connect to.
@@ -132,11 +132,10 @@ When a new or resurrected nodes rejoin the cluster, the proxy continues to
 route all connections to the currently active node. In the case of failover,
 the proxy considers all healthy nodes as candidates for new connections.
 
-<%= image_tag "images/switchboard-all-healthy.png",
-:alt => "Screenshot of the Switchboard dashboard.
+![Screenshot of the Switchboard dashboard.
 At the top, there is a banner with the message 'all nodes are healthy'.
 Below this is a table with the headings nodes, status, current sessions, and IP address.
-For each node in the table, the status column is marked healthy."%>
+For each node in the table, the status column is marked healthy.](images/switchboard-all-healthy.png)
 
 ### <a id="unhealthy"></a> Unhealthy
 
@@ -153,12 +152,11 @@ new connections to a healthy node, assuming such a node exists. Clients are
 expected to handle reconnecting on connection failure should the entire cluster
 become inaccessible.
 
-<%= image_tag "images/switchboard-unhealthy.png",
-:alt => "Screenshot of the Switchboard dashboard.
+![Screenshot of the Switchboard dashboard.
 At the top, there is a banner with the message '2 out of 3 nodes are unhealthy'.
 Below this is a table with the headings nodes, status, current sessions, and IP address.
 For first node in the table, the status column is marked healthy.
-For the following two nodes, the status column is marked unhealthy." %>
+For the following two nodes, the status column is marked unhealthy.](images/switchboard-unhealthy.png)
 
 ### <a id="unresponsive"></a> Unresponsive
 
