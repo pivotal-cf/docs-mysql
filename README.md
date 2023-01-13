@@ -51,6 +51,7 @@ This is a word list for terminology and word usage specific to the MySQL for VMw
 
 
 ## Steps for local development
+
 ```
 $ git clone git@github.com:pivotal-cf/docs-layout-repo
 $ git clone git@github.com:pivotal-cf/docs-mysql
