@@ -32,6 +32,7 @@ For each node in the table, the status column is marked unhealthy.](images/quoru
     | wsrep_cluster_status | non-Primary |
     +----------------------+-------------+
     </pre>
+
 <%# Is it responsive or unresponsive? %>
 
 - All unresponsive nodes respond with `ERROR 1047` when using most statement types
@@ -405,6 +406,7 @@ For each node, record if the `monit stop` command was successful:
         Warning: include files not found '/var/vcap/monit/job/*.monitrc'
         monit: action failed -- There is no service by that name
         </pre>
+
         Follow all the steps below including the steps marked **Manual Redeploy**
         but omitting the steps marked **Monit Restart**.
 
@@ -448,6 +450,7 @@ For each node in the cluster, to find its `seqno`:
         $ grep "Recovered position" /var/vcap/sys/log/pxc-mysql/mysql.err.log | tail -1
         150225 18:09:42 mysqld_safe WSREP: Recovered position e93955c7-b797-11e4-9faa-9a6f0b73eb46:15026
         </pre>
+
         1. If the node never connected to the cluster before crashing, it might not have been
         assigned a group ID. In this case, there is nothing to recover.
         Do not choose this node for bootstrapping unless all the other nodes also crashed.
@@ -664,7 +667,6 @@ then restart the nodes as follows:
 1. With your redeploys completed, turn the BOSH Resurrector back on by running:
 
     <pre>bosh -e YOUR-ENV update-resurrection on</pre>
-
 
 ### <a id="verify-nodes"></a>  Verify that the Nodes Have Joined the Cluster
 

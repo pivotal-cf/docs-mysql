@@ -20,6 +20,7 @@ Log Cache is enabled by default.
   <li>
     To access metrics for a service instance, run:
         <pre><code>cf tail SERVICE-INSTANCE-NAME</code></pre>
+
         Two useful flags to append to this command are:
         <ul>
           <li>
@@ -46,6 +47,7 @@ $ cf tail -f my-instance | egrep 'connected|available|persistent_disk_used_perce
 2019-05-17T11:27:29.50-0700 [my-instance] GAUGE /p.mysql/system/persistent_disk_used_percent:17.000000 percentage
 2019-05-17T11:27:29.50-0700 [my-instance] GAUGE /p.mysql/performance/threads_connected:**7**.000000 connection
 </pre>
+
       For more information about the metrics output, see
       the <a href="#kpi">Key Performance Indicators</a> and <a href="#component-metrics">Component Metrics</a> sections below.
   </li>

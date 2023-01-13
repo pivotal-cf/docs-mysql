@@ -101,6 +101,7 @@ For example:
     name          service     plan        bound apps    last operation
     my-instance   p.mysql     db-small                  create succeeded
     </pre>
+
     You can [bind](#bind) your app to an existing instance or [create](#create) a new instance to bind to your app.
 
 ## <a id='create'></a>Create a Service Instance
@@ -336,13 +337,13 @@ The following table lists migration use cases for the `update-service` command:
   </tr>
 </table>
 
-<p class="note warning"><strong>Warning:</strong> You cannot use <code>cf update-service</code>
+<p class="note caution"><strong>Caution:</strong> You cannot use <code>cf update-service</code>
   to migrate data between an HA cluster plan and a plan of another topology.
 If you want to do this, you must use the <code>cf mysql-tools</code> plugin instead.
 For more information about migrating data,
 see <a href="./about-migrate.html">About Data Migration in <%= vars.product_full %></a>.
 </p>
-<p class="note warning"><strong>Warning:</strong> If you are using <%= vars.single_leader_plan_lc %>,
+<p class="note caution"><strong>Caution:</strong> If you are using <%= vars.single_leader_plan_lc %>,
   you must not update the <%= vars.single_leader_plan %> plan to a plan of another topology.
   If you do this, your replication breaks.
 </p>

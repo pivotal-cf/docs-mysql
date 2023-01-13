@@ -73,6 +73,7 @@ for stopping the leader and promoting the follower:
     <pre class="terminal">$ cf service my-lf-instance --guid
     82ddc607-710a-404e-b1b8-a7e3ea7ec063
     </pre>
+
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
 1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather)
@@ -96,6 +97,7 @@ for stopping the leader and promoting the follower:
 
 1. See the output about the leader-follower MySQL VMs and identify
 the instance marked `Role: leader`.<br><br>For example output:
+
   <pre class="terminal">
   Instance   mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0
   Exit Code  0
@@ -124,6 +126,7 @@ the instance marked `Role: leader`.<br><br>For example output:
             GTID Executed: 82ddc607-710a-404e-b1b8-a7e3ea7ec063:1-18
             2018/04/03 18:08:46 Successfully executed command: inspect
   </pre>
+
 1. Record the index of the instance marked `Role: leader`.
    In the above example output, the index of the leader VM is `ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0`.
 
@@ -146,6 +149,7 @@ leader VM is in the AZ you want to take offline by running:
     mysql/37e4b6bc-2ed6-4bd2-84d1-e59a91f5e7f8  running        us-central1-a  10.0.8.10
     2 instances
   </pre>
+
   <p class="note"><strong>Note</strong>: The leader VM might not display its status as <code>failing</code> if you are performing planned maintenance.</p>
   Examine the output to determine if the leader VM is in the AZ you want to take offline.
 
@@ -170,6 +174,7 @@ To stop the leader VM and promote the follower VM to the new leader:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         run-errand make-read-only \
         --instance=mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
+
 1. If you still have access to the AZ where the leader VM is located, stop the leader VM by running:
 
       ```
@@ -181,6 +186,7 @@ To stop the leader VM and promote the follower VM to the new leader:
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         stop mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
+
 1. Set the follower VM as writable by running:
 
     ```
@@ -226,6 +232,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
         --failing \
         --column=”VM CID” \
         --json</pre>
+
 1. Retrieve the disk CID of the failing former leader VM by running:
 
     ```
@@ -235,6 +242,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
       --column=”Disk CIDs” \
       --json
     ```
+
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 instances \
       --details \
@@ -256,6 +264,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         delete-vm i-1db9ede6</pre>
+
 1. Orphan the disk of the failing former leader VM by running:
 
     ```
@@ -271,6 +280,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
      <pre class="terminal">
      $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
         orphan-disk b-1db9ede6</pre>
+
    Orphaning a disk rather than deleting it preserves the disk for possible recovery.
    After performing recovery operations, you can reattach the disk to a VM. BOSH deletes orphaned disks after five days by default.
 
@@ -307,6 +317,7 @@ To restart the former leader VM and configure it as the new follower:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
       run-errand configure-leader-follower \
       --instance=mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
+
 1. Use the BOSH CLI to run the `inspect` errand, using the same value as above, by running:
 
       ```
@@ -316,6 +327,7 @@ To restart the former leader VM and configure it as the new follower:
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
        run-errand inspect</pre>
+
    If the output displays one instance marked `Role: leader` and another instance marked `Role: follower`,
    then leader-follower replication and high availability are resumed.
    The deployment should be in its original, working state.

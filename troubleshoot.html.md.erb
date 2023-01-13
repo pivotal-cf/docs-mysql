@@ -648,6 +648,7 @@ This section provides solutions for the following errands:
         <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
+
         For example:
 
         <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
@@ -746,6 +747,7 @@ This section provides solutions for the following errands:
           <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
             run-errand make-read-only &#92;
             --instance=mysql/MYSQL-SUBSET-INSTANCE</code></pre>
+
           For example:
           <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
               run-errand make-read-only &#92;
@@ -761,6 +763,7 @@ This section provides solutions for the following errands:
               <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
                 run-errand make-read-only &#92;
                 --instance=mysql/MYSQL-INSTANCE</code></pre>
+
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
                   run-errand make-read-only &#92;
@@ -775,6 +778,7 @@ This section provides solutions for the following errands:
             <li>Migrate all appropriate data to the new leader instance.</li>
             <li>After putting all data on the leader, ssh onto the follower:
               <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code></pre>
+
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep ssh mysql/e0b94ade-0114-4d49-a929-ce1616d8beda</pre>
             </li>
@@ -792,6 +796,7 @@ This section provides solutions for the following errands:
               <pre><code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
                 run-errand configure-leader-follower &#92;
                 --instance=mysql/GUID-OF-LEADER</code></pre>
+
               For example:
               <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
                 run-errand configure-leader-follower &#92;
@@ -881,6 +886,7 @@ This section provides solutions for the following errands:
         <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
+
         For example, if the second instance above is the leader:
         <pre class="terminal">
     $ bosh -e my-env -d my-dep &#92;
@@ -1073,6 +1079,7 @@ This section provides solutions for the following errands:
     <td>A client connected to a <%= vars.product_short %> cluster node reports the following error:
 
     <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
+
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error

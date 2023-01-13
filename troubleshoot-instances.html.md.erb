@@ -45,7 +45,7 @@ Start here if you are responding to a specific error or error messages.
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> checkbox is enabled,
-  and the <strong>Enable Log Cache syslog ingestion</strong> checkbox is disabled in the 
+  and the <strong>Enable Log Cache syslog ingestion</strong> checkbox is disabled in the
   <%=	vars.app_runtime_abbr %> tile.
   For more information about configuring these checkboxes, see
   <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
@@ -125,21 +125,21 @@ topology, or during upgrades:
 
   <tr>
     <th>Cause</th>
-    <td><p>If you have a leader-follower topology, the leader VM might be read-only. 
+    <td><p>If you have a leader-follower topology, the leader VM might be read-only.
     If you can no longer read to the database as well, your persistent disk might be full.</p>
     <p>If you have a <%= vars.single_leader_plan %> topology, your leader VM might be down.</p></td>
   </tr>
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td><p>If you have a leader-follower topology and the leader VM is read-only, for how to 
+    <td><p>If you have a leader-follower topology and the leader VM is read-only, for how to
     troubleshoot this problem, see <a href='./troubleshoot.html#both-read-only'>
         Both Leader and Follower Instances Are Read-Only</a>.</p>
     <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
     troubleshooting inoperable apps, see <a href='#disk-full'>
         Apps are Inoperable</a>.</p>
-    <p>If you have a <%= vars.single_leader_plan %> topology and your leader VM is down, 
+    <p>If you have a <%= vars.single_leader_plan %> topology and your leader VM is down,
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
     see <a href='./multi-site-trigger-failover.html'>
@@ -341,6 +341,7 @@ To find this information, do the following:
 
 1. If you do not know the name of the service instance, run `cf services` to see a listing of all service instances in the space.
 The service instances are listed in the `name` column.
+
     <pre class="terminal">
     $ cf services
     Getting services in org my-org / space my-space as user<span>@</span>example.com...
