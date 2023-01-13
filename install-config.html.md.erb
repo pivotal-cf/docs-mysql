@@ -45,7 +45,7 @@ To create an ASG for <%= vars.product_short %>:
 1. Click **Create Networks**.
 
 1. Click your services network and record the **CIDR**.
-    ![Reserved IP Ranges](opsman-dir-reserved-ips.png)
+    ![Reserved IP Ranges](images/opsman-dir-reserved-ips.png)
 
 1. Create a JSON file named `mysql-asg.json` using the template below:
 
@@ -114,7 +114,7 @@ To download and import the <%= vars.product_short %> tile:
 
 1. Click the newly-added **<%= vars.product_short %>** tile to open its configuration panes.
 
-    ![AZ and Network Assignments pane](config-azs.png)
+    ![AZ and Network Assignments pane](images/config-azs.png)
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
@@ -181,8 +181,7 @@ For each plan that you want to use in your deployment:
 
 1. Select the plan for your desired topology.
 
-    <%= image_tag("plan-types-2-8.png", :alt => "image shows four plan types and inactive.", :width => "300") %>
-
+    <img src="images/plan-types-2-8.png" alt="image shows four plan types and inactive." width="300" />
 
     The tabs below expand to show an example screenshot of each plan:
 
@@ -355,7 +354,7 @@ To configure global settings for all service instances:
 
 1. Click **Settings**.
 
-    <%= image_tag("global-settings.png", :alt => "global-settings.", :width => "300") %>
+    <img src="images/global-settings.png" alt="Global settings." width="300" />
 
 1. Configure the fields as follows:
     <table>
@@ -383,7 +382,7 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**
 
-    <%= image_tag("mysql-config.png", :alt => "mysql-config.", :width => "300") %>
+    <img src="images/mysql-config.png" alt="MySQL configuration." width="300" />
 
 1. Configure the fields as follows:
   <table>
@@ -421,8 +420,8 @@ To configure automated backups:
 
 1. Click **Backups**.
 
-    <%= image_tag("backups.png", :alt => "The radio buttons for backup configuration are
-        Ceph or Amazon S3, SCP, GCS, and Azure.", :width => "200") %>
+    <img src="images/backups.png" alt="The radio buttons for backup configuration are
+        Ceph or Amazon S3, SCP, GCS, and Azure." width="200" />
 
 1. To learn how automated backups work, see [About Automated Backups](backup.html#overview).
 
@@ -449,7 +448,7 @@ To configure the security settings for the MySQL service, do one or both:
 * Enable TLS for the MySQL service. See [Configure TLS](#security-tls) below.
 * Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds) below.
 
-![security](security.png)
+![security](images/security.png)
 
 ####<a id="security-tls"></a> Configure TLS
 
@@ -525,8 +524,8 @@ To enable monitoring and logging in the MySQL service:
 
 1. Click **Monitoring**.
 
-    <%= image_tag("monitoring.png", :alt => "The metrics polling interval defaults to 30
-        and the min is 10.", :width => "300") %>
+    <img src="images/monitoring.png" alt="The metrics polling interval defaults to 30
+        and the min is 10." width="300" />
 
 1. Configure the fields as follows:
   <table>
@@ -565,7 +564,7 @@ To enable RFC 5424 system logging for the MySQL broker and service instance VMs:
 
 1. Click **Yes**.
 
-    <%= image_tag("syslog.png", :alt => "Fields for configuring syslog.", :width => "550") %>
+    <img src="images/syslog.png" alt="Fields for configuring syslog." width="550" />
 
 1. Configure the fields as follows:
   <table>
@@ -609,7 +608,7 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-    <%= image_tag("service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below. ") %>
+    ![Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below. ](images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
   <table>
@@ -672,7 +671,7 @@ To review errands:
 
 1. Click **Errands**.
 
-    <%= image_tag("errands.png", :alt => "Errand list for MySQL for VMware Tanzu.", :width => "250") %>
+    <img src="images/errands.png" alt="Errand list for MySQL for VMware Tanzu." width="250" />
 
 1. Review the settings for the following errands:
   <table>
