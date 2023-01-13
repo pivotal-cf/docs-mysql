@@ -42,6 +42,7 @@ To retrieve the backup encryption key:
     ```
     cf service SERVICE-INSTANCE-NAME --guid
     ```
+
     Record the output.
 
     <p class="note">
@@ -49,6 +50,7 @@ To retrieve the backup encryption key:
       run <code>cf services</code> to see a listing of all service instances in the space.
       The service instances are listed in the name column.
     </p>
+
 1. Record the information needed to log in to the BOSH Director VM by following the procedure in
 [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
 
@@ -87,12 +89,14 @@ To retrieve the backup encryption key:
     <pre class="terminal">$ credhub login \
     	--client-name=credhub \
     	--client-secret=abcdefghijklm123456789</pre>
+
 1. Use the CredHub CLI to retrieve the backup encryption key by running:
 
     ```
     credhub get \
     -n /p-bosh/service-instance_GUID/backup_encryption_key
     ```
+
     For example:
     <pre class="terminal">$ credhub get \
     -n /p-bosh/service-instance_70d30bb6-7f30-441a-a87c-05a5e4afff26/backup_encryption_key</pre>
@@ -134,6 +138,7 @@ To download the backup artifact from an Amazon S3 bucket using the command line 
          manifest > ./manifest.yml</pre>
 
 4. Record the following properties from the deployment manifest:
+
   * `properties.service-backup.destinations[0].config.bucket_name`:
   This is the bucket where the backups are uploaded.
   * `properties.service-backup.destinations[0].config.bucket_path`:
@@ -234,16 +239,19 @@ modify the deployment manifest to scale the instances to one:
           instances: 1    # Scale instances to 1
           ...
         ```
+
   1. Redeploy the deployment manifest by running:
 
         ```
         bosh -e BOSH-ENVIRONMENT -d service-instance_GUID \
          deploy PATH-TO-MANIFEST.yml
         ```
+
         For example:
 
         <pre class="terminal">$ bosh -e my-env -d service-instance_12345678-90ab-cdef-1234-567890abcdef \
           deploy ./manifest.yml</pre>
+
 1. From the <%= vars.ops_manager %> VM, find and record the BOSH instance GUID for your service instance by running :
 
       ```
@@ -344,16 +352,19 @@ To restage your service instance:
           instances: 3    # Scale instances to 3
           ...
         ```
+
   1. From the <%= vars.ops_manager %> VM, redeploy the deployment manifest by running:
 
         ```
         bosh -e BOSH-ENVIRONMENT -d service-instance_GUID  deploy PATH-TO-MANIFEST.yml
         ```
+
         For example:
 
         <pre class="terminal">
         bosh -e my-env -d service-instance_12345678-90ab-cdef-1234-567890abcdef deploy ./manifest.yml
         </pre>
+
 1. If you are restoring a <%= vars.single_leader_plan %> service instance,
     you must re-establish replication:
       1. Create a follower <%= vars.single_leader_plan %> service instance by following the procedure in

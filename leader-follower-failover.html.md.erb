@@ -53,6 +53,7 @@ for stopping the leader and promoting the follower:
     ```
     cf login API-URL
     ```
+
     When prompted, enter your credentials.
 
 1. Target the org and space where the leader-follower service instance is located by running:
@@ -139,6 +140,7 @@ leader VM is in the AZ you want to take offline by running:
     ```
     bosh -d service-instance_GUID run-errand instances
     ```
+
   For example:
   <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
     instances
@@ -192,6 +194,7 @@ To stop the leader VM and promote the follower VM to the new leader:
     ```
     bosh -d service-instance_GUID run-errand make-leader --instance=mysql/INDEX
     ```
+
     Use the index of the follower VM retrieved above. <br>
 
     For example:
@@ -217,6 +220,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
       ```
       bosh update-resurrection off
       ```
+
 1. Retrieve the CID of the failing former leader VM by running:
 
     ```
@@ -226,6 +230,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
       --column=”VM CID” \
       --json
     ```
+
      For example:
      <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 instances \
         --details \
@@ -313,6 +318,7 @@ To restart the former leader VM and configure it as the new follower:
       run-errand configure-leader-follower \
       --instance=mysql/INDEX
     ```
+
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
       run-errand configure-leader-follower \
@@ -324,6 +330,7 @@ To restart the former leader VM and configure it as the new follower:
       bosh -d service-instance_GUID \
           run-errand inspect
       ```
+
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
        run-errand inspect</pre>
@@ -363,6 +370,7 @@ To unbind and rebind your app:
     ```
     cf bind-service APP-NAME  SERVICE-INSTANCE-NAME
     ```
+
 1. Restage the app by running:
 
     ```

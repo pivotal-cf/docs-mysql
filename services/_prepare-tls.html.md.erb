@@ -84,15 +84,15 @@ See [Using TLS](./appdevs.html#using-tls).
 1. A developer enables TLS for an existing service instance.
     See [Using TLS](./using-tls.html).
 1. A developer modifies their app to communicate securely with the <%= product_short %> server:
-	+ **For Java and Spring apps:**
+	* **For Java and Spring apps:**
 	See [Activate TLS for Java and Spring Apps](./using-tls.html#activate-spring).
-	+ **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
+	* **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
 <% elsif vars.product_full.include?("RabbitMQ") %>
 1. A developer enables TLS for an existing service instance.
 		See [Enable TLS for Your Service Instance](./use.html#tls)
 1. A developer modifies their app to communicate securely with the <%= product_short %> server:
-	+ **For Java or Spring apps:** See [Activate TLS for Java and Spring Apps](./use.html#tls-java-spring).
-  + **For all other apps:** See [Modifying Apps for TLS](./modify-apps-tls.html)
+	* **For Java or Spring apps:** See [Activate TLS for Java and Spring Apps](./use.html#tls-java-spring).
+  	* **For all other apps:** See [Modifying Apps for TLS](./modify-apps-tls.html)
 <% end %>
 
 ##<a id='credhub-creds'></a> Find the CredHub Credentials in <%= vars.ops_manager %>
@@ -116,6 +116,7 @@ To find the BOSH CredHub client name and client secret:
 	BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate
 	BOSH_ENVIRONMENT=10.0.0.5 bosh "}
 	```
+
   The `BOSH_CLIENT` is the BOSH CredHub client name and the `BOSH_CLIENT_SECRET` is
 	the BOSH CredHub client secret.
 
@@ -171,6 +172,7 @@ To generate and add the CA Certificate to <%= vars.ops_manager %>:
 	```
 	credhub get --name="/services/tls_ca"
 	```
+
 	If you already have a certificate at the `services/tls_ca` path, skip the next step.
 
 4. Use the CredHub CLI to generate a CA certificate or provide an existing one.
@@ -201,11 +203,11 @@ To generate and add the CA Certificate to <%= vars.ops_manager %>:
 
 5. Record the `certificate` portion from the CA certificate by running:
 
-	 ```
+	```
    credhub get \
 	   --name=/services/tls_ca \
 	   -k ca
-   ```
+    ```
 
 1. Navigate to the <%= vars.ops_manager %> **Installation Dashboard** > **BOSH Director** > **Security**.
 
@@ -224,7 +226,7 @@ For more information, see [Managing ASGs with the cf CLI](https://docs.pivotal.i
 To enable TLS in the <%= product_short %> tile:
 
 1. Enable TLS by doing one of the following:
-	+ **If you are configuring TLS for an existing installation:**
+	* **If you are configuring TLS for an existing installation:**
 <% if vars.product_full.include?("Redis") %>
 Follow the procedure in
 	[Upgrade <%= product_full %>](./upgrade.html#upgrades).
@@ -232,7 +234,7 @@ Follow the procedure in
 Follow the procedure in
 	[Configure Security](./install-config.html#security).
 <% end %>
-	+ **If you are configuring TLS for a new installation:**
+	* **If you are configuring TLS for a new installation:**
 <% if vars.product_full.include?("Redis") %>
 	Follow the procedures in
 	[Configure On-Demand Service Settings](./installing.html#on-demand-config),
@@ -244,8 +246,8 @@ Follow the procedure in
 	<% end %>
 1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **Review Pending Changes**.
 1. Ensure that the CA certificate is deployed to all VMs by selecting:
-	+ <%= vars.app_runtime_full %>
-	+ <%= product_full %>
-	+ The **Upgrade All On-Demand Service Instances** errand
+	* <%= vars.app_runtime_full %>
+	* <%= product_full %>
+	* The **Upgrade All On-Demand Service Instances** errand
 3. Click **Apply Changes**.
 This restarts all the VMs in your deployment and applies your CA certificate.

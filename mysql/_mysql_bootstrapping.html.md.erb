@@ -397,10 +397,10 @@ For each node, record if the `monit stop` command was successful:
     ```
 
 1. Record if the monit command succeeds or exits with an error:
-    + **If monit succeeds in stopping `galera-init`,** then you can use monit to restart this node.
+    * **If monit succeeds in stopping `galera-init`,** then you can use monit to restart this node.
      Follow all the steps below including the steps marked **Monit Restart**
      but omitting the steps marked **Manual Redeploy**.<br><br>
-    + **If monit exits with the following error,** then you must manually deploy this node:
+    * **If monit exits with the following error,** then you must manually deploy this node:
 
         <pre class="terminal">
         Warning: include files not found '/var/vcap/monit/job/*.monitrc'
@@ -443,6 +443,7 @@ For each node in the cluster, to find its `seqno`:
             ```
             /var/vcap/packages/pxc/bin/mysqld --defaults-file=/var/vcap/jobs/pxc-mysql/config/my.cnf --wsrep-recover
             ```
+
        1. Scan the end of the error log `mysql.err.log` for the recovered `seqno`.
        It appears after the group ID (a UUID) and a colon.
        For example, in the following output the recovered `seqno` is `15026`:
@@ -662,6 +663,7 @@ then restart the nodes as follows:
     ```
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml
     ```
+
     You only need to run this command once to deploy both the nodes that you unignored in the step above.
 
 1. With your redeploys completed, turn the BOSH Resurrector back on by running:

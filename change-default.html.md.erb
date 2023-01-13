@@ -42,13 +42,15 @@ updating an existing service instance.
 To set optional parameters:
 
 1. Do one of the following:
-    +  **If you want to create a new service instance,** run:
+
+    *  **If you want to create a new service instance,** run:
 
           ```
         cf create-service p.mysql PLAN SERVICE-INSTANCE \
           -c '{ "PARAMETER": "PARAMETER-VALUE"}'
           ```
-    +  <strong>If you want to update an existing service instance,</strong> run:
+
+    *  <strong>If you want to update an existing service instance,</strong> run:
 
           ```
         cf update-service p.mysql PLAN SERVICE-INSTANCE \

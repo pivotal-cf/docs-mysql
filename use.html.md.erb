@@ -91,6 +91,7 @@ To confirm that a <%= vars.product_short %> instance is running in the space:
     ```
     cf services
     ```
+
 1. Any `p.mysql` listings in the `service` column are service instances of <%= vars.product_short %> in the space.
 <br><br>
 For example:
@@ -187,6 +188,7 @@ To push and bind an app to a <%= vars.product_short %> instance run the followin
     ```
     cf restart APP
     ```
+
     Where `APP` is the app you want to use the MySQL service instance.
 
 ## <a id="call"></a>Use the MySQL Service in Your App
@@ -228,6 +230,7 @@ see [MySQL Environment Variables](#vcap) below.
     ```
     cf restart APP
     ```
+
     Where `APP` is the app you want to use the custom schema.
 
 ###<a id="vcap"></a>MySQL Environment Variables
@@ -289,15 +292,15 @@ your app to apply the changes to `VCAP_SERVICES`.
 
 You can manage service instances in the following ways:
 
-+ Migrate your data to a different plan. See [Migrate Data to a Different Plan](#migrate) below.
-+ Upgrade service instance individually to the latest version of <%= vars.product_short %>.
+* Migrate your data to a different plan. See [Migrate Data to a Different Plan](#migrate) below.
+* Upgrade service instance individually to the latest version of <%= vars.product_short %>.
 See [Upgrade an Individual Service Instance](#single) below.
-+ Change the default parameters for an existing service instance.
+* Change the default parameters for an existing service instance.
 See [Change Default Parameters on an Existing Service Instance](./change-default.html# updating).
-+ Share service instances between orgs and spaces. See [Share Service Instances](#share) below.
-+ Remove access to a service from an app that no longer needs it.
+* Share service instances between orgs and spaces. See [Share Service Instances](#share) below.
+* Remove access to a service from an app that no longer needs it.
 See [Unbind an App from a Service Instance](#unbind) below.
-+ Delete a service instance that is not used. See [Delete a Service Instance](#delete) below.
+* Delete a service instance that is not used. See [Delete a Service Instance](#delete) below.
 
 ### <a id="migrate"></a> Migrate Data to a Different Plan
 
@@ -392,8 +395,8 @@ To share a service instance:
     ```
 
     Where:
-    + `SOURCE-ORG` is the source org for your service instance.
-    + `SOURCE-SPACE` is the source space for your service instance.
+    * `SOURCE-ORG` is the source org for your service instance.
+    * `SOURCE-SPACE` is the source space for your service instance.
 
 2. Share your service instance to the destination org and space by running:
 
@@ -402,9 +405,9 @@ To share a service instance:
     ```
 
     Where:
-    + `SERVICE-INSTANCE` is the service instance you want to share.
-    + `DESTINATION-ORG` is the destination org for the service instance.
-    + `DESTINATION-SPACE` is the destination space for the service instance.
+    * `SERVICE-INSTANCE` is the service instance you want to share.
+    * `DESTINATION-ORG` is the destination org for the service instance.
+    * `DESTINATION-SPACE` is the destination space for the service instance.
 1. Target the destination org and space by running:
 
     ```
@@ -428,9 +431,11 @@ If you want stop an app from using a service you must unbind the app from the se
     ```
     cf unbind-service APP SERVICE-INSTANCE
     ```
+
     Where:
-    - `APP` is the app you want to stop using the MySQL service instance.
-    - `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
+
+    * `APP` is the app you want to stop using the MySQL service instance.
+    * `SERVICE-INSTANCE` is the name you supplied when you ran `cf create-service`.
 
     For example:
 

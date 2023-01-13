@@ -208,6 +208,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     cf login PRIMARY-API-URL
     ```
+
 1. Update your primary service instance with the host-info service key by running:
 
     ```
@@ -241,7 +242,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -277,7 +278,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     <p class="note"><strong>Note:</strong> The <code>-c </code> flag is different than the one in step 1.
     </p>
 
-1. View the `replication-credentials` for your credentials service key by running:
+2. View the `replication-credentials` for your credentials service key by running:
 
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY-NAME
@@ -310,13 +311,14 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
         }
       }</pre>
 
-1. Record the output of the above command.
-1. Log in to the deployment for your secondary foundation by running:
+3. Record the output of the above command.
+4. Log in to the deployment for your secondary foundation by running:
 
     ```
     cf login SECONDARY-API-URL
     ```
-1. Update your secondary service instance with the credentials service key by running:
+
+5. Update your secondary service instance with the credentials service key by running:
 
     ```
     cf update-service SECONDARY-INSTANCE -c CREDENTIALS
@@ -367,6 +369,7 @@ To bind an app to a leader-follower service instance:
     ```
     cf login PRIMARY-API-URL
     ```
+
 1. Bind your app to your primary service instance by doing the procedure in
 [Bind a Service Instance to Your App](./use.html#bind).
 

@@ -63,6 +63,7 @@ To check the expiration date:
     credhub get -n /services/tls_ca -j | jq -r .value.ca \
      | openssl x509 -text -noout | grep -A 2 "Validity"
     ```
+
     For example:
     <pre class="terminal">
     Validity
@@ -144,6 +145,7 @@ To add your new and current Services TLS CA certificate to <%= vars.ops_manager 
     ```
     credhub get --name=/services/new_ca -k ca
     ```
+
 1. In <%= vars.ops_manager %>, paste both certificates into the **BOSH Director > Security > Trusted Certificates** field.
 1. Click **Save**.
 1. In the <%= vars.app_runtime_abbr %> and Pivotal Isolation Segment tiles, paste both certificates into the **Networking** > <%= vars.ca_trust_gorouter_haproxy_fields %>.
@@ -165,6 +167,7 @@ To apply these changes:
     ```
     credhub curl -p /api/v1/certificates?name=%2Fservices%2Ftls_ca
     ```
+
 1. From the returned list, identify which on-demand service tiles use TLS in your deployment, such as <%= vars.on_demand_service_tiles %>.
 1. For each on-demand service tile that uses TLS:
     1. Expand the errands.

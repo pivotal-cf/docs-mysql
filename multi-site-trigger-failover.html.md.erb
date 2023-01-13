@@ -124,6 +124,7 @@ To promote the follower service instance to leader:
     cf update-service SECONDARY-INSTANCE \
     -c '{"initiate-failover":"promote-follower-to-leader"}'
     ```
+
     For example:
     <pre class="terminal">$ cf update-service secondary-node \
       -c '{"initiate-failover":"promote-follower-to-leader"}'<br>
@@ -500,6 +501,7 @@ To reconfigure replication for the service instances:
     ```
     cf login PRIMARY-API-URL
     ```
+
 1. Update the follower service instance in the primary foundation with the credentials service key by running:
 
     ```
@@ -541,7 +543,7 @@ To reconfigure replication for the service instances:
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
-    + If your follower service instance is more than 3 days behind leader,
+    * If your follower service instance is more than 3 days behind leader,
     you get error message similar to  the following:
       <pre class=terminal>$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
@@ -550,7 +552,7 @@ To reconfigure replication for the service instances:
       Leader GTIDs offering: "487e6056-6e93-11ea-8c96-42010a010806:5-9"
       Follower GTIDs missed: "487e6056-6e93-11ea-8c96-42010a010806:1-9"
       Try again with an empty instance or contact your operator to troubleshoot</pre>
-    + If your follower has a divergent dataset from the leader,
+    * If your follower has a divergent dataset from the leader,
     you get error message similar to the following:
       <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...

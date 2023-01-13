@@ -129,6 +129,7 @@ To find the BOSH CredHub client name and client secret:
 	BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate
 	BOSH_ENVIRONMENT=10.0.0.5 bosh "}
 	```
+
   The `BOSH_CLIENT` is the BOSH CredHub client name and the `BOSH_CLIENT_SECRET` is
 	the BOSH CredHub client secret.
 
@@ -209,11 +210,11 @@ To add the CA Certificate to <%= vars.ops_manager %>:
 
 6. Record the CA certificate by running:
 
-	 ```
+	```
    credhub get \
 	   --name=/services/tls_ca \
 	   -k ca
-   ```
+    ```
 
 7. Navigate to the <%= vars.ops_manager %> **Installation Dashboard** > **BOSH Director** > **Security**.
 
