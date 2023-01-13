@@ -50,20 +50,20 @@ see
 
 The <%= vars.single_leader_plan %> plan has the following benefits:
 
-+ **Resilience for Service Instances:** Developers can trigger a failover
+* **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
 see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
 
-+ **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
+* **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
 
-+ **Support for Multiple Cloud Deployment Models:**
+* **Support for Multiple Cloud Deployment Models:**
 Operators can configure <%= vars.single_leader_plan_lc %> with a
 single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
-+ **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
+* **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
 For more information, see [About Active-Passive Topology](#active-passive)
 and [About App-Layer Active-Active Topology](#active-active) below.
 
@@ -88,9 +88,9 @@ The following diagram describes the active-passive topology in a healthy state:
 
 In the above diagram:
 
-+ The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
+* The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
   This app issues transactions to the leader service instance.
-+ The follower service instance in the secondary foundation continuously
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
 ##<a id='active-active'></a> About App-Layer Active-Active Topology
@@ -112,7 +112,7 @@ The following diagram describes the app-layer active-active topology in a health
 
 In the above diagram:
 
-+ The GLB directs traffic to the apps in the primary and
+* The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance. <br><br>
   The app in the secondary foundation issues transactions to the leader as below:
@@ -120,7 +120,7 @@ In the above diagram:
       1. Issues transactions to the follower service instance
       1. Forwards the transactions from the follower service instance to the leader
 
-+ The follower service instance in the secondary foundation continuously
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note"><strong>Note:</strong>
@@ -191,9 +191,9 @@ for a <%= vars.single_leader_plan_lc %> topology:
 
 In the above diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation does not replicate data to another
+* The leader service instance in the secondary foundation does not replicate data to another
 service instance.
 
 ###<a id=active-passive-switchover></a> About Active-Passive Switchover
@@ -211,9 +211,9 @@ in an active-passive topology:
 
 In the above diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation replicates data to the follower service
+* The leader service instance in the secondary foundation replicates data to the follower service
 instance in the primary foundation.
 
 ###<a id=active-active-switchover></a> About App-Layer Active-Active Switchover
@@ -231,7 +231,7 @@ in an active-active topology:
 
 In the above diagram:
 
-+ The GLB directs traffic to the apps in the primary and
+* The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance
   in the secondary foundation. <br><br>
@@ -240,7 +240,7 @@ In the above diagram:
       1. Issues transactions to the follower service instance
       1. Forwards the transactions from the follower service instance to the leader
 
-+ The follower service instance in the primary foundation continuously
+* The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
 ##<a id='infrastructure'></a> Infrastructure Requirements for <%= vars.single_leader_plan %>
@@ -271,6 +271,6 @@ see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#
 
 The <%= vars.single_leader_plan %> plan has the following limitation:
 
-+ **Synchronous replication is not supported:**
+* **Synchronous replication is not supported:**
 For <%= vars.single_leader_plan %> plans, any data that is written to the leader
 is asynchronously replicated to the follower.

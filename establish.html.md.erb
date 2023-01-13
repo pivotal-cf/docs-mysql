@@ -13,15 +13,15 @@ This topic provides instructions for developers for establishing a connection to
 If you want to connect to a MySQL service instance from outside the <%= vars.app_runtime_full %>
 deployment where your <%= vars.product_short %> service instance is located, you can do one of the following:
 
-+ [Connect Using an SSH Tunnel](#ssh-tunnel)
-+ [Connect Using an IP Address](#ip-address)
+* [Connect Using an SSH Tunnel](#ssh-tunnel)
+* [Connect Using an IP Address](#ip-address)
 
 You may want to use an SSH tunnel or IP address for establishing a connection in the following cases:
 
-+ Connecting from a local workstation. For more information, see [<%= vars.product_short %> Tools](./tools.html).
-+ Connecting from outside where your <%= vars.product_short %> service instance is located.
-+ Connecting from a legacy app that is not in your <%= vars.app_runtime_abbr %> deployment.
-+ Taking a manual backup to be stored locally.
+* Connecting from a local workstation. For more information, see [<%= vars.product_short %> Tools](./tools.html).
+* Connecting from outside where your <%= vars.product_short %> service instance is located.
+* Connecting from a legacy app that is not in your <%= vars.app_runtime_abbr %> deployment.
+* Taking a manual backup to be stored locally.
   For more information, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
 ## <a id='ssh-tunnel'></a> Connect Using an SSH Tunnel
@@ -45,13 +45,11 @@ You can also connect remotely to the MySQL service instance by directly using it
 
 You can obtain the IP address using one the following methods:
 
-+  Using cf SSH. For more information, see
+*  Using cf SSH. For more information, see
 [Obtain the IP Address Using cf SSH](#ip-address-cf-ssh).
-
-+  Using the DNS Lookup app. For more information, see
+*  Using the DNS Lookup app. For more information, see
 [Obtain the IP Address Using the DNS Lookup App](#ip-address-lookup).
-
-+  Using the BOSH CLI. For more information, see
+*  Using the BOSH CLI. For more information, see
 [Obtain the IP Address Using the BOSH CLI](#ip-address-bosh).
 
 <p class="note"><strong>Note:</strong> By connecting to the MySQL service instance directly using its
@@ -67,10 +65,9 @@ cf SSH.
 
 To obtain the IP address using cf SSH, you must have the following:
 
-+ SSH access to app containers. For more information, see
+* SSH access to app containers. For more information, see
 [Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
-
-+ An app deployed on the same deployment as the MySQL service instance.
+* An app deployed on the same deployment as the MySQL service instance.
 
 #### Procedure
 

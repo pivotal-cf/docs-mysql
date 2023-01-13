@@ -85,9 +85,9 @@ follow this workflow to enable TLS for <%= product_full %>:
 1. An operator enables TLS in the tile configuration while installing <%= product_short %>.
 			See [Enable TLS in <%= product_short %>](#enable) below.
 1. A developer modifies their app to communicate securely with the <%= product_short %> server:
-	+ **For Java and Spring apps:**
+	* **For Java and Spring apps:**
 	See [Activate TLS for Java and Spring Apps](./using-tls.html#activate-spring).
-	+ **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
+	* **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
 
 ###<a id='workflow-bring-your-own'></a> If Providing Your Own CA Certificate
 
@@ -102,9 +102,9 @@ generates, follow this workflow to enable TLS for <%= product_full %>:
 1. An operator enables TLS in the tile configuration while installing <%= product_short %>.
 			See [Enable TLS in <%= product_short %>](#enable) below.
 1. A developer modifies their app to communicate securely with the <%= product_short %> server:
-	+ **For Java and Spring apps:**
+	* **For Java and Spring apps:**
 	See [Activate TLS for Java and Spring Apps](./using-tls.html#activate-spring).
-	+ **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
+	* **For all other apps:** See [Activate TLS for Non-Spring Apps](./using-tls.html#activate-non-spring).
 
 ##<a id='credhub-creds'></a> Find the CredHub Credentials in <%= vars.ops_manager %>
 
@@ -228,17 +228,19 @@ To add the CA Certificate to <%= vars.ops_manager %>:
 To enable TLS in the <%= product_short %> tile:
 
 1. Enable TLS by doing one of the following:
-	+ **If you are configuring TLS for an existing installation:**
+
+	* **If you are configuring TLS for an existing installation:**
 Follow the procedure in
 	[Configure Security](./install-config.html#security).
-	+ **If you are configuring TLS for a new installation:**
+	* **If you are configuring TLS for a new installation:**
 	Follow the procedures in
 	[Installing and Configuring <%= product_short %>](./install-config.html),
 	including enabling TLS in the [Configure Security](./install-config.html#security) section.
 1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **Review Pending Changes**.
 1. Ensure that the CA certificate is deployed to all VMs by selecting:
-	+ <%= vars.app_runtime_full %>
-	+ <%= product_full %>
-	+ The **Upgrade All On-Demand Service Instances** errand
+
+	* <%= vars.app_runtime_full %>
+	* <%= product_full %>
+	* The **Upgrade All On-Demand Service Instances** errand
 3. Click **Apply Changes**.
 This restarts all the VMs in your deployment and applies your CA certificate.

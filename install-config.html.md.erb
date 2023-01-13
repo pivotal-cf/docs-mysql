@@ -25,10 +25,10 @@ For more information about roles in <%= vars.ops_manager %>, see
 
 Before you install the <%= vars.product_short %> tile, you must:
 
-+ [Create an App Security Group for <%= vars.product_short %>](#asg).
-+ [Enable the BOSH Resurrector](#resurrector).
-+ [(Optional) Preparing for TLS](./prepare-tls.html). Only required if you want to enable TLS.
-+ [(Optional) Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
+* [Create an App Security Group for <%= vars.product_short %>](#asg).
+* [Enable the BOSH Resurrector](#resurrector).
+* [(Optional) Preparing for TLS](./prepare-tls.html). Only required if you want to enable TLS.
+* [(Optional) Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
 want to replicate data across multiple foundations or data centers.
 
 ### <a id="asg"></a> Create an App Security Group for <%= vars.product_short %>
@@ -486,21 +486,25 @@ To store your service instance credentials in runtime CredHub:
         ```
         cf unbind-service APP SERVICE-INSTANCE
         ```
+
     1. Rebind the service instance to the app by running:
 
         ```
         cf bind-service PP SERVICE-INSTANCE
         ```
+
     1. Restart the app to apply the new binding by running:
 
         ```
         cf restart APP
         ```
+
     1. Verify that the binding includes CredHub pointers in the `VCAP_SERVICES` environment variable by running:
 
         ```
         cf env APP
         ```
+
         For example:
         <pre class="terminal">$ cf env my-app
         Getting env variables for app my-app in org system / space example as admin...

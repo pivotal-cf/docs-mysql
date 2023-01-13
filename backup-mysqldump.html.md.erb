@@ -17,10 +17,10 @@ While the backup is running, operations against the database are stalled.
 
 You might want to create a logical backup in the following use cases:
 
-+ Migrating a <%= vars.product_short %> database to an off-platform database.
-+ Backing up specific individual <%= vars.product_short %> databases.
-+ Editing table definitions or insert statements before restoring the <%= vars.product_short %> database.
-+ Migrating an off-platform database with encryption at rest or the Percona PAM Authentication plugin
+* Migrating a <%= vars.product_short %> database to an off-platform database.
+* Backing up specific individual <%= vars.product_short %> databases.
+* Editing table definitions or insert statements before restoring the <%= vars.product_short %> database.
+* Migrating an off-platform database with encryption at rest or the Percona PAM Authentication plugin
 enabled to a <%= vars.product_short %> database.
 See [Restore from an Off-Platform Logical Backup](#external).
 
@@ -84,6 +84,7 @@ see [Establish a Connection to a Service Instance from Outside Your Deployment](
     </pre>
 
 1. Do not back up the following databases:
+
     * `cf_metadata`
     * `information_schema`
     * `mysql`
@@ -170,6 +171,7 @@ your backup artifact.
     ```
     cf service SERVICE-INSTANCE-NAME --guid
     ```
+
     Record the output.
 
 1. Copy the backup artifact to the service instance by running:

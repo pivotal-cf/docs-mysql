@@ -21,13 +21,11 @@ You might want to trigger a failover in the following scenarios:
 
 You can also use the following metrics to determine if you need to trigger a failover:
 
-+ `/p.mysql/available`: This metric monitors whether the MySQL server is currently available.
+* `/p.mysql/available`: This metric monitors whether the MySQL server is currently available.
 For more information, see [Server Availability](./monitor.html#server-heartbeat).
-
 * `/p.mysql/follower/seconds_behind_master`: This metric monitors how far behind the follower is
     in applying writes from the leader. For more information, see [Leader-Follower Metrics](./monitor.html#l-f-metrics).
-
-+ `/p.mysql/follower/seconds_since_leader_heartbeat`: This metric monitors the number of seconds that
+* `/p.mysql/follower/seconds_since_leader_heartbeat`: This metric monitors the number of seconds that
 elapse between the leader heartbeat and the replication of the heartbeat in the follower.
  For more information, see [Leader-Follower Metrics](./monitor.html#l-f-metrics).
 

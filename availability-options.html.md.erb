@@ -12,18 +12,18 @@ availability each provides.
 
 The topologies offered by <%= vars.product_short %> are:
 
-+ **Single node:** This one-VM topology is inexpensive and good for testing.
+* **Single node:** This one-VM topology is inexpensive and good for testing.
 You can use this topology for apps where high availability is not important.
 
-+ **Leader-follower:** This two-VM topology gives you redundancy through failover of the leader VM
+* **Leader-follower:** This two-VM topology gives you redundancy through failover of the leader VM
   to the follower VM.
   For more information, see [About Leader-Follower](./about-leader-follower.html).
 
-+ **Highly available (HA) cluster:** This three-VM plus jumpbox cluster uses a patched Galera cluster,
+* **Highly available (HA) cluster:** This three-VM plus jumpbox cluster uses a patched Galera cluster,
 Percona XtraDB Cluster (PXC), to provide the greatest availability of the topologies.
 For more information, see [About Highly Available Clusters](./about-ha.html).
 
-+ **<%= vars.single_leader_plan %>:** This two-VM topology enables you to provision a leader
+* **<%= vars.single_leader_plan %>:** This two-VM topology enables you to provision a leader
 and follower VM in two different foundations. For more information,
 see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 
@@ -161,9 +161,8 @@ This table compares the recovery time objectives for the topologies.
 When choosing a topology, risk is a factor to consider.
 Risk, in this case, encompasses the likelihood of:
 
-+ Operators being interrupted to perform disaster recovery
-
-+ Encountering issues because of the complexity of the topology and technology
+* Operators being interrupted to perform disaster recovery
+* Encountering issues because of the complexity of the topology and technology
 
 Single node topology has the lowest risk.
 Highly available clusters have the highest risk.

@@ -97,10 +97,10 @@ For information about cron expressions, see
 
 To configure automated backups, follow the procedure for your external storage solution:
 
-+ [Back up Using SCP](#scp)
-+ [Back up to Amazon S3 or Ceph](#ceph-or-s3)
-+ [Back up to GCS](#gcs)
-+ [Back up to Azure Storage](#azure)
+* [Back up Using SCP](#scp)
+* [Back up to Amazon S3 or Ceph](#ceph-or-s3)
+* [Back up to GCS](#gcs)
+* [Back up to Azure Storage](#azure)
 
 ## <a id="scp"></a> Back up Using SCP
 
@@ -114,8 +114,8 @@ The operator provisions the backup machine separately from their installation.
 
 To back up your database using SCP:
 
-+ [Create a Public and Private Key Pair](#scp-keys)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-scp)
+* [Create a Public and Private Key Pair](#scp-keys)
+* [Configure Backups in <%= vars.ops_manager %>](#configure-scp)
 
 ### <a id="scp-keys"></a> Create a Public and Private Key&#8209;Pair
 
@@ -244,9 +244,9 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to backup usi
 When you configure automatic backups for Amazon S3 or Ceph,
 <%= vars.product_short %> runs an Amazon S3 client that saves the backups to one of the following:
 
-+ an Amazon S3 bucket
-+ a Ceph storage cluster
-+ another S3-compatible endpoint certified by VMware
+* an Amazon S3 bucket
+* a Ceph storage cluster
+* another S3-compatible endpoint certified by VMware
 
 For information about Amazon S3 buckets,
 see the [Amazon documentation](https://aws.amazon.com/documentation/s3/).
@@ -255,8 +255,8 @@ see the [Ceph documentation](http://docs.ceph.com/en/latest/).
 
 To back up your database to Amazon S3 or Ceph:
 
-+ [Create a Custom Policy and Access Key](#access-key-aws)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-aws)
+* [Create a Custom Policy and Access Key](#access-key-aws)
+* [Configure Backups in <%= vars.ops_manager %>](#configure-aws)
 
 ### <a id="access-key-aws"></a> Create a Custom Policy and Access Key
 
@@ -427,8 +427,8 @@ When you configure automatic backups for a Google Cloud Storage (GCS) bucket,
 
 To back up your database to Google Cloud Storage (GCS):
 
-+ [Create a Service Account and Private Key](#service-account-gcs)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-gcs)
+* [Create a Service Account and Private Key](#service-account-gcs)
+* [Configure Backups in <%= vars.ops_manager %>](#configure-gcs)
 
 ### <a id="service-account-gcs"></a> Create a Service Account and Private Key
 
@@ -537,8 +537,8 @@ see the [Azure documentation](https://docs.microsoft.com/en-us/azure/storage/).
 
 To back up your database to Azure Storage:
 
-+ [Create a Storage Account and Access Key](#storage-account-azure)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-azure)
+* [Create a Storage Account and Access Key](#storage-account-azure)
+* [Configure Backups in <%= vars.ops_manager %>](#configure-azure)
 
 ### <a id="storage-account-azure"></a> Create a Storage Account and Access Key
 

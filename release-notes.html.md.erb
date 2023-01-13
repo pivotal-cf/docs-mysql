@@ -21,13 +21,13 @@ before upgrading to the latest v2.8.x version.
 
 New features and changes in this release:
 
-+ **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available
+* **Multi-Site Replication GA:** The Multi-Site Replication feature is officially generally available
   in this release. There have been no changes to the feature since v2.8.3.
-+ **Removed global service instance quota limit:** Previously, operators could not set the maximum service 
+* **Removed global service instance quota limit:** Previously, operators could not set the maximum service
   instances quota higher than 500 service instances. This upper limit has been removed.
-+ **Percona Server:** Upgraded to v5.7.31-34
-+ **Percona XtraDB Cluster:** Upgraded to v5.7.31-34
-  + This Percona XtraDB Cluster version contains a patch for a remote code execution vulnerability, CVE-2020-15180.
+* **Percona Server:** Upgraded to v5.7.31-34
+* **Percona XtraDB Cluster:** Upgraded to v5.7.31-34
+  * This Percona XtraDB Cluster version contains a patch for a remote code execution vulnerability, CVE-2020-15180.
     For more information, see [Percona's blog post](https://www.percona.com/blog/2020/10/30/cve-2020-15180-affects-percona-xtradb-cluster/).
 
 ### Known Issues
@@ -66,7 +66,7 @@ The following components are compatible with this release:
 ### Resolved Issues
 This release has the following fixes:
 
-+ **Uppercase letters in the Service Network no longer prevents configuration of Multi-Site Replication:**
+* **Uppercase letters in the Service Network no longer prevents configuration of Multi-Site Replication:**
   Previously, if you had configured the Services Network name with upper case letters in your environment,
 multi-site replication could not be configured successfully.
 
@@ -107,8 +107,8 @@ The following components are compatible with this release:
 
 New features and changes in this release:
 
-+ **Percona Server:** Upgraded to v5.7.30-33
-+ **Percona XtraDB Cluster:** Upgraded to v5.7.30-31.43
+* **Percona Server:** Upgraded to v5.7.30-33
+* **Percona XtraDB Cluster:** Upgraded to v5.7.30-31.43
 
 ### Known Issues
 
@@ -147,10 +147,10 @@ The following components are compatible with this release:
 ### Features
 New features and changes in this release:
 
-+ **Filenames for backup artifacts include an instance UUID:**
+* **Filenames for backup artifacts include an instance UUID:**
 Operators can use this UUID to differentiate between the leader and follower backup artifacts.
 
-+ **Developers can enable lowercase table names when they update service instances:**
+* **Developers can enable lowercase table names when they update service instances:**
 If an operator selects **Allow Developers To Override Lower Case Table Names** in the tile,
 developers can enable and disable the `lower_case_table_names` property when they update a service instance.
 Previously, they could only enable this feature when they created a service instance.
@@ -158,17 +158,17 @@ Previously, they could only enable this feature when they created a service inst
 ### Resolved Issues
 This release has the following fixes:
 
-+ **Smoke tests no longer fail with a timeout:**
+* **Smoke tests no longer fail with a timeout:**
   Previously, if you had many buildpacks in your environment, smoke tests sometimes failed.
 
-+ **Enable Lower Case Table Names no longer
+* **Enable Lower Case Table Names no longer
 enables the feature on existing service instances:**
 Previously, if a developer selected **Enable Lower Case Table Names** in the tile,
 existing tables with uppercase names were orphaned.
 Now, if the feature is enabled in the tile,
 **Enable Lower Case Table Names** is only applied to new service instances.
 
-+ **Leader-follower backups are no longer overwritten:**
+* **Leader-follower backups are no longer overwritten:**
 Previously, <%= vars.product_short %> sometimes only stored one backup file from a random node.
 Now, <%= vars.product_short %> uploads both the leader and follower backup artifacts to the blobstore.
 
@@ -213,61 +213,56 @@ The following components are compatible with this release:
 New features and changes in this release:
 
 #### <%= vars.single_leader_plan %>
-+ **Open beta for <%= vars.single_leader_plan %> plans:**
+
+* **Open beta for <%= vars.single_leader_plan %> plans:**
 Developers can configure a follower service instance for <%= vars.single_leader_plan_lc %> across foundations.
 For more information,
 see [Using <%= vars.product_short %> for Multi-Site Replication](./use-multi-site.html).
-+ **Backup and restore <%= vars.single_leader_plan %> service instances:**
+* **Backup and restore <%= vars.single_leader_plan %> service instances:**
 Operators can configure automated backups for <%= vars.single_leader_plan %> service instances.
 Operators can also use the `mysql-restore` utility to restore
 a <%= vars.single_leader_plan %> instance from a backup.
 For more information,
 see [Backing up <%= vars.product_short %>](./backup.html) and [Restoring <%= vars.product_short %>](./restore.html).
 
-+ **<%= vars.single_leader_plan %> metrics:** You can view metrics for <%= vars.single_leader_plan %>
+* **<%= vars.single_leader_plan %> metrics:** You can view metrics for <%= vars.single_leader_plan %>
 service instances in realtime using `cf tail`.
 
 #### Additional New Features
 
 <%= partial '/services/you-can-upgrade-one-si' %>
 
-+ **Telemetry data:** <%= vars.product_short %> sends Telemetry data when the Telemetry tile is enabled in your foundation.
+* **Telemetry data:** <%= vars.product_short %> sends Telemetry data when the Telemetry tile is enabled in your foundation.
   For more information about the Telemetry tile,
   see [Telemetry for Ops Manager](https://docs.pivotal.io/pivotal-telemetry/).
-
-+ Operators can run the `recreate-all-service-instances` errand to re-create service instance VMs.
+* Operators can run the `recreate-all-service-instances` errand to re-create service instance VMs.
 
 #### Feature Improvements
-+ **Improved certificate rotation workflow:** <%= vars.product_short %> is compatible with the
+* **Improved certificate rotation workflow:** <%= vars.product_short %> is compatible with the
 <%= vars.ops_manager %> CredHub Maestro certificate rotation feature.
 Operators can enable this feature in <%= vars.ops_manager %> v2.8 and later.
 For more information,
 see [CredHub Maestro Rotates BOSH DNS Certificate Authorities](https://docs.pivotal.io/platform/2-8/release-notes/opsmanager-rn.html#maestro-rotate-ca).
-
-+ **Change Highly Available (HA) cluster server defaults:** Developers can set optional parameters
+* **Change Highly Available (HA) cluster server defaults:** Developers can set optional parameters
 to change MySQL server defaults for HA cluster plans. For instructions for
 changing server defaults, see [Changing Defaults Using Arbitrary Parameters](./change-default.html).
-
-+ **Restore HA Clusters with mysql-restore Utility:** Operators can use the `mysql-restore`
+* **Restore HA Clusters with mysql-restore Utility:** Operators can use the `mysql-restore`
 utility to restore an HA cluster from a backup.
 For more information about the `mysql-restore` utility,
 see [Restore the Service Instance](./restore.html#restore-instance).
-
-+ An error message appears when developers bind apps to custom schemas with invalid names.
+* An error message appears when developers bind apps to custom schemas with invalid names.
 The error message shows the valid characters for custom schema names.
-
-+ Apps no longer timeout when connecting to service instances because of latencies
+* Apps no longer timeout when connecting to service instances because of latencies
 in BOSH DNS hostname resolution. This issue has been resolved for app and service key
 bindings to service instances of all plan types.
 
 <%= partial "/services/feature-ops-manager-syslog" %>
 
-
 ### Security Fix
 
 This release includes the following security update:
 
-+ Expired and unused certificates for HA clusters no longer
+* Expired and unused certificates for HA clusters no longer
 are stored on HA cluster service instances.
 
 ### Known Issues
