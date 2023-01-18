@@ -98,7 +98,9 @@ To back up your <%= vars.product_short %> data manually:
 1. For each remaining database, back up by running:
 
     ```
-    mysqldump --set-gtid-purged=off --single-transaction \
+    mysqldump --set-gtid-purged=off \
+    --no-tablespaces \
+    --single-transaction \
     --user=USERNAME --password=PASSWORD \
     --host=MYSQL-IP \
     --databases DB-NAME > BACKUP-FILE
@@ -116,7 +118,9 @@ To back up your <%= vars.product_short %> data manually:
 
     For example:
     <pre class="terminal">
-    $ mysqldump --set-gtid-purged=off --single-transaction \
+    $ mysqldump --set-gtid-purged=off \
+    --no-tablespaces \
+    --single-transaction \
     --user=abcdefghijklm --password=123456789 \
     --host=10.10.10.5 \
     --databases canary\_db > canary\_db.sql
