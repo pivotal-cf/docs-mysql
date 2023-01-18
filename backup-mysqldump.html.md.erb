@@ -72,6 +72,7 @@ To back up your <%= vars.product_short %> data manually:
 
     <pre><code>mysql --user=USERNAME --password=PASSWORD \
     --host=MYSQL-IP \
+    --port=MYSQL-PORT \
     --silent --execute='show databases'</code></pre>
 
     Where:
@@ -79,6 +80,7 @@ To back up your <%= vars.product_short %> data manually:
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address. This value is `0` if you are connecting using an SSH tunnel.
+    * `MYSQL-PORT` is the MySQL Port. This value is `3306` if you are connecting to the database directly.
 
     For example:
     <pre class="terminal">
@@ -103,6 +105,7 @@ To back up your <%= vars.product_short %> data manually:
     --single-transaction \
     --user=USERNAME --password=PASSWORD \
     --host=MYSQL-IP \
+    --port=MYSQL-PORT \
     --databases DB-NAME > BACKUP-FILE
     ```
 
@@ -111,6 +114,7 @@ To back up your <%= vars.product_short %> data manually:
     * `USERNAME` is the username retrieved from the output of `cf service-key`.
     * `PASSWORD` is the password retrieved from the output of `cf service-key`.
     * `MYSQL-IP` is the MySQL IP address.
+    * `MYSQL-PORT` is the MySQL Port.
     * `DB-NAME` is the name of the database.
     * `BACKUP-FILE` is a name you create for the backup file. Use a different filename for each backup.
 
@@ -123,6 +127,7 @@ To back up your <%= vars.product_short %> data manually:
     --single-transaction \
     --user=abcdefghijklm --password=123456789 \
     --host=10.10.10.5 \
+    --port=3306 \
     --databases canary\_db > canary\_db.sql
     </pre>
 
