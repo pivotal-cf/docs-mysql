@@ -354,6 +354,11 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
 You should now have a <%= vars.single_leader_plan %> leader-follower
 service instance that is fully configured and has replication enabled.
 
+### <a id='bind'></a>Upgrade a <%= vars.single_leader_plan %> Leader-Follower Service
+
+It is important to upgrade the <%= vars.single_leader_plan %> Leader-Follower Service in a specific order ie Follower
+first then Leader. This is to ensure that any incompatibilites between different <%= vars.product_short %> versions are handled correctly.
+
 ### <a id='bind'></a>Bind a <%= vars.single_leader_plan %> Leader-Follower Service Instance to Your App
 
 For an app to use a <%= vars.single_leader_plan %> leader-follower service instance,
