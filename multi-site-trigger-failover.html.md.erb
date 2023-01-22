@@ -325,7 +325,7 @@ in the secondary foundation is the leader.
 
 <p class='note warning'><strong>Warning:</strong>
 To successfully trigger a switchover the follower dataset must be a subset of the leader dataset.
-This means that <% vars.product_short %> has not written new data to the follower.
+This means that <%= vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
 create a new <%= vars.single_leader_plan %> service instance and reconfigure replication using this new,
