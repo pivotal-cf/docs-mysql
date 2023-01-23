@@ -204,24 +204,24 @@ To establish a TLS connection to a service instance:
 
 1. Use `mysql` to establish a TLS connection to the MySQL instance. Run the following command:
 
-    <pre>mysql --host=HOSTNAME \
-    --user=USERNAME \
-    --password=PASSWORD \
+  <pre>mysql --host=HOSTNAME \
+  --user=USERNAME \
+  --password=PASSWORD \
+  --ssl-ca=root.pem \
+  --ssl-verify-server-cert</pre>
+
+  Where:
+
+  * `HOSTNAME` is the value for `hostname` retrieved above.
+  * `USERNAME` is the value for `username` retrieved above.
+  * `PASSWORD` is the value for `password` retrieved above.
+
+  For example:
+
+  <pre class="terminal">
+  $ mysql --hostname=q-n3s3y1.q-g693.bosh \
+    --user=6bf07ae455a14064a9073cec8696366c \
+    --password=a22aaa2a2a2aaaaa \
     --ssl-ca=root.pem \
-    --ssl-verify-server-cert</pre>
-
-    Where:
-
-    * `HOSTNAME` is the value for `hostname` retrieved above.
-    * `USERNAME` is the value for `username` retrieved above.
-    * `PASSWORD` is the value for `password` retrieved above.
-
-    For example:
-
-    <pre class="terminal">
-    $ mysql --hostname=q-n3s3y1.q-g693.bosh \
-      --user=6bf07ae455a14064a9073cec8696366c \
-      --password=a22aaa2a2a2aaaaa \
-      --ssl-ca=root.pem \
-      --ssl-verify-server-cert
-    </pre>
+    --ssl-verify-server-cert
+  </pre>
