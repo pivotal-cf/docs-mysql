@@ -23,7 +23,7 @@ following:
   - Disables client access to the cluster. See [Determine If the Cluster Is Accessible](#access) below.
 
   <p class='note warning'><strong>Warning:</strong> When replication fails, data can be lost.
-    Contact <a href="https://support.pivotal.io"><%= vars.product_network %></a> immediately in the case of
+    Contact <%= vars.support_link %> immediately in the case of
     replication failure.</p>
 
 ## <a id="sample-canary"></a>Sample Notification Email
@@ -87,6 +87,6 @@ To determine if cluster access is disabled, do the following:
     When cluster access is disabled, `trafficEnabled` is set to false.
 
 If you must restore client access to the cluster while replication is failing, contact
-[<%= vars.product_network %>](https://support.pivotal.io).
+<%= vars.support_link %>.
 
 For more information about the Switchboard API, see [Monitoring Node Health](monitor-health.html).

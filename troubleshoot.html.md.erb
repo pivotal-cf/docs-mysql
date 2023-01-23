@@ -130,11 +130,9 @@ This section provides solutions for the following errands:
         In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
-        <a href="./backup-mysqldump.html#create-backup">Create a ' + vars.product_short + ' Logical Backup</a>
-        steps.</li>
+        <a href="./backup-mysqldump.html#create-backup">Create a ' + vars.product_short + ' Logical Backup</a> steps.</li>
       <li>Restore the backup artifact to the first instance using the
-        <a href="./backup-mysqldump.html#restore-backup">Restore from a ' + vars.product_short + ' Logical Backup</a>
-        steps.<br>
+        <a href="./backup-mysqldump.html#restore-backup">Restore from a ' + vars.product_short + ' Logical Backup</a> steps.<br>
         At this point, the instances have equivalent data.</li>
       <li>
         Run the <code>configure-leader-follower</code> errand to reconfigure replication:
@@ -240,8 +238,7 @@ This section provides solutions for the following errands:
                   succeeded</pre>
             </li>
             <li>Take a backup of both instances using the
-              <a href="./backup-mysqldump.html#create-backup"> Create a ' + vars.product_short + ' Logical Backup</a>
-              steps.</li>
+              <a href="./backup-mysqldump.html#create-backup"> Create a ' + vars.product_short + ' Logical Backup</a> steps.</li>
             <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead---this instance has the higher GTID Executed set, and will be the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
             <li>After putting all data on the leader, ssh onto the follower:
@@ -372,7 +369,7 @@ This section provides a solution for the following errors:
               turn off binary logging.
               See
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base..
+              in the Knowledge Base.
             </li>
           </ul>'
 } %>
@@ -454,26 +451,26 @@ This section provides solutions for the following errands:
 
     <ul>
       <li>
-        <strong>Network Latency</strong>: If network latency causes a node to become unresponsive, the node drops but eventually rejoins. The node automatically rejoins only if one node has left the cluster. Consult your IaaS network settings to reduce your network latency. <hr></li>
+        <strong>Network Latency</strong>: If network latency causes a node to become unresponsive, the node drops but eventually rejoins. The node automatically rejoins only if one node has left the cluster. Consult your IaaS network settings to reduce your network latency. </li>
       <li>
         <strong>MySQL Process Failure:</strong> If the MySQL process crashes, <code>monit</code>
         and BOSH should restore the process. If the process is not restored, run the
         <code>download-logs</code> tool and consult the error logs it generates. For more information, see the
-        <a href="#download-logs">download-logs</a> section below.<hr>
+        <a href="#download-logs">download-logs</a> section below.
       </li>
       <li>
         <strong>Firewall Rule Change:</strong>
         If your firewall rules change, it might prevent a node from communicating with the rest of the cluster. This causes the node to become unresponsive. In this case, the logs show the node leaving the cluster but do not show network latency errors.
         <br><br>
         To confirm that the node is unresponsive because of a firewall rule change, SSH from a responsive node to the unresponsive node. If you cannot connect, the node is unresponsive due to a firewall rule change. Change your firewall rules to enable the
-        unresponsive node to rejoin the cluster.<hr>
+        unresponsive node to rejoin the cluster.
       </li>
       <li>
         <strong>VM Failure:</strong>
         If you cannot SSH into a node and you are not detecting either network latency or firewall issues, your node might be down due to VM failure. To confirm that the node is unresponsive and re-create the VM, see
         <a href="#recreate-VM">
           Re-create a Corrupted VM in a Highly Available</a>
-        below.<hr>
+        below.
       </li>
       <li>
         <strong>Node Unable to Rejoin:</strong> If a detached existing node fails to join the cluster, its
@@ -643,7 +640,7 @@ See <a href="./interruptions.html#az-fail">AZ Failure</a> and <a href="./interru
 ##  <a id="techniques"></a>  Techniques for Troubleshooting
 
 Instructions on interacting with the on-demand service broker and on-demand service
-instance BOSH deployments, and on performing general maintenance and housekeeping tasks
+instance BOSH deployments, and on performing general maintenance and housekeeping tasks.
 
 ### <a id="parse-error"></a> Parse a Cloud Foundry (CF) Error Message
 
@@ -1022,7 +1019,7 @@ To check the replication status, do the following:
   <li>
     <strong>If each MySQL server instance does not return the same result,</strong> before proceeding
     further or making any changes to your deployment, contact
-    <a href="https://support.pivotal.io/">Support</a>
+    <a href="https://support.pivotal.io/">Support</a>.
     <br>
     <strong>If each MySQL server instance returns the same result,</strong> then you can safely proceed
     to scaling down your cluster to a single node.
