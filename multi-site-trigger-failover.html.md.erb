@@ -101,9 +101,9 @@ To trigger a failover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin...<br>
+  FAILED<br>
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:<br>
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -242,9 +242,9 @@ To trigger a switchover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to the following:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin...<br>
+  FAILED<br>
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:<br>
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -523,7 +523,7 @@ To reconfigure replication for the service instances:
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
     + If your follower service instance is more than 3 days behind leader,
-    you get error message similar to  the following:
+    you get an error message similar to  the following:
       <pre class=terminal>$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
@@ -532,7 +532,7 @@ To reconfigure replication for the service instances:
       Follower GTIDs missed: "487e6056-6e93-11ea-8c96-42010a010806:1-9"
       Try again with an empty instance or contact your operator to troubleshoot</pre>
     + If your follower has a divergent dataset from the leader,
-    you get error message similar to the following:
+    you get an error message similar to the following:
       <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED

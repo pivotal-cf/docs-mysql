@@ -15,16 +15,16 @@ You must bootstrap a cluster that loses quorum. A cluster loses quorum when fewe
 
 To check whether your cluster has lost quorum, look for the following symptoms:
 
-- All nodes appear "Unhealthy" on the proxy dashboard. <% if vars.product_full.include?("MySQL") %>
+- All nodes appear "Unhealthy" on the proxy dashboard. 
 The proxy dashboard is viewable at <%= vars.switchboard_url %>.
-<% else %> To log in to the proxy dashboard, see 
-[Log In to Proxy Dashboard](#proxy-dashboard-login) below.<% end %>
-![Screenshot of the Switchboard dashboard.
-At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
-Below this is a table with the headings nodes, status, current sessions, and IP address.
-For each node in the table, the status column is marked unhealthy.](quorum-lost.png)
+
+    ![Screenshot of the Switchboard dashboard.
+    At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
+    Below this is a table with the headings nodes, status, current sessions, and IP address.
+    For each node in the table, the status column is marked unhealthy.](quorum-lost.png)
 
 - All responsive nodes report the value of `wsrep_cluster_status` as `non-Primary`:
+
     <pre class="terminal">
     mysql> SHOW STATUS LIKE 'wsrep_cluster_status';
     +----------------------+-------------+
@@ -365,7 +365,7 @@ To bootstrap:
 </p>
 
 To restore your BOSH configuration to its previous state, this procedure
-unignores each instance that was previously ignored:
+unignores each instance that was previously ignored.
 
 1. For each ignored instance, run:
 
