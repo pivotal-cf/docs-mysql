@@ -149,28 +149,31 @@ You created these service instances in
 To configure replication for your <%= vars.single_leader_plan %> leader-follower service instance:
 
 1. Create a host-info service key for the service instance in your secondary foundation by running:
+
     ```
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
     Where:
-    * `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
+    + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
-    * `SERVICE-KEY` is a name you choose for the host-info service key.
+    + `SERVICE-KEY` is a name you choose for the host-info service key.
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node host-info \
            -c '{"replication-request": "host-info" }'<br>
         Creating service key host-info for service instance secondary-node as admin...
         OK
     </pre>
+
 1. View the `replication-credentials` for your host-info service key by running:
+
     ```
     cf service-key SECONDARY-INSTANCE SERVICE-KEY
     ```
     Where:
-    * `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
+    + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
-    * `SERVICE-KEY` is the name of the host-info service key you created in step 1, above.
+    + `SERVICE-KEY` is the name of the host-info service key you created in step 1, above.
     For example:
     <pre class="terminal">$ cf service-key secondary-node host-info-key <br>
     Getting key host-info-key for service instance secondary-node as admin...
@@ -242,9 +245,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
 
     Where:
 
-    * `PRIMARY-INSTANCE` is the name of the primary service instance you created in
+    + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
-    * `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
+    + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
     For example:
 
