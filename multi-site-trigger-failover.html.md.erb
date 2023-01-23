@@ -129,19 +129,19 @@ To promote the follower service instance to leader:
     OK</pre>
 
 1. If the above command fails, do one of the following:
-  * If you have unapplied local transactions on the follower service instance, wait for the transactions
+    + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
-    <pre class=terminal>Updating service instance secondary-node as admin...
-    FAILED
-    Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower
-    failed - has 1 transactions still unapplied</pre>
-  * If the leader service instance is still reachable and in read-write mode, follow the procedure in
-    [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
-    <pre class=terminal>
-    Updating service instance secondary-node as admin...
-    FAILED
-    Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower
-    failed - the leader is still writable</pre>
+        <pre class=terminal>Updating service instance secondary-node as admin...
+        FAILED
+        Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower
+        failed - has 1 transactions still unapplied</pre>
+    + If the leader service instance is still reachable and in read-write mode, follow the procedure in
+        [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
+          <pre class=terminal>
+        Updating service instance secondary-node as admin...
+        FAILED
+        Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower
+        failed - the leader is still writable</pre>
 
 1.  Watch the progress of the service instance update by running:
 
