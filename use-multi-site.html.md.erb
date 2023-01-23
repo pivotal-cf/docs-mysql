@@ -83,14 +83,12 @@ To create a multi-site replication service instance in both foundations:
         ```
         cf create-service p.mysql PLAN PRIMARY-INSTANCE
         ```
-
         Where:
         - `PLAN` is the name of the <%= vars.single_leader_plan %> plan you want to use.
         - `PRIMARY-INSTANCE` is a name you choose to identify the service instance.
         This name appears under `service` in output from `cf services`.
 
         For example:
-
         <pre class="terminal">$ cf create-service p.mysql db-small primary-node<br>
         Creating service primary-node in org my-org / space my-space as admin...
         OK</pre>
@@ -158,6 +156,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
+
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node host-info \
            -c '{"replication-request": "host-info" }'<br>
@@ -174,6 +173,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY` is the name of the host-info service key you created in step 1, above.
+
     For example:
     <pre class="terminal">$ cf service-key secondary-node host-info-key <br>
     Getting key host-info-key for service instance secondary-node as admin...
@@ -223,11 +223,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
     watch cf services
     ```
-
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+    
     For example:
-
     <pre class="terminal">$ watch cf services<br>
     Getting services in org my-org / space my-space as admin...
     OK
@@ -242,15 +240,12 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
-
     Where:
-
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), above.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
     For example:
-
     <pre class="terminal">$ cf create-service-key primary-node cred-key \
           -c '{"replication-request": "credentials" }' <br>
       Creating service key cred-key for service instance primary-node as admin...
@@ -271,7 +266,6 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 6, above.
 
     For example:
-
     <pre class="terminal">$ cf service-key primary-node cred-key <br>
     Getting key cred-key for service instance primary as admin...
 
