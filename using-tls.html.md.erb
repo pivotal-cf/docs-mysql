@@ -175,10 +175,12 @@ enabled. For more information about how to enable TLS for a service instance, se
 To establish a TLS connection to a service instance:
 
 1. Create a new service key for the service instance with TLS enabled. For example:
+
   <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
   {
    "hostname": "q-n3s3y1.q-g693.bosh",
-   "jdbcUrl": "jdbc:mysql<span>://</span>q-n3s3y1.q-g693.bosh:3306/service\_instance\_db?user=6bf07ae455a14064a9073cec8696366c\u0026password=a22aaa2a2a2aaaaa\u0026=true",
+   "jdbcUrl": "jdbc:mysql<span>://</span>q-n3s3y1.q-g693.bosh:3306/service\_instance\_db?user=6bf07ae
+   455a14064a9073cec8696366c\u0026password=a22aaa2a2a2aaaaa\u0026=true",
    "name": "service\_instance\_db",
    "password": "a22aaa2a2a2aaaaa",
    "port": 3306,
@@ -187,7 +189,8 @@ To establish a TLS connection to a service instance:
      "ca": "-----BEGIN CERTIFICATE-----\...n-----END CERTIFICATE-----\n"
     }
    },
-   "uri": "mysql<span>://</span>6bf07ae455a14064a9073cec8696366c:a22aaa2a2a2aaaaa<span>@</span>q-n3s3y1.q-g693.bosh:3306/service\_instance\_db?reconnect=true",
+   "uri": "mysql<span>://</span>6bf07ae455a14064a9073cec8696366c:a22aaa2a2a2aaaaa<span>@</span>q-n3s3
+   y1.q-g693.bosh:3306/service\_instance\_db?reconnect=true",
    "username": "6bf07ae455a14064a9073cec8696366c"
   }
   </pre>
@@ -199,24 +202,26 @@ To establish a TLS connection to a service instance:
 
 1. Record the values for `username`, `password`, and `hostname`.
 
-1. Use `mysql` to establish a TLS connection to the MySQL instance.
-  Run the following command:
-  <pre><code>mysql --host=HOSTNAME \
+1. Use `mysql` to establish a TLS connection to the MySQL instance. Run the following command:
+
+    <pre>mysql --host=HOSTNAME \
     --user=USERNAME \
     --password=PASSWORD \
     --ssl-ca=root.pem \
-    --ssl-verify-server-cert</code></pre>
-  <br>
-  Where:
+    --ssl-verify-server-cert</pre>
+
+    Where:
+
     * `HOSTNAME` is the value for `hostname` retrieved above.
     * `USERNAME` is the value for `username` retrieved above.
     * `PASSWORD` is the value for `password` retrieved above.
-  <br><br>
-For example:
-<pre class="terminal">
-$ mysql --hostname=q-n3s3y1.q-g693.bosh \
-  --user=6bf07ae455a14064a9073cec8696366c \
-  --password=a22aaa2a2a2aaaaa \
-  --ssl-ca=root.pem \
-  --ssl-verify-server-cert
-</pre>
+
+    For example:
+
+    <pre class="terminal">
+    $ mysql --hostname=q-n3s3y1.q-g693.bosh \
+      --user=6bf07ae455a14064a9073cec8696366c \
+      --password=a22aaa2a2a2aaaaa \
+      --ssl-ca=root.pem \
+      --ssl-verify-server-cert
+    </pre>

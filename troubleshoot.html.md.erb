@@ -508,8 +508,11 @@ This section provides solutions for the following errands:
 
     <pre class="terminal">
     160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
-    160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
-    160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
+    160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-
+abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l:
+865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
+    160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default
+database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
     </pre>
     DESC
     cause: "This problem happens when there are errors in SQL statements.",
@@ -945,7 +948,8 @@ To check the replication status, do the following:
     <pre>mysql -h FIRST-NODE-IP-ADDRESS \
       -u your-identity \
       -p -D verify_healthy \
-      -e "create table dummy_table (id int not null primary key auto_increment, info text) \
+      -e "create table dummy_table (id int not null primary key auto_increment,
+      info text) \
       engine='innodb';"</pre>
   </li>
   <li>
@@ -953,7 +957,8 @@ To check the replication status, do the following:
     <pre>mysql -h FIRST-NODE-IP-ADDRESS \
       -u YOUR-IDENTITY \
       -p -D verify_healthy \
-      -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"</pre>
+      -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),
+      ('even more dummy data');"</pre>
   </li>
   <li>
     <p>

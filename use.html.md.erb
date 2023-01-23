@@ -251,11 +251,13 @@ For example:
       ],
       "credentials": {
         "hostname": "10.0.0.20",
-        "jdbcUrl": "jdbc:mysql://10.0.0.20:3306/service_instance_db?user=fefcbe8360854a18a7994b870e7b0bf5\u0026password=z9z6eskdbs1rhtxt",
+        "jdbcUrl": "jdbc:mysql://10.0.0.20:3306/service_instance_db?user=fefcbe8360854a18a799
+        4b870e7b0bf5\u0026password=z9z6eskdbs1rhtxt",
         "name": "service_instance_db",
         "password": "z9z6eskdbs1rhtxt",
         "port": 3306,
-        "uri": "mysql://fefcbe8360854a18a7994b870e7b0bf5:z9z6eskdbs1rhtxt@10.0.0.20:3306/service_instance_db?reconnect=true",
+        "uri": "mysql://fefcbe8360854a18a7994b870e7b0bf5:z9z6eskdbs1rhtxt@10.0.0.20:3306/
+        service_instance_db?reconnect=true",
         "username": "fefcbe8360854a18a7994b870e7b0bf5"
       },
       "volume_mounts": []
@@ -490,7 +492,10 @@ To purge a service instance:
 
     <pre class="terminal">
     $ cf purge-service-instance my-instance<br>
-    WARNING: This operation assumes that the service broker responsible for this service instance is no longer available or is not responding with a 200 or 410, and the service instance has been deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service instance will be removed from Cloud Foundry, including service bindings and service keys.
+    WARNING: This operation assumes that the service broker responsible for this service instance is
+    no longer available or is not responding with a 200 or 410, and the service instance has been
+    deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service
+    instance will be removed from Cloud Foundry, including service bindings and service keys.
 
     Really purge service instance my-instance from Cloud Foundry?> y
     Purging service my-instance...
