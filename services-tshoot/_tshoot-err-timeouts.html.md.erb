@@ -5,7 +5,9 @@
     description: 'Broker Request Timeouts',
 
     symptom: 'If developers report errors such as:
-		<pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</pre>',
+    <pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out:
+    https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-
+    55752f3f651b</pre>',
 
     cause: 'Cloud Foundry might not be connected to the service broker, or there might be a large number of queued tasks.',
 
