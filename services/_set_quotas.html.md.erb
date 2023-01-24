@@ -229,115 +229,19 @@ selected for the server VMs, as well as the quota for this plan.
 The quota is shown in the **Maximum service instances** field.
 <% end %>
 
-<%# Tabbed table to display image for MySQL, otherwise display image plainly with different alt text for each service. %>
-<% if current_page.data.galera %>
-Click the tabs below to show an example of each plan:
+See below for examples of each plan.
 
-<style>
-    .tab {
-        overflow: hidden;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
-    }
-
-    /* Style the buttons that are used to open the tab content */
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: ;
-        transition: 0.3s;
-    }
-
-    /* Change background color of buttons on hover */
-    .tab button:hover {
-        background-color: #ddd;
-    }
-
-    /* Create an active/current tablink class */
-    .tab button.active {
-        background-color: #ccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-    </style>
-
-<script>
-function openDocs(evt, docsName) {
-    // Declare all variables
-    var i, tabcontent, tablinks;
-    // Get all elements with class="tabcontent" and hide them
-    tabcontent = document.getElementsByClassName("tabcontent");
-
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(docsName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-</script>
-
-
-<div class="tab">
-  <!- Tab headers and links ->
-  <button class="tablinks active" onclick="openDocs(event, 'tab1')">Single Node and Leader Follower</button>
-  <button class="tablinks" onclick="openDocs(event, 'tab2')">Galera</button>
-</div>
-
-
-<div id="tab1" class="tabcontent" style="display:block">
+Single Node and Leader Follower: <br />
   <img src="./images/sn-lf-plan.png"
 	alt="Screenshot of an example plan quota configuration showing the plan quota
-	field set to 15, VM type set to micro, and persistent disk type set to 20 GB">
-</div>
-<div id="tab2" class="tabcontent">
-  <img src="./images/galera-plan.png"
-	alt="Screenshot of an example plan quota configuration showing the plan quota
-	field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
-	MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB">
-</div>
+  field set to 15, VM type set to micro, and persistent disk type set to 20 GB" /> <br />
 
+Galera: <br />
 
-<% elsif product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the maximum service instances
-field set to 15, VM type for the locator VMs set to micro.cpu, persistent disk type for the locator VMs set to 10 GB,
-VM type for the server VMs set to micro, and persistent disk type for server VMs set to 20 GB",
-:width => "400") %>
-
-<% elsif product_short.include?("RabbitMQ")%>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the plan quota
-field set to 15, RabbitMQ VM type set to micro, and Persistent disk type set to 20 GB",
-:width => "400") %>
-
-<% elsif product_short.include?("Redis")%>
-
-<%= image_tag("../images/plan-resources.png",
-:alt => "Screenshot of an example plan quota configuration showing the plan quota
-field set to 15, server VM type set to micro, and server disk type set to 20 GB",
-:width => "400") %>
-
-<% end %>
+<img src="./images/galera-plan.png"
+alt="Screenshot of an example plan quota configuration showing the plan quota
+field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
+MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB" /> <br />
 
 <p class="note"><strong>Note:</strong>
 	Although operators can limit on-demand instances with plan quotas and a global
