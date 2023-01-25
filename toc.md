@@ -1,4 +1,4 @@
-*   [About VMware Tanzu™ SQL with MySQL for VMs](./about_mysql_vms.html)
+*   [About VMware Tanzu™ SQL with MySQL for VMs 2.9](./about_mysql_vms.html)
     *   [Overview](./index.html)
     *   [Release Notes](./release-notes.html)
 *   [Architecture and Planning Guide](./architecture_planning_guide.html)
