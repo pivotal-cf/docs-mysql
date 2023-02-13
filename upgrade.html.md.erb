@@ -20,9 +20,9 @@ Your configuration settings migrate to the new version automatically.
 To upgrade <%= vars.product_short %>:
 
 1. Review the [Release Notes](./release-notes.html) for the version you are upgrading to.
-#TODO do we need to talk about jammy?
-1. Download the Ubuntu Xenial stemcell from
-[<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-xenial),
+
+1. Download the Ubuntu Jammy stemcell from
+[<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-jammy),
 and import it into the <%= vars.ops_manager %> Stemcell Library.
 For instructions, see [Verify Stemcell Version and Apply All Changes](./install-config.html#stemcell).
 
@@ -63,7 +63,7 @@ Upgrading the <%= vars.product_short %> service and service instances can tempor
 the service.
 For more information, see [Service Interruptions](#interruptions) below.
 
-### <a id="major-version-upgrades"></a> Uprading from <%= vars.product_short %> 2.X tile to <%= vars.product_short %> tile 3.X tile
+### <a id="major-version-upgrades"></a> Upgrading from <%= vars.product_short %> 2.X tile to <%= vars.product_short %> tile 3.X tile
 
 Version 3.X of the <%= vars.product_short %> tile provides the option to upgrade Service Instances from Percona 5.7 to Percona 8.0.
 There are some significant changes from Percona 5.7 to Percona 8.0 of which you should be aware. 
@@ -72,9 +72,8 @@ There may be some compatibility issues with application currently using a Percon
 To better understand these compatibility issues consider the following options:
 + Read the [compatibility documentation from Percona](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals). This will provide details on where an application's SQL may fail to execute correctly.
 + Consider making a backup of the current 5.7 DB and restoring it to a new 8.0 Service Instance in a non production environment. See [Backup and Restore](./backup-restore.html). Connect the relevant application and execute the appropriate tests for functionality and performance, if available.
-+ Percona have a set of [compatibility testing tools](https://www.percona.com/blog/percona-utilities-that-make-major-mysql-version-upgrades-easier) which can be used to run existing queries against an upgraded schema. This process provides a mechanism to thoroughly test the application against the upgraded database. It can highlight incompatibility errors and performance changes.
++ Percona have a set of [compatibility testing tools](https://www.percona.com/blog/percona-utilities-that-make-major-mysql-version-upgrades-easier) which can be used to run existing queries against an upgraded schema. This process provides a mechanism to thoroughly test the application against the upgraded database. It can highlight potential incompatibility errors and performance changes.
 
-#TODO do we want to mention contacting support for help with this?
 ### <a id="individual-upgrades"></a> About Individual Service Instance Upgrades
 
 <%= partial vars.path_to_partials + '/services/devs-can-upgrade-one-si' %>
