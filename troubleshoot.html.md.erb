@@ -87,7 +87,7 @@ main table {
     <td>To troubleshoot:
     <ul>
     <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
-    To generate new certificates, contact <a href="https://support.pivotal.io">Support</a>.</li>
+    To generate new certificates, contact <a href="https://tanzu.vmware.com/support">Support</a>.</li>
 
     <li>Deploy fails: View the logs using Ops Manager to determine why the deploy is failing.</li>
 
@@ -160,7 +160,7 @@ main table {
         <li>
         <p>
         To continue troubleshooting,
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in">Log in to BOSH</a>
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>
         and target the Tanzu SQL for VMs instance using the instructions
         on <a href="#parse-error">parsing a Cloud Foundry error message</a>.
         </p>
@@ -577,7 +577,7 @@ main table {
     <p>
     Ensure that you have network connectivity between the networks that the tile
     is using and the syslog destination.
-    If the destination is external, you need to use the <a href="https://docs.pivotal.io/svc-sdk/odb/tile.html#public-ip">public ip</a>
+    If the destination is external, you need to use the <a href="https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-tile.html#optional-allow-public-ip-addresses-for-ondemand-service-instance-groups-5">public ip</a>
     VM extension feature available in your Ops Manager tile configuration settings.
     </p>
     </li>
@@ -1258,7 +1258,7 @@ main table {
         information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a> below.
         <p class="note warning">
           <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
-          <a href="https://support.pivotal.io">Support</a>.
+          <a href="https://tanzu.vmware.com/support">Support</a>.
         </p>
       </li>
     </ul>
@@ -1338,7 +1338,7 @@ main table {
     <td>Decode the
       <code>GRA_*.log</code>
       files and look for errors. See
-      <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-pcf-v1-10">
+      <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-PCF-v1-10">
         How to decode Galera GRA log files</a>
       in the Support knowledge base. The GRA log files contain failing DDL statements.</td>
   </tr>
@@ -1660,8 +1660,8 @@ Updated: 2017-03-13T10:17:58Z
 
 <p>
   Before following the procedures below, log in to the
-  <a href="https://docs.pivotal.io/pivotalcf/cf-cli/getting-started.html">cf CLI</a> and the
-  <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#prepare">BOSH CLI</a>.
+  <a href="https://docs.pivotal.io/application-service/cf-cli/getting-started.html">cf CLI</a> and the
+  <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html">BOSH CLI</a>.
 </p>
 
 <h4 id="-access-broker-logs-and-vms"><a id="access-broker"></a>  Access Broker Logs and VMs</h4>
@@ -1669,7 +1669,7 @@ Updated: 2017-03-13T10:17:58Z
 
 
 <p>
-    You can <a href="https://docs.pivotal.io/pivotalcf/customizing/troubleshooting.html#component_logs">access logs using Ops Manager</a>
+    You can <a href="https://docs.pivotal.io/application-service/operating/diagnostics.html#component_logs">access logs using Ops Manager</a>
     by clicking on the <strong>Logs</strong> tab in the tile and downloading the broker logs.
 </p>
 
@@ -2049,11 +2049,6 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
 
-<h3 id="-reinstall-a-tile"><a id="reinstall"></a>  Reinstall a Tile</h3>
-
-<p>To reinstall the Tanzu SQL for VMs tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and above</a>
-in the Support knowledge base.</p>
-
 <h3 id="-view-resource-saturation-and-scaling"><a id="view-resources"></a>  View Resource Saturation and Scaling</h3>
 
 
@@ -2204,7 +2199,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
 
   <li>
     If you are uncertain about the recovery steps to take, submit a ticket through
-    <a href="https://support.pivotal.io/">Support</a>. When you submit a ticket provide the following information:
+    <a href="https://tanzu.vmware.com/support">Support</a>. When you submit a ticket provide the following information:
     <ul>
       <li>
         <strong>mysql-diag output:</strong>
@@ -2234,7 +2229,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
 <p class="note warning">
   <strong>Warning:</strong>
   Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
-  <a href="https://support.pivotal.io/">Support</a>.
+  <a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
 <h3 id="-force-a-node-to-rejoin-a-highly-available-cluster-manually"><a id="manual-force"></a> Force a Node to Rejoin a Highly Available Cluster Manually</h3>
@@ -2247,7 +2242,7 @@ and creates a new copy of the cluster data on the node.</p>
 <p class="note warning">
   <strong>Warning:</strong>
   If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
-  <a href="https://support.pivotal.io">Support</a>.
+  <a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
 <p>Before following this procedure, try to bootstrap the cluster. For more information, see
@@ -2258,7 +2253,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
 <ol>
   <li>
     SSH into the node by following the procedure in
-    <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh">BOSH SSH</a>.
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>.
   </li>
   <li>
     Become root by running:
@@ -2293,17 +2288,17 @@ To manually force a node to rejoin the cluster, do the following:</p>
   <li>To log in to the BOSH Director VM by doing the following procedures:
     <ol>
       <li>Gather the information needed to log in to the BOSH Director VM by doing the procedure in
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather">Gather Credential and IP Address Information</a>&#46;</li>
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>&#46;</li>
       <li>Log in to the Ops Manager VM by doing the procedure in
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh">Log in to the Ops Manager VM with SSH</a>&#46;</li>
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">Log in to the Ops Manager VM with SSH</a>&#46;</li>
       <li>Log in to the BOSH Director VM by doing the procedure in
-        <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in">Log in to the BOSH Director VM</a>&#46;</li>
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>&#46;</li>
     </ol>
   </li>
   <li>
     Identify and re-create the unresponsive node with
     <code>bosh cloudcheck</code>, by doing the procedure in
-    <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#cck">BOSH Cloudcheck</a>
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-cloud-check-14">BOSH Cloud Check</a>
     and run
     <code>Recreate VM using last known apply spec</code>.
     <p class="note warning">
@@ -2313,7 +2308,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
     <p class="note warning">
       <strong>Warning:</strong>
       Only re-create one node. Do not re-create the entire cluster. If more than one node is down, contact
-      <a href="https://support.pivotal.io">Support</a>.
+      <a href="https://tanzu.vmware.com/support">Support</a>.
     </p>
   </li>
 </ol>
@@ -2325,8 +2320,8 @@ If you see stale data in your cluster, you can check whether replication is func
 To check the replication status, do the following:
 
 1.  To log in to the BOSH Director VM, do the following:
-    1.  Gather the information needed to log in to the BOSH Director VM by doing the procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
-    2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+    1.  Gather the information needed to log in to the BOSH Director VM by doing the procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
+    2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2).
 2.  Create a dummy database in the first node by running: 
     
     ```
@@ -2397,7 +2392,7 @@ To check the replication status, do the following:
             | 10 | even more dummy data |
             +----+----------------------+ 
         
-7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://support.pivotal.io/)  
+7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).  
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 
@@ -2431,8 +2426,8 @@ the jumpbox VM.</p>
 
 <p>Record the name of the BOSH deployment.</p></li>
 <li><p>SSH into your Ops Manager VM by doing the procedures in
-<a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather">Gather Credential and IP Address Information</a>
-and <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh">SSH into Ops Manager</a>.</p></li>
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>
+and <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">SSH into Ops Manager</a>.</p></li>
 <li><p>File transfer or copy-paste the <code>download-logs</code> script to a working directory on the Ops Manager VM.</p></li>
 <li><p>Set local environment variables to the same BOSH variable values that you recorded earlier,
 including <code>BOSH_DEPLOYMENT</code> for the deployment name.
@@ -2468,6 +2463,6 @@ For more information, see [Running mysql-diag](mysql-diag.html).
 
 <h2 id="-file-a-support-ticket"><a id="support"></a>  File a Support Ticket</h2>
 
-You can file a ticket with [Support](https://support.pivotal.io/). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
+You can file a ticket with [Support](https://tanzu.vmware.com/support). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
 
 To expedite troubleshooting, provide your service broker logs and your service instance logs. If your `cf service YOUR-SERVICE-INSTANCE` output includes a `task-id`, provide the BOSH task output.

@@ -50,12 +50,12 @@ To verify the service instance:
       12345678-90ab-cdef-1234-567890abcdef
     </pre>
 1. Obtain the credentials and IP address needed to SSH into the <%= vars.ops_manager %> VM by following the
-  procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+  procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
 1. SSH into the <%= vars.ops_manager %> VM by following the procedure in
-[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2).
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director by following the procedure in
-[Authenticate with the BOSH Director VM](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
+[SSH Into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11).
 
 1. View the health of the service instance by running:
 
@@ -159,7 +159,7 @@ To promote the follower service instance to leader:
   </pre>
 
 1. Reconfigure your global DNS load balancer to direct all traffic to apps in your secondary foundation.
-See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.html#configure-glb).
+See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).
 
 ###<a id='clean-up'></a> Delete or Purge the Former Leader
 
@@ -569,4 +569,4 @@ To reconfigure replication for the service instances:
       Try again with an empty instance or contact your operator to troubleshoot</pre>
   In either case, you must create a new multi-site service instance and reconfigure replication using this new, empty instance as the follower.
 1. Reconfigure your global DNS load balancer to direct traffic to the correct foundations of your choice.
-See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.html#configure-glb).
+See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).

@@ -75,11 +75,11 @@ for stopping the leader and promoting the follower:
     </pre>
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
-1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather)
-   and [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) to SSH into the <%= vars.ops_manager %> VM.
+1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1)
+   and [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2) to SSH into the <%= vars.ops_manager %> VM.
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director with the BOSH CLI.
-   See [Log in to the BOSH Director](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
+   See [SSH Into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11).
 
 1. Use the BOSH CLI to run the `inspect` errand by running:
 

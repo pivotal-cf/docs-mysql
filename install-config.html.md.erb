@@ -18,7 +18,7 @@ operators can make deployment changes, view credentials, and manage user roles i
 Your role permissions might not permit you to do every procedure in this topic.
 
 For more information about roles in <%= vars.ops_manager %>, see
-    <a href="https://docs.pivotal.io/pivotalcf/opsguide/config-rbac.html#about">
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-config-rbac.html#roles-in-ops-manager-1">
         Roles in <%= vars.ops_manager %></a>.</p>
 
 ## <a id="prereq"></a> Prerequisites
@@ -76,7 +76,7 @@ To create an ASG for <%= vars.product_short %>:
     ```
 
 For more information about ASGs,
-see [App Security Groups](http://docs.pivotal.io/pivotalcf/concepts/asg.html#asg-individual).
+see [App Security Groups](https://docs.pivotal.io/application-service/concepts/asg.html#asg-individual).
 
 
 ### <a id="resurrector"></a> Enable the BOSH Resurrector
@@ -91,7 +91,7 @@ The BOSH Resurrector does the following:
 - Continuously monitors the BOSH Agent running on each service instance VM and restarts the VM as required
 
 For more information about the BOSH Resurrector,
-see [BOSH Resurrector](https://docs.pivotal.io/pivotalcf/customizing/resurrector.html#bosh-resurrector).
+see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-resurrector.html#bosh-resurrector-0).
 
  To enable the BOSH Resurrector:
 
@@ -447,7 +447,7 @@ To set MySQL defaults and enable developers to customize their instances:
         <td>Select this checkbox to enable data downloading from the local file system of the client.
             VMware discourages selecting this checkbox. Before you enable local in-file,
             review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local.html">MySQL documentation</a>.
+            See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
     </td></tr>
     <tr>
       <a name="limit-disk-use"></a>
@@ -559,12 +559,12 @@ See [Using TLS](using-tls.html).
 ####<a id="security-service-instance-creds"></a> Configure Secure Service Instance Credentials
 
 You can store your service instance credentials in runtime CredHub instead of the Cloud Controller database (CCDB).
-For more information about runtime CredHub, see [CredHub](https://docs.pivotal.io/pivotalcf/credhub/).
+For more information about runtime CredHub, see [CredHub](https://docs.pivotal.io/credhub/index.html).
 
 To store your service instance credentials in runtime CredHub:
 
 1. Ensure that you have configured the <%= vars.app_runtime_abbr %> tile to support securing service instance credentials in runtime CredHub.
-   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> Tile](https://docs.pivotal.io/pivotalcf/opsguide/secure-si-creds.html#pas-config).
+   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> Tile](https://docs.pivotal.io/application-service/operating/secure-si-creds.html#pas-config).
 1. Click **Security**.
 1. Select the **Enable Secure Service Instance Credentials** checkbox.
 1. Click **Save**.
@@ -815,7 +815,7 @@ To review errands:
 To verify your stemcell version and apply all changes:
 
 1. Click **Stemcell Library**.
-    For more information about using the **Stemcell Library**, see [Importing and Managing Stemcells](https://docs.pivotal.io/pivotalcf/opsguide/managing-stemcells.html).
+    For more information about using the **Stemcell Library**, see [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html).
 
 1. Verify and, if necessary, import a new stemcell version.
 
