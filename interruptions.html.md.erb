@@ -52,7 +52,7 @@ A <%= vars.product_short %> VM fails and goes offline due to either a virtualiza
 ## <a id='az-fail'></a>AZ Failure
 
 An availability zone (AZ) goes offline entirely or loses connectivity to other AZs (net split).
-This causes service interruption in multi-AZ deployments where [Diego](http://docs.pivotal.io/pivotalcf/concepts/diego/diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
+This causes service interruption in multi-AZ deployments where [Diego](https://docs.pivotal.io/application-service/3-0/concepts/diego/diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
 
 - <strong>Impact:</strong>
   - Some app instances may still be able to connect and continue operating.
