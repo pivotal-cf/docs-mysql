@@ -483,7 +483,7 @@ the highest transaction sequence number (`seqno`).
 For each node in the cluster, to find its `seqno`:
 
 1. SSH into the node using the procedure in
-[BOSH SSH](https://docs.pivotal.io/pivotalcf/2-3/customizing/trouble-advanced.html#bosh-ssh).
+[BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh-15).
 
 1. Find `seqno` values in the node's Galera state file, `grastate.dat` by running:
 
@@ -524,7 +524,7 @@ The node with the highest sequence number is the one most recently updated.
 To identify the node to bootstrap:
 
 1. SSH into the node using the procedure in
-   [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh).
+   [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh-15).
 
 1. View the sequence number for a node by running:
 
@@ -586,7 +586,7 @@ to bootstrap the node:
  <% end %>
 
 1. SSH into the node using the procedure in
-   [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh).
+   [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh-15).
 
 1. Update the node state to trigger its initialization of the cluster by running:
 
@@ -645,7 +645,7 @@ If in [Shut Down MySQL](#shut-down) above you successfully used `monit` to shut 
 `galera-init` process, then restart the nodes as follows:
 
 1. SSH into the node using the procedure in
-   [BOSH SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#bosh-ssh).
+   [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh-15).
 
 1. Start the <code>mysqld</code> process with <code>monit</code> by running:
 
@@ -659,7 +659,7 @@ If in [Shut Down MySQL](#shut-down) above you successfully used `monit` to shut 
     <p class="note warning">
       <strong>Warning:</strong> Forcing a node to rejoin the cluster is a destructive procedure.
        Only follow the procedure with the assistance of
-       <a href="https://support.pivotal.io">Support</a>.</p>
+       <a href="https://tanzu.vmware.com/support">Support</a>.</p>
 
 <% if current_page.data.title == "Recovering From MySQL Cluster Downtime" %>
 

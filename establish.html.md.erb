@@ -32,12 +32,12 @@ traffic to MySQL service instances using an SSH tunnel.
 ### Prerequisite
 
 To connect using an SSH tunnel, you must have SSH access to app containers.
-For more information, see [Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
+For more information, see [Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/application-service/operating/config-ssh.html).
 
 ### Procedure
 
 To connect to a MySQL instance using an SSH tunnel, follow the procedures in
-[Accessing Services with SSH](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html)
+[Accessing Services with SSH](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html)
 
 ##<a id='ip-address'></a> Connect Using an IP Address
 
@@ -68,7 +68,7 @@ cf SSH.
 To obtain the IP address using cf SSH, you must have the following:
 
 + SSH access to app containers. For more information, see
-[Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
+[Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/application-service/operating/config-ssh.html).
 
 + An app deployed on the same deployment as the MySQL service instance.
 
@@ -155,14 +155,14 @@ your operator for access to the BOSH CLI.
 To connect using the BOSH CLI, follow these steps:
 
 1. To obtain the credentials and IP address needed to use the BOSH CLI, follow
-the procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+the procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
 
 1. To SSH into your <%= vars.ops_manager %> VM, follow the procedure in
-[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh)
+[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2)
 for your IaaS.
 
 1. To log in to your BOSH Director, follow the procedure in
-[Log in to the BOSH Director VM](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
+[Authenticate with the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/install-trouble-advanced.html#authenticate-with-the-bosh-director-vm-8).
 
 1. To obtain the MySQL service instance GUID, run the following command:
 

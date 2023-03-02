@@ -23,7 +23,7 @@ following:
   - Disables client access to the cluster. See [Determine If the Cluster Is Accessible](#access) below.
 
   <p class='note warning'><strong>Warning:</strong> When replication fails, data can be lost.
-    Contact <a href="https://support.pivotal.io"><%= vars.product_network %></a> immediately in the case of
+    Contact <a href="https://tanzu.vmware.com/support"><%= vars.product_network %></a> immediately in the case of
     replication failure.</p>
 
 ## <a id="sample-canary"></a>Sample Notification Email
@@ -33,7 +33,7 @@ If the canary detects replication failure, it immediately sends an email through
 <%= vars.app_runtime_abbr %> for the replication canary to send emails.
 
 For more information about configuring email notifications, see the _Configure Email Notifications_
-procedure for your IaaS in the [<%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf) documentation.
+procedure for your IaaS in the [<%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/index.html) documentation.
 
 The notification service sends emails similar to the following:
 
@@ -87,6 +87,6 @@ To determine if cluster access is disabled, do the following:
     When cluster access is disabled, `trafficEnabled` is set to false.
 
 If you must restore client access to the cluster while replication is failing, contact
-[<%= vars.product_network %>](https://support.pivotal.io).
+[Support](https://tanzu.vmware.com/support).
 
 For more information about the Switchboard API, see [Monitoring Node Health](monitor-health.html).
