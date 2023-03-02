@@ -32,17 +32,21 @@ To configure <%= vars.product_short %> to control service-plan access, do the fo
 
     1.  Log in to the Cloud Foundry Command Line Interface (cf CLI) as an admin user:
 
-        <code>cf login</code>
+        <pre class="terminal">
+        cf login
+        </pre>
 
     1.  Enable service access to the org:
 
-        <code>cf enable-service-access p.mysql -p PLAN -o ORGANIZATION</code>
+        <pre class="terminal">
+        cf enable-service-access p.mysql -p PLAN -o ORGANIZATION
+        </pre>
 
         Where:
 
-        `PLAN`: The name of the specific plan to enable, set to manual in step 1 above.
+        * `PLAN`: The name of the specific plan to enable, set to manual in step 1 above.
 
-        `ORGANIZATION`: The name of the org that needs access to `PLAN`
+        * `ORGANIZATION`: The name of the org that needs access to `PLAN`
 
         For example,
 

@@ -279,9 +279,11 @@ To restore a service instance:
     ```
 
     Where:
+
     + `NEW-PLAN` is the name of the service plan for your new service instance.
         The plan you choose depends on the service instance topology that you are
         restoring. If the topology that you are restoring is:
+
           + **Single node or leader-follower:** Select a single node plan.
           + **<%= vars.single_leader_plan %> or HA cluster:**
               Select a <%= vars.single_leader_plan %> plan.
@@ -297,11 +299,13 @@ To restore a service instance:
     ```
 
     Where:
+
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
       Without the flag, the command lists five backups.  
 
     For example:
+
     <pre class="terminal">$ cf adbr list-backups myDB --limit 1
       Getting backups of service instance myDB in org my-org / space my-space as user...
       Backup ID                                         Time of Backup
@@ -314,7 +318,7 @@ To restore a service instance:
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
     ```
-    Where is `BACKUP-ID` is the ID you recorded in the above step. <br><br>
+    Where `BACKUP-ID` is the ID you recorded in the above step. 
 
     For example:
 
@@ -349,6 +353,7 @@ To restore a service instance:
     ```
 
     For example:
+
     <pre class="terminal">$ cf services
     Getting services in org my-org / space my-space as user...
     OK
@@ -363,8 +368,6 @@ To restore a service instance:
     cf unbind-service APP-NAME SOURCE-INSTANCE
     ```
 
-    <%= partial "/mysql/rebind-warning" %>
-
 1. Update your app to bind to the new service instance by running:
 
     ```
@@ -376,6 +379,8 @@ To restore a service instance:
     ```
     cf restage APP-NAME
     ```
+
+<%= partial "/mysql/rebind-warning" %>
 
 ##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr Plugin
 
@@ -406,11 +411,13 @@ The list includes both automated and manual backups.
     ```
 
     Where:
+
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
       Without the flag, the command lists five backups.  
 
     For example:
+
     <pre class="terminal">$ cf adbr list-backups myDB
     Getting backups of service instance myDB in org my-org / space my-space as admin...
     Backup ID                                         Time of Backup
@@ -436,13 +443,13 @@ called `last_successful_backup`.
 
     For details about the metric,
     see [Hours Since Last Successful Backup](./monitor.html#last-successful-backup)
-    in _Monitoring and KPIs for <%= vars.product_full %>_.<br><br>
+    in _Monitoring and KPIs for <%= vars.product_full %>_.
 
     A healthy backup metric shows a saw-tooth plot.
     The blue stepped line is the time elapsed since the last backup.
     The dotted red line represents the scheduled time when an automated backup is expected to occur.
     When a backup is taken, the time elapsed resets to zero.
 
-    <%= image_tag("metric-since-last-backup-healthy.png", :alt => "A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again.", :width => "720") %>
+    <img src="images/metric-since-last-backup-healthy.png" alt="A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again." width="720" />
 
     <a href="./images/metric-since-last-backup-healthy.png" target="_blank" aria-hidden="true">View a larger version of this image</a>

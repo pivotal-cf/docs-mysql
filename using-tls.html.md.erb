@@ -77,6 +77,7 @@ To re-bind your app:
 	```
 	cf stop YOUR-APP
 	```
+
 	Where `YOUR-APP` is the name of your app.
 
 1. To unbind your app from the service instance, run the following command:
@@ -84,7 +85,9 @@ To re-bind your app:
 	```
 	cf unbind-service YOUR-APP YOUR-SERVICE-INSTANCE
 	```
+
 	Where:
+
 	+ `YOUR-APP` is the name of your app.
 	+ `YOUR-SERVICE-INSTANCE` is the name of your service instance.
 
@@ -93,14 +96,18 @@ To re-bind your app:
 	```
 	cf bind-service YOUR-APP YOUR-SERVICE-INSTANCE
 	```
+
 	Where:
+
 	+ `YOUR-APP` is the name of your app.
 	+ `YOUR-SERVICE-INSTANCE` is the name of your service instance.
+
 1. To restage your app, run the following command:
 
 	```
 	cf restage YOUR-APP
 	```
+
 	Where `YOUR-APP` is the name of your app.
 
 Your app now communicates securely with the MySQL service instance.
@@ -123,7 +130,7 @@ To activate TLS for your app, do the following:
    for the bound <%= vars.product_short %> service instance from the `VCAP_SERVICES` environment variable.
 
 	 <a id="call-service"></a>
-	 <br>
+
 	 For example, the following Node.js code initializes a variable named `mysql_creds`, and then populates it with the necessary information from `VCAP_SERVICES`:
 
 	 ```js
@@ -145,7 +152,7 @@ To activate TLS for your app, do the following:
 	 }
 	 ```
 
-2. Modify your app to use the hostname, username, password, and CA certificate to establish a secure connection with the bound <%= vars.product_short %> service instance.<br><br>
+2. Modify your app to use the hostname, username, password, and CA certificate to establish a secure connection with the bound <%= vars.product_short %> service instance.
 
     For example, the following Node.js function establishes a TLS connection with the MySQL service, using the information loaded into `mysql_creds`:
 
@@ -175,6 +182,7 @@ enabled. For more information about how to enable TLS for a service instance, se
 To establish a TLS connection to a service instance:
 
 1. Create a new service key for the service instance with TLS enabled. For example:
+
   <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
   {
    "hostname": "q-n3s3y1.q-g693.bosh",
@@ -191,6 +199,7 @@ To establish a TLS connection to a service instance:
    "username": "6bf07ae455a14064a9073cec8696366c"
   }
   </pre>
+
   If the service key does not have a CA certificate under `tls.cert.ca`, the service key may be stale.
   Create a new one.
 
@@ -206,17 +215,19 @@ To establish a TLS connection to a service instance:
     --password=PASSWORD \
     --ssl-ca=root.pem \
     --ssl-verify-server-cert</code></pre>
-  <br>
+
   Where:
+
     * `HOSTNAME` is the value for `hostname` retrieved above.
     * `USERNAME` is the value for `username` retrieved above.
     * `PASSWORD` is the value for `password` retrieved above.
-  <br><br>
-For example:
-<pre class="terminal">
-$ mysql --hostname=q-n3s3y1.q-g693.bosh \
-  --user=6bf07ae455a14064a9073cec8696366c \
-  --password=a22aaa2a2a2aaaaa \
-  --ssl-ca=root.pem \
-  --ssl-verify-server-cert
-</pre>
+
+  For example:
+
+  <pre class="terminal">
+  $ mysql --hostname=q-n3s3y1.q-g693.bosh \
+    --user=6bf07ae455a14064a9073cec8696366c \
+    --password=a22aaa2a2a2aaaaa \
+    --ssl-ca=root.pem \
+    --ssl-verify-server-cert
+  </pre>

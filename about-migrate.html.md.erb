@@ -44,7 +44,7 @@ See [Use Cases Not Requiring the migrate Command](#update-service-cases) below.
 
 If your use case is not listed in this topic,
 you might need to manually back up and restore your database to migrate your data.
-See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
+See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
 
 ### <a id='migrate-cases'></a> Use Cases Requiring the migrate Command
@@ -167,7 +167,7 @@ The `migrate` command skips the following system schemas:
 - `performance_schema`: This is metadata about performance  and server execution.
 - `sys`: This is a schema that summarizes `performance_schema`.
 
-<p class="note"><strong>Note:</strong><code>sys</code>, <code>performance_schema</code>,
+<p class="note"><strong>Note:</strong> <code>sys</code>, <code>performance_schema</code>,
   and <code>information_schema</code> change dynamically with changes on a <%= vars.product_short %>
   service instance. These schemas are not migrated because the destination database has its own version of the schemas.
   You do not need to back up these schemas.

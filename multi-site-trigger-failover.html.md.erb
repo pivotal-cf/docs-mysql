@@ -35,6 +35,7 @@ To verify the service instance:
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Record the GUID of the follower service instance by running:
@@ -44,7 +45,7 @@ To verify the service instance:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the follower service instance.
-    <br><br>
+
     For example:
     <pre class="terminal">$ cf service my-follower --guid
       12345678-90ab-cdef-1234-567890abcdef
@@ -101,9 +102,9 @@ To trigger a failover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin... <br />
+  FAILED<br />
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred: <br />
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -114,7 +115,8 @@ To promote the follower service instance to leader:
     ```
     cf login SECONDARY-API-URL
     ```
-    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation. <br>
+
+    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the follower service instance to leader by running:
 
@@ -129,14 +131,17 @@ To promote the follower service instance to leader:
     OK</pre>
 
 1. If the above command fails, do one of the following:
+
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
-        <pre class=terminal>Updating service instance secondary-node as admin...
+
+        <pre class="terminal">Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
         [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
-          <pre class=terminal>
+
+          <pre class="terminal">
         Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - the leader is still writable</pre>
@@ -148,7 +153,7 @@ To promote the follower service instance to leader:
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+    
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -176,14 +181,16 @@ To remove the former leader service instance:
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 
 2. Do one of the following:
+
   + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
     Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
      <p class="note"><strong>Note:</strong>
-       If the foundation is lost, you purge the service instance **after** following the steps to recover the
+       If the foundation is lost, you purge the service instance <strong>after</strong> following the steps to recover the
        foundation's Cloud Controller database in
        <a href="https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html">
          Restoring Deployments from Backup with BBR</a>.
@@ -209,10 +216,12 @@ To create a follower:
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Create a service instance using the same <%= vars.single_leader_plan %> plan
    that was used to create the original instance:
+
     + Follow the procedure in [Create a Service Instance](./use.html#create)
     in _Using <%=vars.product_full %>_.
     + Do not name your service instance `follower` because, if in the future
@@ -242,9 +251,9 @@ To trigger a switchover:
 <p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to the following:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+  <code>Updating service instance haDB as admin...<br />
+  FAILED<br />
+  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:<br />
       * the configuration parameter 'initiate-failover' is not a valid option</code>
 </p>
 
@@ -258,6 +267,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login PRIMARY-API-URL
     ```
+
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Set the service instance that is currently the leader to read-only by running:
@@ -268,6 +278,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
 
     For example:
+
     <pre class="terminal">$ cf update-service primary-node \
         -c '{"initiate-failover":"make-leader-read-only"}'<br>
     Updating service instance primary-node as admin...
@@ -286,6 +297,7 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
     cf login SECONDARY-API-URL
     ```
+
     Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the service instance in the secondary foundation to leader by running:
@@ -296,17 +308,21 @@ To make the leader read-only and promote the follower to leader in the secondary
     ```
 
     If the above command fails, do one of the following:
+
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
     to be applied and then run the above command again. The error message looks like the following:
-        <pre class=terminal>Updating service instance secondary-node as admin...
+
+        <pre class="terminal">Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
         [Trigger a Switchover](#switchover) below instead. The error message looks like the following:
-          <pre class=terminal>
+
+        <pre class="terminal">
         Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - the leader is still writable</pre>
+
 1.  Watch the progress of the service instance update by running:
 
     ```
@@ -325,7 +341,7 @@ in the secondary foundation is the leader.
 
 <p class='note warning'><strong>Warning:</strong>
 To successfully trigger a switchover the follower dataset must be a subset of the leader dataset.
-This means that <% vars.product_short %> has not written new data to the follower.
+This means that <%= vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
 create a new <%= vars.single_leader_plan %> service instance and reconfigure replication using this new,
@@ -340,7 +356,7 @@ The following diagram describes the workflow for reconfiguring multi-site replic
 Six steps are shown. Steps 1 and 2 are in 'Primary Foundation';
 Steps 3, 4, and 5 are in 'Secondary Foundation',
 and Step 6 is in 'Primary Foundation'.
-The steps are listed below.](switchover.png)
+The steps are listed below.](images/switchover.png)
 
 <a href="./images/switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -369,11 +385,14 @@ To reconfigure replication for the service instances:
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is a name you choose for the host-info service key.
 
     For example:
+
     <pre class="terminal">$ cf create-service-key primary-node host-info \
           -c '{"replication-request": "host-info" }' <br>
     Creating service key host-info for service instance primary-node as admin...
@@ -385,7 +404,9 @@ To reconfigure replication for the service instances:
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
     + `SERVICE-KEY` is the name of the host-info service key you created in step above.
 
@@ -420,11 +441,14 @@ To reconfigure replication for the service instances:
     ```
     cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `HOST-INFO` is the output you recorded in step above.
 
     For example:
+
     <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
       "peer-info":{ \
           "hostname": "primary.bosh", \
@@ -452,11 +476,14 @@ To reconfigure replication for the service instances:
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
     For example:
+
     <pre class="terminal">$ cf create-service-key secondary-node cred-key \
         -c '{"replication-request": "credentials" }'<br>
     Creating service key cred-key for service instance secondary-node as user<span>@</span>example.com...
@@ -470,7 +497,9 @@ To reconfigure replication for the service instances:
     ```
     cf service-key SECONDARY-INSTANCE SERVICE-KEY-NAME
     ```
+
     Where:
+
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
 
@@ -507,11 +536,14 @@ To reconfigure replication for the service instances:
     ```
     cf update-service PRIMARY-INSTANCE -c CREDENTIALS
     ```
+
     Where:
+
     + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
     + `CREDENTIALS` is the output you recorded in the step above.
 
     For example:
+
     <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \
         "credentials": { \
           "password": "a22aaa2a2a2aaaaa", \
@@ -535,23 +567,29 @@ To reconfigure replication for the service instances:
     watch cf services
     ```
 
-    Wait for the `last operation` for your instance to show as `update succeeded`. <br><br>
+    Wait for the `last operation` for your instance to show as `update succeeded`.
+
     You should now have a leader-follower service instance successfully configured,
-    where the leader is in your secondary foundation and your follower is in the primary foundation. <br><br>
+    where the leader is in your secondary foundation and your follower is in the primary foundation.
+
     If the above command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
+
     + If your follower service instance is more than 3 days behind leader,
     you get error message similar to  the following:
-      <pre class=terminal>$ cf update-service primary-node -c /tmp/credentials-key.json
+
+      <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED
       Server error, status code: 502, error code: 10001, message: Service broker error: Establishing Replication Failed - follower is too far behind Leader to start replication
       Leader GTIDs offering: "487e6056-6e93-11ea-8c96-42010a010806:5-9"
       Follower GTIDs missed: "487e6056-6e93-11ea-8c96-42010a010806:1-9"
       Try again with an empty instance or contact your operator to troubleshoot</pre>
+
     + If your follower has a divergent dataset from the leader,
     you get error message similar to the following:
+
       <pre class="terminal">$ cf update-service primary-node -c /tmp/credentials-key.json
       Updating service instance primary-node as admin...
       FAILED

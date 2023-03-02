@@ -5,16 +5,11 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-<%# The below uses the local product variable and math so we do not need to edit it
-with every release %>
-<% previous_version = (product_info['local_product_version'].to_f - 0.1).round(2) %>
-<% current_version = product_info['local_product_version'] %>
-
 VMware recommends that you upgrade to the latest version of your current minor line,
 then upgrade to the latest available version of the next minor line.
-For example, if you use an older v<%= previous_version %>.x
-version, upgrade to the latest v<%= previous_version %>.x version
-before upgrading to the latest v<%= current_version %>.x version.
+For example, if you use an older v2.8.x
+version, upgrade to the latest v2.8.x version
+before upgrading to the latest v2.9.x version.
 
 <%= partial '/upgrade-planner' %>
 
@@ -38,7 +33,7 @@ See <a href="#2-9-0-breaking-changes">Breaking Changes</a> below.
 
 ### Features
 
-New feature in this release:
+New features in this release:
 
 + **List as many backups as needed:**
   Previously, the Application Developer Backup and Restore (ADBR) plugin always listed the five most recent backups.
@@ -125,10 +120,10 @@ New feature in this release:
   Previously, the Application Developer Backup and Restore (ADBR) feature stored backup
   artifacts in the root directory in external storage.
   For easier navigation, backup artifacts are now stored under
-  `p.mysql > service-instance_GUID > yyyy > mm > dd`.<br><br>
+  `p.mysql > service-instance_GUID > yyyy > mm > dd`.
 
-    Old backup artifacts stored in the root directory can still be accessed through the cf CLI
-    using the `adbr` plugin.
+  Old backup artifacts stored in the root directory can still be accessed through the cf CLI
+  using the `adbr` plugin.
 
 ### Known Issues
 
@@ -174,9 +169,9 @@ then select <strong>Force path style access to bucket</strong> before upgrading.
 <br><br>
 This is necessary because the default style for addressing S3-compatible buckets changed between
 v2.8.x, v2.9.0, and v2.9.1:<br>
-• In v2.9.1 and later, the default bucket address style is virtual hosted.<br>
-• In v2.9.0, the default bucket address style is path.<br>
-• In v2.8.x, the bucket address style is detected automatically.
+* In v2.9.1 and later, the default bucket address style is virtual hosted.<br>
+* In v2.9.0, the default bucket address style is path.<br>
+* In v2.8.x, the bucket address style is detected automatically.
 <br><br>
 For how to select <strong>Force path style access to bucket</strong>,
 see <a href="upgrade.html">Upgrading VMware Tanzu SQL with MySQL for VMs</a>.
@@ -243,9 +238,9 @@ then select <strong>Force path style access to bucket</strong> before upgrading.
 <br><br>
 This is necessary because the default style for addressing S3-compatible buckets changed between
 v2.8.x, v2.9.0, and v2.9.1:<br>
-• In v2.9.1, the default bucket address style is virtual hosted.<br>
-• In v2.9.0, the default bucket address style is path.<br>
-• In v2.8.x, the bucket address style is detected automatically.
+* In v2.9.1, the default bucket address style is virtual hosted.<br>
+* In v2.9.0, the default bucket address style is path.<br>
+* In v2.8.x, the bucket address style is detected automatically.
 <br><br>
 For how to select <strong>Force path style access to bucket</strong>,
 see <a href="upgrade.html">Upgrading VMware Tanzu SQL with MySQL for VMs</a>.

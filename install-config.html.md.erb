@@ -46,9 +46,10 @@ To create an ASG for <%= vars.product_short %>:
 1. Click **Create Networks**.
 
 1. Click your services network and record the **CIDR**.
+
     ![In the 'Create Networks' pane, in the 'Networks' section the 'services'
     network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are
-    shown.](opsman-dir-reserved-ips.png)
+    shown.](images/opsman-dir-reserved-ips.png)
 
 1. Create a JSON file named `mysql-asg.json` using the template below:
 
@@ -118,7 +119,7 @@ To download and import the <%= vars.product_short %> tile:
 
     ![On the left side of the image, 'Assign AZs and Networks' is selected.
     The 'AZ and Network Assignments' configuration pane is shown.
-    See the following section for a description of the fields in this pane.](config-azs.png)
+    See the following section for a description of the fields in this pane.](images/config-azs.png)
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
@@ -207,8 +208,7 @@ For each plan that you want to use in your deployment:
 
 1. Select the plan for your desired topology.
 
-    <%= image_tag("plan-types-2-8.png", :alt => "The 'Plan' section is shown. The radio button for 'Inactive' is selected.", :width => "300") %>
-
+    ![The 'Plan' section is shown. The radio button for 'Inactive' is selected.](images/plan-types-2-8.png)
 
     The tabs below expand to show an example screenshot of each plan:
 
@@ -389,7 +389,7 @@ To configure global settings for all service instances:
 
 1. Click **Settings**.
 
-    <%= image_tag("global-settings.png", :alt => "The 'Settings' pane. See the following step for a detailed description of the configurable fields.", :width => "300") %>
+    ![The 'Settings' pane. See the following step for a detailed description of the configurable fields.](images/global-settings.png)
 
 1. Configure the fields as follows:
     <table>
@@ -417,7 +417,7 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**.
 
-    <%= image_tag("mysql-config.png", :alt => "The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields.", :width => "300") %>
+    ![The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields.](images/mysql-config.png)
 
 1. Configure the fields as follows:
   <table>
@@ -425,12 +425,10 @@ To set MySQL defaults and enable developers to customize their instances:
     <tr><td><strong>Enable Lower Case Table Names</strong></td>
         <td>Select this checkbox to store all table names in lowercase.
             This sets the MySQL server system variable
-            <code>lower\_case\_table\_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
+            <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the checkbox below. <br>
-            For more information about <code>lower\_case\_table\_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you enable this feature,
-ensure all tables have lowercase names. Tables with uppercase names are inaccessible
-after enabling lowercase table names.</p>
+            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
+            <p class="note warning"><strong>Warning:</strong> Before you enable this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this checkbox to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
@@ -442,7 +440,7 @@ after enabling lowercase table names.</p>
             See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
     </td></tr>
     <tr><td><strong>Wait Timeout</strong></td>
-        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections. For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections. For more information about <code>wait_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
     </td></tr>
   </table>
 
@@ -458,8 +456,8 @@ To configure backups:
 
 1. Click **Backups**.
 
-    <%= image_tag("backups.png", :alt => "The radio buttons for backup configuration are
-        Ceph or Amazon S3, SCP, GCS, and Azure.", :width => "200") %>
+    ![The radio buttons for backup configuration are
+        Ceph or Amazon S3, SCP, GCS, and Azure.](images/backups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
 in the _Configuring Automated Backups_ topic:
@@ -488,7 +486,7 @@ To configure the security settings for the MySQL service, do one or both:
 ![The 'Security' pane. The following 'TLS Options' are listed: 'Not Configured',
 'Optional - Developers may configure their service VMs to use TLS', and
 'Required - All connections MUST use TLS.
-Any application that is not using TLS communcation with MySQL will break.'](security.png)
+Any application that is not using TLS communcation with MySQL will break.'](images/security.png)
 
 ####<a id="security-tls"></a> Configure TLS
 
@@ -501,7 +499,7 @@ To enable TLS for the MySQL service:
 1. Under **TLS Options**, select one of the following:
   *  **Optional**: This enables developers to configure their MySQL service VMs to use TLS.
   * **Required**: This enables developers to configure their MySQL service VMs to use TLS and requires all MySQL service VMs to only accept secure connections.
-<p class="note warning"><strong>Warning:</strong> Selecting <strong>Required</strong> breaks any apps that are not currently connecting over TLS.</p>
+  <p class="note warning"><strong>Warning:</strong> Selecting <strong>Required</strong> breaks any apps that are not currently connecting over TLS.</p>
 1. Click **Save**.
 1. After deploying the tile, notify your developers that they must enable TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
@@ -563,9 +561,7 @@ To enable monitoring and logging in the MySQL service:
 
 1. Click **Monitoring**.
 
-    <%= image_tag("monitoring.png",
-    :alt => "Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields.",
-    :width => "300") %>
+    ![Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields.](images/monitoring.png)
 
 1. Configure the fields as follows:
   <table>
@@ -582,7 +578,7 @@ To enable monitoring and logging in the MySQL service:
         <td>Select this checkbox to record who connects to the servers and what queries are processed using the Percona Audit Log Plugin.
             For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
             <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-            You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql\_audit\_logs/</code>.
+            You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
           </p>
            </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
@@ -604,7 +600,7 @@ To enable RFC 5424 system logging for the MySQL broker and service instance VMs:
 
 1. Click **Yes**.
 
-    <%= image_tag("syslog.png", :alt => "Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields.", :width => "550") %>
+    <img src="images/syslog.png" alt="Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields." width="500" />
 
 1. Configure the fields as follows:
   <table>
@@ -648,37 +644,38 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-    <%= image_tag("service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below. ") %>
+    ![Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below.](images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
+
   <table>
     <tr><th>Field</th><th>Instructions</th></tr>
     <tr>
-        <td><strong>Number of simultaneous upgrades</strong></td>
-        <td>Enter the maximum number of service instances that can upgrade at the same time.
+      <td><strong>Number of simultaneous upgrades</strong></td>
+      <td>Enter the maximum number of service instances that can upgrade at the same time.
         The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
         <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, navigate to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
         </p>
-        </td>
+      </td>
     </tr>
     <tr><td><strong>Number of upgrade canary instances</td>
-        <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
-            Increasing this value enables service instance upgrades to fail faster.</td>
+      <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
+          Increasing this value enables service instance upgrades to fail faster.</td>
     </tr>
     <tr><td><strong>BOSH Upgrade Timeout</td>
-        <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
-            Increasing this value enables service instance upgrades to fail faster.</td>
+      <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
+          Increasing this value enables service instance upgrades to fail faster.</td>
     </tr>
     <tr>
       <td>
         <strong>Please type 'X' to acknowledge that you have run...</strong>
       </td>
-        <td>
-          If this is a fresh installation, enter `X`. Do not be concerned with the
-          label instructions.
-        </td>
+      <td>
+        If this is a fresh installation, enter <code>X</code>. Do not be concerned with the
+        label instructions.
+      </td>
     </tr>
-</table>
+  </table>
 
 1. Click **Save**.
 
@@ -711,10 +708,8 @@ To review errands:
 
 1. Click **Errands**.
 
-    <%= image_tag("errands.png",
-    :alt => "Errand list for VMware Tanzu SQL with MySQL for VMs.
-    See the following step for detailed descriptions of the configurable dropdowns.",
-    :width => "250") %>
+    ![Errand list for VMware Tanzu SQL with MySQL for VMs.
+    See the following step for detailed descriptions of the configurable dropdowns.](images/errands.png)
 
 1. Review the settings for the following errands:
   <table>

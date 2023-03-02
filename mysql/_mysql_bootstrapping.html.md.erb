@@ -16,14 +16,13 @@ You must bootstrap a cluster that loses quorum. A cluster loses quorum when fewe
 
 To check whether your cluster has lost quorum, look for the following symptoms:
 
-- All nodes appear "Unhealthy" on the proxy dashboard. <% if vars.product_full.include?("MySQL") %>
+- All nodes appear "Unhealthy" on the proxy dashboard.
 The proxy dashboard is viewable at <%= vars.switchboard_url %>.
-<% else %> To log in to the proxy dashboard, see
-[Log In to Proxy Dashboard](#proxy-dashboard-login) below.<% end %>
-![Screenshot of the Switchboard dashboard.
-At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
-Below this is a table with the headings nodes, status, current sessions, and IP address.
-For each node in the table, the status column is marked unhealthy.](quorum-lost.png)
+
+  ![Screenshot of the Switchboard dashboard.
+  At the top, there is a banner with the message '3 out of 3 nodes are unhealthy'.
+  Below this is a table with the headings nodes, status, current sessions, and IP address.
+  For each node in the table, the status column is marked unhealthy.](images/quorum-lost.png)
 
 - All responsive nodes report the value of `wsrep_cluster_status` as `non-Primary`:
     <pre class="terminal">
@@ -46,34 +45,6 @@ in the MySQL client:
 
 For more information about checking the state of your cluster, see
 [Check Cluster State](https://docs.pivotal.io/p-mysql/1-10/troubleshooting.html#check-state).
-
-
-<% if !vars.product_full.include?("MySQL") %>
-<%# The following is steps to log in to the proxy dashboard for internal MySQL %>
-
-## <a id="proxy-dashboard-login"></a> Log In to Proxy Dashboard
-
-To log in to the proxy dashboard:
-
-1. Get the proxy dashboard credentials by entering the following URL into your web browser
-and recording the output:<pre>
-    http<span>s</span>://OPS-MAN-FQDN/api/v0/deployed/products/<%= vars.app_runtime_abbr.parameterize.upcase %>-GUID/variables?name=mysql-proxy-dashboard-credentials
-</pre>
-    Where:
-    - `OPS-MAN-FQDN` is the fully-qualified domain name (FQDN) for your <%= vars.ops_manager %>
-    deployment.
-    - `<%= vars.app_runtime_abbr.parameterize.upcase %>-GUID` is the GUID of your
-    <%= vars.app_runtime_abbr %> tile. For more information about finding your GUID,
-    see the [Ops Manager API documentation](https://docs.pivotal.io/platform/opsman-api/#tag/Products/paths/~1api~1v0~1deployed~1products/get)
-
-1. Log in to the proxy dashboard by entering the following URL into your web browser: <pre>
-http<span>s</span>://BOSH-JOB-INDEX-proxy-p-mysql-ert.YOUR-SYSTEM-DOMAIN/
-</pre>
-    Where:
-    - `BOSH-JOB-INDEX` is `0`, `1`, or `2`, representing the three proxies deployed on each node.
-    - `SYSTEM-DOMAIN` is the **System domain** you configured in the **Domains** pane of the BOSH Director tile.
-<% end %>
-
 
 ## <a id="assisted-bootstrap"></a> Run the Bootstrap Errand
 
@@ -99,6 +70,7 @@ To determine which set of instructions to follow:
     ```
 
     Where:
+
     - `YOUR-ENV` is the environment where you deployed the cluster.
     - `YOUR-DEPLOYMENT` is the deployment cluster name.
 
@@ -153,25 +125,14 @@ To bootstrap in this scenario:
 
 1. Run the bootstrap errand on the VM where the bootstrap errand is co-located, by running:
 
-<% if vars.product_full.include?("MySQL") %>
     ```
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT run-errand --instance=mysql/0 bootstrap
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
-<% else %>
-    ```
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT run-errand --instance=VM bootstrap
-    ```
 
-    Where:
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
-    + `VM` is `clock_global/0` if you use TAS for VMs and
-      `control/0` if you use Small Footprint TAS for VMs.
-<% end %>
 
     <p class="note"><strong>Note:</strong> The errand runs for a long time, during which no output is returned.</p>
 
@@ -253,6 +214,7 @@ To re-create your missing VMs:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -263,6 +225,7 @@ To re-create your missing VMs:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -277,6 +240,7 @@ To re-create your missing VMs:
       ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -289,6 +253,7 @@ To re-create your missing VMs:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
     + `INSTANCE-GUID` is the GUID of your instance you recorded in the above step.
@@ -311,6 +276,7 @@ To re-create your missing VMs:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -323,25 +289,14 @@ To bootstrap:
 
 1. Run the bootstrap errand by running:
 
-<% if vars.product_full.include?("MySQL") %>
     ```
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT run-errand --instance=mysql/0 bootstrap
     ```
 
     Where:
-    + `YOUR-ENV` is the name of your environment.
-    + `YOUR-DEPLOYMENT` is the name of your deployment.
-<% else %>
-    ```
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT run-errand --instance=VM bootstrap
-    ```
 
-    Where:
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
-    + `VM` is `clock_global/0` if you use TAS for VMs and
-      `control/0` if you use Small Footprint TAS for VMs.
-<% end %>
 
     <p class="note"><strong>Note:</strong> The errand runs for a long time,
       during which no output is returned.</p>
@@ -386,6 +341,7 @@ unignores each instance that was previously ignored:
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/INSTANCE-GUID
     ```
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
     + `INSTANCE-GUID` is the GUID of your instance.
@@ -397,6 +353,7 @@ unignores each instance that was previously ignored:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -407,6 +364,7 @@ unignores each instance that was previously ignored:
     ```
 
     Where:
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -435,6 +393,7 @@ For each node, record if the `monit stop` command was successful:
     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT instances
     ```
     Where: 
+
     + `YOUR-ENV` is the name of your environment.
     + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -462,15 +421,15 @@ For each node, record if the `monit stop` command was successful:
 4. Record if the monit command succeeds or exits with an error:
     + **If monit succeeds in stopping `galera-init`,** then you can use monit to restart this node.
      Follow all the steps below including the steps marked **Monit Restart**
-     but omitting the steps marked **Manual Redeploy**.<br><br>
+     but omitting the steps marked **Manual Redeploy**.
     + **If monit exits with the following error,** then you must manually deploy this node:
 
         <pre class="terminal">
         Warning: include files not found '/var/vcap/monit/job/*.monitrc'
         monit: action failed -- There is no service by that name
         </pre>
-        Follow all the steps below including the steps marked **Manual Redeploy**
-        but omitting the steps marked **Monit Restart**.
+        Follow all the steps below including the steps marked <strong>Manual Redeploy</strong>
+        but omitting the steps marked <strong>Monit Restart</strong>.
 
 
 ### <a id="choose-node"></a> Determine which Node to Bootstrap
@@ -617,19 +576,20 @@ then redeploy the <code>mysqld</code> software to your bootstrap node as follows
   1. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
   For nodes all nodes except the bootstrap node you identified above, run:
 
-        <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</code></pre>
+     <pre class="terminal">bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
+      bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N</pre>
 
-        Where `N` and `M` are the numbers of the non-bootstrapped nodes.
-        For example, if you bootstrap node 0, then `M`=1 and `N`=2.
+     Where `N` and `M` are the numbers of the non-bootstrapped nodes.
+     For example, if you bootstrap node 0, then `M`=1 and `N`=2.
 
   1. Turn off the BOSH Resurrector by running:
 
-        <pre><code>bosh update-resurrection off</code></pre>
+     <pre class="terminal">bosh update-resurrection off</pre>
 
   1. Use the BOSH manifest to bootstrap your bootstrap machine by running:
-    <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
-    bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml</code></pre>
+
+     <pre><code>bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
+     bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml</code></pre>
 
 ### <a id="restart-nodes"></a>Restart Remaining Nodes ###
 
@@ -682,6 +642,7 @@ the highest `sequence_number` is `mysql/0`. <br><br>
         ```
 
         Where:
+
         + `YOUR-ENV` is the name of your environment.
         + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -695,6 +656,7 @@ the highest `sequence_number` is `mysql/0`. <br><br>
         ```
 
         Where:
+
         + `YOUR-ENV` is the name of your environment.
         + `YOUR-DEPLOYMENT` is the name of your deployment.
 
@@ -722,7 +684,7 @@ then restart the nodes as follows:
 
 1. With your redeploys completed, turn the BOSH Resurrector back on by running:
 
-    <pre>bosh -e YOUR-ENV update-resurrection on</pre>
+    <pre class="terminal">bosh -e YOUR-ENV update-resurrection on</pre>
 
 
 ### <a id="verify-nodes"></a>  Verify that the Nodes Have Joined the Cluster
@@ -730,9 +692,7 @@ then restart the nodes as follows:
 The final task is to verify that all the nodes have joined the cluster.
 
 1. Connect to the MySQL database with BOSH SSH.
-<% if vars.product_full.include?("MySQL") %>
    For instructions, see [Connect to MySQL with BOSH SSH](access-admin.html#set-permissions).
-<% end %>
 
 2. Run the following command to output the total number of nodes in the cluster:
 

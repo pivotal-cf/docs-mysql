@@ -26,26 +26,527 @@ The following errors occur in multiple services:
 + [Upgrade All Service Instances Errand Fails](#upgrade-all-fails)
 + [Missing Logs and Metrics](#missing-logs)
 
-<%= partial '/services-tshoot/tshoot-err-install-fail' %>
+<a name="install-fail"></a>
 
-<%= partial '/services-tshoot/tshoot-err-cannot-create-delete' %>
+<div>
 
-<%= partial '/services-tshoot/tshoot-err-timeouts' %>
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Failed Installation
+  <br><br></th>
+  </tr>
 
-<%= partial '/services-tshoot/tshoot-err-instance-not-exist' %>
+  <tr>
+    <th>Symptom</th>
+    <td><%= vars.product_short %> fails to install.</td>
+  </tr>
 
-<%= partial '/services-tshoot/tshoot-err-other-errors' %>
+  <tr>
+    <th>Cause</th>
+    <td>Reasons for a failed installation include:
+    <ul>
+    <li>
+    Certificate issues: The on-demand broker (ODB) requires valid certificates.
+    </li>
+    <li>Deploy fails. This could be due to a variety of reasons.
+    </li>
+    <li>Networking problems: </li>
+    <ul>
+    <li>Cloud Foundry cannot reach the <%= vars.product_short %> broker</li>
+    <li>Cloud Foundry cannot reach the service instances</li>
+    <li>The service network cannot access the BOSH director </li>
+    </ul>
+    <li>The Register broker errand fails.</li>
+    <li>The smoke test errand fails.</li>
+    <li>
+    Resource sizing issues: These occur when the resource sizes selected for a
+    given plan are less than <%= vars.product_short %> requires to function.
+    </li>
+    <li>Other service-specific issues.</li>
+    </ul></td>
+  </tr>
 
-<%= partial '/services-tshoot/tshoot-err-cannot-connect' %>
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ul>
+    <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
+    To generate new certificates, contact <a href="https://support.pivotal.io">Support</a>.</li>
+
+    <li>Deploy fails: View the logs using <%= vars.ops_manager %> to determine why the deploy is failing.</li>
+
+    <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li>
+
+    <li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li>
+
+    <li>Resource sizing issues: Check your resource configuration in <%= vars.ops_manager %> and ensure that the
+    configuration matches that recommended by the service.</li>
+    </ul></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="cannot-create-delete"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Create or Delete Service Instances
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Instance provisioning failed: There was a problem completing your request. Please contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Reasons include:
+    <ul>
+      <li>Problems with the deployment manifest</li>
+      <li>Authentication errors</li>
+      <li>Network errors</li>
+      <li>Quota errors</li>
+    </ul></td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		<p>
+		If the BOSH error shows a problem with the deployment manifest, open the
+		manifest in a text editor to inspect it.
+		</p>
+		</li>
+		<li>
+		<p>
+		To continue troubleshooting,
+		<a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in">Log in to BOSH</a>
+    and target the <%= vars.product_short %> instance using the instructions
+		on <a href="#parse-error">parsing a Cloud Foundry error message</a>.
+		</p>
+		</li>
+		<li>
+		<p>
+		Retrieve the BOSH task ID from the error message and run the following command:
+		</p>
+		<pre><code>bosh task TASK-ID</code></pre>
+		</li>
+		<li>
+		<p>
+		If you need more information, <a href="#access-broker">access the broker logs</a> and
+		use the <code>broker-request-id</code> from the error message above to search the logs for
+		more information. Check for:
+		</p>
+		</li>
+		<ul>
+		<li><a href="#auth">Authentication errors</a></li>
+		<li><a href="#network">Network errors</a></li>
+		<li><a href="#quotas">Quota errors</a></li>
+		</ul>
+		</ol></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="timeouts"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Broker Request Timeouts
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Cloud Foundry might not be connected to the service broker, or there might be a large number of queued tasks.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		Confirm that Cloud Foundry (CF) is <a href="#network">connected to the service broker</a>.
+		</li>
+		<li>
+		Check the BOSH queue size:
+		<ol>
+		<li>Log in to BOSH as an admin.</li>
+		<li>Run <pre><code>bosh tasks</code></pre></li>
+		</ol>
+    If there are a large number of queued tasks, the system may be under too much load.
+		BOSH is configured with two workers and one status worker, which might not be
+		sufficient resources for the level of load.
+		</li>
+		<li>
+		If the task queue is long, advise app developers to try again once the system is under less load.
+		</li>
+		</ol></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="instance-not-exist"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Instance Does Not Exist
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+		<pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The instance might have been deleted.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+		<ol>
+		<li>
+		<p>
+    Confirm that the <%= vars.product_short %> instance exists in BOSH and
+		obtain the GUID CF by running:
+		</p>
+		<pre><code>cf service MY-INSTANCE --guid</code></pre>
+		</li>
+		<li>
+		<p>
+		Using the GUID obtained above, run:
+		</p>
+		<pre><code>bosh -d service-instance_GUID vms</code></pre>
+		</li>
+		</ol>
+
+		<p>
+		If the BOSH deployment is not found, it has been deleted from BOSH.
+		Contact Support for further assistance.
+		</p></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="cannot-bind"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Bind to or Unbind from Service Instances
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>If developers report errors such as:
+    <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This might be due to authentication or network errors.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To find out the exact issue with the binding process:
+    <ol>
+    <li>
+    <p>
+      <a href="#access-broker">Access the service broker logs</a>.
+    </p>
+    </li>
+    <li>
+    <p>
+      Search the logs for the <code>broker-request-id</code> string listed in the error message above.
+    </p>
+    </li>
+    <li>
+    <p>
+      Check for:
+    </p>
+    </li>
+    <ul>
+    <li><a href="#auth">Authentication errors</a></li>
+    <li><a href="#network">Network errors</a></li>
+    </ul>
+    <li>
+    <p>
+    Contact Support for further assistance if you are unable to resolve the problem.
+    </p>
+    </li>
+    </ol></td>
+  </tr>
+
+</table>
+</div>
+
+<a name="cannot-connect"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Connect to a Service Instance
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that their app cannot use service instances that they have
+    successfully created and bound.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>The error might originate from the service or be network related.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To solve this issue, ask the user to send application logs that show the connection error.
+    If the error originates from the service, then follow <%= vars.product_short %>-specific instructions.
+    If the issue appears to be network-related, then:
+    <ol>
+    <li>
+    <p>
+    Check that <a href="https://docs.pivotal.io/application-service/operating/app-sec-groups.html"/>application security groups</a>
+    are configured correctly.
+    Access should be configured for the service network that the tile is deployed to.
+    </p>
+    </li>
+    <li>
+    <p>
+    Ensure that the network the <%= vars.app_runtime_abbr %> tile is deployed
+    to has network access to the service network. You can find the network definition
+    for this service network in the BOSH Director tile.
+    </p>
+    </li>
+    <li>
+    <p>
+    In <%= vars.ops_manager %> go into the service tile and see the service network that is
+    configured in the networks tab.
+    </p>
+    </li>
+    <li>
+    <p>
+    In <%= vars.ops_manager %> go into the <%= vars.app_runtime_abbr %> tile and see the network it is assigned to.
+    Make sure that these networks can access each other.
+    </p>
+    </li>
+    </ol></td>
+  </tr>
+
+</table>
+</div>
 
 <p class="note"><strong>Note:</strong>
   Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
   See <a href="./upgrade.html#interruptions">Service Interruptions</a> for more information.
 </p>
 
-<%= partial '/services-tshoot/tshoot-err-upgrade-all-fails' %>
+<a name="upgrade-all-fails"></a>
 
-<%= partial '/services-tshoot/tshoot-err-missing-logs' %>
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Upgrade All Service Instances Errand Fails
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>There might be a problem with a particular instance.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ol>
+    <li>Look at the errand output in the <%= vars.ops_manager %> log.</li>
+
+    <li>If an instance has failed to upgrade, debug and fix it before running the errand again
+    to prevent any failure issues from spreading to other on-demand instances.</li>
+
+    <li>After the <%= vars.ops_manager %> log no longer lists the deployment as <code>failing</code>,
+    <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
+    </ol>
+</td>
+  </tr>
+
+</table>
+</div>
+
+<a name="missing-logs"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Missing Logs and Metrics
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>No logs are being emitted by the on-demand broker.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Syslog might not be configured correctly, or you might have network access issues.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ol>
+    <li>
+    <p>
+    Ensure you have configured syslog for the tile.
+    </p>
+    </li>
+    <li> Check that your syslog forwarding address is correct in <%= vars.ops_manager %>.</li>
+    <li>
+    <p>
+    Ensure that you have network connectivity between the networks that the tile
+    is using and the syslog destination.
+    If the destination is external, you need to use the <a href="https://docs.pivotal.io/svc-sdk/odb/tile.html#public-ip">public ip</a>
+    VM extension feature available in your <%= vars.ops_manager %> tile configuration settings.
+    </p>
+    </li>
+    <li>
+    <p>
+    Verify that Loggregator is emitting metrics:
+    </p>
+    <ol>
+    <li>
+    <p>
+    Install the <code>cf log-stream</code> plugin.
+    For instructions, see the <a href="https://github.com/cloudfoundry/log-stream-cli">Log Stream CLI Plugin</a>
+    GitHub repository.
+    </p>
+    </li>
+    <li>
+    <p>
+    Find the GUID for your service instance by running:
+    </p>
+    <pre><code>cf service SERVICE-INSTANCE --guid</code></pre>
+    </li>
+    <li>
+    <p>
+    Find logs from your service instance by running:
+    </p>
+    <pre><code>cf log-stream | grep "SERVICE-GUID"</code></pre>
+    </li>
+    <li>If no metrics appear within five minutes, verify that the broker network has access
+    to the Loggregator system on all required ports.</li>
+    </ol>
+    </li>
+    <li>If you are unable to resolve the issue, contact <a href="#support">Support</a>. </li>
+    </ol>
+
+</td>
+  </tr>
+
+</table>
+</div>
 
 
 ### <a id="l-f-errors"></a> Leader-Follower Service Instance Errors
@@ -56,27 +557,47 @@ This section provides solutions for the following errands:
 + [Both Leader and Follower Instances Are Writable](#both-writable)
 + [Both Leader and Follower Instances Are Read-Only](#both-read-only)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unable-to-determine",
-    description: "Unable to Determine Leader and Follower",
-    symptom: <<~DESC,
-    This problem happens when the <code>configure-leader-follower</code>
+<a name="unable-to-determine"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Unable to Determine Leader and Follower
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>This problem happens when the <code>configure-leader-follower</code>
     errand fails because it cannot determine the VM roles. <br><br>
 
     The <code>configure-leader-follower</code> errand exits with <code>1</code>
     and the errand logs contain the following:
 
     <pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
-    DESC
+</td>
+  </tr>
 
-    cause: <<~DESC,
-
-      Something has happened to the instances, such as a failure or manual intervention.
+  <tr>
+    <th>Cause</th>
+    <td>Something has happened to the instances, such as a failure or manual intervention.
       As a result, there is not enough information available to determine the correct state
       and topology without operator intervention to resolve the issue.
-      DESC
+</td>
+  </tr>
 
-    solution: 'Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
     <a href="./about-leader-follower.html#errands">orchestration</a>
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
     <code>configure-leader-follower</code> errand. This is shown in the example below.<br><br>
@@ -114,15 +635,15 @@ This section provides solutions for the following errands:
         In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
-        <a href="./backup-mysqldump.html#create-backup">Create a ' + vars.product_short + ' Logical Backup</a>
+        <a href="./backup-mysqldump.html#create-backup">Create a <%= vars.product_short %> Logical Backup</a>
         steps.</li>
       <li>Restore the backup artifact to the first instance using the
-        <a href="./backup-mysqldump.html#restore-backup">Restore from a ' + vars.product_short + ' Logical Backup</a>
+        <a href="./backup-mysqldump.html#restore-backup">Restore from a <%= vars.product_short %> Logical Backup</a>
         steps.<br>
         At this point, the instances have equivalent data.</li>
       <li>
         Run the <code>configure-leader-follower</code> errand to reconfigure replication:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
         For example:
@@ -131,34 +652,55 @@ This section provides solutions for the following errands:
           run-errand configure-leader-follower &#92;
           --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</pre>
       </li>
-    </ol>'
+    </ol></td>
+  </tr>
 
-} %>
+</table>
+</div>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "both-writable",
+<a name="both-writable"></a>
 
-    description: "Both Leader and Follower Instances Are Writable",
+<div>
 
-    symptom: <<~DESC ,
-    This problem happens when the<code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Both Leader and Follower Instances Are Writable
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
+    This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
     The <code>configure–leader-follower</code> errand exits with <code>1</code>
     and the errand logs contain the following:
 
     <pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</pre>
-    DESC
+</td>
+  </tr>
 
-    cause:
-      vars.product_short + ' tries to ensure that there is only one writable instance of the
+  <tr>
+    <th>Cause</th>
+    <td><%= vars.product_short %> tries to ensure that there is only one writable instance of the
       leader-follower pair at any given time. However, in certain situations, such as
       network partitions, or manual intervention outside of the provided bosh
       errands, it is possible for both instances to be writable. <br><br>
       The service instances remain in this state until an operator resolves the issue
-      to ensure that the correct instance is promoted and reduce the potential for data divergence.
-    ',
+      to ensure that the correct instance is promoted and reduce the potential for data divergence.</td>
+  </tr>
 
-    solution: '
-      <ol>
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    <ol>
         <li>
           Use the
           <code>inspect</code> errand to retrieve the GTID Executed set for each VM:
@@ -224,7 +766,7 @@ This section provides solutions for the following errands:
                   succeeded</pre>
             </li>
             <li>Take a backup of both instances using the
-              <a href="./backup-mysqldump.html#create-backup"> Create a ' + vars.product_short + ' Logical Backup</a>
+              <a href="./backup-mysqldump.html#create-backup"> Create a <%= vars.product_short %> Logical Backup</a>
               steps.</li>
             <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead---this instance has the higher GTID Executed set, and will be the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
@@ -255,26 +797,54 @@ This section provides solutions for the following errands:
           </ol>
         </li>
       </ol>
-    '
-} %>
+    </td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "both-read-only",
-    description: "Both Leader and Follower Instances Are Read-Only",
-    symptom: "Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
-    However if both VMs are read only, apps cannot write to the database.",
-    cause: "This problem happens if the leader VM fails and the BOSH Resurrector is enabled.
-    When the leader is resurrected, it is set as read-only.",
-    solution:'
+</table>
+</div>
+
+<a name="both-read-only"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Both Leader and Follower Instances Are Read-Only
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
+    However if both VMs are read only, apps cannot write to the database.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens if the leader VM fails and the BOSH Resurrector is enabled.
+    When the leader is resurrected, it is set as read-only.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
     <ol>
       <li>
         Use the
         <code>inspect</code>
         errand to confirm that both VMs are in a read-only state:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</pre>
       </li>
-      <li>Examine the output and locate the information about the leader-follower ' +
-        vars.product_short+ ' VMs:
+      <li>Examine the output and locate the information about the leader-follower 
+        <%= vars.product_short %> VMs:
         <pre class="terminal">
     Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
     Exit Code  0
@@ -304,19 +874,22 @@ This section provides solutions for the following errands:
         If Read Only is set to
         <code>true</code>
         for both VMs, make the leader writable using the following command:
-        <pre>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
+        <pre class="terminal">bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</pre>
         For example, if the second instance above is the leader:
         <pre class="terminal">
-    $ bosh -e my-env -d my-dep &#92;
-      run-errand configure-leader-follower &#92;
-      --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
-    </pre>
+        $ bosh -e my-env -d my-dep &#92;
+          run-errand configure-leader-follower &#92;
+          --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
+        </pre>
       </li>
     </ol>
-   '
-} %>
+   </td>
+  </tr>
+
+</table>
+</div>
 
 ###<a id="apps-inoperable"></a>Inoperable App and Database Errors
 
@@ -325,22 +898,47 @@ This section provides a solution for the following errors:
 + [Persistent Disk is Full](#persistent-disk)
 + [Cannot Access Database Table](#access-table)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "persistent-disk",
-    description: "Persistent Disk is Full",
-    symptom: 'Developers report that read, write, and cf CLI operations do not work.
-    Developers cannot upgrade to a larger ' + vars.product_short + ' service plan to free up disk space. <br><br>
+<a name="persistent-disk"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Persistent Disk is Full
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>Developers report that read, write, and cf CLI operations do not work.
+    Developers cannot upgrade to a larger <%= vars.product_short %> service plan to free up disk space. <br><br>
     If your persistent disk is full, apps become inoperable.
-    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.',
-    cause: 'This problem happens if your persistent disk is full.
+    In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens if your persistent disk is full.
     When you use the BOSH CLI to target your deployment, you see that instances are at 100% persistent disk usage. <br><br>
     Available disk space can be increased by deleting log files.
-    After deleting logs, you can then upgrade to a larger ' + vars.product_short + ' service plan.
+    After deleting logs, you can then upgrade to a larger <%= vars.product_short %> service plan.
     <br><br>
     You can also turn off binary logging before developers do large data uploads or if their
-    databases have a high transaction volume.',
-    solution: '
-      To resolve this issue, do one of the following:<br><br>
+    databases have a high transaction volume.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    To resolve this issue, do one of the following:<br><br>
           <ul>
             <li><strong>If your persistent disk is already full,</strong> delete binary logs.
               See
@@ -356,18 +954,43 @@ This section provides a solution for the following errors:
               turn off binary logging.
               See
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base..
+              in the Knowledge Base.
             </li>
-          </ul>'
-} %>
+            </ul>
+            </td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "access-table",
-    description: "Cannot Access Database Table",
-    symptom: "When you query an existing table, you see an error similar to
+</table>
+</div>
+
+<a name="access-table"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Cannot Access Database Table
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>When you query an existing table, you see an error similar to
     the following:
-    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre>",
-    cause: "<p>This error occurs if you created an uppercase table name and then
+    <pre class="terminal">ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</pre></td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td><p>This error occurs if you created an uppercase table name and then
       enabled lowercase table names.</p>
 
     <p>You enable lowercase table names either by:</p>
@@ -383,8 +1006,12 @@ This section provides a solution for the following errors:
       information about this configuration,
       see <a href='./install-config.html#mysql'>Configure MySQL</a>.</li>
     </ul>
-",
-    solution: "<p>To resolve this issue:</p>
+</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td><p>To resolve this issue:</p>
     <ol>
       <li>Disable lowercase table names by doing one of the following:
           <ul>
@@ -395,7 +1022,7 @@ This section provides a solution for the following errors:
               <ol>
               <li>Deselect <strong>Enable Lower Case Table Names</strong> in
             the <strong>Mysql Configuration</strong> pane of the tile.</li>
-              <li> Navigate to the " + vars.ops_manager + " Installation Dashboard,
+              <li> Navigate to the <%= vars.ops_manager %> Installation Dashboard,
         click <strong>Review Pending Changes</strong>, and then click
         <strong>Apply Changes</strong>.</li>
             </ol></li>
@@ -406,8 +1033,12 @@ This section provides a solution for the following errors:
         (Optional) If you want to re-enable lowercase table names,
         re-name your table to lowercase and then enable lowercase table names.
       </li>
-    </ol>"
-} %>
+      </ol>
+      </td>
+  </tr>
+
+</table>
+</div>
 
 
 ###<a id="ha"></a>Highly Available Cluster Errors
@@ -417,24 +1048,46 @@ This section provides solutions for the following errands:
 + [Unresponsive Node in a Highly Available Cluster](#unresponsive)
 + [Many Replication Errors in Logs for Highly Available Clusters](#replication-errors)
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unresponsive",
-    description: "Unresponsive Node in a Highly Available Cluster",
-    symptom:'
-    A client connected to a ' + vars.product_short + ' cluster node reports the following error:
+<a name="unresponsive"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Unresponsive Node in a Highly Available Cluster
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
+    A client connected to a <%= vars.product_short %> cluster node reports the following error:
 
     <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
     </pre>
-    ',
+    </td>
+  </tr>
 
-    cause: 'If the client is connected to a ' + vars.product_short + ' cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
-    re-routes further connections to a different node.',
+  <tr>
+    <th>Cause</th>
+    <td>If the client is connected to a <%= vars.product_short %> cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
+    re-routes further connections to a different node.</td>
+  </tr>
 
-    solution: <<~DESC,
-    A node can become unresponsive for a number of reasons. For solutions, see the following:
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>A node can become unresponsive for a number of reasons. For solutions, see the following:
 
     <ul>
       <li>
@@ -484,13 +1137,33 @@ This section provides solutions for the following errands:
         </ul>
       </li>
     </ul>
-    DESC
-} %>
+</td>
+  </tr>
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "replication-errors",
-    description: "Many Replication Errors in Logs for Highly Available Clusters",
-    symptom: <<~DESC,
+</table>
+</div>
+
+<a name="replication-errors"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Many Replication Errors in Logs for Highly Available Clusters
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     You see many replication errors in the MySQL logs, like the following:
 
     <pre class="terminal">
@@ -498,10 +1171,18 @@ This section provides solutions for the following errands:
     160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
     160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
     </pre>
-    DESC
-    cause: "This problem happens when there are errors in SQL statements.",
-    solution: <<~DESC,
-      For solutions for replication errors in MySQL log files, see the table below.
+    </td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>This problem happens when there are errors in SQL statements.</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
+    For solutions for replication errors in MySQL log files, see the table below.
 
       <table class="nice">
         <tr>
@@ -531,19 +1212,38 @@ This section provides solutions for the following errands:
 
       If you see replication errors, but no <code>ALTER TABLE</code>
       or persistent disk or memory issues, you can ignore the replication errors.
-    DESC
+    </td>
+  </tr>
 
-} %>
+</table>
+</div>
 
 ###  <a id="failed-adbr-backups"></a>Failed Backups
 
 If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plugin fails,
 check that the 2345 port from the <%= vars.app_runtime_abbr %> to the ODB component is open.
 
-<%= partial "/troubleshoot-template", locals: {
-    id: "unable-to-determine",
-    description: "Automated Backups or adbr Plugin Backups Fail",
-    symptom: <<~DESC,
+<a name="unable-to-determine"></a>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    Automated Backups or adbr Plugin Backups Fail
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>
     The following are true:<br><br>
     <ul>
       <li>The backup fails.</li>
@@ -555,18 +1255,27 @@ check that the 2345 port from the <%= vars.app_runtime_abbr %> to the ODB compon
        Where <code>SYSTEM-DOMAIN</code> is your system domain.
       </li>
     </ul>
-    DESC
+    </td>
+  </tr>
 
-    cause: <<~DESC,
+  <tr>
+    <th>Cause</th>
+    <td>
       Port 2345 that allows communication between the TAS for VMs and ODB components is closed.
-      DESC
+      </td>
+  </tr>
 
-    solution: <<~DESC,
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>
     Open port 2345 from the TAS for VMs component to the ODB component.
     See <a href="about.html#mysql-ports">Required Networking Rules for Tanzu SQL for VMs</a>
     in <em>On-Demand Networking</em>.
-      DESC
-} %>
+      </td>
+  </tr>
+
+</table>
+</div>
 
 ##  <a id="components"></a>  Troubleshoot Components
 
@@ -812,26 +1521,26 @@ To manually force a node to rejoin the cluster, do the following:
   </li>
   <li>
     Become root by running:
-    <pre> sudo su</pre>
+    <pre class="terminal"> sudo su</pre>
   </li>
   <li>
     Shut down the
     <code>mysqld</code>
     process on the node by running:
-    <pre>  monit stop galera-init </pre>
+    <pre class="terminal">  monit stop galera-init </pre>
   </li>
   <li>
     Remove the unsynchronized data on the node by running:
-    <pre>  rm -rf /var/vcap/store/pxc-mysql</pre>
+    <pre class="terminal">  rm -rf /var/vcap/store/pxc-mysql</pre>
   </li>
   <li>
     Prepare the node before restarting by running:
-    <pre>  /var/vcap/jobs/pxc-mysql/bin/pre-start</pre>
+    <pre class="terminal">  /var/vcap/jobs/pxc-mysql/bin/pre-start</pre>
   </li>
   <li>Restart the
     <code>mysqld</code>
     process by running:
-    <pre> monit start galera-init</pre>
+    <pre class="terminal"> monit start galera-init</pre>
   </li>
 </ol>
 
@@ -891,7 +1600,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Create a dummy database in the first node by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
        -u YOUR-IDENTITY \
        -p -e "create database verify_healthy;"</pre>
     Where:
@@ -908,7 +1617,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Create a dummy table in the dummy database by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u your-identity \
       -p -D verify_healthy \
       -e "create table dummy_table (id int not null primary key auto_increment, info text) \
@@ -916,7 +1625,7 @@ To check the replication status, do the following:
   </li>
   <li>
     Insert data into the dummy table by running:
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u YOUR-IDENTITY \
       -p -D verify_healthy \
       -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"</pre>
@@ -925,7 +1634,7 @@ To check the replication status, do the following:
     <p>
       Query the table and verify that the three rows of dummy data exist on the first node by running:
     </p>
-    <pre>mysql -h FIRST-NODE-IP-ADDRESS \
+    <pre class="terminal">mysql -h FIRST-NODE-IP-ADDRESS \
       -u YOUR-IDENTITY \
       -p -D verify_healthy \
       -e "select * from dummy_table;"</pre>
@@ -947,7 +1656,7 @@ To check the replication status, do the following:
     by doing the following for each of the remaining MySQL server IP addresses:
     <ol>
       <li>Query the dummy table by running :
-        <pre>mysql -h NEXT-NODE-IP-ADDRESS \
+        <pre class="terminal">mysql -h NEXT-NODE-IP-ADDRESS \
           -u YOUR-IDENTITY \
           -p -D verify\_healthy \
           -e "select * from dummy_table;"</pre>
@@ -960,7 +1669,7 @@ To check the replication status, do the following:
         Verify that the node contains the same three rows of dummy data as the other nodes
         by running:
 
-        <pre >mysql -h NEXT-NODE-IP-ADDRESS \
+        <pre class="terminal">mysql -h NEXT-NODE-IP-ADDRESS \
           -u YOUR-IDENTITY \
           -p -D verify\_healthy \
           -e "select * from dummy\_table;"</pre>
@@ -985,7 +1694,7 @@ To check the replication status, do the following:
   <li>
     <strong>If each MySQL server instance does not return the same result,</strong> before proceeding
     further or making any changes to your deployment, contact
-    <a href="https://tanzu.vmware.com/support">Support</a>
+    <a href="https://tanzu.vmware.com/support">Support</a>.
     <br>
     <strong>If each MySQL server instance returns the same result,</strong> then you can safely proceed
     to scaling down your cluster to a single node.
@@ -1033,7 +1742,7 @@ and [Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.vmware.com/
 
 1. Set local environment variables to the same BOSH variable values that you recorded earlier,
 including `BOSH_DEPLOYMENT` for the deployment name.
-  <br><br>
+
     For example:
     <pre class="terminal">$ BOSH\_CLIENT=ops\_manager \
       BOSH\_CLIENT\_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
