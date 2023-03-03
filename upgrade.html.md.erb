@@ -70,12 +70,13 @@ There are some significant changes from Percona 5.7 to Percona 8.0 of which you 
 The major upgrade incompatibilities have been addressed with version 3.X of the <%= vars.product_short %> tile.
 There may be some compatibility issues with application currently using a Percona 5.7 DB when that DB is upgraded to Percona 8.0.
 To better understand these compatibility issues consider the following options:
+
 + Read the [compatibility documentation from Percona](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals). This will provide details on where an application's SQL may fail to execute correctly.
 + Consider making a backup of the current 5.7 DB and restoring it to a new 8.0 Service Instance in a non production environment. See [Backup and Restore](./backup-restore.html). Connect the relevant application and execute the appropriate tests for functionality and performance, if available.
 + Percona have a set of [compatibility testing tools](https://www.percona.com/blog/percona-utilities-that-make-major-mysql-version-upgrades-easier) which can be used to run existing queries against an upgraded schema. This process provides a mechanism to thoroughly test the application against the upgraded database. It can highlight potential incompatibility errors and performance changes.
 
-**NOTE:**
-These tools are referenced as one option to be considered as part of the process to upgrade a database from MySQL 5.7 to 8.0. They are meant to provide additional confidence while evaluating an upgrade, and are just one source of feedback. No individual tool can guarantee a successful upgrade - it will be the end responsibility of the user to fully review their unique database configuration.
+>**Note**
+>These tools are referenced as one option to be considered as part of the process to upgrade a database from MySQL 5.7 to 8.0. They are meant to provide additional confidence while evaluating an upgrade, and are just one source of feedback. No individual tool can guarantee a successful upgrade - it will be the end responsibility of the user to fully review their unique database configuration.
 
 ### <a id="individual-upgrades"></a> About Individual Service Instance Upgrades
 
