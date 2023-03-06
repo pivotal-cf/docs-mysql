@@ -111,7 +111,7 @@ cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>
 updates the service instance they are bound to.
-          The service should resume within 10–15 minutes. High Availability plans should have slightly shorter periods of time when applications cannot connect as there is a rolling upgrade process which maintains some level of service during the upgrade.
+          The service should resume within 10–15 minutes. High Availability plans use a rolling upgrade process that maintains some level of service during the upgrade, and these plans have slightly shorter periods of time when applications cannot connect.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully,
 apps reconnect automatically.
 
