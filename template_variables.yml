@@ -52,6 +52,6 @@ template_variables:
   mysql_metrics_origin: /p-mysql
   mysql_metrics_origin_v2: /p.mysql
 
-  current_minor_version: 2.7
+  current_minor_version: 3.0
 
   switchboard_url: proxy-BOSH-JOB-INDEX.p-mysql.YOUR-SYSTEM-DOMAIN
