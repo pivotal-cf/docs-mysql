@@ -27,11 +27,11 @@ This release includes the following changes:
 + Support for Ubuntu Jammy stemcells
 + Ubuntu Jammy stemcells require TLS v1.2.
 + For HA service instances, all nodes use TLS for internal communication.
-+ Service instance upgrades:
-	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is enabled, all service instances will be automatically updated or upgraded:
++ Service instances can be updated to run on Ubuntu Jammy and optionally upgraded to run MySQL 8.0, either automatically during the tile upgrade or individually after the tile upgrade is complete.
+	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is enabled, all service instances will be automatically updated or upgraded.
 		+ All service instances using a service plan with a **MySQL Default Version** setting of MySQL 5.7 will be automatically updated to run MySQL 5.7 on Ubuntu Jammy.
-		+ All service instances using a service plan with a **MySQL Default Version** setting of MySQL 8.0 will be automatically upgraded to run MySQL 5.7 on Ubuntu Jammy.
-	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is disabled, no service instances will be automatically updated or upgraded:
+		+ All service instances using a service plan with a **MySQL Default Version** setting of MySQL 8.0 will be automatically upgraded to run MySQL 8.0 on Ubuntu Jammy.
+	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is disabled, no service instances will be automatically updated or upgraded.
 		+ Developers can update a service instance to run on Ubuntu Jammy by running `cf update-service --upgrade`.
 		+ Developers can upgrade a service instance to run MySQL 8.0 on Ubuntu Jammy by running `cf update-service -p` and specifying a service plan that has **MySQL Default Version** set to MySQL 8.0.
 + VM extensions: a new field for service plans enables operators to configure a list of custom VM extensions that apply to VMs for service instances created using the plan.
