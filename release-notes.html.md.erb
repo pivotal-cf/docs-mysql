@@ -15,27 +15,36 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="3-0-0"></a> v3.0.0
 
-**Release Date: TBD**
-
-
-### Known Issues
-
-+ Enforce Application TLS for HA instances does not enforce TLS. The expected behavior is TLS is required. The actual behavior is TLS is not required.
-
-## Breaking changes
-
-This release includes the following breaking changes:
-
-+ Renamed enable_tls property to enforce_client_tls
-
+**Release Date: April 4th, 2023**
 
 ### Changes
 
 This release includes the following changes:
 
-+ Supports MySQL 5.7 and 8.0
-+ Supports Ubuntu Jammy stemcells
-+ Ubuntu Jammy stemcells require TLS v1.2
++ The product has been renamed to VMware SQL with MySQL for Tanzu Application Service.
++ The number of available service plans has increased from 9 to 18.
++ Support for MySQL 5.7 and 8.0: a new **MySQL Default Version** field for service plans enables operators to select either MySQL 5.7 or MySQL 8.0 as the default version for service instances created using the plan.
++ Support for Ubuntu Jammy stemcells
++ Ubuntu Jammy stemcells require TLS v1.2.
++ For HA service instances, all nodes use TLS for internal communication.
++ Service instance upgrades:
+	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is enabled, all service instances will be automatically updated or upgraded:
+		+ All service instances using a service plan with a **MySQL Default Version** setting of MySQL 5.7 will be automatically updated to run MySQL 5.7 on Ubuntu Jammy.
+		+ All service instances using a service plan with a **MySQL Default Version** setting of MySQL 8.0 will be automatically upgraded to run MySQL 5.7 on Ubuntu Jammy.
+	+ If the **Upgrade all On-demand MySQL Service Instances** post-deploy errand is disabled, no service instances will be automatically updated or upgraded:
+		+ Developers can update a service instance to run on Ubuntu Jammy by running `cf update-service --upgrade`.
+		+ Developers can upgrade a service instance to run MySQL 8.0 on Ubuntu Jammy by running `cf update-service -p` and specifying a service plan that has **MySQL Default Version** set to MySQL 8.0.
++ VM extensions: a new field for service plans enables operators to configure a list of custom VM extensions that apply to VMs for service instances created using the plan.
+
+### Known Issues
+
++ Setting **TLS Options** to **Required** enables TLS communication between apps and MySQL service instances, but does not enforce it.
+
+## Breaking changes
+
+This release includes the following breaking changes:
+
++ The `enable_tls` property has been renamed to `enforce_client_tls`.
 
 ### Compatibility
 
