@@ -310,6 +310,13 @@ For each plan that you want to use in your deployment:
     you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.</p>
   <table>
     <tr><th>Field</th><th>Description</th></tr>
+    <tr><td><strong>MySQL Default Version</strong></td>
+        <td>Select one of the following options:<br>
+            <ul><li> <strong>MySQL 5.7</strong>: Sets MySQL 5.7 as the default version for the service plan.
+                </li>
+                <li><strong>MySQL 8.0</strong>: Sets MySQL 8.0 as the default version for the service plan.
+                </li>
+        </ul></td></tr>
     <tr><td><strong>Service Plan Access</strong></td>
         <td>Select one of the following options:<br>
             <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
@@ -356,12 +363,12 @@ For each plan that you want to use in your deployment:
           If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
         </td></tr>
     <tr><td><strong>Plan VM Extensions</strong></td>
-        <td>Specify a comma-separated list of supported VM Extensions you want to
+        <td>Specify a comma-separated list of supported VM extensions you want to
           apply to service instances created under this plan. <br>
-          You can manage VM Extensions in Ops Manager or through the OM CLI.
+          You can manage VM extensions in Ops Manager or through the OM CLI.
           For more information, see <a href="https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html">
           Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
-          in GitHub. <br>
+          in GitHub. <br><br>
           <strong>NOTE:</strong> If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
           config), then instance creation attempts will fail. <br>
         </td></tr>
