@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting VMware Tanzu SQL with MySQL for VMs
+title: Troubleshooting VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
@@ -54,7 +54,7 @@ main table {
 
   <tr>
     <th>Symptom</th>
-    <td>Tanzu SQL for VMs fails to install.</td>
+    <td>VMware SQL with MySQL for TAS fails to install.</td>
   </tr>
 
   <tr>
@@ -68,7 +68,7 @@ main table {
     </li>
     <li>Networking problems: </li>
     <ul>
-    <li>Cloud Foundry cannot reach the Tanzu SQL for VMs broker</li>
+    <li>Cloud Foundry cannot reach the VMware SQL with MySQL for TAS broker</li>
     <li>Cloud Foundry cannot reach the service instances</li>
     <li>The service network cannot access the BOSH director </li>
     </ul>
@@ -76,7 +76,7 @@ main table {
     <li>The smoke test errand fails.</li>
     <li>
     Resource sizing issues: These occur when the resource sizes selected for a
-    given plan are less than Tanzu SQL for VMs requires to function.
+    given plan are less than VMware SQL with MySQL for TAS requires to function.
     </li>
     <li>Other service-specific issues.</li>
     </ul></td>
@@ -161,7 +161,7 @@ main table {
         <p>
         To continue troubleshooting,
         <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>
-        and target the Tanzu SQL for VMs instance using the instructions
+        and target the VMware SQL with MySQL for TAS instance using the instructions
         on <a href="#parse-error">parsing a Cloud Foundry error message</a>.
         </p>
         </li>
@@ -294,7 +294,7 @@ main table {
         <ol>
         <li>
         <p>
-        Confirm that the Tanzu SQL for VMs instance exists in BOSH and
+        Confirm that the VMware SQL with MySQL for TAS instance exists in BOSH and
         obtain the GUID CF by running:
         </p>
         <code>cf service MY-INSTANCE --guid</code>
@@ -431,7 +431,7 @@ successfully created and bound.
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>
     To solve this issue, ask the user to send application logs that show the connection error.
-    If the error originates from the service, then follow Tanzu SQL for VMs-specific instructions.
+    If the error originates from the service, then follow VMware SQL with MySQL for TAS-specific instructions.
     If the issue appears to be network-related, then:
     <ol>
     <li>
@@ -717,10 +717,10 @@ and topology without operator intervention to resolve the issue.
         In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
-        <a href="./backup-mysqldump.html#create-backup">Create a Tanzu SQL for VMs Logical Backup</a>
+        <a href="./backup-mysqldump.html#create-backup">Create a VMware SQL with MySQL for TAS Logical Backup</a>
         steps.</li>
       <li>Restore the backup artifact to the first instance using the
-        <a href="./backup-mysqldump.html#restore-backup">Restore from a Tanzu SQL for VMs Logical Backup</a>
+        <a href="./backup-mysqldump.html#restore-backup">Restore from a VMware SQL with MySQL for TAS Logical Backup</a>
         steps.<br>
         At this point, the instances have equivalent data.</li>
       <li>
@@ -779,7 +779,7 @@ and the errand logs contain the following:
 
   <tr>
     <th>Cause</th>
-    <td>Tanzu SQL for VMs tries to ensure that there is only one writable instance of the
+    <td>VMware SQL with MySQL for TAS tries to ensure that there is only one writable instance of the
       leader-follower pair at any given time. However, in certain situations, such as
       network partitions, or manual intervention outside of the provided bosh
       errands, it is possible for both instances to be writable. <br><br>
@@ -857,7 +857,7 @@ and the errand logs contain the following:
                   succeeded</pre>
             </li>
             <li>Take a backup of both instances using the
-              <a href="./backup-mysqldump.html#create-backup"> Create a Tanzu SQL for VMs Logical Backup</a>
+              <a href="./backup-mysqldump.html#create-backup"> Create a VMware SQL with MySQL for TAS Logical Backup</a>
               steps.</li>
             <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and will be the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
@@ -943,7 +943,7 @@ main table {
         errand to confirm that both VMs are in a read-only state:
         <code>bosh -e ENVIRONMENT -d DEPLOYMENT run-errand inspect</code>
       </li>
-      <li>Examine the output and locate the information about the leader-follower Tanzu SQL for VMs VMs:
+      <li>Examine the output and locate the information about the leader-follower VMware SQL with MySQL for TAS VMs:
         <pre class="terminal">
     Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
     Exit Code  0
@@ -1029,7 +1029,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>Developers report that read, write, and cf CLI operations do not work.
-    Developers cannot upgrade to a larger Tanzu SQL for VMs service plan to free up disk space. <br><br>
+    Developers cannot upgrade to a larger VMware SQL with MySQL for TAS service plan to free up disk space. <br><br>
     If your persistent disk is full, apps become inoperable.
     In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.</td>
   </tr>
@@ -1039,7 +1039,7 @@ main table {
     <td>This problem happens if your persistent disk is full.
     When you use the BOSH CLI to target your deployment, you see that instances are at 100% persistent disk usage. <br><br>
     Available disk space can be increased by deleting log files.
-    After deleting logs, you can then upgrade to a larger Tanzu SQL for VMs service plan.
+    After deleting logs, you can then upgrade to a larger VMware SQL with MySQL for TAS service plan.
     <br><br>
     You can also turn off binary logging before developers do large data uploads or if their
     databases have a high transaction volume.</td>
@@ -1196,7 +1196,7 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>
-    A client connected to a Tanzu SQL for VMs cluster node reports the following error:
+    A client connected to a VMware SQL with MySQL for TAS cluster node reports the following error:
 
     <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
@@ -1208,7 +1208,7 @@ main table {
 
   <tr>
     <th>Cause</th>
-    <td>If the client is connected to a Tanzu SQL for VMs cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
+    <td>If the client is connected to a VMware SQL with MySQL for TAS cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
     re-routes further connections to a different node.</td>
   </tr>
 
@@ -1409,7 +1409,7 @@ main table {
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Open port 2345 from the TAS for VMs component to the ODB component.
-See <a href="about.html#mysql-ports">Required Networking Rules for Tanzu SQL for VMs</a>
+See <a href="about.html#mysql-ports">Required Networking Rules for VMware SQL with MySQL for TAS</a>
 in <em>On-Demand Networking</em>.
 </td>
   </tr>
@@ -1430,7 +1430,7 @@ in <em>On-Demand Networking</em>.
 <p>
   On-demand service brokers add tasks to the BOSH request queue, which can back up
   and cause delay under heavy loads.
-  An app developer who requests a new Tanzu SQL for VMs instance sees
+  An app developer who requests a new VMware SQL with MySQL for TAS instance sees
   <code>create in progress</code> in the Cloud Foundry Command Line Interface (cf CLI) until
   BOSH processes the queued request.
 </p>
@@ -1448,7 +1448,7 @@ in <em>On-Demand Networking</em>.
 
 <p>
   The VM or Disk type that you configured in the plan page of the tile in Ops Manager
-  might not be large enough for the Tanzu SQL for VMs service instance to start.
+  might not be large enough for the VMware SQL with MySQL for TAS service instance to start.
   See tile-specific guidance on resource requirements.
 </p>
 
@@ -1464,7 +1464,7 @@ in <em>On-Demand Networking</em>.
 </p>
 
 <p>
-    To resolve this, redeploy the Tanzu SQL for VMs tile in Ops Manager.
+    To resolve this, redeploy the VMware SQL with MySQL for TAS tile in Ops Manager.
     This provides the broker with the latest configuration.
 </p>
 
@@ -1486,12 +1486,12 @@ in <em>On-Demand Networking</em>.
     <th>Issue</th>
     <th>Solution</th>
     <tr>
-        <td>Latency when connecting to the Tanzu SQL for VMs service instance to create or delete a binding.</td>
+        <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
         <td>Try again or improve network performance.</td>
     </tr>
     <tr>
-        <td>Firewall rules are blocking connections from the Tanzu SQL for VMs service broker to the service instance.</td>
-        <td>Open the Tanzu SQL for VMs tile in Ops Manager and check the two networks configured in the <strong>Networks</strong> pane. Ensure that these networks allow access to each other.</td>
+        <td>Firewall rules are blocking connections from the VMware SQL with MySQL for TAS service broker to the service instance.</td>
+        <td>Open the VMware SQL with MySQL for TAS tile in Ops Manager and check the two networks configured in the <strong>Networks</strong> pane. Ensure that these networks allow access to each other.</td>
     </tr>
     <tr>
         <td>Firewall rules are blocking connections from the service network to the BOSH director network.</td>
@@ -1517,7 +1517,7 @@ To validate connectivity, do the following:
     bosh deployments
     ```
     
-2.  SSH into the Tanzu SQL for VMs service broker by running:
+2.  SSH into the VMware SQL with MySQL for TAS service broker by running:
     
     ```
     bosh -d DEPLOYMENT-NAME ssh
@@ -1532,7 +1532,7 @@ To validate connectivity, do the following:
 
 <p>
   Use <code>cf ssh</code> to access to the app container, then try connecting to
-  the Tanzu SQL for VMs service instance using the binding included in the
+  the VMware SQL with MySQL for TAS service instance using the binding included in the
   <code>VCAP_SERVICES</code> environment variable.
 </p>
 
@@ -1573,7 +1573,7 @@ Please contact your Operator for help.
 <h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a>  Failing Jobs and Unhealthy Instances</h3>
 
 
-To determine whether there is an issue with the Tanzu SQL for VMs deployment:
+To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:
 
 1.  Inspect the VMs by running:
     
@@ -1891,7 +1891,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <p>
     When you make changes to the plan configuration, the errand
-    upgrades all the Tanzu SQL for VMs service instances to the latest version of the plan.
+    upgrades all the VMware SQL with MySQL for TAS service instances to the latest version of the plan.
 </p>
 
 <p>
@@ -2051,7 +2051,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <h3 id="-reinstall-a-tile"><a id="reinstall"></a>  Reinstall a Tile</h3>
 
- <p>To reinstall the Tanzu SQL for VMs tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and above</a>
+ <p>To reinstall the VMware SQL with MySQL for TAS tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and above</a>
  in the Support knowledge base.</p>
 
 <h3 id="-view-resource-saturation-and-scaling"><a id="view-resources"></a>  View Resource Saturation and Scaling</h3>
@@ -2186,7 +2186,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
   </li>
 
   <li>
-    Run <code>download-logs</code> against each node in your Tanzu SQL for VMs cluster, proxies, and jumpbox VM.
+    Run <code>download-logs</code> against each node in your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM.
     You must run
     <code>download-logs</code> before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
     <br>
@@ -2215,17 +2215,17 @@ gathering information to diagnose the type of failure the cluster is experiencin
       </li>
       <li>
         <strong>download-logs logs:</strong>
-        Logs from your Tanzu SQL for VMs cluster, proxies, and jumpbox VM. The
+        Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
         <a href="#download-logs" ">download-logs</a>
         section below explains how to run
         <strong>download-logs</strong>.
       </li>
       <li>
         <strong>Deployment environment:</strong>
-        The environment that Tanzu SQL for VMs is running in such as VMware Tanzu Application Service for VMs or a service tile.</li>
+        The environment that VMware SQL with MySQL for TAS is running in such as VMware Tanzu Application Service for VMs or a service tile.</li>
       <li>
         <strong>Version numbers:</strong>
-        The versions of the installed Ops Manager, TAS for VMs, and Tanzu SQL for VMs.
+        The versions of the installed Ops Manager, TAS for VMs, and VMware SQL with MySQL for TAS.
       </li>
     </ul>
   </li>
@@ -2408,7 +2408,7 @@ To check the replication status, do the following:
 <h3 id="download-logs"><a id="download-logs"></a>download-logs</h3>
 
 <p><code>download-logs</code> is a script that you can run from your Ops Manager VM to aggregate
-logs from your Tanzu SQL for VMs cluster nodes, proxies, and, with highly available clusters,
+logs from your VMware SQL with MySQL for TAS cluster nodes, proxies, and, with highly available clusters,
 the jumpbox VM.</p>
 
 <p>To use the <code>download-logs</code> script:</p>
@@ -2426,7 +2426,7 @@ the jumpbox VM.</p>
 <li><code>BOSH_CA_CERT</code></li>
 <li><code>BOSH_ENVIRONMENT</code></li>
 </ul></li>
-<li><p>From the BOSH CLI, view the name of the BOSH deployment for Tanzu SQL for VMs by running:</p>
+<li><p>From the BOSH CLI, view the name of the BOSH deployment for VMware SQL with MySQL for TAS by running:</p>
 <code>bosh deployments</code>
 
 <p>Record the name of the BOSH deployment.</p></li>
@@ -2447,14 +2447,14 @@ For example:
 <li><p>Run the <code>download-logs</code> script by running:</p>
 <code>./download-logs -o .</code>
 
-<p>The script saves a compressed file of logs combined from all Tanzu SQL for VMs VMs.
+<p>The script saves a compressed file of logs combined from all VMware SQL with MySQL for TAS VMs.
 The filename has the form <code>TIMESTAMP-mysql-logs.tar.gz.gpg</code>.</p></li>
 </ol>
 
 
 ### <a id="mysql-diag"></a>mysql-diag
 
-The `mysql-diag` tools outputs the current status of a highly available (HA) Tanzu SQL for VMs cluster and suggests recovery actions if the cluster fails.
+The `mysql-diag` tools outputs the current status of a highly available (HA) VMware SQL with MySQL for TAS cluster and suggests recovery actions if the cluster fails.
 
 For more information, see [Running mysql-diag](mysql-diag.html).
 

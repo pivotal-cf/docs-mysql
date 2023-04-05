@@ -1,7 +1,7 @@
 docs-mysql
 ==========
 
-Docs for VMware Tanzu SQL with MySQL for VMs
+Docs for VMware SQL with MySQL for Tanzu Application Service
 
 ## Which branch to use?
 
@@ -33,13 +33,13 @@ The private book repo associated with this content repo is [**docs-book-mysql**]
 
 ## Partials
 
-Cross-product partials for **VMware Tanzu SQL with MySQL for VMs** are single sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
+Cross-product partials for **VMware SQL with MySQL for Tanzu Application Service** are single sourced from the [Services Partials](https://github.com/pivotal-cf/docs-partials) repo.
 
 Previously, these partials were sourced from the v018.x branch of the [On Demand Service Broker SDK](https://github.com/pivotal-cf/docs-on-demand-service-broker/tree/v0.18.x) content repository.
 
 ## Style Guide
 
-This is a word list for terminology and word usage specific to the VMware Tanzu SQL with MySQL for VMs docs.
+This is a word list for terminology and word usage specific to the VMware SQL with MySQL for Tanzu Application Service docs.
 
 | Word | Explanation |
 |------|-------------|
@@ -48,7 +48,7 @@ This is a word list for terminology and word usage specific to the VMware Tanzu 
 | CA certificate | A primary(?) certificate that is signed by a certificate authority. |
 | certificate | generic word, there are TLS certificates, internal certificates, CA certificates |
 | highly available cluster | No need to capitalize. Don't mix with "high availability cluster" or Galera. Galera happens to be the technology right now, but highly available cluster is the topology. You can abbreviate to HA cluster after spelling out on first use. Don't use "HAC". |
-| internal certificate | These are certificates managed by VMware Tanzu SQL with MySQL for VMs. There are many of these. They get rotated with upgrades. |
+| internal certificate | These are certificates managed by VMware SQL with MySQL for Tanzu Application Service. There are many of these. They get rotated with upgrades. |
 | leader-follower | It seems that we always hyphenate it. But we don't capitalize it. |
 | MySQL database cluster node | Only applies to Galera clusters. Spell out like this at first use, then opt for "node" on the rest of the page. |
 | node | See above. The old proxy page used: MySQL node, server node, MySQL servers, cluster back-ends, back-end database cluster node, database node VM, proxy instance, proxy. But, only two things are referred to here, nodes and proxies. |
