@@ -399,23 +399,23 @@ The upgrade is available when the `upgrade available` column in the output says 
 
 For example:
 
-```
-$ cf services
-Getting services in org system / space system as admin...
+  ```
+  $ cf services
+  Getting services in org system / space system as admin...
 
-name         service    plan      bound apps  last operation    broker                  upgrade available
-my-instance  p.mysql    db-small              create succeeded  dedicated-mysql-broker  yes
-```
+  name         service    plan      bound apps  last operation    broker                  upgrade available
+  my-instance  p.mysql    db-small              create succeeded  dedicated-mysql-broker  yes
+  ```
 
 1. Upgrade the service instance by running:
 
-```
-cf update-service SERVICE-INSTANCE-NAME --upgrade
-```
+  ```
+  cf update-service SERVICE-INSTANCE-NAME --upgrade
+  ```
 
 1. When prompted, confirm that you want to upgrade.
 
-####<a id="upgrade-mysql-8-0"></a> Upgrade to MySQL 8.0
+####<a id="upgrade-mysql-8-0"></a> Upgrade a Service Instance to MySQL 8.0
 
 When you upgrade a service instance using the `cf update-service` command with the
 `--upgrade` flag, the service instance continues to use MySQL 5.7. To upgrade a service
@@ -424,12 +424,14 @@ instance to use MySQL 8.0, you have two options:
 1. If your operator has configured the service plan used by your service instance to use
 MySQL 8.0, run the `cf update-service` command with the `-p` flag and specify the
 existing service plan used by the service instance:
+
   ```
   cf update-service SERVICE-INSTANCE-NAME -p my-existing-plan
   ```
 1. If the service plan used by your service instance is still configured to use MySQL 5.7,
 run the `cf-update-service` command with the `-p` flag and specify a service plan
 that is configured to use MySQL 8.0:
+
   ```
   cf update-service SERVICE-INSTANCE-NAME -p new-8-0-plan
   ```
