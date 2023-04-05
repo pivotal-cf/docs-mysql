@@ -10,23 +10,14 @@ from their apps and local workstations to the <%= vars.product_full %> service.
 
 ## <a id="overview"></a>Overview
 
-For <%= vars.product_old %> v2.5 and later and <%= vars.product_short %> 2.7 and later, if your operator has configured TLS in the tile,
-but did not configure TLS for existing service instances in <%= vars.product_old %> v2.4 and earlier,
-you must enable TLS using the procedures in [Enable TLS](#enable), below.
-
-If your operator has configured TLS in the tile, new service instances have TLS enabled by default.
-In this case, developers do not have to enable TLS.
+If your app does not currently use TLS to connect to <%= vars.product_short %> service
+instances, and your operator has configured <%= vars.product_short %> to enforce TLS
+connections between apps and service instances, you must enable TLS using the procedures
+in [Enable TLS](#enable), below.
 
 After TLS is enabled for your service instance, you can establish a TLS connection from your local
 workstation to a <%= vars.product_short %> service instance.
 See [Establish a TLS Connection to a Service Instance](#establish-tls), below.
-
- <p class="note warning"><strong>Warning:</strong> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
-   Because of this, the server certificate does not validate apps.
-   If an app presents a certificate to the MySQL server,
-   the connection closes and a network error appears in the app logs. To resolve this issue, you must disable
- 	mTLS in your apps.
- </p>
 
  <p class="note warning"><strong>Warning:</strong> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
    Because of this, the server certificate does not validate apps.
@@ -45,21 +36,12 @@ To enable TLS on existing service instances, do one of the following:
 * If your app is written in Java or Spring, see [Activate TLS for Java and Spring Apps](#activate-spring), below.
 * If your app is not written in Java or Spring, see [Activate TLS for Non-Spring Apps](#activate-non-spring), below.
 
-### <a id='prereq'></a> Prerequisites
-
-To enable TLS for service instances, an operator must:
-
-* Complete the procedure in [Preparing for TLS](prepare-tls.html).
-* Enable TLS in the tile configuration when doing the procedure in [Configure Security](install-config.html#security).
-
 ###<a id='activate-spring'></a> Activate TLS for Java and Spring Apps
 
-In <%= vars.product_old %> v2.5, if your operator has configured TLS in the tile,
-new service instances have TLS enabled by default.
 If your Spring app detects TLS configured in the service instance, it must connect over TLS.
-
-If you did not previously enable TLS in your service instance before upgrading to <%= vars.product_old %> v2.5,
-you must rebind your Spring apps in order to re-establish connections to your service instance.
+If you did not previously enable TLS in your service instance before your operator configured
+<%= vars.product_short %> to require TLS connections to service instances, you must rebind
+your Spring apps in order to re-establish connections to your service instance.
 
 <p class="note"><strong>Note:</strong> VMware recommends developers configure their apps
 to use the <a href="https://dev.mysql.com/downloads/connector/j/8.0.html">MySQL Connector/J</a> v5.1.42 or later
