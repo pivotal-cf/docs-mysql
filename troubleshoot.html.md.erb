@@ -588,22 +588,16 @@ main table {
     <ol>
     <li>
     <p>
-    Install the <code>cf log-stream</code> plugin.
-    For instructions, see the <a href="https://github.com/cloudfoundry/log-stream-cli">Log Stream CLI Plugin</a>
+    Install the <code>cf log-cache</code> plugin.
+    For instructions, see the <a href="https://github.com/cloudfoundry/log-cache-cli">Log Cache CLI Plugin</a>
     GitHub repository.
     </p>
     </li>
     <li>
     <p>
-    Find the GUID for your service instance by running:
-    </p>
-    <code>cf service SERVICE-INSTANCE --guid</code>
-    </li>
-    <li>
-    <p>
     Find logs from your service instance by running:
     </p>
-    <code>cf log-stream | grep "SERVICE-GUID"</code>
+    <code>cf tail -f SERVICE_INSTANCE</code>
     </li>
     <li>If no metrics appear within five minutes, verify that the broker network has access
     to the Loggregator system on all required ports.</li>
