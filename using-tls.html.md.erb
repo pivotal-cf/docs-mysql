@@ -13,16 +13,16 @@ from their apps and local workstations to the <%= vars.product_full %> service.
 If your app does not currently use TLS to connect to <%= vars.product_short %> service
 instances, and your operator has configured <%= vars.product_short %> to enforce TLS
 connections between apps and service instances, you must enable TLS using the procedures
-in [Enable TLS](#enable), below.
+in [Enable TLS](#enable).
 
 After TLS is enabled for your service instance, you can establish a TLS connection from your local
 workstation to a <%= vars.product_short %> service instance.
-See [Establish a TLS Connection to a Service Instance](#establish-tls), below.
+See [Establish a TLS Connection to a Service Instance](#establish-tls).
 
  <p class="note warning"><strong>Warning:</strong> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
    Because of this, the server certificate does not validate apps.
    If an app presents a certificate to the MySQL server,
-   the connection closes and a network error appears in the app logs. To resolve this issue, you must disable
+   the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate
  	mTLS in your apps.
  </p>
 
@@ -33,8 +33,8 @@ Java and Spring apps automatically detect TLS.
 Apps written in other languages and frameworks must be manually modified to use TLS.
 To enable TLS on existing service instances, do one of the following:
 
-* If your app is written in Java or Spring, see [Activate TLS for Java and Spring Apps](#activate-spring), below.
-* If your app is not written in Java or Spring, see [Activate TLS for Non-Spring Apps](#activate-non-spring), below.
+* If your app is written in Java or Spring, see [Activate TLS for Java and Spring Apps](#activate-spring).
+* If your app is not written in Java or Spring, see [Activate TLS for Non-Spring Apps](#activate-non-spring).
 
 ###<a id='activate-spring'></a> Activate TLS for Java and Spring Apps
 
@@ -177,7 +177,7 @@ To establish a TLS connection to a service instance:
   }
   </pre>
 
-  If the service key does not have a CA certificate under `tls.cert.ca`, the service key may be stale.
+  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale.
   Create a new one.
 
 1. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:

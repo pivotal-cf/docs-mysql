@@ -8,7 +8,7 @@ This topic describes networking for on-demand services, including <%= vars.produ
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- This partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + '/services/service-networks-v3' %>
 
@@ -24,7 +24,7 @@ This on-demand architecture has the following advantages:
 
 An on-demand service separates operations between the default network and the service network. Shared service components, such as executive controllers and databases, Cloud Controller, UAA, and other on-demand components, run on the default network. Worker pools deployed to specific spaces run on the service network.
 
-The diagram below shows worker VMs in an on-demand service instance running on a separate services network, while other components run on the default network.
+The following diagram shows worker VMs in an on-demand service instance running on a separate services network, while other components run on the default network.
 
 <p><img src="./images/odb-architecture-vmware.png"
 alt="Diagram of the default network and services network as described in this section.">
@@ -33,7 +33,7 @@ alt="Diagram of the default network and services network as described in this se
 
 <h2> <a id="rules"></a> Required Networking Rules for On-Demand Services </h2>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + '/services/service_networks_table', :locals => {
 	:app_runtime_full => vars.app_runtime_full,
@@ -43,7 +43,7 @@ alt="Diagram of the default network and services network as described in this se
 
 Regardless of the specific network layout, the operator must set network rules.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 <table class="nice">
 	<th>Source Component</th>
@@ -141,7 +141,7 @@ If you are using a leader-follower
 service plan, the operator must set network rules in addition to the
 networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 
 <table class="nice">
@@ -166,7 +166,7 @@ To ensure that connections are open, see the table below:
 If you are using a HA cluster service plan, the operator must set network rules in addition
 to the networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 <table class="nice">
 	<th>Source VM</th>
@@ -219,7 +219,7 @@ To ensure that connections are open, see the table below:
 If you are using <%= vars.single_leader_plan_lc %>, the operator must set network rules for
 both foundations in addition to the networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open in both foundations, see the table below:
+To ensure that connections are open in both foundations, see the following table:
 
 <table class="nice">
 	<th>Source VM</th>

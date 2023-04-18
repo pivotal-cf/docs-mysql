@@ -82,7 +82,7 @@ To set optional parameters:
 
 ## <a id='workload'></a>Workloads
 
-The table below describes how to use the `workload` optional parameter
+The following table describes how to use the `workload` optional parameter
  to adjust server default settings for different workload profiles:
 
 <table>
@@ -105,7 +105,7 @@ The table below describes how to use the `workload` optional parameter
     <th><strong>Description</strong></th>
     <td>Set this parameter to  <code>mixed</code>,
       <code>read-heavy</code> or <code>write-heavy</code>.
-      See <a href="#workload-type">Workload Profile Types</a> below.</td>
+      See <a href="#workload-type">Workload Profile Types</a>.</td>
   </tr>
 
   <tr>
@@ -117,7 +117,7 @@ The table below describes how to use the `workload` optional parameter
 
 ### <a id='workload-type'></a> Workload Profile Types
 
-The table below lists the workload profiles that developers
+The following table lists the workload profiles that developers
 can use to configure MySQL instances based on their specific app workloads:
 
 
@@ -171,7 +171,7 @@ lowercase table names both of the above names change to `tablename` and are inte
 For more information, see the
 [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names).
 
-The table below describes how to use the `enable_lower_case_table_names` optional parameter:
+The following table describes how to use the `enable_lower_case_table_names` optional parameter:
 
 <table>
   <tr>
@@ -194,7 +194,7 @@ The table below describes how to use the `enable_lower_case_table_names` optiona
     <td>The operator can set a default for this parameter and permit developers to override the default.
        <br><br>
       If you set this to <code>true</code>, table names are stored in lowercase.
-      See <a href="#lowercase">About Lowercase Table Names</a> below.
+      See <a href="#lowercase">About Lowercase Table Names</a>.
       <p class="note warning"><strong>Warning:</strong> Before you enable this feature,
 ensure all tables have lowercase names. Tables with uppercase names are inaccessible
 after enabling lowercase table names.</p></td>
@@ -209,7 +209,7 @@ after enabling lowercase table names.</p></td>
 
 ## <a id='character'></a>Character Sets
 
-The table below describes how to use the `default-charset` and  `default-collation`
+The following table describes how to use the `default-charset` and  `default-collation`
 optional parameters to change the character sets used in databases:
 
 <table>
@@ -282,7 +282,7 @@ leader node until the follower acknowledges the commit and can replicate it.
 The guarantee of redundancy gives sync replication an advantage over asynchronous replication in data integrity.
 However, depending on latency, sync replication reduces the performance of write operations.
 
-The table below describes how to use the `replication_mode` optional parameter:
+The following table describes how to use the `replication_mode` optional parameter:
 
 <p class="note"><strong>Note: </strong> <code>replication_mode</code> does not work
 for single node, HA cluster, or multi-site replication plans.</p>
@@ -336,7 +336,7 @@ the replication mode automatically reverts to asynchronous without any user inte
 You can manually override this timeout by setting a lower value.
 </p>
 
-The table below describes how to use the `semi_sync_ack_timeout_in_ms` optional parameter:
+The following table describes how to use the `semi_sync_ack_timeout_in_ms` optional parameter:
 
 <table>
   <tr>
@@ -368,7 +368,7 @@ The table below describes how to use the `semi_sync_ack_timeout_in_ms` optional 
 
 ## <a id='backup-schedule'></a> Backup Schedule
 
-The table below describes how to use the `backup-schedule` optional parameter:
+The following table describes how to use the `backup-schedule` optional parameter:
 
 <table>
   <tr>
@@ -406,7 +406,7 @@ The table below describes how to use the `backup-schedule` optional parameter:
 
 ## <a id='optimize_for_short_words'></a> Optimize for Short Words
 
-The table below describes how to use the `optimize_for_short_words` optional parameter:
+The following table describes how to use the `optimize_for_short_words` optional parameter:
 
 <table>
   <tr>
@@ -433,7 +433,7 @@ The table below describes how to use the `optimize_for_short_words` optional par
     you must monitor the memory usage of the service instance and choose a larger VM type
     when necessary.
     Also, the operator needs to prevent the index from becoming too large and ineffective
-    by removing entries as described below.
+    by removing entries.
     How often this needs to be done depends on the workload and
     how much data is changed in the full-text index.
     <br>
@@ -470,7 +470,7 @@ The table below describes how to use the `optimize_for_short_words` optional par
 
 ## <a id='wsrep_applier_threads'></a> WSREP Applier Threads
 
-The table below describes how to use the `wsrep_applier_threads` optional parameter:
+The folllowing table describes how to use the `wsrep_applier_threads` optional parameter:
 
 <table>
   <tr>
@@ -490,13 +490,13 @@ The table below describes how to use the `wsrep_applier_threads` optional parame
   <tr>
     <th><strong>Description</strong></th>
     <td>
-      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to 4 threads, whereas Percona XtraDB Cluster 5.7 defaults to 1. 
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to 4 threads, whereas Percona XtraDB Cluster 5.7 defaults to 1.
 
-      For further details, see the 
+      For further details, see the
       <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster Docs</a>.
 
       <p class="note caution">
-        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans, and will be rejected for service plans using other topologies.
+        <strong>Note:</strong> This parameter only applies to "high-availablity" service plans, and is rejected for service plans using other topologies.
       </p>
     </td>
 

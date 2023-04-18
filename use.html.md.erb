@@ -17,26 +17,26 @@ To use <%= vars.product_short %> in an app:
 1. Check the service availability in the Marketplace,
    and see if there is an existing instance of <%= vars.product_short %> in your space.
 
-    See [Confirm the <%= vars.product_short %> Service Availability](#marketplace), below.
+    See [Confirm the <%= vars.product_short %> Service Availability](#marketplace).
 
 2. If there is no existing instance or you want to use a different one,
    create an instance of the <%= vars.product_short %> service in the same space as the app.
 
-    See [Create a Service Instance](#create), below.
+    See [Create a Service Instance](#create).
 
 4. Bind the app to the <%= vars.product_short %> service instance, to enable the app to use MySQL.
 
-    See [Bind a Service Instance to Your App](#bind), below.
+    See [Bind a Service Instance to Your App](#bind).
 
 5. Call the <%= vars.product_short %> service in your app code, and then re-push your app into the space.
 
-    See [Use the MySQL Service in Your App](#call), below.
+    See [Use the MySQL Service in Your App](#call).
 
 After you create a <%= vars.product_short %> service instance,
 you can manage it over the life cycle of your apps and data.
-See [Manage Service Instances](#manage), below.
+See [Manage Service Instances](#manage).
 
-The below procedures use the Cloud Foundry Command Line Interface (cf CLI). For more information,
+The following procedures use the Cloud Foundry Command Line Interface (cf CLI). For more information,
 see [Managing Service Instances with the cf CLI](https://docs.pivotal.io/application-service/devguide/services/managing-services.html).
 You can also use Apps Manager to do the same tasks using a graphical UI.
 For more information, see
@@ -44,7 +44,7 @@ For more information, see
 
 ## <a id="prereqs"></a>Prerequisites
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + "/services/developer-prereqs" %>
 
@@ -199,7 +199,7 @@ To access the MySQL service from your app:
 
 1. Locate the connection strings listed in the
 `VCAP_SERVICES` > `credentials` object for your app. For information about `VCAP_SERVICES`,
-see [MySQL Environment Variables](#vcap) below.
+see [MySQL Environment Variables](#vcap).
 
 1. In your app code, call the MySQL service using the connection strings.<br><br>
   See this example [Node.js code](./using-tls.html#call-service).
@@ -292,15 +292,15 @@ your app to apply the changes to `VCAP_SERVICES`.
 
 You can manage service instances in the following ways:
 
-+ Migrate your data to a different plan. See [Migrate Data to a Different Plan](#migrate) below.
++ Migrate your data to a different plan. See [Migrate Data to a Different Plan](#migrate).
 + Upgrade service instance individually to the latest version of <%= vars.product_short %>.
-See [Upgrade an Individual Service Instance](#single) below.
+See [Upgrade an Individual Service Instance](#single).
 + Change the default parameters for an existing service instance.
 See [Change Default Parameters on an Existing Service Instance](./change-default.html#updating).
-+ Share service instances between orgs and spaces. See [Share Service Instances](#share) below.
++ Share service instances between orgs and spaces. See [Share Service Instances](#share).
 + Remove access to a service from an app that no longer needs it.
-See [Unbind an App from a Service Instance](#unbind) below.
-+ Delete a service instance that is not used. See [Delete a Service Instance](#delete) below.
+See [Unbind an App from a Service Instance](#unbind).
++ Delete a service instance that is not used. See [Delete a Service Instance](#delete).
 
 ### <a id="migrate"></a> Migrate Data to a Different Plan
 
@@ -342,7 +342,7 @@ The following table lists migration use cases for the `update-service` command:
 
 <p class="note warning"><strong>Warning:</strong> You cannot use <code>cf update-service</code>
   to migrate data between an HA cluster plan and a plan of another topology.
-If you want to do this, you must use the <code>cf mysql-tools</code> plugin instead.
+If you want to do this, you must use the <code>cf mysql-tools</code> plug-in instead.
 For more information about migrating data,
 see <a href="./about-migrate.html">About Data Migration in <%= vars.product_full %></a>.
 </p>
@@ -555,7 +555,7 @@ To purge a service instance:
 
     <pre class="terminal">
     $ cf purge-service-instance my-instance<br>
-    WARNING: This operation assumes that the service broker responsible for this service instance is no longer available or is not responding with a 200 or 410, and the service instance has been deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service instance will be removed from Cloud Foundry, including service bindings and service keys.
+    WARNING: This operation assumes that the service broker responsible for this service instance is no longer available or is not responding with a 200 or 410, and the service instance has been deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service instance are removed from Cloud Foundry, including service bindings and service keys.
 
     Really purge service instance my-instance from Cloud Foundry?> y
     Purging service my-instance...

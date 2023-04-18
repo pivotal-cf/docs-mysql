@@ -41,11 +41,11 @@ To create a leader-follower service across multiple foundations:
 foundations.
 See [Confirm the <%= vars.product_full %> Service Availability](use.html#marketplace).
 1. Create one <%= vars.single_leader_plan %>  service instance on each foundation.
-See [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc), below.
+See [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
 1. Enable replication between the <%= vars.single_leader_plan %> service instances.
-See [Configure <%= vars.single_leader_plan %>](#create-service-key), below.
+See [Configure <%= vars.single_leader_plan %>](#create-service-key).
 1. Bind the <%= vars.single_leader_plan %> leader-follower service instance to your apps.
-See [Bind a <%= vars.single_leader_plan %> Leader-Follower Service Instance to Your App](#bind), below.
+See [Bind a <%= vars.single_leader_plan %> Leader-Follower Service Instance to Your App](#bind).
 5. Modify your app to use the <%= vars.product_short %> service.
 See [Use the MySQL Service in Your App](./use.html#call).
 
@@ -60,7 +60,7 @@ To create a leader-follower service instance across two foundations, you
 must create one <%= vars.single_leader_plan %> service instance in each
 foundation. You must configure the service instances in each foundation for replication.
 
-<p class="note"><strong>Note:</strong> In the below procedure, the primary foundation is
+<p class="note"><strong>Note:</strong> In the following procedure, the primary foundation is
 the foundation that your leader VM is deployed to. The secondary foundation is
 the foundation that the follower VM is deployed to, and usually is your disaster recovery
 site.
@@ -143,7 +143,7 @@ The following diagram describes the workflow for configuring <%= vars.single_lea
 Six steps are shown.
 Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation',
 and Step 6 is in 'Secondary Foundation'.
-The steps are listed below.](images/configure-multi-site.png)
+The steps are listed here.](images/configure-multi-site.png)
 
 <a href="./images/configure-multi-site.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -158,7 +158,7 @@ The steps shown in the diagram are as follows:
 
 #### Procedure for Configuring <%= vars.single_leader_plan %>
 
-<p class="note"><strong>Note:</strong> The below procedure assumes you created the leader service instance in
+<p class="note"><strong>Note:</strong> The following procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 You created these service instances in
 <a href="#create-multi-dc">Create <%= vars.single_leader_plan %> Service Instances</a> above.

@@ -12,7 +12,7 @@ to run an errand using the BOSH CLI.
 
 Errands can manage service brokers and run mass operations on service
 instances created by brokers.
-To run an errand, see [Run an Errand](#errand) below.
+To run an errand, see [Run an Errand](#errand).
 
 For all supported <%= vars.product_full %> errands,
 see the full errand list:
@@ -159,8 +159,8 @@ For more information, see [Triggering a Leader-Follower Failover](./leader-follo
 
 The `delete-all-service-instances-and-deregister-broker` errand does the following:
 
-- Disables service access to the service offering for all orgs and spaces.
-The errand disables service
+- Deactivates service access to the service offering for all orgs and spaces.
+The errand deactivates service
 access to ensure that new instances cannot be provisioned during the lifetime of the errand.
 - Unbinds all apps from the service instances.
 - Runs any pre-delete errands for each instance.

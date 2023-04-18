@@ -237,7 +237,7 @@ main table {
         <li>Log in to BOSH as an admin.</li>
         <li>Run <code>bosh tasks</code></li>
         </ol>
-    If there are a large number of queued tasks, the system may be under too much load.
+    If there are a large number of queued tasks, the system might be under too much load.
         BOSH is configured with two workers and one status worker, which might not be
         sufficient resources for the level of load.
         </li>
@@ -588,8 +588,8 @@ main table {
     <ol>
     <li>
     <p>
-    Install the <code>cf log-cache</code> plugin.
-    For instructions, see the <a href="https://github.com/cloudfoundry/log-cache-cli">Log Cache CLI Plugin</a>
+    Install the <code>cf log-cache</code> plug-in.
+    For instructions, see the <a href="https://github.com/cloudfoundry/log-cache-cli">Log Cache CLI Plug-in</a>
     GitHub repository.
     </p>
     </li>
@@ -675,7 +675,7 @@ and topology without operator intervention to resolve the issue.
     <td>Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
     <a href="./about-leader-follower.html#errands">orchestration</a>
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
-    <code>configure-leader-follower</code> errand. This is shown in the example below.<br><br>
+    <code>configure-leader-follower</code> errand. This is shown in the following example.<br><br>
     This example shows one outcome that the <code>inspect</code> errand can return: <br>
 
     <ol>
@@ -708,7 +708,7 @@ and topology without operator intervention to resolve the issue.
       2 errand(s)
       Succeeded</pre>
 
-        In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The instructions below resolve this by copying data to the first instance, and
+        In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
         <a href="./backup-mysqldump.html#create-backup">Create a VMware SQL with MySQL for TAS Logical Backup</a>
@@ -835,7 +835,7 @@ and the errand logs contain the following:
             [...]
             succeeded</pre>
         </li>
-        <li>If the GTID Executed sets are neither equivalent nor subsets, data has diverged and you must determine what data has diverged as part of the procedure below:
+        <li>If the GTID Executed sets are neither equivalent nor subsets, data has diverged and you must determine what data has diverged as part of the following procedure:
           <ol>
             <li>Use the
               <code>make-read-only</code>
@@ -853,7 +853,7 @@ and the errand logs contain the following:
             <li>Take a backup of both instances using the
               <a href="./backup-mysqldump.html#create-backup"> Create a VMware SQL with MySQL for TAS Logical Backup</a>
               steps.</li>
-            <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and will be the new leader.</li>
+            <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and becomes the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
             <li>After putting all data on the leader, ssh onto the follower:
               <code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code>
@@ -1125,12 +1125,12 @@ main table {
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td><p>To resolve this issue:</p>
     <ol>
-      <li>Disable lowercase table names by doing one of the following:
+      <li>Deactivate lowercase table names by doing one of the following:
           <ul>
             <li>Set the optional <code>enable_lower_case_table_names</code> parameter to <code>false</code>
             with the cf CLI.
             For instructions, see <a href='./change-default.html#parameters'>Set Optional Parameters</a>.</li>
-            <li>Enable lowercase table names in the tile:
+            <li>Activate lowercase table names in the tile:
               <ol>
               <li>Deselect <strong>Enable Lower Case Table Names</strong> in
             the <strong>Mysql Configuration</strong> pane of the tile.</li>
@@ -1142,8 +1142,8 @@ main table {
       </li>
 
       <li>
-        (Optional) If you want to re-enable lowercase table names,
-        re-name your table to lowercase and then enable lowercase table names.
+        (Optional) If you want to activate lowercase table names again,
+        name your table again to lowercase and then activate lowercase table names.
       </li>
     </ol></td>
   </tr>
@@ -1217,7 +1217,7 @@ main table {
     <strong>MySQL Process Failure:</strong> If the MySQL process crashes, <code>monit</code>
     and BOSH should restore the process. If the process is not restored, run the
     <code>download-logs</code> tool and consult the error logs it generates. For more information, see the
-    <a href="#download-logs">download-logs</a> section below.<hr>
+    <a href="#download-logs">download-logs</a> section.<hr>
   </li>
   <li>
     <strong>Firewall Rule Change:</strong>
@@ -1230,8 +1230,7 @@ main table {
     <strong>VM Failure:</strong>
     If you cannot SSH into a node and you are not detecting either network latency or firewall issues, your node might be down due to VM failure. To confirm that the node is unresponsive and re-create the VM, see
     <a href="#recreate-VM">
-      Re-create a Corrupted VM in a Highly Available</a>
-    below.<hr>
+      Re-create a Corrupted VM in a Highly Available</a>.<hr>
   </li>
   <li>
     <strong>Node Unable to Rejoin:</strong> If a detached existing node fails to join the cluster, its
@@ -1240,7 +1239,7 @@ main table {
      data that the primary component lacks. You can check this by looking at the node&rsquo;s error log at
     <code>/var/vcap/sys/log/pxc-mysql/mysql.err.log</code>.
     <br><br>
-    To restore the cluster, do one the following:
+    To restore the cluster, do one of the following:
     <ul>
       <li>If the detached node has a higher sequence number than the primary component, do the procedures in
         <a href="./bootstrapping.html">Bootstrapping</a>.
@@ -1249,7 +1248,7 @@ main table {
         If bootstrapping does not restore the cluster, you can manually force
         the node to rejoin the cluster. This removes all of the unsynchronized data
         from the detached server node and creates a new copy of the cluster data on the node. For more
-        information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a> below.
+        information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>.
         <p class="note warning">
           <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
           <a href="https://tanzu.vmware.com/support">Support</a>.
@@ -1310,7 +1309,7 @@ main table {
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>For solutions for replication errors in MySQL log files, see the table below.
+    <td>For solutions for replication errors in MySQL log files, see the following table.
 
 <table class="nice">
   <tr>
@@ -1348,7 +1347,7 @@ or persistent disk or memory issues, you can ignore the replication errors.
 
 <h3 id="failed-backups"><a id="failed-adbr-backups"></a>Failed Backups</h3>
 
-<p>If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plugin fails,
+<p>If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plug-in fails,
 check that the 2345 port from the TAS for VMs to the ODB component is open.</p>
 
 <style>
@@ -1374,7 +1373,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Automated Backups or adbr Plugin Backups Fail
+    Automated Backups or adbr Plug-in Backups Fail
   <br><br></th>
   </tr>
 
@@ -1431,7 +1430,7 @@ in <em>On-Demand Networking</em>.
 
 <p>
   Ops Manager currently deploys two BOSH workers to process its queue.
-  Future versions of Ops Manager will let users configure the number of BOSH workers.
+  Future versions of Ops Manager lets users configure the number of BOSH workers.
 </p>
 
 <h3 id="-configuration"><a id="bosh-config"></a> Configuration</h3>
@@ -1453,7 +1452,7 @@ in <em>On-Demand Networking</em>.
 
 
 <p>
-    If you have rotated any UAA user credentials then you may see authentication
+    If you have rotated any UAA user credentials then you can see authentication
     issues in the service broker logs.
 </p>
 
@@ -1468,7 +1467,7 @@ in <em>On-Demand Networking</em>.
     tab of the VMware Tanzu Application Service for VMs tile.
 </p>
 
-<h3 id="-networking"><a id="network"></a>  Networking</h3> 
+<h3 id="-networking"><a id="network"></a>  Networking</h3>
 
 <p>
     Common issues with networking include:
@@ -1506,17 +1505,17 @@ in <em>On-Demand Networking</em>.
 To validate connectivity, do the following:
 
 1.  View the BOSH deployment name for your service broker by running:
-    
+
     ```
     bosh deployments
     ```
-    
+
 2.  SSH into the VMware SQL with MySQL for TAS service broker by running:
-    
+
     ```
     bosh -d DEPLOYMENT-NAME ssh
     ```
-    
+
 3.  If no BOSH `task-id` appears in the error message, look in the broker log using the `broker-request-id` from the task.
 
 
@@ -1570,13 +1569,13 @@ Please contact your Operator for help.
 To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:
 
 1.  Inspect the VMs by running:
-    
+
     ```
     bosh -d service-instance_GUID vms --vitals
     ```
 
 2.  For additional information, run:
-    
+
     ```
     bosh -d service-instance_GUID instances --ps --vitals
     ```
@@ -1653,7 +1652,7 @@ Updated: 2017-03-13T10:17:58Z
 
 
 <p>
-  Before following the procedures below, log in to the
+  Before using the procedures, log in to the
   <a href="https://docs.pivotal.io/application-service/cf-cli/getting-started.html">cf CLI</a> and the
   <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html">BOSH CLI</a>.
 </p>
@@ -1824,9 +1823,9 @@ Updated: 2017-03-13T10:17:58Z
 <ul>
   <li>Registers the service broker with Cloud Controller.</li>
   <li>
-    Enables service access for any plans that are enabled on the tile.
+    Activates service access for any plans that are activated on the tile.
   </li>
-  <li>Disables service access for any plans that are disabled on the tile.
+  <li>Deactivates service access for any plans that are deactivated on the tile.
   </li>
   <li>Does nothing for any plans that are set to manual on the tile.</li>
 </ul>
@@ -1837,7 +1836,7 @@ Updated: 2017-03-13T10:17:58Z
 </p>
 
 <p>
-  Plans with disabled service access are only visible to admin Cloud Foundry
+  Plans with deactivated service access are only visible to admin Cloud Foundry
   users. Non-admin Cloud Foundry users, including Org Managers and Space Managers, cannot
   see these plans.
 </p>
@@ -1877,7 +1876,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <ul>
     <li>Collects all of the service instances that the on-demand broker has registered.</li>
-    <li>Issues an upgrade command and deploys the a new manifest to the on-demand broker for each 
+    <li>Issues an upgrade command and deploys the a new manifest to the on-demand broker for each
         service instance.</li>
     <li>Adds to a retry list any instances that have ongoing BOSH tasks at the time of upgrade.</li>
     <li>Retries any instances in the retry list until all instances are upgraded.</li>
@@ -1988,7 +1987,7 @@ Errand 'orphan-deployments' completed with error (exit code 10)
 </pre>
 
 <p>
-  These details will also be available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
+  These details are also available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
 </p>
 
 <pre class="terminal">
@@ -2029,8 +2028,8 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <ul>
   <li>Exit with exit 1</li>
-  <li>Stdout will be empty</li>
-  <li>Any error messages will be under stderr</li>
+  <li>Stdout is empty</li>
+  <li>Any error messages are under stderr</li>
 </ul>
 
 <p>
@@ -2038,7 +2037,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 </p>
 
 <p class="note warning">
-  <strong>WARNING: </strong> Running this command may leave IaaS resources in an unusable state.
+  <strong>WARNING: </strong> Running this command might leave IaaS resources in an unusable state.
 </p>
 
 <code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
@@ -2115,7 +2114,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <p>
   Quota saturation and total number of service instances are available through ODB
-  metrics emitted to Loggregator. The metric names are shown below:
+  metrics emitted to Loggregator. The metric names are shown here:
 </p>
 
 <table>
@@ -2166,13 +2165,13 @@ gathering information to diagnose the type of failure the cluster is experiencin
     <ul>
       <li>To force a node to rejoin the cluster, see
         <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>
-        below.</li>
+       .</li>
       <li>To re-create a corrupted VM, see
         <a href="#recreate-VM">Re-create a Corrupted VM in a Highly Available Cluster</a>
-        below.</li>
+        .</li>
       <li>To check if replication is working, see
         <a href="#check-replication">Check Replication in a Highly Available Cluster</a>
-        below.</li>
+        .</li>
     </ul>
     For more information about
     <code>mysql-diag</code>, see
@@ -2185,7 +2184,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
     <code>download-logs</code> before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
     <br>
     For more information, see the <a href="#download-logs">download-logs</a>
-    section below.
+    following section.
     <br>
     <p class="note">
       <strong>Note:</strong>
@@ -2211,7 +2210,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
         <strong>download-logs logs:</strong>
         Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
         <a href="#download-logs" ">download-logs</a>
-        section below explains how to run
+        section explains how to run
         <strong>download-logs</strong>.
       </li>
       <li>
@@ -2302,7 +2301,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
     <code>Recreate VM using last known apply spec</code>.
     <p class="note warning">
       <strong>Warning:</strong>
-      Recreating a node will clear its logs. Ensure the node is completely down before recreating it.
+      Recreating a node clears its logs. Ensure the node is completely down before recreating it.
     </p>
     <p class="note warning">
       <strong>Warning:</strong>
@@ -2321,8 +2320,8 @@ To check the replication status, do the following:
 1.  To log in to the BOSH Director VM, do the following:
     1.  Gather the information needed to log in to the BOSH Director VM by doing the procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
     2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2).
-2.  Create a dummy database in the first node by running: 
-    
+2.  Create a dummy database in the first node by running:
+
     ```
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -e "create database verify_healthy;"
     ```
@@ -2332,27 +2331,27 @@ To check the replication status, do the following:
     *   `FIRST-NODE-IP-ADDRESS` is the IP address of the first node you recorded in step 1.
     *   `YOUR-IDENTITY` is the value of `identity` that you recorded in step 1.
 
-3.  Create a dummy table in the dummy database by running:  
+3.  Create a dummy table in the dummy database by running:
 
     ```
     mysql -h FIRST-NODE-IP-ADDRESS \ -u your-identity \ -p -D verify_healthy \ -e "create table dummy_table (id int not null primary key auto_increment, info text) \ engine='innodb';"
     ```
 
-4.  Insert data into the dummy table by running:  
+4.  Insert data into the dummy table by running:
 
     ```
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"
     ```
 
 5.  Query the table and verify that the three rows of dummy data exist on the first node by running:
-    
+
     ```
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "select * from dummy_table;"
     ```
-    
-    When prompted for a password, provide the `password` value recorded in step 1.  
+
+    When prompted for a password, provide the `password` value recorded in step 1.
     The above command returns output similar to the following:
-    
+
     <pre class="terminal">
     +----+----------------------+
      | id | info                 |
@@ -2362,16 +2361,16 @@ To check the replication status, do the following:
     | 10 | even more dummy data |
     +----+----------------------+
     </pre>
-    
+
 6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
-    1.  Query the dummy table by running : 
+    1.  Query the dummy table by running :
         ```
         mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"
         ```
         When prompted for a password, provide the `password` value recorded in step 1.
-        
+
     2.  Verify that the node contains the same three rows of dummy data as the other nodes by running:
-        
+
         ```
         mysql -h NEXT-NODE-IP-ADDRESS \\
                   -u YOUR-IDENTITY \\
@@ -2379,19 +2378,19 @@ To check the replication status, do the following:
                   -e "select \* from dummy\\\_table;"
         ```
         When prompted for a password, provide the `password` value recorded in step 1.
-                
-        
+
+
     3.  Verify that the above command returns output similar to the following:
-        
+
             +----+----------------------+
             | id | info                 |
             +----+----------------------+
             |  4 | dummy data           |
             |  7 | more dummy data      |
             | 10 | even more dummy data |
-            +----+----------------------+ 
-        
-7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).  
+            +----+----------------------+
+
+7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 

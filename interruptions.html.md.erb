@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic explains events in the lifecycle of a <%= vars.product_full %> service instance that may cause temporary service interruptions.
+This topic explains events in the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
 
 ## <a id='service-update'></a>Stemcell or Service Update
 
@@ -28,8 +28,8 @@ A process, like the MySQL server, crashes on the service instance VM.
 
 - <strong>Impact:</strong>
   - BOSH (monit) brings the process back automatically.
-  - Depending on the process and what it was doing, the service may experience 60-120 seconds of downtime.
-  - Until the process resumes, apps may be unable to use MySQL, metrics or logging may stop, and other features may be interrupted.
+  - Depending on the process and what it was doing, the service might experience 60-120 seconds of downtime.
+  - Until the process resumes, apps might be unable to use MySQL, metrics or logging might stop, and other features might be interrupted.
 - <strong>Required Actions:</strong> None. If the process resumes cleanly and without manual intervention, apps reconnect automatically.
 
 ## <a id='vm-fail'></a>VM Failure
@@ -55,10 +55,10 @@ An availability zone (AZ) goes offline entirely or loses connectivity to other A
 This causes service interruption in multi-AZ deployments where [Diego](https://docs.pivotal.io/application-service/concepts/diego/diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
 
 - <strong>Impact:</strong>
-  - Some app instances may still be able to connect and continue operating.
-  - App instances in the other AZs will not be able to connect.
+  - Some app instances can still be able to connect and continue operating.
+  - App instances in the other AZs are not able to connect.
   - Downtime: Unknown
-- <strong>Required Actions:</strong>  Recovery of the app / database connection should be automatic. Depending on the app, manual intervention may be required to check data consistency.
+- <strong>Required Actions:</strong>  Recovery of the app / database connection should be automatic. Depending on the app, manual intervention can be required to check data consistency.
 
 ## <a id='region-fail'></a>Region Failure
 
@@ -69,5 +69,5 @@ bringing <%= vars.app_runtime_full %> components offline.
   - The entire installation needs to be brought back up manually.
   - Downtime: Unknown
 - <strong>Required Actions:</strong>
-Each service instance may need to be [restored individually](./backup-restore.html#restore) 
+Each service instance might need to be [restored individually](./backup-restore.html#restore)
 depending on the restored state of the platform.

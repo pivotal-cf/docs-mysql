@@ -12,9 +12,9 @@ access their <%= vars.product_full %> databases.
 
 You can access your <%= vars.product_short %> databases by using the following tools:
 
-+ [MySQLWeb Database Management App](#mysqlweb), below
-+ [cf CLI MySQL Plugin](#plugin), below
-+ [Desktop Tools](#desktop), below
++ [MySQLWeb Database Management App](#mysqlweb).
++ [cf CLI MySQL Plugin](#plugin).
++ [Desktop Tools](#desktop).
 
 ## <a id="mysqlweb"></a>MySQLWeb Database Management App
 
@@ -32,19 +32,19 @@ You can run the MySQLWeb app in two ways:
 If you deploy MySQLWeb to <%= vars.ops_manager %>, you can configure it in the deployment manifest to automatically
 bind to a specific service instance.
 
-See the MySQLWeb [code repo](https://github.com/pivotal-cf/PivotalMySQLWeb) 
+See the MySQLWeb [code repo](https://github.com/pivotal-cf/PivotalMySQLWeb)
 for how to install and run MySQLWeb.
 
-## <a id="plugin"></a>cf CLI MySQL Plugin
+## <a id="plugin"></a>cf CLI MySQL Plug-in
 
 To connect to your <%= vars.product_short %> databases from a command line, use the cf CLI MySQL plugin.
-The plugin lets you:
+The plug-in lets you:
 
 * Inspect databases for debugging
 * Manually adjust database schema or contents in development environments
 * Dump and restore databases
 
-To install the cf CLI MySQL plugin, run the following:
+To install the cf CLI MySQL plug-in, run the following:
 
 <pre class="terminal">
 $ cf install-plugin -r "CF-Community" mysql-plugin

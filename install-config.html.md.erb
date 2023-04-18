@@ -50,7 +50,7 @@ To create an ASG for <%= vars.product_short %>:
     network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are
     shown.](images/opsman-dir-reserved-ips.png)
 
-1. Create a JSON file named `mysql-asg.json` using the template below:
+1. Create a JSON file named `mysql-asg.json` using the following template:
 
     ```json
     [
@@ -99,7 +99,7 @@ see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manage
 
 2. Click **Director Config**.
 
-3. Select the **Enable VM Resurrector Plugin** checkbox.
+3. Select the **Enable VM Resurrector Plugin** check box.
 
 4. Click **Save**.
 
@@ -122,7 +122,7 @@ To download and import the <%= vars.product_short %> tile:
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
-To configure the <%= vars.product_short %> tile, do the procedures below.
+To configure the <%= vars.product_short %> tile, do the following procedures.
 
 ###<a id="azs"></a> Configure AZs and Networks
 
@@ -164,7 +164,7 @@ and networks for the broker and MySQL service instances:
 Each service plan has a corresponding section in the tile configuration, such as **Plan 1**, **Plan 2**, and so on.
 
 By default, plans 1 through 3 are active and plans 4 through 18 are inactive.
-The procedures below describe how to change these defaults.
+The following procedures describe how to change these defaults.
 
 <p class="note warning"><strong>Warning:</strong>
   You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
@@ -210,7 +210,7 @@ For each plan that you want to use in your deployment:
     <%= image_tag("images/plan-types-3-0.png", :alt => "The 'Plan' section is shown. The radio button for 'Inactive' is selected.", :width => "300") %>
 
 
-    The tabs below expand to show an example screenshot of each plan:
+    The following tabs expand to show an example screenshot of each plan:
 
     <style>
     .tab {
@@ -322,9 +322,9 @@ For each plan that you want to use in your deployment:
             <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
               and displays the service plan to all developers in the Marketplace.
                 </li>
-                <li><strong>Disable:</strong> Disables access to all orgs and hides the service plan
+                <li><strong>Disable:</strong> Deactivates access to all orgs and hides the service plan
                   to all developers in the Marketplace.
-                  This disables creating new service instances of this plan.
+                  This deactivates creating new service instances of this plan.
                 </li>
                 <li><strong>Manual:</strong> Lets you manually control service access with the cf CLI.
                     For more information, see <a href="./service-plan.html">Controlling Access to Service Plans by Org</a>.
@@ -370,7 +370,7 @@ For each plan that you want to use in your deployment:
           Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
           in GitHub. <br><br>
           <strong>NOTE:</strong> If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
-          config), then instance creation attempts will fail. <br>
+          config), then instance creation attempts fail. <br>
         </td></tr>
   </table>
 1. Click **Save**.
@@ -413,7 +413,7 @@ To configure global settings for all service instances:
       <col width="30%">
       <tr><th>Field</th><th>Instructions</th></tr>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
-          <td>Select this checkbox if either of the following apply:<ul>
+          <td>Select this check box if either of the following apply:<ul>
               <li>Your service instances need an external backup, blobstore, or syslog storage</li>
               <li>You have configured BOSH to use an external blobstore</li></ul>
               </td></tr>
@@ -450,26 +450,26 @@ To set MySQL defaults and enable developers to customize their instances:
   <table>
     <tr><th>Field</th><th>Instructions</th></tr>
     <tr><td><strong>Enable Lower Case Table Names</strong></td>
-        <td>Select this checkbox to store all table names in lowercase.
+        <td>Select this check box to store all table names in lowercase.
             This sets the MySQL server system variable
             <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
-            To permit developers to override this default, see the checkbox below. <br>
+            To permit developers to override this default, see the following check box. <br>
             For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you enable this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+            <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
-        <td>Select this checkbox to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
+        <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
             For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
     <tr><td><strong>Enable Local Infile</strong></td>
-        <td>Select this checkbox to enable data downloading from the local file system of the client.
-            VMware discourages selecting this checkbox. Before you enable local in-file,
+        <td>Select this check box to enable data downloading from the local file system of the client.
+            VMware discourages selecting this check box. Before you enable local in-file,
             review the security issues associated with <code>LOAD DATA LOCAL</code>.
             See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
     </td></tr>
     <tr>
       <a name="limit-disk-use"></a>
       <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
-      <td>Select this checkbox if you have leader-follower or <%= vars.single_leader_plan %> instances
+      <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
             with high-transaction rates.
             Limiting the size of the transaction logs reduces the risk of the persistent disk
             reaching capacity and causing service interruption.
@@ -487,7 +487,7 @@ To learn how backups work, see [About Backups](./backup-restore.html#about-backu
 To configure backups:
 
 <p class="note"><strong>Note:</strong> You must configure backups.
-  You cannot disable this feature.
+  You cannot deactivate this feature.
 </p>
 
 1. Click **Backups**.
@@ -516,13 +516,13 @@ in the _Configuring Automated Backups_ topic:
 
 To configure the security settings for the MySQL service, do one or both:
 
-* Enable TLS for the MySQL service. See [Configure TLS](#security-tls) below.
-* Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds) below.
+* Activate TLS for the MySQL service. See [Configure TLS](#security-tls).
+* Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds).
 
 ![The 'Security' pane. The following 'TLS Options' are listed: 'Not Configured',
-'Optional - Developers may configure their service VMs to use TLS', and
+'Optional - Developers might configure their service VMs to use TLS', and
 'Required - All connections MUST use TLS.
-Any application that is not using TLS communcation with MySQL will break.'](images/security.png)
+Any application that is not using TLS communcation with MySQL break.'](images/security.png)
 
 ####<a id="security-tls"></a> Configure TLS
 
@@ -561,7 +561,7 @@ To store your service instance credentials in runtime CredHub:
 1. Ensure that you have configured the <%= vars.app_runtime_abbr %> tile to support securing service instance credentials in runtime CredHub.
    For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> Tile](https://docs.pivotal.io/application-service/operating/secure-si-creds.html#pas-config).
 1. Click **Security**.
-1. Select the **Enable Secure Service Instance Credentials** checkbox.
+1. Select the **Enable Secure Service Instance Credentials** check box.
 1. Click **Save**.
 1. After deploying the tile, notify the developers that they must unbind and rebind any existing service instances bindings if they want to use secure service instance credentials. Developers must:
 
@@ -619,19 +619,19 @@ To enable monitoring and logging in the MySQL service:
         <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
             All service instances emit metrics about the health and status of the MySQL server.</td></tr>
     <tr><td><strong>Enable User Statistics Logging</strong></td>
-        <td>Select this checkbox to collect user statistics. You can use these statistics to better
+        <td>Select this check box to collect user statistics. You can use these statistics to better
           understand server activity and identify load sources.
             For more information about user statistics, see the <a href="https://www.percona.com/doc/percona-server/5.7/diagnostics/user_stats.html">MySQl documentation</a>.
             </td></tr>
     <tr><td><strong>Enable Server Activity Logging</strong></td>
-        <td>Select this checkbox to record who connects to the servers and what queries are processed using the Percona Audit Log Plugin.
+        <td>Select this check box to record who connects to the servers and what queries are processed using the Percona Audit Log Plug-in.
             For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
             <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
             You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
           </p>
            </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
-        <td>Select this checkbox to create a read-only admin user, named <code>roadmin</code>, on each service instance.
+        <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
             This user can be used for auditing and monitoring without risking
             mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
             <br><br>
@@ -693,7 +693,7 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-    <%= image_tag("images/service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described below. ") %>
+    <%= image_tag("images/service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields, described here. ") %>
 
 1. Configure the fields as follows:
     <table>

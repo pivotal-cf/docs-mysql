@@ -82,7 +82,7 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
 1. Select **SCP**.<br/>
 
     <img alt="Backup configuration pane shows SCP radio button selected and the fields
-     in the pane are described in the table below."
+     in the pane are described in the following table."
       width="500" src="./images/scp-backups.png"/>
 
 1. Configure the fields as follows:
@@ -304,14 +304,14 @@ you must have an S3 bucket in which to store the backups.
             </td>
             <td>
               The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              You should select this checkbox if you use:
+              You should select this check box if you use:
 
               <ul>
                 <li>
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                   An S3-compatible endpoint such as Minio that might require path-style URLs.
                 </li>
               </ul>
 
@@ -430,9 +430,9 @@ To create an IAM Role with a custom policy:
     Where `BUCKET-NAME` is the name of the bucket.
 
 1. Record the Amazon Resource Name (ARN) of this new IAM role.
-   This will be used in [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy) below.
+   This is used in [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy).
 1. Record the name of the Instance Profile associated with this new IAM role.
-   This will be used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops) below.
+   This is used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops).
 
 
 ### <a id="ip-add-policy"></a> Add a Policy to the Existing <%= vars.ops_manager %> User or Role
@@ -448,7 +448,7 @@ To find the existing user or role and add a policy:
 1. Click the **BOSH Director for AWS** tile.
 1. Select **AWS Config**.
 <br><br>
-The tabs below expand to show instructions depending on the type of **AWS Config** that is already configured: <br><br>
+The following tabs expand to show instructions depending on the type of **AWS Config** that is already configured: <br><br>
 
     <style>
     .btn.btn-default,
@@ -684,14 +684,14 @@ To set the VM extension name:
             </td>
             <td>
               The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              You should select this checkbox if you use:
+              You should select this check box if you use:
 
               <ul>
                 <li>
                    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
                 </li>
                 <li>
-                   An S3-compatible endpoint such as Minio that may require path-style URLs.
+                   An S3-compatible endpoint such as Minio that might require path-style URLs.
                 </li>
               </ul>
 
@@ -754,9 +754,9 @@ To apply changes and upgrade all service instances for <%= vars.product_short %>
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 1. Click **Review Pending Changes**.
-1. Clear the checkboxes for all products except **BOSH Director** and
+1. Clear the check boxes for all products except **BOSH Director** and
 **<%= vars.product_full %>**.
-1. Verify that the checkbox for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
+1. Verify that the check box for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
 1. Click **Apply Changes**.
 
 ### <a id="ip-verify-instances"></a> (Optional) Verify the IAM Role is Associated with MySQL Service Instances
@@ -918,7 +918,7 @@ To back up your database to your Azure Storage account:
 1. Select **Azure**.
 
     <img alt="Backup configuration pane shows Azure radio button selected and the fields
-     in the pane are described in the table below."
+     in the pane are described in the following table."
       src="./images/azure-backups.png"/>
 
 1. Configure the fields as follows:

@@ -16,13 +16,13 @@ some server defaults differ depending on the service plan.
 
 For server defaults that are:
 
-+ Common to all plans, see [Server Defaults for All Plans](#all) below.
++ Common to all plans, see [Server Defaults for All Plans](#all).
 + Specific to single node and leader-follower plans,
-see [Server Defaults for Single Node and Leader-Follower Plans](#sn-l-f) below.
+see [Server Defaults for Single Node and Leader-Follower Plans](#sn-l-f).
 + Specific to highly available (HA) cluster plans,
-see [Server Defaults for Highly Available Cluster Plans](#ha) below.
+see [Server Defaults for Highly Available Cluster Plans](#ha).
 + Specific to <%= vars.single_leader_plan_lc %> plans,
-see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site) below.
+see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site).
 
 
 <p class="note"><strong>Note:</strong>
@@ -162,7 +162,7 @@ to all service plans.
         <td><code>skip-name-resolve</code></td>
         <td>ON</td>
         <td>
-            This disables reverse DNS lookups to improve performance.
+            This deactivates reverse DNS lookups to improve performance.
             <%= vars.product_short %> uses user credentials, rather than hostnames, to authenticate access.
             Therefore, most deployments do not need reverse DNS lookups.<br><br>
             To enable reverse name resolution, clear this option.

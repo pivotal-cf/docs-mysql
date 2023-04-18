@@ -19,8 +19,8 @@ When replication fails, the canary cannot read the data from all the nodes and d
 following:
 
   - Sends a message that replication has failed to a configured email address.
-  See [Sample Notification Email](#sample-canary) below.
-  - Disables client access to the cluster. See [Determine If the Cluster Is Accessible](#access) below.
+  For more on notification emails, see [Sample Notification Email](#sample-canary).
+  - Deactivates client access to the cluster. For more information on client access to the client, see [Determine If the Cluster Is Accessible](#access).
 
   <p class='note warning'><strong>Warning:</strong> When replication fails, data can be lost.
     Contact <a href="https://tanzu.vmware.com/support">Support</a> immediately in the case of
@@ -50,12 +50,12 @@ performing as expected across all nodes.
 
 ## <a id="access"></a> Determine If the Cluster Is Accessible
 
-When the canary detects replication failure, it disables connections to the database cluster through
+When the canary detects replication failure, it deactivates connections to the database cluster through
 the proxies. When the replication issue is resolved, the canary automatically restores client access to the
-cluster. You can determine if the canary disabled cluster access by observing the cluster using
+cluster. You can determine if the canary deactivated the cluster access by observing the cluster using
 the Switchboard API.
 
-To determine if cluster access is disabled, do the following:
+To determine if cluster access is deactivated, do the following:
 
 1. Do the prerequisite procedure in [Monitor Node Health](monitor-health.html#monitor).
 
@@ -85,7 +85,7 @@ To determine if cluster access is disabled, do the following:
     ]
     </pre>
 
-    When cluster access is disabled, `trafficEnabled` is set to false.
+    When cluster access is deactivated, `trafficEnabled` is set to false.
 
 If you must restore client access to the cluster while replication is failing, contact
 [Support](https://tanzu.vmware.com/support).

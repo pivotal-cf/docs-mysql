@@ -15,14 +15,14 @@ You can migrate data from a source database to a destination database using the 
 To migrate data in <%= vars.product_short %>:
 
 1. Enable the `migrate` command to access the source database.
-    See [Enable Source Access](#source-access) below.
+    See [Enable Source Access](#source-access).
 1. Migrate the data from the source database to the destination service instance.
-    See [Migrate Data](#migrate-data) below.
+    See [Migrate Data](#migrate-data).
 1. Ensure that the migration was successful.
-    See [Validate Data](#validate-data) below.
+    See [Validate Data](#validate-data).
 1. Rebind and re-stage apps to the new destination service instance.
     To save resources, you can optionally delete the old source database.
-    See [Rebind and Re-Stage Apps](#rebind-restage) below.
+    See [Rebind and Re-Stage Apps](#rebind-restage).
 
 <p class="note warning"><strong>Warning:</strong>
   Migrating large datasets can take several hours.
@@ -31,7 +31,7 @@ To migrate data in <%= vars.product_short %>:
   then 2X amount of data takes 20 minutes to migrate using the same hardware.
   <br><br>
   Do a test migration with small datasets to estimate how long the entire migration
-  will take before migrating larger datasets.
+  takes before migrating larger datasets.
 </p>
 
 ## <a id='prepare'></a>Prerequisites
@@ -49,7 +49,7 @@ in <%= vars.product_short %>](./about-migrate.html).
 you want to migrate to.
 * A <%= vars.product_short %> service plan available in the destination org and space you want
   to migrate your data to.
-  This service plan must fulfill the requirements in [Resource Planning](#sizing) below.
+  This service plan must fulfill the requirements in [Resource Planning](#sizing).
   Talk to your operator to determine which service plan is appropriate.
 
 
@@ -75,11 +75,11 @@ larger than the size of the source data.
 For more information about recommended persistent disk sizes,
 see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
 
-## <a id='install-plugin'></a>Install the mysql-tools CF CLI Plugin
+## <a id='install-plugin'></a>Install the mysql-tools CF CLI Plug-in
 
-VMware recommends that developers migrate data using the `mysql-tools` CLI plugin with the `migrate` command.
-For more information about `mysql-tools` cf CLI plugin,
-see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
+VMware recommends that developers migrate data using the `mysql-tools` CLI plug-in with the `migrate` command.
+For more information about `mysql-tools` cf CLI plug-in,
+see [mysql-cli-plug-in](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
 
 <p class="note">
   <strong>Note:</strong>
@@ -87,14 +87,14 @@ see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub
   To configure and enable TLS, see <a href="./install-config.html#security-tls">Configure TLS</a>.
 </p>
 
-To install the `mysql-tools` cf CLI plugin:
+To install the `mysql-tools` cf CLI plug-in:
 
-1. Install the plugin by running:
+1. Install the plug-in by running:
 
     ```
     cf install-plugin -r CF-Community "MysqlTools"
     ```
-2. Confirm that the plugin has installed successfully by running:
+2. Confirm that the plug-in has installed successfully by running:
 
     ```
     cf mysql-tools version
@@ -109,14 +109,14 @@ space and org.
 If you are:
 
 * **Migrating within an Org and Space**: The `migrate` command can access the source without any preparation.
- Continue to [Migrate Data](#migrate-data) below.
+ Continue to [Migrate Data](#migrate-data).
 * **Migrating across Spaces**: If the source database is in a different space from the destination,
 enable access using service instance sharing.
-See [Source Access across Spaces](#across-spaces) below.
+See [Source Access across Spaces](#across-spaces).
 * **Migrating from Off-Platform**: If the source database is in a different <%= vars.ops_manager %> foundation
 from the destination or not deployed on <%= vars.ops_manager %>,
 create a user-provided service that can access the remote database.
-See [Source Access Off-Platform](#off-platform) below.
+See [Source Access Off-Platform](#off-platform).
 
 ### <a id='across-spaces'></a>Source Access across Spaces
 
@@ -128,7 +128,7 @@ To share a source MySQL service instance with your destination org and space:
 
 1. Do the procedure in [Share Service Instances](./use.html#share).
 
-1. Continue to [Migrate Data](#migrate-data) below.
+1. Continue to [Migrate Data](#migrate-data).
 
 
 ### <a id='off-platform'></a>Source Access Off-Platform
@@ -179,7 +179,7 @@ These values usually include:
     <code>cf cups</code> is a shortcut for the <code>cf create-user-provided-service</code> command.
     </p>
 
-1. After your user-provided service instance is created, continue to [Migrate Data](#migrate-data) below.
+1. After your user-provided service instance is created, continue to [Migrate Data](#migrate-data).
 
 ## <a id='migrate-data'></a>Migrate Data
 
@@ -188,10 +188,10 @@ After your source database can access the destination space:
 + **If your source MySQL database is running on <%= vars.ops_manager %>,**
 you must stop all traffic to the service instance before you migrate your data.
 You can do this by stopping and unbinding all of your apps.
-See [Stop and Unbind Apps](#stop-unbind) below.
+See [Stop and Unbind Apps](#stop-unbind).
 
 + **If your source MySQL database is running off-platform,**
- do the procedure in [Migrate Data to Destination Instance](#command) below.
+ do the procedure in [Migrate Data to Destination Instance](#command).
 
 ### <a id='stop-unbind'></a> Stop and Unbind Apps
 
@@ -235,7 +235,7 @@ To stop and unbind your apps:
         * `APP` is the name of your app.
         * `SOURCE-INSTANCE` is the name of your source <%= vars.product_short %> service instance.
 
-1. Do the procedure in [Migrate Data to Destination Instance](#command) below.
+1. Do the procedure in [Migrate Data to Destination Instance](#command).
 
 ### <a id='command'></a> Migrate Data to Destination Instance
 
@@ -260,7 +260,7 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
 
     * `SOURCE-INSTANCE` is the name of your source MySQL service instance
      or user-provided service instance.
-    * `V2-PLAN` is the name of the service plan that you selected above.
+    * `V2-PLAN` is the name of the service plan that you selected.
 
     For example:
     <pre class="terminal">$ cf mysql-tools migrate my-instance db-small <br>

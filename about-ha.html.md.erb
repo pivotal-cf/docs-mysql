@@ -38,7 +38,7 @@ For more information about `mysql-diag`, see [Running mysql-diag](./mysql-diag.h
 The following diagram shows an HA cluster in three availability zones (AZs):
 
 
-![An HA MySQL cluster. See below for a detailed image description.](./images/ha-clusters.png)
+![An HA MySQL cluster. See the following detailed image description.](./images/ha-clusters.png)
 
 <a href="./images/ha-clusters.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -52,7 +52,7 @@ Traffic from apps and clients is sent round-robin to the proxies on all nodes ov
 The proxies direct their traffic to the server on the primary node.
 
 If the primary server fails, a secondary node is promoted to become the new primary.
-The proxies will update to ensure that traffic is sent to the new primary.
+The proxies are updated to ensure that traffic is sent to the new primary.
 
 For more information about other availability options supported by <%= vars.product_short %>,
 see [Availability Options](availability-options.html).
@@ -205,7 +205,7 @@ Switchboard was developed to replace HAProxy as the proxy tier for the high
 availability cluster for MySQL databases in <%= vars.product_short %>.
 
 
-![Switchboard. See below for a detailed image description.](./images/switchboard-all-healthy.png)
+![Switchboard. See the following detailed image description.](./images/switchboard-all-healthy.png)
 
 <a href="./images/switchboard-all-healthy.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
@@ -222,4 +222,4 @@ Switchboard offers the following features:
 
     For more information about monitoring proxy health status, see
     [Monitoring Node Health](./monitor-health.html).
-    
+

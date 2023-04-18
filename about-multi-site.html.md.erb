@@ -65,7 +65,7 @@ Both deployment models have the same end-user experience.
 
 + **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
 For more information, see [About Active-Passive Topology](#active-passive)
-and [About App-Layer Active-Active Topology](#active-active) below.
+and [About App-Layer Active-Active Topology](#active-active).
 
 
 ##<a id='active-passive'></a> About Active-Passive Topology
@@ -78,15 +78,15 @@ VMware recommends using this topology when your secondary foundation is scaled d
 generally inactive, and does not receive significant app traffic.
 
 For information about active-passive failover and switchover,
-see [About Failover and Switchover](#failover-switchover) below.
+see [About Failover and Switchover](#failover-switchover).
 
 The following diagram describes the active-passive topology in a healthy state:
 
-![This active-passive topology diagram is described below](images/active-passive.png)
+![This active-passive topology diagram is described here](images/active-passive.png)
 
 <a href="./images/active-passive.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the previous diagram:
 
 + The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
   This app issues transactions to the leader service instance.
@@ -102,20 +102,20 @@ VMware recommends using this topology when both your primary and secondary found
 are scaled up and are expected to serve traffic.
 
 For information about app-layer active-active failover and switchover,
-see [About Failover and Switchover](#failover-switchover) below.
+see [About Failover and Switchover](#failover-switchover).
 
 The following diagram describes the app-layer active-active topology in a healthy state:
 
-![This app-layer active-active topology diagram is described below](images/active-active.png)
+![This app-layer active-active topology diagram is described here](images/active-active.png)
 
 <a href="./images/active-active.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the previous diagram:
 
 + The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance. <br><br>
-  The app in the secondary foundation issues transactions to the leader as below:
+  The app in the secondary foundation issues transactions to the leader:
       1. Connects to the follower service instance
       1. Issues transactions to the follower service instance
       1. Forwards the transactions from the follower service instance to the leader
@@ -140,7 +140,7 @@ For instructions about triggering failover or switchover, see
 see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
 
 
-The table below describes when you should trigger a failover or switchover:
+The following table describes when you should trigger a failover or switchover:
 
 <table>
   <tr>
@@ -185,7 +185,7 @@ and the primary foundation receives no app traffic.
 The following diagram describes what happens when you trigger a failover
 for a <%= vars.single_leader_plan_lc %> topology:
 
-![This multi-site failover diagram is described below](images/multi-site-failover.png)
+![This multi-site failover diagram is described here](images/multi-site-failover.png)
 
 <a href="./images/multi-site-failover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
@@ -205,7 +205,7 @@ The primary foundation receives no app traffic.
 The following diagram describes what happens when you trigger a switchover
 in an active-passive topology:
 
-![This active-passive switchover diagram is described below](images/active-passive-switchover.png)
+![This active-passive switchover diagram is described here](images/active-passive-switchover.png)
 
 <a href="./images/active-passive-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
@@ -225,7 +225,7 @@ However, the leader service instance is in secondary foundation.
 The following diagram describes what happens when you trigger a switchover
 in an active-active topology:
 
-![This active-active switchover diagram is described below](images/active-active-switchover.png)
+![This active-active switchover diagram is described here](images/active-active-switchover.png)
 
 <a href="./images/active-active-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
@@ -235,7 +235,7 @@ In the above diagram:
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance
   in the secondary foundation. <br><br>
-  The app in the primary foundation issues transactions to the leader as below:
+  The app in the primary foundation issues transactions to the leader:
       1. Connects to the follower service instance
       1. Issues transactions to the follower service instance
       1. Forwards the transactions from the follower service instance to the leader

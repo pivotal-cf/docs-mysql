@@ -195,16 +195,16 @@ To stop the leader VM and promote the follower VM to the new leader:
 
 At this point, a single instance is working but leader-follower replication has not yet been restored.
 To fail your app over to a single instance instead of restoring leader-follower,
-skip to <a href="#unbind-rebind">Unbind and Rebind the App</a> below.
+skip to <a href="#unbind-rebind">Unbind and Rebind the App</a>.
 
-If you are triggering a failover in response to the AZ of the leader VM going offline, you can fail your app over to a single instance by following the procedure in [Unbind and Rebind the App](#unbind-rebind) below.
-However, to restore leader-follower, you must regain access to the AZ where your leader VM is located before following the procedure in [Clean Up Former Leader VM (Optional)](#clean-up) and [Configure the New Follower](#config-follower) below.
+If you are triggering a failover in response to the AZ of the leader VM going offline, you can fail your app over to a single instance by following the procedure in [Unbind and Rebind the App](#unbind-rebind).
+However, to restore leader-follower, you must regain access to the AZ where your leader VM is located before following the procedure in [Clean Up Former Leader VM (Optional)](#clean-up) and [Configure the New Follower](#config-follower).
 
 ## <a id='clean-up'></a>Clean Up Former Leader VM (Optional)
 
 If you are triggering a failover in response to a failing leader VM, to clean up the former leader VM:
 
-1. Disable resurrection, specifying the same deployment as above, by running:
+1. Deactivate resurrection, specifying the same deployment as above, by running:
 
       ```
       bosh update-resurrection off

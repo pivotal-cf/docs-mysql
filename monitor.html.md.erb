@@ -36,7 +36,7 @@ To access MySQL metrics:
 
 ###  <a id="grafana"></a>Use Grafana
 
-You can use Grafana to visually view metrics for <%= vars.product_short %> service instances. 
+You can use Grafana to visually view metrics for <%= vars.product_short %> service instances.
 
 <p class='note'><strong>Note:</strong> This section requires Healthwatch v2.x.</p>
 
@@ -57,7 +57,7 @@ You can use the Indicator Protocol dashboard to view Key Performance Indicators 
 for <%= vars.product_short %> service instances. The dashboard includes a graphical representation of the KPIs and information about recommended alert thresholds.
 For more information about the Indicator Protocol dashboard, see [Indicator Protocol Dashboard
 (Beta)](https://docs.pivotal.io/healthwatch/1-8/indicator-protocol.html).
-For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi) below.
+For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi).
 
 To access KPIs using the Indicator Protocol dashboard:
 
@@ -79,7 +79,7 @@ metrics are shown as graphs over time.](images/indicator-dash.png)
 
 <a href="./images/indicator-dash.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 ### <a id="log-cache"></a>Use Log Cache
 <%= partial vars.path_to_partials + '/services/log-cache-cli-plugin',
 :locals => {:service_name => vars.product_short} %>
@@ -100,7 +100,7 @@ for typical <%= vars.product_short %> installations.
 VMware recommends that you alter the alert measures by observing historical trends.
 You can also create your KPIs that are specific to your environment using the available component metrics.
 
-For a list of all the <%= vars.product_short %> component metrics, see [Component Metrics](#component-metrics) below.
+For a list of all the <%= vars.product_short %> component metrics, see [Component Metrics](#component-metrics).
 
 <%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/all-kpis' %>
 

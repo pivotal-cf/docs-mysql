@@ -49,7 +49,7 @@ to the **Errands** pane and select **Off** for **Upgrade all On-demand MySQL Ser
 <br><br>
 By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
-[About Individual Service Instance Upgrades](#individual-upgrades) below.
+[About Individual Service Instance Upgrades](#individual-upgrades).
 
 1. Navigate to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
@@ -61,21 +61,21 @@ see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-
 
 Upgrading the <%= vars.product_short %> service and service instances can temporarily interrupt
 the service.
-For more information, see [Service Interruptions](#interruptions) below.
+For more information, see [Service Interruptions](#interruptions).
 
 ### <a id="major-version-upgrades"></a> Upgrading from <%= vars.product_short %> 2.x to 3.x
 
 After upgrading to <%= vars.product_short %> v3.x, you can upgrade your service instances from Percona 5.7 to Percona 8.0.
 Percona 8.0 includes significant changes.
-<%= vars.product_short %> v3.x addresses the major upgrade incompatibilities, but in some cases, client applications that are bound to a service instance that uses Percona 5.7 may have compatibility issues when the service instance is upgraded to use Percona 8.0.
+<%= vars.product_short %> v3.x addresses the major upgrade incompatibilities, but in some cases, client applications that are bound to a service instance that uses Percona v5.7 might have compatibility issues when the service instance is upgraded to use Percona 8.0.
 
 To better understand the possible compatibility issues, consider the following options:
 
-+ Read the [compatibility documentation from Percona](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals). This provides details on where application SQL may fail to execute correctly.
++ Read the [compatibility documentation from Percona](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals). This provides details on where application SQL might fail to execute correctly.
 + Consider making a backup of the current (Percona 5.7) database and restoring from the backup to a new 8.0 service instance in a non-production environment. See [Backup and Restore](./backup-restore.html). Then connect the relevant application and execute the appropriate tests for functionality and performance, if available.
 + Percona have a set of [compatibility testing tools](https://www.percona.com/blog/percona-utilities-that-make-major-mysql-version-upgrades-easier) which can be used to run existing queries against an upgraded schema. This process provides a mechanism to thoroughly test the application against the upgraded database. It can highlight potential incompatibility errors and performance changes.
   >**Note**
-  >These tools are an optional source of feedback that may provide additional confidence while evaluating an upgrade from MySQL 5.7 to 8.0. No individual tool can guarantee a successful upgrade. It is your responsibility to fully review your unique database configuration.
+  >These tools are an optional source of feedback that can provide additional confidence while evaluating an upgrade from MySQL 5.7 to 8.0. No individual tool can guarantee a successful upgrade. It is your responsibility to fully review your unique database configuration.
 
 ### <a id="individual-upgrades"></a> About Individual Service Instance Upgrades
 
@@ -84,7 +84,7 @@ To better understand the possible compatibility issues, consider the following o
 ## <a id="interruptions"></a>Service Interruptions
 
 Service changes and upgrades and failures at the process, VM, and IaaS level can cause outages
-in the <%= vars.product_short %> service, as described below.
+in the <%= vars.product_short %> service, as described here.
 
 Read this section if:
 
@@ -98,7 +98,7 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>
  updates the service instance they are bound to.
-          The service should resume within 10–15 minutes.
+          The service resumes within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, apps reconnect automatically.
 
 ### <a id='change-plan'></a>Plan Change
