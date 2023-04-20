@@ -32,6 +32,7 @@
             *   [Bootstrapping](./bootstrapping.html)
             *   [Running mysql-diag](./mysql-diag.html)
             *   [About the Replication Canary](./replication-canary.html)
+        *   [Data at Rest Full-Disk Encryption](./data-at-rest-full-disk-encryption.html)
 *   [Developer Guide](./developer_guide.html)
     *   [Getting Started](./developer_guide_getting_started.html)
         *   [Using VMware SQL with MySQL for TAS](./use.html)
