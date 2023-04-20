@@ -1,0 +1,13 @@
+---
+title: Data at Rest Full Disk Encryption
+owner: MySQL
+---
+
+Data at rest full disk encryption is implemented at the IaaS level. 
+The main purpose is to protect the data in the event the physical hard drives are compromised.
+The disks are only readable with the appropriate encryption key. 
+Therefore, full disk encryption provides a relatively easy means of protecting the data on the physical hard drives.
+The main drawback is that once the disk is mounted and used, it is readable from the system on which it is mounted.
+Consequently, this approach does not offer protection against an attack on a running server once mounted.
+Data at rest full disk encryption is supported by the popular IaaS providers.
+The process is IaaS specific, enabled on all disks used by that IaaS and explained in the Operations Manager documentation. [Here is the documentation](https://docs.pivotal.io/ops-manager/security/pcf-infrastructure/disk-encrypt.html) that explains how to enable full disk encryption for each particular IaaS.
