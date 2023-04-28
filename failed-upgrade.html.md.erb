@@ -23,6 +23,7 @@ There are 2 potential scenarios that can arise from a failed update-service
   - One of the instances gets upgraded to 8.0 successfully, and communicates with the cluster
    - A either the second or third instance gets upgraded and fails before or after it is fully upgraded to 8.0
 
+If you have encountered one of these scenarios and you have a failed update.  Then look into why the update failed, and correct any issues, such as the server running out of disk space, or any other issue that may have caused the failure.  Otherwise the following steps may not work correctly it fixing the environment.
 ## <a id="only-5-7"></a>A cluster of nodes with only 5.7 instances
 rerun the update service command
 ```
@@ -30,34 +31,32 @@ cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
 ```
 
 ## <a id="some-8-0"></a> A cluster of nodes with some or all 8.0 instances
-The remaining 5.7 instances must be redeployed using bosh deploy
+The remaining 5.7 instances must be redeployed individually using bosh deploy
 1. **Manual Redeploy:** If any of the instances are still Percona 5.7,
-   then redeploy the <code>mysqld</code> software to that node as follows:
+   then redeploy the <code>mysqld</code> software to each node at a time as follows:
 
 2. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
-   For nodes all nodes except the bootstrap node you identified above, run:
+   For each node except the bootstrap node you identified above, run the bosh command with ignore.  
+   As an example if you are updating instance 0 you will want to ignore 1 and 2:
 
-      ```
-      bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/M
-      bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/N
-      ```
+         ```
+         bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/1
+         bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/2
+         ```
+      Where `N` and `M` are the numbers of the nodes to be ignored.
+      For example, if you're manually updating node 0, then `M`=1 and `N`=2.
 
-   Where `N` and `M` are the numbers of the nodes to be ignored.
-   For example, if you're manually updating node 0, then `M`=1 and `N`=2.
-
-1. Turn off the BOSH Resurrector by running:
+3. Turn off the BOSH Resurrector by running:
 
       ```
       bosh update-resurrection off
       ```
 
-2. Use the BOSH manifest to update the instance by running:
-
+4. Use the BOSH manifest to update the instance to force the version to 8.0.  First you will export the manifest into a yaml file to edit with the following command:
       ```
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
       ```
-   Using a text editor, manually modify the `mysql_version` property from "5.7" to "8.0". The full path of the property is `/instance_groups/name=mysql/jobs/name=pxc-mysql/properties/mysql_version?`
+    Using a text editor, manually modify the `mysql_version` property from "5.7" to "8.0". The full path of the property is `/instance_groups/name=mysql/jobs/name=pxc-mysql/properties/mysql_version?`. Then use the following command to deploy the newly updated manifest to your targeted instance VM.
       ```
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml
       ```
-
