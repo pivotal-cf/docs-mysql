@@ -16,24 +16,43 @@ There is no downgrade path from 8.0 to 5.7 therefore please take the following s
 Do not perform an update of an HA cluster unless all 3 nodes are reporting as healthy.
 Upgrade service instances by following the [instructions for updating all service instances](./upgrade.html.md.erb) or the [instructions for update an individual service instance's plan](./upgrade.html#change-plan)
 
-There are 2 potential scenarios that can arise from a failed update-service
+There are two potential failure scenarios that can arise when running "cf update-service" to migrate a HA deployment from MySQL 5.7 to MySQL 8.0:
 - [A cluster of nodes with only 5.7 instances](#only-5-7)
   - One of the instances gets updated and the other two instances do not respond to it
 - [A cluster of nodes with some or all 8.0 instances](#some-8-0)
   - One of the instances gets upgraded to 8.0 successfully, and communicates with the cluster
    - A either the second or third instance gets upgraded and fails before or after it is fully upgraded to 8.0
 
-If you have encountered one of these scenarios and you have a failed update.  Then look into why the update failed, and correct any issues, such as the server running out of disk space, or any other issue that may have caused the failure.  Otherwise the following steps may not work correctly it fixing the environment.
+If you have encountered one of these scenarios and you have a failed update.  Then look into why the update failed, and correct any issues, such as the server running out of disk space, or any other issue that may have caused the failure.  Otherwise the following steps may not work correctly in fixing the environment.
 ## <a id="only-5-7"></a>A cluster of nodes with only 5.7 instances
-rerun the update service command
+Rerun the update service command:
 ```
 cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
 ```
+##### Rough notes below here:
+
+- To find the version INSTALLED on a VM:
+- `bosh -d service-instance_$(cf service ha1 --guid) ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+
+- IF you have ONLY ONE 5.7 node, THEN you can "bosh deploy" (including all steps described below) to re-attempt the upgrade of that node.
+
+- IF you have TWO 5.7 nodes, then you must
+  a) establish which are inside vs outside the cluster (details TBD)
+  b) IF both are in the cluster, then "cf update-service"
+  c) Otherwise, you have a 5.7 node IN and OUT of the cluster. You must first "bosh deploy" (per below) only the 5.7 node OUTSIDE the cluster; this should make it an 8.0 node and join it into the cluster, after which you can upgrade the remaining (and cluster-internal) 5.7 node without taking down the cluster.
+  (Otherwise, upgrading the 5.7 node inside the cluster first means your cluster drops down to only one node, which will panic galera into refusing new connections.)
+
+- Q: How to determine which 5.7 is in vs out of the cluster?
+  A:...
+
+
+
+##### Below here needs rework.
 
 ## <a id="some-8-0"></a> A cluster of nodes with some or all 8.0 instances
 The remaining 5.7 instances must be redeployed individually using bosh deploy
 1. **Manual Redeploy:** If any of the instances are still Percona 5.7,
-   then redeploy the <code>mysqld</code> software to each node at a time as follows:
+   then redeploy the <code>mysqld</code> software to each node one at a time as follows:
 
 2. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
    For each node except the bootstrap node you identified above, run the bosh command with ignore.  
