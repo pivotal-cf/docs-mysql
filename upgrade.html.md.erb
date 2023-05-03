@@ -60,7 +60,7 @@ to the **Errands** pane and select **Off** for **Upgrade all On-demand MySQL Ser
 <br><br>
 By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
-[About Individual Service Instance Upgrades](#individual-upgrades) below.
+[About Individual Service Instance Upgrades](#individual-upgrades).
 
 1. Navigate to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
@@ -72,7 +72,7 @@ see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-
 
 Upgrading the <%= vars.product_short %> service and service instances can temporarily interrupt
 the service.
-For more information, see [Service Interruptions](#interruptions) below.
+For more information, see [Service Interruptions](#interruptions).
 
 ### <a id="individual-upgrades"></a> About Individual Service Instance Upgrades
 
@@ -80,8 +80,8 @@ For more information, see [Service Interruptions](#interruptions) below.
 
 ## <a id="interruptions"></a>Service Interruptions
 
-Service changes and upgrades and failures at the process, VM, and IaaS level can cause outages
-in the <%= vars.product_short %> service, as described below.
+Service changes, upgrades, and failures at the process, VM, and IaaS level can cause outages
+in the <%= vars.product_short %> service.
 
 Read this section if:
 
@@ -95,7 +95,7 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>
  updates the service instance they are bound to.
-          The service should resume within 10–15 minutes.
+          The service resumes within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, apps reconnect automatically.
 
 ### <a id='change-plan'></a>Plan Change
@@ -104,15 +104,15 @@ A developer changes their service instance to provide a different service plan, 
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>
 updates the service instance they are bound to.
-          The service should resume within 10–15 minutes.
+          The service resumes within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully,
-apps reconnect automatically.
+the apps reconnect automatically.
 
 ### <a id='upgrade-interruption'></a>Service Broker Deployments
 
 Automated backups are not taken during service broker deployments.
 
-When the service broker is unavailable, such as during upgrades and redeployments,
+When the service broker is unavailable, such as during upgrades and re-deployments,
 automated backups fail.
 Automated backups resume according to schedule when the service broker is online again.
 

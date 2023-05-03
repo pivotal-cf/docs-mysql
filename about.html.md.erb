@@ -24,7 +24,7 @@ This topic describes networking for on-demand services, including <%= vars.produ
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial '/services/service-networks-v3' %>
 
@@ -57,29 +57,16 @@ Cloud Controller, UAA, and other on-demand components, run on the default networ
 Worker pools deployed to specific spaces run on the service network.
 </p>
 
-<p>
-The diagram below shows worker VMs in an on-demand service instance
-running on a separate services network, while other components run on the default
-network.
-</p>
 
-<%# There are two diagrams: a Pivotal-branded diagram and a VMware-branded diagram.
+The following diagram shows worker VMs in an on-demand service instance running on a separate services network, while other components run on the default network.
 
-Logic is included to append '-vmware' to the filename if rebranded to VMware.
-%>
+![alt-text="The default network and services network."](./images/odb-architecture-vmware.png)
 
-<img src="./images/odb-architecture-vmware.png"
-alt="Diagram shows the Default Network and the Services Network.
-The Default Network shows the Cloud Controller, communicating with the On-Demand Broker,
-which communicates with the BOSH Director when the user runs the cf create-service command.
-The BOSH Director then adds an on-demand instance to the Services network.
-The instances have been created in separate spaces and have several worker VMs.">
-
-<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a>
+<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a></p>
 
 <h2> <a id="rules"></a> Required Networking Rules for On-Demand Services </h2>
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial '/services/service_networks_table', :locals => {
 	:app_runtime_full => vars.app_runtime_full,
@@ -89,7 +76,7 @@ The instances have been created in separate spaces and have several worker VMs."
 
 Regardless of the specific network layout, the operator must set network rules.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 <table class="nice">
 	<th>Source Component</th>
@@ -187,7 +174,7 @@ If you are using a leader-follower
 service plan, the operator must set network rules in addition to the
 networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 
 <table class="nice">
@@ -212,7 +199,7 @@ To ensure that connections are open, see the table below:
 If you are using a HA cluster service plan, the operator must set network rules in addition
 to the networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open, see the table below:
+To ensure that connections are open, see the following table:
 
 <table class="nice">
 	<th>Source VM</th>
@@ -247,7 +234,7 @@ To ensure that connections are open, see the table below:
 			For more information,
 			see <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/security/secure-network.html#firewall-configuration">Firewall Configuration</a>
 			in the Percona documentation.<br><br>
-			The communication between these VMs is two-way.
+			The communication between these VMs is two way.
 	</td>
 	</tr>
 	<tr>
@@ -255,7 +242,7 @@ To ensure that connections are open, see the table below:
 		<td><strong>Galera healthcheck</strong></td>
 		<td>9200</td>
 		<td>This port is for monitoring the health of nodes in an HA cluster.<br><br>
-			The communication between these VMs is two-way.
+			The communication between these VMs is two way.
 	</td>
 	</tr>
 </table>
@@ -265,7 +252,7 @@ To ensure that connections are open, see the table below:
 If you are using <%= vars.single_leader_plan_lc %>, the operator must set network rules for
 both foundations in addition to the networking rules required for <%= vars.product_short %>.
 
-To ensure that connections are open in both foundations, see the table below:
+To ensure that connections are open in both foundations, see the following table:
 
 <table class="nice">
 	<th>Source VM</th>
@@ -278,7 +265,7 @@ To ensure that connections are open in both foundations, see the table below:
 		<td><strong>Follower VM</strong></td>
 		<td>8081 <br>8443<br>18443 <br>3306</td>
 		<td>These ports are needed to enable replication between services instance in two different
-			foundations. <br><br>The communication between these VMs is two-way.</td>
+			foundations. <br><br>The communication between these VMs is two way.</td>
 	</tr>
 
 </table>

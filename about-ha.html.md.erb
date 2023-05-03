@@ -11,14 +11,13 @@ and contains information to help you decide whether to use HA clusters.
 
 ## <a id="understanding"></a> Highly Available Cluster Topology
 
-In an HA cluster topology, a cluster consists of three nodes, where each node
-contains the same set of data synchronized across nodes. Data is replicated across
-nodes simultaneously or not written at all if replication fails even on a single node.
+In an HA cluster topology, a cluster consists of three nodes. Each node
+contains the same set of data synchronized across nodes. Data is simultaneously replicated across
+nodes or not written at all if replication fails even on a single node.
 
-With three nodes, HA clusters are highly available and automatically resilient to failure.
-This is because if a node loses contact with the other two nodes, the other two nodes can
-remain in contact and continue to accept transactions. Because the number of nodes is odd,
-the two nodes can assume they represent the primary component.
+With three nodes, HA clusters are highly available and resilient to failure because if a node loses contact with the other two nodes, the other two nodes can
+remain in contact and continue to accept transactions. If the number of nodes is odd,
+the two nodes can represent the primary component.
 For more information about cluster availability, see
 [Percona XtraDB Cluster: Quorum and Availability of the cluster](https://www.percona.com/blog/2015/06/12/percona-xtradb-cluster-quorum-availability-cluster/)
 in the Percona XtraDB Cluster documentation.
@@ -39,30 +38,29 @@ For more information about `mysql-diag`, see [Running mysql-diag](./mysql-diag.h
 
 The following diagram shows an HA cluster in three availability zones (AZs):
 
-<%# Edit in Google Slides: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing %>
+![alt-text=" HA MySQL cluster"](./images/ha-clusters.png)
+See the following image for a detailed description.
 
-![An HA MySQL cluster. See below for a detailed image description.](images/ha-clusters.png)
-
-<a href="./images/ha-clusters.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
+<a href="./images/ha-clusters.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
 The diagram shows an app communicating with a MySQL cluster using BOSH DNS.
 Each of the three MySQL nodes is located in its own AZ.
-Each MySQL node contains a proxy and a server, and has its own disk.
-Arrows are shown connecting the MySQL nodes, indicating that they can communicate with each other across AZs.
+Each MySQL node contains a proxy and a server, and has its' own disk.
+Arrows are shown thAT connect the MySQL nodes, indicating that they can communicate with each other across AZs.
 The dotted lines indicate data replication from the primary to the secondary databases.
 
-Traffic from apps and clients is sent round-robin to the proxies on all nodes over BOSH DNS.
+Traffic from apps and clients is sent round robin to the proxies on all nodes over BOSH DNS.
 The proxies direct their traffic to the server on the primary node.
 
-If the primary server fails, a secondary node is promoted to become the new primary.
-The proxies will update to ensure that traffic is sent to the new primary.
+If the primary server fails, a secondary node is promoted to become the new primary node.
+The proxies update to ensure that traffic is sent to the new primary node.
 
 For more information about other availability options supported by <%= vars.product_short %>,
 see [Availability Options](availability-options.html).
 
 ## <a id="requirements"></a> Infrastructure Requirements for Highly Available Deployments
 
- Before deciding to use HA clusters for <%= vars.product_short %> service plans, consider the
+ Before you decide to use HA clusters for <%= vars.product_short %> service plans, consider the
  following requirements.
 
 ### <a id="cap-plan"></a> Capacity Planning
@@ -118,14 +116,14 @@ at risk because they are not replicated within a cluster.
 - Large DDL statements can lock all schemas. This can be mitigated by using the
  Rolling Schema Upgrade (RSU) method. For instructions on how to use the RSU method,
 see [Using a rolling schema upgrade (RSU)](https://community.pivotal.io/s/article/Using-Rolling-Schema-Upgrade)
-in the VMware Tanzu Support knowledge base.
+in the VMware Tanzu Support Knowledge Base.
 
 - Large transaction sizes can inhibit the performance of the cluster and apps using
 the cluster because they are buffered in memory.
 
-- You cannot execute a DML statement in parallel with a DDL statement, if both
+- You cannot run a DML statement in parallel with a DDL statement, if both
 statements affect the same tables. If they are expected in parallel, the DML and
-DDL statements are both applied immediately to the cluster, causing errors.
+DDL statements are both applied immediately to the cluster, and cause errors.
 
 ### <a id="dev-arch"></a> Architecture Limitations
 
@@ -188,10 +186,41 @@ in the Percona XtraDB Cluster documentation.
 ### Maximum Transaction Sizes
 These are the maximum transaction sizes set for HA clusters:
 
-The maximum write-set size allowed in HA clusters is 2 GB. For more information,
+The maximum write-set size that is allowed in HA clusters is 2 GB. For more information,
 see [wsrep\_max\_ws\_size](https://www.percona.com/doc/percona-xtradb-cluster/LATEST/wsrep-system-index.html#wsrep_max_ws_size).
 
 The maximum number of rows each write-set can contain defaults to no limit.
 For more information, see [wsrep\_max\_ws\_rows](https://www.percona.com/doc/percona-xtradb-cluster/LATEST/wsrep-system-index.html#wsrep_max_ws_rows).
 
 ## <a id="proxy"></a>MySQL Proxy
+
+<%= vars.product_full %> uses a proxy to send client connections
+to the healthy MySQL database cluster nodes in a highly available cluster plan.
+Using a proxy handles failure of nodes, enabling fast,
+failover to other nodes within the cluster. When a
+node becomes unhealthy, the proxy closes all connections to the unhealthy node
+and re-routes all subsequent connections to a healthy node.
+
+The proxy used in <%= vars.product_short %> is Switchboard.
+Switchboard was developed to replace HAProxy as the proxy tier for the high
+availability cluster for MySQL databases in <%= vars.product_short %>.
+
+See the following image for a detailed description.
+![alt-text="Switchboard overview"](./images/switchboard-all-healthy.png)
+
+<a href="./images/switchboard-all-healthy.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+Switchboard offers the following features:
+
+- **MySQL Server Access**
+
+    MySQL clients communicate with nodes through this network port.
+    These connections are automatically passed through to the nodes.
+
+- **Switchboard and API**
+
+    Operators can connect to Switchboard to view the state of the nodes.
+
+    For more information about monitoring proxy health status, see
+    [Monitoring Node Health](./monitor-health.html).
+

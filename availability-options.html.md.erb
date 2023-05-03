@@ -24,12 +24,12 @@ Percona XtraDB Cluster (PXC), to provide the greatest availability of the topolo
 For more information, see [About Highly Available Clusters](./about-ha.html).
 
 + **<%= vars.single_leader_plan %>:** This two-VM topology enables you to provision a leader
-and follower VM in two different foundations. For more information,
+and follower VM in two different foundations. For more information about how to provision a leader and follower VM,
 see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 
 ## <a id="pros-and-cons"></a> Pros and Cons
 
-The table below lists some key characteristics of the topologies to help you decide
+The following table lists some key characteristics of the topologies to help you decide
 which one is best for your developers.
 
 <table class="nice">
@@ -70,7 +70,7 @@ which one is best for your developers.
       <td>
           <ul>
             <li>Tightest RPO and RTO for downtime, including downtime for upgrades.<br>
-                See <a href="#rpo-and-rto">RPOs and RTOs</a> below.</li>
+                See <a href="#rpo-and-rto">RPOs and RTOs</a>.</li>
           </ul>
        </td>
       <td>
@@ -106,11 +106,11 @@ which one is best for your developers.
 Recovery point objective (RPO) and recovery time objective (RTO) are important considerations
 for availability.
 
-The tables below describe the RPOs and RTOs for the topologies.
+The following tables describe the RPOs and RTOs for the topologies.
 
 ### <a id="rpo"></a> RPOs
 
-This table compares the recovery point objectives for the topologies.
+This table compares the recovery point objectives for the topologies:
 
 <table class="nice">
   <tr><th>Type of downtime</th>
@@ -131,7 +131,7 @@ This table compares the recovery point objectives for the topologies.
 
 ### <a id="rto"></a> RTOs
 
-This table compares the recovery time objectives for the topologies.
+This table compares the recovery time objectives for the topologies:
 
 <table class="nice">
   <tr><th>Type of downtime</th>
@@ -158,8 +158,8 @@ This table compares the recovery time objectives for the topologies.
 
 ## <a id="risk"></a> Risk
 
-When choosing a topology, risk is a factor to consider.
-Risk, in this case, encompasses the likelihood of:
+When you choose a topology, risk is a factor to consider.
+Risk encompasses the likelihood of:
 
 + Operators being interrupted to perform disaster recovery
 

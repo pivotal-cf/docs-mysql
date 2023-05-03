@@ -21,7 +21,7 @@ owner: MySQL
   They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
   <br><br>
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
-  adbr plugin.
+  adbr plug-in.
 </p>
 
 
@@ -67,11 +67,11 @@ Unencrypted data is never transferred outside the <%= vars.product_short %> depl
 Developers can change the backup schedule for an individual service instance using
 an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
 
-Automated backups fail if the service broker is unavailable, such as during an upgrade.
+Automated backups fail if the service broker is unavailable. For example, during an upgrade.
 
 <p class="note"><strong>Note:</strong>
   You must configure backups in the <%= vars.product_short %> tile.
-  You cannot be disable this feature.
+  You cannot be deactivate this feature.
 </p>
 
 <p class="note"><strong>Note:</strong>
@@ -124,8 +124,7 @@ The most important entries in the metadata file are the following:
 + `server_version`: Use this to determine potential incompatibilities
 when restoring an instance with the backup artifact.
 
-The backup process does not interrupt the MySQL service.
-However backups only reflect transactions that are completed before the `start_time`.
+The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
 
 <p class="note"><strong>Note:</strong>
   The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
@@ -134,13 +133,13 @@ However backups only reflect transactions that are completed before the `start_t
   This is a known issue.
 </p>
 
-## <a id='prerequisite'></a> Prerequisite: adbr Plugin
+## <a id='prerequisite'></a> Prerequisite: adbr Plug in
 
 Before you can manually back up or restore a service instance,
-you must have installed the Application Data Backup and Restore (ADBR) plugin
+you must have installed the ApplicationDataBackupRestore (adbr) plug-in
 for the Cloud Foundry Command Line Interface (cf CLI) tool.
 
-To install the plugin, run:
+To install the plug-in, run:
 
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
@@ -148,7 +147,7 @@ cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 
 <p class="note">
    <strong>Note:</strong> The procedures on this page assume that
-   you are using the adbr plugin v0.3.0 or later.
+   you are using the adbr plug-in v0.3.0 or later.
 </p>
 
 ## <a id="backup"></a> Manually Back Up a Service Instance
@@ -184,7 +183,7 @@ Finally, you rebind and restage apps that use the service instance.
 
 ###<a id="restore-concepts"></a>About Restoring a Service Instance
 
-Before you begin the restore procedure below, review the following important concepts:
+Before you begin the restore procedure review the following important concepts:
 
 + [The Topology of the Instance You Restore To](#instance-types)
 + [When to Use a Different Restore Method](#different-cases)
@@ -232,7 +231,7 @@ see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
 
 ####<a name="different-cases"></a> When to Use a Different Restore Method
 
-There are some cases where you cannot use the procedure below:
+There are some cases where you cannot use the following procedure:
 
 <table class="nice">
 <col width="50%">
@@ -264,7 +263,7 @@ For example, the following actions write to the database:
 + You configure the service instance for <%= vars.single_leader_plan %>.
 + <%= vars.product_short %> takes an automatic backup.
 
-If the database is not empty, then the adbr plugin fails to restore the data and
+If the database is not empty, then the adbr plug-in fails to restore the data and
 you need to delete the service instance and create another.
 
 
@@ -302,7 +301,7 @@ To restore a service instance:
 
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
-      Without the flag, the command lists five backups.  
+      Without the flag, the command lists five backups.
 
     For example:
 
@@ -311,14 +310,14 @@ To restore a service instance:
       Backup ID                                         Time of Backup
       a41bf723-2538-4020-9d16-50cccb7b7c8d_1589825284   Fri May 28 18:08:04 UTC 2021</pre>
 
-      Record the `Backup ID` from the above output.
+      Record the `Backup ID` from the output.
 
 1. Restore the service instance by running:
 
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
     ```
-    Where `BACKUP-ID` is the ID you recorded in the above step. 
+    Where is `BACKUP-ID` is the ID you recorded in the previous step. <br><br>
 
     For example:
 
@@ -336,7 +335,7 @@ To restore a service instance:
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
       [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
-    If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database) above.
+    If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database).
 
 1. If you are restoring a leader-follower or HA cluster service instance,
     update the plan by running:
@@ -380,12 +379,10 @@ To restore a service instance:
     cf restage APP-NAME
     ```
 
-<%= partial "/mysql/rebind-warning" %>
+##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr Plug-in
 
-##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr Plugin
-
-If you get HTTP error codes when working with the adbr plugin,
-see [Failed Backup or Restore with adbr Plugin](troubleshoot-instances.html#failed-adbr)
+If you get HTTP error codes when working with the adbr plug-in,
+see [Failed Backup or Restore with adbr Plug-in](troubleshoot-instances.html#failed-adbr)
 in _Troubleshooting On-Demand Instances_.
 
 ##<a id="monitor-backups"></a> Monitor Backups
@@ -393,18 +390,18 @@ in _Troubleshooting On-Demand Instances_.
 It is particularly important to verify that automated backups are being taken according to schedule.
 A common cause of failure for automated backups is the persistent disk filling up.
 
-Two ways to check that backups are being made:
+There are two ways to check that backups are being made:
 
-+ [Use the adbr Plugin to List Backups](#use-adbr)
++ [Use the adbr Plug-in to List Backups](#use-adbr)
 + [Use Healthwatch to Confirm Automated Backups](#use-healthwatch)
 
-### <a id="use-adbr"></a> Use the adbr Plugin to List Backups
+### <a id="use-adbr"></a> Use the adbr Plug-in to List Backups
 
-The `adbr` plugin is a quick way to list backups for a service instance.
-The plugin lists the last five backups for a service instance.
+The `adbr` plug-in is a quick way to list backups for a service instance.
+The plug-in lists the last five backups for a service instance.
 The list includes both automated and manual backups.
 
-1. List the backups for an instance using the `adbr` plugin by running:
+1. List the backups for an instance using the `adbr` plug-in by running:
 
     ```
     cf adbr list-backups SOURCE-INSTANCE --limit NUMBER
@@ -414,7 +411,7 @@ The list includes both automated and manual backups.
 
     * `SOURCE-INSTANCE` is the name of the service instance.
     * `--limit NUMBER` is an optional flag to specify how many backups to list.
-      Without the flag, the command lists five backups.  
+      Without the flag, the command lists five backups.
 
     For example:
 
@@ -450,6 +447,6 @@ called `last_successful_backup`.
     The dotted red line represents the scheduled time when an automated backup is expected to occur.
     When a backup is taken, the time elapsed resets to zero.
 
-    <img src="images/metric-since-last-backup-healthy.png" alt="A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again." width="720" />
+    ![alt-text="A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again."](./images/metric-since-last-backup-healthy.png)
 
     <a href="./images/metric-since-last-backup-healthy.png" target="_blank" aria-hidden="true">View a larger version of this image</a>

@@ -12,7 +12,7 @@ restore a MySQL database with the backup.
 
 A logical backup reproduces the database table structure and data, without copying the InnoDB data files.
 The backup contains SQL statements to re-create the data.
-Because of this, restoring a logical backup takes longer that restoring a physical backup.
+Because of this, restoring a logical backup takes longer than restoring a physical backup.
 While the backup is running, operations against the database are stalled.
 
 You might want to create a logical backup in the following use cases:
@@ -20,16 +20,16 @@ You might want to create a logical backup in the following use cases:
 + Migrating a <%= vars.product_short %> database to an off-platform database.
 + Backing up specific individual <%= vars.product_short %> databases.
 + Editing table definitions or insert statements before restoring the <%= vars.product_short %> database.
-+ Migrating an off-platform database with encryption at rest or the Percona PAM Authentication plugin
++ Migrating an off-platform database with encryption at rest or the Percona PAM Authentication plug-in
 enabled to a <%= vars.product_short %> database.
 See [Restore from an Off-Platform Logical Backup](#external).
 
-In most cases, if you want to copy a <%= vars.product_short %> database you should use the `migrate` command.
+In most cases, if you want to copy a <%= vars.product_short %> database you can use the `migrate` command.
 For information about using the `migrate` command, see [About Data Migration in <%= vars.product_short %>](./about-migrate.html).
 
 You can create a physical backup by following the procedure in [Backing Up and Restoring <%= vars.product_full %> ](./backup-restore.html#backup).
 
-Additionally, operators can configure physical backups of your MySQL database in <%= vars.product_short %>
+Operators can configure physical backups of your MySQL database in <%= vars.product_short %>
 tile.
 For information about backups configured by operators,
 see [Configuring Automated Backups](./automated-backup.html).
@@ -42,15 +42,15 @@ does not send an email notification.</p>
 
 To back up and restore a <%= vars.product_short %> logical backup:
 
-1. Create a logical backup of your database. See [Create a <%= vars.product_short %> Logical Backup](#create-backup) below.
+1. Create a logical backup of your database. See [Create a <%= vars.product_short %> Logical Backup](#create-backup).
 1. Restore the logical backup to a <%= vars.product_short %> service instance.
-See [ Restore from a <%= vars.product_short %> Logical Backup](#restore-backup) below.
+For more information about restoring a logical backup, see [ Restore from a <%= vars.product_short %> Logical Backup](#restore-backup).
 
 
 ### <a id="create-backup"></a> Create a <%= vars.product_short %> Logical Backup
 
-<%= vars.product_short %> disables remote admin access to MySQL databases.
-Because of this, you must create a read-only service key to access the database for the service instance you want to back up.
+<%= vars.product_short %> deactivates remote admin access to MySQL databases.
+You must create a read only service key to access the database for the service instance you want to back up.
 
 To back up your <%= vars.product_short %> data manually:
 
@@ -136,7 +136,7 @@ To restore a logical backup:
 do the procedure in [Create a Service Instance](./use.html#create).
 
 1. Retrieve the credentials for the service instance you are restoring the backup to by following steps 1 and 2 in
-[Create a <%= vars.product_short %> Logical Backup](#create-backup) above.
+[Create a <%= vars.product_short %> Logical Backup](#create-backup).
 You can either restore the backup to an existing service instance or the one you created in step 1.
 
 1. Connect to your service instance,
@@ -163,7 +163,7 @@ This section assumes that you have already created a logical backup for your off
 using `mysqldump`.
 
 If you want to restore a logical backup from an off-platform database that has encryption at rest or
-the Percona PAM Authentication plugin enabled, you cannot use the `migrate` command.
+the Percona PAM Authentication plug-in enabled, you cannot use the `migrate` command.
 
 
 To restore an off-platform logical backup to a <%= vars.product_short %> database:

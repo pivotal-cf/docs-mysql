@@ -30,15 +30,15 @@ zones (AZs):
 
 <%# Edit in Google Slides: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing %>
 
-![A leader-follower service instance. See below for a detailed image description.](images/l-f.png)
+![alt-text="A leader-follower service instance."](./images/l-f.png)
 
-<a href="./images/l-f.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
+<p><a href="./images/l-f.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>.</p>
 
-In the above diagram, the leader and follower nodes are each shown in their own AZ,
+In the previous diagram, the leader and follower nodes are each shown in their own AZ,
 separated by a dotted line.
 
 An app sends traffic to the leader node.
-A two-way arrow connects the leader to the follower indicating that
+A two way arrow connects the leader to the follower indicating that
 any data that is written to the leader is replicated to the follower.
 The leader and the follower each have their own disk.
 
@@ -82,7 +82,7 @@ see [configure-leader-follower](./errands.html#configure-leader-follower) in _Ru
 ## <a id="iaas"></a> Infrastructure Requirements for Leader-Follower Deployments
 
 Leader-follower instances have additional infrastructure requirements to singleton
-instances, as described below.
+instances, as described in the following section.
 
 ### <a id="capacity"></a> Capacity Planning
 

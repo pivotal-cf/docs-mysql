@@ -41,14 +41,14 @@ Start here if you are responding to a specific error or error messages.
 
   <tr>
     <th>Cause</th>
-    <td>This might be because the Firehose is disabled in the <%= vars.app_runtime_abbr %> tile.</td>
+    <td>This might happen because the Firehose is deactivated in the TAS for VMs tile.</td>
   </tr>
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> checkbox is enabled,
-      and the <strong>Enable Log Cache syslog ingestion</strong> checkbox is disabled in the <%= vars.app_runtime_abbr %> tile.
-  For more information about configuring these checkboxes, see
+    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> check box is activated,
+  and the <strong>Enable Log Cache syslog ingestion</strong> check box is deactivated in the TAS for VMs tile.
+  For more information about configuring these check boxes, see
   <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
   </tr>
 
@@ -226,10 +226,9 @@ For more information about troubleshooting this problem, see
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td><ul>
-    <li>See <a href="#connector-8.0.13">Apps Requiring TLS Cannot Connect to the Database after Upgrade from v2.8</a> below.</li>
-    <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a> below.</li>
-    <li>See <a href="#m-tls">Mutual TLS</a> below.</li>
-    <li>See <a href="#m-tls">Java Apps Cannot Connect after Buildpack Update</a> below.</li>
+    <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a>.</li>
+    <li>See <a href="#m-tls">Mutual TLS</a>.</li>
+    <li>See <a href="#m-tls">Java Apps Cannot Connect after Buildpack Update</a>.</li>
 </ul></td>
   </tr>
 
@@ -325,8 +324,8 @@ the apps are using MySQL Connector/J v5.1.41 or earlier.</p></td>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td><p>If you cannot update the MySQL Connector/J, do the workaround in
 <a href="https://community.pivotal.io/s/article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack">
-How to disable KeyManager and TrustManager in Container Security Provider Framework in the
-Javanbuildpack</a> in the Support knowledge base.</p></td>
+How to deactivate KeyManager and TrustManager in Container Security Provider Framework in the
+Javanbuildpack</a> in the Support Knowledge Base.</p></td>
   </tr>
 
 </table>
@@ -353,7 +352,7 @@ Javanbuildpack</a> in the Support knowledge base.</p></td>
 
   <tr>
     <th>Symptom</th>
-    <td>Apps cannot connect to the database when TLS is enabled and your apps use mTLS.</td>
+    <td>Apps cannot connect to the database when TLS is activated and your apps use mTLS.</td>
   </tr>
 
   <tr>
@@ -363,7 +362,7 @@ Javanbuildpack</a> in the Support knowledge base.</p></td>
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>To resolve this issue disable mTLS in your apps.</td>
+    <td>To resolve this issue deactivate mTLS in your apps.</td>
   </tr>
 
 </table>
@@ -393,12 +392,12 @@ Javanbuildpack</a> in the Support knowledge base.</p></td>
     <td>After updating a Java app to use Java buildpack v4.38 or later,
              the app cannot connect to the database over TLS.
              <p>In the app logs, you see errors such as:</p>
-              <pre class="terminal">javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is disabled or cipher suites are inappropriate)</pre></td>
+              <pre class="terminal">javax.net.ssl.SSLHandshakeException: No appropriate protocol (protocol is deactivated or cipher suites are inappropriate)</pre> </td>
   </tr>
 
   <tr>
     <th>Cause</th>
-    <td>By default, the new version of Java disables TLS v1.0 and v1.1.</td>
+    <td>By default, the new version of Java deactivates TLS v1.0 and v1.1.</td>
   </tr>
 
   <tr>
@@ -409,10 +408,10 @@ Javanbuildpack</a> in the Support knowledge base.</p></td>
 </table>
 </div>
 
-### <a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plugin
+<h3 id="-failed-backup-or-restore-with-the-adbr-plugin"><a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plug-in</h3>
 
-If you get errors when working with the ApplicationDataBackupRestore (adbr) plugin
-for the Cloud Foundry Command Line Interface (cf CLI) tool, see:
+<p>If you get errors when working with the ApplicationDataBackupRestore (adbr) plug-in
+for the Cloud Foundry Command Line Interface (cf CLI) tool, see:</p>
 
 - ["400" Error during Backup or Restore](#failed-adbr-400)
 - ["500" Error during Backup or Restore](#failed-adbr-500)
@@ -593,14 +592,16 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
 </table>
 </div>
 
-For general information about the adbr plugin,
-see [Backing Up and Restoring <%= vars.product_full %>](./backup-restore.html).
+<p>For general information about the adbr plug-in,
+see <a href="./backup-restore.html">Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
 
 ### <a id="disk-usage-increases"></a> Persistent Disk Usage Is Increasing
 
 If you have set the `optimize_for_short_words` parameter to `true` and
 you are alerted that persistent disk usage is high,
-then you might need to optimize indexed tables.
+then you might need to optimize the indexed tables.</p>
+
+<style>
 
 
 <a name="shrink-index"></a>
@@ -658,7 +659,7 @@ Basic cf CLI operations include `create`, `update`, `bind`, `unbind`, and `delet
 
 ### <a id="parse-error"></a>Understand a Cloud Foundry (CF) Error Message
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial '/services-tshoot/tshoot-tech-parse-error' %>
 
@@ -691,12 +692,22 @@ The service instances are listed in the `name` column.
 
 ## <a id="kb"></a>Use the Knowledge Base (Community)
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial '/services-tshoot/tshoot-kb' %>
 
 ## <a id="support"></a>File a Support Ticket
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial '/services-tshoot/tshoot-support-dev' %>
+<p>
+  You can file a support ticket <a href="https://support.pivotal.io/">here</a>.
+  Be sure to provide the error message from <code>cf service YOUR-SERVICE-INSTANCE</code>.
+</p>
+
+<p>
+  To expedite troubleshooting, if possible, provide your service broker logs,
+  service instance logs, and BOSH task output.
+  Your cloud operator can obtain these from your error message.
+</p>

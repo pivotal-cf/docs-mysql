@@ -60,7 +60,7 @@ and then download the backup artifact.
     or
     <pre class="terminal">[on-demand-service-broker] [8db9f496-e83f-4aa6-82f0-528ddbff4c0a] 2020/08/21 23:53:09.978376 BOSH task ID 348 status: done delete deployment for instance 6c1db434-29ef-47c4-9f22-59fe53676b07: Description: delete deployment service-instance_6c1db434-29ef-47c4-9f22-59fe53676b07 Result: /deployments/service-instance_6c1db434-29ef-47c4-9f22-59fe53676b07</font></pre>
 
-    In the example log entries above, the GUID of the service instance begins with `6c1db`.
+    In the log entries example, the GUID of the service instance begins with `6c1db`.
 
     For information about broker logs,
     see [Access Broker and Instance Logs and VMs](troubleshoot.html#bosh-cf-access).
@@ -90,7 +90,7 @@ you cannot follow the instructions in [Backing Up and Restoring <%= vars.product
 
 Instead, follow these instructions to identify and download the backup artifact.
 These instructions are more straightforward
-than [If Restoring a Backup from a Deleted Service Instance](#lost-instance) above
+than [If Restoring a Backup from a Deleted Service Instance](#lost-instance)
 because you have access to the backed up service instance and therefore its GUID
 and a timestamp for the backup.
 
@@ -151,7 +151,7 @@ To retrieve the backup encryption key:
     bosh -d pivotal-mysql-GUID ssh
     ```
 
-    Where `GUID` is the GUID recorded in step 1 above.
+    Where is `GUID` is the GUID you recorded in step 1.
 
     For example:
 
@@ -189,7 +189,7 @@ To retrieve the backup encryption key:
     credhub get -n /tanzu-mysql/backups/BACKUP-ID
     ```
 
-    Where `BACKUP-ID` is the name of the backup artifact identified above.
+    Where is `BACKUP-ID` is the name of the backup artifact you identified.
 
     For example:
 
@@ -206,7 +206,7 @@ To retrieve the backup encryption key:
    This is the backup encryption key that need when you restore the backup.
 
     In this example, it is `NWjbvbB3pjOC`.
-    You use this key when you restore the backup.<br>
+    Use this key when you restore the backup.<br>
 
 
 ##<a id="prepare"></a> Create and Prepare a New Service Instance for Restore
@@ -255,7 +255,7 @@ To prepare a new service instance for restore:
       ```
   bosh -e BOSH-ENVIRONMENT -d service-instance_GUID instances
       ```
-      Where `GUID` is the service instance GUID you recorded in the above step.
+      Where `GUID` is the service instance GUID you previously recorded.
       <br><br>
       For example:
       <pre class="terminal">$ bosh -e my-env -d service-instance_12345678-90ab-cdef-1234-567890abcdef instances
@@ -277,7 +277,7 @@ To prepare a new service instance for restore:
 
     - `GUID` is the service instance GUID.
     - `mysql-backup-STRING.tar.gpg` is the backup file you downloaded
-       in [Identify and Download the Backup Artifact](#download) above.
+       in [Identify and Download the Backup Artifact](#download).
     - `BOSH-INSTANCE-GUID` is the BOSH instance GUID you recorded in the previous step.
     - `DESTINATION-PATH` is where the backup file saves on the BOSH VM.
 
@@ -323,7 +323,7 @@ in [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vm
     Where:
 
     + `ENCRYPTION-KEY` is the backup encryption key you recorded in
-        [Retrieve Backup Encryption Key](#retrieve-key) above.
+        [Retrieve Backup Encryption Key](#retrieve-key).
     + `RESTORE-FILE-PATH` is the full path on the BOSH VM where the backup artifact exists.
 
     For example:
@@ -383,6 +383,6 @@ To restage your service instance:
     cf restage APP-NAME
     ```
 
-Your app should be running and able to access the restored data.
+Your app must be running and able to access the restored data.
 
 <%= partial "/mysql/rebind-warning" %>

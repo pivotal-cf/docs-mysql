@@ -10,19 +10,19 @@ applies to its Percona Server components.
 
 ## <a id="defaults"></a> Overview
 
-This section lists the server defaults for <%= vars.product_short %> service plans.
-Most of the server defaults are the same for all service plans. However,
+Learn about the server defaults for <%= vars.product_short %> service plans.
+Most of the server defaults are the same for all service plans, however,
 some server defaults differ depending on the service plan.
 
 For server defaults that are:
 
-+ Common to all plans, see [Server Defaults for All Plans](#all) below.
++ Common to all plans, see [Server Defaults for All Plans](#all).
 + Specific to single node and leader-follower plans,
-see [Server Defaults for Single Node and Leader-Follower Plans](#sn-l-f) below.
+see [Server Defaults for Single Node and Leader-Follower Plans](#sn-l-f).
 + Specific to highly available (HA) cluster plans,
-see [Server Defaults for Highly Available Cluster Plans](#ha) below.
+see [Server Defaults for Highly Available Cluster Plans](#ha).
 + Specific to <%= vars.single_leader_plan_lc %> plans,
-see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site) below.
+see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site).
 
 
 <p class="note"><strong>Note:</strong>
@@ -33,7 +33,7 @@ see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site) belo
 ## <a id="all"></a> Server Defaults for All Plans
 
 The following table lists the <%= vars.product_short %> server defaults that are common
-to all service plans.
+to all service plans:
 
 <table>
     <th>Name</th>
@@ -123,7 +123,7 @@ to all service plans.
         <td>0</td>
         <td>
             By default, all table names are case sensitive.
-            Operators can change this default on the
+            Operators can change this default setting on the
             <a href="./install-config.html#mysql">MySQL Configuration page</a>
             and permit developers to override the default when they create a
             service instance. <br>For more information about using lowercase
@@ -136,17 +136,17 @@ to all service plans.
         <td><strong>Max Allowed Packet</strong></td>
         <td><code>max-allowed-packet</code></td>
         <td>256&nbsp;MB</td>
-        <td>If necessary, you can change this size in a session variable. </td>
+        <td>If necessary, you can change this size setting in a session variable. </td>
     </tr>
      <tr>
         <td><strong>Reverse Name Resolution</strong></td>
         <td><code>skip-name-resolve</code></td>
         <td>ON</td>
         <td>
-            This disables reverse DNS lookups to improve performance.
+            This deactivates reverse DNS lookups to improve performance.
             <%= vars.product_short %> uses user credentials, rather than hostnames, to authenticate access.
             Therefore, most deployments do not need reverse DNS lookups.<br><br>
-            To enable reverse name resolution, clear this option.
+            To activate reverse name resolution, deselect this option.
         </td>
     </tr>
     <tr>
@@ -176,8 +176,8 @@ to all service plans.
 
 ## <a id="sn-l-f"></a> Server Defaults for Single Node and Leader-Follower Plans
 
-In addition to the server defaults that are common to all plans, single node
-and leader-follower plans use the server defaults listed in the following table.
+In addition to the server default settings that are common to all plans, single node
+and leader-follower plans use the server defaults listed in the following table:
 
 <table>
     <th>Name</th>
@@ -241,8 +241,8 @@ and leader-follower plans use the server defaults listed in the following table.
 
 ## <a id="ha"></a> Server Defaults for Highly Available Cluster Plans
 
-In addition to the server defaults that are common to all plans,
-HA cluster plans use the server defaults listed in the following table.
+In addition to the server default settings that are common to all plans,
+HA cluster plans use the server defaults listed in the following table:
 
 <table>
     <th>Name</th>
@@ -303,7 +303,7 @@ HA cluster plans use the server defaults listed in the following table.
 
 ## <a id="multi-site"></a> Server Defaults for <%= vars.single_leader_plan %> Plans
 
-In addition to the server defaults that are common to all plans,
+In addition to the server default settings that are common to all plans,
 <%= vars.single_leader_plan_lc %> plans use the server defaults listed in the following table.
 
 <table>
@@ -324,7 +324,7 @@ In addition to the server defaults that are common to all plans,
         <td><code>myisam-recover-options</code></td>
         <td>OFF</td>
         <td>
-            This setting enables <%= vars.product_short %> to recover from most MyISAM problems
+            This setting activates <%= vars.product_short %> to recover from most MyISAM problems
             without human intervention.<br>For more information, see the
             <a href="https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_myisam-recover-options">
                 MySQL documentation</a>.
@@ -335,7 +335,7 @@ In addition to the server defaults that are common to all plans,
         <td><code>event-scheduler</code></td>
         <td>OFF</td>
         <td>
-            <%= vars.product_short %> enables the event scheduler so users can create and use
+            <%= vars.product_short %> activates the event scheduler so users can create and use
             events in their dedicated service instances.
         </td>
     </tr>
@@ -350,7 +350,7 @@ In addition to the server defaults that are common to all plans,
         <td><strong>Collation Server</strong></td>
         <td><code>collation-server</code></td>
         <td><code>utf8_unicode_ci</code></td>
-        <td>You can override this during a session.<br>
+        <td>You can override this setting during a session.<br>
           For instructions about
           viewing available and default collations, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
         MySQL documentation</a>.</td>
