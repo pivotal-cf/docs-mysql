@@ -11,7 +11,7 @@ the leader to the follower.
 
 ## <a id="overview"></a> Overview
 
-You might want to trigger a failover in the following scenarios:
+You can trigger a failover in the following scenarios:
 
 * You want to take the leader VM down to do planned maintenance.
 * The performance of the leader VM degrades.
@@ -19,7 +19,7 @@ You might want to trigger a failover in the following scenarios:
 * The AZ where the leader VM is located goes offline unexpectedly.
 
 
-You can also use the following metrics to determine if you need to trigger a failover:
+You can use the following metrics to determine if you need to trigger a failover:
 
 + `/p.mysql/available`: This metric monitors whether the MySQL server is currently available.
 For more information, see [Server Availability](./monitor.html#server-heartbeat).
@@ -79,7 +79,7 @@ for stopping the leader and promoting the follower:
    and [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2) to SSH into the <%= vars.ops_manager %> VM.
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director with the BOSH CLI.
-   See [SSH Into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11).
+   For more information on logging in with the BOSH CLI, see [Log in to the BOSH Director](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
 
 1. Use the BOSH CLI to run the `inspect` errand by running:
 
@@ -124,10 +124,10 @@ the instance marked `Role: leader`.<br><br>For example output:
             2018/04/03 18:08:46 Successfully executed command: inspect
   </pre>
 1. Record the index of the instance marked `Role: leader`.
-   In the above example output, the index of the leader VM is `ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0`.
+   In this example output, the index of the leader VM is `ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0`.
 
 1. Record the index of the other instance, which is the follower VM.
-   In the above example output, the index of the follower VM is `37e4b6bc-2ed6-4bd2-84d1-e59a91f5e7f8`.
+   In this example output, the index of the follower VM is `37e4b6bc-2ed6-4bd2-84d1-e59a91f5e7f8`.
 
 1. If you still have access to the AZ where the leader VM is located, determine if the
 leader VM is in the AZ you want to take offline by running:
@@ -204,7 +204,7 @@ However, to restore leader-follower, you must regain access to the AZ where your
 
 If you are triggering a failover in response to a failing leader VM, to clean up the former leader VM:
 
-1. Deactivate resurrection, specifying the same deployment as above, by running:
+1. Deactivate resurrection, specifying the same deployment as previously shown, by running:
 
       ```
       bosh update-resurrection off
@@ -275,7 +275,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
 
 To restart the former leader VM and configure it as the new follower:
 
-1. Re-create the former leader VM by running:
+1. Create the former leader VM again by running:
 
     ```
     bosh -d service-instance_GUID \
@@ -292,7 +292,7 @@ To restart the former leader VM and configure it as the new follower:
    $ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
      recreate \
      mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd01.
-1. Set the former leader VM as a follower, using the same values as above, by running:
+1. Set the former leader VM as a follower, using the same values as previously shown, by running:
 
     ```
     bosh -d service-instance_GUID \
@@ -303,7 +303,7 @@ To restart the former leader VM and configure it as the new follower:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
       run-errand configure-leader-follower \
       --instance=mysql/ca0ed8b5-7590-4cde-bba8-7ca2935f2bd0</pre>
-1. Use the BOSH CLI to run the `inspect` errand, using the same value as above, by running:
+1. Use the BOSH CLI to run the `inspect` errand, using the same value as previously shown, by running:
 
       ```
       bosh -d service-instance_GUID \
@@ -315,7 +315,7 @@ To restart the former leader VM and configure it as the new follower:
    If the output displays one instance marked `Role: leader` and another instance marked `Role: follower`,
    then leader-follower replication and high availability are resumed.
    The deployment should be in its original, working state.
-   You can turn resurrection back on if desired.
+   You can turn resurrection back on if you want too.
 
 ## <a id='unbind-rebind'></a> Unbind and Rebind the App
 
@@ -324,7 +324,7 @@ your developers must bind and rebind their apps to the leader-follower service i
 
 <p class="note"><strong>Note:</strong> If you have BOSH DNS enabled in <%= vars.ops_manager %>,
   you do not need to unbind and re-bind your app to a leader-follower service instance to failover the app.
-  The operator enables BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.
+  The operator activates BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.
 </p>
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>

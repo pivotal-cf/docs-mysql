@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to operators about how to prepare foundations for
+This topic provides instructions to operators on how to prepare foundations for
 <%= vars.single_leader_plan_lc %> using <%= vars.product_full %>.
 
 For information about multi-site architecture,
@@ -13,7 +13,7 @@ see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 
 ##<a id='prerequisites'></a> Prerequisites
 
-Before <%= vars.single_leader_plan_lc %> can be configured for <%= vars.product_short %>, you must
+Before you can configure <%= vars.single_leader_plan_lc %> for <%= vars.product_short %>, you must
 confirm that you have done the following:
 
 1. Created two <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) foundations that support
@@ -21,7 +21,7 @@ confirm that you have done the following:
 
 1. Deployed both foundations on a routable network. For example, the leader and follower service instances must be
 able to connect to each other on their respective IP addresses.
-You must ensure that the CIDR ranges for the leader and follower nodes do not overlap.
+You must verify that the CIDR ranges for the leader and follower nodes do not overlap.
 
 1. Determined which of the following disaster recovery strategies you want to use for your foundations:
     For more information, see [About Active-Passive Topology](./about-multi-site.html#active-passive).
@@ -29,22 +29,23 @@ You must ensure that the CIDR ranges for the leader and follower nodes do not ov
 
 1. Configured a global DNS load balancer to point to the two <%= vars.app_runtime_abbr %> foundations
 and their local load balancers.
-See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).
+For more information, see [Configure Your GLB](https://docs.pivotal.io/pivotalcf/plan/global-dns-lb.html#configure-glb).
 
-##<a id='enable'></a> Enable <%= vars.single_leader_plan %>
+## <a id='enable'></a> Enable <%= vars.single_leader_plan %>
 
 After two <%= vars.app_runtime_abbr %> foundations are created, you can enable <%= vars.single_leader_plan_lc %> by
 doing the following:
 
 1. Configure networking rules.
-See [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
+For more information on network rules, see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
 
-1. Enable TLS for both foundations. When you paste the contents of your TLS CA certificate in [Preparing for TLS](./prepare-tls.html), paste both TLS CA certificates:
+1. Enable TLS for both foundations. When you paste the contents of your TLS CA certificate in [Preparing for TLS](./prepare-tls.html), paste both TLS CA certificates as shown in the following image:
 
-    ![On the Security pane in the MySQL tile, the TLS CA certificates for the two different
-    foundations are in the Trusted Certificates field.
-    The certificate for foundation 2 is on a new line directly after the certificate
-    for foundation 1.](./images/multi-site-ca.png)
+![alt-text="On the Security pane in the MySQL tile, the TLS CA certificates for the two different
+foundations are in the Trusted Certificates field.
+The certificate for foundation 2 is on a new line directly after the certificate
+for foundation 1."](./images/multi-site-ca.png)
+
 
 1. Configure a <%= vars.single_leader_plan %> plan on both foundations. See
 [Configure Service Plans](./install-config.html#active).

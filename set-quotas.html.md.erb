@@ -40,11 +40,11 @@ For example, if you have two service tiles,
 you must set a separate global service quota for each of them.
 
 When the global quota is reached for a service, no more instances of that service
-can be created unless the quota is increased, or some instances of that service are deleted.
+can be created unless the quota is increased, or in some instances of that service are deleted.
 
 ## <a id="plan"></a> Create Plan-level Quotas
 
-A service can offer one or more plans.
+A service might offer one or more plans.
 You can set a separate quota per plan so that instances of that plan cannot exceed the plan quota.
 For a service with multiple plans, the total number of instances created for all
 plans combined cannot exceed the [global quota](#global) for the service.
@@ -63,11 +63,11 @@ For example, if you set your org-level quota to 100, developers can create up to
 100 service instances in that org using any combination of on-demand services.
 
 When this quota is met, no more service instances of any kind can be created in
-the org unless the quota is increased or some service instances are deleted.
+the org unless the quota is increased or in some service instances are deleted.
 
 To create and set an org-level quota, do the following:
 
-1. Run this command to create a quota for service instances at the org level:
+1. Run the following command to create a quota for service instances at the org level:
 
   <pre>
   cf create-quota QUOTA-NAME -m TOTAL-MEMORY -i INSTANCE-MEMORY -r ROUTES -s SERVICE-INSTANCES --allow-paid-service-plans
@@ -75,16 +75,16 @@ To create and set an org-level quota, do the following:
 
   Where:
 
-  * `QUOTA-NAME`---A name for this quota
-  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined
-  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance
-  * `ROUTES`---Maximum number of routes allowed for all service instances combined
-  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
+  * `QUOTA-NAME`---A name for this quota.
+  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined.
+  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance.
+  * `ROUTES`---Maximum number of routes allowed for all service instances combined.
+  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org.
 
   For example:
   <pre class="terminal">cf create-quota myquota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
 
-2. Associate the quota you created above with a specific org by running the following command:
+2. Associate the quota you previously created with a specific org by running the following command:
 
   <pre>
   cf set-quota ORG-NAME QUOTA-NAME
@@ -108,7 +108,7 @@ combination of on-demand services.
 
 When this quota is met, no more service instances of any kind can be created in
 the space unless the quota is updated
-or some service instances are deleted.
+or in some service instances are deleted.
 
 To create and set a space-level quota, do the following:
 
@@ -120,18 +120,18 @@ To create and set a space-level quota, do the following:
 
   Where:
 
-  * `QUOTA-NAME`---A name for this quota
-  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined
-  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance
-  * `ROUTES`---Maximum number of routes allowed for all service instances combined
-  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org
+  * `QUOTA-NAME`---A name for this quota.
+  * `TOTAL-MEMORY`---Maximum memory used by all service instances combined.
+  * `INSTANCE-MEMORY`---Maximum memory used by any single service instance.
+  * `ROUTES`---Maximum number of routes allowed for all service instances combined.
+  * `SERVICE-INSTANCES`---Maximum number of service instances allowed for the org.
 
   For example:
 
   <pre class="terminal">cf create-space-quota myspacequota -m 1024mb -i 16gb -r 30 -s 50 --allow-paid-service-plans</pre>
 
 
-2. Associate the quota you created above with a specific space by running the following command:
+2. Associate the quota you previously created with a specific space by running the following command:
 
   <pre>
   cf set-space-quota SPACE-NAME QUOTA-NAME
@@ -165,7 +165,8 @@ see the [Creating and Modifying Quota Plans](https://docs.pivotal.io/application
 
 Service-level and plan-level quota use, and total number of service instances,
 are available through the on-demand broker metrics emitted to Loggregator.
-These metrics are listed here:
+
+These are the metrics:
 
 <table>
   <tr>
@@ -213,7 +214,7 @@ To view configurations for your VMware SQL with MySQL for TAS on-demand plan, do
 1. Click the section for the plan you want to view. For example, **Plan 1**.
 
 The following image shows an example that includes the VM type and persistent disk
-selected for the server VMs, as well as the quota for this plan.
+selected for the server VMs, and the quota for this plan.
 
 Click the following tabs to show an example of each plan:
 
@@ -299,7 +300,7 @@ following calculation:
 
 **plan quota x cost of selected resources**
 
-For example, if you selected the options in the above image,
+For example, if you selected the options in the previous image,
 you have selected a VM type **micro** and a persistent disk type **20&nbsp;GB**,
 and the plan quota is **15**.
 The VM and persistent disk types have an associated cost for the IaaS you are using.

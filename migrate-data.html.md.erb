@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to migrate the data from any MySQL database to a
+This topic describes how to migrate data from any MySQL database to a
 <%= vars.product_full %> service instance.
 
 ## <a id='overview'></a>Overview
@@ -30,8 +30,7 @@ To migrate data in <%= vars.product_short %>:
   For example, if X amount of data takes 10 minutes to migrate,
   then 2X amount of data takes 20 minutes to migrate using the same hardware.
   <br><br>
-  Do a test migration with small datasets to estimate how long the entire migration
-  takes before migrating larger datasets.
+  Do a test migration with small datasets to estimate how long the entire migration takes before migrating larger datasets.
 </p>
 
 ## <a id='prepare'></a>Prerequisites
@@ -79,12 +78,12 @@ see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
 
 VMware recommends that developers migrate data using the `mysql-tools` CLI plug-in with the `migrate` command.
 For more information about `mysql-tools` cf CLI plug-in,
-see [mysql-cli-plug-in](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
+see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
 
 <p class="note">
   <strong>Note:</strong>
-  You must have TLS enabled to use this feature.
-  To configure and enable TLS, see <a href="./install-config.html#security-tls">Configure TLS</a>.
+  You must have TLS activated to use this feature.
+  To configure and activate TLS, see <a href="./install-config.html#security-tls">Configure TLS</a>.
 </p>
 
 To install the `mysql-tools` cf CLI plug-in:
@@ -94,7 +93,7 @@ To install the `mysql-tools` cf CLI plug-in:
     ```
     cf install-plugin -r CF-Community "MysqlTools"
     ```
-2. Confirm that the plug-in has installed successfully by running:
+2. Confirm that the plug-in has successfully installed, run:
 
     ```
     cf mysql-tools version
@@ -103,7 +102,7 @@ To install the `mysql-tools` cf CLI plug-in:
 ## <a id='source-access'></a>Enable Source Access
 
 The `migrate` command must be able to access the source database.
-How you enable this access depends on where the source database is located relative to the destination
+How you activate this access depends on where the source database is located relative to the destination
 space and org.
 
 If you are:
@@ -146,9 +145,9 @@ To create a user-provided service instance to access the off-platform database:
 1. Confirm that your off-platform MySQL database permits inbound and outbound network
     traffic to your destination <%= vars.ops_manager %> foundation. You might need to modify firewall rules
     for your off-platform MySQL database. Talk to your platform operator for assistance.
-1. If your off-platform MySQL database requires connections over TLS, make sure
+1. If your off-platform MySQL database requires connections over TLS, verify
     that your <%= vars.ops_manager %> foundation is configured to recognize the CA certificate
-    that the MySQL server certificate is signed with. Talk to your platform operator for assistance.
+    that the MySQL server certificate signed in with. Talk to your platform operator for assistance.
 1. Record the information needed to access your off-platform database.
 These values usually include:
   - `hostname`: the domain name or IP address of the off-platform source database.
@@ -167,7 +166,7 @@ These values usually include:
     Where:
 
     * `CF-DB-INSTANCE` is the name that you want to give to the new database service instance that you are migrating to.
-    * `CREDS-STRUCT` is a JSON structure that contains the off-platform database access values you recorded in the above step.
+    * `CREDS-STRUCT` is a JSON structure that contains the off-platform database access values you recorded in the previous step.
 
     For example:
     <pre class="terminal noselect">$ cf cups migrating-db -p '{"hostname": "34.192.88.212", "name": "my\_db", \
@@ -218,7 +217,7 @@ To stop and unbind your apps:
     Your apps are listed the `bound apps` column.
 
 
-1. For each bound app you recorded in the above step:
+1. For each bound app you recorded in the previous step:
     1. Stop the app by running:
 
         ```
@@ -242,7 +241,7 @@ To stop and unbind your apps:
 To migrate data from your source database to your destination service instance:
 
 1. Log in to your BOSH deployment and target the destination org and space by doing
-steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
+steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind).
 
 1. View and select an available <%= vars.product_short %> v2 service plans by running:
 
@@ -260,7 +259,7 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
 
     * `SOURCE-INSTANCE` is the name of your source MySQL service instance
      or user-provided service instance.
-    * `V2-PLAN` is the name of the service plan that you selected.
+    * `V2-PLAN` is the name of the service plan that you previously selected.
 
     For example:
     <pre class="terminal">$ cf mysql-tools migrate my-instance db-small <br>
@@ -277,7 +276,7 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind) above.
     2018/04/24 11:41:29 Cleaning up...</pre>
 
     <p class="note"><strong>Note:</strong>
-      For debugging purposes, you can add the <code>--no-cleanup</code> flag to the above command.
+      For debugging purposes, you can add the <code>--no-cleanup</code> flag to the previous command.
       If a migration fails, this flag preserves the migration app and the newly-created service instance.
       However, if a migration succeeds, the migration app is still deleted.
     </p>

@@ -53,12 +53,12 @@ main table {
 
   <tr>
     <th>Cause</th>
-    <td>This might be because the Firehose is deactivated in the TAS for VMs tile.</td>
+    <td>This might happen because the Firehose is deactivated in the TAS for VMs tile.</td>
   </tr>
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> check box is enabled,
+    <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> check box is activated,
   and the <strong>Enable Log Cache syslog ingestion</strong> check box is deactivated in the TAS for VMs tile.
   For more information about configuring these check boxes, see
   <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
@@ -394,7 +394,7 @@ the apps are using MySQL Connector/J v5.1.41 or earlier.</p></td>
     <td><p>If you cannot update the MySQL Connector/J, do the workaround in
 <a href="https://community.pivotal.io/s/article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack">
 How to deactivate KeyManager and TrustManager in Container Security Provider Framework in the
-Javanbuildpack</a> in the Support knowledge base.</p></td>
+Javanbuildpack</a> in the Support Knowledge Base.</p></td>
   </tr>
 
 </table>
@@ -429,7 +429,7 @@ main table {
 
   <tr>
     <th>Symptom</th>
-    <td>Apps cannot connect to the database when TLS is enabled and your apps use mTLS.</td>
+    <td>Apps cannot connect to the database when TLS is activated and your apps use mTLS.</td>
   </tr>
 
   <tr>
@@ -717,13 +717,13 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
 </div>
 
 <p>For general information about the adbr plug-in,
-see <a href="./backup-restore.html">Backing Up and Restoring VMware SQL with MySQL for Tanzu Application Service</a>.</p>
+see <a href="./backup-restore.html">Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
 
 <h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent Disk Usage Is Increasing</h3>
 
 <p>If you have set the <code>optimize_for_short_words</code> parameter to <code>true</code> and
 you are alerted that persistent disk usage is high,
-then you might need to optimize indexed tables.</p>
+then you might need to optimize the indexed tables.</p>
 
 <style>
 
@@ -884,5 +884,5 @@ my-instance   p.mysql      db-small                  create succeeded
 <p>
   To expedite troubleshooting, if possible, provide your service broker logs,
   service instance logs, and BOSH task output.
-  Your cloud operator should be able to obtain these from your error message.
+  Your cloud operator can obtain these from your error message.
 </p>

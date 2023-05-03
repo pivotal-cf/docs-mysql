@@ -9,27 +9,27 @@ This topic explains events in the lifecycle of a <%= vars.product_full %> servic
 
 ## <a id='service-update'></a>Stemcell or Service Update
 
-An operator updates a stemcell version or their version of <%= vars.product_short %>.
+An operator can update a stemcell version or their version of <%= vars.product_short %>.
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
-The service should resume within 10-15 minutes.
-- <strong>Required Actions:</strong> None. If the update deploys successfully, apps reconnect automatically.
+The service resumes within 10-15 minutes.
+- <strong>Required Actions:</strong> None. If the update deploys successfully, the apps automatically reconnect.
 
 ## <a id='change-plan'></a>Plan Change
 
-A developer changes their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
+A developer can change their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
 
-- <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to. The service should resume within 10-15 minutes.
+- <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to. The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully, apps reconnect automatically.
 
 ## <a id='process-fail'></a>VM Process Failure
 
-A process, like the MySQL server, crashes on the service instance VM.
+A process, like the MySQL server, fails on the service instance VM.
 
 - <strong>Impact:</strong>
   - BOSH (monit) brings the process back automatically.
-  - Depending on the process and what it was doing, the service might experience 60-120 seconds of downtime.
-  - Until the process resumes, apps might be unable to use MySQL, metrics or logging might stop, and other features might be interrupted.
+  - Depending on the process and what it was doing, the service can experience 60-120 seconds of downtime.
+  - Until the process resumes, apps might be unable to use MySQL, metrics or logging can stop, and other features might be interrupted.
 - <strong>Required Actions:</strong> None. If the process resumes cleanly and without manual intervention, apps reconnect automatically.
 
 ## <a id='vm-fail'></a>VM Failure
@@ -37,9 +37,9 @@ A process, like the MySQL server, crashes on the service instance VM.
 A <%= vars.product_short %> VM fails and goes offline due to either a virtualization problem or a host hardware problem.
 
 - <strong>Impact:</strong>
-  - If the [BOSH Resurrector](https://bosh.io/docs/resurrector.html) is enabled (recommended), BOSH should detect the failure, recreate the VM, and reattach the same persistent disk and IP address.
+  - If the [BOSH Resurrector](https://bosh.io/docs/resurrector.html) is enabled (recommended), BOSH can detect the failure, recreate the VM, and reattach the same persistent disk and IP address.
   - Downtime largely depends on how quickly the Resurrector notices, usually 1-2 minutes, and how long it takes the IaaS to create a replacement VM.
-  - If the Resurrector is not enabled, some IaaSes such as vSphere have similar resurrection or HA features.
+  - If the Resurrector is not enabled, some IaaSes, for example, vSphere, have similar resurrection or HA features.
   - Apps cannot connect to MySQL until the VM is recreated and the My SQL server process is resumed.
   - Based on prior experience with BOSH Resurrector, typical downtime is 8-10 minutes.
 - <strong>Required Actions:</strong>
@@ -58,7 +58,7 @@ This causes service interruption in multi-AZ deployments where [Diego](https://d
   - Some app instances can still be able to connect and continue operating.
   - App instances in the other AZs are not able to connect.
   - Downtime: Unknown
-- <strong>Required Actions:</strong>  Recovery of the app / database connection should be automatic. Depending on the app, manual intervention can be required to check data consistency.
+- <strong>Required Actions:</strong>  Recovery of the app - database connection must be automatic. Depending on the app, manual intervention might be required to check data consistency.
 
 ## <a id='region-fail'></a>Region Failure
 

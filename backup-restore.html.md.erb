@@ -21,7 +21,7 @@ owner: MySQL
   They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
   <br><br>
   Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
-  adbr plug in.
+  adbr plug-in.
 </p>
 
 
@@ -67,7 +67,7 @@ Unencrypted data is never transferred outside the <%= vars.product_short %> depl
 Developers can change the backup schedule for an individual service instance using
 an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
 
-Automated backups fail if the service broker is unavailable, such as during an upgrade.
+Automated backups fail if the service broker is unavailable. For example, during an upgrade.
 
 <p class="note"><strong>Note:</strong>
   You must configure backups in the <%= vars.product_short %> tile.
@@ -124,8 +124,7 @@ The most important entries in the metadata file are the following:
 + `server_version`: Use this to determine potential incompatibilities
 when restoring an instance with the backup artifact.
 
-The backup process does not interrupt the MySQL service.
-However backups only reflect transactions that are completed before the `start_time`.
+The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
 
 <p class="note"><strong>Note:</strong>
   The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
@@ -184,7 +183,7 @@ Finally, you rebind and restage apps that use the service instance.
 
 ###<a id="restore-concepts"></a>About Restoring a Service Instance
 
-Before you begin the restore procedure, review the following important concepts:
+Before you begin the restore procedure review the following important concepts:
 
 + [The Topology of the Instance You Restore To](#instance-types)
 + [When to Use a Different Restore Method](#different-cases)
@@ -232,7 +231,7 @@ see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
 
 ####<a name="different-cases"></a> When to Use a Different Restore Method
 
-There are some cases where you cannot use the procedure:
+There are some cases where you cannot use the following procedure:
 
 <table class="nice">
 <col width="50%">
@@ -304,14 +303,14 @@ To restore a service instance:
       Backup ID                                         Time of Backup
       a41bf723-2538-4020-9d16-50cccb7b7c8d_1589825284   Fri May 28 18:08:04 UTC 2021</pre>
 
-      Record the `Backup ID` from the above output.
+      Record the `Backup ID` from the output.
 
 1. Restore the service instance by running:
 
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
     ```
-    Where is `BACKUP-ID` is the ID you recorded in the above step. <br><br>
+    Where is `BACKUP-ID` is the ID you recorded in the revious step. <br><br>
 
     For example:
 
@@ -329,7 +328,7 @@ To restore a service instance:
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
       [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
-    If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database) above.
+    If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database).
 
 1. If you are restoring a leader-follower or HA cluster service instance,
     update the plan by running:
@@ -385,7 +384,7 @@ in _Troubleshooting On-Demand Instances_.
 It is particularly important to verify that automated backups are being taken according to schedule.
 A common cause of failure for automated backups is the persistent disk filling up.
 
-Two ways to check that backups are being made:
+There are two ways to check that backups are being made:
 
 + [Use the adbr Plug-in to List Backups](#use-adbr)
 + [Use Healthwatch to Confirm Automated Backups](#use-healthwatch)
@@ -441,6 +440,6 @@ called `last_successful_backup`.
     The dotted red line represents the scheduled time when an automated backup is expected to occur.
     When a backup is taken, the time elapsed resets to zero.
 
-    <%= image_tag("images/metric-since-last-backup-healthy.png", :alt => "A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again.", :width => "720") %>
+    ![alt-text="A plot of the last successful backup metric. The metric increases linearly until the backup is made. The metric falls back to zero and then increases again."](./images/metric-since-last-backup-healthy.png)
 
     <a href="./images/metric-since-last-backup-healthy.png" target="_blank" aria-hidden="true">View a larger version of this image</a>

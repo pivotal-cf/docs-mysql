@@ -10,14 +10,18 @@ from their apps and local workstations to the <%= vars.product_full %> service.
 
 ## <a id="overview"></a>Overview
 
-If your app does not currently use TLS to connect to <%= vars.product_short %> service
-instances, and your operator has configured <%= vars.product_short %> to enforce TLS
-connections between apps and service instances, you must enable TLS using the procedures
-in [Enable TLS](#enable).
+For <%= vars.product_old %> v2.5 and later and <%= vars.product_short %> 2.7 and later, if your operator has configured TLS in the tile,
+but did not configure TLS for existing service instances in <%= vars.product_old %> v2.4 and earlier,
+you must activate TLS using the procedures in [Activate TLS](#enable).
 
-After TLS is enabled for your service instance, you can establish a TLS connection from your local
+If your operator has configured TLS in the tile, new service instances have TLS activated by default.
+In this case, developers don't have to activate TLS.
+
+After TLS is activated for your service instance, you can establish a TLS connection from your local
 workstation to a <%= vars.product_short %> service instance.
-See [Establish a TLS Connection to a Service Instance](#establish-tls).
+
+For more information on how to establish a TLS connection, see [Establish a TLS Connection to a Service Instance](#establish-tls).
+
 
  <p class="note warning"><strong>Warning:</strong> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
    Because of this, the server certificate does not validate apps.
@@ -26,33 +30,43 @@ See [Establish a TLS Connection to a Service Instance](#establish-tls).
  	mTLS in your apps.
  </p>
 
-## <a id='enable'></a> Enable TLS
+## <a id='enable'></a> Activate TLS
 
 The procedure for updating your app depends on the language and framework of your app.
 Java and Spring apps automatically detect TLS.
 Apps written in other languages and frameworks must be manually modified to use TLS.
-To enable TLS on existing service instances, do one of the following:
+
+To activate TLS on existing service instances, do one of the following:
 
 * If your app is written in Java or Spring, see [Activate TLS for Java and Spring Apps](#activate-spring).
 * If your app is not written in Java or Spring, see [Activate TLS for Non-Spring Apps](#activate-non-spring).
 
-###<a id='activate-spring'></a> Activate TLS for Java and Spring Apps
+### <a id='prereq'></a> Prerequisites
 
+To activate TLS for service instances, an operator must:
+
+* Complete the procedure in [Preparing for TLS](prepare-tls.html).
+* Activate TLS in the tile configuration when doing the procedure in [Configure Security](install-config.html#security).
+
+### <a id='activate-spring'></a> Activate TLS for Java and Spring Apps
+
+In <%= vars.product_old %> v2.5, if your operator has configured TLS in the tile,
+new service instances have TLS activated by default.
 If your Spring app detects TLS configured in the service instance, it must connect over TLS.
-If you did not previously enable TLS in your service instance before your operator configured
-<%= vars.product_short %> to require TLS connections to service instances, you must rebind
-your Spring apps in order to re-establish connections to your service instance.
+
+If you did not previously activate TLS in your service instance before upgrading to <%= vars.product_old %> v2.5,
+you must rebind your Spring apps in order to re-establish connections to your service instance.
 
 <p class="note"><strong>Note:</strong> VMware recommends developers configure their apps
 to use the <a href="https://dev.mysql.com/downloads/connector/j/8.0.html">MySQL Connector/J</a> v5.1.42 or later
 instead of the MariaDB Connector/J.
 </p>
 
-#### <a id='rebind'></a> Rebind Your App
+### <a id='rebind'></a> Rebind your App
 
-If your app is bound to an existing service instance, you must re-bind it after enabling TLS for the instance.
+If your app is bound to an existing service instance, you must rebind it after activating TLS for the instance.
 
-To re-bind your app:
+To rebind your app:
 
 1. To stop your app, run the following command:
 
@@ -71,7 +85,7 @@ To re-bind your app:
 	+ `YOUR-APP` is the name of your app.
 	+ `YOUR-SERVICE-INSTANCE` is the name of your service instance.
 
-1. To re-bind your app to the service instance, run the following command:
+1. To rebind your app to the service instance, run the following command:
 
 	```
 	cf bind-service YOUR-APP YOUR-SERVICE-INSTANCE
@@ -92,7 +106,7 @@ Your app now communicates securely with the MySQL service instance.
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-###<a id='activate-non-spring'></a> Activate TLS for Non-Spring Apps
+### <a id='activate-non-spring'></a> Activate TLS for Non-Spring Apps
 
 In order to activate TLS for apps not written in Java or Spring,
 you must modify the app to discover the CA certificate in `VCAP_SERVICES`
@@ -100,6 +114,7 @@ and specify the CA component when initiating the connection to the database.
 
 `VCAP_SERVICES` is an environment variable that exists within every container.
 It contains runtime-specific information about the app, including metadata supplied by each of the services that are bound to that app.
+
 The metadata includes the information needed to connect to the service, such as hostnames, usernames, and passwords.
 
 To activate TLS for your app, do the following:
@@ -152,14 +167,16 @@ To activate TLS for your app, do the following:
 	```
 1. Push your app with `cf push`.
 
-##<a id='establish-tls'></a> Establish a TLS Connection to a Service Instance
+## <a id='establish-tls'></a> Establish a TLS Connection to a Service Instance
 
 You can use `mysql` to establish a TLS connection to a <%= vars.product_short %> service instance that has TLS
-enabled. For more information about how to enable TLS for a service instance, see [Enable TLS](#enable), above.
+activated.
+
+For more information about how to activate TLS for a service instance, see [Activate TLS](#enable).
 
 To establish a TLS connection to a service instance:
 
-1. Create a new service key for the service instance with TLS enabled. For example:
+1. Create a new service key for the service instance with TLS activated. For example:
   <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
   {
    "hostname": "q-n3s3y1.q-g693.bosh",
@@ -177,15 +194,14 @@ To establish a TLS connection to a service instance:
   }
   </pre>
 
-  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale.
-  Create a new one.
+  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale. Create a new service key.
 
-1. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:
-  <pre class="terminal">$ pbpaste > root.pem</pre>
+2. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:
+<pre class="terminal">$ pbpaste > root.pem</pre>
 
-1. Record the values for `username`, `password`, and `hostname`.
+3. Record the values for `username`, `password`, and `hostname`.
 
-1. Use `mysql` to establish a TLS connection to the MySQL instance.
+4. Use `mysql` to establish a TLS connection to the MySQL instance.
   Run the following command:
   <pre><code>mysql --host=HOSTNAME \
     --user=USERNAME \
@@ -195,9 +211,9 @@ To establish a TLS connection to a service instance:
   <br>
   Where:
 
-    * `HOSTNAME` is the value for `hostname` retrieved above.
-    * `USERNAME` is the value for `username` retrieved above.
-    * `PASSWORD` is the value for `password` retrieved above.
+    * `HOSTNAME` is the value for `hostname` previously retrieved.
+    * `USERNAME` is the value for `username` previously retrieved.
+    * `PASSWORD` is the value for `password` previously retrieved.
   <br><br>
 
   For example:

@@ -7,7 +7,7 @@ owner: MySQL
 
 This topic describes how to configure automated, physical backups for <%= vars.product_full %>.
 
-Additionally, when they want, developers can create physical backups using the Cloud Foundry Command Line Interface (cf CLI)
+Developers can create physical backups using the Cloud Foundry Command Line Interface (cf CLI)
 or logical backups using `mysqldump`.
 For more information about physical backups, see
 [Backing Up and Restoring <%= vars.product_full %>](./backup-restore.html).
@@ -98,8 +98,7 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
             </td>
             <td>
                 Enter the user that you created in
-                <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>
-                above.
+                <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>.
             </td>
         </tr>
         <tr>
@@ -108,8 +107,7 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
             </td>
             <td>
                  Enter the private key that you created in
-                 <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>
-                 above. <br>
+                 <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>. <br>
                  Store the public key that is used for SSH and SCP access on the destination VM.
             </td>
         </tr>
@@ -176,6 +174,7 @@ When you configure backups for Amazon S3 or Ceph,
 
 For information about Amazon S3 buckets,
 see the [Amazon documentation](https://aws.amazon.com/documentation/s3/).
+
 For information about Ceph storage clusters,
 see the [Ceph documentation](https://docs.ceph.com/en/latest/).
 
@@ -187,10 +186,8 @@ To back up your database to Amazon S3 or Ceph:
 ### <a id="access-key-aws"></a> Create a Custom Policy and Access Key
 
 <%= vars.product_short %> accesses your S3 bucket through a user account.
-VMware recommends that this account is only used by <%= vars.product_short %>.
-You must apply a minimal policy that enables the user account upload backups to your S3 bucket.
-
-Give the policy the permission to list and upload to buckets.
+VMware recommends that this account be only used by <%= vars.product_short %>.
+You must apply a minimal policy that enables the user account upload backups to your S3 bucket. Then give the policy the permission to list and upload to buckets.
 
 The procedure in this section assumes that you are using an Amazon S3 bucket.
 If you are using a Ceph or another S3-compatible bucket to create the policy and access key,
@@ -248,7 +245,7 @@ you must have an S3 bucket in which to store the backups.
 1. Select **Ceph or Amazon S3**.
 
     <img alt="Backup configuration pane shows Ceph or Amazon S3 selected and the fields
-    in the pane are described in the table below."
+    in the pane are described in the following table."
     width="400" src="./images/S3-backups.png"/>
 
 1. Configure the fields as follows:
@@ -264,7 +261,7 @@ you must have an S3 bucket in which to store the backups.
             </td>
             <td>
                 Enter the S3 Access Key ID and Secret Access Key that you created in
-                <a href="#access-key-aws">Create a Custom Policy and Access Key</a> above.
+                <a href="#access-key-aws">Create a Custom Policy and Access Key</a>.
             </td>
         </tr>
         <tr>
@@ -303,8 +300,8 @@ you must have an S3 bucket in which to store the backups.
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
-              The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              You should select this check box if you use:
+              The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
+              Select this check box if you use:
 
               <ul>
                 <li>
@@ -372,7 +369,7 @@ When you configure backups for Amazon S3 with Instance Profile, <%= vars.product
 allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
 new backups IAM role to a new EC2 instance.
 
-The procedure in this section allows <%= vars.product_short %> to upload backups to
+You can use the procedure in this section to allow <%= vars.product_short %> to upload backups to
 Amazon S3 without static credentials (Access and Secret Access Key ID).
 
 **Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
@@ -395,6 +392,7 @@ First, you must create a policy for your <%= vars.product_short %> user account.
 
 For more information about AWS identity and access management, see the
 [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).<br>
+
 For more information about users, groups, and roles in AWS, see the
 [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html).
 
@@ -584,7 +582,7 @@ in the <%= vars.ops_manager %> documentation.
 For information about `create-vm-extension`, see
 [om create-vm-extension](https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md) in GitHub.
 
-Example JSON to specify the instance profile name:
+JSON example to specify the instance profile name:
 
 ```json
 {
@@ -598,11 +596,11 @@ Where:
 
 * `VM-EXTENSION-NAME` is the unique VM extension name that <%= vars.ops_manager %> manages
 * `INSTANCE-PROFILE-NAME` is the name of the instance profile created in
-  [Create an IAM Role with a Custom Policy](#ip-create-policy) above.
+  [Create an IAM Role with a Custom Policy](#ip-create-policy).
 
 #### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker Job
 
-There are two methods that you can use to apply the VM extension to the `dedicated-mysql-broker`
+These are the following methods that you can use to apply the VM extension to the `dedicated-mysql-broker`
 job in the <%= vars.product_short %> tile:
 
 * **Using the <%= vars.ops_manager %> API directly.** For more information, see
@@ -627,7 +625,7 @@ To set the VM extension name:
 1. Select **Backups**.
 1. Select **Amazon S3 (with Instance Profiles)**
 
-    <img alt="Configure blobstore for MySQL backups pane shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are described in the table below."
+    <img alt="Configure blobstore for MySQL backups pane shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are described in the following table."
     width="400" src="./images/S3-instance-profiles.png"/>
 
 1. Configure the fields as follows:
@@ -643,7 +641,7 @@ To set the VM extension name:
             </td>
             <td>
                 Enter the <code>VM-EXTENSION-NAME</code> that you created in
-                <a href="#ip-vm-ops">Create a VM Extension in <%= vars.ops_manager %></a> above.
+                <a href="#ip-vm-ops">Create a VM Extension in <%= vars.ops_manager %></a>.
             </td>
         </tr>
         <tr>
@@ -683,8 +681,8 @@ To set the VM extension name:
                 <strong>Force path style access to bucket</strong>
             </td>
             <td>
-              The default behaviour in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              You should select this check box if you use:
+              The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
+              Select this check box if you use:
 
               <ul>
                 <li>
@@ -754,9 +752,9 @@ To apply changes and upgrade all service instances for <%= vars.product_short %>
 
 1. Return to the <%= vars.ops_manager %> Installation Dashboard.
 1. Click **Review Pending Changes**.
-1. Clear the check boxes for all products except **BOSH Director** and
+1. Deselect the check boxes for all products except **BOSH Director** and
 **<%= vars.product_full %>**.
-1. Verify that the check box for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is enabled.
+1. Verify that the check box for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is activated.
 1. Click **Apply Changes**.
 
 ### <a id="ip-verify-instances"></a> (Optional) Verify the IAM Role is Associated with MySQL Service Instances
@@ -810,7 +808,7 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
 1. Select **GCS**.
 
     <img alt="Backup configuration pane shows GCS radio button selected and the fields
-     in the pane are described in the table below."
+     in the pane are described in the following table."
       src="./images/gcs-backups.png"/>
 
 1. Configure the fields as follows:
@@ -856,7 +854,7 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
             <td>
                 Enter the contents of the service account JSON file that you downloaded
                 when creating a service account in
-               <a href="#service-account-gcs">Create a Service Account and Private Key</a> above.
+               <a href="#service-account-gcs">Create a Service Account and Private Key</a>.
             </td>
         </tr>
         <tr>
@@ -893,7 +891,7 @@ To back up your database to Azure Storage:
 ### <a id="storage-account-azure"></a> Create a Storage Account and Access Key
 
 <%= vars.product_short %> accesses your Azure Storage account through a storage access key.
-VMware recommends that this account is only used by <%= vars.product_short %>.
+VMware recommends that this account be only used by <%= vars.product_short %>.
 You must apply a minimal policy that enables the storage account upload backups to your Azure Storage.
 
 The storage account needs the following permissions:
@@ -934,7 +932,7 @@ To back up your database to your Azure Storage account:
             </td>
             <td>
                Enter the Azure Storage account name that you created in
-               <a href="#storage-account-azure">Create a Storage Account and Access Key</a> above.
+               <a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
             </td>
         </tr>
         <tr>
@@ -943,7 +941,7 @@ To back up your database to your Azure Storage account:
             </td>
             <td>
                 Enter one of the storage access keys that you viewed in
-                <a href="#storage-account-azure">Create a Storage Account and Access Key</a> above.
+                <a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
             </td>
         </tr>
         <tr>

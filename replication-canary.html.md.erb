@@ -11,8 +11,8 @@ monitors an HA cluster to ensure that replication is working.
 
 ## <a id="overview"></a>Overview
 
-The replication canary writes to a private dataset in the cluster and then attempts to read the
-written data from each node. It pauses between reads and writes to ensure that the write-sets have
+The replication canary writes to a private dataset in the cluster and attempts to read the
+written data from each node. It pauses between read and write mode to ensure that the write-sets have
 been replicated. The private dataset does not use a significant amount of disk capacity.
 
 When replication fails, the canary cannot read the data from all the nodes and does the

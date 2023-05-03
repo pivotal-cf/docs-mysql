@@ -61,7 +61,7 @@ To set optional parameters:
       The `-c` flag accepts a valid JSON object containing service-specific configuration parameters,
       provided either in-line or in a file.<br>
 
-1. Verify that the `cf` command executed successfully by running:
+1. Verify that the `cf` command ran successfully by running:
 
     ```
     watch cf services
@@ -147,9 +147,9 @@ can use to configure MySQL instances based on their specific app workloads:
 
     <tr>
         <td>Write-Heavy Workload</td>
-        <td>For apps that write to the database a lot, you can configure your
-          service instances with a write-heavy workload.<br><br>
-            The write-heavy profile changes the following server defaults listed in
+        <td>For apps that write to the database frequently, you can configure your
+          service instances with a write heavy workload.<br><br>
+            The write heavy profile changes the following server defaults that are listed in
                 <a href="./server-defaults.html">About MySQL Server Defaults</a>:
           <ul>
           <li><code>innodb_buffer_pool_size</code>
@@ -162,11 +162,11 @@ can use to configure MySQL instances based on their specific app workloads:
 
 ## <a id="lowercase"></a>Lowercase Table Names
 
-If you are migrating a database from a system that was case-insensitive,
+If you are migrating a database from a system that was case insensitive,
 you can enable lowercase table names to change all table names to lowercase.
 
 For example, if your database had the table names `TableName` and `TABLEname`, when you enable
-lowercase table names both of the above names change to `tablename` and are interpreted as the same table.
+lowercase table names both of the names change to `tablename` and are interpreted as the same table.
 
 For more information, see the
 [MySQL documentation](https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names).
@@ -433,7 +433,7 @@ The following table describes how to use the `optimize_for_short_words` optional
     you must monitor the memory usage of the service instance and choose a larger VM type
     when necessary.
     Also, the operator needs to prevent the index from becoming too large and ineffective
-    by removing entries.
+    by removing entries as described in the following paragraphs.
     How often this needs to be done depends on the workload and
     how much data is changed in the full-text index.
     <br>
@@ -470,7 +470,7 @@ The following table describes how to use the `optimize_for_short_words` optional
 
 ## <a id='wsrep_applier_threads'></a> WSREP Applier Threads
 
-The folllowing table describes how to use the `wsrep_applier_threads` optional parameter:
+The following table describes how to use the `wsrep_applier_threads` optional parameter:
 
 <table>
   <tr>

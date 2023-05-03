@@ -8,7 +8,7 @@ This topic describes networking for on-demand services, including <%= vars.produ
 
 <h2> <a id="service-network"></a>Service Network Requirement </h2>
 
-<!-- This partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + '/services/service-networks-v3' %>
 
@@ -26,10 +26,9 @@ An on-demand service separates operations between the default network and the se
 
 The following diagram shows worker VMs in an on-demand service instance running on a separate services network, while other components run on the default network.
 
-<p><img src="./images/odb-architecture-vmware.png"
-alt="Diagram of the default network and services network as described in this section.">
-<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a></p>
+![alt-text="The default network and services network."](./images/odb-architecture-vmware.png)
 
+<a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a></p>
 
 <h2> <a id="rules"></a> Required Networking Rules for On-Demand Services </h2>
 
@@ -201,7 +200,7 @@ To ensure that connections are open, see the following table:
 			For more information,
 			see <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/security/secure-network.html#firewall-configuration">Firewall Configuration</a>
 			in the Percona documentation.<br><br>
-			The communication between these VMs is two-way.
+			The communication between these VMs is two way.
 	</td>
 	</tr>
 	<tr>
@@ -209,7 +208,7 @@ To ensure that connections are open, see the following table:
 		<td><strong>Galera healthcheck</strong></td>
 		<td>9200</td>
 		<td>This port is for monitoring the health of nodes in an HA cluster.<br><br>
-			The communication between these VMs is two-way.
+			The communication between these VMs is two way.
 	</td>
 	</tr>
 </table>
@@ -232,7 +231,7 @@ To ensure that connections are open in both foundations, see the following table
 		<td><strong>Follower VM</strong></td>
 		<td>8081 <br>8443<br>18443 <br>3306</td>
 		<td>These ports are needed to enable replication between services instance in two different
-			foundations. <br><br>The communication between these VMs is two-way.</td>
+			foundations. <br><br>The communication between these VMs is two way.</td>
 	</tr>
 
 </table>

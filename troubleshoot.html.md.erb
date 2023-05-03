@@ -174,8 +174,8 @@ main table {
         <li>
         <p>
         If you need more information, <a href="#access-broker">access the broker logs</a> and
-        use the <code>broker-request-id</code> from the error message above to search the logs for
-        more information. Check for:
+        use the <code>broker-request-id</code> from the previous error message to search the logs for
+        more information. Search for:
         </p>
         </li>
         <ul>
@@ -237,12 +237,12 @@ main table {
         <li>Log in to BOSH as an admin.</li>
         <li>Run <code>bosh tasks</code></li>
         </ol>
-    If there are a large number of queued tasks, the system might be under too much load.
+    If there are a large number of queued tasks, the system might be overloaded.
         BOSH is configured with two workers and one status worker, which might not be
         sufficient resources for the level of load.
         </li>
         <li>
-        If the task queue is long, advise app developers to try again once the system is under less load.
+        If the task queue is long, advise the app developers to try again once the system is under less of a load.
         </li>
         </ol></td>
   </tr>
@@ -301,7 +301,7 @@ main table {
         </li>
         <li>
         <p>
-        Using the GUID obtained above, run:
+        Using the GUID that you obtained previously, run:
         </p>
         <code>bosh -d service-instance_GUID vms</code>
         </li>
@@ -365,7 +365,7 @@ main table {
     </li>
     <li>
     <p>
-      Search the logs for the <code>broker-request-id</code> string listed in the error message above.
+      Search the logs for the <code>broker-request-id</code> string listed in the error message.
     </p>
     </li>
     <li>
@@ -438,7 +438,7 @@ successfully created and bound.
     <p>
     Check that <a href="https://docs.pivotal.io/application-service/operating/app-sec-groups.html"/>application security groups</a>
     are configured correctly.
-    Access should be configured for the service network that the tile is deployed to.
+    Access can be configured for the service network that the tile is deployed to.
     </p>
     </li>
     <li>
@@ -451,7 +451,7 @@ successfully created and bound.
     <li>
     <p>
     In Ops Manager go into the service tile and see the service network that is
-    configured in the networks tab.
+    configured in the Networks tab.
     </p>
     </li>
     <li>
@@ -708,7 +708,7 @@ and topology without operator intervention to resolve the issue.
       2 errand(s)
       Succeeded</pre>
 
-        In the above scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
+        In the previous scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
         <a href="./backup-mysqldump.html#create-backup">Create a VMware SQL with MySQL for TAS Logical Backup</a>
@@ -822,7 +822,7 @@ and the errand logs contain the following:
             <li>If one instance has a range that is a subset of the other, the instance with the subset should must be made read-only, as described in Step 3.</li>
           </ul>
         </li>
-        <li>Based on the information you gathered in the step above, run the
+        <li>Based on the information you gathered in the previous step, run the
           <code>make-read-only</code>
           errand to make the appropriate instance read-only:
           <code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
@@ -853,7 +853,7 @@ and the errand logs contain the following:
             <li>Take a backup of both instances using the
               <a href="./backup-mysqldump.html#create-backup"> Create a VMware SQL with MySQL for TAS Logical Backup</a>
               steps.</li>
-            <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and becomes the new leader.</li>
+            <li>Manually inspect the data on each instance to determine the discrepancies and put the data on the instance that is further ahead&mdash;this instance has the higher GTID Executed set, and is the new leader.</li>
             <li>Migrate all appropriate data to the new leader instance.</li>
             <li>After putting all data on the leader, ssh onto the follower:
               <code>bosh -e ENVIRONMENT -d DEPLOYMENT ssh mysql/GUID-OF-FOLLOWER</code>
@@ -918,12 +918,12 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
-    However if both VMs are read only, apps cannot write to the database.</td>
+    However, if both VMs are read-only, apps cannot write to the database.</td>
   </tr>
 
   <tr>
     <th>Cause</th>
-    <td>This problem happens if the leader VM fails and the BOSH Resurrector is enabled.
+    <td>This problem happens if the leader VM fails and the BOSH Resurrector is activated.
     When the leader is resurrected, it is set as read-only.</td>
   </tr>
 
@@ -970,7 +970,7 @@ main table {
         <code>bosh -e ENVIRONMENT -d DEPLOYMENT &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</code>
-        For example, if the second instance above is the leader:
+        For example, if the second instance is the leader:
         <pre class="terminal">
     $ bosh -e my-env -d my-dep &#92;
       run-errand configure-leader-follower &#92;
@@ -1103,9 +1103,9 @@ main table {
   <tr>
     <th>Cause</th>
     <td><p>This error occurs if you created an uppercase table name and then
-      enabled lowercase table names.</p>
+      activated lowercase table names.</p>
 
-    <p>You enable lowercase table names either by:</p>
+    <p>You activate lowercase table names either by:</p>
 
     <ul>
 
@@ -1143,7 +1143,7 @@ main table {
 
       <li>
         (Optional) If you want to activate lowercase table names again,
-        name your table again to lowercase and then activate lowercase table names.
+        rename your table to lowercase and then activate lowercase table names.
       </li>
     </ol></td>
   </tr>
@@ -1223,23 +1223,23 @@ main table {
     <strong>Firewall Rule Change:</strong>
     If your firewall rules change, it might prevent a node from communicating with the rest of the cluster. This causes the node to become unresponsive. In this case, the logs show the node leaving the cluster but do not show network latency errors.
     <br><br>
-    To confirm that the node is unresponsive because of a firewall rule change, SSH from a responsive node to the unresponsive node. If you cannot connect, the node is unresponsive due to a firewall rule change. Change your firewall rules to enable the
+    To confirm that the node is unresponsive because of a firewall rule change, SSH from a responsive node to the unresponsive node. If you cannot connect, the node is unresponsive due to a firewall rule change. Change your firewall rules to activate the
     unresponsive node to rejoin the cluster.<hr>
   </li>
   <li>
     <strong>VM Failure:</strong>
-    If you cannot SSH into a node and you are not detecting either network latency or firewall issues, your node might be down due to VM failure. To confirm that the node is unresponsive and re-create the VM, see
+    If you cannot SSH into a node and you are not detecting either network latency or firewall issues, your node might be down due to VM failure. To confirm that the node is unresponsive and recreate the VM, see
     <a href="#recreate-VM">
-      Re-create a Corrupted VM in a Highly Available</a>.<hr>
+      Recreate a Corrupted VM in a Highly Available</a>.<hr>
   </li>
   <li>
     <strong>Node Unable to Rejoin:</strong> If a detached existing node fails to join the cluster, its
     <code>sequence_number</code> might be higher than those of the nodes with quorum. A higher
     <code>sequence_number</code> on the detached node indicates that it has recent changes to the
-     data that the primary component lacks. You can check this by looking at the node&rsquo;s error log at
+     data that the primary component lacks. You can verify this by looking at the node&rsquo;s error log at
     <code>/var/vcap/sys/log/pxc-mysql/mysql.err.log</code>.
     <br><br>
-    To restore the cluster, do one of the following:
+    To restore the cluster, complete one of the following:
     <ul>
       <li>If the detached node has a higher sequence number than the primary component, do the procedures in
         <a href="./bootstrapping.html">Bootstrapping</a>.
@@ -1309,7 +1309,7 @@ main table {
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>For solutions for replication errors in MySQL log files, see the following table.
+    <td>For solutions for the replication errors in MySQL log files, see the following table:
 
 <table class="nice">
   <tr>
@@ -1348,7 +1348,7 @@ or persistent disk or memory issues, you can ignore the replication errors.
 <h3 id="failed-backups"><a id="failed-adbr-backups"></a>Failed Backups</h3>
 
 <p>If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plug-in fails,
-check that the 2345 port from the TAS for VMs to the ODB component is open.</p>
+verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
 
 <style>
 
@@ -1430,7 +1430,7 @@ in <em>On-Demand Networking</em>.
 
 <p>
   Ops Manager currently deploys two BOSH workers to process its queue.
-  Future versions of Ops Manager lets users configure the number of BOSH workers.
+  Users of future versions of Ops Manager can configure the number of BOSH workers.
 </p>
 
 <h3 id="-configuration"><a id="bosh-config"></a> Configuration</h3>
@@ -1452,7 +1452,7 @@ in <em>On-Demand Networking</em>.
 
 
 <p>
-    If you have rotated any UAA user credentials then you can see authentication
+    If you have rotated any UAA user credentials then you might see authentication
     issues in the service broker logs.
 </p>
 
@@ -1510,7 +1510,7 @@ To validate connectivity, do the following:
     bosh deployments
     ```
 
-2.  SSH into the VMware SQL with MySQL for TAS service broker by running:
+2.  SSH into the Tanzu SQL for VMs service broker by running:
 
     ```
     bosh -d DEPLOYMENT-NAME ssh
@@ -1652,9 +1652,9 @@ Updated: 2017-03-13T10:17:58Z
 
 
 <p>
-  Before using the procedures, log in to the
-  <a href="https://docs.pivotal.io/application-service/cf-cli/getting-started.html">cf CLI</a> and the
-  <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html">BOSH CLI</a>.
+  Before following these procedures, log in to the
+  <a href="https://docs.pivotal.io/pivotalcf/cf-cli/getting-started.html">cf CLI</a> and the
+  <a href="https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#prepare">BOSH CLI</a>.
 </p>
 
 <h4 id="-access-broker-logs-and-vms"><a id="access-broker"></a>  Access Broker Logs and VMs</h4>
@@ -2008,8 +2008,8 @@ $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-i
 
 <ul>
   <li>Exit with exit code 0</li>
-  <li>Stdout will be an empty list of deployments</li>
-  <li>Stderr will be <code>None</code></li>
+  <li>Stdout is an empty list of deployments</li>
+  <li>Stderr is <code>None</code></li>
 </ul>
 
 <pre class="terminal">
@@ -2044,8 +2044,8 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <h3 id="-reinstall-a-tile"><a id="reinstall"></a>  Reinstall a Tile</h3>
 
- <p>To reinstall the VMware SQL with MySQL for TAS tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and above</a>
- in the Support knowledge base.</p>
+<p>To reinstall the Tanzu SQL for VMs tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and higher</a>
+in the Support Knowledge Base.</p>
 
 <h3 id="-view-resource-saturation-and-scaling"><a id="view-resources"></a>  View Resource Saturation and Scaling</h3>
 
@@ -2085,18 +2085,18 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
     <code>cf curl /v2/service_instances/GUID/service_bindings</code>
   </li>
   <li>
-    The output from the above curl gives you a list of <code>resources</code>,
+    The output from the curl gives you a list of <code>resources</code>,
     with each item referencing a service binding, which contains the <code>APP-URL</code>.
     To find the name, org, and space for the app, run the following:
     <ol>
       <li><code>cf curl APP-URL</code> and record the app name under <code>entity.name</code>.</li>
       <li><code>cf curl SPACE-URL</code> to obtain the space, using the <code>entity.space_url</code>
-        from the above curl.
+        from the curl.
         Record the space name under <code>entity.name</code>.
       </li>
       <li>
         <code>cf curl ORGANIZATION-URL</code> to obtain the org, using the
-        <code>entity.organization_url</code> from the above curl.
+        <code>entity.organization_url</code> from the curl.
         Record the organization name under <code>entity.name</code>.
       </li>
     </ol>
@@ -2114,7 +2114,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <p>
   Quota saturation and total number of service instances are available through ODB
-  metrics emitted to Loggregator. The metric names are shown here:
+  metrics emitted to Loggregator. The metric names are shown in the following table:
 </p>
 
 <table>
@@ -2155,8 +2155,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
 
 <ol>
   <li>Consult solutions for common errors. See
-    <a href="#ha">Highly Available Cluster Troubleshooting Errors</a>
-    above.
+    <a href="#ha">Highly Available Cluster Troubleshooting Errors</a>.
   </li>
   <li>Use
     <code>mysql-diag</code>
@@ -2164,14 +2163,11 @@ gathering information to diagnose the type of failure the cluster is experiencin
     <code>mysql-diag</code>, you might recover your cluster with the following troubleshooting techniques:
     <ul>
       <li>To force a node to rejoin the cluster, see
-        <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>
-       .</li>
-      <li>To re-create a corrupted VM, see
-        <a href="#recreate-VM">Re-create a Corrupted VM in a Highly Available Cluster</a>
-        .</li>
+        <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>.</li>
+      <li>To recreate a corrupted VM, see
+        <a href="#recreate-VM">Re-create a Corrupted VM in a Highly Available Cluster</a>.</li>
       <li>To check if replication is working, see
-        <a href="#check-replication">Check Replication in a Highly Available Cluster</a>
-        .</li>
+        <a href="#check-replication">Check Replication in a Highly Available Cluster</a>.</li>
     </ul>
     For more information about
     <code>mysql-diag</code>, see
@@ -2184,7 +2180,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
     <code>download-logs</code> before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
     <br>
     For more information, see the <a href="#download-logs">download-logs</a>
-    following section.
+    section.
     <br>
     <p class="note">
       <strong>Note:</strong>
@@ -2301,7 +2297,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
     <code>Recreate VM using last known apply spec</code>.
     <p class="note warning">
       <strong>Warning:</strong>
-      Recreating a node clears its logs. Ensure the node is completely down before recreating it.
+      Recreating a node clears the logs. Ensure the node is completely down before recreating it.
     </p>
     <p class="note warning">
       <strong>Warning:</strong>
@@ -2318,8 +2314,8 @@ If you see stale data in your cluster, you can check whether replication is func
 To check the replication status, do the following:
 
 1.  To log in to the BOSH Director VM, do the following:
-    1.  Gather the information needed to log in to the BOSH Director VM by doing the procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
-    2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2).
+    1.  Gather the information needed to log in to the BOSH Director VM by using the procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+    2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
 2.  Create a dummy database in the first node by running:
 
     ```
@@ -2350,7 +2346,7 @@ To check the replication status, do the following:
     ```
 
     When prompted for a password, provide the `password` value recorded in step 1.
-    The above command returns output similar to the following:
+    The previous command returns output similar to the following:
 
     <pre class="terminal">
     +----+----------------------+
@@ -2380,7 +2376,7 @@ To check the replication status, do the following:
         When prompted for a password, provide the `password` value recorded in step 1.
 
 
-    3.  Verify that the above command returns output similar to the following:
+    3.  Verify that the previous command returns output similar to the following:
 
             +----+----------------------+
             | id | info                 |
@@ -2390,13 +2386,13 @@ To check the replication status, do the following:
             | 10 | even more dummy data |
             +----+----------------------+
 
-7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).
+7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://support.pivotal.io/)
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 
 <h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for Troubleshooting</h2>
 
-<p>The troubleshooting techniques described above use the following tools.</p>
+<p>The troubleshooting techniques described here  use the following tools.</p>
 
 <h3 id="download-logs"><a id="download-logs"></a>download-logs</h3>
 

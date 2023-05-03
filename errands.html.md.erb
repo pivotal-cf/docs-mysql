@@ -58,7 +58,7 @@ To run an errand:
 ## <a id="available-errands"></a> Available Errands
 
 The following sections describe each service broker errand that
-you can run. To run an errand, see [Run an Errand](#errand) above.
+you can run. To run an errand, see [Run an Errand](#errand).
 
 ### <a id="find-deprecated-bindings"></a> find-deprecated-bindings
 
@@ -108,7 +108,7 @@ The `configure-leader-follower` errand does the following:
 * Fails and alerts operators with BOSH errand output if the service instance is in a unhealthy state.
 
 This errand is used to trigger a leader-follower failover.
-You can also use this errand to create custom failover scripts.
+You can use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
 ### <a id="make-leader"></a> make-leader
@@ -121,7 +121,7 @@ The `make-leader` errand does the following:
 * Fails if the original leader is still writeable. This protects against data divergence.
 
 This errand is used to trigger a leader-follower failover.
-You can also use this errand to create custom failover scripts.
+You can use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
 
@@ -135,7 +135,7 @@ The `make-read-only` errand does the following:
 if the follower VM is accessible.
 
 This errand is used to trigger a leader-follower failover.
-You can also use this errand to create custom failover scripts.
+You can use this errand to create custom failover scripts.
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
 ### <a id="upgrade-all-service-instances"></a> upgrade-all-service-instances
@@ -151,7 +151,7 @@ For more information, see [Triggering a Leader-Follower Failover](./leader-follo
 ### <a id="delete-all-service-instances-and-deregister-broker"></a> delete-all-service-instances-and-deregister-broker
 
 
-<p class="note warning"><strong>Warning:</strong> This errand destroys all of the
+<p class="note warning"><strong>Warning:</strong> This errand destroys all
   on-demand service instances and deregisters the broker from the Cloud Controller.
   Use it with extreme caution.
 </p>

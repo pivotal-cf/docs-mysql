@@ -83,7 +83,7 @@ If the service instance is `failing`, contact <a href="https://pivotal.io/suppor
 
 ##<a id='failover'></a> Trigger a Failover
 
-<p class="note warning"><strong>Warning:</strong> You should only trigger failover
+<p class="note warning"><strong>Warning:</strong> You can only trigger failover
   if you do not need to recover the leader service instance.
 </p>
 
@@ -127,9 +127,9 @@ To promote the follower service instance to leader:
     Updating service instance secondary-node as admin...
     OK</pre>
 
-1. If the above command fails, do one of the following:
+1. If this command fails, do one of the following:
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
-    to be applied and then run the above command again. The error message looks like the following:
+    to be applied and run the command again. The error message looks like the following:
         <pre class=terminal>Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
@@ -215,14 +215,14 @@ To create a follower:
     + Follow the procedure in [Create a Service Instance](./use.html#create)
     in _Using <%=vars.product_full %>_.
     + Do not name your service instance `follower` because, if in the future
-    you trigger a failover or switchover, this instance is no longer the follower.
+    you trigger a failover or switchover, this instance can no longer be the follower.
 
 ###<a id='restore-follower'></a> Reconfigure <%= vars.single_leader_plan %>
 
 The follower in the primary foundation needs to catch up to the newly promoted leader
 in the secondary foundation.
 
-You do this by reconfiguring <%= vars.single_leader_plan %> so that the follower
+Reconfigure <%= vars.single_leader_plan %> so that the follower
 in the primary foundation receives the data from the leader in the secondary foundation.
 
 To reconfigure:
@@ -248,7 +248,7 @@ To trigger a switchover:
 </p>
 
 Before you promote the follower service instance,
-you must make the leader service instance, which is in the primary foundation, read-only.
+you must make the leader service instance, which is in the primary foundation, a read-only format.
 
 To make the leader read-only and promote the follower to leader in the secondary foundation:
 
@@ -294,15 +294,15 @@ To make the leader read-only and promote the follower to leader in the secondary
       -c '{"initiate-failover":"promote-follower-to-leader"}'
     ```
 
-    If the above command fails, do one of the following:
+    If this command fails, do one of the following:
 
     + If you have unapplied local transactions on the follower service instance, wait for the transactions
-    to be applied and then run the above command again. The error message looks like the following:
+    to be applied and then run the command again. The error message might look like the following:
         <pre class=terminal>Updating service instance secondary-node as admin...
         FAILED
         Server error, status code: 502, error code: 10001, message: Service broker error: Promotion of follower failed - has 1 transactions still unapplied</pre>
     + If the leader service instance is still reachable and in read-write mode, follow the procedure in
-        [Trigger a Switchover](#switchover)instead. The error message looks like the following:
+        [Trigger a Switchover](#switchover) instead. The error message might look like the following:
           <pre class=terminal>
         Updating service instance secondary-node as admin...
         FAILED
@@ -324,7 +324,7 @@ service instance in the primary foundation is the follower and the service insta
 in the secondary foundation is the leader.
 
 <p class='note warning'><strong>Warning:</strong>
-To successfully trigger a switchover the follower dataset must be a subset of the leader dataset.
+To successfully trigger a switchover, the follower dataset must be a subset of the leader dataset.
 This means that <%= vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
@@ -335,23 +335,21 @@ empty instance as the follower.
 #### Workflow for Reconfiguring <%= vars.single_leader_plan %>
 
 The following diagram describes the workflow for reconfiguring multi-site replication:
-
-![Two boxes are shown side by side, labeled 'Primary Foundation' and 'Secondary Foundation'.
+![alt-text="Two boxes are shown side by side, labeled 'Primary Foundation' and 'Secondary Foundation'.
 Six steps are shown. Steps 1 and 2 are in 'Primary Foundation';
 Steps 3, 4, and 5 are in 'Secondary Foundation',
-and Step 6 is in 'Primary Foundation'.
-The steps are listed here.](images/switchover.png)
+and Step 6 is in 'Primary Foundation'."](./images/switchover.png)
 
 <a href="./images/switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
-The steps shown in the diagram are as follows:
+The steps shown in the diagram are:
 
 1. Create host-info service key.
-1. Record host-info service key.
-1. Update secondary service instance with host-info service key.
-1. Create credentials service key.
-1. Record credentials service key.
-1. Update primary service instance with credentials service key.
+2. Record host-info service key.
+3. Update secondary service instance with host-info service key.
+4. Create credentials service key.
+5. Record credentials service key.
+6. Update primary service instance with credentials service key.
 
 #### Procedure for Reconfiguring <%= vars.single_leader_plan %>
 
@@ -389,7 +387,7 @@ To reconfigure replication for the service instances:
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the follower service instance in the primary foundation.
-    + `SERVICE-KEY` is the name of the host-info service key you created in step above.
+    + `SERVICE-KEY` is the name of the host-info service key you created in previous step.
 
     For example:
 
@@ -408,7 +406,7 @@ To reconfigure replication for the service instances:
         }
       }</pre>
 
-1. Record the output of the above command.
+1. Record the output of the previous command.
 
 1. Log in to the deployment for your secondary foundation by running:
 
@@ -425,7 +423,7 @@ To reconfigure replication for the service instances:
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
-    + `HOST-INFO` is the output you recorded in step above.
+    + `HOST-INFO` is the output you recorded in previous step.
 
     For example:
     <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
@@ -440,7 +438,7 @@ To reconfigure replication for the service instances:
     }'<br>
   Updating service instance secondary-node as admin...
   OK</pre>
-1.  Watch the progress of the service instance update by running:
+1.  Monitor the progress of the service instance update by running:
 
     ```
     watch cf services
@@ -466,7 +464,7 @@ To reconfigure replication for the service instances:
     Creating service key cred-key for service instance secondary-node as user<span>@</span>example.com...
     OK
     </pre>
-    <p class="note"><strong>Note:</strong> The <code>-c </code> flag is different than the one in step 2 above.
+    <p class="note"><strong>Note:</strong> The <code>-c </code> flag is different than the one in step 2.
     </p>
 
 1. View the `replication-credentials` for your credentials service key by running:
@@ -477,7 +475,7 @@ To reconfigure replication for the service instances:
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
-    + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7, above.
+    + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 7.
 
     For example:
 
@@ -500,7 +498,7 @@ To reconfigure replication for the service instances:
         }
       }</pre>
 
-1. Record the output of the above command.
+1. Record the output of the previous command.
 
 1. Log in to the deployment for your primary foundation by running:
 
@@ -515,7 +513,7 @@ To reconfigure replication for the service instances:
     Where:
 
     + `PRIMARY-INSTANCE` is name of the follower service instance in the primary foundation.
-    + `CREDENTIALS` is the output you recorded in the step above.
+    + `CREDENTIALS` is the output you recorded in the previous step.
 
     For example:
     <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \
@@ -542,9 +540,9 @@ To reconfigure replication for the service instances:
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`. <br><br>
-    You should now have a leader-follower service instance successfully configured,
+    You now have a leader-follower service instance successfully configured,
     where the leader is in your secondary foundation and your follower is in the primary foundation. <br><br>
-    If the above command fails and you get one of the following errors,
+    If this command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
 

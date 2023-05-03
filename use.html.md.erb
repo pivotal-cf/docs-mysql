@@ -28,17 +28,21 @@ To use <%= vars.product_short %> in an app:
 
     See [Bind a Service Instance to Your App](#bind).
 
-5. Call the <%= vars.product_short %> service in your app code, and then re-push your app into the space.
+5. Call the <%= vars.product_short %> service in your app code, and then push your app again into the space.
 
-    See [Use the MySQL Service in Your App](#call).
+    For more information on services, see [Use the MySQL Service in Your App](#call).
 
 After you create a <%= vars.product_short %> service instance,
 you can manage it over the life cycle of your apps and data.
-See [Manage Service Instances](#manage).
 
-The following procedures use the Cloud Foundry Command Line Interface (cf CLI). For more information,
-see [Managing Service Instances with the cf CLI](https://docs.pivotal.io/application-service/devguide/services/managing-services.html).
+For more information on managing services instances, see [Manage Service Instances](#manage).
+
+The following procedures use the Cloud Foundry Command Line Interface (cf CLI).
+
+For more information,
+see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
 You can also use Apps Manager to do the same tasks using a graphical UI.
+
 For more information, see
 [Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/application-service/console/manage-apps.html)
 
@@ -80,7 +84,7 @@ To find out if a <%= vars.product_short %> service is available in the Marketpla
     [...]
     </pre>
 
-### <a id="check-instance"></a> Check That an Instance Is Running in the Space
+### <a id="check-instance"></a> Check that an Instance is Running in the Space
 
 To confirm that a <%= vars.product_short %> instance is running in the space:
 
@@ -151,7 +155,7 @@ your instance to show as `create succeeded`.
 
     If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
 
-## <a id="bind"></a>Bind a Service Instance to Your App
+## <a id="bind"></a>Bind a Service Instance to your App
 
 For an app to use a service, you must bind the app to a service instance.
 You must do this after every time you run `cf push`.
@@ -191,7 +195,7 @@ To push and bind an app to a <%= vars.product_short %> instance run the followin
     ```
     Where `APP` is the app you want to use the MySQL service instance.
 
-## <a id="call"></a>Use the MySQL Service in Your App
+## <a id="call"></a>Use the MySQL Service in your App
 
 To access the MySQL service from your app:
 
@@ -202,10 +206,10 @@ To access the MySQL service from your app:
 see [MySQL Environment Variables](#vcap).
 
 1. In your app code, call the MySQL service using the connection strings.<br><br>
-  See this example [Node.js code](./using-tls.html#call-service).
+  See this example: [Node.js code](./using-tls.html#call-service).
 
 
-###<a id="schema"></a>Use Custom Schemas
+### <a id="schema"></a>Use Custom Schemas
 
   <%= vars.product_short %> supports multiple custom schemas.
   You can use custom schemas with apps that share a MySQL service instance to isolate app data by schema.
@@ -233,7 +237,7 @@ see [MySQL Environment Variables](#vcap).
     ```
     Where `APP` is the app you want to use the custom schema.
 
-###<a id="vcap"></a>MySQL Environment Variables
+### <a id="vcap"></a>MySQL Environment Variables
 Apps running in <%= vars.ops_manager %> gain access to bound service instances
 through an environment variable credentials hash called `VCAP_SERVICES`.
 This environment variable includes the credentials that apps
@@ -539,7 +543,7 @@ that the instance no longer exists:
 ### <a id="purge"></a>Purge a Service Instance
 
 If the service instance VM is lost, then you cannot delete the service instance.
-However, the cf CLI allows you to purge a service instance from the Cloud Controller database.
+However, you can use the cf CLI to purge a service instance from the Cloud Controller database.
 
 To purge a service instance:
 
