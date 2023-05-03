@@ -1,69 +1,120 @@
 ---
-title: Failed Upgrade
+title: Upgrading MySQL on HA Service Instances
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for updating HA service instances from Percona 5.7 plans to Percona 8.0 plans and help with troubleshooting and fixing any problems.
+This topic provides instructions for upgrading HA service instances from Percona 5.7 plans to Percona 8.0 plans, and help with troubleshooting upgrade failures.
 
-## <a id="overview"></a>Overview
+## <a id="overview"></a>MySQL HA Upgrade Overview
 
-Service instance updates from Percona 5.7 plans to Percona 8.0 plans require a little planning to ensure success.
-There is no downgrade path from 8.0 to 5.7 therefore please take the following steps.
-[Follow the steps to backup your service instance](./backup-restore.html.md.erb)
-[Check the health of cluster](monitor-health.html.md.erb)
-Do not perform an update of an HA cluster unless all 3 nodes are reporting as healthy.
-Upgrade service instances by following the [instructions for updating all service instances](./upgrade.html.md.erb) or the [instructions for update an individual service instance's plan](./upgrade.html#change-plan)
+To upgrade an existing 5.7 service instance to MySQL 8.0, you will update the service instance''s plan to a different plan which specifies MySQL 8.0 in its definition. (There is no option to upgrade an existing MySQL service instance without updating it to a new service plan.)
 
-There are two potential failure scenarios that can arise when running "cf update-service" to migrate a HA deployment from MySQL 5.7 to MySQL 8.0:
-- [A cluster of nodes with only 5.7 instances](#only-5-7)
-  - One of the instances gets updated and the other two instances do not respond to it
+1. Consult your platform operator or platform configuration to identify a suitable 8.0-enabled service plan to update your existing 5.7 service instance to.
+
+2. [Backup your service instance](./backup-restore.html.md.erb) There is no downgrade path from 8.0 to 5.7, so a backup preserves your ability to restore your data via a new 5.7 service instance if necessary.
+
+3. Do not attempt the upgrade if you are experiencing any database problems or issues. For HA instances [check the health of your cluster](monitor-health.html.md.erb), and do not perform an upgrade unless all 3 cluster nodes are reporting as healthy. HA service instances attempt to continually serve queries and connections throughout the upgrade process.
+
+4. Once the above are done, upgrade your service instances by following the instructions for [Updating all service instances](./upgrade.html.md.erb) or to [Upgrade an Individual Service Instance](./use.html##upgrade-an-individual-service-instance-12).
+
+## <a id="recovering"></a>Recovering from MySQL HA Upgrade Failures
+
+### <a id="overview"></a>Recovery Overview
+
+There are two types failure scenarios that can arise when running "cf update-service" to migrate a HA deployment from MySQL 5.7 to MySQL 8.0:
+- [A cluster of nodes with only 5.7 instances](#only-5-7):
+  One of the instances upgrades to 8.0 but is unablthe remaining two 5.7 instances do not respond to it
 - [A cluster of nodes with some or all 8.0 instances](#some-8-0)
-  - One of the instances gets upgraded to 8.0 successfully, and communicates with the cluster
+  - One of the instances gets upgraded to 8.0 successfully, and joins the cluster
    - A either the second or third instance gets upgraded and fails before or after it is fully upgraded to 8.0
 
-If you have encountered one of these scenarios and you have a failed update.  Then look into why the update failed, and correct any issues, such as the server running out of disk space, or any other issue that may have caused the failure.  Otherwise the following steps may not work correctly in fixing the environment.
-## <a id="only-5-7"></a>A cluster of nodes with only 5.7 instances
-Rerun the update service command:
+If you have encountered one of these scenarios, then examine the failed node, diagnose the root cause of the update failure (such as inadequate disk space), and correct any issue that may have caused the failure.  Otherwise the following steps may not correctly fix the environment.
+
+
+## <a id="scenario"></a>Determine Your Failure Scenario
+
+We must first establish each node's
+- cluster status (whether the node is inside the HA cluster or not), and
+- MySQL version (the software deployed onto the node, if not necessarily running)
+
+
+1. Run the `mysql-diag` command as documented in [Running mysql-diag](./mysql-diag.html.md.erb)].
+
+2. Look at the mysql-diag output table showing HOST and WSREP CLUSTER STATUS, and note each of the 3 node's NAME/UUID (abbreviated) and whether its WSREP CLUSTER STATUS is "Primary" or "N/A - ERROR". You will need this information for the subsequent steps. For example:
+
+[DOCS TEAM: This should be a table with 4 rows including a header, and 2 columns]
+Name:               Cluster Status:
+mysql/cd759761      Error
+mysql/ce79f187      Primary
+mysql/7c3d095c      Primary
+
+("Primary" indicates the node is part of a cluster; it does not signify whether the node is the primary node within that cluster.)
+
+3. Run the below command to extract the mysql version of Node 0 in your cluster:
+`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
+    ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+
+The output of this command shows the UUID (full) of the node and its `mysql_version` (5.7 or 8.0). Update the matching row in above cluster status notes to indicate the VM's node number ("mysql/0") and its mysql-version.
+
+[DOCS TEAM: This should be a table with 4 rows including a header, and 4 columns]
+
+Name:               Cluster Status:         Node:           MySQL Version:
+mysql/cd759761      Error
+mysql/ce79f187      Primary
+mysql/7c3d095c      Primary                 mysql/0         8.0
+
+The abbreviated UUID in the first column should prefix the full UUID you get from running the bosh command in this step.
+
+4. Repeat the above command for each of the remaining nodes `mysql/1` and `mysql/2`:
+`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
+    ssh mysql/1 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
+    ssh mysql/2 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+
+Update the corresponding row in your notes to complete the picture of the VMs cluster status and mysql versions:
+
+Name:               Cluster Status:         Node:           MySQL Version:
+mysql/cd759761      Error                   mysql/2         8.0
+mysql/ce79f187      Primary                 mysql/1         5.7
+mysql/7c3d095c      Primary                 mysql/0         8.0
+
+5. Identify your failure scenario from the information you've collected:
+  - If both of your HA cluster nodes (with Cluster Status: Primary) are running
+  MySQL Version 5.7, then proceed with the [5.7 Cluster Upgrade Recovery]()
+  - If both of your HA cluster nodes (with Cluster Status: Primary) are running
+  MySQL Version 8.0, then proceed with the [8.0 Cluster Upgrade Recovery]()
+  TODO: This is a newly-ID''d scenario, and does not yet have recovery instructions. Work pending recovery flow
+  validation with the rest of the team.
+  - If one of your HA cluster nodes is running MySQL Version 8.0 and the other running MySQL Version 5.7, then proceed with the [Mixed Cluster Upgrade Recovery]()
+
+## <a id="only-5-7"></a>5.7 Cluster Upgrade Recovery
+
+1. Rerun the update service command:
 ```
 cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
 ```
-##### Rough notes below here:
 
-- To find the version INSTALLED on a VM:
-- `bosh -d service-instance_$(cf service ha1 --guid) ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+1. TODO: Revisit that guidance. Assuming a working 2-node cluster -- both 5.7 (with a broken 8.0 node outside the cluster), doesn''t 'cf update-service' risk taking down one of the two working 5.7 cluster nodes,
+leaving the user with just a 1-node 5.7 cluster? It seems to make sense first to get the broken 8.0 node onto its feet and
+joined to the cluster (via "bosh deploy"), and then use "cf update-service" to handle the rest of the cluster.
 
-- IF you have ONLY ONE 5.7 node, THEN you can "bosh deploy" (including all steps described below) to re-attempt the upgrade of that node.
-
-- IF you have TWO 5.7 nodes, then you must
-  a) establish which are inside vs outside the cluster (details TBD)
-  b) IF both are in the cluster, then "cf update-service"
-  c) Otherwise, you have a 5.7 node IN and OUT of the cluster. You must first "bosh deploy" (per below) only the 5.7 node OUTSIDE the cluster; this should make it an 8.0 node and join it into the cluster, after which you can upgrade the remaining (and cluster-internal) 5.7 node without taking down the cluster.
-  (Otherwise, upgrading the 5.7 node inside the cluster first means your cluster drops down to only one node, which will panic galera into refusing new connections.)
-
-- Q: How to determine which 5.7 is in vs out of the cluster?
-  A:...
-
-
-
-##### Below here needs rework.
-
-## <a id="some-8-0"></a> A cluster of nodes with some or all 8.0 instances
+## <a id="some-8-0"></a>Mixed Cluster Upgrade Recovery
+TODO:
 The remaining 5.7 instances must be redeployed individually using bosh deploy
 1. **Manual Redeploy:** If any of the instances are still Percona 5.7,
    then redeploy the <code>mysqld</code> software to each node one at a time as follows:
 
 2. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
    For each node except the bootstrap node you identified above, run the bosh command with ignore.  
-   As an example if you are updating instance 0 you will want to ignore 1 and 2:
+   For example, if you are updating instance 0 you will want to ignore 1 and 2:
 
          ```
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/1
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/2
          ```
-      Where `N` and `M` are the numbers of the nodes to be ignored.
-      For example, if you're manually updating node 0, then `M`=1 and `N`=2.
+
 
 3. Turn off the BOSH Resurrector by running:
 
@@ -79,3 +130,36 @@ The remaining 5.7 instances must be redeployed individually using bosh deploy
       ```
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml
       ```
+
+4. TODO: Might it be sufficient here to (a) validate that all 3 nodes are in the cluster, and then (b) run `cf update-service`?
+
+
+5. Unignore the nodes you ignored above in Step 2.
+  For example, if you had previously ignored instances 1 and 2, you would run:
+         ```
+         bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/1
+         bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/2
+         ```
+
+6. Turn BOSH resurrector back on by running:
+      ```
+      bosh update-resurrection on
+      ```
+
+## Rough notes below here: (TODO: remove these before publishing)
+
+- To find the version INSTALLED on a VM:
+- `bosh -d service-instance_$(cf service ha1 --guid) ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+
+- IF you have ONLY ONE 5.7 node, THEN you can "bosh deploy" (including all steps described below) to re-attempt the upgrade of that node.
+
+- IF you have TWO 5.7 nodes, then you must
+  a) establish which are inside vs outside the cluster (details TBD)
+  b) IF both are in the cluster, then "cf update-service"
+  c) Otherwise, you have a 5.7 node IN and OUT of the cluster. You must first "bosh deploy" (per below) only the 5.7 node OUTSIDE the cluster; this should make it an 8.0 node and join it into the cluster, after which you can upgrade the remaining (and cluster-internal) 5.7 node without taking down the cluster.
+  (Otherwise, upgrading the 5.7 node inside the cluster first means your cluster drops down to only one node, which will panic galera into refusing new connections.)
+
+- Q: How to determine which 5.7 is in vs out of the cluster?
+  A: The user can run mysql-diag via the BOSH cli (per https://docs.pivotal.io/application-service/2-9/mysql/mysql-diag.html#) to ID which nodes are in-vs-out of cluster.
+  Then they must interrogate the "out" node...BUT this doesn't tell them whether they still have
+  a 5.7 inside the cluster.
