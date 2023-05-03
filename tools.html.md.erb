@@ -5,29 +5,29 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for tools developers can use to
-access their <%= vars.product_full %> databases.
+This topic provides instructions for tool developers to use for
+access to their <%= vars.product_full %> databases.
 
 ## <a id="overview"></a>Overview
 
 You can access your <%= vars.product_short %> databases by using the following tools:
 
-+ [MySQLWeb Database Management App](#mysqlweb), below
-+ [cf CLI MySQL Plugin](#plugin), below
-+ [Desktop Tools](#desktop), below
++ [MySQLWeb Database Management App](#mysqlweb).
++ [cf CLI MySQL Plug-in](#plugin).
++ [Desktop Tools](#desktop).
 
 ## <a id="mysqlweb"></a>MySQLWeb Database Management App
 
-The MySQLWeb app provides a web-based UI for managing <%= vars.product_short %> databases.
+The MySQLWeb app provides a web UI for managing <%= vars.product_short %> databases.
 The free app lets you view and operate on tables, indexes, constraints, and other database structures,
-and directly execute SQL commands.
+and directly run SQL commands.
 
-![Screenshot of the MySQLWeb app interface. The 'SQL Worksheet' tab is active.](images/mysqlweb.png)
+![alt-text="The MySQLWeb app interface, with the 'SQL Worksheet' tab active."](./images/mysqlweb.png)
 
-You can run the MySQLWeb app in two ways:
+You can run the MySQLWeb app in the following ways:
 
-* Standalone on your own machine
-* Deployed to <%= vars.ops_manager %>
+* Standalone on your own machine.
+* Deployed to <%= vars.ops_manager %>.
 
 If you deploy MySQLWeb to <%= vars.ops_manager %>, you can configure it in the deployment manifest to automatically
 bind to a specific service instance.
@@ -36,16 +36,16 @@ See the MySQLWeb [code repo](https://github.com/pivotal-cf/PivotalMySQLWeb) and
 [demo video](https://drive.google.com/file/d/0B2wmRcJj8XF-SXloNFNNaGJXbFk/view),
 for how to install and run MySQLWeb.
 
-## <a id="plugin"></a>cf CLI MySQL Plugin
+## <a id="plugin"></a>cf CLI MySQL Plug-in
 
-To connect to your <%= vars.product_short %> databases from a command line, use the cf CLI MySQL plugin.
-The plugin lets you:
+To connect to your <%= vars.product_short %> databases from a command line, use the cf CLI MySQL plug-in.
+The plug-in lets you:
 
-* Inspect databases for debugging
-* Manually adjust database schema or contents in development environments
-* Dump and restore databases
+* Inspect databases for debugging.
+* Manually adjust database schema or contents in development environments.
+* Dump and restore databases.
 
-To install the cf CLI MySQL plugin, run the following:
+To install the cf CLI MySQL plug-in, run the following:
 
 <pre class="terminal">
 $ cf install-plugin -r "CF-Community" mysql-plugin
@@ -55,7 +55,7 @@ For more information, see the [cf-mysql-plugin](https://github.com/andreasf/cf-m
 
 ## <a id="desktop"></a> Desktop Tools
 
-You can connect your <%= vars.product_short %> databases to a desktop tool, such as MySQL Workbench
+You can connect your <%= vars.product_short %> databases to a desktop tool. For example, MySQL Workbench
 or Sequel Pro, if you have the credentials for your MySQL service instance.
 
 If you do not have credentials for your MySQL service instance, follow the procedure in
@@ -96,8 +96,8 @@ command:
     * `port`
     * `username`
 
-1. Configure an SSH tunnel using the values for `hostname` and `port` that you recorded in the above step.
+1. Configure an SSH tunnel using the values for `hostname` and `port` that you recorded in the previous step.
    For information on configuring an SSH tunnel,
    see [Configure Your SSH Tunnel](https://docs.pivotal.io/pivotalcf/devguide/deploy-apps/ssh-services.html#ssh-tunnel).
 
-1. Configure a connection in your desktop tool using the values for `hostname`, `name`, `password`, `port`, and `username` that you recorded in the above step.
+1. Configure a connection in your desktop tool using the values for `hostname`, `name`, `password`, `port`, and `username` that you recorded in the previous step.

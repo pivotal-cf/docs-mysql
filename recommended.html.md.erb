@@ -13,13 +13,13 @@ Unlike other traditional databases which centralize and consolidate data,
 MySQL lends itself to dedicated deployment supporting the “shared nothing”
  context of building apps in the cloud.
 
-##<a id="ondemand"></a> About On-Demand Plans
+## <a id="ondemand"></a> About On-Demand Plans
 * Each on-demand plan instance is deployed to its own VM and is suitable for production workloads.
 * The maximum-number of on-demand plan instances available to developers is set by the operator and
 enforced on both a global and per-plan level quota.
 * Operators can update the plan settings,
 including the VM size and disk size after the plans have been created.
-**Operators should not downsize the VMs or disk size as this can cause data loss in pre-existing instances.**
+**Operators  cannot downsize the VMs or disk size as this can cause data loss in pre-existing instances.**
 * All plans deploy a single VM of the specified size with the specified disk type.
 * Cannot scale down the size of VMs on the plan once deployed (this protects against data loss).
 * The default maximum number of connections is set at 750.
@@ -29,7 +29,7 @@ including the VM size and disk size after the plans have been created.
 For information on setting limits and calculating costs for on-demand service instances,
 see [Setting Limits for On-Demand Service Instances](./set-quotas.html).
 
-##<a id="azs"></a> Availability Using Multiple AZs
+## <a id="azs"></a> Availability Using Multiple AZs
 
 <%= vars.product_full %> supports configuring multiple availability zones (AZs).
 However, assigning multiple AZs to MySQL jobs does not guarantee high availability.
@@ -41,7 +41,7 @@ However, assigning multiple AZs to MySQL jobs does not guarantee high availabili
 * For all <%= vars.product_short %> plans, select three AZs.
 Choosing three AZs does not increase the number of AZs assigned to service instances to three.
 
-##<a id="downtime"></a> Downtime During Redeploys
+## <a id="downtime"></a> Downtime During Redeploys
 
 By default, <%= vars.product_short %> does a rolling deploy during upgrades or when you apply
 configuration changes.
@@ -55,7 +55,7 @@ You can mitigate downtime by using HA cluster plans.
 For more information about downtime in <%= vars.product_short %>,
 see [RPOs and RTOs](.//availability-options.html#rpo-and-rto).
 
-##<a id="persistent"></a> Persistent Disk Usage
+## <a id="persistent"></a> Persistent Disk Usage
 
 
 The persistent disk receives, temporarily stores, and encrypts MySQL backups.
@@ -75,11 +75,11 @@ For the amount of persistent disk required for your service plan, see the follow
 * [HA Cluster Jumpbox](#ha-cluster-jumpbox)
 * [HA Cluster Node](#ha-cluster-node)
 
-[//]: # (Edit the below diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing) 
+[//]: # (Edit the below diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing)
 
 <h3> <a id="single-node"></a> Single Node and Leader-Follower</h3>
 
-You can configure the persistent disk size for single node or leader-follower VMs. For 
+You can configure the persistent disk size for single node or leader-follower VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -98,7 +98,7 @@ Use the following table to determine the amount of persistent disk space you nee
 </table>
 
 
-In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
 
 - Maximum app data. Remember to include binlogs in your size estimate for app data.
 - Data for copied backups.
@@ -108,12 +108,11 @@ Each `N` combined makes `3N`, as seen in the formula.
 
 The following diagram shows how persistent disk space is used:
 
-<img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-single-node.png"/>
+![alt-text="How persistent disk space is used"](./images/persistent-disk-single-node.png)
 
 <h3> <a id="multi-site"></a> Multi-Site Replication </h3>
 
-You can configure the persistent disk size for Multi-Site Replication VMs. For 
+You can configure the persistent disk size for Multi-Site Replication VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -132,7 +131,7 @@ Use the following table to determine the amount of persistent disk space you nee
 </table>
 
 
-In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
 
 - Maximum app data. Remember to include binlogs in your size estimate for app data.
 - Data for copied backups.
@@ -147,7 +146,7 @@ The following diagram shows how persistent disk space is used:
 
 <h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
 
-You can configure the persistent disk size for HA cluster jumpbox VMs. For 
+You can configure the persistent disk size for HA cluster jumpbox VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -166,7 +165,7 @@ Use the following table to determine the amount of persistent disk space you nee
 </table>
 
 
-In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
 
 - Data for copied backups.
 - Data for compression and encryption.
@@ -175,13 +174,12 @@ Each `N` combined makes `2N`, as seen in the formula.
 
 The following diagram shows how persistent disk space is used:
 
-<img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
+![alt-text="Each `N` combined makes `2N`, as seen in the formula."](./images/persistent-disk-multi-site.png)
 
 
 <h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
 
-You can configure the persistent disk size for HA cluster jumpbox VMs. For 
+You can configure the persistent disk size for HA cluster jumpbox VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -200,7 +198,7 @@ Use the following table to determine the amount of persistent disk space you nee
 </table>
 
 
-In the **Total Disk Size** formula from the table above, `N` represents the following items in equal value:
+In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
 
 - Data for copied backups.
 - Data for compression and encryption.
@@ -215,7 +213,7 @@ The following diagram shows how persistent disk space is used:
 
 <h3> <a id="ha-cluster-node"></a> HA Cluster Node </h3>
 
-You can configure the persistent disk size for HA cluster node VMs. For 
+You can configure the persistent disk size for HA cluster node VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
 
 Use the following table to determine the amount of persistent disk space you need:
@@ -233,14 +231,15 @@ Use the following table to determine the amount of persistent disk space you nee
   </tr>
 </table>
 
-In the **Total Disk Size** formula from the table above, `N` represents maximum app data. Remember to include binlogs in your size estimate for app data.
+In the **Total Disk Size** formula from the previous table, `N` represents maximum app data. Remember to include binlogs in your size estimate for app data.
 
 The following diagram shows how persistent disk space is used:
 
-<img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-ha-node.png"/>
+![alt-text="The `N` represents maximum app data. Remember to include binlogs in your size estimate for app data."](./images/persistent-disk-ha-node.png)
 
 
 
-  
+
+
+
 

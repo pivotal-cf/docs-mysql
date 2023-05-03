@@ -7,13 +7,14 @@ owner: MySQL
 
 This topic gives instructions for controlling access to service plans by org.
 You can also set limits for the number of service intances globally and per plan.
+
 For more information, see [Setting Limits for On-Demand Instances](./set-quotas.html).
 
 ## <a id="service-plan-access"></a> Control Access to Service Plan by Orgs
 
-<%= vars.product_full %> allows you to control which CF orgs are able to access specific service plans.
+You are able to control which CF orgs are able to access specific service plans in <%= vars.product_full %>.
 By default, active service plans are visible to all orgs.
-Controlling which orgs have access to a specific service plan allows you to ensure
+Controlling which orgs have access to a specific service plan enables you to ensure
 that the resource-intensive service plans are only available to the orgs that explicitly need them.
 
 To configure <%= vars.product_short %> to control service-plan access, do the following:
@@ -34,15 +35,15 @@ To configure <%= vars.product_short %> to control service-plan access, do the fo
 
         <code>cf login</code>
 
-    1.  Enable service access to the org:
+    1.  Activate service access to the org:
 
         <code>cf enable-service-access p.mysql -p PLAN -o ORGANIZATION</code>
 
         Where:
 
-        * `PLAN`: The name of the specific plan to enable, set to manual in step 1 above.
+        * `PLAN`: The name of the specific plan to enable, set to manual in step 1.
 
-        * `ORGANIZATION`: The name of the org that needs access to `PLAN`
+        * `ORGANIZATION`: The name of the org that needs access to `PLAN`.
 
         For example,
 
@@ -52,7 +53,7 @@ To configure <%= vars.product_short %> to control service-plan access, do the fo
         OK
         </pre>
 
-The org is now able to use the plan.
+The org can now use the plan.
 
 For information on modifying and viewing service-plan access,
 see [ Managing Access to Service Plans](https://docs.pivotal.io/pivotalcf/services/access-control.html).

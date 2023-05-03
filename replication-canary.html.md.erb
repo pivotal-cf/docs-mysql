@@ -11,16 +11,16 @@ monitors an HA cluster to ensure that replication is working.
 
 ## <a id="overview"></a>Overview
 
-The replication canary writes to a private dataset in the cluster and then attempts to read the
-written data from each node. It pauses between reads and writes to ensure that the write-sets have
+The replication canary writes to a private dataset in the cluster and attempts to read the
+written data from each node. It pauses between read and write mode to ensure that the write-sets have
 been replicated. The private dataset does not use a significant amount of disk capacity.
 
 When replication fails, the canary cannot read the data from all the nodes and does the
 following:
 
   - Sends a message that replication has failed to a configured email address.
-  See [Sample Notification Email](#sample-canary) below.
-  - Disables client access to the cluster. See [Determine If the Cluster Is Accessible](#access) below.
+  See [Sample Notification Email](#sample-canary).
+  - Deactivates client access to the cluster. See [Determine If the Cluster Is Accessible](#access).
 
   <p class='note warning'><strong>Warning:</strong> When replication fails, data can be lost.
     Contact <a href="https://support.pivotal.io"><%= vars.product_network %></a> immediately in the case of
@@ -50,12 +50,12 @@ performing as expected across all nodes.
 
 ## <a id="access"></a> Determine If the Cluster Is Accessible
 
-When the canary detects replication failure, it disables connections to the database cluster through
+When the canary detects replication failure, it deactivates connections to the database cluster through
 the proxies. When the replication issue is resolved, the canary automatically restores client access to the
-cluster. You can determine if the canary disabled cluster access by observing the cluster using
+cluster. You can determine if the canary deactivated cluster access by observing the cluster using
 the Switchboard API.
 
-To determine if cluster access is disabled, do the following:
+To determine if cluster access is deactivated, do the following:
 
 1. Do the prerequisite procedure in [Monitor Node Health](monitor-health.html#monitor).
 
@@ -85,7 +85,7 @@ To determine if cluster access is disabled, do the following:
     ]
     </pre>
 
-    When cluster access is disabled, `trafficEnabled` is set to false.
+    When cluster access is deactivated, `trafficEnabled` is set to false.
 
 If you must restore client access to the cluster while replication is failing, contact
 [<%= vars.product_network %>](https://support.pivotal.io).
