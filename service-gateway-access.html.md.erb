@@ -35,22 +35,19 @@ Service-gateway access to MySQL service instances leverages the TCP router in
 
 Any database requests that an app makes are forwarded through DNS to a load balancer that can route
 traffic from outside to inside the foundation.
-This load balancer opens a range of ports that are reserved for MySQL database traffic.
+The load balancer opens a range of ports that are reserved for MySQL database traffic.
 When an app developer creates a service instance with service-gateway access enabled, a
 port from the range is provisioned for that service instance.
 The load balancer then forwards the requests for this MySQL service instance to
 the TCP router.
 The TCP router internally load balances between the MySQL service instance nodes.
 
-The diagram below shows how the traffic is routed from apps to the MySQL service instance nodes in this case.
+The following diagram shows how the traffic is routed from apps to the MySQL service instance nodes in this case.
 Apps that are hosted outside the foundation and apps that are hosted on different foundations,
 use this same route to access the service instance.
 Apps running on the same foundation connect directly to the service instance without going through
 the load balancer or router.
 
-![Diagram showing an app that is external to the foundation sending traffic to the external load balancer.
-The load balancer sends the traffic to a MySQL tile port in the TCP router.
+![alt-text="Shows an app that is external to the foundation sending traffic to the external load balancer.The load balancer sends the traffic to a MySQL tile port in the TCP router.
 The TCP router is inside the foundation.
-The TCP router balances the load among the nodes in the MySQL service instance.](images/service-gateway-architecture.png)
-<a href="./images/service-gateway-architecture.png" target="_blank" aria-hidden="true">Click here to view a larger version of the image above</a>
-
+The TCP router balances the load among the nodes in the MySQL service instance."](./images/service-gateway-architecture.png)

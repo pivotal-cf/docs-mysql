@@ -5,23 +5,23 @@ owner: MySQL
 ---
 
 This topic explains how to create a service instance with service-gateway access.
-It also explains how to enable and disable service-gateway access on an existing service instance.
+It also explains how to activate and deactivate service-gateway access on an existing service instance.
 
 For general information about service-gateway access, including about architecture and use cases,
 see [About Service-Gateway Access](./service-gateway-access.html).
 
-If service-gateway access is enabled for the foundation, external components that are outside the
+If service-gateway access is activated for the foundation, the external components that are outside the
 foundation can connect to MySQL service instances.
 These external components are also referred to as _off-platform_ components.
 
 These components are typically:
 
 + Apps running externally or running on other foundations
-+ Database administrative and management tools, such as MySQL Workbench
++ Database administrative and management tools, for example, MySQL Workbench
 
 <p class="note">
   <strong>Note:</strong> Apps that are deployed in the same foundation as the service instance,
-  connect to the service instance directly without going through the service-gateway.
+  can connect to the service instance directly without going through the service-gateway.
 </p>
 
 
@@ -32,14 +32,14 @@ The procedures in this topic assume:
 + You meet the prerequisites for using <%= vars.product_full %>.
   For more information, see [Prerequisites](use.html#prereqs) in _Using <%= vars.product_full %>_.
 
-+ Your operator has enabled service-gateway access.
-  If you do not know if the foundation is enabled for service-gateway access,
++ Your operator has activated service-gateway access.
+  If you do not know if the foundation is activated for service-gateway access,
   contact your operator.
 
 
 ## <a id='create-service-gateway'></a> Create a Service Instance that Allows Off-Platform Access
 
-The procedure below describes how to create a new MySQL service instance that can be accessed by
+The following procedure describes how to create a new MySQL service instance that can be accessed by
 external components.
 
 To create a service instance that enables service-gateway access:
@@ -67,15 +67,15 @@ To create a service instance that enables service-gateway access:
       indicates that the key contains credentials for off-platform access.
 
     <p class="note">
-      <strong>Note:</strong> If the operator disables and then re-enables service-gateway access
-      on the foundation, you must create new service keys to obtain a new set of credentials for
+      <strong>Note:</strong> If the operator deactivates and then activates service-gateway access
+      again on the foundation, you must create new service keys to obtain a new set of credentials for
       service-gateway access.
     </p>
 
 3. Use the keys in the service key to access the service instance
    from outside the foundation.<br><br>
 
-    An example of a service key is below:
+    This ia an example of a service key:
 
     ```
     {
@@ -103,9 +103,9 @@ To create a service instance that enables service-gateway access:
 ## <a id='enable-service-gateway'></a> Enable an Existing Service Instance for Off-Platform Access
 
 If you already have a MySQL service instance, you can make it accessible to external components
-by enabling service-gateway access.
+by activating service-gateway access.
 
-To enable service-gateway access on an existing MySQL service instance:
+To activate service-gateway access on an existing MySQL service instance:
 
 1. Run:
 
@@ -124,14 +124,14 @@ To enable service-gateway access on an existing MySQL service instance:
 ## <a id='disable-service-gateway'></a> Disable Off-Platform Access on a Service Instance
 
 If you have a MySQL service instance that no longer needs to be accessed from outside the foundation,
-disable service-gateway access for that service instance.
+deactivate service-gateway access for that service instance.
 
-To disable service-gateway access on a MySQL service instance:
+To deactivate service-gateway access on a MySQL service instance:
 
 1. Run:
 
     ```
     cf update-service SERVICE-INSTANCE-NAME -c '{"enable_external_access": false}'
     ```
-    Where `SERVICE-INSTANCE-NAME` is the name of the service instance for which you want to disable
+    Where `SERVICE-INSTANCE-NAME` is the name of the service instance for which you want to deactivate
     service-gateway access.

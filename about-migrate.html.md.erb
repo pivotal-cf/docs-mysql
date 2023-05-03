@@ -7,13 +7,13 @@ owner: MySQL
 
 This topic explains how data migration works in <%= vars.product_full %>.
 
-Read this topic before you do in the procedures in
+Read this topic before you do the procedures in
 [Migrating Data in <%= vars.product_short %>](./migrate-data.html).
 
 
 ## <a id='overview'></a>The migrate Command
 
-You can use the `mysql-tools` CLI plugin to migrate MySQL data with the `migrate` command.
+You can use the `mysql-tools` CLI plug-in to migrate MySQL data with the `migrate` command.
 The `migrate` command does a streaming `mysqldump` and restore to migrate data from
 your source MySQL database to a destination <%= vars.product_short %> v2 instance.
 
@@ -36,11 +36,11 @@ During data migration, the `migrate` command:
 ## <a id='use-cases'></a>Use Cases
 
 The `migrate` command is used for most migration use cases.
-See [Use Cases Requiring the migrate Command](#migrate-cases) below.
+See [Use Cases Requiring the migrate Command](#migrate-cases).
 
 However, many common migrations, such as from a small to a large database,
 can be done with the simpler `update-service` command.
-See [Use Cases Not Requiring the migrate Command](#update-service-cases) below.
+See [Use Cases Not Requiring the migrate Command](#update-service-cases).
 
 If your use case is not listed in this topic,
 you might need to manually back up and restore your database to migrate your data.
@@ -49,7 +49,7 @@ See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
 
 ### <a id='migrate-cases'></a> Use Cases Requiring the migrate Command
 
-The following table lists migration use cases that must be done with the `migrate` command.
+The following table lists migration use cases that must be done with the `migrate` command:
 
 <table>
   <tr>
@@ -105,7 +105,7 @@ The following table lists migration use cases that must be done with the `migrat
   </tr>
 </table>
 
-**&#42;** If your off-platform database has encryption at rest or the Percona PAM Authentication plugin
+**&#42;** If your off-platform database has encryption at rest or the Percona PAM Authentication plug-in
 enabled, you cannot use the `migrate` command.
 Instead, you must follow the procedure
 in [Restore from an Off-Platform Logical Backup](./backup-mysqldump.html#external).
@@ -170,6 +170,6 @@ The `migrate` command skips the following system schemas:
 
 <p class="note"><strong>Note:</strong><code>sys</code>, <code>performance_schema</code>,
   and <code>information_schema</code> change dynamically with changes on a <%= vars.product_short %>
-  service instance. These schemas are not migrated because the destination database has its own version of the schemas.
+  service instance. These schemas are not migrated because the destination database has its' own version of the schemas.
   You do not need to back up these schemas.
 </p>
