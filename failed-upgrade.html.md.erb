@@ -1,11 +1,11 @@
 ---
-title: Upgrading MySQL on HA Service Instances
+title: Upgrading MySQL on Service Instances AND Recovering from HA MySQL Upgrade Failures
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for upgrading HA service instances from Percona 5.7 plans to Percona 8.0 plans, and help with troubleshooting upgrade failures.
+This topic provides instructions for upgrading service instances from Percona 5.7 plans to Percona 8.0 plans, and help with troubleshooting upgrade failures on HA instances.
 
 ## <a id="overview"></a>MySQL HA Upgrade Overview
 
@@ -13,11 +13,17 @@ To upgrade an existing 5.7 service instance to MySQL 8.0, you will update the se
 
 1. Consult your platform operator or platform configuration to identify a suitable 8.0-enabled service plan to update your existing 5.7 service instance to.
 
-2. [Backup your service instance](./backup-restore.html.md.erb) There is no downgrade path from 8.0 to 5.7, so a backup preserves your ability to restore your data via a new 5.7 service instance if necessary.
+We recommend keeping the plan topology consistent when upgrading MySQL from 5.7 to 8.0. For example, if you have a 5.7 single-node service instance and want to upgrade it to an 8.0 high-availability instance, first perform "cf update-service" on your service instance and designate a 8.0 single-instance plan. Then, once that update is successful and your service instance is running MySQL 8.0, perform a second "cf update-service" to change its topology from single-node to high-availability.
+
+MySQL Tiles supporting both MySQL 5.7 and MySQL 8.0offer double the number of service plans compared to previous 5.7-only tiles. Platform Operators choose to create equivalent MySQL 8.0 plans for each previously-existing MySQL 5.7 plan -- holding other plan factors constant while just adjusting the MySQL version in that plan. This plan configuration approach lets Platform Operators offer Developers plans that are identical except for the MySQL version, thereby facilitating the safe upgrade approach outlined in the previous paragraph.
+
+2. [Backup your service instance](./backup-restore.html.md.erb) There is no downgrade path from 8.0 to 5.7, so a backup preserves your ability to recover from any failure by restoring your data to a new 5.7 service instance if necessary.
 
 3. Do not attempt the upgrade if you are experiencing any database problems or issues. For HA instances [check the health of your cluster](monitor-health.html.md.erb), and do not perform an upgrade unless all 3 cluster nodes are reporting as healthy. HA service instances attempt to continually serve queries and connections throughout the upgrade process.
 
 4. Once the above are done, upgrade your service instances by following the instructions for [Updating all service instances](./upgrade.html.md.erb) or to [Upgrade an Individual Service Instance](./use.html##upgrade-an-individual-service-instance-12).
+
+## =========================================
 
 ## <a id="recovering"></a>Recovering from MySQL HA Upgrade Failures
 
@@ -83,30 +89,37 @@ mysql/7c3d095c      Primary                 mysql/0         8.0
 5. Identify your failure scenario from the information you've collected:
   - If both of your HA cluster nodes (with Cluster Status: Primary) are running
   MySQL Version 5.7, then proceed with the [5.7 Cluster Upgrade Recovery]()
-  - If both of your HA cluster nodes (with Cluster Status: Primary) are running
-  MySQL Version 8.0, then proceed with the [8.0 Cluster Upgrade Recovery]()
-  TODO: This is a newly-ID''d scenario, and does not yet have recovery instructions. Work pending recovery flow
-  validation with the rest of the team.
   - If one of your HA cluster nodes is running MySQL Version 8.0 and the other running MySQL Version 5.7, then proceed with the [Mixed Cluster Upgrade Recovery]()
 
 ## <a id="only-5-7"></a>5.7 Cluster Upgrade Recovery
+
+Because the entire cluster is 5.7 nodes, you can use cf update-service to continue the upgrade.
+
+Note this may move the cluster into read-only mode since cf may select a 5.7 cluster node as its first upgrade target,
+which will temporarily reduce your HA cluster to a single node (and thus into read-only state).
 
 1. Rerun the update service command:
 ```
 cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
 ```
 
-1. TODO: Revisit that guidance. Assuming a working 2-node cluster -- both 5.7 (with a broken 8.0 node outside the cluster), doesn''t 'cf update-service' risk taking down one of the two working 5.7 cluster nodes,
-leaving the user with just a 1-node 5.7 cluster? It seems to make sense first to get the broken 8.0 node onto its feet and
-joined to the cluster (via "bosh deploy"), and then use "cf update-service" to handle the rest of the cluster.
+(Due to a bug #185055158, using "bosh deploy" to add an 8.0 node in this scenario will cripple cf's
+ability to run update-service on this instance. The approach we take here prioritizes preserving "cf update-service"
+over 100% cluster writability, hence we risk cluster write downtime in lieu of crippling "cf update-service".
+We should revisit this once that bug is fixed.)
 
-## <a id="some-8-0"></a>Mixed Cluster Upgrade Recovery
-TODO:
-The remaining 5.7 instances must be redeployed individually using bosh deploy
-1. **Manual Redeploy:** If any of the instances are still Percona 5.7,
-   then redeploy the <code>mysqld</code> software to each node one at a time as follows:
 
-2. Target BOSH on your bootstrap node by instructing it to ignore the other nodes in your cluster.
+## <a id="some-8-0"></a>Mixed or 8.0 Cluster Upgrade Recovery
+
+Due to a bug #185055158, "cf update-service" is unavailable to use if there is any 8.0 node in your cluster;
+it mis-reports the 8.0 manifest as currently-deployed, and therefore takes no action to upgrade broken
+5.7 instances. Hence we "bosh deploy" any 5.7 instances, starting with the instance outside of the cluster
+(to preserve the cluster's 2-node minimum).use
+
+
+1. ID the number of the 5.7 node outside the cluster; this is the node you will redeploy.
+
+2. Target your broken node by instructing BOSH to ignore the other nodes in your cluster.
    For each node except the bootstrap node you identified above, run the bosh command with ignore.  
    For example, if you are updating instance 0 you will want to ignore 1 and 2:
 
@@ -114,7 +127,6 @@ The remaining 5.7 instances must be redeployed individually using bosh deploy
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/1
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/2
          ```
-
 
 3. Turn off the BOSH Resurrector by running:
 
@@ -131,35 +143,83 @@ The remaining 5.7 instances must be redeployed individually using bosh deploy
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml
       ```
 
-4. TODO: Might it be sufficient here to (a) validate that all 3 nodes are in the cluster, and then (b) run `cf update-service`?
+4. (At this stage you may want to check that all 3 nodes are in you cluster.)
 
+5. If you started this process with an 8.0 cluster, then all 3 nodes should now be at 8.0; perform the below cleanup steps.use
 
-5. Unignore the nodes you ignored above in Step 2.
+If you started this process with a mixed 8.0 & 5.7 cluster, repeat the above process for the remaining 5.7 node, being careful to
+"bosh unignore" that remaining node and "bosh ignore" the node you just recovered.to
+
+6. At this stage, all your nodes should be running 8.0 and should be in the cluster.
+
+7. Unignore any remaining nodes you ignored above:
   For example, if you had previously ignored instances 1 and 2, you would run:
          ```
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/1
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/2
          ```
 
-6. Turn BOSH resurrector back on by running:
+8. Turn BOSH resurrector back on by running:
       ```
       bosh update-resurrection on
       ```
+## Troubleshooting Node Upgrade Failures
 
-## Rough notes below here: (TODO: remove these before publishing)
+Here are observations on what might cause a node to fail in an upgrade, and things to look at before
+proceeding with the above steps ("bosh deploy" / "cf update-service" etc.)
 
-- To find the version INSTALLED on a VM:
-- `bosh -d service-instance_$(cf service ha1 --guid) ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
+1. An error on one MySQL VM can trigger upgrade errors on other nodes. Check the health of all nodes
+(including disk usage), not just the failing node.
 
-- IF you have ONLY ONE 5.7 node, THEN you can "bosh deploy" (including all steps described below) to re-attempt the upgrade of that node.
+In a test where mysql/2's disk was filled prior to upgrading the cluster, mysql/0 was be the first node to fail during the upgrade process.
+That mysql/0 upgraded its bits to 8.0, found the cluster, and tried to join: (from mysql/0 mysql.err.log)
 
-- IF you have TWO 5.7 nodes, then you must
-  a) establish which are inside vs outside the cluster (details TBD)
-  b) IF both are in the cluster, then "cf update-service"
-  c) Otherwise, you have a 5.7 node IN and OUT of the cluster. You must first "bosh deploy" (per below) only the 5.7 node OUTSIDE the cluster; this should make it an 8.0 node and join it into the cluster, after which you can upgrade the remaining (and cluster-internal) 5.7 node without taking down the cluster.
-  (Otherwise, upgrading the 5.7 node inside the cluster first means your cluster drops down to only one node, which will panic galera into refusing new connections.)
+> [System] [MY-013381] [Server] Server upgrade from '50700' to '80032' started.
+> [System] [MY-013381] [Server] Server upgrade from '50700' to '80032' completed.
+> ...
+> [Note] [MY-000000] [WSREP] Server status change connected -> joiner
+> ...
+> [Note] [MY-000000] [Galera] Member 2.0 (mysql/0) requested state transfer from '*any*'. Selected 1.0 (mysql/2)(SYNCED) as donor.
 
-- Q: How to determine which 5.7 is in vs out of the cluster?
-  A: The user can run mysql-diag via the BOSH cli (per https://docs.pivotal.io/application-service/2-9/mysql/mysql-diag.html#) to ID which nodes are in-vs-out of cluster.
-  Then they must interrogate the "out" node...BUT this doesn't tell them whether they still have
-  a 5.7 inside the cluster.
+In this case mysql/2 was malfunctioning; the state transfer to mysql/0 appears to been interrupted and/or improperly terminated:
+(Still from mysql/0 mysql.err.log)
+
+> [Note] [MY-000000] [Galera] 1.0 (mysql/2): State transfer to 2.0 (mysql/0) complete.
+> [Note] [MY-000000] [Galera] Member 1.0 (mysql/2) synced with group.
+> ...
+> [ERROR] [MY-000000] [WSREP-SST] ******************* FATAL ERROR **********************
+> [ERROR] [MY-000000] [WSREP-SST] Possible timeout in receving first data from donor in gtid/keyring stage
+> [ERROR] [MY-000000] [WSREP-SST] Line 1381
+> [ERROR] [MY-000000] [WSREP-SST] ******************************************************
+> [ERROR] [MY-000000] [WSREP-SST] Cleanup after exit with status:32
+> [ERROR] [MY-000000] [WSREP] Process completed with error: wsrep_sst_xtrabackup-v2 ...(Broken pipe)
+> [ERROR] [MY-000000] [WSREP] Failed to read uuid:seqno from joiner script.
+> [ERROR] [MY-000000] [WSREP] SST script aborted with error 32 (Broken pipe)
+> [Note] [MY-000000] [Galera] Processing SST received
+> [Note] [MY-000000] [Galera] SST request was cancelled
+> [ERROR] [MY-000000] [Galera] State transfer request failed unrecoverably: 32 (Broken pipe). Most likely it is due to inability to communicate with the cluster primary component. Restart required.
+
+During the above, here's the view from mysql/2 as it tried and failed to fulfill mysql/0's state transfer request:
+(from mysql/2 mysql.err.log)
+
+> [Note] WSREP: Member 2.0 (mysql/0) requested state transfer from '*any*'. Selected 1.0 (mysql/2)(SYNCED) as donor.
+> [Note] WSREP: (aa7d5ebb, 'ssl://0.0.0.0:4567') turning message relay requesting off
+> [Note] WSREP: monitor wait failed for causal read (repl.causal_read_timeout): : 110 (Connection timed out)
+           at /var/vcap/data/compile/percona-xtradb-cluster-5.7/Percona-XtraDB-Cluster-5.7.41-31.65/percona-xtradb-cluster-galera/galerautils/src/gu_lock.hpp:wait(
+  ):97
+>[Note] WSREP: monitor wait failed for causal read (repl.causal_read_timeout): : 110 (Connection timed out)
+           at /var/vcap/data/compile/percona-xtradb-cluster-5.7/Percona-XtraDB-Cluster-5.7.41-31.65/percona-xtradb-cluster-galera/galerautils/src/gu_lock.hpp:wait(
+  ):97
+
+Further down, the logs identify the underlying root cause: (from mysql/2 mysql.err.log)
+
+> [ERROR] Disk is full writing './mysql-bin.000001' (Errcode: -1891240384 - No space left on device). Waiting for someone to free space...
+> [ERROR] Retry in 60 secs. Message reprinted in 600 secs
+> [Note] WSREP: monitor wait failed for causal read (repl.causal_read_timeout): : 110 (Connection timed out)
+           at /var/vcap/data/compile/percona-xtradb-cluster-5.7/Percona-XtraDB-Cluster-5.7.41-31.65/percona-xtradb-cluster-galera/galerautils/src/gu_lock.hpp:wait():97
+> [Note] WSREP: monitor wait failed for causal read (repl.causal_read_timeout): : 110 (Connection timed out)
+           at /var/vcap/data/compile/percona-xtradb-cluster-5.7/Percona-XtraDB-Cluster-5.7.41-31.65/percona-xtradb-cluster-galera/galerautils/src/gu_lock.hpp:wait():97
+> [Note] WSREP: monitor wait failed for causal read (repl.causal_read_timeout): : 110 (Connection timed out)
+           at /var/vcap/data/compile/percona-xtradb-cluster-5.7/Percona-XtraDB-Cluster-5.7.41-31.65/percona-xtradb-cluster-galera/galerautils/src/gu_lock.hpp:wait():97
+
+2.
