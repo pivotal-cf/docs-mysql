@@ -9,15 +9,15 @@ This topic provides instructions for upgrading service instances from Percona 5.
 
 ## <a id="overview"></a>MySQL HA Upgrade Overview
 
-To upgrade an existing 5.7 service instance to MySQL 8.0, you will update the service instance''s plan to a different plan which specifies MySQL 8.0 in its definition. (There is no option to upgrade an existing MySQL service instance without updating it to a new service plan.)
+To upgrade an existing 5.7 service instance to MySQL 8.0, you will update the service instance's plan to a different plan which specifies MySQL 8.0 in its definition. (The only way to upgrade an existing MySQL service instance from 5.7 to 8.0 is by updating it to a new service plan.)
 
 1. Consult your platform operator or platform configuration to identify a suitable 8.0-enabled service plan to update your existing 5.7 service instance to.
 
 We recommend keeping the plan topology consistent when upgrading MySQL from 5.7 to 8.0. For example, if you have a 5.7 single-node service instance and want to upgrade it to an 8.0 high-availability instance, first perform "cf update-service" on your service instance and designate a 8.0 single-instance plan. Then, once that update is successful and your service instance is running MySQL 8.0, perform a second "cf update-service" to change its topology from single-node to high-availability.
 
-MySQL Tiles supporting both MySQL 5.7 and MySQL 8.0offer double the number of service plans compared to previous 5.7-only tiles. Platform Operators choose to create equivalent MySQL 8.0 plans for each previously-existing MySQL 5.7 plan -- holding other plan factors constant while just adjusting the MySQL version in that plan. This plan configuration approach lets Platform Operators offer Developers plans that are identical except for the MySQL version, thereby facilitating the safe upgrade approach outlined in the previous paragraph.
+MySQL Tiles supporting both MySQL 5.7 and MySQL 8.0 offer double the number of service plans compared to previous 5.7-only tiles. Platform Operators choose to create equivalent MySQL 8.0 plans for each previously-existing MySQL 5.7 plan -- holding other plan factors constant while just adjusting the MySQL version in that plan. This plan configuration approach lets Platform Operators offer Developers plans that are identical except for the MySQL version, thereby facilitating the safe upgrade approach outlined in the previous paragraph.
 
-2. [Backup your service instance](./backup-restore.html.md.erb) There is no downgrade path from 8.0 to 5.7, so a backup preserves your ability to recover from any failure by restoring your data to a new 5.7 service instance if necessary.
+2. [Backup your service instance](./backup-restore.html.md.erb) There is no downgrade path from 8.0 to 5.7. A backup preserves your ability to recover from any failure by restoring your data to a new 5.7 service instance if necessary.
 
 3. Do not attempt the upgrade if you are experiencing any database problems or issues. For HA instances [check the health of your cluster](monitor-health.html.md.erb), and do not perform an upgrade unless all 3 cluster nodes are reporting as healthy. HA service instances attempt to continually serve queries and connections throughout the upgrade process.
 
@@ -29,97 +29,18 @@ MySQL Tiles supporting both MySQL 5.7 and MySQL 8.0offer double the number of se
 
 ### <a id="overview"></a>Recovery Overview
 
-There are two types failure scenarios that can arise when running "cf update-service" to migrate a HA deployment from MySQL 5.7 to MySQL 8.0:
-- [A cluster of nodes with only 5.7 instances](#only-5-7):
-  One of the instances upgrades to 8.0 but is unablthe remaining two 5.7 instances do not respond to it
-- [A cluster of nodes with some or all 8.0 instances](#some-8-0)
-  - One of the instances gets upgraded to 8.0 successfully, and joins the cluster
-   - A either the second or third instance gets upgraded and fails before or after it is fully upgraded to 8.0
+When running "cf update-service" and failures happen usually there is an underlying node problem. In order to make progess 
+with the update it is necessary to find and fix the underlying issue with the node.
+A common issue can be a full disk which prevents the service from starting. See the [Toubleshooting Node Upgrade Failures](#troubleshooting-node-upgrade-failures) for more information.  
+Once the underlying node issue has been addressed run the same  "cf update-service" command as previously.  
+If this does not resolve the issue then manually update each node that has not yet been updated as described in section [Manually Upgrade Cluster](#manually-upgrade-cluster)
 
-If you have encountered one of these scenarios, then examine the failed node, diagnose the root cause of the update failure (such as inadequate disk space), and correct any issue that may have caused the failure.  Otherwise the following steps may not correctly fix the environment.
+## <a id="manually-upgrade-cluster"></a>Manually upgrade cluster
 
-
-## <a id="scenario"></a>Determine Your Failure Scenario
-
-We must first establish each node's
-- cluster status (whether the node is inside the HA cluster or not), and
-- MySQL version (the software deployed onto the node, if not necessarily running)
-
-
-1. Run the `mysql-diag` command as documented in [Running mysql-diag](./mysql-diag.html.md.erb)].
-
-2. Look at the mysql-diag output table showing HOST and WSREP CLUSTER STATUS, and note each of the 3 node's NAME/UUID (abbreviated) and whether its WSREP CLUSTER STATUS is "Primary" or "N/A - ERROR". You will need this information for the subsequent steps. For example:
-
-[DOCS TEAM: This should be a table with 4 rows including a header, and 2 columns]
-Name:               Cluster Status:
-mysql/cd759761      Error
-mysql/ce79f187      Primary
-mysql/7c3d095c      Primary
-
-("Primary" indicates the node is part of a cluster; it does not signify whether the node is the primary node within that cluster.)
-
-3. Run the below command to extract the mysql version of Node 0 in your cluster:
-`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
-    ssh mysql/0 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
-
-The output of this command shows the UUID (full) of the node and its `mysql_version` (5.7 or 8.0). Update the matching row in above cluster status notes to indicate the VM's node number ("mysql/0") and its mysql-version.
-
-[DOCS TEAM: This should be a table with 4 rows including a header, and 4 columns]
-
-Name:               Cluster Status:         Node:           MySQL Version:
-mysql/cd759761      Error
-mysql/ce79f187      Primary
-mysql/7c3d095c      Primary                 mysql/0         8.0
-
-The abbreviated UUID in the first column should prefix the full UUID you get from running the bosh command in this step.
-
-4. Repeat the above command for each of the remaining nodes `mysql/1` and `mysql/2`:
-`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
-    ssh mysql/1 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
-`bosh -d service-instance_$(cf service SERVICE_INSTANCE_NAME --guid) \
-    ssh mysql/2 -c "sudo grep mysql_version /var/vcap/jobs/mysql-agent/config/mysql-agent.yml"`
-
-Update the corresponding row in your notes to complete the picture of the VMs cluster status and mysql versions:
-
-Name:               Cluster Status:         Node:           MySQL Version:
-mysql/cd759761      Error                   mysql/2         8.0
-mysql/ce79f187      Primary                 mysql/1         5.7
-mysql/7c3d095c      Primary                 mysql/0         8.0
-
-5. Identify your failure scenario from the information you've collected:
-  - If both of your HA cluster nodes (with Cluster Status: Primary) are running
-  MySQL Version 5.7, then proceed with the [5.7 Cluster Upgrade Recovery]()
-  - If one of your HA cluster nodes is running MySQL Version 8.0 and the other running MySQL Version 5.7, then proceed with the [Mixed Cluster Upgrade Recovery]()
-
-## <a id="only-5-7"></a>5.7 Cluster Upgrade Recovery
-
-Because the entire cluster is 5.7 nodes, you can use cf update-service to continue the upgrade.
-
-Note this may move the cluster into read-only mode since cf may select a 5.7 cluster node as its first upgrade target,
-which will temporarily reduce your HA cluster to a single node (and thus into read-only state).
-
-1. Rerun the update service command:
-```
-cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
-```
-
-(Due to a bug #185055158, using "bosh deploy" to add an 8.0 node in this scenario will cripple cf's
-ability to run update-service on this instance. The approach we take here prioritizes preserving "cf update-service"
-over 100% cluster writability, hence we risk cluster write downtime in lieu of crippling "cf update-service".
-We should revisit this once that bug is fixed.)
-
-
-## <a id="some-8-0"></a>Mixed or 8.0 Cluster Upgrade Recovery
-
-Due to a bug #185055158, "cf update-service" is unavailable to use if there is any 8.0 node in your cluster;
-it mis-reports the 8.0 manifest as currently-deployed, and therefore takes no action to upgrade broken
-5.7 instances. Hence we "bosh deploy" any 5.7 instances, starting with the instance outside of the cluster
+To "bosh deploy" any remaining 5.7 instances we start with the instance outside of the cluster
 (to preserve the cluster's 2-node minimum).use
 
-
-1. ID the number of the 5.7 node outside the cluster; this is the node you will redeploy.
-
-2. Target your broken node by instructing BOSH to ignore the other nodes in your cluster.
+1. Target your broken node by instructing BOSH to ignore the other nodes in your cluster.
    For each node except the bootstrap node you identified above, run the bosh command with ignore.  
    For example, if you are updating instance 0 you will want to ignore 1 and 2:
 
@@ -128,13 +49,13 @@ it mis-reports the 8.0 manifest as currently-deployed, and therefore takes no ac
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT ignore mysql/2
          ```
 
-3. Turn off the BOSH Resurrector by running:
+1. Turn off the BOSH Resurrector by running:
 
       ```
       bosh update-resurrection off
       ```
 
-4. Use the BOSH manifest to update the instance to force the version to 8.0.  First you will export the manifest into a yaml file to edit with the following command:
+1. Use the BOSH manifest to update the instance to force the version to 8.0.  First you will export the manifest into a yaml file to edit with the following command:
       ```
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT manifest > /tmp/manifest.yml
       ```
@@ -143,27 +64,27 @@ it mis-reports the 8.0 manifest as currently-deployed, and therefore takes no ac
       bosh -e YOUR-ENV -d YOUR-DEPLOYMENT deploy /tmp/manifest.yml
       ```
 
-4. (At this stage you may want to check that all 3 nodes are in you cluster.)
+1. (At this stage you may want to check that all 3 nodes are in you cluster.)
 
-5. If you started this process with an 8.0 cluster, then all 3 nodes should now be at 8.0; perform the below cleanup steps.use
+1. If you started this process with an 8.0 cluster, then all 3 nodes should now be at 8.0; perform the below cleanup steps.use
 
 If you started this process with a mixed 8.0 & 5.7 cluster, repeat the above process for the remaining 5.7 node, being careful to
 "bosh unignore" that remaining node and "bosh ignore" the node you just recovered.to
 
-6. At this stage, all your nodes should be running 8.0 and should be in the cluster.
+1. At this stage, all your nodes should be running 8.0 and should be in the cluster.
 
-7. Unignore any remaining nodes you ignored above:
+1. Unignore any remaining nodes you ignored above:
   For example, if you had previously ignored instances 1 and 2, you would run:
          ```
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/1
          bosh -e YOUR-ENV -d YOUR-DEPLOYMENT unignore mysql/2
          ```
 
-8. Turn BOSH resurrector back on by running:
+1. Turn BOSH resurrector back on by running:
       ```
       bosh update-resurrection on
       ```
-## Troubleshooting Node Upgrade Failures
+## <a id="troubleshooting-node-upgrade-failures"></a>Troubleshooting Node Upgrade Failures
 
 Here are observations on what might cause a node to fail in an upgrade, and things to look at before
 proceeding with the above steps ("bosh deploy" / "cf update-service" etc.)
