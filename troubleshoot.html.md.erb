@@ -24,6 +24,7 @@ The following errors occur in multiple services:
 *   [Cannot Connect to a Service Instance](#cannot-connect)
 *   [Upgrade All Service Instances Errand Fails](#upgrade-all-fails)
 *   [Missing Logs and Metrics](#missing-logs)
+*   [MySQL Load is high w/ slow credhub queries](#credhub-encryption-keys)
 
 <style>
 
@@ -607,6 +608,56 @@ main table {
     </ol>
 
 </td>
+  </tr>
+
+<style>
+
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="credhub-encryption-keys"></a></p>
+
+<div>
+
+  <table class="nice">
+    <style>
+      main table {
+        table-layout: fixed;
+      }
+    </style>
+  <col width="20%">
+  <col width="80%">
+  <tr>
+  <th colspan="2" style="text-align: left;"> <br>
+    MySQL Load is high w/ large number of credhub encryption keys
+  <br><br></th>
+  </tr>
+
+  <tr>
+    <th>Symptom</th>
+    <td>MySQL load is high</td>
+    <td>Slow credhub queries</td>
+  </tr>
+
+  <tr>
+    <th>Cause</th>
+    <td>Large number of credhub encryption keys</td>
+  </tr>
+
+  <tr>
+    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <td>To troubleshoot:
+    <ol>
+    <li>
+    <p>
+    Follow the steps in this knowledge base <a href="https://community.pivotal.io/s/article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US"> article </a>.
+    </p>
+    </li>
+    </td>
   </tr>
 
 </table>
