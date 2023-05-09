@@ -40,16 +40,16 @@ and apps to access the service after it is installed.
 
 To create an ASG for <%= vars.product_short %>:
 
-1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **BOSH Director**.
+1. Go to **<%= vars.ops_manager %> Installation Dashboard** > **BOSH Director**.
 
 1. Click **Create Networks**.
 
 1. Click your services network and record the **CIDR**.
-    ![In the 'Create Networks' pane, in the 'Networks' section the 'services'
-    network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are
-    shown.](images/opsman-dir-reserved-ips.png)
 
-1. Create a JSON file named `mysql-asg.json` using the following template:
+    ![alt-text="In the 'Create Networks' pane, in the 'Networks' section the 'services'
+    network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are shown."](./images/opsman-dir-reserved-ips.png)
+
+2. Create a JSON file named `mysql-asg.json` using the following template:
 
     ```json
     [
@@ -63,13 +63,13 @@ To create an ASG for <%= vars.product_short %>:
 
     Where `CIDR` is the CIDR that you recorded in the previous step.
 
-1. Create an ASG by running:
+3. Create an ASG by running:
 
     ```console
     cf create-security-group p.mysql ./mysql-asg.json
     ```
 
-1. Bind the ASG to all running apps by running:
+4. Bind the ASG to all running apps by running:
 
      ```console
     cf bind-running-security-group p.mysql
@@ -94,7 +94,7 @@ see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manage
 
  To enable the BOSH Resurrector:
 
-1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **BOSH Director**.
+1. Go to **<%= vars.ops_manager %> Installation Dashboard** > **BOSH Director**.
 
 2. Click **Director Config**.
 
@@ -108,16 +108,17 @@ To download and import the <%= vars.product_short %> tile:
 
 1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/pivotal-mysql/).
 
-1. Navigate to the **<%= vars.ops_manager %> Installation Dashboard** and click **Import a Product** to upload the product file.
+1. Go to the **<%= vars.ops_manager %> Installation Dashboard** and click **Import a Product** to upload the product file.
 
 1. Under **Import a Product**, click **+** next to the version number of <%= vars.product_short %>.
    This adds the tile to your staging area.
 
 1. Click the newly-added **<%= vars.product_short %>** tile to open its configuration panes.
 
-    ![On the left side of the image, 'Assign AZs and Networks' is selected.
+    ![alt-text="On the left side of the image, 'Assign AZs and Networks' is selected.
     The 'AZ and Network Assignments' configuration pane is shown.
-    See the following section for a description of the fields in this pane.](images/config-azs.png)
+    See the following section for a description of the fields in this pane."](./images/config-azs.png)
+
 
 ## <a id="config-on-demand"></a> Configure the Tile
 
@@ -155,7 +156,7 @@ and networks for the broker and MySQL service instances:
     after you <strong>Apply Changes</strong>.
   </p>
 
-1. Click **Save**.
+3. Click **Save**.
 
 ### <a id="active"></a> Configure Service Plans
 
@@ -206,7 +207,9 @@ For each plan that you want to use in your deployment:
 
 1. Select the plan for your desired topology.
 
-    The following tabs expand to show an example screenshot of each plan:
+    ![alt-text="The Plan' section is shown. The radio button for 'Inactive' is selected."](./images/plan-types-3-0.png)
+
+    The following tabs expand to show an example image of each plan:
 
     <style>
     .tab {
@@ -372,7 +375,7 @@ For each plan that you want to use in your deployment:
   <a href="https://docs.pivotal.io/p-mysql/about-migrate.html">About Data Migration in <%= vars.product_short %></a>.
 </p>
 
-### <a id="inactive"></a> (Optional) Deactivate Service Plan
+### <a id="inactive"></a> Deactivate Service Plan (Optional)
 
 To deactivate a service plan:
 
@@ -625,11 +628,9 @@ To activate monitoring and logging in the MySQL service:
 
 1. Click **Monitoring**.
 
-    <%= image_tag("images/monitoring.png",
-    :alt => "Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields.",
-    :width => "300") %>
+    ![alt-text="Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields."](./images/monitoring.png)
 
-1. Configure the fields as follows:
+2. Configure the fields as follows and then Click **Save**:
 
   <table>
     <tr><th>Field</th><th>Instructions</th></tr>
@@ -657,7 +658,6 @@ To activate monitoring and logging in the MySQL service:
             The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
   </table>
 
-1. Click **Save**.
 
 ### <a id="syslog"></a> Configure System Logging
 
@@ -667,9 +667,9 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
 
 1. Click **Yes**.
 
-    <%= image_tag("images/syslog.png", :alt => "Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields.", :width => "550") %>
+    ![alt-text="Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields."](./images/syslog.png)
 
-1. Configure the fields as follows:
+2. Configure the fields as follows:
 
   <table>
     <tr><th>Field</th><th>Instructions</th></tr>
@@ -699,7 +699,7 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
     See <a href="#global">Configure Global Settings</a>.
   <p>
 
-1. Click **Save**.
+4. Click **Save**.
 
 ### <a id="service-instance-upgrades"></a> Configure Service Instance Upgrades
 
@@ -712,7 +712,7 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-    <%= image_tag("images/service-instance-upgrades.png", :alt => "Screenshot of service instance upgrades section in the MySQL tile in Ops Manager. Includes a header called 'Configuration for the upgrade-all-service-instances errand and several fields. ") %>
+![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
     <table>
@@ -744,11 +744,11 @@ To configure service instance upgrades.
       </tr>
     </table>
 
-1. Click **Save**.
+2. Click **Save**.
 
 ### <a id="errands"></a> Review Errands (Optional)
 
-Errands are scripts that run at specfic times to do various tasks.
+Errands are scripts that run at specific times to do various tasks.
 <%= vars.product_short %> can run errands to manage the broker and service instances.
 You do not need to change the default configurations for errands.
 
@@ -809,17 +809,18 @@ To review errands:
       <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
       <td>Upgrades existing instances of a service to its latest installed version.<br><br>
         If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.
-    For more information about individual service instance upgrades,
-    see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>.</td>
-    </tr>
+    </td>
 
     <tr>
       <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
     </tr>
-
     <tr>
       <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
       <td>Deletes all service instances and deregisters the broker.</td>
+
+      For more information about individual service instance upgrades,
+    see <a href="./upgrade.
+    html#individual-upgrades">About Individual Service Instance Upgrades</a>
     </tr>
   </table>
 
@@ -832,9 +833,12 @@ To verify your stemcell version and apply all changes:
 
 1. Verify and, if necessary, import a new stemcell version.
 
-1. Navigate to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
+1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 
 1. Click **Apply Changes**.
 
 For information about the Xenial stemcells that are compatible with <%= vars.product_short %>,
 see [Release Notes](./release-notes.html) or [<%= vars.product_network %>](https://network.pivotal.io/).
+
+
+[def]: ./images/monitoring.png"
