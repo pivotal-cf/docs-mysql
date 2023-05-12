@@ -41,6 +41,15 @@ to all service plans:
     <th>Default</th>
     <th width="45%">Notes</th>
     <tr>
+        <td><strong>Applier Threads</strong></td>
+        <td><code>wsrep_slave_threads</code></td>
+        <td>Number of CPU cores</td>
+        <td>
+            Defines the number of threads to use in applying of write-sets.
+            For more information refer to <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster documentation</a>
+        </td>
+    </tr>
+    <tr>
         <td><strong>Audit Log</strong></td>
         <td><code>audit-log</code></td>
         <td>OFF</td>
