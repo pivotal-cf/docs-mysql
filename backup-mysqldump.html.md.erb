@@ -8,7 +8,7 @@ owner: MySQL
 This topic describes how to manually create a logical backup with `mysqldump` and
 restore a MySQL database with the backup.
 
-## <a id="overview"></a> Overview
+## <a id="overview"></a> Overview on Manually Creating a Logical Backup
 
 A logical backup reproduces the database table structure and data, without copying the InnoDB data files.
 The backup contains SQL statements to re-create the data.
@@ -170,7 +170,6 @@ using `mysqldump`.
 
 If you want to restore a logical backup from an off-platform database that has encryption at rest or
 the Percona PAM Authentication plug-in enabled, you cannot use the `migrate` command.
-
 
 To restore an off-platform logical backup to a <%= vars.product_short %> database:
 

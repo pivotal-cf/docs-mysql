@@ -85,9 +85,9 @@ The BOSH Resurrector increases the availability of <%= vars.product_short %> by 
 
 The BOSH Resurrector does the following:
 
-+ Reacts to hardware failures and network disruptions by restarting VMs on active, stable hosts
-+ Detects operating system failures by continuously monitoring VMs and restarts them as required
-+ Continuously monitors the BOSH Agent running on each service instance VM and restarts the VM as required
++ Reacts to hardware failures and network disruptions by restarting VMs on active, stable hosts.
++ Detects operating system failures by continuously monitoring VMs and restarts them as required.
++ Continuously monitors the BOSH Agent running on each service instance VM and restarts the VM as required.
 
 For more information about the BOSH Resurrector,
 see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-resurrector.html#bosh-resurrector-0).
@@ -281,24 +281,20 @@ For each plan that you want to use in your deployment:
     </div>
 
     <div id="tab1" class="tabcontent" style="display:block">
-      <img src="./images/single-node-plan.png"
-      alt="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.
-      The table in the next step describes the fields that are revealed after selecting this plan.">
+    ![alt-text="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.
+    The table in the next step describes the fields that are revealed after selecting this plan."](./images/single-node-plan.png)
     </div>
     <div id="tab2" class="tabcontent">
-      <img src="./images/leader-follower-plan.png"
-      alt="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.
-      The table in the next step describes the fields that are revealed after selecting this plan.">
+    ![alt-text="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.
+    The table in the next step describes the fields that are revealed after selecting this plan."](./images/leader-follower-plan.png)
     </div>
     <div id="tab3" class="tabcontent">
-      <img src="./images/ha-plan.png"
-      alt="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.
-      The table in the next step describes the fields that are revealed after selecting this plan.">
+    ![alt-text="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.
+    The table in the next step describes the fields that are revealed after selecting this plan."](./images/ha-plan.png)
     </div>
     <div id="tab4" class="tabcontent">
-      <img src="./images/multi-site-plan.png"
-      alt="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.
-      The table in the next step describes the fields that are revealed after selecting this plan.">
+    ![alt-text="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.
+    The table in the next step describes the fields that are revealed after selecting this plan."](./images/multi-site-plan.png)
     </div>
 
 2. Configure the fields as follows:
@@ -396,8 +392,8 @@ To deactivate a service plan:
 To configure global settings for all service instances:
 
 1. Click **Settings**.
-
-    <%= image_tag("images/global-settings.png", :alt => "The 'Settings' pane. See the following step for a detailed description of the configurable fields.", :width => "350") %>
+![alt-text="The 'Settings' pane. See the following step for a
+detailed description of the configurable fields."](./images/global-settings.png)
 
 1. Configure the fields as follows:
     <table class="nice">
@@ -435,7 +431,8 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**.
 
-    <%= image_tag("images/mysql-config.png", :alt => "The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields.", :width => "300") %>
+![alt-text="The 'Mysql Configuration' pane. See the following step for
+a detailed description of the configurable fields."](./images/mysql-config.png)
 
 1. Configure the fields as follows:
 
@@ -484,11 +481,8 @@ To configure backups:
 
 1. Click **Backups**.
 
-    >**Note**
-    > The **Amazon S3 (with Instance Profiles)** option was added in <%= vars.product_short %> v2.10.6.
-
-    <%= image_tag("images/backups.png", :alt => "The radio buttons for backup configuration are
-        Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure.", :width => "200") %>
+![alt-text="The radio buttons for backup configuration are
+Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/nbackups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
 in the _Configuring Automated Backups_ topic:
@@ -721,7 +715,7 @@ To configure service instance upgrades.
           <td><strong>Number of simultaneous upgrades</strong></td>
           <td>Enter the maximum number of service instances that can upgrade at the same time.
           The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
-          <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, navigate to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
+          <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
           </p>
           </td>
       </tr>
