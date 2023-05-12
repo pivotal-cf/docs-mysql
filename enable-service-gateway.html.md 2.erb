@@ -15,11 +15,14 @@ For a more detailed overview, see [About Service-Gateway Access](./service-gatew
 
 To enable service-gateway access for an on-demand offering:
 
-1. [Activate TCP routing using the <%= vars.app_runtime_abbr %> tile](#tcp-routing)
-1. [Configure the firewall to allow incoming traffic to the TCP router](#configure-firewall)
-1. [Configure the load balancer in the IaaS to redirect traffic to the TCP router](#configure-lb)
-1. [Create a DNS record that maps to the load balancer](#create-dns-record)
-1. [Activate service-gateway access](#configure-service-gateway-plan)
+- [ Overview](#-overview)
+- [ Activate TCP Routing using the \<%= vars.app\_runtime\_abbr %\> Tile](#-activate-tcp-routing-using-the--varsapp_runtime_abbr--tile)
+- [ Configure the Firewall to Allow Incoming Traffic to the TCP Router](#-configure-the-firewall-to-allow-incoming-traffic-to-the-tcp-router)
+- [ Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router](#-configure-the-load-balancer-in-the-iaas-to-redirect-traffic-to-the-tcp-router)
+- [ Create a DNS Record That Maps to the Load Balancer](#-create-a-dns-record-that-maps-to-the-load-balancer)
+- [ Enable Service-Gateway Access](#-enable-service-gateway-access)
+- [ Deactivate Service-Gateway Access](#-deactivate-service-gateway-access)
+- [ Developer Workflow](#-developer-workflow)
 
 <p class="note warning">
   <strong>Warning:</strong> VMware recommends that you configure Transport Layer Security (TLS)
@@ -44,10 +47,11 @@ TCP router.
 1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
 
-    ![Screenshot showing Ops Manager UI with the 'Status' tab selected.
-    In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
-    and 'CID'. The screenshot highlights with a red outline the last row in the table for the job
-    'TCP Router'.](images/TCP-router-CID.png)
+![alt-text="Screenshot showing Ops Manager UI with the 'Status' tab selected.
+In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
+and 'CID'. The screenshot highlights with a red outline the last row in the table for the job
+'TCP Router'"](./images/TCP-router-CID.png)
+
     <a href="./images/TCP-router-CID.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 ## <a id='configure-firewall'></a> Configure the Firewall to Allow Incoming Traffic to the TCP Router
@@ -81,11 +85,12 @@ To configure the load balancer:
       instances that you need. The start port and the end port are both inclusive.
     </p>
 
-    ![Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
+![alt-text="Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
     using ports in the TAS LB port range through the TCP Router using ports in the TAS TCP port range.
     Traffic flows to the MySQL service instances from the Load Balancer using ports in the Service
     Gateway LB port range through the TCP Router using ports in the Service Gateway TCP port
-    range.](images/service-gateway-ports.png)
+    range."](./images/service-gateway-ports.png)
+
 1. Record this port range.
 
 
@@ -113,14 +118,13 @@ To configure service-gateway access for the foundation:
 1. Go to the **Settings** pane in the <%= vars.product_short %> tile.
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
-
-    ![Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
+![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
     the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-    text 1024-1123 is entered.](images/global-settings-off-platform-access.png)
+    text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
     This activates the feature and makes the domain and port range fields visible.
 
-2. Configure the fields as follows:
+1. Configure the fields as follows:
 
     <table>
        <col width="20%">

@@ -672,7 +672,7 @@ and topology without operator intervention to resolve the issue.
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>Use the <code>inspect</code> errand to determine which instance should be the leader. Then, using the
+    <td>Use the <code>inspect</code> errand to determine which instance can be the leader. Then, using the
     <a href="./about-leader-follower.html#errands">orchestration</a>
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
     <code>configure-leader-follower</code> errand. This is shown in the following example.<br><br>
@@ -819,7 +819,7 @@ and the errand logs contain the following:
         <li>Look at the value of GTID Executed for both instances.
           <ul>
             <li>If the range after the GUID is equivalent, either instance can be made read-only, as described in Step 3.</li>
-            <li>If one instance has a range that is a subset of the other, the instance with the subset should must be made read-only, as described in Step 3.</li>
+            <li>If one instance has a range that is a subset of the other, the instance with the subset must be made read-only, as described in Step 3.</li>
           </ul>
         </li>
         <li>Based on the information you gathered in the previous step, run the
@@ -1214,8 +1214,8 @@ main table {
   <li>
     <strong>Network Latency</strong>: If network latency causes a node to become unresponsive, the node drops but eventually rejoins. The node automatically rejoins only if one node has left the cluster. Consult your IaaS network settings to reduce your network latency. <hr></li>
   <li>
-    <strong>MySQL Process Failure:</strong> If the MySQL process crashes, <code>monit</code>
-    and BOSH should restore the process. If the process is not restored, run the
+    <strong>MySQL Process Failure:</strong> If the MySQL process fails, <code>monit</code>
+    then BOSH restores the process. If the process is not restored, run the
     <code>download-logs</code> tool and consult the error logs it generates. For more information, see the
     <a href="#download-logs">download-logs</a> section.<hr>
   </li>
@@ -1831,7 +1831,7 @@ Updated: 2017-03-13T10:17:58Z
 </ul>
 
 <p>
-  You should run this errand whenever the broker is re-deployed with new catalog metadata to
+  You can run this errand whenever the broker is redeployed with new catalog metadata to
   update the Marketplace.
 </p>
 
@@ -1932,7 +1932,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <p class="note warning">
   <strong>Warning:</strong> Use extreme caution when running this errand.
-  You should only use it when you want to totally destroy all of the on-demand service
+  You can only use it when you want to totally destroy all of the on-demand service
   instances in an environment.
 </p>
 

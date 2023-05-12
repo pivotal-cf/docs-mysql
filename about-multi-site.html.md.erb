@@ -9,7 +9,7 @@ This topic describes how the <%= vars.single_leader_plan_lc %> topology works in
 <%= vars.product_full %> and contains information to help users decide whether to use
 the <%= vars.single_leader_plan %> plan.
 
-##<a id='overview'></a> Overview
+##<a id='overview'></a> Overview on Multi-Site Replication
 
 The <%= vars.single_leader_plan_lc %> topology in <%= vars.product_short %>
 is a disaster recovery solution that enables developers to provision a leader-follower
@@ -189,7 +189,7 @@ for a <%= vars.single_leader_plan_lc %> topology:
 
 <a href="./images/multi-site-failover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the previous diagram:
 
 + The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
@@ -209,7 +209,7 @@ in an active-passive topology:
 
 <a href="./images/active-passive-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the preceding diagram:
 
 + The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
@@ -229,7 +229,7 @@ in an active-active topology:
 
 <a href="./images/active-active-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the preceding diagram:
 
 + The GLB directs traffic to the apps in the primary and
   secondary foundations.

@@ -44,10 +44,11 @@ TCP router.
 1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
 
-    ![Screenshot showing Ops Manager UI with the 'Status' tab selected.
-    In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
-    and 'CID'. The screenshot highlights with a red outline the last row in the table for the job
-    'TCP Router'.](images/TCP-router-CID.png)
+![alt-text="Screenshot showing Ops Manager UI with the 'Status' tab selected.
+In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
+and 'CID'. The screenshot highlights with a red outline the last row in the table for the job
+'TCP Router'."](./images/TCP-router-CID.png)
+
     <a href="./images/TCP-router-CID.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 ## <a id='configure-firewall'></a> Configure the Firewall to Allow Incoming Traffic to the TCP Router
@@ -81,11 +82,12 @@ To configure the load balancer:
       instances that you need. The start port and the end port are both inclusive.
     </p>
 
-    ![Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
+    ![alt-text="Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
     using ports in the TAS LB port range through the TCP Router using ports in the TAS TCP port range.
     Traffic flows to the MySQL service instances from the Load Balancer using ports in the Service
     Gateway LB port range through the TCP Router using ports in the Service Gateway TCP port
-    range.](images/service-gateway-ports.png)
+    range."](./images/service-gateway-ports.png)
+
 1. Record this port range.
 
 
@@ -114,9 +116,9 @@ To configure service-gateway access for the foundation:
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
 
-    ![Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
-    the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-    text 1024-1123 is entered.](images/global-settings-off-platform-access.png)
+![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
+the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
+text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
     This activates the feature and makes the domain and port range fields visible.
 
