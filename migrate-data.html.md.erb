@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to migrate data from any MySQL database to a
+This topic tells you how to migrate data from any MySQL database to a
 <%= vars.product_full %> service instance.
 
 ## <a id='overview'></a>Overview
@@ -52,7 +52,7 @@ you want to migrate to.
   Talk to your operator to determine which service plan is appropriate.
 
 
-### <a id='sizing'></a>Resource Planning
+### <a id='sizing'></a>Resource planning
 
 You must ensure that the <%= vars.product_short %> v2 service plan for your
 destination service instance has your preferred VM type and persistent disk size.
@@ -99,7 +99,7 @@ To install the `mysql-tools` cf CLI plug-in:
     cf mysql-tools version
     ```
 
-## <a id='source-access'></a>Enable Source Access
+## <a id='source-access'></a>Enable source access
 
 The `migrate` command must be able to access the source database.
 How you activate this access depends on where the source database is located relative to the destination
@@ -117,7 +117,7 @@ from the destination or not deployed on <%= vars.ops_manager %>,
 create a user-provided service that can access the remote database.
 See [Source Access Off-Platform](#off-platform).
 
-### <a id='across-spaces'></a>Source Access across Spaces
+### <a id='across-spaces'></a>Source access across spaces
 
 If your source MySQL service instance is in a different development space from your destination org and space,
 you can migrate your data by sharing the service instance to the destination org and space.
@@ -130,7 +130,7 @@ To share a source MySQL service instance with your destination org and space:
 1. Continue to [Migrate Data](#migrate-data).
 
 
-### <a id='off-platform'></a>Source Access Off-Platform
+### <a id='off-platform'></a>Source access Off-Platform
 
 If your source MySQL database is in a different <%= vars.ops_manager %> foundation
 or not deployed on <%= vars.ops_manager %>,
@@ -180,7 +180,7 @@ These values usually include:
 
 1. After your user-provided service instance is created, continue to [Migrate Data](#migrate-data).
 
-## <a id='migrate-data'></a>Migrate Data
+## <a id='migrate-data'></a>Migrate data
 
 After your source database can access the destination space:
 
@@ -281,7 +281,7 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind).
       However, if a migration succeeds, the migration app is still deleted.
     </p>
 
-## <a id='validate-data'></a>Validate Data
+## <a id='validate-data'></a>Validate data
 
 After migrating your data, you must verify that the data was successfully migrated by validating the data
 in the new <%= vars.product_short %> v2.x service instance.
@@ -307,7 +307,7 @@ into the <%= vars.product_short %> v2.x service instance.
 
 1. Exit the MySQL shell and stop the SSH tunnel.
 
-## <a id='rebind-restage'></a>Rebind and Re-Stage Apps
+## <a id='rebind-restage'></a>Rebind and Re-Stage apps
 
 To complete the migration, rebind and re-stage any bound apps in your destination org and space.
 After rebinding and re-staging your apps,

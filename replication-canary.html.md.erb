@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic describes the replication canary for an highly available (HA) cluster.
+This topic tells you about the replication canary for an highly available (HA) cluster.
 The replication canary runs on the jumpbox VM and
 monitors an HA cluster to ensure that replication is working.
 
@@ -26,7 +26,7 @@ following:
     Contact Support immediately in the case of
     replication failure.</p>
 
-## <a id="sample-canary"></a>Sample Notification Email
+## <a id="sample-canary"></a>Sample notification email
 
 If the canary detects replication failure, it immediately sends an email through the
 <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) notification service. You must have configured email notifications in
@@ -48,7 +48,7 @@ has detected an unsafe cluster condition in which replication is not
 performing as expected across all nodes.
 ```
 
-## <a id="access"></a> Determine If the Cluster Is Accessible
+## <a id="access"></a> Determining if the Cluster is accessible
 
 When the canary detects replication failure, it deactivates connections to the database cluster through
 the proxies. When the replication issue is resolved, the canary automatically restores client access to the

@@ -4,10 +4,10 @@ owner: MySQL
 ---
 <strong><%= modified_date %></strong>
 
-The topic describes how to trigger a failover and switchover
+The topic dtells you how to trigger a failover and switchover
  when using a <%= vars.single_leader_plan %> plan.
 
-##<a id='overview'></a> Overview
+##<a id='overview'></a> Overview on failover or switchover to secondary foundation
 
 You can trigger a failover or switchover to redirect traffic to a secondary foundation.
 You can only trigger a failover or switchover in <%= vars.product_short %> v2.7.3 and later.
@@ -22,7 +22,7 @@ is healthy. See [Verify Follower Health](#verify).
 the primary foundation and the follower service instance in the secondary foundation.
 </p>
 
-##<a id='verify'></a> Verify Follower Health
+##<a id='verify'></a> Verify Follower health
 
 Before you trigger a failover or switchover,
 you must verify that the follower service instance is healthy.
@@ -333,7 +333,7 @@ create a new <%= vars.single_leader_plan %> service instance and reconfigure rep
 empty instance as the follower.
 </p>
 
-#### Workflow for Reconfiguring <%= vars.single_leader_plan %>
+#### Workflow for reconfiguring <%= vars.single_leader_plan %>
 
 The following diagram describes the workflow for reconfiguring multi-site replication:
 

@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to configure automated, physical backups for <%= vars.product_full %>.
+This topic tells you how to configure and automate, physical backups for <%= vars.product_full %>.
 
 Developers can create physical backups using the Cloud Foundry Command Line Interface (cf CLI)
 or logical backups using `mysqldump`.
@@ -34,13 +34,13 @@ You configure this schedule with a cron expression.
 
 To configure backups, follow the procedure for your external storage solution:
 
-+ [Back Up Using SCP](#scp)
-+ [Back Up to Amazon S3 or Ceph](#ceph-or-s3)
-+ [Back Up to Amazon S3 with Instance Profile](#instance-profile)
-+ [Back Up to GCS](#gcs)
-+ [Back Up to Azure Storage](#azure)
++ [Back Up Using SCP](#scp).
++ [Back Up to Amazon S3 or Ceph](#ceph-or-s3).
++ [Back Up to Amazon S3 with Instance Profile](#instance-profile).
++ [Back Up to GCS](#gcs).
++ [Back Up to Azure Storage](#azure).
 
-## <a id="scp"></a> Back Up Using SCP
+## <a id="scp"></a> Back Up using SCP
 
 Secure copy protocol (SCP) enables operators to use any storage solution
 on the destination VM. This is the fastest method for backing up your database.
@@ -52,10 +52,10 @@ The operator provisions the backup machine separately from their installation.
 
 To back up your database using SCP:
 
-+ [Create a Public and Private Key Pair](#scp-keys)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-scp)
++ [Create a Public and Private Key Pair](#scp-keys).
++ [Configure Backups in <%= vars.ops_manager %>](#configure-scp).
 
-### <a id="scp-keys"></a> Create a Public and Private Key&#8209;Pair
+### <a id="scp-keys"></a> Create a Public and Private Key Pair
 
 <%= vars.product_short %> accesses a remote host as a user with a private key for authentication.
 VMware recommends that this user and key-pair is only used for <%= vars.product_short %>.
@@ -179,8 +179,8 @@ see the [Ceph documentation](https://docs.ceph.com/en/latest/).
 
 To back up your database to Amazon S3 or Ceph:
 
-+ [Create a Custom Policy and Access Key](#access-key-aws)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-aws)
++ [Create a Custom Policy and Access Key](#access-key-aws).
++ [Configure Backups in <%= vars.ops_manager %>](#configure-aws).
 
 ### <a id="access-key-aws"></a> Create a Custom Policy and Access Key
 
@@ -374,19 +374,19 @@ Amazon S3 without static credentials (Access and Secret Access Key ID).
 
 The process for configuring backups for an Amazon S3 with Instance Profile is:
 
-1. [Create an IAM Role with a Custom Policy](#ip-create-policy)
-1. [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy)
-1. [Configure a VM Extension](#ip-configure-vm)
- 1. [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
- 1. [Apply the VM Extension to the dedicated-mysql-broker Job](#ip-vm-job)
- 1. [Set the VM Extension Name](#ip-vm-tile)
-1. [Apply Changes and Upgrade All Service Instances](#ip-apply-upgrade)
-1. [(Optional) Verify the IAM Role is Associated with MySQL Service Instances](#ip-verify-instances)
+1. [Create an IAM Role with a Custom Policy](#ip-create-policy).
+1. [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy).
+1. [Configure a VM Extension](#ip-configure-vm).
+ 1. [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops).
+ 1. [Apply the VM Extension to the dedicated-mysql-broker Job](#ip-vm-job).
+ 1. [Set the VM Extension Name](#ip-vm-tile).
+1. [Apply Changes and Upgrade All Service Instances](#ip-apply-upgrade).
+1. [(Optional) Verify the IAM Role is Associated with MySQL Service Instances](#ip-verify-instances).
 
 
 ### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
 
-First, you must create a policy for your <%= vars.product_short %> user account.
+To start, you must create a policy for your <%= vars.product_short %> user account.
 
 For more information about AWS identity and access management, see the
 [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).<br>
@@ -430,7 +430,6 @@ To create an IAM Role with a custom policy:
 1. Record the name of the Instance Profile associated with this new IAM role.
    This is used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops).
 
-
 ### <a id="ip-add-policy"></a> Add a Policy to the Existing <%= vars.ops_manager %> User or Role
 
 Next, you must add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
@@ -438,6 +437,7 @@ is configured in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
 This policy allows the IAM user or role used by BOSH to pass the new backups IAM role to a new EC2 instance.
 
 Depending on your configuration, this is either a user or a role.
+
 To find the existing user or role and add a policy:
 
 1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).

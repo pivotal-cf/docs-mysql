@@ -5,7 +5,7 @@ owner: MySQL
 
 This topic explains how to enable service-gateway access.
 
-## <a id='overview'></a> Overview
+## <a id='overview'></a> Overview on enabling service gateway access
 
 Service-gateway access enables external clients to connect to a MySQL service.
 The clients are typically apps running external to the foundation, apps on a different foundation,
@@ -15,11 +15,11 @@ For a more detailed overview, see [About Service-Gateway Access](./service-gatew
 
 To enable service-gateway access for an on-demand offering:
 
-1. [Activate TCP routing using the <%= vars.app_runtime_abbr %> tile](#tcp-routing)
-1. [Configure the firewall to allow incoming traffic to the TCP router](#configure-firewall)
-1. [Configure the load balancer in the IaaS to redirect traffic to the TCP router](#configure-lb)
-1. [Create a DNS record that maps to the load balancer](#create-dns-record)
-1. [Activate service-gateway access](#configure-service-gateway-plan)
+1. [Activate TCP routing using the <%= vars.app_runtime_abbr %> tile](#tcp-routing).
+1. [Configure the firewall to allow incoming traffic to the TCP router](#configure-firewall).
+1. [Configure the load balancer in the IaaS to redirect traffic to the TCP router](#configure-lb).
+1. [Create a DNS record that maps to the load balancer](#create-dns-record).
+1. [Activate service-gateway access](#configure-service-gateway-plan).
 
 <p class="note warning">
   <strong>Warning:</strong> VMware recommends that you configure Transport Layer Security (TLS)
@@ -41,7 +41,7 @@ For example, `1024` for a single port or `1024–1123` for a range of ports.
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 1. Click **Apply Changes** for the <%= vars.app_runtime_abbr %> tile to create the
 TCP router.
-1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
+1. From the **Status** tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
 
 ![alt-text="Screenshot showing Ops Manager UI with the 'Status' tab selected.
@@ -51,7 +51,7 @@ and 'CID'. The screenshot highlights with a red outline the last row in the tabl
 
     <a href="./images/TCP-router-CID.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
-## <a id='configure-firewall'></a> Configure the Firewall to Allow Incoming Traffic to the TCP Router
+## <a id='configure-firewall'></a> Configure the Firewall to allow incoming traffic to the TCP Router
 
 The steps you take to allow traffic to the TCP router depend on your IaaS:
 
@@ -193,7 +193,7 @@ To deactivate service-gateway access:
 1. Click **Apply Changes** to apply the changes to the <%= vars.product_short %> tile.
 
 
-## <a id='workflow'></a> Developer Workflow
+## <a id='workflow'></a> Developer workflow
 
 For instructions for app developers, see
 [Create a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html).

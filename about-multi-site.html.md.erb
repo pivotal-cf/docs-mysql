@@ -9,7 +9,7 @@ This topic describes how the <%= vars.single_leader_plan_lc %> topology works in
 <%= vars.product_full %> and contains information to help users decide whether to use
 the <%= vars.single_leader_plan %> plan.
 
-##<a id='overview'></a> Overview on Multi-Site Replication
+## <a id='overview'></a> Overview on Multi-Site Replication
 
 The <%= vars.single_leader_plan_lc %> topology in <%= vars.product_short %>
 is a disaster recovery solution that enables developers to provision a leader-follower
@@ -32,7 +32,6 @@ or no traffic at all.
 <%= vars.product_short %> assumes that the follower is deployed on this foundation unless
 a developer triggers a failover.
 
-
 <p class="note"><strong>Note:</strong>
   The <%= vars.single_leader_plan %> plan type is configured separately
   from the leader-follower service plan.
@@ -46,29 +45,28 @@ For information for developers about using <%= vars.single_leader_plan %>,
 see
 [Using <%= vars.product_short %> for <%= vars.single_leader_plan %>](./use-multi-site.html).
 
-##<a id='benefits'></a> <%= vars.single_leader_plan %> Benefits
+## <a id='benefits'></a> <%= vars.single_leader_plan %> Benefits
 
 The <%= vars.single_leader_plan %> plan has the following benefits:
 
-+ **Resilience for Service Instances:** Developers can trigger a failover
+* **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
 see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
 
-+ **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
+* **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
 
-+ **Support for Multiple Cloud Deployment Models:**
+* **Support for Multiple Cloud Deployment Models:**
 Operators can configure <%= vars.single_leader_plan_lc %> with a
 single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
-+ **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
+* **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
 For more information, see [About Active-Passive Topology](#active-passive)
 and [About App-Layer Active-Active Topology](#active-active) below.
 
-
-##<a id='active-passive'></a> About Active-Passive Topology
+## <a id='active-passive'></a> About Active-Passive Topology
 
 In an active-passive topology, when all foundations and workloads are healthy,
 all app traffic is directed to the primary foundation.
@@ -78,7 +76,7 @@ VMware recommends using this topology when your secondary foundation is scaled d
 generally inactive, and does not receive significant app traffic.
 
 For information about active-passive failover and switchover,
-see [About Failover and Switchover](#failover-switchover) below.
+see [About Failover and Switchover](#failover-switchover).
 
 The following diagram describes the active-passive topology in a healthy state:
 
@@ -86,14 +84,14 @@ The following diagram describes the active-passive topology in a healthy state:
 
 <a href="./images/active-passive.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the preceding diagram:
 
-+ The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
+* The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
   This app issues transactions to the leader service instance.
-+ The follower service instance in the secondary foundation continuously
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
-##<a id='active-active'></a> About App-Layer Active-Active Topology
+## <a id='active-active'></a> About App-Layer Active-Active Topology
 
 In an app-layer active-active topology, when all foundations and workloads are healthy,
 app traffic is directed to both the primary and secondary foundation.
@@ -102,25 +100,25 @@ VMware recommends using this topology when both your primary and secondary found
 are scaled up and are expected to serve traffic.
 
 For information about app-layer active-active failover and switchover,
-see [About Failover and Switchover](#failover-switchover) below.
+see [About Failover and Switchover](#failover-switchover).
 
 The following diagram describes the app-layer active-active topology in a healthy state:
 
-![This app-layer active-active topology diagram is described below](images/active-active.png)
+![alt-text=""](./images/active-active.png)
 
 <a href="./images/active-active.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-In the above diagram:
+In the preceding diagram:
 
-+ The GLB directs traffic to the apps in the primary and
+* The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance. <br><br>
   The app in the secondary foundation issues transactions to the leader as below:
       1. Connects to the follower service instance
-      1. Issues transactions to the follower service instance
-      1. Forwards the transactions from the follower service instance to the leader
+      2. Issues transactions to the follower service instance
+      3. Forwards the transactions from the follower service instance to the leader
 
-+ The follower service instance in the secondary foundation continuously
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note"><strong>Note:</strong>
@@ -130,8 +128,7 @@ Therefore, the follower service instance is read-only.
 Apps can only write to the leader.
  </p>
 
-
-##<a id='failover-switchover'></a> About Failover and Switchover
+## <a id='failover-switchover'></a> About Failover and Switchover
 
 <%= vars.product_short %> prioritizes data consistency over availability.
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
@@ -139,8 +136,7 @@ and developers must manually trigger a failover or switchover.
 For instructions about triggering failover or switchover, see
 see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
 
-
-The table below describes when you should trigger a failover or switchover:
+The following table describes when you should trigger a failover or switchover:
 
 <table>
   <tr>
@@ -175,7 +171,7 @@ For information about <%= vars.single_leader_plan_lc %> topologies
 in an healthy state, see [About Active-Passive Topology](#active-passive)
 and [About App-Layer Active-Active Topology](#active-active) above.
 
-###<a id='failover'></a> About Failover
+### <a id='failover'></a> About Failover
 
 In both the active-passive and app-layer active-active topologies,
 if a developer triggers a failover,
@@ -185,18 +181,18 @@ and the primary foundation receives no app traffic.
 The following diagram describes what happens when you trigger a failover
 for a <%= vars.single_leader_plan_lc %> topology:
 
-![This multi-site failover diagram is described below](images/multi-site-failover.png)
+![alt-text=""](./images/multi-site-failover.png)
 
 <a href="./images/multi-site-failover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
 In the previous diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation does not replicate data to another
+* The leader service instance in the secondary foundation does not replicate data to another
 service instance.
 
-###<a id=active-passive-switchover></a> About Active-Passive Switchover
+### <a id=active-passive-switchover></a> About Active-Passive Switchover
 
 In an active-passive topology, if a developer triggers a switchover,
 all app traffic is directed to the leader in the secondary foundation.
@@ -205,18 +201,18 @@ The primary foundation receives no app traffic.
 The following diagram describes what happens when you trigger a switchover
 in an active-passive topology:
 
-![This active-passive switchover diagram is described below](images/active-passive-switchover.png)
+![alt-text=""](./images/active-passive-switchover.png)
 
 <a href="./images/active-passive-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
 In the preceding diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation replicates data to the follower service
+* The leader service instance in the secondary foundation replicates data to the follower service
 instance in the primary foundation.
 
-###<a id=active-active-switchover></a> About App-Layer Active-Active Switchover
+### <a id=active-active-switchover></a> About App-Layer Active-Active Switchover
 
 If a developer triggers a switchover,
 app traffic is still directed to both the primary and secondary foundation.
@@ -225,29 +221,29 @@ However, the leader service instance is in secondary foundation.
 The following diagram describes what happens when you trigger a switchover
 in an active-active topology:
 
-![This active-active switchover diagram is described below](images/active-active-switchover.png)
+![alt-text=""](./images/active-active-switchover.png)
 
 <a href="./images/active-active-switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
 In the preceding diagram:
 
-+ The GLB directs traffic to the apps in the primary and
+* The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance
   in the secondary foundation. <br><br>
   The app in the primary foundation issues transactions to the leader as below:
       1. Connects to the follower service instance
-      1. Issues transactions to the follower service instance
-      1. Forwards the transactions from the follower service instance to the leader
+      2. Issues transactions to the follower service instance
+      3. Forwards the transactions from the follower service instance to the leader
 
-+ The follower service instance in the primary foundation continuously
+* The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
-##<a id='infrastructure'></a> Infrastructure Requirements for <%= vars.single_leader_plan %>
+## <a id='infrastructure'></a> Infrastructure Requirements for <%= vars.single_leader_plan %>
 
 Before using the <%= vars.single_leader_plan %> plan, consider the following requirements.
 
-###<a id='capacity'></a> Capacity Planning
+### <a id='capacity'></a> Capacity Planning
 
 When calculating IaaS usage, you must take into account that each
 <%= vars.single_leader_plan %> instance requires two VMs.
@@ -258,7 +254,7 @@ For more information,
 see [Setting Limits for On-Demand Service Instances](.//set-quotas.html) and
 [Persistent Disk Usage](./recommended.html#persistent).
 
-###<a id='network'></a> Networking Requirements
+### <a id='network'></a> Networking Requirements
 
 Operators should consider that <%= vars.single_leader_plan %> instances that are deployed in
 data centers that are geographically farther apart experience higher latencies.
@@ -266,11 +262,10 @@ data centers that are geographically farther apart experience higher latencies.
 For information about the standard networking rules,
 see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
 
-
-##<a id='limitations'></a> <%= vars.single_leader_plan %> Limitations
+## <a id='limitations'></a> <%= vars.single_leader_plan %> Limitations
 
 The <%= vars.single_leader_plan %> plan has the following limitation:
 
-+ **Synchronous replication is not supported:**
+* **Synchronous replication is not supported:**
 For <%= vars.single_leader_plan %> plans, any data that is written to the leader
 is asynchronously replicated to the follower.
