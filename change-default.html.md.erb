@@ -490,9 +490,9 @@ The following table describes how to use the `wsrep_applier_threads` optional pa
   <tr>
     <th><strong>Description</strong></th>
     <td>
-      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to the number of available CPU cores, whereas Percona XtraDB Cluster 5.7 defaults to 1. To return the property to the default use a value of -1.
-      For further details, see the
-      <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster Docs</a>.
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. <%= vars.product_short %> defaults to the number of available CPU cores, whereas Percona XtraDB Cluster 5.7 defaults to 1. To return the property to the default, use a value of -1.
+      For more information, see the
+      <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster documentation</a>.
 
       <p class="note caution">
         <strong>Note:</strong> This parameter only applies to "high-availablity" service plans, and is rejected for service plans using other topologies.
