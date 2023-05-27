@@ -10,7 +10,6 @@ The topic describes how to trigger a failover and switchover
 ##<a id='overview'></a> Overview
 
 You can trigger a failover or switchover to redirect traffic to a secondary foundation.
-You can only trigger a failover or switchover in <%= vars.product_short %> v2.7.3 and later.
 
 For information about when to trigger a failover or switchover,
 see [About Failover and Switchover](./about-multi-site.html#failover-switchover).
@@ -50,12 +49,12 @@ To verify the service instance:
       12345678-90ab-cdef-1234-567890abcdef
     </pre>
 1. Obtain the credentials and IP address needed to SSH into the <%= vars.ops_manager %> VM by following the
-  procedure in [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather).
+  procedure in [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1).
 1. SSH into the <%= vars.ops_manager %> VM by following the procedure in
-[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh).
+[Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2).
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director by following the procedure in
-[Authenticate with the BOSH Director VM](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
+[SSH Into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11).
 
 1. View the health of the service instance by running:
 
@@ -159,7 +158,7 @@ To promote the follower service instance to leader:
   </pre>
 
 1. Reconfigure your global DNS load balancer to direct all traffic to apps in your secondary foundation.
-See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.html#configure-glb).
+See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).
 
 ###<a id='clean-up'></a> Delete or Purge the Former Leader
 
@@ -337,22 +336,21 @@ empty instance as the follower.
 
 The following diagram describes the workflow for reconfiguring multi-site replication:
 
-![Two boxes are shown side by side, labeled 'Primary Foundation' and 'Secondary Foundation'.
+![alt-text="Two boxes are shown side by side, labeled 'Primary Foundation' and 'Secondary Foundation'.
 Six steps are shown. Steps 1 and 2 are in 'Primary Foundation';
 Steps 3, 4, and 5 are in 'Secondary Foundation',
-and Step 6 is in 'Primary Foundation'.
-These are the steps.](images/switchover.png)
+and Step 6 is in 'Primary Foundation'."](./images/switchover.png)
 
 <a href="./images/switchover.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
 The steps shown in the diagram are:
 
 1. Create host-info service key.
-1. Record host-info service key.
-1. Update secondary service instance with host-info service key.
-1. Create credentials service key.
-1. Record credentials service key.
-1. Update primary service instance with credentials service key.
+2. Record host-info service key.
+3. Update secondary service instance with host-info service key.
+4. Create credentials service key.
+5. Record credentials service key.
+6. Update primary service instance with credentials service key.
 
 #### Procedure for Reconfiguring <%= vars.single_leader_plan %>
 
@@ -569,4 +567,4 @@ To reconfigure replication for the service instances:
       Try again with an empty instance or contact your operator to troubleshoot</pre>
   In either case, you must create a new multi-site service instance and reconfigure replication using this new, empty instance as the follower.
 1. Reconfigure your global DNS load balancer to direct traffic to the correct foundations of your choice.
-See [Configure Your GLB](https://docs.pivotal.io/platform/plan/global-dns-lb.html#configure-glb).
+See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).

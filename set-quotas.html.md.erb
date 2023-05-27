@@ -48,7 +48,7 @@ A service might offer one or more plans.
 You can set a separate quota per plan so that instances of that plan cannot exceed the plan quota.
 For a service with multiple plans, the total number of instances created for all
 plans combined cannot exceed the [global quota](#global) for the service.
-<% if vars.product_short == "Tanzu SQL for VMs" %>
+<% if vars.product_short == "VMware SQL with MySQL for TAS" %>
 If the plan quota field is blank, the plan quota is set to the global quota by default.
 <% end %>
 
@@ -159,7 +159,7 @@ cf space SPACE-NAME
 ```
 
 For more information on managing org and space-level quotas,
-see the [Creating and Modifying Quota Plans](https://docs.pivotal.io/pivotalcf/adminguide/quota-plans.html).
+see the [Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html).
 
 ## <a id="monitor"></a> Monitor Quota Use and Service Instance Count
 
@@ -207,9 +207,9 @@ configuration(s).
 The specific costs depend on your IaaS.
 
 
-To view configurations for your Tanzu SQL for VMs on-demand plan, do the following:
+To view configurations for your VMware SQL with MySQL for TAS on-demand plan, do the following:
 
-1. Navigate to **Ops Manager Installation Dashboard** > **VMware Tanzu SQL with MySQL for VMs** > **Settings**.
+1. Go to **Ops Manager Installation Dashboard** > **VMware SQL with MySQL for Tanzu Application Service** > **Settings**.
 
 1. Click the section for the plan you want to view. For example, **Plan 1**.
 
@@ -275,15 +275,13 @@ function openDocs(evt, docsName) {
   <button class="tablinks" onclick="openDocs(event, 'tab2')">Galera</button>
 </div>
 <div id="tab1" class="tabcontent" style="display:block">
-  <img src="./images/sn-lf-plan.png"
-  alt="Screenshot of an example plan quota configuration showing the plan quota
-  field set to 15, VM type set to micro, and persistent disk type set to 20 GB">
+![alt-text="Screenshot of an example plan quota configuration showing the plan quota
+field set to 15, VM type set to micro, and persistent disk type set to 20 GB"](./images/sn-lf-plan.png)
 </div>
 <div id="tab2" class="tabcontent">
-  <img src="./images/galera-plan.png"
-  alt="Screenshot of an example plan quota configuration showing the plan quota
-  field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
-  MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB">
+![alt-text="Screenshot of an example plan quota configuration showing the plan quota
+field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
+MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB"](./images/galera-plan.png)
 </div>
 
 <p class="note"><strong>Note:</strong>

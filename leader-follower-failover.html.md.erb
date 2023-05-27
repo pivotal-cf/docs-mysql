@@ -9,9 +9,9 @@ This topic describes how to trigger a failover of apps from
 the leader to the follower.
 
 
-## <a id="overview"></a> Overview
+## <a id="overview"></a> Overview on Triggering a Failover from a Leader to Follower
 
-You might want to trigger a failover in the following scenarios:
+You can trigger a failover in the following scenarios:
 
 * You want to take the leader VM down to do planned maintenance.
 * The performance of the leader VM degrades.
@@ -36,11 +36,11 @@ For information about errands used to trigger failover, see
 
 To trigger a failover:
 
-1. [Retrieve Information](#retrieve)
-1. [Promote the Follower](#promote)
-1. [Clean Up Former Leader VM (Optional)](#clean-up)
-1. [Configure the New Follower](#config-follower)
-1. [Unbind and Rebind the App](#unbind-rebind)
+1. [Retrieve Information](#retrieve).
+1. [Promote the Follower](#promote).
+1. [Clean Up Former Leader VM (Optional)](#clean-up).
+1. [Configure the New Follower](#config-follower).
+1. [Unbind and Rebind the App](#unbind-rebind).
 
 
 ## <a id='retrieve'></a> Retrieve Information
@@ -75,8 +75,8 @@ for stopping the leader and promoting the follower:
     </pre>
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
-1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#gather)
-   and [SSH into <%= vars.ops_manager %>](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#ssh) to SSH into the <%= vars.ops_manager %> VM.
+1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1)
+   and [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2) to SSH into the <%= vars.ops_manager %> VM.
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director with the BOSH CLI.
    For more information on logging in with the BOSH CLI, see [Log in to the BOSH Director](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
@@ -197,8 +197,8 @@ At this point, a single instance is working but leader-follower replication has 
 To fail your app over to a single instance instead of restoring leader-follower,
 skip to <a href="#unbind-rebind">Unbind and Rebind the App</a>.
 
-If you are triggering a failover in response to the AZ of the leader VM going offline, you can fail your app over to a single instance by following the procedure in [Unbind and Rebind the App](#unbind-rebind) below.
-However, to restore leader-follower, you must regain access to the AZ where your leader VM is located before following the procedure in [Clean Up Former Leader VM (Optional)](#clean-up) and [Configure the New Follower](#config-follower) below.
+If you are triggering a failover in response to the AZ of the leader VM going offline, you can fail your app over to a single instance by following the procedure in [Unbind and Rebind the App](#unbind-rebind).
+However, to restore leader-follower, you must regain access to the AZ where your leader VM is located before following the procedure in [Clean Up Former Leader VM (Optional)](#clean-up) and [Configure the New Follower](#config-follower).
 
 ## <a id='clean-up'></a>Clean Up Former Leader VM (Optional)
 
@@ -273,7 +273,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
 
 ## <a id='config-follower'></a> Configure the New Follower
 
-To restart the former leader VM and configure it as the new follower:
+To start the former leader VM again and configure it as the new follower:
 
 1. Create the former leader VM again by running:
 

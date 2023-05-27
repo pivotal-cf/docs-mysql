@@ -1,5 +1,5 @@
 ---
-title: Using VMware Tanzu SQL with MySQL for VMs
+title: Using VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
@@ -42,12 +42,13 @@ The following procedures use the Cloud Foundry Command Line Interface (cf CLI).
 For more information,
 see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
 You can also use Apps Manager to do the same tasks using a graphical UI.
+
 For more information, see
-[Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/pivotalcf/console/manage-apps.html)
+[Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/application-service/console/manage-apps.html)
 
 ## <a id="prereqs"></a>Prerequisites
 
-<!-- The below partial is in https://github.com/pivotal-cf/docs-partials -->
+<!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + "/services/developer-prereqs" %>
 
@@ -87,7 +88,7 @@ To find out if a <%= vars.product_short %> service is available in the Marketpla
 
 To confirm that a <%= vars.product_short %> instance is running in the space:
 
-1. Use the [cf CLI](http://docs.pivotal.io/pivotalcf/cf-cli/getting-started.html#login) or
+1. Use the [cf CLI](https://docs.pivotal.io/application-service/cf-cli/getting-started.html#login) or
 [Apps Manager](http://docs.pivotal.io/pivotalcf/customizing/console-login.html) to log in to the org and space that contains the app.
 1. Enter the following command:
 
@@ -378,8 +379,66 @@ To migrate a service instance to another plan:
 
 ### <a id="single"></a> Upgrade an Individual Service Instance
 
-<%= partial vars.path_to_partials + '/services/upgrade-one-si' %>
+<p class="note"><strong>Note:</strong>
+  Before you individually upgrade service instances you must have cf CLI v6.46.0 or later.
+</p>
 
+You can use <code>cf update-service</code> with the <code>--upgrade</code> flag to individually upgrade
+on-demand service instances to the latest version of <%= vars.product_short %>.
+When you upgrade a service instance, you do not need to rebind your app or service keys.
+However, when you upgrade a service instance the database is unavailable for several minutes.
+
+For more information about using <code>cf update-service</code>, see the
+<a href="https://cli.cloudfoundry.org/en-US/cf/update-service.html">Cloud Foundry CLI Reference Guide</a>.
+
+To upgrade a single service instance:
+
+1. Confirm that an upgrade is available for the service instance by running:
+
+  ```
+  cf services
+  ```
+
+  The upgrade is available when the `upgrade available` column in the output says `yes`.
+
+  For example:
+
+  ```
+  $ cf services
+  Getting services in org system / space system as admin...
+
+  name         service    plan      bound apps  last operation    broker                  upgrade available
+  my-instance  p.mysql    db-small              create succeeded  dedicated-mysql-broker  yes
+  ```
+
+1. Upgrade the service instance by running:
+
+  ```
+  cf update-service SERVICE-INSTANCE-NAME --upgrade
+  ```
+
+1. When you are prompted, confirm that you want to upgrade.
+
+####<a id="upgrade-mysql-8-0"></a> Upgrade a Service Instance to MySQL 8.0
+
+When you upgrade a service instance using the `cf update-service` command with the
+`--upgrade` flag, the service instance continues to use MySQL 5.7. To upgrade a service
+instance to use MySQL 8.0, you have two options:
+
+1. If your operator has configured the service plan used by your service instance to use
+MySQL 8.0, run the `cf update-service` command with the `-p` flag and specify the
+existing service plan used by the service instance:
+
+  ```
+  cf update-service SERVICE-INSTANCE-NAME -p my-existing-plan
+  ```
+1. If the service plan used by your service instance is still configured to use MySQL 5.7,
+run the `cf-update-service` command with the `-p` flag and specify a service plan
+that is configured to use MySQL 8.0:
+
+  ```
+  cf update-service SERVICE-INSTANCE-NAME -p new-8-0-plan
+  ```
 
 ###<a id="share"></a> Share Service Instances
 
@@ -500,7 +559,7 @@ To purge a service instance:
 
     <pre class="terminal">
     $ cf purge-service-instance my-instance<br>
-    WARNING: This operation assumes that the service broker responsible for this service instance is no longer available or is not responding with a 200 or 410, and the service instance has been deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service instance is removed from Cloud Foundry, including service bindings and service keys.
+    WARNING: This operation assumes that the service broker responsible for this service instance is no longer available or is not responding with a 200 or 410, and the service instance has been deleted, leaving orphan records in Cloud Foundry's database. All knowledge of the service instance are removed from Cloud Foundry, including service bindings and service keys.
 
     Really purge service instance my-instance from Cloud Foundry?> y
     Purging service my-instance...

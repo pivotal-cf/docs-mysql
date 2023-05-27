@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu SQL with MySQL for VMs Recommended Usage and Limitations
+title: VMware SQL with MySQL for Tanzu Application Service Recommended Usage and Limitations
 ---
 
 ## <a id="usecases"></a> Recommended Use Cases
@@ -75,7 +75,7 @@ For the amount of persistent disk required for your service plan, see the follow
 * [HA Cluster Jumpbox](#ha-cluster-jumpbox)
 * [HA Cluster Node](#ha-cluster-node)
 
-[//]: # (Edit the below diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing)
+[//]: # (Edit the following diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing)
 
 <h3> <a id="single-node"></a> Single Node and Leader-Follower</h3>
 
@@ -140,9 +140,7 @@ In the **Total Disk Size** formula from the previous table, `N` represents the f
 Each `N` combined makes `3N`, as seen in the formula.
 
 The following diagram shows how persistent disk space is used:
-
-<img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
+![alt-text="Persistent Disk diagram.
 
 <h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
 
@@ -206,10 +204,7 @@ In the **Total Disk Size** formula from the previous table, `N` represents the f
 Each `N` combined makes `2N`, as seen in the formula.
 
 The following diagram shows how persistent disk space is used:
-
-<img alt="Persistent Disk diagram.
-    The information depicted in the diagram is explained above." width="280" src="./images/persistent-disk-multi-site.png"/>
-
+![alt-text="Persistent Disk diagram."](./images/persistent-disk-multi-site.png)
 
 <h3> <a id="ha-cluster-node"></a> HA Cluster Node </h3>
 

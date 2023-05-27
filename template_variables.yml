@@ -10,8 +10,8 @@ template_variables:
 
   # VMware Tanzu Variables
 
-  product_full: VMware Tanzu SQL with MySQL for VMs
-  product_short: Tanzu SQL for VMs
+  product_full: VMware SQL with MySQL for Tanzu Application Service
+  product_short: VMware SQL with MySQL for TAS
 
   app_runtime_full: VMware Tanzu Application Service for VMs
   app_runtime_abbr: TAS for VMs
@@ -29,15 +29,15 @@ template_variables:
   product_network: VMware Tanzu Network
 
   # Other variables
-  tile_name: VMware Tanzu SQL with MySQL for VMs
+  tile_name: VMware SQL with MySQL for Tanzu Application Service
   product_url: https://network.pivotal.io/products/pivotal-cf
   product_link: <div class="header-item"><a href="https://network.pivotal.io/products/VMware Tanzu-cf">Back to Product Page</a></div>
-  service_name: VMware Tanzu SQL with MySQL for VMs
-  service_name_article: VMware Tanzu SQL with MySQL for VMs
-  service_name_article_full: the VMware Tanzu SQL with MySQL for VMs service
-  support_link: <a href="http://support.pivotal.io" target="_blank">Support</a>
+  service_name: VMware SQL with MySQL for Tanzu Application Service
+  service_name_article: VMware SQL with MySQL for Tanzu Application Service
+  service_name_article_full: the VMware SQL with MySQL for Tanzu Application Service service
+  support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="http://support.io" target="_blank">Need Support?</a>
-  support_url: http://support.pivotal.io
+  support_url: https://tanzu.vmware.com/support
   path_to_partials: /p-mysql/partials
   single_leader_plan: Multi&#8209;Site Replication
   single_leader_plan_lc: multi&#8209;site replication
@@ -52,6 +52,6 @@ template_variables:
   mysql_metrics_origin: /p-mysql
   mysql_metrics_origin_v2: /p.mysql
 
-  current_minor_version: 2.7
+  current_minor_version: 3.0
 
   switchboard_url: proxy-BOSH-JOB-INDEX.p-mysql.YOUR-SYSTEM-DOMAIN

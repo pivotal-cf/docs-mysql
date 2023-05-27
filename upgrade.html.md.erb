@@ -1,5 +1,5 @@
 ---
-title: Upgrading VMware Tanzu SQL with MySQL for VMs
+title: Upgrading VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
@@ -21,15 +21,15 @@ To upgrade <%= vars.product_short %>:
 
 1. Review the [Release Notes](./release-notes.html) for the version you are upgrading to.
 
-1. Download the Ubuntu Xenial stemcell from
-[<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-xenial),
+1. Download the Ubuntu Jammy stemcell from
+[<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-jammy),
 and import it into the <%= vars.ops_manager %> Stemcell Library.
 For instructions, see [Verify Stemcell Version and Apply All Changes](./install-config.html#stemcell).
 
 1. Download the desired version of the product from
 [<%= vars.product_network %>](https://network.pivotal.io/products/p-mysql).
 
-1. Navigate to the <%= vars.ops_manager %> Installation Dashboard and
+1. Go to the <%= vars.ops_manager %> Installation Dashboard and
 click **Import a Product** to upload the product file.
 
 1. Under the **Import a Product** button, click **+** next to **<%= vars.product_short %>**.
@@ -44,16 +44,16 @@ Click **Save** on any panes where you make changes.
 
     </p>
 
-1. (Optional) If you want developers to individually upgrade service instances, navigate
+1. (Optional) If you want developers to individually upgrade service instances, go to
 to the **Errands** pane and select **Off** for **Upgrade all On-demand MySQL Service Instances**.
 <br><br>
 By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
 [About Individual Service Instance Upgrades](#individual-upgrades).
 
-1. Navigate to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
+1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
-see [Reviewing Pending Product Changes](https://docs.pivotal.io/pivotalcf/customizing/review-pending-changes.html).
+see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. For the <%= vars.product_short %> tile, enable the **Register On-demand MySQL Broker** errand if the errand is not already enabled.
 
@@ -90,6 +90,10 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
 ### <a id='change-plan'></a>Plan Change
 
 A developer changes their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
+This process is used to update Service Instances from Percona 5.7 to Percona 8.0. For example
+```
+cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
+```
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>
 updates the service instance they are bound to.
