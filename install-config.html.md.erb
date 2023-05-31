@@ -489,7 +489,7 @@ To configure backups:
 1. Click **Backups**.
 
 ![alt-text="The radio buttons for backup configuration are
-Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/nbackups.png)
+Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
 in the _Configuring Automated Backups_ topic:
@@ -498,6 +498,11 @@ in the _Configuring Automated Backups_ topic:
     that saves backups to an S3 bucket,
     a [Ceph](https://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by VMware.<br>
     For instructions about using Ceph or Amazon S3 for backups, see [Back Up to Ceph or S3](./automated-backup.html#ceph-or-s3).<br><br>
++ **Amazon S3 (with Instance Profiles):** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
+    that saves backups to an S3 bucket, similar to the <strong>Ceph or Amazon S3</strong> option. This option uses AWS Instance Profiles
+    and VM Extensions to bypass the need for S3 access keys in the tile's backup configuration.
+    For instructions about using Amazon S3 with Instance Profiles
+    for backups, see [Back Up to Amazon S3 with Instance Profile](./automated-backup.html#back-up-to-amazon-s3-with-instance-profile).<br><br>
 + **SCP:** <%= vars.product_short %> runs an Secure Copy Protocol (SCP) command that secure-copies backups to a VM
     or physical machine operating outside of your deployment. This is the fastest option. <br>
     SCP enables you to securely transfer files between two hosts.
