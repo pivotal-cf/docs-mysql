@@ -12,6 +12,41 @@ and then upgrade to the latest patch available for the next minor.
 
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
+## <a id="3-0-1"></a> v3.0.1
+
+**Release Date: Jul 17th, 2023**
+
+### Changes
+
+This release includes the following changes:
+
++ A number of high and critical CVEs were addressed by updating the components to the latest version
++ Customers who are enrolled to capture telemetry can additionally track the number of CPU cores consumed by all MySQL service instances within a foundation
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>1.148</td></tr>
+  <tr><td>Percona Server</td><td>8.0.32-24*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>8.0.32-24*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.41-31.65</td></tr>
+  <tr><td>Percona XtraBackup</td><td>8.0.32-26*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
+  <tr><td>pxc-release</td><td>1.0.14*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.27.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.1.0*</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.187.14*</td></tr>
+
+</table>
 
 ## <a id="3-0-0"></a> v3.0.0
 
