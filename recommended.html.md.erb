@@ -1,8 +1,8 @@
 ---
-title: VMware SQL with MySQL for Tanzu Application Service Recommended Usage and Limitations
+title: VMware SQL with MySQL for Tanzu Application Service recommended usage and limitations
 ---
 
-## <a id="usecases"></a> Recommended Use Cases
+## <a id="usecases"></a> Recommended use cases
 
 MySQL is a powerful open-source relational database used by apps since the mid-90s.
 Developers have relied on MySQL as a first step to storing, processing and sharing data.
@@ -13,7 +13,7 @@ Unlike other traditional databases which centralize and consolidate data,
 MySQL lends itself to dedicated deployment supporting the “shared nothing”
  context of building apps in the cloud.
 
-## <a id="ondemand"></a> About On-Demand Plans
+## <a id="ondemand"></a> About on-demand plans
 * Each on-demand plan instance is deployed to its own VM and is suitable for production workloads.
 * The maximum-number of on-demand plan instances available to developers is set by the operator and
 enforced on both a global and per-plan level quota.
@@ -24,12 +24,12 @@ including the VM size and disk size after the plans have been created.
 * Cannot scale down the size of VMs on the plan once deployed (this protects against data loss).
 * The default maximum number of connections is set at 750.
 
-## <a id="resources"></a> Resource Usage Planning for On-Demand Plans
+## <a id="resources"></a> Resource usage planning for on-demand plans
 
 For information on setting limits and calculating costs for on-demand service instances,
 see [Setting Limits for On-Demand Service Instances](./set-quotas.html).
 
-## <a id="azs"></a> Availability Using Multiple AZs
+## <a id="azs"></a> Availability using multiple AZs
 
 <%= vars.product_full %> supports configuring multiple availability zones (AZs).
 However, assigning multiple AZs to MySQL jobs does not guarantee high availability.
@@ -41,7 +41,7 @@ However, assigning multiple AZs to MySQL jobs does not guarantee high availabili
 * For all <%= vars.product_short %> plans, select three AZs.
 Choosing three AZs does not increase the number of AZs assigned to service instances to three.
 
-## <a id="downtime"></a> Downtime During Redeploys
+## <a id="downtime"></a> Downtime during redeploys
 
 By default, <%= vars.product_short %> does a rolling deploy during upgrades or when you apply
 configuration changes.
@@ -55,7 +55,7 @@ You can mitigate downtime by using HA cluster plans.
 For more information about downtime in <%= vars.product_short %>,
 see [RPOs and RTOs](.//availability-options.html#rpo-and-rto).
 
-## <a id="persistent"></a> Persistent Disk Usage
+## <a id="persistent"></a> Persistent disk usage
 
 
 The persistent disk receives, temporarily stores, and encrypts MySQL backups.
@@ -175,7 +175,7 @@ The following diagram shows how persistent disk space is used:
 ![alt-text="Each `N` combined makes `2N`, as seen in the formula."](./images/persistent-disk-multi-site.png)
 
 
-<h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
+<h3> <a id="ha-cluster-jumpbox"></a> HA cluster jumpbox </h3>
 
 You can configure the persistent disk size for HA cluster jumpbox VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
@@ -206,7 +206,7 @@ Each `N` combined makes `2N`, as seen in the formula.
 The following diagram shows how persistent disk space is used:
 ![alt-text="Persistent Disk diagram."](./images/persistent-disk-multi-site.png)
 
-<h3> <a id="ha-cluster-node"></a> HA Cluster Node </h3>
+<h3> <a id="ha-cluster-node"></a> HA cluster node </h3>
 
 You can configure the persistent disk size for HA cluster node VMs. For
 instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).

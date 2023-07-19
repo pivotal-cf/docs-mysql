@@ -1,28 +1,27 @@
 ---
-title: Resolving Service Interruptions
+title: Resolving service interruptions
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic explains events in the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
+Learn about events in the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
 
-## <a id='service-update'></a>Stemcell or Service Update
+## <a id='service-update'></a>Stemcell or service update
 
 An operator can update a stemcell version or their version of <%= vars.product_short %>.
-
-- <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
+Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
 The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, the apps automatically reconnect.
 
-## <a id='change-plan'></a>Plan Change
+## <a id='change-plan'></a>Plan change
 
 A developer can change their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to. The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully, apps reconnect automatically.
 
-## <a id='process-fail'></a>VM Process Failure
+## <a id='process-fail'></a>VM Process failure
 
 A process, like the MySQL server, fails on the service instance VM.
 
@@ -60,7 +59,7 @@ This causes service interruption in multi-AZ deployments where [Diego](https://d
   - Downtime: Unknown
 - <strong>Required Actions:</strong>  Recovery of the app - database connection must be automatic. Depending on the app, manual intervention might be required to check data consistency.
 
-## <a id='region-fail'></a>Region Failure
+## <a id='region-fail'></a>Region failure
 
 - <strong>Example:</strong> An entire region fails,
 bringing <%= vars.app_runtime_full %> components offline.

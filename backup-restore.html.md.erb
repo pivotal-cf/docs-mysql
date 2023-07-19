@@ -1,33 +1,31 @@
 ---
-title: Backing Up and Restoring VMware SQL with MySQL for Tanzu Application Service
+title: Backing up and restoring VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-<p class="note">
-  <strong>Note:</strong> The backup and restore capability described in this topic
+You can back up and restore a physical backup
+to a <%= vars.product_full %> service instance.
+
+Both operators and developers can use the procedures in this topic.
+
+<p> The backup and restore capability described in this topic
   restores a <i>running</i> service instance's backup to a new instance.
   It is not intended to list or restore backups created by a deleted service instance.
+
   For more information about restoring a backup from a deleted service instance,
-  see <a href="./manual-restore.html">Manually Restoring From Backup</a>.
+  see, <a href="./manual-restore.html">Manually Restoring From Backup</a>.
 </p>
 
 <p class="note">
-  <strong>Note:</strong> In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore
-  (adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
-  <br><br>
-  As of v2.9.3, backup artifacts are organized under subfolders in external storage.
-  They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
-  <br><br>
-  Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
-  adbr plug-in.
+<span class="note__title">Note</span> In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore
+(adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
+<br><br>
+As of v2.9.3, backup artifacts are organized under subfolders in external storage. They are now stored under <code>p.mysql >
+service-instance_GUID > yyyy > mm > dd</code>. Old backup artifacts stored in the root directory can still be
+accessed through the cf CLI using the adbr plug-in.
 </p>
-
-
-This topic describes how to back up and restore a physical backup
-to a <%= vars.product_full %> service instance.
-Both operators and developers can use the procedures in this topic.
 
 Operators can configure automated backups in the <%= vars.product_short %> tile by following the procedures in
 [Configuring Automated Backups](./automated-backup.html).
@@ -35,8 +33,6 @@ Operators can configure automated backups in the <%= vars.product_short %> tile 
 Developers can manually take physical backups by following the procedure in this topic.
 Developers can also create logical backups using `mysqldump`.
 For more information about logical backups, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
-
-## <a id="overview"></a> Overview
 
 You can back up and restore a <%= vars.product_short %> service instance using the
 Cloud Foundry Command Line Interface (cf CLI).
@@ -52,7 +48,7 @@ You might want to back up or restore a service instance in the following use cas
 + Testing
 
 
-## <a id="about-backups"></a>About Backups
+## <a id="about-backups"></a>About backups
 
 Automated backups do the following:
 
@@ -69,24 +65,21 @@ an arbitrary parameter. For more information, see [Backup Schedule](./change-def
 
 Automated backups fail if the service broker is unavailable. For example, during an upgrade.
 
-<p class="note"><strong>Note:</strong>
-  You must configure backups in the <%= vars.product_short %> tile.
+<p> You must configure backups in the <%= vars.product_short %> tile.
   You cannot be deactivate this feature.
 </p>
 
-<p class="note"><strong>Note:</strong>
-  As of v2.9, only the leader node is backed up for a leader-follower deployment.
+<p> As of v2.9, only the leader node is backed up for a leader-follower deployment.
 </p>
 
-<p class="note warning"><strong>Warning:</strong>
-  If <%= vars.product_short %> fails to upload a backup, the backup artifact remains on the persistent disk.
+<p> If <%= vars.product_short %> fails to upload a backup, the backup artifact remains on the persistent disk.
   This can cause the persistent disk to fill up faster.
   If the persistent disk is full, apps become inoperable.
   For instructions on how to troubleshoot persistent disk errors,
   see <a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.
 </p>
 
-## <a id="understanding-metadata"></a> About Backup Files and Metadata
+## <a id="understanding-metadata"></a> About backup files and metadata
 
 When <%= vars.product_short %> runs a backup,
 it uploads two files with Unix epoch-timestamped filenames:
@@ -126,14 +119,13 @@ when restoring an instance with the backup artifact.
 
 The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
 
-<p class="note"><strong>Note:</strong>
-  The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
+<p> The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
   indicates that the backup is not compressed or encrypted.
   However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted.
   This is a known issue.
 </p>
 
-## <a id='prerequisite'></a> Prerequisite: adbr Plug in
+## <a id='prerequisite'></a> Prerequisite: adbr plug-in
 
 Before you can manually back up or restore a service instance,
 you must have installed the ApplicationDataBackupRestore (adbr) plug-in
@@ -144,13 +136,13 @@ To install the plug-in, run:
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 ```
-
-<p class="note">
-   <strong>Note:</strong> The procedures on this page assume that
-   you are using the adbr plug-in v0.3.0 or later.
+<p class="note caution">
+<span class="note__title">Caution</span>
+The procedures on this page assume that
+you are using the adbr plug-in v0.3.0 or later.
 </p>
 
-## <a id="backup"></a> Manually Back Up a Service Instance
+## <a id="backup"></a> Manually back up a service instance
 
 To manually trigger a backup outside of the configured schedule:
 
@@ -173,23 +165,22 @@ To manually trigger a backup outside of the configured schedule:
       Getting status of service instance myDB in org my-org / space my-space as user...
       [Fri May 28 18:08:25 UTC 2021] Status: Backup was successful. Uploaded 3.2M</pre>
 
-## <a id="restore"></a> Restore a Service Instance
+## <a id="restore"></a> Restore a service instance
 
-When restoring a service instance, you create a new service instance
-and then restore the backup to it.
-If you are restoring leader-follower or HA cluster service instance,
+When you restore a service instance, you create a new service instance
+and then restore the backup to it. If you are restoring leader-follower or HA cluster service instance,
 you update the plan after restoring the data.
 Finally, you rebind and restage apps that use the service instance.
 
-###<a id="restore-concepts"></a>About Restoring a Service Instance
+### <a id="restore-concepts"></a>About restoring a service instance
 
 Before you begin the restore procedure review the following important concepts:
 
-+ [The Topology of the Instance You Restore To](#instance-types)
-+ [When to Use a Different Restore Method](#different-cases)
-+ [The New Database Must Be Empty](#empty-database)
++ [The Topology of the Instance You Restore To](#instance-types).
++ [When to Use a Different Restore Method](#different-cases).
++ [The New Database Must Be Empty](#empty-database).
 
-####<a name="instance-types"></a> The Topology of the Instance You Restore To
+#### <a name="instance-types"></a> The topology of the instance you restore to
 
 You can only restore to a single node or a <%= vars.single_leader_plan %> service instance.
 If you want a different topology, update the instance after restoring the data:
@@ -229,7 +220,7 @@ is at least as large as the persistent disk of the largest HA cluster plan.
 For information about persistent disk sizing recommendations,
 see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
 
-####<a name="different-cases"></a> When to Use a Different Restore Method
+#### <a name="different-cases"></a> When to use a different restore method
 
 There are some cases where you cannot use the following procedure:
 
@@ -248,7 +239,7 @@ There are some cases where you cannot use the following procedure:
   </tr>
 </table>
 
-####<a name="empty-database"></a> The New Database Must Be Empty
+#### <a name="empty-database"></a> The new database must be empty
 
 Do not write anything to the database in the new service instance
 until after you have restored the backup to it.
@@ -262,7 +253,7 @@ If the database is not empty, then the adbr plug-in fails to restore the data an
 you need to delete the service instance and create another.
 
 
-###<a id="procedure"></a> Procedure to Restore a Service Instance
+### <a id="procedure"></a> Procedure to restore a service instance
 
 To restore a service instance:
 
@@ -379,15 +370,15 @@ If you get HTTP error codes when working with the adbr plug-in,
 see [Failed Backup or Restore with adbr Plug-in](troubleshoot-instances.html#failed-adbr)
 in _Troubleshooting On-Demand Instances_.
 
-##<a id="monitor-backups"></a> Monitor Backups
+##<a id="monitor-backups"></a> Monitor backups
 
 It is particularly important to verify that automated backups are being taken according to schedule.
 A common cause of failure for automated backups is the persistent disk filling up.
 
 There are two ways to check that backups are being made:
 
-+ [Use the adbr Plug-in to List Backups](#use-adbr)
-+ [Use Healthwatch to Confirm Automated Backups](#use-healthwatch)
++ [Use the adbr Plug-in to List Backups](#use-adbr).
++ [Use Healthwatch to Confirm Automated Backups](#use-healthwatch).
 
 ### <a id="use-adbr"></a> Use the adbr Plug-in to List Backups
 

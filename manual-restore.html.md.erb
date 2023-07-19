@@ -1,5 +1,5 @@
 ---
-title: Manually Restoring from Backup
+title: Manually restoring from backup
 owner: MySQL
 ---
 
@@ -15,11 +15,10 @@ This topic describes how to manually restore a
 + You have lost or deleted the service instance that backup came from.
 + You are restoring to a different foundation.
 
-## <a id="overview"></a>Overview
-
-<p class="note"><strong>Note:</strong> VMware recommends
-  that you always configure a single instance plan to streamline the
-  restore process for leader-follower and HA cluster plans.
+<p class="note important">
+<span class="note__title"> Important</span> VMware recommends
+that you always configure a single instance plan to streamline the
+restore process for leader-follower and HA cluster plans.
 </p>
 
 Restoring <%= vars.product_short %> from backup is a manual process primarily intended for
@@ -34,7 +33,7 @@ To restore a <%= vars.product_short %> instance from a backup:
 4. [Restore the Service Instance](#restore-instance)
 5. [Restage the Service Instance](#restage)
 
-##<a id="download"></a> Identify and Download the Backup Artifact
+## <a id="download"></a> Identify and download the backup artifact
 
 The procedure you need to find and download the backup artifact depends on whether
 or not the service instance was deleted.
@@ -44,7 +43,7 @@ Follow the procedure for your situation:
 + [If Restoring a Backup from a Deleted Service Instance](#lost-instance)
 + [If Restoring to a Different Foundation](#different-foundation)
 
-### <a id="lost-instance"></a>If Restoring a Backup from a Deleted Service Instance
+### <a id="lost-instance"></a>If Restoring a backup from a deleted service instance
 
 If you are restoring a backup from a lost or deleted instance,
 you cannot follow the instructions in [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
@@ -82,7 +81,7 @@ and then download the backup artifact.
     but this text file is not needed for the restore procedure.
 
 
-### <a id="different-foundation"></a>If Restoring to a Different Foundation
+### <a id="different-foundation"></a> Restoring to a different foundation
 
 If you have a backup of a service instance taken from one foundation,
 and you want to restore the backup to a different foundation,
@@ -133,7 +132,7 @@ and a timestamp for the backup.
     The file with the `.txt` extension  contains metadata to help identify the backup,
     but this text file is not needed for the restore procedure.
 
-##<a id="retrieve-key"></a> Retrieve Backup Encryption Key
+## <a id="retrieve-key"></a> Retrieving backup encryption key
 
 Each backup artifact has its own encryption key, stored in runtime CredHub.
 
@@ -209,7 +208,7 @@ To retrieve the backup encryption key:
     Use this key when you restore the backup.<br>
 
 
-##<a id="prepare"></a> Create and Prepare a New Service Instance for Restore
+## <a id="prepare"></a> Creating and preparing a new service instance for restore
 
 You can only restore single node and leader-follower backup artifacts to a single node service instance.
 Ensure that the persistent disk in the single node plan is at
@@ -287,11 +286,11 @@ To prepare a new service instance for restore:
         scp mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg \
         mysql/d7ff8d46-c3e8-449f-aea7-5a05b0a1929c:/tmp/</pre>
 
-## <a id="restore-instance"></a> Restore the Service Instance
+## <a id="restore-instance"></a> Restoring the service instance
 
-<p class="note warning">
-  <strong>Warning:</strong> Restoring a service instance is destructive.
-  VMware recommends that you only restore to a new and unused service instance.
+<p class="note caution">
+<span class="note__title">Caution</span>
+Restoring a service instance is destructive. VMware recommends that you only restore to a new and unused service instance.
 </p>
 
 You can restore a single node, leader-follower, HA cluster service, or <%= vars.single_leader_plan %> instance
@@ -331,7 +330,7 @@ in [SSH Into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Opera
 
     <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg</pre>
 
-## <a id="restage"></a> Restage the Service Instance
+## <a id="restage"></a> Restaging the service instance
 
 After you restore your single node, leader-follower, HA cluster service instance, or
 <%= vars.single_leader_plan %> you must restage your new service instance.

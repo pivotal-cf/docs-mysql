@@ -1,11 +1,11 @@
 ---
-title: Backing Up and Restoring with mysqldump
+title: Backing up and restoring with mysqldump
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to manually create a logical backup with `mysqldump` and
+You can manually create a logical backup with `mysqldump` and
 restore a MySQL database with the backup.
 
 ## <a id="overview"></a> Overview on Manually Creating a Logical Backup
@@ -34,7 +34,7 @@ tile.
 For information about backups configured by operators,
 see [Configuring Automated Backups](./automated-backup.html).
 
-<p class="note"><strong>Note:</strong> When you take a logical backup, <%= vars.product_short %>
+<p> When you take a logical backup, <%= vars.product_short %>
 does not send an email notification.</p>
 
 
@@ -135,7 +135,7 @@ To back up your <%= vars.product_short %> data manually:
     [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/using-mysqldump.html) in the MySQL Documentation.
 
 
-### <a id="restore-backup"></a> Restore from a <%= vars.product_short %> Logical Backup
+### <a id="restore-backup"></a> Restore from a <%= vars.product_short %> Logical backup
 
 To restore a logical backup:
 
