@@ -1,14 +1,11 @@
 ---
-title: Running Service Broker Errands
+title: Running service broker errands
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes each of the service broker errands and how
-to run an errand using the BOSH CLI.
-
-## <a id="overview"></a> Overview on Service Broker Errands using BOSH CLI
+This topic describes each of the service broker errands and how you can run an errand using the BOSH CLI.
 
 Errands can manage service brokers and run mass operations on service
 instances created by brokers.
@@ -28,7 +25,7 @@ see the full errand list:
 + [recreate-all-service-instances](#recreate-all-service-instances)
 
 
-## <a id="errand"></a> Run an Errand
+## <a id="errand"></a> Run an errand
 
 To run an errand:
 
@@ -55,7 +52,7 @@ To run an errand:
 
 
 
-## <a id="available-errands"></a> Available Errands
+## <a id="available-errands"></a> Available errands
 
 The following sections describe each service broker errand that
 you can run. To run an errand, see [Run an Errand](#errand).
@@ -151,7 +148,7 @@ For more information, see [Triggering a Leader-Follower Failover](./leader-follo
 ### <a id="delete-all-service-instances-and-deregister-broker"></a> delete-all-service-instances-and-deregister-broker
 
 
-<p class="note warning"><strong>Warning:</strong> This errand destroys all
+<p> This errand destroys all
   on-demand service instances and deregisters the broker from the Cloud Controller.
   Use it with extreme caution.
 </p>

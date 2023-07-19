@@ -8,43 +8,40 @@ owner: MySQL
 This topic provides instructions for developers using the <%= vars.product_full %> service for their
 <%= vars.app_runtime_full %> apps.
 
-
-## <a id='overview'></a>Overview
-
 <%= vars.product_short %> provides a relational database for apps and devices.
 To use <%= vars.product_short %> in an app:
 
 1. Check the service availability in the Marketplace,
    and see if there is an existing instance of <%= vars.product_short %> in your space.
 
-    See [Confirm the <%= vars.product_short %> Service Availability](#marketplace).
+    See [Confirm the <%= vars.product_short %> service availability](#marketplace).
 
 2. If there is no existing instance or you want to use a different one,
    create an instance of the <%= vars.product_short %> service in the same space as the app.
 
-    See [Create a Service Instance](#create).
+    See [Creating a service instance](#create).
 
 4. Bind the app to the <%= vars.product_short %> service instance, to enable the app to use MySQL.
 
-    See [Bind a Service Instance to Your App](#bind).
+    See [Binding a service instance to your app](#bind).
 
 5. Call the <%= vars.product_short %> service in your app code, and then push your app again into the space.
 
-    For more information on services, see [Use the MySQL Service in Your App](#call).
+    For more information on services, see [Using the MySQL service in your app](#call).
 
 After you create a <%= vars.product_short %> service instance,
 you can manage it over the life cycle of your apps and data.
 
-For more information on managing services instances, see [Manage Service Instances](#manage).
+For more information on managing services instances, see [Managing service instances](#manage).
 
 The following procedures use the Cloud Foundry Command Line Interface (cf CLI).
 
 For more information,
-see [Managing Service Instances with the cf CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
+see [Managing service instances with the cf CLI](http://docs.pivotal.io/pivotalcf/devguide/services/managing-services.html).
 You can also use Apps Manager to do the same tasks using a graphical UI.
 
 For more information, see
-[Managing Apps and Service Instances Using Apps Manager](https://docs.pivotal.io/application-service/console/manage-apps.html)
+[Managing Apps and service instances using Apps Manager](https://docs.pivotal.io/application-service/console/manage-apps.html)
 
 ## <a id="prereqs"></a>Prerequisites
 
@@ -52,7 +49,7 @@ For more information, see
 
 <%= partial vars.path_to_partials + "/services/developer-prereqs" %>
 
-## <a id='marketplace'></a>Confirm the <%= vars.product_short %> Service Availability
+## <a id='marketplace'></a>Confirming the <%= vars.product_short %> service availability
 
 For an app to use the <%= vars.product_short %> service, both of the following must be true:
 
@@ -61,7 +58,7 @@ For an app to use the <%= vars.product_short %> service, both of the following m
 
 You can confirm both of these using the cf CLI as follows.
 
-### <a id="check-marketplace"></a> Check Service Availability in the Marketplace
+### <a id="check-marketplace"></a> Checking service availability in the Marketplace
 
 To find out if a <%= vars.product_short %> service is available in the Marketplace:
 
@@ -84,7 +81,7 @@ To find out if a <%= vars.product_short %> service is available in the Marketpla
     [...]
     </pre>
 
-### <a id="check-instance"></a> Check that an Instance is Running in the Space
+### <a id="check-instance"></a> Checking that an instance is running in the space
 
 To confirm that a <%= vars.product_short %> instance is running in the space:
 
@@ -108,12 +105,12 @@ For example:
 
     You can [bind](#bind) your app to an existing instance or [create](#create) a new instance to bind to your app.
 
-## <a id='create'></a>Create a Service Instance
+## <a id='create'></a>Creating a service instance
 
 On-demand services are created asynchronously, not immediately.
 The `watch` command shows you when your service instance is ready to bind and use.
 
-<p class="note"><strong>Note:</strong> If you are deploying a leader-follower service instance across
+<p> If you are deploying a leader-follower service instance across
   multiple foundations,
 follow the procedure in
 <a href="./use-multi-site.html">Using <%= vars.product_short %> for <%= vars.single_leader_plan %></a>.
@@ -153,9 +150,9 @@ your instance to show as `create succeeded`.
     my-instance   p.mysql       db-small                  create succeeded
     </pre>
 
-    If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
+    If you get an error, see [Troubleshooting instances](./troubleshoot-instances.html).
 
-## <a id="bind"></a>Bind a Service Instance to your App
+## <a id="bind"></a>Binding a service instance to your app
 
 For an app to use a service, you must bind the app to a service instance.
 You must do this after every time you run `cf push`.
@@ -195,7 +192,7 @@ To push and bind an app to a <%= vars.product_short %> instance run the followin
     ```
     Where `APP` is the app you want to use the MySQL service instance.
 
-## <a id="call"></a>Use the MySQL Service in your App
+## <a id="call"></a>Using the MySQL service in your app
 
 To access the MySQL service from your app:
 
@@ -209,7 +206,7 @@ see [MySQL Environment Variables](#vcap).
   See this example: [Node.js code](./using-tls.html#call-service).
 
 
-### <a id="schema"></a>Use Custom Schemas
+### <a id="schema"></a>Use Custom schemas
 
   <%= vars.product_short %> supports multiple custom schemas.
   You can use custom schemas with apps that share a MySQL service instance to isolate app data by schema.
@@ -237,7 +234,7 @@ see [MySQL Environment Variables](#vcap).
     ```
     Where `APP` is the app you want to use the custom schema.
 
-### <a id="vcap"></a>MySQL Environment Variables
+### <a id="vcap"></a>MySQL environment variables
 Apps running in <%= vars.ops_manager %> gain access to bound service instances
 through an environment variable credentials hash called `VCAP_SERVICES`.
 This environment variable includes the credentials that apps
@@ -281,8 +278,7 @@ If you modify your service instance,
 you must `cf unbind-service`, `cf bind-service` and `cf restage`
 your app to apply the changes to `VCAP_SERVICES`.
 
-<p class = "note"><strong>Note:</strong>
-  If you use MySQL Connector/J 8.0.13 or later with <%= vars.product_short %>,
+<p> If you use MySQL Connector/J 8.0.13 or later with <%= vars.product_short %>,
   you must modify the JDBC URL in <code>VCAP_SERVICES</code> to include <code>sslMode=VERIFY_IDENTITY</code>
   and <code>verifyServerCertificate=true</code>.
   MySQL Connector/J 8.0.13 and later does not verify TLS connections.
@@ -292,7 +288,7 @@ your app to apply the changes to `VCAP_SERVICES`.
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-## <a id="manage"></a>Manage a Service Instance
+## <a id="manage"></a>Managing a service instance
 
 You can manage service instances in the following ways:
 
@@ -306,7 +302,7 @@ See [Change Default Parameters on an Existing Service Instance](./change-default
 See [Unbind an App from a Service Instance](#unbind).
 + Delete a service instance that is not used. See [Delete a Service Instance](#delete).
 
-### <a id="migrate"></a> Migrate Data to a Different Plan
+### <a id="migrate"></a> Migrating data to a different plan
 
 You can use `cf update-service` to migrate data to a different plan.
 When you update a service instance, you do not need to rebind your app or service keys.
@@ -343,14 +339,15 @@ The following table lists migration use cases for the `update-service` command:
       <td>Single Node of the same or larger size</td>
   </tr>
 </table>
-
-<p class="note warning"><strong>Warning:</strong> You cannot use <code>cf update-service</code>
-  to migrate data between an HA cluster plan and a plan of another topology.
+<p class="note caution">
+<span class="note__title">Caution</span> You cannot use <code>cf update-service</code>
+to migrate data between an HA cluster plan and a plan of another topology.
 If you want to do this, you must use the <code>cf mysql-tools</code> plug-in instead.
 For more information about migrating data,
-see <a href="./about-migrate.html">About Data Migration in <%= vars.product_full %></a>.
+see <a href="./about-migrate.html">About data migration in <%= vars.product_full %></a>.
 </p>
-<p class="note warning"><strong>Warning:</strong> If you are using <%= vars.single_leader_plan_lc %>,
+
+<p> If you are using <%= vars.single_leader_plan_lc %>,
   you must not update the <%= vars.single_leader_plan %> plan to a plan of another topology.
   If you do this, your replication breaks.
 </p>
@@ -377,10 +374,10 @@ To migrate a service instance to another plan:
     $ cf update-service my-instance -p db-large
     </pre>
 
-### <a id="single"></a> Upgrade an Individual Service Instance
+### <a id="single"></a> Upgrading an individual service instance
 
-<p class="note"><strong>Note:</strong>
-  Before you individually upgrade service instances you must have cf CLI v6.46.0 or later.
+<%= partial vars.path_to_partials + '/services/upgrade-one-si' %>
+<p> Before you individually upgrade service instances you must have cf CLI v6.46.0 or later.
 </p>
 
 You can use <code>cf update-service</code> with the <code>--upgrade</code> flag to individually upgrade
@@ -419,7 +416,7 @@ To upgrade a single service instance:
 
 1. When you are prompted, confirm that you want to upgrade.
 
-####<a id="upgrade-mysql-8-0"></a> Upgrade a Service Instance to MySQL 8.0
+####<a id="upgrade-mysql-8-0"></a> Upgrading a service instance to MySQL 8.0
 
 When you upgrade a service instance using the `cf update-service` command with the
 `--upgrade` flag, the service instance continues to use MySQL 5.7. To upgrade a service
@@ -440,7 +437,7 @@ that is configured to use MySQL 8.0:
   cf update-service SERVICE-INSTANCE-NAME -p new-8-0-plan
   ```
 
-###<a id="share"></a> Share Service Instances
+###<a id="share"></a> Sharing service instances
 
 In <%= vars.product_short %> you can share service instances between different orgs and spaces using `cf share-service`.
 Service instance sharing is enabled by default.
@@ -486,7 +483,7 @@ To share a service instance:
 
     Where `SERVICE-INSTANCE` is the service instance you shared.
 
-### <a id="unbind"></a>Unbind an App from a Service Instance
+### <a id="unbind"></a>Unbinding an app from a service instance
 
 If you want stop an app from using a service you must unbind the app from the service.
 
@@ -510,7 +507,7 @@ If you want stop an app from using a service you must unbind the app from the se
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-### <a id="delete"></a>Delete a Service Instance
+### <a id="delete"></a>Deleting a service instance
 
 You cannot delete a service instance that an app is bound to.
 
@@ -540,7 +537,7 @@ that the instance no longer exists:
     watch cf service SERVICE-INSTANCE
     ```
 
-### <a id="purge"></a>Purge a Service Instance
+### <a id="purge"></a>Purging a service instance
 
 If the service instance VM is lost, then you cannot delete the service instance.
 However, you can use the cf CLI to purge a service instance from the Cloud Controller database.

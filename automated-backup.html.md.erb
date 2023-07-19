@@ -1,23 +1,25 @@
 ---
-title: Configuring Automated Backups
+title: Configuring automated backups
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to configure automated, physical backups for <%= vars.product_full %>.
+You can configure automated, physical backups for <%= vars.product_full %>.
 
 Developers can create physical backups using the Cloud Foundry Command Line Interface (cf CLI)
 or logical backups using `mysqldump`.
+
 For more information about physical backups, see
 [Backing Up and Restoring <%= vars.product_full %>](./backup-restore.html).
+
 For more information about logical backups, see
 [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
 You can restore a physical backup by following the procedures in
 [Restore a Service Instance](./backup-restore.html#restore).
 
-## <a id="enable-backups"></a> About Configuring Automated Backups
+## <a id="enable-backups"></a> About configuring automated backups
 
 You can configure <%= vars.product_short %> to automatically back up databases to external storage.
 <%= vars.product_short %> backs up the entire data directory for each service instance.
@@ -25,8 +27,7 @@ You can configure <%= vars.product_short %> to automatically back up databases t
 <%= vars.product_short %> backs up your database on a schedule.
 You configure this schedule with a cron expression.
 
-<p class="note">
-  <strong>Note:</strong> Configuring a cron expression overrides the default schedule for your service instance.
+<p> Configuring a cron expression overrides the default schedule for your service instance.
   <br><br>
   Developers can override the default for their service instance.
   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
@@ -34,13 +35,13 @@ You configure this schedule with a cron expression.
 
 To configure backups, follow the procedure for your external storage solution:
 
-+ [Back Up Using SCP](#scp)
++ [Back up using SCP](#scp)
 + [Back Up to Amazon S3 or Ceph](#ceph-or-s3)
 + [Back Up to Amazon S3 with Instance Profile](#instance-profile)
 + [Back Up to GCS](#gcs)
 + [Back Up to Azure Storage](#azure)
 
-## <a id="scp"></a> Back Up Using SCP
+## <a id="scp"></a> Back up using SCP
 
 Secure copy protocol (SCP) enables operators to use any storage solution
 on the destination VM. This is the fastest method for backing up your database.
@@ -55,7 +56,7 @@ To back up your database using SCP:
 + [Create a Public and Private Key Pair](#scp-keys)
 + [Configure Backups in <%= vars.ops_manager %>](#configure-scp)
 
-### <a id="scp-keys"></a> Create a Public and Private Key&#8209;Pair
+### <a id="scp-keys"></a> Create a public and private Key&#8209;Pair
 
 <%= vars.product_short %> accesses a remote host as a user with a private key for authentication.
 VMware recommends that this user and key-pair is only used for <%= vars.product_short %>.
@@ -63,7 +64,7 @@ VMware recommends that this user and key-pair is only used for <%= vars.product_
 1. Determine the remote host that you use to store backups for <%= vars.product_short %>.
    Ensure that the MySQL service instances can access the remote host.
 
-    <p class="note"><strong>Note</strong>: VMware recommends using a VM outside your deployment
+    <p> VMware recommends using a VM outside your deployment
       for the destination of SCP backups. As a result,
       you might need to enable public IPs for the MySQL VMs.
     </p>
@@ -73,7 +74,7 @@ VMware recommends that this user and key-pair is only used for <%= vars.product_
 1. (Recommended) Create a new public and private key-pair for authenticating as the above user
 on the destination VM.
 
-### <a id="configure-scp"></a> Configure Backups in <%= vars.ops_manager %>
+### <a id="configure-scp"></a> Configure backups in <%= vars.ops_manager %>
 
 Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up using SCP.
 
@@ -145,8 +146,8 @@ in the pane are described in the following table."](./images/scp-backups.png)
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p class="note">
-                  <strong>Note:</strong> Developers can override the default for their service instance.
+
+                <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
             </td>
@@ -179,14 +180,15 @@ see the [Ceph documentation](https://docs.ceph.com/en/latest/).
 
 To back up your database to Amazon S3 or Ceph:
 
-+ [Create a Custom Policy and Access Key](#access-key-aws)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-aws)
++ [Create a custom policy and access key](#access-key-aws)
++ [Configure backups in <%= vars.ops_manager %>](#configure-aws)
 
-### <a id="access-key-aws"></a> Create a Custom Policy and Access Key
+### <a id="access-key-aws"></a> Create a Ccstom policy and access key
 
 <%= vars.product_short %> accesses your S3 bucket through a user account.
 VMware recommends that this account be only used by <%= vars.product_short %>.
-You must apply a minimal policy that enables the user account upload backups to your S3 bucket. Then give the policy the permission to list and upload to buckets.
+You must apply a minimal policy that enables the user account upload backups to your S3 bucket. Then give the policy the
+permission to list and upload to buckets.
 
 The procedure in this section assumes that you are using an Amazon S3 bucket.
 If you are using a Ceph or another S3-compatible bucket to create the policy and access key,
@@ -232,7 +234,7 @@ Ensure you select **Programmatic access**
 and **Attach existing policies to user directly**. You must attach the policy you created in
 the previous step.
 
-### <a id="configure-aws"></a> Configure Backups in <%= vars.ops_manager %>
+### <a id="configure-aws"></a> Configure backups in <%= vars.ops_manager %>
 
 Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your S3 account.
 
@@ -310,8 +312,7 @@ in the pane are described in the following table."](./images/S3-backups.png)
                 </li>
               </ul>
 
-              <p class="note">
-                <strong>Note:</strong> If you are using a blobstore that uses a specific set of domains in its
+              <p> If you are using a blobstore that uses a specific set of domains in its
                 server certificate, add a new wildcard domain or use path-style URLs if supported by the
                 blobstore.
               </p>
@@ -345,8 +346,8 @@ in the pane are described in the following table."](./images/S3-backups.png)
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p class="note">
-                  <strong>Note:</strong> Developers can override the default for their service instance.
+
+                <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
             </td>
@@ -354,14 +355,13 @@ in the pane are described in the following table."](./images/S3-backups.png)
       </table>
 
 
-## <a id="instance-profile"></a> Back Up to Amazon S3 with Instance Profile
+## <a id="instance-profile"></a> Back up to Amazon S3 with instance profile
 
-  <p class="note warning">
-   <strong>Warning:</strong> Configuring this backup method requires operators to run the
-   <code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.
+<p class="note important">
+<span class="note__title"> Important</span> Configuring this backup method requires operators to run the
+<code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.</p>
    <br><br>
    Backups fail until the service instance is upgraded.
-  </p>
 
 When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %>
 allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
@@ -374,17 +374,17 @@ Amazon S3 without static credentials (Access and Secret Access Key ID).
 
 The process for configuring backups for an Amazon S3 with Instance Profile is:
 
-1. [Create an IAM Role with a Custom Policy](#ip-create-policy)
-1. [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy)
+1. [Create an IAM Role with a custom policy](#ip-create-policy)
+1. [Add a policy to the existing <%= vars.ops_manager %> user or role](#ip-add-policy)
 1. [Configure a VM Extension](#ip-configure-vm)
  1. [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
  1. [Apply the VM Extension to the dedicated-mysql-broker Job](#ip-vm-job)
  1. [Set the VM Extension Name](#ip-vm-tile)
-1. [Apply Changes and Upgrade All Service Instances](#ip-apply-upgrade)
-1. [(Optional) Verify the IAM Role is Associated with MySQL Service Instances](#ip-verify-instances)
+1. [Apply changes and upgrade all service instances](#ip-apply-upgrade)
+1. [(Optional) Verify the IAM Role is associated with MySQL service instances](#ip-verify-instances)
 
 
-### <a id="ip-create-policy"></a> Create an IAM Role with a Custom Policy
+### <a id="ip-create-policy"></a> Create an IAM role with a custom policy
 
 First, you must create a policy for your <%= vars.product_short %> user account.
 
@@ -431,7 +431,7 @@ To create an IAM Role with a custom policy:
    This is used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops).
 
 
-### <a id="ip-add-policy"></a> Add a Policy to the Existing <%= vars.ops_manager %> User or Role
+### <a id="ip-add-policy"></a> Add a Policy to the existing <%= vars.ops_manager %> user or role
 
 Next, you must add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
 is configured in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
@@ -598,7 +598,7 @@ Where:
 * `INSTANCE-PROFILE-NAME` is the name of the instance profile created in
   [Create an IAM Role with a Custom Policy](#ip-create-policy).
 
-#### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker Job
+#### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker job
 
 These are the following methods that you can use to apply the VM extension to the `dedicated-mysql-broker`
 job in the <%= vars.product_short %> tile:
@@ -609,12 +609,13 @@ in the <%= vars.ops_manager %> documentation.
 
 * **Using the om CLI to configure the tile.** Add the `additional_vm_extensions`
 key in the `resource-config` section of the product configuration and use the om CLI.
+
 For information about configuring using a YAML configuration file, see
 [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file)
 in GitHub.
 
 
-#### <a id="ip-vm-tile"></a> Set the VM Extension Name
+#### <a id="ip-vm-tile"></a> Set the VM Extension name
 
 Now that you have created and applied the VM extension, you must set it in the <%= vars.product_short %> tile.
 
@@ -625,8 +626,9 @@ To set the VM extension name:
 1. Select **Backups**.
 1. Select **Amazon S3 (with Instance Profiles)**
 
-    <img alt="Configure blobstore for MySQL backups pane shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are described in the following table."
-    width="400" src="./images/S3-instance-profiles.png"/>
+![alt-text="Shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are
+described in the following table."](./images/S3-instance-profiles.png)
+
 
 1. Configure the fields as follows:
 
@@ -693,11 +695,9 @@ To set the VM extension name:
                 </li>
               </ul>
 
-              <p class="note">
-                <strong>Note:</strong> If you are using a blobstore that uses a specific set of domains in its
+              <p> If you are using a blobstore that uses a specific set of domains in its
                 server certificate, add a new wildcard domain or use path-style URLs if supported by the
-                blobstore.
-              </p>
+                blobstore.</p>
 
                For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
                <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
@@ -728,8 +728,8 @@ To set the VM extension name:
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p class="note">
-                  <strong>Note:</strong> Developers can override the default for their service instance.
+
+                <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
             </td>
@@ -739,7 +739,7 @@ To set the VM extension name:
 1. Click **Save**.
 
 
-### <a id="ip-apply-upgrade"></a> Apply Changes and Upgrade All Service Instances
+### <a id="ip-apply-upgrade"></a> Apply Ccanges and upgrade all service instances
 
 The changes to your service instances are not complete until you apply your configuration changes.
 
@@ -757,7 +757,7 @@ To apply changes and upgrade all service instances for <%= vars.product_short %>
 1. Verify that the check box for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is activated.
 1. Click **Apply Changes**.
 
-### <a id="ip-verify-instances"></a> (Optional) Verify the IAM Role is Associated with MySQL Service Instances
+### <a id="ip-verify-instances"></a> (Optional) Verify the IAM role is associated with MySQL service instances
 
 To verify that the IAM role is associated with the MySQL service instances:
 
@@ -765,7 +765,7 @@ To verify that the IAM role is associated with the MySQL service instances:
 1. Verify that the IAM Role is present in the details for the instance.
 
 
-## <a id="gcs"></a> Back Up to GCS
+## <a id="gcs"></a> Back up to GCS
 
 When you configure backups for a Google Cloud Storage (GCS) bucket,
 <%= vars.product_short %> runs a GCS SDK that saves backups to a GCS bucket.
@@ -775,10 +775,10 @@ When you configure backups for a Google Cloud Storage (GCS) bucket,
 
 To back up your database to Google Cloud Storage (GCS):
 
-+ [Create a Service Account and Private Key](#service-account-gcs)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-gcs)
++ [Create a service account and private key](#service-account-gcs)
++ [Configure backups in <%= vars.ops_manager %>](#configure-gcs)
 
-### <a id="service-account-gcs"></a> Create a Service Account and Private Key
+### <a id="service-account-gcs"></a> Create a service account and private key
 
 <%= vars.product_short %> accesses your GCS bucket through a service account.
 VMware recommends that this account is only used by <%= vars.product_short %>.
@@ -799,7 +799,7 @@ When you create the service account:
       1. Create and download a private key JSON file.
 
 
-### <a id="configure-gcs"></a> Configure Backups in <%= vars.ops_manager %>
+### <a id="configure-gcs"></a> Configure backups in <%= vars.ops_manager %>
 
 Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS account.
 
@@ -807,9 +807,8 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
 
 1. Select **GCS**.
 
-    <img alt="Backup configuration pane shows GCS radio button selected and the fields
-     in the pane are described in the following table."
-      src="./images/gcs-backups.png"/>
+![alt-text="Shows GCS radio button selected and the fields
+in the pane are described in the following table."](./images/gcs-backups.png)
 
 1. Configure the fields as follows:
 
@@ -867,15 +866,15 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p class="note">
-                  <strong>Note:</strong> Developers can override the default for their service instance.
+
+                <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
             </td>
         </tr>
       </table>
 
-## <a id="azure"></a> Back Up to Azure Storage
+## <a id="azure"></a> Back Up to Azure storage
 
 When you configure backups for Azure Storage,
 <%= vars.product_short %> runs an Azure SDK that saves backups to an Azure storage account.
@@ -885,10 +884,10 @@ see the [Azure documentation](https://docs.microsoft.com/en-us/azure/storage/).
 
 To back up your database to Azure Storage:
 
-+ [Create a Storage Account and Access Key](#storage-account-azure)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-azure)
++ [Create a storage account and access key](#storage-account-azure)
++ [Configure backups in <%= vars.ops_manager %>](#configure-azure)
 
-### <a id="storage-account-azure"></a> Create a Storage Account and Access Key
+### <a id="storage-account-azure"></a> Create a storage account and access key
 
 <%= vars.product_short %> accesses your Azure Storage account through a storage access key.
 VMware recommends that this account be only used by <%= vars.product_short %>.
@@ -907,7 +906,7 @@ the [Azure documentation](https://docs.microsoft.com/en-us/azure/storage/common/
 1. View your access key by following this procedure in
 the [Azure documentation](https://docs.microsoft.com/en-us/azure/storage/common/storage-account-keys-manage#view-access-keys-and-connection-string)
 
-### <a id="configure-azure"></a> Configure Backups in <%= vars.ops_manager %>
+### <a id="configure-azure"></a> Configure backups in <%= vars.ops_manager %>
 
 To back up your database to your Azure Storage account:
 
@@ -985,8 +984,8 @@ To back up your database to your Azure Storage account:
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p class="note">
-                  <strong>Note:</strong> Developers can override the default for their service instance.
+
+                <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>
             </td>
