@@ -1,21 +1,17 @@
 ---
-title: Using VMware Tanzu SQL with MySQL for VMs for Multi-Site Replication
+title: Using VMware SQL with MySQL for Tanzu Application Service for multi-site replication
 owner: MySQL
 ---
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for developers using the <%= vars.product_full %> for replication
+You can use <%= vars.product_full %> for replication
 across multiple foundations or data centers.
 
-## <a id="overview"></a>Overview on using VMware Tanzu SQL with MySQL for VMs for Multi-Site Replication
+You provision a leader-follower service instance across two foundations using the
+<%= vars.single_leader_plan %> topology.  This leader-follower service instance is
+comprised of two single node instances that are configured for replication.
 
-In <%= vars.product_short %> v2.7.4 and later, you provision a leader-follower
-service instance across two foundations using the <%= vars.single_leader_plan %> topology.
-This leader-follower service instance is comprised of two single node instances
-that are configured for replication.
-
-<p class="note"><strong>Note:</strong>
-  The <%= vars.single_leader_plan %> plan type is configured separately
+<p> The <%= vars.single_leader_plan %> plan type is configured separately
   from the leader-follower service plan.
 </p>
 
@@ -34,35 +30,35 @@ Your operator configures this plan and enables access to it in your org and spac
 For more information configuring a <%= vars.single_leader_plan %> topology,
 see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
 
-## <a id='create-multi-dc'></a>Create a <%= vars.single_leader_plan %> Leader-Follower Service Instance
+## <a id='create-multi-dc'></a>Creating a <%= vars.single_leader_plan %> leader-follower service instance
 
 To create a leader-follower service across multiple foundations:
 
 1. Check the availability of the <%= vars.single_leader_plan %> plan in the Marketplace in both your
 foundations.
-See [Confirm the <%= vars.product_full %> Service Availability](use.html#marketplace).
+See [Confirming the <%= vars.product_full %> service availability](use.html#marketplace).
 1. Create one <%= vars.single_leader_plan %>  service instance on each foundation.
-See [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+See [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
 1. Enable replication between the <%= vars.single_leader_plan %> service instances.
-See [Configure <%= vars.single_leader_plan %>](#create-service-key).
+See [Configuring <%= vars.single_leader_plan %>](#create-service-key).
 1. Bind the <%= vars.single_leader_plan %> leader-follower service instance to your apps.
-See [Bind a <%= vars.single_leader_plan %> Leader-Follower Service Instance to Your App](#bind).
+See [Binding a <%= vars.single_leader_plan %> leader-follower service instance to your app](#bind).
 5. Modify your app to use the <%= vars.product_short %> service.
-See [Use the MySQL Service in Your App](./use.html#call).
+See [Using the MySQL service in your app](./use.html#call).
 
 After you create a <%= vars.single_leader_plan %> leader-follower service instance,
 you can manage it over the life cycle of your apps and data.
 For instructions on how to manage a <%= vars.product_short %> service instance,
-see [Manage Service Instances](./use.html#manage).
+see [Managing service instances](./use.html#manage).
 
-### <a id='create-service-instance'></a>Create <%= vars.single_leader_plan %> Service Instances
+### <a id='create-service-instance'></a>Creating <%= vars.single_leader_plan %> service instances
 
 To create a leader-follower service instance across two foundations, you
 must create one <%= vars.single_leader_plan %> service instance in each
 foundation. You must configure the service instances in each foundation for replication.
 
-<p class="note"><strong>Note:</strong> The secondary foundation is
-the foundation that the follower VM is deployed, and usually is your disaster recovery
+<p> The secondary foundation is
+the foundation that the follower VM deployed, and usually is your disaster recovery
 site.
 </p>
 
@@ -95,11 +91,12 @@ To create a multi-site replication service instance in both foundations:
         Creating service primary-node in org my-org / space my-space as admin...
         OK</pre>
 
-        <p class="note"><strong>Note:</strong> Do not name your service instance
+        <p> Do not name your service instance
           <code>leader</code> or <code>follower</code>. If you trigger a failover or switchover,
           the service instances in your primary and secondary foundations switch roles.
+
           For more information,
-          see <a href="./multi-site-trigger-failover.html">Triggering Multi-Site Replication Failover and Switchover</a>.
+          see <a href="./multi-site-trigger-failover.html">Triggering multi-site replication failover and switchover</a>.
         </p>
 
     3. (Optional) Watch the progress of the service instance creation by running:
@@ -125,7 +122,7 @@ To create a multi-site replication service instance in both foundations:
 foundation by repeating step 1 and replacing references to `primary` with `secondary`.
 Ensure that you log in to deployment for your secondary foundation.
 
-### <a id='create-service-key'></a>Configure <%= vars.single_leader_plan %>
+### <a id='create-service-key'></a>Configuring <%= vars.single_leader_plan %>
 
 After you create the <%= vars.single_leader_plan %> service instance in primary and secondary foundations,
 you must configure replication between the two service instances.
@@ -135,7 +132,7 @@ between the leader and follower VMs.
 You must not use these service keys for any other use case besides establishing
 <%= vars.single_leader_plan_lc %>.
 
-#### Workflow for Configuring <%= vars.single_leader_plan %>
+#### Workflow for configuring <%= vars.single_leader_plan %>
 
 The following diagram describes the workflow for configuring <%= vars.single_leader_plan_lc %>:
 
@@ -154,12 +151,12 @@ The steps shown in the diagram are as follows:
 5. Record credentials service key.
 6. Update primary service instance with credentials service key.
 
-#### Procedure for Configuring <%= vars.single_leader_plan %>
+#### Procedure for configuring <%= vars.single_leader_plan %>
 
-<p class="note"><strong>Note:</strong> The following procedure assumes you created the leader service instance in
+<p> The following procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 You created these service instances in
-<a href="#create-multi-dc">Create <%= vars.single_leader_plan %> Service Instances</a>.
+<a href="#create-multi-dc">Creating <%= vars.single_leader_plan %> service instances</a>.
 </p>
 
 To configure replication for your <%= vars.single_leader_plan %> leader-follower service instance:
@@ -173,7 +170,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    step 2 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY` is a name you choose for the host-info service key.
     <br><br>
 
@@ -192,7 +189,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    step 2 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY` is the name of the host-info service key you created in step 1.
 
     For example:
@@ -225,7 +222,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-    step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `HOST-INFO` is the output you recorded in step 3.
 
     For example:
@@ -258,7 +255,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     primary-node   p.mysql       db-small                  update succeeded
   </pre>
 
-    If you get an error, see [Troubleshooting Instances](./troubleshoot-instances.html).
+    If you get an error, see [Troubleshooting instances](./troubleshoot-instances.html).
 1.  Create a credentials service key for the service instance in your primary foundation by
     running:
 
@@ -269,7 +266,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-    step 1 of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
     <br><br>
 
@@ -279,7 +276,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
       Creating service key cred-key for service instance primary-node as admin...
       OK
     </pre>
-    <p class="note"><strong>Note:</strong> The <code>-c </code> flag is different than the one in step 1.
+    <p> The <code>-c </code> flag is different than the one in step 1.
     </p>
 1. View the `replication-credentials` for your credentials service key by running:
 
@@ -289,7 +286,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in step 1
-    of [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 6.
 
     For example:
@@ -327,7 +324,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is name of the secondary service instance you created in step 2 of
-    [Create <%= vars.single_leader_plan %> Service Instances](#create-multi-dc).
+    [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `CREDENTIALS` is the output you recorded in step 8.
 
     For example:
@@ -351,7 +348,12 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
 You now have a <%= vars.single_leader_plan %> leader-follower
 service instance that is fully configured and has replication enabled.
 
-### <a id='bind'></a>Bind a <%= vars.single_leader_plan %> Leader-Follower Service Instance to Your App
+### <a id='upgrade'></a>Upgrading a <%= vars.single_leader_plan %> leader-follower service
+
+It is important to upgrade the <%= vars.single_leader_plan %> Leader-Follower service in a specific order: Follower
+first, then Leader. This ensures that any incompatibilities between different <%= vars.product_short %> versions are handled correctly.
+
+### <a id='bind'></a>Binding a <%= vars.single_leader_plan %> leader-follower service instance to your app
 
 For an app to use a <%= vars.single_leader_plan %> leader-follower service instance,
 you must bind your app to your primary service instance in your primary foundation.
@@ -359,8 +361,8 @@ If you want to use an active-active topology,
 you must additionally bind your app to the secondary service instance in your secondary foundation.
 
 For information about active-passive and app-layer active-active topologies,
-see see [About Active-Passive Topology](./about-multi-site.html#active-passive)
-and [About App-Layer Active-Active Topology](./about-multi-site.html#active-active).
+see see [About active-passive topology](./about-multi-site.html#active-passive)
+and [About app-layer active-active topology](./about-multi-site.html#active-active).
 
 To bind an app to a leader-follower service instance:
 
@@ -370,11 +372,11 @@ To bind an app to a leader-follower service instance:
     cf login PRIMARY-API-URL
     ```
 1. Bind your app to your primary service instance by doing the procedure in
-[Bind a Service Instance to Your App](./use.html#bind).
+[Binding a service instance to your app](./use.html#bind).
 
 1. (Optional) If you are using an active-active topology,
 you must bind the same app to your secondary service instance in your secondary foundation.
 To do this, repeat the previous steps and replace references to `primary` with `secondary`.
 
 1. Modify your app to use the <%= vars.product_short %> service by using the procedure in
-  [Use the MySQL Service in Your App](./use.html#call).
+  [Using the MySQL service in your app](./use.html#call).

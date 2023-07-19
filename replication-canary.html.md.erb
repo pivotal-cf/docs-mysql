@@ -1,5 +1,5 @@
 ---
-title: About the Replication Canary
+title: About the replication canary
 owner: MySQL
 ---
 
@@ -8,8 +8,6 @@ owner: MySQL
 This topic tells you about the replication canary for an highly available (HA) cluster.
 The replication canary runs on the jumpbox VM and
 monitors an HA cluster to ensure that replication is working.
-
-## <a id="overview"></a>Overview on Replication Canary
 
 The replication canary writes to a private dataset in the cluster and attempts to read the
 written data from each node. It pauses between read and write mode to ensure that the write-sets have
@@ -22,8 +20,8 @@ following:
   See [Sample Notification Email](#sample-canary).
   - Deactivates client access to the cluster. See [Determine If the Cluster Is Accessible](#access).
 
-  <p class='note warning'><strong>Warning:</strong> When replication fails, data can be lost.
-    Contact Support immediately in the case of
+  <p> When replication fails, data can be lost.
+    Contact <a href="https://tanzu.vmware.com/support">Support</a> immediately in the case of
     replication failure.</p>
 
 ## <a id="sample-canary"></a>Sample notification email
@@ -48,7 +46,7 @@ has detected an unsafe cluster condition in which replication is not
 performing as expected across all nodes.
 ```
 
-## <a id="access"></a> Determining if the Cluster is accessible
+## <a id="access"></a> Determining if the cluster is accessible
 
 When the canary detects replication failure, it deactivates connections to the database cluster through
 the proxies. When the replication issue is resolved, the canary automatically restores client access to the
@@ -57,7 +55,7 @@ the Switchboard API.
 
 To determine if cluster access is deactivated, do the following:
 
-1. Do the prerequisite procedure in [Monitor Node Health](monitor-health.html#monitor).
+1. Do the prerequisite procedure in [Monitor node health](monitor-health.html#monitor).
 
 1. To view cluster access, run the following command:
 
@@ -89,4 +87,4 @@ To determine if cluster access is deactivated, do the following:
 
 If you must restore client access to the cluster while replication is failing, contact Support.
 
-For more information about the Switchboard API, see [Monitoring Node Health](monitor-health.html).
+For more information about the Switchboard API, see [Monitoring node health](monitor-health.html).

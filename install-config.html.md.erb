@@ -1,19 +1,19 @@
 ---
-title: Installing and Configuring VMware Tanzu SQL with MySQL for VMs
+title: Installing and configuring VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions to operators
-about how to install, configure, and deploy the <%= vars.product_full %> tile.  The
-<%= vars.product_short %> service enables developers to create and use MySQL
+You can install, configure, and deploy the <%= vars.product_full %> tile.  The
+<%= vars.product_short %> service enables you to create and use MySQL
 service instances on demand.
 
-## <a id="rbac"></a>Role-Based Access in <%= vars.ops_manager %>
+## <a id="rbac"></a>Role-based access in <%= vars.ops_manager %>
 
 <%= vars.ops_manager %> admins can use Role-Based Access Control (RBAC) to manage which
 operators can make deployment changes, view credentials, and manage user roles in <%= vars.ops_manager %>.
+
 Your role permissions might not permit you to do every procedure in this topic.
 
 For more information about roles in <%= vars.ops_manager %>, see
@@ -31,7 +31,7 @@ Before you install the <%= vars.product_short %> tile, you must:
 + [Prepare for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
 want to replicate data across multiple foundations or data centers.
 
-### <a id="asg"></a> Create an App Security Group for <%= vars.product_short %>
+### <a id="asg"></a> Creating an App Security Group for <%= vars.product_short %>
 
 To enable apps running on <%= vars.app_runtime_full %> to communicate with the MySQL service network,
 you must create an App Security Group (ASG).
@@ -78,7 +78,7 @@ To create an ASG for <%= vars.product_short %>:
 For more information about ASGs,
 see [App Security Groups](http://docs.pivotal.io/application-service/concepts/asg.html#asg-individual).
 
-### <a id="resurrector"></a> Enable the BOSH Resurrector
+### <a id="resurrector"></a> Enabling the BOSH Resurrector
 
 VMware recommends activating the BOSH Resurrector when installing <%= vars.product_short %>.
 The BOSH Resurrector increases the availability of <%= vars.product_short %> by restarting and resuming MySQL service.
@@ -102,7 +102,7 @@ see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manage
 
 4. Click **Save**.
 
-## <a id="install"></a> Download and Import the Tile
+## <a id="install"></a> Download and import the tile
 
 To download and import the <%= vars.product_short %> tile:
 
@@ -119,8 +119,7 @@ To download and import the <%= vars.product_short %> tile:
     The 'AZ and Network Assignments' configuration pane is shown.
     See the following section for a description of the fields in this pane."](./images/config-azs.png)
 
-
-## <a id="config-on-demand"></a> Configure the Tile
+## <a id="config-on-demand"></a> Configuring the tile
 
 To configure the <%= vars.product_short %> tile, do the following procedures.
 
@@ -158,7 +157,7 @@ and networks for the broker and MySQL service instances:
 
 3. Click **Save**.
 
-### <a id="active"></a> Configure Service Plans
+### <a id="active"></a> Configuring service plans
 
 <%= vars.product_short %> enables you to configure as many as nine service plans.
 Each service plan has a corresponding section in the tile configuration, such as **Plan 1**, **Plan 2**, and so on.
@@ -166,12 +165,11 @@ Each service plan has a corresponding section in the tile configuration, such as
 By default, plans 1 through 3 are active and plans 4 through 9 are inactive.
 The following procedures describe how to change these defaults.
 
-<p class="note warning"><strong>Warning:</strong>
-  You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
+<p> You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
   If you deactivate <strong>Plan 1</strong>, your installation fails when you apply changes.
 </p>
 
-#### <a name="one-node-plans"></a> About Creating Plans for Restoring Multi-Node Service Instances
+#### <a name="one-node-plans"></a> About creating plans for restoring multi-node service instances
 
 If you offer leader-follower or highly available (HA) cluster plans,
 then you must configure single-node or <%= vars.single_leader_plan %> plans that can be used
@@ -199,7 +197,7 @@ For information about how multi-node service instances are restored,
 see <a href="./backup-restore.html#restore">Restore a Service Instance</a>
 in <em>Backing Up and Restoring <%= vars.product_full %></em>.
 
-### Procedure for Configuring Service Plans
+### Procedure for configuring service plans
 
 For each plan that you want to use in your deployment:
 
@@ -298,8 +296,11 @@ For each plan that you want to use in your deployment:
     </div>
 
 2. Configure the fields as follows:
-    <p class="note"><strong>Note:</strong> If you want to replicate data across multiple foundations or data centers,
-    you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.</p>
+
+<p class="note important">
+<span class="note__title"> Important</span>  If you want to replicate data across multiple foundations or data centers,
+you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
+</p>
 
   <table>
     <tr><th>Field</th><th>Description</th></tr>
@@ -355,20 +356,21 @@ For each plan that you want to use in your deployment:
           For more information, see <a href="https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html">
           Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
           in GitHub. <br>
-          <strong>NOTE:</strong> If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
+          If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
           config), then instance creation attempts fail. <br>
         </td></tr>
   </table>
 
 4. Click Save.
 
-<p class="note warning"><strong>Warning:</strong> If you expect your developers
-  to upgrade from one plan to another, do not place the plans in separate AZs.
-  For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
-  an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
-  prevents them from losing their data by orphaning their disk in AZ1.<br><br>
-  If you need to manually migrate the data from one AZ to another, see
-  <a href="https://docs.pivotal.io/p-mysql/about-migrate.html">About Data Migration in <%= vars.product_short %></a>.
+<p class="note important">
+<span class="note__title"> Important</span> If you expect your developers
+to upgrade from one plan to another, do not place the plans in separate AZs.
+For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
+an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
+prevents them from losing their data by orphaning their disk in AZ1.<br><br>
+If you need to manually migrate the data from one AZ to another, see
+<a href="https://docs.pivotal.io/p-mysql/about-migrate.html">About Data Migration in <%= vars.product_short %></a>.
 </p>
 
 ### <a id="inactive"></a> Deactivate Service Plan (Optional)
@@ -425,7 +427,7 @@ detailed description of the configurable fields."](./images/global-settings.png)
 
 1. Click **Save**.
 
-### <a id="mysql"></a> Configure MySQL
+### <a id="mysql"></a> Configuring MySQL
 
 To set MySQL defaults and enable developers to customize their instances:
 
@@ -469,15 +471,15 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
     </td></tr>
   </table>
 
-### <a id="backups"></a> Configure Backups
+### <a id="backups"></a> Configuring backups
 
 To learn how backups work, see [About Backups](./backup-restore.html#about-backups).
 
-To configure backups:
-
-<p class="note"><strong>Note:</strong> You must configure backups.
+<p>
+You must configure backups.
   You cannot deactivate this feature.
 </p>
+To configure backups:
 
 1. Click **Backups**.
 
@@ -485,7 +487,7 @@ To configure backups:
   Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
-in the _Configuring Automated Backups_ topic:
+in the *Configuring Automated Backups* topic:
 
   + **Ceph or Amazon S3:** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
       that saves backups to an S3 bucket,
@@ -507,7 +509,7 @@ in the _Configuring Automated Backups_ topic:
       SDK that saves backups to an Azure storage account.<br>For instructions about using Azure for backups,
       see [Back Up to Azure Storage](./automated-backup.html#azure).
 
-### <a id="security"></a> Configure Security
+### <a id="security"></a> Configuring security
 
 To configure the security settings for the MySQL service, do one or both:
 
@@ -548,12 +550,12 @@ To activate TLS for the MySQL service:
                 as the minimum TLS version for client connections.
               </li>
             </ul>
-          <p class="note warning"><strong>Warning:</strong> Selecting <strong>Required</strong> breaks any
+          <p> Selecting <strong>Required</strong> breaks any
             apps that are not currently connecting over TLS.</p>
           </td></tr>
     </table>
 
-    <div class="note warning"><strong>Warning:</strong> Enforcing TLS v1.2 has the following effects:
+    <p>Enforcing TLS v1.2 has the following effects:
       <ul>
         <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
         <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
@@ -561,15 +563,15 @@ To activate TLS for the MySQL service:
       The TLS v1.2 restriction is a global setting, so it applies to every service instance.
       Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
     </div>
-
 1. Click **Save**.
 1. After deploying the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
 
-#### <a id="security-service-instance-creds"></a> Configure Secure Service Instance Credentials
+#### <a id="security-service-instance-creds"></a> Configuring secure service instance credentials
 
 You can store your service instance credentials in runtime CredHub instead of the Cloud Controller database (CCDB).
-For more information about runtime CredHub, see [CredHub](https://docs.pivotal.io/credhub/).
+
+For more information about runtime CredHub, see [CredHub](https://docs.pivotal.io/credhub/index.html).
 
 To store your service instance credentials in runtime CredHub:
 
@@ -621,7 +623,7 @@ To store your service instance credentials in runtime CredHub:
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-### <a id="monitoring"></a> Configure Monitoring
+### <a id="monitoring"></a> Configuring monitoring
 
 To activate monitoring and logging in the MySQL service:
 
@@ -657,8 +659,7 @@ To activate monitoring and logging in the MySQL service:
             The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
   </table>
 
-
-### <a id="syslog"></a> Configure System Logging
+### <a id="syslog"></a> Configuring system logging
 
 To activate RFC 5424 system logging for the MySQL broker and service instance VMs:
 
@@ -692,7 +693,7 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
     <tr><td><strong>SSL Certificate</strong></td>
         <td>Enter the SSL certificates for the syslog server. This ensures the logs are transported securely.</td></tr>
   </table>
-  <p class="note"><strong>Note:</strong> If your syslog server is external to your deployment,
+  <p> If your syslog server is external to your deployment,
     you might need to select
     <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.
     See <a href="#global">Configure Global Settings</a>.
@@ -700,7 +701,7 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
 
 4. Click **Save**.
 
-### <a id="service-instance-upgrades"></a> Configure Service Instance Upgrades
+### <a id="service-instance-upgrades"></a> Configuring service instance upgrades
 
 This section configures the `upgrade-all-service-instances` errand.
 <%= vars.product_short %> uses this errand to upgrade service instances.
@@ -745,13 +746,13 @@ To configure service instance upgrades.
 
 2. Click **Save**.
 
-### <a id="errands"></a> Review Errands (Optional)
+### <a id="errands"></a> Review errands (Optional)
 
 Errands are scripts that run at specific times to do various tasks.
 <%= vars.product_short %> can run errands to manage the broker and service instances.
 You do not need to change the default configurations for errands.
 
-<p class="note warning"><strong>Warning:</strong> The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
+<p> The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
 necessary cleanup tasks when you delete the <%= vars.product_short %> tile or re-define plans. Setting this errand to <strong>Off</strong> can cause
 problems when attempting to install the tile again or re-define plans. VMware recommends that you do not set this errand to <strong>Off</strong>.
 </p>
@@ -779,16 +780,14 @@ To review errands:
 
 1. Review the settings for the following errands:
 
-  <table>
+<table>
     <tr>
       <th>Errand</th>
       <th>Description</th>
     </tr>
-
-    <tr>
+      <tr>
       <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
     </tr>
-
     <tr>
       <td><strong>Register On-demand MySQL Broker</strong></td>
       <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
@@ -820,10 +819,10 @@ To review errands:
       For more information about individual service instance upgrades,
     see <a href="./upgrade.
     html#individual-upgrades">About Individual Service Instance Upgrades</a>
-    </tr>
+  </tr>
   </table>
 
-### <a id="stemcell"></a> Verify Stemcell Version and Apply All Changes
+### <a id="stemcell"></a> Verifying stemcell version and apply all changes
 
 To verify your stemcell version and apply all changes:
 
@@ -838,6 +837,3 @@ To verify your stemcell version and apply all changes:
 
 For information about the Xenial stemcells that are compatible with <%= vars.product_short %>,
 see [Release Notes](./release-notes.html) or [<%= vars.product_network %>](https://network.pivotal.io/).
-
-
-[def]: ./images/monitoring.png"

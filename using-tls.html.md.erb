@@ -8,8 +8,6 @@ owner: MySQL
 This topic describes how developers can use TLS to secure the communication
 from their apps and local workstations to the <%= vars.product_full %> service.
 
-## <a id="overview"></a>Overview on Using TLS
-
 For <%= vars.product_old %> v2.5 and later and <%= vars.product_short %> 2.7 and later, if your operator has configured TLS in the tile,
 but did not configure TLS for existing service instances in <%= vars.product_old %> v2.4 and earlier,
 you must activate TLS using the procedures in [Activate TLS](#enable).
@@ -22,15 +20,13 @@ workstation to a <%= vars.product_short %> service instance.
 
 For more information on how to establish a TLS connection, see [Establish a TLS Connection to a Service Instance](#establish-tls).
 
+<p class="note important">
+<span class="note__title"> Important</span> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
+Because of this, the server certificate does not validate apps.
+If an app presents a certificate to the MySQL server,
+the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate mTLS in your apps.
 
- <p class="note warning"><strong>Warning:</strong> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
-   Because of this, the server certificate does not validate apps.
-   If an app presents a certificate to the MySQL server,
-   the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate
- 	mTLS in your apps.
- </p>
-
-## <a id='enable'></a> Activate TLS
+## <a id='enable'></a> Activating TLS
 
 The procedure for updating your app depends on the language and framework of your app.
 Java and Spring apps automatically detect TLS.
@@ -57,12 +53,12 @@ If your Spring app detects TLS configured in the service instance, it must conne
 If you did not previously activate TLS in your service instance before upgrading to <%= vars.product_old %> v2.5,
 you must rebind your Spring apps in order to re-establish connections to your service instance.
 
-<p class="note"><strong>Note:</strong> VMware recommends developers configure their apps
+<p> VMware recommends developers configure their apps
 to use the <a href="https://dev.mysql.com/downloads/connector/j/8.0.html">MySQL Connector/J</a> v5.1.42 or later
 instead of the MariaDB Connector/J.
 </p>
 
-### <a id='rebind'></a> Rebind your App
+### <a id='rebind'></a> Rebinding your app
 
 If your app is bound to an existing service instance, you must rebind it after activating TLS for the instance.
 
@@ -106,7 +102,7 @@ Your app now communicates securely with the MySQL service instance.
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-### <a id='activate-non-spring'></a> Activate TLS for Non-Spring Apps
+### <a id='activate-non-spring'></a> Activating TLS for non-spring apps
 
 In order to activate TLS for apps not written in Java or Spring,
 you must modify the app to discover the CA certificate in `VCAP_SERVICES`
@@ -167,7 +163,7 @@ To activate TLS for your app, do the following:
 	```
 1. Push your app with `cf push`.
 
-## <a id='establish-tls'></a> Establish a TLS Connection to a Service Instance
+## <a id='establish-tls'></a> Establishing a TLS connection to a service instance
 
 You can use `mysql` to establish a TLS connection to a <%= vars.product_short %> service instance that has TLS
 activated.
@@ -194,7 +190,8 @@ To establish a TLS connection to a service instance:
   }
   </pre>
 
-  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale. Create a new service key.
+  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale. Create a new
+  service key.
 
 2. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:
 <pre class="terminal">$ pbpaste > root.pem</pre>

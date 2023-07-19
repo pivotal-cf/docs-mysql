@@ -5,8 +5,8 @@ Owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-VMware recommends that you upgrade to the latest patch available for your current minor,
-and then upgrade to the latest patch available for the next minor.
+VMware recommends that you upgrade to the latest patch available for your current minor release,
+and then upgrade to the latest patch available for the next minor release.
 
 <%= partial vars.path_to_partials + '/upgrade-planner' %>
 
@@ -29,6 +29,19 @@ This release includes the following changes:
 
 + A number of high and critical CVEs were addressed by updating the components to the latest version
 + Customers who are enrolled to capture telemetry can additionally track the number of CPU cores consumed by all MySQL service instances within a foundation
++ Support for MySQL 5.7 and 8.0: a new **MySQL Default Version** field for service plans enables operators to select either MySQL 5.7 or MySQL 8.0 as the default version for service instances created using the plan.
++ The tile requires Ubuntu Jammy stemcell 1.95 or later.
++ The number of available service plans has increased from 9 to 18.
++ For HA service instances, all nodes use TLS for internal communication.
++ VM extensions: a new field for service plans enables operators to configure a list of custom VM extensions that apply to VMs for service instances created using the plan.
+
+### Breaking changes
+
+This release includes the following breaking changes:
+
++ The `enable_tls` property has been renamed to `enforce_client_tls`.
++ Ubuntu Jammy stemcells require TLS v1.2 or above.
++ MySQL 8.0 service instances support both TLS v1.2 and TLS v1.3. MySQL 5.7 service instances support only TLS v1.2.
 
 ### Compatibility
 
@@ -191,7 +204,7 @@ The following components are compatible with this release:
 ### Resolved Issues
 
 + **Backups to an Azure blobstore can now be larger than 50&nbsp;GB**:<br/>
-  Uploading backups larger than 50&nbsp;GB to an Azure blobstore was failing. 
+  Uploading backups larger than 50&nbsp;GB to an Azure blobstore was failing.
   This release now supports backups as large as 1000&nbsp;GB to an Azure blobstore.
 
 ### Known Issues
@@ -239,7 +252,7 @@ This release includes the following security fixes:
 
 ### Resolved Issues
 
-Requests to the CloudFoundry router destined for an HA mysql service instance can now have a header `X-Forwarded-Proto: https`. Previously such requests would have caused an infinite redirect. 
+Requests to the CloudFoundry router destined for an HA mysql service instance can now have a header `X-Forwarded-Proto: https`. Previously such requests would have caused an infinite redirect.
 
 ### Known Issues
 

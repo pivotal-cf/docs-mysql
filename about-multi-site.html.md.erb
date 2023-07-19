@@ -1,5 +1,5 @@
 ---
-title: About Multi-Site Replication
+title: About Multi-Site replication
 owner: MySQL
 ---
 
@@ -32,10 +32,9 @@ or no traffic at all.
 <%= vars.product_short %> assumes that the follower is deployed on this foundation unless
 a developer triggers a failover.
 
-<p class="note"><strong>Note:</strong>
-  The <%= vars.single_leader_plan %> plan type is configured separately
-  from the leader-follower service plan.
-</p>
+
+<p> The <%= vars.single_leader_plan %> plan type is configured separately
+  from the leader-follower service plan.</p>
 
 For information for operators about enabling <%= vars.single_leader_plan %>,
 see
@@ -66,7 +65,8 @@ Both deployment models have the same end-user experience.
 For more information, see [About Active-Passive Topology](#active-passive)
 and [About App-Layer Active-Active Topology](#active-active) below.
 
-## <a id='active-passive'></a> About Active-Passive Topology
+
+##<a id='active-passive'></a> About active-passive topology
 
 In an active-passive topology, when all foundations and workloads are healthy,
 all app traffic is directed to the primary foundation.
@@ -80,7 +80,7 @@ see [About Failover and Switchover](#failover-switchover).
 
 The following diagram describes the active-passive topology in a healthy state:
 
-![This active-passive topology diagram is described below](images/active-passive.png)
+![alt-text=""](./images/active-passive.png)
 
 <a href="./images/active-passive.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
@@ -91,7 +91,7 @@ In the preceding diagram:
 * The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
-## <a id='active-active'></a> About App-Layer Active-Active Topology
+##<a id='active-active'></a> About app-layer active-active topology
 
 In an app-layer active-active topology, when all foundations and workloads are healthy,
 app traffic is directed to both the primary and secondary foundation.
@@ -106,8 +106,6 @@ The following diagram describes the app-layer active-active topology in a health
 
 ![alt-text=""](./images/active-active.png)
 
-<a href="./images/active-active.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
-
 In the preceding diagram:
 
 * The GLB directs traffic to the apps in the primary and
@@ -121,14 +119,15 @@ In the preceding diagram:
 * The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
-<p class="note"><strong>Note:</strong>
-In the <%= vars.single_leader_plan %> plan,
+<p class="note important">
+<span class="note__title"> Important</span> In the <%= vars.single_leader_plan %> plan,
 the app-layer active-active topology does not enable multi-primary replication.
 Therefore, the follower service instance is read-only.
 Apps can only write to the leader.
- </p>
+</p>
 
-## <a id='failover-switchover'></a> About Failover and Switchover
+
+##<a id='failover-switchover'></a> About failover and switchover
 
 <%= vars.product_short %> prioritizes data consistency over availability.
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
@@ -143,7 +142,6 @@ The following table describes when you should trigger a failover or switchover:
     <th width="50%">Failover if...</th>
     <th>Switchover if...</th>
   </tr>
-
   <tr>
     <td>
       <ul>
@@ -154,7 +152,7 @@ The following table describes when you should trigger a failover or switchover:
         <li>The data center for the leader VM experiences an unexpected outage.</li>
       </ul>
     </td>
-
+    <tr>
     <td>
       <ul>
         <li>Both the leader and the follower instance are healthy. </li>
@@ -164,14 +162,13 @@ The following table describes when you should trigger a failover or switchover:
       </ul>
     </td>
   </tr>
-
 </table>
 
 For information about <%= vars.single_leader_plan_lc %> topologies
 in an healthy state, see [About Active-Passive Topology](#active-passive)
-and [About App-Layer Active-Active Topology](#active-active) above.
+and [About App-Layer Active-Active Topology](#active-active).
 
-### <a id='failover'></a> About Failover
+###<a id='failover'></a> About failover
 
 In both the active-passive and app-layer active-active topologies,
 if a developer triggers a failover,
@@ -192,7 +189,7 @@ In the previous diagram:
 * The leader service instance in the secondary foundation does not replicate data to another
 service instance.
 
-### <a id=active-passive-switchover></a> About Active-Passive Switchover
+###<a id=active-passive-switchover></a> About active-passive switchover
 
 In an active-passive topology, if a developer triggers a switchover,
 all app traffic is directed to the leader in the secondary foundation.
@@ -212,7 +209,7 @@ In the preceding diagram:
 * The leader service instance in the secondary foundation replicates data to the follower service
 instance in the primary foundation.
 
-### <a id=active-active-switchover></a> About App-Layer Active-Active Switchover
+###<a id=active-active-switchover></a> About app-layer active-active switchover
 
 If a developer triggers a switchover,
 app traffic is still directed to both the primary and secondary foundation.
@@ -239,11 +236,11 @@ In the preceding diagram:
 * The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
-## <a id='infrastructure'></a> Infrastructure Requirements for <%= vars.single_leader_plan %>
+##<a id='infrastructure'></a> Infrastructure requirements for <%= vars.single_leader_plan %>
 
 Before using the <%= vars.single_leader_plan %> plan, consider the following requirements.
 
-### <a id='capacity'></a> Capacity Planning
+###<a id='capacity'></a> Capacity planning
 
 When calculating IaaS usage, you must take into account that each
 <%= vars.single_leader_plan %> instance requires two VMs.
@@ -254,15 +251,16 @@ For more information,
 see [Setting Limits for On-Demand Service Instances](.//set-quotas.html) and
 [Persistent Disk Usage](./recommended.html#persistent).
 
-### <a id='network'></a> Networking Requirements
+###<a id='network'></a> Networking requirements
 
-Operators should consider that <%= vars.single_leader_plan %> instances that are deployed in
+Consider that <%= vars.single_leader_plan %> instances that are deployed in
 data centers that are geographically farther apart experience higher latencies.
 
 For information about the standard networking rules,
 see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
 
-## <a id='limitations'></a> <%= vars.single_leader_plan %> Limitations
+
+## <a id='limitations'></a> <%= vars.single_leader_plan %> limitations
 
 The <%= vars.single_leader_plan %> plan has the following limitation:
 

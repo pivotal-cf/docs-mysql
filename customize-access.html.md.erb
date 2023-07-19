@@ -1,14 +1,12 @@
 ---
-title: Customizing Database Credentials
+title: Customizing database credentials
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for developers to customize access credentials and privileges for
+You can customize access credentials and privileges for
 <%= vars.product_full %> service instances.
-
-## <a id="overview"></a> Overview on Customizing Access Credentials
 
 You can customize database credentials by creating service keys with custom properties.
 For example, you can create read-only access credentials to activate desktop tools to connect to
@@ -22,7 +20,7 @@ For information on Apps Manager, see [Getting Started with Apps Manager](http://
 
 <%= vars.product_short %> enables space developers to create read-only credentials to give to users who need read-only access to the database. These users can audit and monitor the database without mutating or changing any data.
 
-<p class="note"><strong>Note:</strong> Any user that can create a service key can provision a fully privileged service key.
+<p> Any user that can create a service key can provision a fully privileged service key.
 </p>
 
 
@@ -66,11 +64,11 @@ To create and find read-only credentials for an existing service instance:
      "username": "973eb219bd554dfc9794bc29a301bcb1"
     }</pre>
 
-## <a id="username"></a> Create Custom Username Credentials
+## <a id="username"></a> Creating custom username credentials
 
 <%= vars.product_short %> enables space developers to create custom usernames for service keys and service bindings. You can create these credentials for users that want to access the database with a specific username.
 
-<p class="note"><strong>Note:</strong> Any user that can create a service key can provision a fully privileged service key.
+<p> Any user that can create a service key can provision a fully privileged service key.
 </p>
 
 

@@ -1,18 +1,18 @@
 ---
-title: On-Demand Networking
+title: On-Demand networking
 owner: MySQL
 ---
 
 
-This topic tells about networking for on-demand services, including <%= vars.product_full %>.
+You can use networking for on-demand services, including <%= vars.product_full %>.
 
-<h2> <a id="service-network"></a>Service Network Requirement </h2>
+<h2> <a id="service-network"></a>Service network requirement </h2>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
 <%= partial vars.path_to_partials + '/services/service-networks-v3' %>
 
-<h2> <a id='on-demand'></a>Default Network and Service Network </h2>
+<h2> <a id='on-demand'></a>Default network and service network </h2>
 
 On-demand <%= vars.product_short %> services use BOSH to dynamically deploy VMs and create single-tenant service instances in a dedicated network. On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs. These worker VMs run as service instances within development spaces.
 
@@ -30,7 +30,7 @@ The following diagram shows worker VMs in an on-demand service instance running 
 
 <a href="./images/odb-architecture-vmware.png" target="_blank">View a larger version of this image</a></p>
 
-<h2> <a id="rules"></a> Required Networking Rules for On-Demand Services </h2>
+<h2> <a id="rules"></a> Required networking rules for on-demand services </h2>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
@@ -38,7 +38,7 @@ The following diagram shows worker VMs in an on-demand service instance running 
 	:app_runtime_full => vars.app_runtime_full,
 	:product_short => vars.product_short} %>
 
-<h2> <a id='mysql-ports'></a> Required Networking Rules for <%= vars.product_short %> </h2>
+<h2> <a id='mysql-ports'></a> Required networking rules for <%= vars.product_short %> </h2>
 
 Regardless of the specific network layout, the operator must set network rules.
 
@@ -134,7 +134,7 @@ To ensure that connections are open, see the following table:
 	</tr>
 </table>
 
-<h3> <a id='lf-ports'></a> Required Networking Rules for Leader-Follower Plans </h3>
+<h3> <a id='lf-ports'></a> Required networking rules for leader-follower plans </h3>
 
 If you are using a leader-follower
 service plan, the operator must set network rules in addition to the
@@ -160,7 +160,7 @@ To ensure that connections are open, see the following table:
 	</tr>
 </table>
 
-<h3> <a id='hac-ports'></a> Required Networking Rules for Highly Available (HA) Cluster Plans </h3>
+<h3> <a id='hac-ports'></a> Required networking rules for highly availiable cluster plans </h3>
 
 If you are using a HA cluster service plan, the operator must set network rules in addition
 to the networking rules required for <%= vars.product_short %>.
@@ -213,7 +213,7 @@ To ensure that connections are open, see the following table:
 	</tr>
 </table>
 
-<h3> <a id='multi-site-ports'></a> Required Networking Rules for <%= vars.single_leader_plan %> </h3>
+<h3> <a id='multi-site-ports'></a> Required Networking rules for <%= vars.single_leader_plan %> </h3>
 
 If you are using <%= vars.single_leader_plan_lc %>, the operator must set network rules for
 both foundations in addition to the networking rules required for <%= vars.product_short %>.

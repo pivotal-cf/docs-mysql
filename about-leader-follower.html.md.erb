@@ -1,12 +1,12 @@
 ---
-title: About Leader-Follower
+title: About leader-follower topology
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how the leader-follower topology works in <%= vars.product_full %>
-and contains information to help users decide whether to enable or use leader-follower.
+You can learn how the leader-follower topology works in <%= vars.product_full %>
+and how it helps you decide whether to enable or use leader-follower.
 
 ## <a id='overview'></a> Overview on Leader-Follower Topology
 
@@ -42,7 +42,7 @@ A two way arrow connects the leader to the follower indicating that
 any data that is written to the leader is replicated to the follower.
 The leader and the follower each have their own disk.
 
-## <a id="failover"></a>About Failover
+## <a id="failover"></a>About failover
 
 <%= vars.product_short %> focuses on data consistency rather than availability.
 Therefore, it does not trigger failover automatically,
@@ -52,7 +52,7 @@ app traffic is sent to the follower.
 
 For more information, see [Triggering a Leader-Follower Failover](./leader-follower-failover.html).
 
-## <a id='about-sync'></a> About Synchronous Replication
+## <a id='about-sync'></a> About synchronous replication
 
 By default, any data that is written to the leader is asynchronously replicated to
 the follower.
@@ -67,7 +67,7 @@ transaction.
 For information about enabling sync replication,
 see [Synchronous Replication for Leader-Follower](./change-default.html#synchronous-replication).
 
-## <a id="errands"></a>About Leader-Follower Errands
+## <a id="errands"></a>About leader-follower errands
 
 <%= vars.product_short %> automates orchestrating the standard lifecycle of creating, updating,
 and deleting leader-follower service instances.
@@ -84,14 +84,14 @@ see [configure-leader-follower](./errands.html#configure-leader-follower) in _Ru
 Leader-follower instances have additional infrastructure requirements to singleton
 instances, as described in the following section.
 
-### <a id="capacity"></a> Capacity Planning
+### <a id="capacity"></a> Capacity planning
 
 When calculating IaaS usage, you must take into account that each leader-follower
 instance requires two VMs.
 Therefore, the resources used for a leader-follower-enabled plan must be doubled.
 For more information, see [Resource Usage Planning for On-Demand Plans](./recommended.html#resources).
 
-### <a id="availability"></a> Availability Zones
+### <a id="availability"></a> Availability zones
 
 To minimize impact of an availability zone (AZ) outage and to remove single points of failure,
 VMware recommends that you provision three AZs if using leader-follower deployments.
@@ -100,7 +100,7 @@ With three AZs, the MySQL VMs are deployed to two AZs and the broker is deployed
 For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
 in _<%= vars.product_full %> Recommended Usage and Limitations_.
 
-### <a id="networking"></a> Networking Rules
+### <a id="networking"></a> Networking rules
 
 In addition to the standard networking rules needed for <%= vars.product_short %>,
 the operator must ensure leader-follower-specific network rules are also set up as follows:

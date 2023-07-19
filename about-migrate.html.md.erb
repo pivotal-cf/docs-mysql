@@ -1,17 +1,17 @@
 ---
-title: About Data Migration in VMware Tanzu SQL with MySQL for VMs
+title: About data migration in VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic explains how data migration works in <%= vars.product_full %>.
+You can use data migration in <%= vars.product_full %>.
 
 Read this topic before you do the procedures in
 [Migrating Data in <%= vars.product_short %>](./migrate-data.html).
 
 
-## <a id='overview'></a>The migrate Command
+## <a id='overview'></a>The migrate command
 
 You can use the `mysql-tools` CLI plug-in to migrate MySQL data with the `migrate` command.
 The `migrate` command does a streaming `mysqldump` and restore to migrate data from
@@ -33,7 +33,7 @@ During data migration, the `migrate` command:
   a user-provided service instance.
 
 
-## <a id='use-cases'></a>Use Cases
+## <a id='use-cases'></a>Use cases
 
 The `migrate` command is used for most migration use cases.
 See [Use Cases Requiring the migrate Command](#migrate-cases).
@@ -47,7 +47,7 @@ you might need to manually back up and restore your database to migrate your dat
 See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
 
 
-### <a id='migrate-cases'></a> Use Cases Requiring the migrate Command
+### <a id='migrate-cases'></a> Use cases that require the migrate command
 
 The following table lists migration use cases that must be done with the `migrate` command:
 
@@ -110,7 +110,7 @@ enabled, you cannot use the `migrate` command.
 Instead, you must follow the procedure
 in [Restore from an Off-Platform Logical Backup](./backup-mysqldump.html#external).
 
-### <a id='update-service-cases'></a> Use Cases Not Requiring the migrate Command
+### <a id='update-service-cases'></a> Use cases that do not require the migrate command
 
 Not all migrations require the `migrate` command.
 For example, if you are migrating a database to a larger single node or leader-follower plan,
@@ -149,13 +149,13 @@ For instructions about using the `update-service` command, see
 </table>
 
 
-## <a id='unsupported'></a>Omitted Data
+## <a id='unsupported'></a>Omitted data
 
-<p class="note warning"><strong>Warning:</strong>
-The <code>migrate</code> command does not migrate all stored programs.
+<p class="note important">
+<span class="note__title"> Important</span> The <code>migrate</code> command does not migrate all stored programs.
 The command only migrates views and does not migrate triggers, routines, or events.
 To manually migrate triggers, routines,	or events,
-contact <a href="https://pivotal.io/support">Support</a>.
+contact [VMware Tanzu Support](https://tanzu.vmware.com/support)</a>.
 </p>
 
 The `migrate` command skips the following system schemas:
@@ -168,7 +168,7 @@ The `migrate` command skips the following system schemas:
 - `performance_schema`: This is metadata about performance  and server execution.
 - `sys`: This is a schema that summarizes `performance_schema`.
 
-<p class="note"><strong>Note:</strong><code>sys</code>, <code>performance_schema</code>,
+<p> <code>sys</code>, <code>performance_schema</code>,
   and <code>information_schema</code> change dynamically with changes on a <%= vars.product_short %>
   service instance. These schemas are not migrated because the destination database has its' own version of the schemas.
   You do not need to back up these schemas.
