@@ -4,15 +4,14 @@ owner: MySQL
 ---
 
 
-This topic provides operators with basic instructions for troubleshooting on-demand <%= vars.product_full %>.
+You can use these instructions for troubleshooting on-demand <%= vars.product_full %>.
 For information about temporary <%= vars.product_short %> service interruptions, see
-<a href="./upgrade.html#interruptions">Service Interruptions</a>.
+<a href="./upgrade.html#interruptions">Service interruptions</a>.
 
-## <a id="errors"></a> Troubleshoot Errors
+## <a id="errors"></a> Troubleshoot errors
+Use the following information to troubleshoot specific errors or error messages.
 
-This section provides information on how to troubleshoot specific errors or error messages.
-
-### <a id="x-product"></a> Common Services Errors
+### <a id="x-product"></a> Common services errors
 
 The following errors occur in multiple services:
 
@@ -466,12 +465,6 @@ successfully created and bound.
 
 </table>
 </div>
-
-<p class="note"><strong>Note:</strong>
-  Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
-  See <a href="./upgrade.html#interruptions">Service Interruptions</a> for more information.
-</p>
-
 <style>
 
 
@@ -1093,7 +1086,7 @@ main table {
 </table>
 </div>
 
-<h3 id="inoperable-app-and-database-errors"><a id="apps-inoperable"></a>Inoperable App and Database Errors</h3>
+<h3 id="inoperable-app-and-database-errors"><a id="apps-inoperable"></a>Inoperable app and database errors</h3>
 
 <p>This section provides a solution for the following errors:</p>
 
@@ -1157,10 +1150,10 @@ main table {
               See
               <a href="https://community.pivotal.io/s/article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full">MySQL for PCF hangs when server VM persistent disk is full</a>
               in the Knowledge Base.
-              <p class="note warning"><strong>Warning:</strong>
-                Deleting binary logs is a destructive procedure and can result in MySQL data loss.
+                <p class="note important">
+                <span class="note__title"> Important</span>  Deleting binary logs is a destructive procedure and can result in MySQL data loss.
                 Only do this procedure with the assistance of <a href="https://pivotal.io/support">Support</a>.
-              </p>
+                </p>
             </li>
             <li>
               <strong>If the majority of your persistent disk are binary logs but it is not currently full,</strong>
@@ -1358,10 +1351,10 @@ main table {
         the node to rejoin the cluster. This removes all of the unsynchronized data
         from the detached server node and creates a new copy of the cluster data on the node. For more
         information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>.
-        <p class="note warning">
-          <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
-          <a href="https://tanzu.vmware.com/support">Support</a>.
-        </p>
+
+        <p class="note caution">
+<span class="note__title">Caution</span> Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
+  <a href="https://tanzu.vmware.com/support">Support</a></p>
       </li>
     </ul>
   </li>
@@ -1570,11 +1563,9 @@ in <em>On-Demand Networking</em>.
     This provides the broker with the latest configuration.
 </p>
 
-<p class="note">
-    <strong>Note</strong>: You must ensure that any changes to UAA
+<p>You must ensure that any changes to UAA
     credentials are reflected in the Ops Manager <code>credentials</code>
-    tab of the VMware Tanzu Application Service for VMs tile.
-</p>
+    tab of the VMware Tanzu Application Service for VMs tile.</p>
 
 <h3 id="-networking"><a id="network"></a>  Networking</h3>
 
@@ -1639,9 +1630,7 @@ To validate connectivity, do the following:
 </p>
 
 ### <a id="quotas"></a> Quotas
-
-#### Plan Quota Issues
-
+#### Plan quota issues
 If developers report errors such as:
 
 ```
@@ -1656,7 +1645,7 @@ Please contact your Operator for help.
 5.  Deploy the tile.
 6.  Find who is using the plan quota and take the appropriate action.
 
-#### Global Quota Issues
+#### Global quota issues
 
 If developers report errors such as:
 
@@ -1672,7 +1661,7 @@ Please contact your Operator for help.
 5.  Deploy the tile.
 6.  Find out who is using the quota and take the appropriate action.
 
-<h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a>  Failing Jobs and Unhealthy Instances</h3>
+<h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a>  Failing jobs and unhealthy instances</h3>
 
 
 To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:
@@ -1694,20 +1683,18 @@ If the VM is failing, follow the service-specific information. Any unadvised cor
 A failing process or failing VM might come back automatically after a temporary service outage. See [VM Process Failure](./interruptions.html#process-fail) and [VM Failure](./interruptions.html#vm-fail).
 
 
-<h3 id="-az-or-region-failure"><a id="az-region-fail"></a>  AZ or Region Failure</h3>
+<h3 id="-az-or-region-failure"><a id="az-region-fail"></a>  AZ or region failure</h3>
 
 <p>Failures at the IaaS level, such as Availability Zone (AZ) or region failures,
 can interrupt service and require manual restoration.
 See <a href="./interruptions.html#az-fail">AZ Failure</a> and <a href="./interruptions.html#region-fail">Region Failure</a>.</p>
 
-<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a>  Techniques for Troubleshooting</h2>
+<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a>  Techniques for troubleshooting</h2>
 
 <p>Instructions on interacting with the on-demand service broker and on-demand service
 instance BOSH deployments, and on performing general maintenance and housekeeping tasks</p>
 
-<h3 id="-parse-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a> Parse a Cloud Foundry (CF) Error Message</h3>
-
-
+<h3 id="-parse-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a> Parse a Cloud Foundry error message</h3>
 
 <p>
   Failed operations (create, update, bind, unbind, delete) result in an error message.
@@ -1757,7 +1744,7 @@ Updated: 2017-03-13T10:17:58Z
   If you have more than one broker instance, repeat this process for each instance.
 </p>
 
-<h3 id="-access-broker-and-instance-logs-and-vms"><a id="bosh-cf-access"></a>  Access Broker and Instance Logs and VMs</h3>
+<h3 id="-access-broker-and-instance-logs-and-vms"><a id="bosh-cf-access"></a>  Access broker and instance logs and VMs</h3>
 
 
 <p>
@@ -1837,7 +1824,7 @@ Updated: 2017-03-13T10:17:58Z
     </tr>
 </table>
 
-<h4 id="-access-service-instance-logs-and-vms"><a id="access-instance"></a>  Access Service Instance Logs and VMs</h4>
+<h4 id="-access-service-instance-logs-and-vms"><a id="access-instance"></a>  Access service instance logs and VMs</h4>
 
 
 
@@ -1869,7 +1856,7 @@ Updated: 2017-03-13T10:17:58Z
     </li>
 </ol>
 
-<h3 id="-run-service-broker-errands-to-manage-brokers-and-instances"><a id="broker-errands"></a> Run Service Broker Errands to Manage Brokers and Instances</h3>
+<h3 id="-run-service-broker-errands-to-manage-brokers-and-instances"><a id="broker-errands"></a> Run service broker errands to manage brokers and instances</h3>
 
 
 <p>
@@ -1922,7 +1909,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <pre class="terminal">bosh -d my-deployment run-errand deregister-broker</pre>
 
-<h4 id="-register-broker"><a id="register-broker"></a> Register Broker</h4>
+<h4 id="-register-broker"><a id="register-broker"></a> Register broker</h4>
 
 
 <p>
@@ -1950,7 +1937,7 @@ Updated: 2017-03-13T10:17:58Z
   see these plans.
 </p>
 
-<h4 id="-deregister-broker"><a id="deregister-broker"></a> Deregister Broker</h4>
+<h4 id="-deregister-broker"><a id="deregister-broker"></a> Deregister broker</h4>
 
 
 <p>
@@ -1976,7 +1963,7 @@ Updated: 2017-03-13T10:17:58Z
 
 <code>bosh -d DEPLOYMENT-NAME run-errand deregister-broker</code>
 
-<h4 id="-upgrade-all-service-instances"><a id="upgrade-all"></a> Upgrade All Service Instances</h4>
+<h4 id="-upgrade-all-service-instances"><a id="upgrade-all"></a> Upgrade all service instances</h4>
 
 
 <p>
@@ -2001,7 +1988,7 @@ Updated: 2017-03-13T10:17:58Z
     This prevents systemic problems from spreading to the rest of your service instances.
 </p>
 
-<h4 id="-delete-all-service-instances"><a id="delete-all"></a> Delete All Service Instances</h4>
+<h4 id="-delete-all-service-instances"><a id="delete-all"></a> Delete all service instances</h4>
 
 
 <p>
@@ -2011,8 +1998,7 @@ Updated: 2017-03-13T10:17:58Z
   It does not delete orphan BOSH deployments.
 </p>
 
-<p class="note">
-  <strong>Note</strong>: Orphan BOSH deployments do not correspond to a known service instance.
+<p> Orphan BOSH deployments do not correspond to a known service instance.
   While rare, orphan deployments can occur. Use the <code>orphan-deployments</code>
   errand to identify them.
 </p>
@@ -2039,19 +2025,17 @@ Updated: 2017-03-13T10:17:58Z
   </li>
 </ol>
 
-<p class="note warning">
-  <strong>Warning:</strong> Use extreme caution when running this errand.
-  You can only use it when you want to totally destroy all of the on-demand service
-  instances in an environment.
-</p>
-
+<p class="note caution">
+<span class="note__title">Caution</span> Use extreme caution when running this errand.
+You can only use it when you want to totally destroy all of the on-demand service
+instances in an environment.</p>
 <p>
   To run the errand, run the following command:
 </p>
 
 <code>bosh -d service-instance_GUID delete-deployment</code>
 
-<h3 id="-detect-orphaned-service-instances"><a id="detect-orphans"></a> Detect Orphaned Service Instances</h3>
+<h3 id="-detect-orphaned-service-instances"><a id="detect-orphans"></a> Detect orphaned service instances</h3>
 
 
 <p>
@@ -2145,8 +2129,7 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
   To clean up orphaned instances, run the following command on each instance:
 </p>
 
-<p class="note warning">
-  <strong>WARNING: </strong> Running this command might leave IaaS resources in an unusable state.
+<p> Running this command might leave IaaS resources in an unusable state.
 </p>
 
 <code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
@@ -2212,8 +2195,7 @@ in the Support Knowledge Base.</p>
   </li>
 </ol>
 
-<p class="note">
-  <strong>Note:</strong> When running <code>cf curl</code> ensure that you query
+<p> When running <code>cf curl</code> ensure that you query
   all pages, because the responses are limited to a certain number of bindings per page.
     The default is 50.
     To find the next page curl the value under <code>next_url</code>.
@@ -2253,9 +2235,7 @@ in the Support Knowledge Base.</p>
   </tbody>
 </table>
 
-<p class="note">
-  <strong>Note</strong>: Quota metrics are not emitted if no quota has been set.
-</p>
+<p> Quota metrics are not emitted if no quota has been set.</p>
 
 <h3 id="techniques-for-troubleshooting-highly-available-clusters"><a id="trouble-ha"></a>Techniques for Troubleshooting Highly Available Clusters</h3>
 
@@ -2291,9 +2271,8 @@ gathering information to diagnose the type of failure the cluster is experiencin
     For more information, see the <a href="#download-logs">download-logs</a>
     section.
     <br>
-    <p class="note">
-      <strong>Note:</strong>
-      VMware recommends that you use the <code>-X</code> flag to get the complete
+
+    <p> VMware recommends that you use the <code>-X</code> flag to get the complete
       set of available logs. However, if your cluster processes a high volume of
       transactions, the complete set might be too large and you can omit this flag
       to fetch the essential set of logs.
@@ -2329,9 +2308,7 @@ gathering information to diagnose the type of failure the cluster is experiencin
   </li>
 </ol>
 
-<p class="note warning">
-  <strong>Warning:</strong>
-  Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
+<p> Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
   <a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
@@ -2342,9 +2319,7 @@ you can manually force the node to rejoin the cluster.
 This procedure removes all the data on the node, forces the node to join the cluster,
 and creates a new copy of the cluster data on the node.</p>
 
-<p class="note warning">
-  <strong>Warning:</strong>
-  If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
+<p> If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
   <a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
@@ -2385,7 +2360,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
 
 <h3 id="re-create-a-corrupted-vm-in-a-highly-available-cluster"><a id="recreate-VM"></a>Re-create a Corrupted VM in a Highly Available Cluster</h3>
 
-<p>To re-create a corrupted VM:</p>
+<p>To recreate a corrupted VM:</p>
 
 <ol>
   <li>To log in to the BOSH Director VM by doing the following procedures:
@@ -2404,19 +2379,15 @@ To manually force a node to rejoin the cluster, do the following:</p>
     <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-cloud-check-14">BOSH Cloud Check</a>
     and run
     <code>Recreate VM using last known apply spec</code>.
-    <p class="note warning">
-      <strong>Warning:</strong>
-      Recreating a node clears the logs. Ensure the node is completely down before recreating it.
+    <p> Recreating a node clears the logs. Ensure the node is completely down before recreating it.
     </p>
-    <p class="note warning">
-      <strong>Warning:</strong>
-      Only re-create one node. Do not re-create the entire cluster. If more than one node is down, contact
+    <p> Only re-create one node. Do not re-create the entire cluster. If more than one node is down, contact
       <a href="https://tanzu.vmware.com/support">Support</a>.
     </p>
   </li>
 </ol>
 
-<h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check Replication Status in a Highly Available Cluster</h3>
+<h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check replication status in a highly available cluster</h3>
 
 If you see stale data in your cluster, you can check whether replication is functioning normally.
 
@@ -2499,11 +2470,11 @@ To check the replication status, do the following:
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 
-<h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for Troubleshooting</h2>
+<h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for troubleshooting</h2>
 
 <p>The troubleshooting techniques described here  use the following tools.</p>
 
-<h3 id="download-logs"><a id="download-logs"></a>download-logs</h3>
+<h3 id="download-logs"><a id="download-logs"></a>Downloading logs</h3>
 
 <p><code>download-logs</code> is a script that you can run from your Ops Manager VM to aggregate
 logs from your VMware SQL with MySQL for TAS cluster nodes, proxies, and, with highly available clusters,
@@ -2564,7 +2535,7 @@ For more information, see [Running mysql-diag](mysql-diag.html).
   searching the <a href="https://community.pivotal.io/s/">VMware Tanzu Knowledge Base</a>.
 </p>
 
-<h2 id="-file-a-support-ticket"><a id="support"></a>  File a Support Ticket</h2>
+<h2 id="-file-a-support-ticket"><a id="support"></a>  File a support ticket</h2>
 
 You can file a ticket with [Support](https://tanzu.vmware.com/support). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
 

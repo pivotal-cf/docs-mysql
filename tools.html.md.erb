@@ -1,14 +1,12 @@
 ---
-title: Using Management Tools for VMware SQL with MySQL for Tanzu Application Service
+title: Using management tools for VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for tool developers to use for
-access to their <%= vars.product_full %> databases.
-
-## <a id="overview"></a>Overview
+This topic provides you with the instructions to use for
+accessing  <%= vars.product_full %> databases.
 
 You can access your <%= vars.product_short %> databases by using the following tools:
 
@@ -16,7 +14,7 @@ You can access your <%= vars.product_short %> databases by using the following t
 + [cf CLI MySQL Plug-in](#plugin).
 + [Desktop Tools](#desktop).
 
-## <a id="mysqlweb"></a>MySQLWeb Database Management App
+## <a id="mysqlweb"></a>MySQLWeb Database management app
 
 The MySQLWeb app provides a web UI for managing <%= vars.product_short %> databases.
 The free app lets you view and operate on tables, indexes, constraints, and other database structures,
@@ -58,7 +56,7 @@ You can connect your <%= vars.product_short %> databases to a desktop tool. For 
 or Sequel Pro, if you have the credentials for your MySQL service instance.
 
 If you do not have credentials for your MySQL service instance, follow the procedure in
-[Create Read-only Access Credentials](././customize-access.html).
+[Creating read-only access credentials](././customize-access.html).
 
 To connect your databases to a desktop tool do the following:
 
@@ -97,6 +95,6 @@ command:
 
 1. Configure an SSH tunnel using the values for `hostname` and `port` that you recorded in the previous step.
    For information on configuring an SSH tunnel,
-   see [Configure Your SSH Tunnel](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#ssh-tunnel).
+   see [Configure your SSH tunnel](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#ssh-tunnel).
 
 1. Configure a connection in your desktop tool using the values for `hostname`, `name`, `password`, `port`, and `username` that you recorded in the previous step.

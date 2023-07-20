@@ -1,21 +1,21 @@
 ---
-title: Troubleshooting On-Demand Instances
+title: Troubleshooting on-demand instances
 owner: MySQL
 ---
 
-<p>This topic provides techniques that app developers can use to begin troubleshooting
+<p>This topic provides techniques that you can use to begin troubleshooting
  on-demand instances.</p>
 
-<h2 id="-troubleshoot-errors"><a id="errors"></a> Troubleshoot Errors</h2>
+<h2 id="-troubleshoot-errors"><a id="errors"></a> Troubleshoot errors</h2>
 
 <p>Start here if you are responding to a specific error or error messages.</p>
 
-<h3 id="-common-service-errors"><a id="x-product"></a> Common Service Errors</h3>
+<h3 id="-common-service-errors"><a id="x-product"></a> Common service errors</h3>
 
 <p>Errors common to on-demand services are:</p>
 
 <ul>
-<li><p><a href="#no-metrics">No Metrics from Log Cache</a></p></li>
+<li><p><a href="#no-metrics">No metrics from log cache</a></p></li>
 <li><p><a href="#no-service-gateway-ports">When Using Service-Gateway Access, create-service or update-service Fails</a></p></li>
 </ul>
 
@@ -90,7 +90,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    When Using Service-Gateway Access, create-service or update-service Fails
+    When using service-gateway access, create-service or update-service fails
   <br><br></th>
   </tr>
 
@@ -133,7 +133,7 @@ main table {
 </table>
 </div>
 
-<h3 id="if-instances-or-database-are-inaccessible"><a id="inaccessible"></a>If Instances or Database are Inaccessible</h3>
+<h3 id="if-instances-or-database-are-inaccessible"><a id="inaccessible"></a>If instances or databases are not accessible</h3>
 
 <p>You might experience the following in a leader-follower or Multi&#8209;Site Replication
 topology, or during upgrades:</p>
@@ -171,7 +171,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Temporary Outages
+    Temporary outages
   <br><br></th>
   </tr>
 
@@ -212,7 +212,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Apps Cannot Write to the Database
+    Apps cannot write to the database
   <br><br></th>
   </tr>
 
@@ -237,7 +237,7 @@ main table {
     <p>If your apps can no longer read to the database as well,
     your persistent disk might be full. For more information about
     troubleshooting inoperable apps, see <a href='#disk-full'>
-        Apps are Inoperable</a>.</p>
+        Apps are inoperable</a>.</p>
     <p>If you have a Multi&#8209;Site Replication topology and your leader VM is down,
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
@@ -319,7 +319,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Apps Cannot Connect to the Database
+    Apps cannot connect to the database
   <br><br></th>
   </tr>
 
@@ -371,7 +371,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    MySQL Connector/J v5.1.41 or Earlier
+    MySQL Connector/J v5.1.41 or earlier
   <br><br></th>
   </tr>
 
@@ -468,7 +468,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Java Apps Cannot Connect after Buildpack Update
+    Java apps cannot connect after buildpack update
   <br><br></th>
   </tr>
 
@@ -529,7 +529,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    &ldquo;400&rdquo; Error during Backup or Restore
+    &ldquo;400&rdquo; error during backup or restore
   <br><br></th>
   </tr>
 
@@ -577,7 +577,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    &ldquo;500&rdquo; Error during Backup or Restore
+    &ldquo;500&rdquo; error during backup or restore
   <br><br></th>
   </tr>
 
@@ -625,7 +625,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    &ldquo;502&rdquo; Error during Backup or Restore
+    &ldquo;502&rdquo; error during backup or restore
   <br><br></th>
   </tr>
 
@@ -673,7 +673,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    &ldquo;Status: Restore failed&rdquo; after adbr Restore
+    &ldquo;Status: Restore failed&rdquo; after adbr restore
   <br><br></th>
   </tr>
 
@@ -719,7 +719,7 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
 <p>For general information about the adbr plug-in,
 see <a href="./backup-restore.html">Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
 
-<h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent Disk Usage Is Increasing</h3>
+<h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent disk usage is increasing</h3>
 
 <p>If you have set the <code>optimize_for_short_words</code> parameter to <code>true</code> and
 you are alerted that persistent disk usage is high,
@@ -748,7 +748,7 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Persistent Disk Usage Is Increasing
+    Persistent disk usage is increasing
   <br><br></th>
   </tr>
 
@@ -778,7 +778,7 @@ main table {
 
 <p>For information about monitoring disk usage, see <a href="./monitor.html">Monitoring and KPIs</a>.</p>
 
-<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a> Techniques for Troubleshooting</h2>
+<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a> Techniques for troubleshooting</h2>
 
 <p>See the following sections for troubleshooting techniques when using
 the Cloud Foundry Command-Line Interface (cf CLI) to perform basic
@@ -786,7 +786,7 @@ operations on a VMware SQL with MySQL for TAS service instance.</p>
 
 <p>Basic cf CLI operations include <code>create</code>, <code>update</code>, <code>bind</code>, <code>unbind</code>, and <code>delete</code>.</p>
 
-<h3 id="understand-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Understand a Cloud Foundry (CF) Error Message</h3>
+<h3 id="understand-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Understanding a Cloud Foundry error message</h3>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
@@ -838,7 +838,7 @@ Updated: 2017-03-13T10:17:58Z
   If you have more than one broker instance, repeat this process for each instance.
 </p>
 
-<h3 id="-find-information-about-your-service-instance"><a id="instance"></a> Find Information about Your Service Instance</h3>
+<h3 id="-find-information-about-your-service-instance"><a id="instance"></a> Find information about your service instance</h3>
 
 <p>You might need to find the name, GUID, or other information about a service instance.
 To find this information, do the following:</p>
@@ -872,7 +872,7 @@ my-instance   p.mysql      db-small                  create succeeded
   searching the <a href="https://community.pivotal.io/s/">VMware Tanzu Knowledge Base</a>.
 </p>
 
-<h2 id="file-a-support-ticket"><a id="support"></a>File a Support Ticket</h2>
+<h2 id="file-a-support-ticket"><a id="support"></a>File a support ticket</h2>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
