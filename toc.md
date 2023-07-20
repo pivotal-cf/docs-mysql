@@ -1,5 +1,5 @@
 *   [VMware SQL with MySQL for Tanzu Application Service](./about_mysql_vms.html)
-    *   [VMware SQL with MySQL for Tanzu Application Service](./index.html)
+    *   [Overview](./index.html)
     *   [Release Notes](./release-notes.html)
 *   [VMware SQL with MySQL for TAS - Architecture and Planning Guide](./architecture_planning_guide.html)
     *   [On-Demand networking](./about.html)
