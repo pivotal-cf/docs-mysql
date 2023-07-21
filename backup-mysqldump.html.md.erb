@@ -8,8 +8,6 @@ owner: MySQL
 You can manually create a logical backup with `mysqldump` and
 restore a MySQL database with the backup.
 
-## <a id="overview"></a> Overview on manually creating a Logical Backup
-
 A logical backup reproduces the database table structure and data, without copying the InnoDB data files.
 The backup contains SQL statements to re-create the data.
 Because of this, restoring a logical backup takes longer than restoring a physical backup.
@@ -38,7 +36,7 @@ see [Configuring Automated Backups](./automated-backup.html).
 does not send an email notification.</p>
 
 
-## <a id="manual-backup"></a> Back Up and Restore a <%= vars.product_short %> Logical Backup
+## <a id="manual-backup"></a> Back Up and restore a <%= vars.product_short %> Logical Backup
 
 To back up and restore a <%= vars.product_short %> logical backup:
 
