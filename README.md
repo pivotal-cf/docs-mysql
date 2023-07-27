@@ -9,8 +9,11 @@ Docs for VMware SQL with MySQL for Tanzu Application Service
 
 | Branch name | Use for… |
 |-------------| -------|
-| master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
-| 2.9         | [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
+| master      | Do not use. |
+| 3.1         | in progress branch for next release |
+| 3.0         | Current version |
+| 2.10        | Supported version |
+| 2.9         | No longer supported. |
 | 2.8.3-174881244 | This is a temporary feature branch to prep for v2.8.3. |
 | 2.8         | v2.8.x |
 | 2.7         | v2.7.x |
