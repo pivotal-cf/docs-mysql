@@ -29,14 +29,6 @@ This release includes the following changes:
 + For HA service instances, all nodes use TLS for internal communication.
 + VM extensions: a new field for service plans enables operators to configure a list of custom VM extensions that apply to VMs for service instances created using the plan.
 
-### Breaking changes
-
-This release includes the following breaking changes:
-
-+ The `enable_tls` property has been renamed to `enforce_client_tls`.
-+ Ubuntu Jammy stemcells require TLS v1.2 or above.
-+ MySQL 8.0 service instances support both TLS v1.2 and TLS v1.3. MySQL 5.7 service instances support only TLS v1.2.
-
 ### Compatibility
 
 The following components are compatible with this release:
