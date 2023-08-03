@@ -47,7 +47,7 @@ you might need to manually back up and restore your database to migrate your dat
 See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
 
 
-### <a id='migrate-cases'></a> Use cases that require the migrate command
+### <a id='migrate-cases'></a> Use cases requiring the migrate command
 
 The following table lists migration use cases that must be done with the `migrate` command:
 
@@ -110,7 +110,7 @@ enabled, you cannot use the `migrate` command.
 Instead, you must follow the procedure
 in [Restore from an Off-Platform Logical Backup](./backup-mysqldump.html#external).
 
-### <a id='update-service-cases'></a> Use cases that do not require the migrate command
+### <a id='update-service-cases'></a> Use cases not requiring the migrate command
 
 Not all migrations require the `migrate` command.
 For example, if you are migrating a database to a larger single node or leader-follower plan,
@@ -155,7 +155,7 @@ For instructions about using the `update-service` command, see
 <span class="note__title"> Important</span> The <code>migrate</code> command does not migrate all stored programs.
 The command only migrates views and does not migrate triggers, routines, or events.
 To manually migrate triggers, routines,	or events,
-contact [VMware Tanzu Support](https://tanzu.vmware.com/support)</a>.
+contact [VMware Support](https://www.vmware.com/support/services.html)</a>.
 </p>
 
 The `migrate` command skips the following system schemas:
@@ -168,8 +168,8 @@ The `migrate` command skips the following system schemas:
 - `performance_schema`: This is metadata about performance  and server execution.
 - `sys`: This is a schema that summarizes `performance_schema`.
 
-<p> <code>sys</code>, <code>performance_schema</code>,
-  and <code>information_schema</code> change dynamically with changes on a <%= vars.product_short %>
+<p> The </strong><code>sys</code>, <code>performance_schema</code>,
+  and <code>information_schema</code> schemas change dynamically with changes on a <%= vars.product_short %>
   service instance. These schemas are not migrated because the destination database has its' own version of the schemas.
   You do not need to back up these schemas.
 </p>

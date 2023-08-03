@@ -3,8 +3,7 @@ title: On-Demand networking
 owner: MySQL
 ---
 
-
-You can use networking for on-demand services, including <%= vars.product_full %>.
+This topic tells you about on-demand services, including <%= vars.product_full %>.
 
 <h2> <a id="service-network"></a>Service network requirement </h2>
 
@@ -14,7 +13,8 @@ You can use networking for on-demand services, including <%= vars.product_full %
 
 <h2> <a id='on-demand'></a>Default network and service network </h2>
 
-On-demand <%= vars.product_short %> services use BOSH to dynamically deploy VMs and create single-tenant service instances in a dedicated network. On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs. These worker VMs run as service instances within development spaces.
+On-demand <%= vars.product_short %> services use BOSH to dynamically deploy VMs and create
+single-tenant service instances in a dedicated network. On-demand services use the dynamically-provisioned service network to host single-tenant worker VMs. These worker VMs run as service instances within development spaces.
 
 This on-demand architecture has the following advantages:
 
@@ -40,7 +40,7 @@ The following diagram shows worker VMs in an on-demand service instance running 
 
 <h2> <a id='mysql-ports'></a> Required networking rules for <%= vars.product_short %> </h2>
 
-Regardless of the specific network layout, the operator must set network rules.
+Regardless of the specific network layout, you must set network rules.
 
 To ensure that connections are open, see the following table:
 
@@ -137,11 +137,10 @@ To ensure that connections are open, see the following table:
 <h3> <a id='lf-ports'></a> Required networking rules for leader-follower plans </h3>
 
 If you are using a leader-follower
-service plan, the operator must set network rules in addition to the
+service plan, you must set network rules in addition to the
 networking rules required for <%= vars.product_short %>.
 
 To ensure that connections are open, see the following table:
-
 
 <table class="nice">
 	<th>Source VM</th>
@@ -178,7 +177,7 @@ To ensure that connections are open, see the following table:
 		<td><strong>MySQL service instances</strong></td>
 		<td>8083</td>
 		<td>This port is needed to monitor cluster health with Switchboard.
-			For more information, see <a href="./monitor-health.html">Monitoring Node Health (HA Cluster)</a>.</td>
+			For more information, see <a href="./monitor-health.html">Monitoring node health (HA cluster)</a>.</td>
 	</tr>
 
 	<tr>
@@ -186,7 +185,7 @@ To ensure that connections are open, see the following table:
 		<td><strong><%= vars.app_runtime_abbr %> UAA</strong></td>
 		<td>8443</td>
 		<td>This port is needed so that the replication canary can create a UAA client for sending email
-			notifications. For more information, see <a href="./replication-canary.html">About the Replication Canary</a>.</td>
+			notifications. For more information, see <a href="./replication-canary.html">About the replication canary</a>.</td>
 	</tr>
 
 	<tr>
@@ -213,9 +212,9 @@ To ensure that connections are open, see the following table:
 	</tr>
 </table>
 
-<h3> <a id='multi-site-ports'></a> Required Networking rules for <%= vars.single_leader_plan %> </h3>
+<h3> <a id='multi-site-ports'></a> Required networking rules for <%= vars.single_leader_plan %> </h3>
 
-If you are using <%= vars.single_leader_plan_lc %>, the operator must set network rules for
+If you are using <%= vars.single_leader_plan_lc %>, you must set network rules for
 both foundations in addition to the networking rules required for <%= vars.product_short %>.
 
 To ensure that connections are open in both foundations, see the following table:

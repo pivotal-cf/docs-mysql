@@ -24,14 +24,14 @@ For more information about roles in <%= vars.ops_manager %>, see
 
 Before you install the <%= vars.product_short %> tile, you must:
 
-+ [Create an App Security Group for <%= vars.product_short %>](#asg).
++ [Create an app security group for <%= vars.product_short %>](#asg).
 + [Enable the BOSH Resurrector](#resurrector).
 + [Prepare for TLS](./prepare-tls.html). Required to enable TLS and required for <%=vars.single_leader_plan %>
   and HA cluster plans.
 + [Prepare for <%= vars.single_leader_plan %>](./prepare-multi-site.html): Only required if you
 want to replicate data across multiple foundations or data centers.
 
-### <a id="asg"></a> Creating an App Security Group for <%= vars.product_short %>
+### <a id="asg"></a> Create an app security group for <%= vars.product_short %>
 
 To enable apps running on <%= vars.app_runtime_full %> to communicate with the MySQL service network,
 you must create an App Security Group (ASG).
@@ -76,7 +76,7 @@ To create an ASG for <%= vars.product_short %>:
     ```
 
 For more information about ASGs,
-see [App Security Groups](http://docs.pivotal.io/application-service/concepts/asg.html#asg-individual).
+see [App security groups in Cloud Foundry](<https://docs.vmware.com/en/VMware-Tanzu-Application-Service/><%= vars.current_major_version %>/tas-for-vms/asg.html#asg-individua).
 
 ### <a id="resurrector"></a> Enabling the BOSH Resurrector
 
@@ -106,7 +106,8 @@ see [BOSH Resurrector](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manage
 
 To download and import the <%= vars.product_short %> tile:
 
-1. Download the product file from [<%= vars.product_network %>](https://network.pivotal.io/products/pivotal-mysql/).
+1. Download the product file
+from [<%= vars.product_network %>](https://network.pivotal.io/products/pivotal-mysql/).
 
 1. Go to the **<%= vars.ops_manager %> Installation Dashboard** and click **Import a Product** to upload the product file.
 
@@ -119,11 +120,11 @@ To download and import the <%= vars.product_short %> tile:
     The 'AZ and Network Assignments' configuration pane is shown.
     See the following section for a description of the fields in this pane."](./images/config-azs.png)
 
-## <a id="config-on-demand"></a> Configuring the tile
+## <a id="config-on-demand"></a> Configure the tile
 
 To configure the <%= vars.product_short %> tile, do the following procedures.
 
-### <a id="azs"></a> Configure AZs and Networks
+### <a id="azs"></a> Configure AZs and networks
 
 To configure an availability zone (AZ) to run the service broker
 and networks for the broker and MySQL service instances:
@@ -141,7 +142,7 @@ and networks for the broker and MySQL service instances:
     <tr><td><strong>Network</strong></td>
         <td>Select a subnet for the MySQL broker. This is typically the same subnet
             that includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.<br>
-            This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
+            This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default network and service network</a>.
             </td></tr>
     <tr><td><strong>Service Network</strong></td>
         <td>Select the subnet for the on-demand service instances.
@@ -151,13 +152,12 @@ and networks for the broker and MySQL service instances:
             to avoid conflicts with services that are not IPsec compatible.
          </td></tr>
   </table>
-    <p> You cannot change the regions or networks
-    after you <strong>Apply Changes</strong>.
-  </p>
+          <p> You cannot change the regions or networks
+          after you <strong>Apply Changes</strong>.</p>
 
 3. Click **Save**.
 
-### <a id="active"></a> Configuring service plans
+### <a id="active"></a> Configure service plans
 
 <%= vars.product_short %> enables you to configure as many as nine service plans.
 Each service plan has a corresponding section in the tile configuration, such as **Plan 1**, **Plan 2**, and so on.
@@ -165,11 +165,12 @@ Each service plan has a corresponding section in the tile configuration, such as
 By default, plans 1 through 3 are active and plans 4 through 9 are inactive.
 The following procedures describe how to change these defaults.
 
-<p> You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
+<p class="note important">
+<span class="note__title"> Important</span>  You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
   If you deactivate <strong>Plan 1</strong>, your installation fails when you apply changes.
 </p>
 
-#### <a name="one-node-plans"></a> About creating plans for restoring multi-node service instances
+### <a name="one-node-plans"></a> About creating plans for restoring multi-node service instances
 
 If you offer leader-follower or highly available (HA) cluster plans,
 then you must configure single-node or <%= vars.single_leader_plan %> plans that can be used
@@ -194,8 +195,8 @@ to restore a multi-node plan from backup.
 </table>
 
 For information about how multi-node service instances are restored,
-see <a href="./backup-restore.html#restore">Restore a Service Instance</a>
-in <em>Backing Up and Restoring <%= vars.product_full %></em>.
+see <a href="./backup-restore.html#restore">Restore a service instance</a>
+in <em>backing up and restoring <%= vars.product_full %></em>.
 
 ### Procedure for configuring service plans
 
@@ -296,11 +297,8 @@ For each plan that you want to use in your deployment:
     </div>
 
 2. Configure the fields as follows:
-
-<p class="note important">
-<span class="note__title"> Important</span>  If you want to replicate data across multiple foundations or data centers,
-you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
-</p>
+    <p> If you want to replicate data across multiple foundations or data centers,
+    you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.</p>
 
   <table>
     <tr><th>Field</th><th>Description</th></tr>
@@ -327,8 +325,8 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
     <tr><td><strong>Plan Quota</strong></td>
         <td>Enter the maximum number of service instances that can exist at one time.
           If the plan quota field is blank, the plan quota is set to the global quota by default.
-          <br>
-        For information about the global quota, see <a href="./set-quotas.html">Setting Limits for On-Demand Service Instances</a>.</td></tr>
+          If you have selected the highly available cluster plan, the Plan Quota maximum is 5. <br>
+        For information about the global quota, see <a href="./set-quotas.html">Setting limits for on-demand service instances</a>.</td></tr>
     <tr><td><strong>Paid Plan</strong></td>
         <td>Select this box to indicate that this service plan is paid.</td></tr>
     <tr><td><strong>MySQL VM Type</strong></td>
@@ -339,12 +337,12 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
     <tr><td><strong>MySQL Persistent Disk</strong></td>
         <td>Select a disk size. This disk stores the MySQL data.<br>
             For sizing recommendations,
-            see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
+            see <a href="recommended.html#persistent"> Persistent disk usage</a>.
     </td></tr>
     <tr><td><strong>Jumpbox Persistent Disk</strong></td>
         <td>Only for highly available cluster plans. Select a disk size.
           This disk stores backups. <br> For sizing recommendations,
-          see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.</td></tr>
+          see <a href="recommended.html#persistent"> Persistent disk usage</a>.</td></tr>
     <tr><td><strong>MySQL Availability Zone(s)</strong></td>
         <td> BOSH deploys your service instances to the selected AZs.
           If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
@@ -354,7 +352,7 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
           apply to service instances created under this plan. <br>
           You can manage VM Extensions in Ops Manager or through the OM CLI.
           For more information, see <a href="https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html">
-          Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
+          Create or update a VM extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
           in GitHub. <br>
           If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
           config), then instance creation attempts fail. <br>
@@ -363,17 +361,16 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
 
 4. Click Save.
 
-<p class="note important">
-<span class="note__title"> Important</span> If you expect your developers
-to upgrade from one plan to another, do not place the plans in separate AZs.
-For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
-an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
-prevents them from losing their data by orphaning their disk in AZ1.<br><br>
-If you need to manually migrate the data from one AZ to another, see
-<a href="https://docs.pivotal.io/p-mysql/about-migrate.html">About Data Migration in <%= vars.product_short %></a>.
+<p> If you expect your developers
+  to upgrade from one plan to another, do not place the plans in separate AZs.
+  For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
+  an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
+  prevents them from losing their data by orphaning their disk in AZ1.<br><br>
+  If you need to manually migrate the data from one AZ to another, see
+  <a href="https://docs.pivotal.io/p-mysql/about-migrate.html">About data migration in <%= vars.product_short %></a>.
 </p>
 
-### <a id="inactive"></a> Deactivate Service Plan (Optional)
+### <a id="inactive"></a> Deactivate service plan (Optional)
 
 To deactivate a service plan:
 
@@ -389,7 +386,7 @@ To deactivate a service plan:
 1. Click **Inactive**.
 1. Click **Save**.
 
-### <a id="global"></a> Configure Global Settings
+### <a id="global"></a> Configure global settings
 
 To configure global settings for all service instances:
 
@@ -446,7 +443,7 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
             <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the following check box. <br>
             For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+            <p> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
@@ -471,50 +468,43 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
     </td></tr>
   </table>
 
-### <a id="backups"></a> Configuring backups
+### <a id="backups"></a> Configure backups
 
-To learn how backups work, see [About Backups](./backup-restore.html#about-backups).
+To learn how backups work, see [About backups](./backup-restore.html#about-backups).
 
-<p>
-You must configure backups.
-  You cannot deactivate this feature.
-</p>
 To configure backups:
+
+You must configure backups. You cannot deactivate this feature.
 
 1. Click **Backups**.
 
-  ![alt-text="The radio buttons for backup configuration are
-  Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
+![alt-text="The radio buttons for backup configuration are
+Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
 in the *Configuring Automated Backups* topic:
 
-  + **Ceph or Amazon S3:** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
-      that saves backups to an S3 bucket,
-      a [Ceph](https://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by VMware.<br>
-      For instructions about using Ceph or Amazon S3 for backups, see [Back Up to Ceph or S3](./automated-backup.html#ceph-or-s3).<br><br>
-  + **Amazon S3 (with Instance Profiles):** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
-      that saves backups to an S3 bucket, similar to the <strong>Ceph or Amazon S3</strong> option. This option uses AWS Instance Profiles
-      and VM Extensions to bypass the need for S3 access keys in the tile's backup configuration.
-      For instructions about using Amazon S3 with Instance Profiles
-      for backups, see [Back Up to Amazon S3 with Instance Profile](./automated-backup.html#back-up-to-amazon-s3-with-instance-profile).<br><br>
-  + **SCP:** <%= vars.product_short %> runs an Secure Copy Protocol (SCP) command that secure-copies backups to a VM
-      or physical machine operating outside of your deployment. This is the fastest option. <br>
-      SCP enables you to securely transfer files between two hosts.
-      You can provision the backup machine separately from your installation.
-       <br>For instructions about using SCP for backups, see [Back Up with SCP](./automated-backup.html#scp).<br><br>
-  + **GCS:** <%= vars.product_short %> runs a [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) SDK
-      that saves backups to an GCS bucket. <br>For instructions about using GCS for backups, see [Back Up to GCS](./automated-backup.html#gcs). <br><br>
-  + **Azure:** <%= vars.product_short %> runs an [Azure](https://docs.microsoft.com/en-us/azure/storage/)
-      SDK that saves backups to an Azure storage account.<br>For instructions about using Azure for backups,
-      see [Back Up to Azure Storage](./automated-backup.html#azure).
++ **Ceph or Amazon S3:** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
+    that saves backups to an S3 bucket,
+    a [Ceph](https://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by VMware.<br>
+    For instructions about using Ceph or Amazon S3 for backups, see [Back Up to Ceph or S3](./automated-backup.html#ceph-or-s3).<br><br>
++ **SCP:** <%= vars.product_short %> runs an Secure Copy Protocol (SCP) command that secure-copies backups to a VM
+    or physical machine operating outside of your deployment. This is the fastest option. <br>
+    SCP enables you to securely transfer files between two hosts.
+    You can provision the backup machine separately from your installation.
+     <br>For instructions about using SCP for backups, see [Back Up with SCP](./automated-backup.html#scp).<br><br>
++ **GCS:** <%= vars.product_short %> runs a [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) SDK
+    that saves backups to an GCS bucket. <br>For instructions about using GCS for backups, see [Back Up to GCS](./automated-backup.html#gcs). <br><br>
++ **Azure:** <%= vars.product_short %> runs an [Azure](https://docs.microsoft.com/en-us/azure/storage/)
+    SDK that saves backups to an Azure storage account.<br>For instructions about using Azure for backups,
+    see [Back up to Azure Storage](./automated-backup.html#azure).
 
-### <a id="security"></a> Configuring security
+### <a id="security"></a> Configure security
 
 To configure the security settings for the MySQL service, do one or both:
 
 + Enable TLS for the MySQL service. See [Configure TLS](#security-tls).
-+ Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds).
++ Store your service instance credentials in runtime CredHub. See [Configure secure service instance credentials](#security-service-instance-creds).
 
 ![alt-text="The Security pane. The following TLS Options are listed: Not Configured,
 Optional - Developers can configure their service VMs to use TLS, and
@@ -555,32 +545,30 @@ To activate TLS for the MySQL service:
           </td></tr>
     </table>
 
-    <p>Enforcing TLS v1.2 has the following effects:
+    Enforcing TLS v1.2 has the following effects:
       <ul>
         <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
         <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
       </ul>
       The TLS v1.2 restriction is a global setting, so it applies to every service instance.
       Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
-    </div>
 1. Click **Save**.
-1. After deploying the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
+1. After you deploy the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
 
-#### <a id="security-service-instance-creds"></a> Configuring secure service instance credentials
+#### <a id="security-service-instance-creds"></a> Configure secure service instance credentials
 
 You can store your service instance credentials in runtime CredHub instead of the Cloud Controller database (CCDB).
-
-For more information about runtime CredHub, see [CredHub](https://docs.pivotal.io/credhub/index.html).
+For more information about runtime CredHub, see [CredHub](<https://docs.vmware.com/en/VMware-Tanzu-Application-Service/><%= vars.current_major_version %>/tas-for-vms/credhub-index.html).
 
 To store your service instance credentials in runtime CredHub:
 
 1. Ensure that you have configured the <%= vars.app_runtime_abbr %> tile to support securing service instance credentials in runtime CredHub.
-   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> Tile](https://docs.pivotal.io/application-service/opsguide/secure-si-creds.html#pas-config).
+   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> tile](<https://docs.vmware.com/en/VMware-Tanzu-Application-Service/><%= vars.current_major_version %>/tas-for-vms/secure-si-creds.html#pas-config).
 1. Click **Security**.
 1. Select the **Enable Secure Service Instance Credentials** check box.
 1. Click **Save**.
-1. After deploying the tile, notify the developers that they must unbind and rebind any existing service instances bindings if they want to use secure service instance credentials. Developers must:
+1. After you deploy the tile, notify the developers that they must unbind and rebind any existing service instances bindings if they want to use secure service instance credentials. Developers must:
 
     1. Unbind the service instance from the app by running:
 
@@ -623,7 +611,7 @@ To store your service instance credentials in runtime CredHub:
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
-### <a id="monitoring"></a> Configuring monitoring
+### <a id="monitoring"></a> Configure monitoring
 
 To activate monitoring and logging in the MySQL service:
 
@@ -646,7 +634,7 @@ To activate monitoring and logging in the MySQL service:
     <tr><td><strong>Enable Server Activity Logging</strong></td>
         <td>Select this check box to record who connects to the servers and what queries are processed using the Percona Audit Log Plugin.
             For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
-            <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
+            <p> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
             You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
           </p>
            </td></tr>
@@ -659,7 +647,7 @@ To activate monitoring and logging in the MySQL service:
             The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
   </table>
 
-### <a id="syslog"></a> Configuring system logging
+### <a id="syslog"></a> Configure system logging
 
 To activate RFC 5424 system logging for the MySQL broker and service instance VMs:
 
@@ -696,12 +684,12 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
   <p> If your syslog server is external to your deployment,
     you might need to select
     <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.
-    See <a href="#global">Configure Global Settings</a>.
+    See <a href="#global">Configure global settings</a>.
   <p>
 
 4. Click **Save**.
 
-### <a id="service-instance-upgrades"></a> Configuring service instance upgrades
+### <a id="service-instance-upgrades"></a> Configure service instance upgrades
 
 This section configures the `upgrade-all-service-instances` errand.
 <%= vars.product_short %> uses this errand to upgrade service instances.
@@ -721,7 +709,8 @@ To configure service instance upgrades.
           <td><strong>Number of simultaneous upgrades</strong></td>
           <td>Enter the maximum number of service instances that can upgrade at the same time.
           The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
-          <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
+
+      <p> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
           </p>
           </td>
       </tr>
@@ -814,20 +803,20 @@ To review errands:
     </tr>
     <tr>
       <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
-      <td>Deletes all service instances and deregisters the broker.</td>
+      <td>Deletes all service instances and de-registers the broker.</td>
 
       For more information about individual service instance upgrades,
     see <a href="./upgrade.
-    html#individual-upgrades">About Individual Service Instance Upgrades</a>
-  </tr>
+    html#individual-upgrades">About individual service instance upgrades</a>
+    </tr>
   </table>
 
-### <a id="stemcell"></a> Verifying stemcell version and apply all changes
+### <a id="stemcell"></a> Verify stemcell version and apply all changes
 
 To verify your stemcell version and apply all changes:
 
 1. Click **Stemcell Library**.
-    For more information about using the **Stemcell Library**, see [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html).
+    For more information about using the **Stemcell Library**, see [Importing and managing stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html).
 
 1. Verify and, if necessary, import a new stemcell version.
 

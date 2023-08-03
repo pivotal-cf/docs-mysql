@@ -24,7 +24,7 @@ To upgrade <%= vars.product_short %>:
 1. Download the Ubuntu Xenial stemcell from
 [<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-xenial),
 and import it into the <%= vars.ops_manager %> Stemcell Library.
-For instructions, see [Verifing stemcell version and apply all changes](./install-config.html#stemcell).
+For instructions, see [Verify stemcell version and apply all changes](./install-config.html#stemcell).
 
 1. Download the desired version of the product from
 [<%= vars.product_network %>](https://network.pivotal.io/products/p-mysql).
@@ -37,11 +37,10 @@ This adds the tile to your staging area.
 
 1. Click the newly-added **<%= vars.product_short %>** tile to review its configuration panes.
 Click **Save** on any panes where you make changes.
-
     <p> To decrease the runtime for service instance upgrades,
       configure the <code>upgrade-all-service-instances</code> errand in the tile.
       For instructions about configuring this errand,
-      see <a href="./install-config.html#service-instance-upgrades">Configure Service Instance Upgrades</a>.
+      see <a href="./install-config.html#service-instance-upgrades">Configure service instance upgrades</a>.
 
     </p>
 
@@ -88,7 +87,7 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
           The service resumes within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, apps reconnect automatically.
 
-### <a id='change-plan'></a> Plan change
+### <a id='change-plan'></a>Plan change
 
 A developer changes their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
 This process is used to update Service Instances from Percona 5.7 to Percona 8.0.

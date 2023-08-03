@@ -7,7 +7,7 @@ owner: MySQL
 
 If you are restoring a service instance to the same foundation and you still have the original
 service instance, then follow the instructions
-in [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html).
+in [Backing up and restoring <%= vars.product_full %>](backup-restore.html).
 
 This topic tells you how to manually restore a
 <%= vars.product_full %> service instance from a backup in the following cases:
@@ -15,10 +15,9 @@ This topic tells you how to manually restore a
 + You have lost or deleted the service instance that backup came from.
 + You are restoring to a different foundation.
 
-<p class="note important">
-<span class="note__title"> Important</span> VMware recommends
-that you always configure a single instance plan to streamline the
-restore process for leader-follower and HA cluster plans.
+<p> VMware recommends
+  that you always configure a single instance plan to streamline the
+  restore process for leader-follower and HA cluster plans.
 </p>
 
 Restoring <%= vars.product_short %> from backup is a manual process primarily intended for
@@ -27,26 +26,26 @@ Restoring a <%= vars.product_short %> service instance replaces all of its data 
 
 To restore a <%= vars.product_short %> instance from a backup:
 
-1. [Identify and Download the Backup Artifact](#download)
-2. [Retrieve Backup Encryption Key](#retrieve-key)
-3. [Create and Prepare a New Service Instance for Restore](#prepare)
-4. [Restore the Service Instance](#restore-instance)
-5. [Restage the Service Instance](#restage)
+1. [Identify and download the backup artifact](#download)
+2. [Retrieve backup encryption key](#retrieve-key)
+3. [Create and prepare a new service instance for restore](#prepare)
+4. [Restore the service instance](#restore-instance)
+5. [Restage the service instance](#restage)
 
-## <a id="download"></a> Identify and download the backup artifact
+##<a id="download"></a> Identify and download the backup artifact
 
 The procedure you need to find and download the backup artifact depends on whether
 or not the service instance was deleted.
 
 Follow the procedure for your situation:
 
-+ [If Restoring a Backup from a Deleted Service Instance](#lost-instance)
-+ [If Restoring to a Different Foundation](#different-foundation)
++ [If restoring a backup from a deleted service instance](#lost-instance)
++ [If Restoring to a fifferent foundation](#different-foundation)
 
-### <a id="lost-instance"></a>If Restoring a backup from a deleted service instance
+### <a id="lost-instance"></a>If restoring a backup from a deleted service instance
 
 If you are restoring a backup from a lost or deleted instance,
-you cannot follow the instructions in [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
+you cannot follow the instructions in [Backing up and restoring <%= vars.product_full %>](backup-restore.html)
 because you do not have the GUID for the service instance nor the timestamp for the backup.
 
 The instructions on this section decribe how to find these things
@@ -62,10 +61,10 @@ and then download the backup artifact.
     In the log entries example, the GUID of the service instance begins with `6c1db`.
 
     For information about broker logs,
-    see [Access Broker and Instance Logs and VMs](troubleshoot.html#bosh-cf-access).
+    see [Access broker and instance logs and VMs](troubleshoot.html#bosh-cf-access).
 
 1. Log in to your backup storage system.
-   Your backup storage system is whatever you configured in [Configuring Automated Backups](automated-backup.html).
+   Your backup storage system is whatever you configured in [Configuring automated backups](automated-backup.html).
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
 
 2. Identify and download the backup artifact, the tarfile.
@@ -81,11 +80,11 @@ and then download the backup artifact.
     but this text file is not needed for the restore procedure.
 
 
-### <a id="different-foundation"></a> Restoring to a different foundation
+### <a id="different-foundation"></a>If Restoring to a different foundation
 
 If you have a backup of a service instance taken from one foundation,
 and you want to restore the backup to a different foundation,
-you cannot follow the instructions in [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html).
+you cannot follow the instructions in [Backing up and restoring <%= vars.product_full %>](backup-restore.html).
 
 Instead, follow these instructions to identify and download the backup artifact.
 These instructions are more straightforward
@@ -124,7 +123,7 @@ and a timestamp for the backup.
     </pre>
 
 3. If the service instance is running, download the backup tarfile.
-   Your backup storage system is whatever you configured in [Configuring Automated Backups](automated-backup.html).
+   Your backup storage system is whatever you configured in [Configuring automated backups](automated-backup.html).
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
 
 4. Untar the backup artifact. Keep the backup file with the `tar.gpg` extension.
@@ -132,7 +131,7 @@ and a timestamp for the backup.
     The file with the `.txt` extension  contains metadata to help identify the backup,
     but this text file is not needed for the restore procedure.
 
-## <a id="retrieve-key"></a> Retrieving backup encryption key
+##<a id="retrieve-key"></a> Retrieve backup encryption key
 
 Each backup artifact has its own encryption key, stored in runtime CredHub.
 
@@ -208,13 +207,14 @@ To retrieve the backup encryption key:
     Use this key when you restore the backup.<br>
 
 
-## <a id="prepare"></a> Creating and preparing a new service instance for restore
+##<a id="prepare"></a> Create and prepare a new service instance for restore
 
 You can only restore single node and leader-follower backup artifacts to a single node service instance.
 Ensure that the persistent disk in the single node plan is at
 least as large as the persistent disk of your largest leader-follower.
+
 For information about persistent disk sizing recommendations,
-see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
+see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
 To prepare a new service instance for restore:
 
@@ -235,7 +235,7 @@ To prepare a new service instance for restore:
               Select a <%= vars.single_leader_plan %> plan.
     + `NEW-INSTANCE-NAME` is the name of the new service instance.
 
-    For more information, see [Create a Service Instance](./use.html#create).
+    For more information, see [Create a service instance](./use.html#create).
 
 1. Monitor the status of the service instance creation by running:
 
@@ -277,7 +277,7 @@ To prepare a new service instance for restore:
 
     - `GUID` is the service instance GUID.
     - `mysql-backup-STRING.tar.gpg` is the backup file you downloaded
-       in [Identify and Download the Backup Artifact](#download).
+       in [Identify and download the backup artifact](#download).
     - `BOSH-INSTANCE-GUID` is the BOSH instance GUID you recorded in the previous step.
     - `DESTINATION-PATH` is where the backup file saves on the BOSH VM.
 
@@ -286,11 +286,10 @@ To prepare a new service instance for restore:
         scp mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg \
         mysql/d7ff8d46-c3e8-449f-aea7-5a05b0a1929c:/tmp/</pre>
 
-## <a id="restore-instance"></a> Restoring the service instance
+## <a id="restore-instance"></a> Restore the service instance
 
-<p class="note caution">
-<span class="note__title">Caution</span>
-Restoring a service instance is destructive. VMware recommends that you only restore to a new and unused service instance.
+<p> Restoring a service instance is destructive.
+  VMware recommends that you only restore to a new and unused service instance.
 </p>
 
 You can restore a single node, leader-follower, HA cluster service, or <%= vars.single_leader_plan %> instance
@@ -306,7 +305,7 @@ The restore utility does the following:
 To restore a service instance:
 
 1. Use the BOSH CLI to SSH in to the newly created MySQL service instance by following the procedure
-in [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh-15).
+in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11).
 
 1. After securely logging in to MySQL, become root by running:
 
@@ -323,14 +322,14 @@ in [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmw
     Where:
 
     + `ENCRYPTION-KEY` is the backup encryption key you recorded in
-        [Retrieve Backup Encryption Key](#retrieve-key).
+        [Retrieve backup encryption key](#retrieve-key).
     + `RESTORE-FILE-PATH` is the full path on the BOSH VM where the backup artifact exists.
 
     For example:
 
     <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg</pre>
 
-## <a id="restage"></a> Restaging the service instance
+## <a id="restage"></a> Restage the service instance
 
 After you restore your single node, leader-follower, HA cluster service instance, or
 <%= vars.single_leader_plan %> you must restage your new service instance.

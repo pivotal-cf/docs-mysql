@@ -1,16 +1,16 @@
 ---
-title: Troubleshooting On-Demand instances
+title: Troubleshooting on-demand instances
 owner: MySQL
 ---
 
 <p>This topic tells you about techniques that app developers can use to begin troubleshooting
  on-demand instances.</p>
 
-<h2 id="-troubleshoot-errors"><a id="errors"></a> Troubleshoot Errors</h2>
+<h2 id="-troubleshoot-errors"><a id="errors"></a> Troubleshoot errors</h2>
 
 <p>Start here if you are responding to a specific error or error messages.</p>
 
-<h3 id="-common-service-errors"><a id="x-product"></a> Common Service Errors</h3>
+<h3 id="-common-service-errors"><a id="x-product"></a> Common service errors</h3>
 
 <p>Errors common to on-demand services are:</p>
 
@@ -60,8 +60,9 @@ main table {
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Ask your operator to ensure that the <strong>V2 Firehose</strong> check box is activated,
   and the <strong>Enable Log Cache syslog ingestion</strong> check box is deactivated in the TAS for VMs tile.
+
   For more information about configuring these check boxes, see
-  <a href="https://docs.pivotal.io/application-service/operating/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
+  <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/logging-config-opsman.html#syslog-forward">Enable Syslog Forwarding</a>.</td>
   </tr>
 
 </table>
@@ -119,7 +120,7 @@ main table {
                      and, in the <code>broker.stdout.log</code> file look for this error message:
                      <code>Failed to update manifest: There are no free ports in range: […</code>
                      For information about how to download the service broker logs,
-                     see <a href='troubleshoot.html#bosh-cf-access'>Access Broker Logs and VMs</a>.
+                     see <a href='troubleshoot.html#bosh-cf-access'>Access broker logs and VMs</a>.
                   </li>
                   <li> Ask the operator to increase the external TCP port range for off-platform access
                        by editing the <strong>Settings</strong> pane on the Tanzu SQL for VMs tile.
@@ -133,19 +134,19 @@ main table {
 </table>
 </div>
 
-<h3 id="if-instances-or-database-are-inaccessible"><a id="inaccessible"></a>If Instances or Database are Inaccessible</h3>
+<h3 id="if-instances-or-database-are-inaccessible"><a id="inaccessible"></a>If instances or database are inaccessible</h3>
 
 <p>You might experience the following in a leader-follower or Multi&#8209;Site Replication
 topology, or during upgrades:</p>
 
 <ul>
-<li><a href="#outages">Temporary Outages</a></li>
-<li><a href="#read-only">Apps Cannot Write to the Database</a></li>
-<li><a href="#disk-full">Apps Are Inoperable</a></li>
-<li><a href="#m-tls-error">Apps Cannot Connect to the Database</a></li>
-<li><a href="#connecter">MySQL Connector/J v5.1.41 or Earlier</a></li>
+<li><a href="#outages">Temporary outages</a></li>
+<li><a href="#read-only">Apps cannot write to the database</a></li>
+<li><a href="#disk-full">Apps are inoperable</a></li>
+<li><a href="#m-tls-error">Apps cannot connect to the database</a></li>
+<li><a href="#connecter">MySQL Connector/J v5.1.41 or earlier</a></li>
 <li><a href="#m-tls">Mutual TLS</a></li>
-<li><a href="#java-buildpack">Java Apps Cannot Connect after Buildpack Update</a></li>
+<li><a href="#java-buildpack">Java apps cannot connect after buildpack update</a></li>
 </ul>
 
 <style>
@@ -183,7 +184,7 @@ main table {
 
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
-    <td>For more information, see <a href="./upgrade.html#interruptions">Service Interruptions</a>.</td>
+    <td>For more information, see <a href="./upgrade.html#interruptions">Service interruptions</a>.</td>
   </tr>
 
 </table>
@@ -242,7 +243,7 @@ main table {
     to resolve this issue, you can trigger a failover to the follower VM.
     For more information about troubleshooting this problem,
     see <a href='./multi-site-trigger-failover.html'>
-        Triggering Multi-Site Replication Failover and Switchover</a>.</p></td>
+        Triggering multi-site replication failover and switchover</a>.</p></td>
   </tr>
 
 </table>
@@ -290,7 +291,7 @@ write, and cf CLI operations do not work.</td>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Contact your operator to check if your persistent disk is full.
 For more information about troubleshooting this problem, see
-<a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.</td>
+<a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.</td>
   </tr>
 
 </table>
@@ -339,9 +340,9 @@ main table {
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td><ul>
-    <li>See <a href="#connector">MySQL Connector/J v5.1.41 or Earlier</a>.</li>
+    <li>See <a href="#connector">MySQL Connector/J v5.1.41 or earlier</a>.</li>
     <li>See <a href="#m-tls">Mutual TLS</a>.</li>
-    <li>See <a href="#m-tls">Java Apps Cannot Connect after Buildpack Update</a>.</li>
+    <li>See <a href="#m-tls">Java apps cannot connect after buildpack update</a>.</li>
 </ul></td>
   </tr>
 
@@ -494,16 +495,16 @@ main table {
 </table>
 </div>
 
-<h3 id="-failed-backup-or-restore-with-the-adbr-plugin"><a id="failed-adbr"></a> Failed Backup or Restore with the adbr Plug-in</h3>
+<h3 id="-failed-backup-or-restore-with-the-adbr-plugin"><a id="failed-adbr"></a> Failed backup or restore with the adbr plug-in</h3>
 
 <p>If you get errors when working with the ApplicationDataBackupRestore (adbr) plug-in
 for the Cloud Foundry Command Line Interface (cf CLI) tool, see:</p>
 
 <ul>
-<li><a href="#failed-adbr-400">&ldquo;400&rdquo; Error during Backup or Restore</a></li>
-<li><a href="#failed-adbr-500">&ldquo;500&rdquo; Error during Backup or Restore</a></li>
-<li><a href="#failed-adbr-502">&ldquo;502&rdquo; Error during Backup or Restore</a></li>
-<li><a href="#failed-restore">&ldquo;Status: Restore failed&rdquo; after adbr Restore</a></li>
+<li><a href="#failed-adbr-400">&ldquo;400&rdquo; error during backup or restore</a></li>
+<li><a href="#failed-adbr-500">&ldquo;500&rdquo; error during backup or restore</a></li>
+<li><a href="#failed-adbr-502">&ldquo;502&rdquo; error during backup or restore</a></li>
+<li><a href="#failed-restore">&ldquo;Status: Restore failed&rdquo; after adbr restore</a></li>
 </ul>
 
 <style>
@@ -717,9 +718,9 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
 </div>
 
 <p>For general information about the adbr plug-in,
-see <a href="./backup-restore.html">Backing Up and Restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
+see <a href="./backup-restore.html">Backing up and restoring VMware Tanzu SQL with MySQL for VMs</a>.</p>
 
-<h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent Disk Usage Is Increasing</h3>
+<h3 id="-persistent-disk-usage-is-increasing"><a id="disk-usage-increases"></a> Persistent disk usage is increasing</h3>
 
 <p>If you have set the <code>optimize_for_short_words</code> parameter to <code>true</code> and
 you are alerted that persistent disk usage is high,
@@ -758,7 +759,7 @@ main table {
     and the persistent disk is filling up.
       </p>
       For information about the parameter,
-      see <a href="change-default.html#optimize_for_short_words">Optimize for Short Words</a>.</td>
+      see <a href="change-default.html#optimize_for_short_words">Optimize for short words</a>.</td>
   </tr>
 
   <tr>
@@ -770,7 +771,7 @@ main table {
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Remove full-text entries for deleted or old records by following the instructions
-               in <a href="change-default.html#optimize_for_short_words">Optimize for Short Words</a>.</td>
+               in <a href="change-default.html#optimize_for_short_words">Optimize for short words</a>.</td>
   </tr>
 
 </table>
@@ -778,7 +779,7 @@ main table {
 
 <p>For information about monitoring disk usage, see <a href="./monitor.html">Monitoring and KPIs</a>.</p>
 
-<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a> Techniques for Troubleshooting</h2>
+<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a> Techniques for troubleshooting</h2>
 
 <p>See the following sections for troubleshooting techniques when using
 the Cloud Foundry Command-Line Interface (cf CLI) to perform basic
@@ -786,7 +787,7 @@ operations on a Tanzu SQL for VMs service instance.</p>
 
 <p>Basic cf CLI operations include <code>create</code>, <code>update</code>, <code>bind</code>, <code>unbind</code>, and <code>delete</code>.</p>
 
-<h3 id="understand-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Understand a Cloud Foundry (CF) Error Message</h3>
+<h3 id="understand-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Understand a Cloud Foundry error message</h3>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 
@@ -838,7 +839,7 @@ Updated: 2017-03-13T10:17:58Z
   If you have more than one broker instance, repeat this process for each instance.
 </p>
 
-<h3 id="-find-information-about-your-service-instance"><a id="instance"></a> Find Information about Your Service Instance</h3>
+<h3 id="-find-information-about-your-service-instance"><a id="instance"></a> Find information about your service instance</h3>
 
 <p>You might need to find the name, GUID, or other information about a service instance.
 To find this information, do the following:</p>
@@ -863,7 +864,7 @@ my-instance   p.mysql      db-small                  create succeeded
 
 <p>The GUID is useful for debugging.</p>
 
-<h2 id="use-the-knowledge-base-(community)"><a id="kb"></a>Use the Knowledge Base (Community)</h2>
+<h2 id="use-the-knowledge-base-(community)"><a id="kb"></a>Use the Knowledge Base Community</h2>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 

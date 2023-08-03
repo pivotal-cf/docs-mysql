@@ -20,13 +20,16 @@ workstation to a <%= vars.product_short %> service instance.
 
 For more information on how to establish a TLS connection, see [Establish a TLS Connection to a Service Instance](#establish-tls).
 
-<p class="note important">
-<span class="note__title"> Important</span> Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
-Because of this, the server certificate does not validate apps.
-If an app presents a certificate to the MySQL server,
-the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate mTLS in your apps.
+<p class="note caution">
+<span class="note__title">Caution</span>
+Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
+   Because of this, the server certificate does not validate apps.
+   If an app presents a certificate to the MySQL server,
+   the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate
+ 	mTLS in your apps.
+</p>
 
-## <a id='enable'></a> Activating TLS
+## <a id='enable'></a> Activate TLS
 
 The procedure for updating your app depends on the language and framework of your app.
 Java and Spring apps automatically detect TLS.
@@ -39,7 +42,7 @@ To activate TLS on existing service instances, do one of the following:
 
 ### <a id='prereq'></a> Prerequisites
 
-To activate TLS for service instances, an operator must:
+To activate TLS for service instances, you must:
 
 * Complete the procedure in [Preparing for TLS](prepare-tls.html).
 * Activate TLS in the tile configuration when doing the procedure in [Configure Security](install-config.html#security).
@@ -58,7 +61,7 @@ to use the <a href="https://dev.mysql.com/downloads/connector/j/8.0.html">MySQL 
 instead of the MariaDB Connector/J.
 </p>
 
-### <a id='rebind'></a> Rebinding your app
+### <a id='rebind'></a> Rebind your app
 
 If your app is bound to an existing service instance, you must rebind it after activating TLS for the instance.
 
@@ -163,7 +166,7 @@ To activate TLS for your app, do the following:
 	```
 1. Push your app with `cf push`.
 
-## <a id='establish-tls'></a> Establishing a TLS connection to a service instance
+## <a id='establish-tls'></a> Establish a TLS connection to a service instance
 
 You can use `mysql` to establish a TLS connection to a <%= vars.product_short %> service instance that has TLS
 activated.
@@ -190,8 +193,8 @@ To establish a TLS connection to a service instance:
   }
   </pre>
 
-  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale. Create a new
-  service key.
+  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale.
+  Create a new service key.
 
 2. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:
 <pre class="terminal">$ pbpaste > root.pem</pre>

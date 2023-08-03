@@ -5,11 +5,6 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-You can back up and restore a physical backup
-to a <%= vars.product_full %> service instance.
-
-Both operators and developers can use the procedures in this topic.
-
 <p> The backup and restore capability described in this topic
   restores a <i>running</i> service instance's backup to a new instance.
   It is not intended to list or restore backups created by a deleted service instance.
@@ -18,21 +13,27 @@ Both operators and developers can use the procedures in this topic.
   see, <a href="./manual-restore.html">Manually Restoring From Backup</a>.
 </p>
 
-<p class="note">
-<span class="note__title">Note</span> In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore
-(adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
-<br><br>
-As of v2.9.3, backup artifacts are organized under subfolders in external storage. They are now stored under <code>p.mysql >
-service-instance_GUID > yyyy > mm > dd</code>. Old backup artifacts stored in the root directory can still be
-accessed through the cf CLI using the adbr plug-in.
+<p> In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore
+  (adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
+  <br><br>
+  As of v2.9.3, backup artifacts are organized under subfolders in external storage.
+  They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd</code>.
+  <br><br>
+  Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the
+  adbr plug-in.
 </p>
 
+
+You can back up and restore a physical backup
+to a <%= vars.product_full %> service instance.
+Both operators and developers can use the procedures in this topic.
+
 Operators can configure automated backups in the <%= vars.product_short %> tile by following the procedures in
-[Configuring Automated Backups](./automated-backup.html).
+[Configuring automated backups](./automated-backup.html).
 
 Developers can manually take physical backups by following the procedure in this topic.
 Developers can also create logical backups using `mysqldump`.
-For more information about logical backups, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
+For more information about logical backups, see [Backing up and restoring with mysqldump](./backup-mysqldump.html).
 
 You can back up and restore a <%= vars.product_short %> service instance using the
 Cloud Foundry Command Line Interface (cf CLI).
@@ -69,14 +70,12 @@ Automated backups fail if the service broker is unavailable. For example, during
   You cannot be deactivate this feature.
 </p>
 
-<p> As of v2.9, only the leader node is backed up for a leader-follower deployment.
-</p>
-
-<p> If <%= vars.product_short %> fails to upload a backup, the backup artifact remains on the persistent disk.
-  This can cause the persistent disk to fill up faster.
-  If the persistent disk is full, apps become inoperable.
-  For instructions on how to troubleshoot persistent disk errors,
-  see <a href="./troubleshoot.html#persistent-disk">Persistent Disk is Full</a>.
+<p class="note important">
+<span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload a backup, the backup artifact remains on the persistent disk.
+This can cause the persistent disk to fill up faster.
+If the persistent disk is full, apps become inoperable.
+For instructions on how to troubleshoot persistent disk errors,
+see <a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.
 </p>
 
 ## <a id="understanding-metadata"></a> About backup files and metadata
@@ -136,10 +135,9 @@ To install the plug-in, run:
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 ```
-<p class="note caution">
-<span class="note__title">Caution</span>
-The procedures on this page assume that
-you are using the adbr plug-in v0.3.0 or later.
+
+<p> The procedures on this page assume that
+   you are using the adbr plug-in v0.3.0 or later.
 </p>
 
 ## <a id="backup"></a> Manually back up a service instance
@@ -176,9 +174,9 @@ Finally, you rebind and restage apps that use the service instance.
 
 Before you begin the restore procedure review the following important concepts:
 
-+ [The Topology of the Instance You Restore To](#instance-types).
-+ [When to Use a Different Restore Method](#different-cases).
-+ [The New Database Must Be Empty](#empty-database).
++ [The topology of the instance you restore to](#instance-types)
++ [When to use a different restore method](#different-cases)
++ [The new database must be empty](#empty-database)
 
 #### <a name="instance-types"></a> The topology of the instance you restore to
 
@@ -213,12 +211,12 @@ If you want a different topology, update the instance after restoring the data:
   </tr>
 </table>
 
-Operators must ensure that the persistent disk in the single node plan is at least as large
+You must ensure that the persistent disk in the single node plan is at least as large
 as the persistent disk of the largest leader-follower plan.
 Similarly, they must ensure that the persistent disk in the <%= vars.single_leader_plan %> plan
 is at least as large as the persistent disk of the largest HA cluster plan.
 For information about persistent disk sizing recommendations,
-see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
+see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
 #### <a name="different-cases"></a> When to use a different restore method
 
@@ -258,7 +256,7 @@ If the database is not empty, then the adbr plug-in fails to restore the data an
 you need to delete the service instance and create another.
 
 
-### <a id="procedure"></a> Procedure to restore a service instance
+### <a id="procedure"></a> Restore a service instance
 
 To restore a service instance:
 
@@ -279,7 +277,7 @@ To restore a service instance:
     + `DESTINATION-INSTANCE` is a name that you choose to identify the service instance.
 
     You restore the backup artifact to this service instance.
-    For more information, see [Create a Service Instance](./use.html#create).
+    For more information, see [Create a service instance](./use.html#create).
 
 1. View the available backup artifacts for your service instance by running:
 
@@ -324,7 +322,7 @@ To restore a service instance:
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
       [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
-    If the status is `Restore failed`, see [The New Database Must Be Empty](#empty-database).
+    If the status is `Restore failed`, see [The new database must be empty](#empty-database).
 
 1. If you are restoring a leader-follower or HA cluster service instance,
     update the plan by running:
@@ -369,11 +367,11 @@ To restore a service instance:
     cf restage APP-NAME
     ```
 
-##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr Plug-in
+## <a id="troubleshooting-adbr"></a> Troubleshooting the adbr plug-in
 
 If you get HTTP error codes when working with the adbr plug-in,
-see [Failed Backup or Restore with adbr Plug-in](troubleshoot-instances.html#failed-adbr)
-in _Troubleshooting On-Demand Instances_.
+see [Failed backup or restore with adbr plug-in](troubleshoot-instances.html#failed-adbr)
+in _Troubleshooting on-demand instances_.
 
 ##<a id="monitor-backups"></a> Monitor backups
 
@@ -382,10 +380,10 @@ A common cause of failure for automated backups is the persistent disk filling u
 
 There are two ways to check that backups are being made:
 
-+ [Use the adbr Plug-in to List Backups](#use-adbr).
-+ [Use Healthwatch to Confirm Automated Backups](#use-healthwatch).
++ [Use the adbr plug-in to list backups](#use-adbr)
++ [Use Healthwatch to confirm automated backups](#use-healthwatch)
 
-### <a id="use-adbr"></a> Use the adbr Plug-in to List Backups
+### <a id="use-adbr"></a> Use the adbr plug-in to list backups
 
 The `adbr` plug-in is a quick way to list backups for a service instance.
 The plug-in lists the last five backups for a service instance.
@@ -414,12 +412,12 @@ The list includes both automated and manual backups.
     f4df63d3-ece1-4b53-99a4-4b55ad10af2f_1596674700   Wed Jun  2 00:45:00 UTC 2021
     </pre>
 
-### <a id="use-healthwatch"></a> Use Healthwatch to Confirm Automated Backups
+### <a id="use-healthwatch"></a> Use Healthwatch to confirm automated backups
 
 You can use Healthwatch to confirm that automated backups are being taken
 on the schedule configured by the operator.
 For information about configuring the schedule for automated backups,
-see [Configuring Automated Backups](./automated-backup.html).
+see [Configuring automated backups](./automated-backup.html).
 
 For each backup of every service instance,
 <%= vars.product_short %> emits a metric
@@ -428,7 +426,7 @@ called `last_successful_backup`.
 1. Monitor the `last_successful_backup` metric through Healthwatch.
 
     For details about the metric,
-    see [Hours Since Last Successful Backup](./monitor.html#last-successful-backup)
+    see [Hours since last successful backup](./monitor.html#last-successful-backup)
     in _Monitoring and KPIs for <%= vars.product_full %>_.<br><br>
 
     A healthy backup metric shows a saw-tooth plot.

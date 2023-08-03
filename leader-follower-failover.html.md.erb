@@ -15,29 +15,28 @@ You can trigger a failover in the following scenarios:
 * The leader VM fails unexpectedly.
 * The AZ where the leader VM is located goes offline unexpectedly.
 
-
 You can use the following metrics to determine if you need to trigger a failover:
 
 + `/p.mysql/available`: This metric monitors whether the MySQL server is currently available.
-For more information, see [Server Availability](./monitor.html#server-heartbeat).
+For more information, see [Server availability](./monitor.html#server-heartbeat).
 
 * `/p.mysql/follower/seconds_behind_master`: This metric monitors how far behind the follower is
-    in applying writes from the leader. For more information, see [Leader-Follower Metrics](./monitor.html#l-f-metrics).
+    in applying writes from the leader. For more information, see [Leader-Follower metrics](./monitor.html#l-f-metrics).
 
 + `/p.mysql/follower/seconds_since_leader_heartbeat`: This metric monitors the number of seconds that
 elapse between the leader heartbeat and the replication of the heartbeat in the follower.
- For more information, see [Leader-Follower Metrics](./monitor.html#l-f-metrics).
+ For more information, see [Leader-Follower metrics](./monitor.html#l-f-metrics).
 
 For information about errands used to trigger failover, see
 [configure-leader-follower](./errands.html#configure-leader-follower), [make-leader](./errands.html#make-leader), and [make-read-only](./errands.html#make-read-only).
 
 To trigger a failover:
 
-1. [Retrieve Information](#retrieve).
-1. [Promote the Follower](#promote).
-1. [Clean Up Former Leader VM (Optional)](#clean-up).
-1. [Configure the New Follower](#config-follower).
-1. [Unbind and Rebind the App](#unbind-rebind).
+1. [Retrieve information](#retrieve).
+1. [Promote the follower](#promote).
+1. [Clean up former leader VM (Optional)](#clean-up).
+1. [Configure the new follower](#config-follower).
+1. [Unbind and rebind the app](#unbind-rebind).
 
 
 ## <a id='retrieve'></a> Retrieve information
@@ -73,8 +72,8 @@ for stopping the leader and promoting the follower:
 
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
-1. Follow the procedure at [Gather Credential and IP Address Information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1)
-   and [Log in to the <%= vars.ops_manager %> VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2) to SSH into the <%= vars.ops_manager %> VM.
+1. Follow the procedure at [Gather credential and IP Address information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1)
+   and [SSH into <%= vars.ops_manager %>](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2) to SSH into the <%= vars.ops_manager %> VM.
 
 1. From the <%= vars.ops_manager %> VM, log in to your BOSH Director with the BOSH CLI.
    For more information on logging in with the BOSH CLI, see [Log in to the BOSH Director](https://docs.pivotal.io/pivotalcf/customizing/trouble-advanced.html#log-in).
@@ -198,7 +197,7 @@ skip to <a href="#unbind-rebind">Unbind and Rebind the App</a>.
 If you are triggering a failover in response to the AZ of the leader VM going offline, you can fail your app over to a single instance by following the procedure in [Unbind and Rebind the App](#unbind-rebind) below.
 However, to restore leader-follower, you must regain access to the AZ where your leader VM is located before following the procedure in [Clean Up Former Leader VM (Optional)](#clean-up) and [Configure the New Follower](#config-follower) below.
 
-## <a id='clean-up'></a>Clean Up Former Leader VM (Optional)
+## <a id='clean-up'></a>Clean up former leader VM (Optional)
 
 If you are triggering a failover in response to a failing leader VM, to clean up the former leader VM:
 
@@ -269,7 +268,7 @@ If you are triggering a failover in response to a failing leader VM, to clean up
    Orphaning a disk rather than deleting it preserves the disk for possible recovery.
    After performing recovery operations, you can reattach the disk to a VM. BOSH deletes orphaned disks after five days by default.
 
-## <a id='config-follower'></a> Configure the New Follower
+## <a id='config-follower'></a> Configure the new follower
 
 To start the former leader VM again and configure it as the new follower:
 

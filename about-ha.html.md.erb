@@ -4,10 +4,10 @@ owner: MySQL
 tile: true
 ---
 
-You can learn how highly available (HA) clusters work in <%= vars.product_full %>
-and contain information that help's you decide whether to use HA clusters.
+This topic describes how Highly Available (HA) clusters work in <%= vars.product_full %>
+and provides information to help you decide whether to use HA clusters.
 
-## <a id="understanding"></a> Highly Available Cluster Topology
+## <a id="understanding"></a> Highly available cluster topology
 
 In an HA cluster topology, a cluster consists of three nodes. Each node
 contains the same set of data synchronized across nodes. Data is simultaneously replicated across
@@ -16,6 +16,7 @@ nodes or not written at all if replication fails even on a single node.
 With three nodes, HA clusters are highly available and resilient to failure because if a node loses contact with the other two nodes, the other two nodes can
 remain in contact and continue to accept transactions. If the number of nodes is odd,
 the two nodes can represent the primary component.
+
 For more information about cluster availability, see
 [Percona XtraDB Cluster: Quorum and Availability of the cluster](https://www.percona.com/blog/2015/06/12/percona-xtradb-cluster-quorum-availability-cluster/)
 in the Percona XtraDB Cluster documentation.
@@ -56,14 +57,14 @@ The proxies update to ensure that traffic is sent to the new primary node.
 For more information about other availability options supported by <%= vars.product_short %>,
 see [Availability Options](availability-options.html).
 
-## <a id="requirements"></a> Infrastructure requirements for highly available deployments
+## <a id="requirements"></a> Infrastructure Requirements for highly available deployments
 
  Before you decide to use HA clusters for <%= vars.product_short %> service plans, consider the
  following requirements.
 
 ### <a id="cap-plan"></a> Capacity planning
 
-When calculating IaaS usage, you must take into account that each HA instance
+When you calculate IaaS usage, you must take into account that each HA instance
 requires three VMs. Therefore, the resources used for an HA plan must be tripled.
 For more information, see [Resource Usage Planning for On-Demand Plans](./recommended.html#resources).
 
@@ -77,8 +78,8 @@ With three AZs, nodes are deployed to separate AZs.
 For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
 in _<%= vars.product_full %> Recommended Usage and Limitations_.
 
-### <a id="network-req"></a> Networking rules
-In addition to the standard networking rules needed for <%= vars.product_short %>, the operator
+### <a id="network-req"></a> Networking Rules
+In addition to the standard networking rules needed for <%= vars.product_short %>, you
 must ensure HA cluster specific network rules are also configured.
 
 For information about HA cluster specific networking rules,
@@ -139,7 +140,7 @@ For more information,
 see [wsrep\_auto\_increment\_control](https://www.percona.com/doc/percona-xtradb-cluster/LATEST/wsrep-system-index.html#wsrep_auto_increment_control)
 in the Percona XtraDB Cluster documentation.
 
-- Users cannot change the session behavior of auto-increment variables.
+- You cannot change the session behavior of auto-increment variables.
 This is because the HA cluster controls the behavior of these variables.
 For example, if an app runs `SET SESSION auto_increment_increment`, the cluster ignores the change.
 
@@ -160,7 +161,8 @@ nodes are partitioned, the cluster loses quorum and becomes unusable until manua
 bootstrapped. For more information about bootstrapping HA clusters,
 see [Bootstrapping](./bootstrapping.html).
 
-## <a id="server"></a> MySQL Server Defaults for HA Components
+## <a id="server"></a> MySQL Server defaults for HA components
+
 This section describes some defaults that <%= vars.product_short %> applies to HA components.
 
 ### State snapshot transfer process
@@ -174,10 +176,11 @@ to perform SST, which is fast, but blocks requests during the transfer. For more
 information about [Percona XtraBackup SST Configuration](https://www.percona.com/doc/percona-xtradb-cluster/LATEST/manual/xtrabackup_sst.html)
 in the Percona XtraDB Cluster documentation.
 
-### Large Data File Splitting Enabled
+### Large data file splitting enabled
 
 By default, HA clusters splits large `Load Data` commands into small manageable units.
 This deviates from the standard behavior for MySQL.
+
 For more information, see [wsrep\_load\_data\_splitting](https://www.percona.com/doc/percona-xtradb-cluster/LATEST/wsrep-system-index.html#wsrep_load_data_splitting)
 in the Percona XtraDB Cluster documentation.
 
