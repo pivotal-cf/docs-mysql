@@ -1,43 +1,43 @@
 ---
-title: Migrating Data in VMware SQL with MySQL for Tanzu Application Service
+title: Migrating data in VMware SQL with MySQL for Tanzu Application Service
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how to migrate data from any MySQL database to a
+You can migrate data from any MySQL database to a
 <%= vars.product_full %> service instance.
-
-## <a id='overview'></a>Overview
 
 You can migrate data from a source database to a destination database using the `migrate` command.
 
 To migrate data in <%= vars.product_short %>:
 
 1. Enable the `migrate` command to access the source database.
-    See [Enable Source Access](#source-access).
+    See [Enable source access](#source-access).
 1. Migrate the data from the source database to the destination service instance.
-    See [Migrate Data](#migrate-data).
+    See [Migrate data](#migrate-data).
 1. Ensure that the migration was successful.
-    See [Validate Data](#validate-data).
+    See [Validate data](#validate-data).
 1. Rebind and re-stage apps to the new destination service instance.
     To save resources, you can optionally delete the old source database.
-    See [Rebind and Re-Stage Apps](#rebind-restage).
+    See [Rebind and re-stage apps](#rebind-restage).
 
-<p class="note warning"><strong>Warning:</strong>
-  Migrating large datasets can take several hours.
-  Data migration is linear and depends on the hardware being used.
-  For example, if X amount of data takes 10 minutes to migrate,
-  then 2X amount of data takes 20 minutes to migrate using the same hardware.
-  <br><br>
-  Do a test migration with small datasets to estimate how long the entire migration takes before migrating larger datasets.
+    <p class="note caution">
+<span class="note__title">Caution</span>
+Migrating large datasets can take several hours.
+    Data migration is linear and depends on the hardware being used.
+    For example, if X amount of data takes 10 minutes to migrate,
+    then 2X amount of data takes 20 minutes to migrate using the same hardware.
+    <br><br>
+    Do a test migration with small datasets to estimate how
+    long the entire migration takes before migrating larger datasets.
 </p>
 
 ## <a id='prepare'></a>Prerequisites
 
 Before you do the procedures in this topic, you must have:
 
-* Read about the `migrate` command in [About Data Migration
+* Read about the `migrate` command in [About data migration
 in <%= vars.product_short %>](./about-migrate.html).
 * An existing MySQL database that is the source of the data you want to migrate from.
   MySQL source databases can be:
@@ -48,23 +48,22 @@ in <%= vars.product_short %>](./about-migrate.html).
 you want to migrate to.
 * A <%= vars.product_short %> service plan available in the destination org and space you want
   to migrate your data to.
-  This service plan must fulfill the requirements in [Resource Planning](#sizing).
+  This service plan must fulfill the requirements in [Resource planning](#sizing).
   Talk to your operator to determine which service plan is appropriate.
 
 
-### <a id='sizing'></a>Resource Planning
+### <a id='sizing'></a>Resource planning
 
 You must ensure that the <%= vars.product_short %> v2 service plan for your
 destination service instance has your preferred VM type and persistent disk size.
 If the plan does not enough space on disk to store the data, migration fails.
 
-<p class="note"><strong>Note:</strong>
-  To view available service plans, run <code>cf marketplace</code>.
+<p> To view available service plans, run <code>cf marketplace</code>.
   <%= vars.product_short %> v2 appears as <code>p.mysql</code>
   and <%= vars.product_old %> v1 appears as <code>p-mysql</code>.
 </p>
 
-When choosing a service plan for your destination service instance, if you select:
+You can choose a service plan for your destination service instance, if you select:
 
 * **A single node or leader-follower plan,** ensure the persistent disk size is three times
   larger than the size of the source data.
@@ -72,17 +71,15 @@ When choosing a service plan for your destination service instance, if you selec
 larger than the size of the source data.
 
 For more information about recommended persistent disk sizes,
-see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
+see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
-## <a id='install-plugin'></a>Install the mysql-tools CF CLI Plug-in
+## <a id='install-plugin'></a>Install the mysql-tools CF CLI plug-in
 
 VMware recommends that developers migrate data using the `mysql-tools` CLI plug-in with the `migrate` command.
 For more information about `mysql-tools` cf CLI plug-in,
 see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
 
-<p class="note">
-  <strong>Note:</strong>
-  You must have TLS activated to use this feature.
+<p> You must have TLS activated to use this feature.
   To configure and activate TLS, see <a href="./install-config.html#security-tls">Configure TLS</a>.
 </p>
 
@@ -99,7 +96,7 @@ To install the `mysql-tools` cf CLI plug-in:
     cf mysql-tools version
     ```
 
-## <a id='source-access'></a>Enable Source Access
+## <a id='source-access'></a>Enable source access
 
 The `migrate` command must be able to access the source database.
 How you activate this access depends on where the source database is located relative to the destination
@@ -107,17 +104,17 @@ space and org.
 
 If you are:
 
-* **Migrating within an Org and Space**: The `migrate` command can access the source without any preparation.
- Continue to [Migrate Data](#migrate-data).
+* **Migrating within an Org and Space**: The `migrate` command can access the source without any
+preparation. Continue to [Migrate data](#migrate-data).
 * **Migrating across Spaces**: If the source database is in a different space from the destination,
 enable access using service instance sharing.
-See [Source Access across Spaces](#across-spaces).
+See [Source access across spaces](#across-spaces).
 * **Migrating from Off-Platform**: If the source database is in a different <%= vars.ops_manager %> foundation
 from the destination or not deployed on <%= vars.ops_manager %>,
 create a user-provided service that can access the remote database.
-See [Source Access Off-Platform](#off-platform).
+See [Source access off-platform](#off-platform).
 
-### <a id='across-spaces'></a>Source Access across Spaces
+### <a id='across-spaces'></a>Source access across spaces
 
 If your source MySQL service instance is in a different development space from your destination org and space,
 you can migrate your data by sharing the service instance to the destination org and space.
@@ -125,12 +122,12 @@ Service instance sharing is enabled by default.
 
 To share a source MySQL service instance with your destination org and space:
 
-1. Do the procedure in [Share Service Instances](./use.html#share).
+1. Do the procedure in [Share service instances](./use.html#share).
 
-1. Continue to [Migrate Data](#migrate-data).
+1. Continue to [Migrate data](#migrate-data).
 
 
-### <a id='off-platform'></a>Source Access Off-Platform
+### <a id='off-platform'></a>Source access off-platform
 
 If your source MySQL database is in a different <%= vars.ops_manager %> foundation
 or not deployed on <%= vars.ops_manager %>,
@@ -138,7 +135,7 @@ you can migrate your data by creating a local user-provided service instance tha
 
 For more information on user-provided
 service instances, see
-[User-Provided Service Instances](https://docs.pivotal.io/application-service/devguide/services/user-provided.html).
+[User-provided service instances](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/services-user-provided.html).
 
 To create a user-provided service instance to access the off-platform database:
 
@@ -174,13 +171,13 @@ These values usually include:
     Creating user provided service migrating-db in org my-org / space my-space as admin...
     OK
     </pre>
-    <p class="note"><strong>Note</strong>:
-    <code>cf cups</code> is a shortcut for the <code>cf create-user-provided-service</code> command.
+
+    <p><code>cf cups</code> is a shortcut for the <code>cf create-user-provided-service</code> command.
     </p>
 
-1. After your user-provided service instance is created, continue to [Migrate Data](#migrate-data).
+1. After your user-provided service instance is created, continue to [Migrate data](#migrate-data).
 
-## <a id='migrate-data'></a>Migrate Data
+## <a id='migrate-data'></a>Migrate data
 
 After your source database can access the destination space:
 
@@ -192,7 +189,7 @@ See [Stop and Unbind Apps](#stop-unbind).
 + **If your source MySQL database is running off-platform,**
  do the procedure in [Migrate Data to Destination Instance](#command).
 
-### <a id='stop-unbind'></a> Stop and Unbind Apps
+### <a id='stop-unbind'></a> Stop and unbind apps
 
 To stop and unbind your apps:
 
@@ -234,14 +231,14 @@ To stop and unbind your apps:
         * `APP` is the name of your app.
         * `SOURCE-INSTANCE` is the name of your source <%= vars.product_short %> service instance.
 
-1. Do the procedure in [Migrate Data to Destination Instance](#command).
+1. Do the procedure in [Migrate data to destination instance](#command).
 
-### <a id='command'></a> Migrate Data to Destination Instance
+### <a id='command'></a> Migrate data to destination instance
 
 To migrate data from your source database to your destination service instance:
 
 1. Log in to your BOSH deployment and target the destination org and space by doing
-steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind).
+steps 1 and 2 of [Stop and unbind apps](#stop-unbind).
 
 1. View and select an available <%= vars.product_short %> v2 service plans by running:
 
@@ -275,15 +272,14 @@ steps 1 and 2 of [Stop and Unbind Apps](#stop-unbind).
     2018/04/24 11:41:27 Migration completed successfully
     2018/04/24 11:41:29 Cleaning up...</pre>
 
-    <p class="note"><strong>Note:</strong>
-      For debugging purposes, you can add the <code>--no-cleanup</code> flag to the previous command.
+    <p> For debugging purposes, you can add the <code>--no-cleanup</code> flag to the previous command.
       If a migration fails, this flag preserves the migration app and the newly-created service instance.
       However, if a migration succeeds, the migration app is still deleted.
     </p>
 
-## <a id='validate-data'></a>Validate Data
+## <a id='validate-data'></a>Validate data
 
-After migrating your data, you must verify that the data was successfully migrated by validating the data
+After you migrate your data, you must verify that the data was successfully migrated by validating the data
 in the new <%= vars.product_short %> v2.x service instance.
 
 You can validate the data by creating an SSH tunnel to gain direct command line access to the
@@ -292,22 +288,22 @@ new <%= vars.product_short %> v2.x service instance.
 To create an SSH tunnel to the instance and validate your data:
 
 1. Create an SSH tunnel to your <%= vars.product_short %> v2.x service instance by doing the following procedures in
-[Accessing Services with SSH](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html):
+[Accessing Services with SSH](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/deploy-apps-ssh-services.html):
 
-    1. [Push Your Host App](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#push-app)
+    1. [Push your host app](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/deploy-apps-ssh-services.html#push-app)
 
-    1. [Create Your Service Key](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#bind-app)
+    1. [Create your service key](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/deploy-apps-ssh-services.html#bind-app)
 
-    1. [Configure Your SSH Tunnel](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#ssh-tunnel)
+    1. [Configure your SSH tunnel](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/deploy-apps-ssh-services.html#ssh-tunnel)
 
-    1. [Access Your Service Instance](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#access-service)
+    1. [Access your service instance](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/deploy-apps-ssh-services.html#ssh-tunnel)
 
 1. From the MySQL shell, validate that the data that you expect to see has been imported
 into the <%= vars.product_short %> v2.x service instance.
 
 1. Exit the MySQL shell and stop the SSH tunnel.
 
-## <a id='rebind-restage'></a>Rebind and Re-Stage Apps
+## <a id='rebind-restage'></a>Rebind and re-stage apps
 
 To complete the migration, rebind and re-stage any bound apps in your destination org and space.
 After rebinding and re-staging your apps,

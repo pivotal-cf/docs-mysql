@@ -1,14 +1,14 @@
 ---
 breadcrumb: VMware Tanzu RabbitMQ for VMs Documentation
-title: Creating a Service Instance with Service-Gateway Access
+title: Creating a service instance with Service-Gateway access
 owner: MySQL
 ---
 
-This topic explains how to create a service instance with service-gateway access.
-It also explains how to activate and deactivate service-gateway access on an existing service instance.
+You can reate a service instance with service-gateway access.
+You can activate and deactivate service-gateway access on an existing service instance.
 
 For general information about service-gateway access, including about architecture and use cases,
-see [About Service-Gateway Access](./service-gateway-access.html).
+see [About Service-Gateway access](./service-gateway-access.html).
 
 If service-gateway access is activated for the foundation, the external components that are outside the
 foundation can connect to MySQL service instances.
@@ -16,11 +16,10 @@ These external components are also referred to as _off-platform_ components.
 
 These components are typically:
 
-+ Apps running externally or running on other foundations
-+ Database administrative and management tools, for example, MySQL Workbench
++ Apps running externally or running on other foundations.
++ Database administrative and management tools, for example, MySQL Workbench.
 
-<p class="note">
-  <strong>Note:</strong> Apps that are deployed in the same foundation as the service instance,
+<p> Apps that are deployed in the same foundation as the service instance,
   can connect to the service instance directly without going through the service-gateway.
 </p>
 
@@ -37,7 +36,7 @@ The procedures in this topic assume:
   contact your operator.
 
 
-## <a id='create-service-gateway'></a> Create a Service Instance that Allows Off-Platform Access
+## <a id='create-service-gateway'></a> Create a service instance that allows off-platform access
 
 The following procedure describes how to create a new MySQL service instance that can be accessed by
 external components.
@@ -66,8 +65,7 @@ To create a service instance that enables service-gateway access:
     - `SERVICE-KEY` is a name you choose for the service key. Choose a name that
       indicates that the key contains credentials for off-platform access.
 
-    <p class="note">
-      <strong>Note:</strong> If the operator deactivates and then activates service-gateway access
+    <p> If you deactivate and then activate service-gateway access
       again on the foundation, you must create new service keys to obtain a new set of credentials for
       service-gateway access.
     </p>
@@ -100,7 +98,7 @@ To create a service instance that enables service-gateway access:
     instance from.
 
 
-## <a id='enable-service-gateway'></a> Enable an Existing Service Instance for Off-Platform Access
+## <a id='enable-service-gateway'></a> Enable an existing service instance for off-platform access
 
 If you already have a MySQL service instance, you can make it accessible to external components
 by activating service-gateway access.
@@ -118,10 +116,10 @@ To activate service-gateway access on an existing MySQL service instance:
 
 2. Obtain credentials by creating a service key.
    Follow steps 2 and 3 in
-   [Create a Service Instance that Allows Off-Platform Access](#create-service-gateway) above.
+   [Create a service instance that allows off-platform access](#create-service-gateway).
 
 
-## <a id='disable-service-gateway'></a> Disable Off-Platform Access on a Service Instance
+## <a id='disable-service-gateway'></a> Deactivate off-platform access on a service instance
 
 If you have a MySQL service instance that no longer needs to be accessed from outside the foundation,
 deactivate service-gateway access for that service instance.

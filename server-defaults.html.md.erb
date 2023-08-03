@@ -1,5 +1,5 @@
 ---
-title: About MySQL Server Defaults
+title: About MySQL server defaults
 owner: MySQL
 ---
 
@@ -8,25 +8,22 @@ owner: MySQL
 This topic provides information about the defaults that <%= vars.product_full %>
 applies to its Percona Server components.
 
-## <a id="defaults"></a> Overview
-
 Learn about the server defaults for <%= vars.product_short %> service plans.
 Most of the server defaults are the same for all service plans, however,
 some server defaults differ depending on the service plan.
 
 For server defaults that are:
 
-+ Common to all plans, see [Server Defaults for All Plans](#all).
++ Common to all plans, see [Server defaults for all plans](#all).
 + Specific to single node and leader-follower plans,
-see [Server Defaults for Single Node and Leader-Follower Plans](#sn-l-f).
+see [Server defaults for single node and leader-follower plans](#sn-l-f).
 + Specific to highly available (HA) cluster plans,
-see [Server Defaults for Highly Available Cluster Plans](#ha).
+see [Server defaults for highly available cluster lans](#ha).
 + Specific to <%= vars.single_leader_plan_lc %> plans,
-see [Server Defaults for <%= vars.single_leader_plan %> Plans](#multi-site).
+see [Server defaults for <%= vars.single_leader_plan %> plans](#multi-site).
 
 
-<p class="note"><strong>Note:</strong>
-  You can use optional parameters to change certain server defaults. For more information,
+<p> You can use optional parameters to change certain server defaults. For more information,
   see <a href="./change-default.html">Changing Defaults Using Arbitrary Parameters</a>.
 </p>
 
@@ -203,7 +200,7 @@ to all service plans:
     </tr>
 </table>
 
-## <a id="sn-l-f"></a> Server Defaults for Single Node and Leader-Follower Plans
+## <a id="sn-l-f"></a> Server defaults for single node and leader-follower plans
 
 In addition to the server default settings that are common to all plans, single node
 and leader-follower plans use the server defaults listed in the following table:
@@ -268,7 +265,7 @@ and leader-follower plans use the server defaults listed in the following table:
 </table>
 
 
-## <a id="ha"></a> Server Defaults for Highly Available Cluster Plans
+## <a id="ha"></a> Server defaults for highly available cluster plans
 
 In addition to the server default settings that are common to all plans,
 HA cluster plans use the server defaults listed in the following table:
@@ -330,7 +327,7 @@ HA cluster plans use the server defaults listed in the following table:
     </tr>
 </table>
 
-## <a id="multi-site"></a> Server Defaults for <%= vars.single_leader_plan %> Plans
+## <a id="multi-site"></a> Server defaults for <%= vars.single_leader_plan %> plans
 
 In addition to the server default settings that are common to all plans,
 <%= vars.single_leader_plan_lc %> plans use the server defaults listed in the following table.

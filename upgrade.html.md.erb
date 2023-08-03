@@ -24,7 +24,7 @@ To upgrade <%= vars.product_short %>:
 1. Download the Ubuntu Jammy stemcell from
 [<%= vars.product_network %>](https://network.pivotal.io/products/stemcells-ubuntu-jammy),
 and import it into the <%= vars.ops_manager %> Stemcell Library.
-For instructions, see [Verify Stemcell Version and Apply All Changes](./install-config.html#stemcell).
+For instructions, see [Verify stemcell version and apply all changes](./install-config.html#stemcell).
 
 1. Download the desired version of the product from
 [<%= vars.product_network %>](https://network.pivotal.io/products/p-mysql).
@@ -37,10 +37,10 @@ This adds the tile to your staging area.
 
 1. Click the newly-added **<%= vars.product_short %>** tile to review its configuration panes.
 Click **Save** on any panes where you make changes.
-    <p class="note"><strong>Note:</strong> To decrease the runtime for service instance upgrades,
+    <p> To decrease the runtime for service instance upgrades,
       configure the <code>upgrade-all-service-instances</code> errand in the tile.
       For instructions about configuring this errand,
-      see <a href="./install-config.html#service-instance-upgrades">Configure Service Instance Upgrades</a>.
+      see <a href="./install-config.html#service-instance-upgrades">Configure service instance upgrades</a>.
 
     </p>
 
@@ -49,11 +49,11 @@ to the **Errands** pane and select **Off** for **Upgrade all On-demand MySQL Ser
 <br><br>
 By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
-[About Individual Service Instance Upgrades](#individual-upgrades).
+[About individual service instance upgrades](#individual-upgrades).
 
 1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
-see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
+see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. For the <%= vars.product_short %> tile, enable the **Register On-demand MySQL Broker** errand if the errand is not already enabled.
 
@@ -61,13 +61,13 @@ see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-
 
 Upgrading the <%= vars.product_short %> service and service instances can temporarily interrupt
 the service.
-For more information, see [Service Interruptions](#interruptions).
+For more information, see [Service interruptions](#interruptions).
 
-### <a id="individual-upgrades"></a> About Individual Service Instance Upgrades
+### <a id="individual-upgrades"></a> About individual service instance upgrades
 
 <%= partial vars.path_to_partials + '/services/devs-can-upgrade-one-si' %>
 
-## <a id="interruptions"></a>Service Interruptions
+## <a id="interruptions"></a>Service interruptions
 
 Service changes, upgrades, and failures at the process, VM, and IaaS level can cause outages
 in the <%= vars.product_short %> service.
@@ -78,7 +78,7 @@ Read this section if:
 + You are experiencing a service interruption and are wondering why.
 + You are planning to update or change a service instance and want to know if it might cause a service interruption.
 
-### <a id='service-update'></a>Stemcell or Service Update
+### <a id='service-update'></a>Stemcell or service update
 
 An operator updates a stemcell version or their version of <%= vars.product_short %>.
 
@@ -87,7 +87,7 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
           The service resumes within 10–15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, apps reconnect automatically.
 
-### <a id='change-plan'></a>Plan Change
+### <a id='change-plan'></a>Plan change
 
 A developer changes their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
 This process is used to update Service Instances from Percona 5.7 to Percona 8.0. For example
@@ -101,7 +101,7 @@ updates the service instance they are bound to.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully,
 the apps reconnect automatically.
 
-### <a id='upgrade-interruption'></a>Service Broker Deployments
+### <a id='upgrade-interruption'></a>Service broker deployments
 
 Automated backups are not taken during service broker deployments.
 
@@ -109,5 +109,5 @@ When the service broker is unavailable, such as during upgrades and re-deploymen
 automated backups fail.
 Automated backups resume according to schedule when the service broker is online again.
 
-For general information about backups, see [Backing Up and Restoring <%= vars.product_full %>](backup-restore.html)
-and [Configuring Automated Backups](automated-backup.html).
+For general information about backups, see [Backing up and restoring <%= vars.product_full %>](backup-restore.html)
+and [Configuring automated backups](automated-backup.html).

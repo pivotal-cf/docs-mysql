@@ -1,9 +1,7 @@
 ---
-title: Data at Rest Full-Disk Encryption
+title: Data at rest full-disk encryption
 owner: MySQL
 ---
-
-## Overview on Rest Full-Disk Encryption
 
 Data at rest full-disk encryption (FDE) protects data on the physical hard drives in case the drives are compromised.
 The disks are only readable with the appropriate encryption key.
@@ -15,9 +13,10 @@ In <%= vars.product_full %>, data at rest full-disk encryption is implemented at
 Once a disk is mounted and used, it is readable from the system on which it is mounted.
 Consequently, FDE does not offer protection against an attack on a running server after the disk has been mounted.
 
-## Enabling Full-Disk Encryption
+## Enabling full-disk encryption
 
 Data at rest FDE is supported by the popular IaaS providers.
 FDE is enabled on all disks used by the IaaS.
 
-The process is IaaS-specific. For information about enabling FDE for each IaaS, see the [Ops Manager documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-disk-encrypt.html).
+The process is IaaS-specific. For information about enabling FDE for
+each IaaS, see the [Ops Manager documentation](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-disk-encrypt.html).

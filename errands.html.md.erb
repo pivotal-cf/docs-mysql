@@ -1,5 +1,5 @@
 ---
-title: Running Service Broker Errands
+title: Running service broker errands
 owner: MySQL
 ---
 
@@ -28,7 +28,7 @@ see the full errand list:
 + [recreate-all-service-instances](#recreate-all-service-instances)
 
 
-## <a id="errand"></a> Run an Errand
+## <a id="errand"></a> Run an errand
 
 To run an errand:
 
@@ -55,7 +55,7 @@ To run an errand:
 
 
 
-## <a id="available-errands"></a> Available Errands
+## <a id="available-errands"></a> Available errands
 
 The following sections describe each service broker errand that
 you can run. To run an errand, see [Run an Errand](#errand).
@@ -151,7 +151,7 @@ For more information, see [Triggering a Leader-Follower Failover](./leader-follo
 ### <a id="delete-all-service-instances-and-deregister-broker"></a> delete-all-service-instances-and-deregister-broker
 
 
-<p class="note warning"><strong>Warning:</strong> This errand destroys all
+<p> This errand destroys all
   on-demand service instances and deregisters the broker from the Cloud Controller.
   Use it with extreme caution.
 </p>
@@ -175,9 +175,6 @@ In this case, VMware recommends running the errand again.
 <%= vars.ops_manager %> runs this errand only when deleting <%= vars.product_short %>.
 Running this errand removes all service instances and their data.
 
-
-
-
 ### <a id="recreate-all-service-instances"></a> recreate-all-service-instances
 
 The `recreate-all-service-instances` errand recreates all service instance
@@ -187,5 +184,5 @@ You might want use this errand in the following cases:
 
 * Rotating the <%= vars.ops_manager %> root certificate authority (CA).
 For more information about rotating CAs, see
-[Rotating CAs and Leaf Certificates](https://docs.pivotal.io/ops-manager/security/pcf-infrastructure/rotate-cas-and-leaf-certs.html).
+[Rotating CAs and Leaf Certificates](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/security-pcf-infrastructure-rotate-cas-and-leaf-certs.html).
 * Fully restoring the platform during disaster recovery or migration.

@@ -1,5 +1,5 @@
 ---
-title: Using SSH to Connect from Outside a Deployment
+title: Using SSH to connect from outside a deployment
 owner: MySQL
 ---
 
@@ -8,14 +8,12 @@ owner: MySQL
 This topic provides instructions for developers to establish an SSH tunnel connection to a
 <%= vars.product_full %> service instance from outside a deployment.
 
-<p class="note">
-   <strong>Note:</strong>
-In general, the preferred method to connect to a service instance from outside your deployment
+<p> In general, the preferred method to connect to a service instance from outside your deployment
 is through service-gateway access.
-For information, see <a href="create-service-gateway-instance.html">Creating a Service Instance with Service-Gateway Access</a>.
+For information, see <a href="create-service-gateway-instance.html">Creating a service instance with Service-Gateway access</a>.
 </p>
 
-## <a id='overview'></a>Overview on using SSH to Connect Outside a Deployment
+## <a id='overview'></a>Overview on using SSH to connect outside a deployment
 
 You might want to use an SSH tunnel in the following cases:
 
@@ -23,7 +21,7 @@ You might want to use an SSH tunnel in the following cases:
 + Connecting from outside where your <%= vars.product_short %> service instance is located.
 + Connecting from a legacy app that is not in your <%= vars.app_runtime_abbr %> deployment.
 + Taking a manual backup to be stored locally.
-  For more information, see [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
+  For more information, see [Backing up and restoring with mysqldump](./backup-mysqldump.html).
 
 Any app deployed within your deployment can resolve BOSH DNS hostnames and forward
 traffic to MySQL service instances using an SSH tunnel.
@@ -31,10 +29,12 @@ traffic to MySQL service instances using an SSH tunnel.
 ##<a id='prereq'></a> Prerequisite
 
 To connect using an SSH tunnel, you must have SSH access to app containers.
-For more information, see [Configuring SSH Access for <%= vars.app_runtime_abbr %>](https://docs.pivotal.io/pivotalcf/opsguide/config-ssh.html).
+For more information,
+see [Configuring SSH access for <%= vars.app_runtime_abbr %>](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/config-ssh.htmll).
 
 ##<a id='procedure'></a> Procedure
 
-To connect to a MySQL instance using an SSH tunnel, follow the procedures in
-[Accessing Services with SSH](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#ssh-tunnel).
+To connect to a MySQL instance using an SSH tunnel,
+follow the procedures in
+[Accessing Services with SSH](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/deploy-apps-ssh-services.html#ssh-tunnel).
 

@@ -1,40 +1,38 @@
 ---
-title: Enabling Service-Gateway Access
+title: Enabling Service-Gateway access
 owner: MySQL
 ---
 
 This topic explains how to enable service-gateway access.
 
-## <a id='overview'></a> Overview
-
 Service-gateway access enables external clients to connect to a MySQL service.
 The clients are typically apps running external to the foundation, apps on a different foundation,
 and management tools such as MySQL Workbench.
 
-For a more detailed overview, see [About Service-Gateway Access](./service-gateway-access.html).
+For a more detailed overview, see [About Service-Gateway access](./service-gateway-access.html).
 
 To enable service-gateway access for an on-demand offering:
+- [ Activate TCP Routing using the \<%= vars.app\_runtime\_abbr %\> tile](#-activate-tcp-routing-using-the--varsapp_runtime_abbr--tile)
+- [ Configure the firewall to allow incoming traffic to the TCP Router](#-configure-the-firewall-to-allow-incoming-traffic-to-the-tcp-router)
+- [ Configure the Load Balancer in the IaaS to redirect traffic to the TCP Router](#-configure-the-load-balancer-in-the-iaas-to-redirect-traffic-to-the-tcp-router)
+- [ Create a DNS record that maps to the Load Balancer](#-create-a-dns-record-that-maps-to-the-load-balancer)
+- [ Enable Service-Gateway access](#-enable-service-gateway-access)
+- [ Deactivate Service-Gateway access](#-deactivate-service-gateway-access)
+- [ Developer workflow](#-developer-workflow)
 
-- [ Overview](#-overview)
-- [ Activate TCP Routing using the \<%= vars.app\_runtime\_abbr %\> Tile](#-activate-tcp-routing-using-the--varsapp_runtime_abbr--tile)
-- [ Configure the Firewall to Allow Incoming Traffic to the TCP Router](#-configure-the-firewall-to-allow-incoming-traffic-to-the-tcp-router)
-- [ Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router](#-configure-the-load-balancer-in-the-iaas-to-redirect-traffic-to-the-tcp-router)
-- [ Create a DNS Record That Maps to the Load Balancer](#-create-a-dns-record-that-maps-to-the-load-balancer)
-- [ Enable Service-Gateway Access](#-enable-service-gateway-access)
-- [ Deactivate Service-Gateway Access](#-deactivate-service-gateway-access)
-- [ Developer Workflow](#-developer-workflow)
-
-<p class="note warning">
-  <strong>Warning:</strong> VMware recommends that you configure Transport Layer Security (TLS)
-  alongside service-gateway access to prevent man-in-the-middle attacks.
-  For instructions on how to configure TLS, see
-  <a href="./install-config.html#security">Configure Security</a>.
+<p class="note important">
+<span class="note__title"> Important</span> VMware recommends that you configure Transport Layer Security (TLS)
+alongside service-gateway access to prevent man-in-the-middle attacks.
+For instructions on how to configure TLS, see
+<a href="./install-config.html#security">Configure Security</a>.
 </p>
 
 
-## <a id='tcp-routing'></a> Activate TCP Routing using the <%= vars.app_runtime_abbr %> Tile
+## <a id='tcp-routing'></a> Activate TCP Routing using the <%= vars.app_runtime_abbr %> tile
 
-TCP routing is deactivated by default. To activate TCP routing:
+TCP routing is deactivated by default.
+
+To activate TCP routing:
 
 1. Go to the Networking pane of the <%= vars.app_runtime_abbr %> tile.
 1. Under **Enable TCP requests to apps through specific ports on the TCP router**, select
@@ -47,23 +45,23 @@ TCP router.
 1. From the status tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
 
-![alt-text="Screenshot showing Ops Manager UI with the 'Status' tab selected.
+![alt-text="Ops Manager UI with the 'Status' tab selected.
 In the tab contents, there is a table with several columns labeled 'Job', 'Index,' 'IPS', 'AZ',
 and 'CID'. The screenshot highlights with a red outline the last row in the table for the job
 'TCP Router'"](./images/TCP-router-CID.png)
 
     <a href="./images/TCP-router-CID.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
-## <a id='configure-firewall'></a> Configure the Firewall to Allow Incoming Traffic to the TCP Router
+## <a id='configure-firewall'></a> Configure the firewall to allow incoming traffic to the TCP Router
 
 The steps you take to allow traffic to the TCP router depend on your IaaS:
 
 1. Allow incoming traffic to the TCP router VM created in
-[Activate TCP Routing Using the <%= vars.app_runtime_abbr %> Tile](#tcp-routing).
+[Activate TCP Routing using the <%= vars.app_runtime_abbr %> tile](#tcp-routing).
 
     For information about how to do so, see the documentation for your IaaS.
 
-## <a id='configure-lb'></a> Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router
+## <a id='configure-lb'></a> Configure the Load Balancer in the IaaS to redirect traffic to the TCP Router
 
 To configure the load balancer:
 
@@ -71,40 +69,36 @@ To configure the load balancer:
 1. Create an external TCP load balancer that points to the VM running the TCP router.
 1. Configure a distinct external port range that does not overlap with any of the following:
     + The TCP networking port or port range that you configured in
-      [Activate TCP Routing Using the <%= vars.app_runtime_abbr %> Tile](#tcp-routing).
+      [Activate TCP Routing using the <%= vars.app_runtime_abbr %> tile](#tcp-routing).
     + The port range configured for service-gateway access for other service tiles,
       such as VMware Tanzu™ RabbitMQ® for VMs.
 
     For example, if your TCP routing port range is `1024–1123`,
     and ports `1124–1223` are reserved for Tanzu RabbitMQ service instances,
     then your load balancer port range for service gateway must not overlap `1024-1223`.
-    <p class="note">
-      <strong>Note:</strong> Each <%= vars.product_short %> service instance using service-gateway
+
+    <p> Each <%= vars.product_short %> service instance using service-gateway
       access requires a unique port.
       Ensure that the port range configured has enough capacity to accommodate all the service
       instances that you need. The start port and the end port are both inclusive.
     </p>
 
-![alt-text="Diagram showing Service Gateway port ranges: Traffic flows to the apps from the Load Balancer
-    using ports in the TAS LB port range through the TCP Router using ports in the TAS TCP port range.
-    Traffic flows to the MySQL service instances from the Load Balancer using ports in the Service
-    Gateway LB port range through the TCP Router using ports in the Service Gateway TCP port
-    range."](./images/service-gateway-ports.png)
+![alt-text="Service Gateway port ranges."](./images/service-gateway-ports.png)
 
 1. Record this port range.
 
 
-## <a id='create-dns-record'></a> Create a DNS Record That Maps to the Load Balancer
+## <a id='create-dns-record'></a> Create a DNS record that maps to the Load Balancer
 
 To create a DNS record and prepare to map it:
 
 1. Following the documentation for your IaaS, create a new DNS record of type A that maps to the
 external IP address of the load balancer created in
-[Configure the Load Balancer in the IaaS to Redirect Traffic to the TCP Router](#configure-lb).
+[Configure the Load Balancer in the IaaS to redirect traffic to the TCP Router](#configure-lb).
 1. Record the domain used for this DNS record.
 
 
-## <a id='configure-service-gateway-plan'></a> Enable Service-Gateway Access
+## <a id='configure-service-gateway-plan'></a> Enable Service-Gateway access
 
 When service-gateway access is activated, all developers have the ability to create a service instance
 that is available to apps outside the foundation.
@@ -118,9 +112,7 @@ To configure service-gateway access for the foundation:
 1. Go to the **Settings** pane in the <%= vars.product_short %> tile.
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
-![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
-    the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-    text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
+![alt-text="Example of the Settings pane."](./images/global-settings-off-platform-access.png)
 
     This activates the feature and makes the domain and port range fields visible.
 
@@ -148,26 +140,23 @@ To configure service-gateway access for the foundation:
             <td>
                Set this to the range of ports you configured for the external load balancer for MySQL
                service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
-               to Redirect Traffic to the TCP Router</a>.
+               to redirect traffic to the TCP Router</a>.
             </td>
         </tr>
     </table>
 
-    <p class="note warning">
-       <strong>Warning:</strong>
-       If you already have service instances using service-gateway, any modifications to this range
-       must include ports that are already assigned to these service instances.
-       If the port range does not contain the ports already assigned to service instances, the
-       upgrades for the service instances fail.
-       For example, if service-gateway access has the port range <code>1000-1005</code>,
-       and there are service instances that correspond to ports <code>1000</code>, <code>1001</code>,
-       and <code>1002</code>, then the new port range must have ports <code>1000</code>,
-       <code>1001</code>, and <code>1002</code>.
-    </p>
+    <p class="note important">
+<span class="note__title"> Important</span>  If you already have service instances using service-gateway, any modifications to this range
+must include ports that are already assigned to these service instances.
+If the port range does not contain the ports already assigned to service instances, the
+upgrades for the service instances fail.
+For example, if service-gateway access has the port range <code>1000-1005</code>,
+and there are service instances that correspond to ports <code>1000</code>, <code>1001</code>,
+and <code>1002</code>, then the new port range must have ports <code>1000</code>,
+<code>1001</code>, and <code>1002</code>.
+</p>
 
-
-    <p class="note">
-      <strong>Note:</strong> If service-gateway access is deactivated and then activated again, app
+<p> If service-gateway access is deactivated and then activated again, app
       developers must create new service keys to obtain a new set of credentials for service-gateway
       access.
     </p>
@@ -177,10 +166,9 @@ To configure service-gateway access for the foundation:
 1. Click **Apply Changes** to apply the changes to the <%= vars.product_short %> tile.
 
 
-## <a id='disable-service-gateway-access'></a> Deactivate Service-Gateway Access
+## <a id='disable-service-gateway-access'></a> Deactivate Service-Gateway access
 
-<p class="note">
-  <strong>Note:</strong> If service-gateway access is deactivated and then activated again, app developers
+<p> If service-gateway access is deactivated and then activated again, app developers
   must create new service keys to obtain a new set of credentials for service-gateway access.
 </p>
 
@@ -195,7 +183,7 @@ To deactivate service-gateway access:
 1. Click **Apply Changes** to apply the changes to the <%= vars.product_short %> tile.
 
 
-## <a id='workflow'></a> Developer Workflow
+## <a id='workflow'></a> Developer workflow
 
 For instructions for app developers, see
-[Create a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html).
+[Create a service instance with Service-Gateway access](./create-service-gateway-instance.html).

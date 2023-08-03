@@ -1,28 +1,28 @@
 ---
-title: Resolving Service Interruptions
+title: Resolving service interruptions
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic explains events in the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
+This topic tells you about the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
 
-## <a id='service-update'></a>Stemcell or Service Update
+## <a id='service-update'></a>Stemcell or service update
 
-An operator can update a stemcell version or their version of <%= vars.product_short %>.
+You can update a stemcell version or their version of <%= vars.product_short %>.
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
 The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, the apps automatically reconnect.
 
-## <a id='change-plan'></a>Plan Change
+## <a id='change-plan'></a>Plan change
 
 A developer can change their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to. The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully, apps reconnect automatically.
 
-## <a id='process-fail'></a>VM Process Failure
+## <a id='process-fail'></a>VM process failure
 
 A process, like the MySQL server, fails on the service instance VM.
 
@@ -32,7 +32,7 @@ A process, like the MySQL server, fails on the service instance VM.
   - Until the process resumes, apps might be unable to use MySQL, metrics or logging can stop, and other features might be interrupted.
 - <strong>Required Actions:</strong> None. If the process resumes cleanly and without manual intervention, apps reconnect automatically.
 
-## <a id='vm-fail'></a>VM Failure
+## <a id='vm-fail'></a>VM failure
 
 A <%= vars.product_short %> VM fails and goes offline due to either a virtualization problem or a host hardware problem.
 
@@ -49,10 +49,11 @@ A <%= vars.product_short %> VM fails and goes offline due to either a virtualiza
   in _Running Errands_.
   - If the VM is not part of a leader-follower pair, when the VM comes back, no further action is required for the app developer to continue operations.
 
-## <a id='az-fail'></a>AZ Failure
+## <a id='az-fail'></a>AZ failure
 
 An availability zone (AZ) goes offline entirely or loses connectivity to other AZs (net split).
-This causes service interruption in multi-AZ deployments where [Diego](https://docs.pivotal.io/application-service/concepts/diego/diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
+This causes service interruption in multi-AZ deployments
+where [Diego](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/diego-diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
 
 - <strong>Impact:</strong>
   - Some app instances can still be able to connect and continue operating.
@@ -60,7 +61,7 @@ This causes service interruption in multi-AZ deployments where [Diego](https://d
   - Downtime: Unknown
 - <strong>Required Actions:</strong>  Recovery of the app - database connection must be automatic. Depending on the app, manual intervention might be required to check data consistency.
 
-## <a id='region-fail'></a>Region Failure
+## <a id='region-fail'></a>Region failure
 
 - <strong>Example:</strong> An entire region fails,
 bringing <%= vars.app_runtime_full %> components offline.
