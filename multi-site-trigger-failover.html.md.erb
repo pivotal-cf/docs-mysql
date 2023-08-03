@@ -1,13 +1,11 @@
 ---
-title: Triggering Multi-Site Replication Failover and Switchover
+title: Triggering multi-site replication failover and switchover
 owner: MySQL
 ---
 <strong><%= modified_date %></strong>
 
-The topic describes how to trigger a failover and switchover
+You can trigger a failover and switchover
  when using a <%= vars.single_leader_plan %> plan.
-
-##<a id='overview'></a> Overview
 
 You can trigger a failover or switchover to redirect traffic to a secondary foundation.
 
@@ -17,15 +15,15 @@ see [About Failover and Switchover](./about-multi-site.html#failover-switchover)
 Before you trigger a failover or switchover, you must verify that the follower service instance
 is healthy. See [Verify Follower Health](#verify).
 
-<p class="note"><strong>Note:</strong> The procedures in this topic assume that you created the leader service instance in
+<p> The procedures in this topic assume that you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 </p>
 
-##<a id='verify'></a> Verify Follower Health
+##<a id='verify'></a> Verify follower health
 
 Before you trigger a failover or switchover,
 you must verify that the follower service instance is healthy.
-If your follower service instance is unhealthy, contact <a href="https://pivotal.io/support">Support</a>.
+If your follower service instance is unhealthy, contact <a href="https://www.vmware.com/support/services.html">Support</a>.
 
 To verify the service instance:
 
@@ -79,25 +77,25 @@ To verify the service instance:
         Succeeded</pre>
 
 1. Ensure that the service instance is `running`.
-If the service instance is `failing`, contact <a href="https://pivotal.io/support">Support</a>.
+If the service instance is `failing`, contact <a href="tps://www.vmware.com/support/services.html">Support</a>.
 
-##<a id='failover'></a> Trigger a Failover
+##<a id='failover'></a> Trigger a failover
 
-<p class="note warning"><strong>Warning:</strong> You can only trigger failover
+<p> You can only trigger failover
   if you do not need to recover the leader service instance.
 </p>
 
 To trigger a failover:
 
 1. [Promote the Follower](#promote-failover)
-1. [Delete or Purge the Former Leader](#clean-up)
+1. [Delete or purge the former leader](#clean-up)
 1. [Create a Follower](#create-follower)
 1. [Reconfigure <%= vars.single_leader_plan %>](#restore-follower)
 
 
-### <a id='promote-failover'></a> Promote the Follower
+### <a id='promote-failover'></a> Promote the follower
 
-<p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
+<p> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to:<br><br>
 <code>Updating service instance haDB as admin...
@@ -160,7 +158,7 @@ To promote the follower service instance to leader:
 1. Reconfigure your global DNS load balancer to direct all traffic to apps in your secondary foundation.
 See [Configure Your GLB](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/refarch-global-dns-lb.html#configure-your-glb-1).
 
-###<a id='clean-up'></a> Delete or Purge the Former Leader
+###<a id='clean-up'></a> Delete or purge the former leader
 
 When you do a failover, you cannot manually recover the leader service instance.
 After you promote the follower service instance to leader, you remove the former leader service instance.
@@ -181,10 +179,9 @@ To remove the former leader service instance:
 2. Do one of the following:
   + If the VM is lost, purge the service instance by doing the procedure [Purge a Service
     Instance](./use.html#purge) in _Using <%= vars.product_full %>_.
-     <p class="note"><strong>Note:</strong>
-       If the foundation is lost, you purge the service instance <strong>after</strong> following the steps to recover the
+     <p> If the foundation is lost, you purge the service instance <strong>after</strong> following the steps to recover the
        foundation's Cloud Controller database in
-       <a href="https://docs.pivotal.io/ops-manager/install/backup-restore/restore-pcf-bbr.html">
+       <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html">
          Restoring Deployments from Backup with BBR</a>.
      </p>
   * If the VM is not lost:
@@ -196,7 +193,7 @@ To remove the former leader service instance:
       3. Delete the service instance by following the procedure
         [Delete a Service Instance](./use.html#delete) in _Using <%= vars.product_full %>_.
 
-###<a id='create-follower'></a> Create a Follower
+###<a id='create-follower'></a> Create a follower
 
 To reconfigure <%= vars.single_leader_plan %> between two instances,
 a new follower without any data must be created in the primary foundation.
@@ -233,12 +230,12 @@ To reconfigure:
 
 To trigger a switchover:
 
-1. [Promote the Follower](#promote)
+1. [Promote the follower](#promote)
 1. [Reconfigure <%= vars.single_leader_plan %>](#reconfigure)
 
-### <a id='promote-switchover'></a> Promote the Follower
+### <a id='promote-switchover'></a> Promote the follower
 
-<p class="note"><strong>Note:</strong> If you try to promote a leader-follower,
+<p> If you try to promote a leader-follower,
   highly available cluster, or single node service instance to leader
   or make it read-only, you get an error message similar to the following:<br><br>
 <code>Updating service instance haDB as admin...
@@ -319,24 +316,25 @@ To make the leader read-only and promote the follower to leader in the secondary
 
 To establish a connection between the service instances in the primary and secondary foundations,
 you must reconfigure replication. Reconfiguring replication is similar to the procedure in
-[Configure Multi‑Site Replication](./use-multi-site.html#create-service-key) except the
+[Configure multi‑site replication](./use-multi-site.html#create-service-key) except the
 service instance in the primary foundation is the follower and the service instance
 in the secondary foundation is the leader.
 
-<p class='note warning'><strong>Warning:</strong>
-To successfully trigger a switchover, the follower dataset must be a subset of the leader dataset.
+  <p class="note caution">
+  <span class="note__title">Caution</span>
+  To successfully trigger a switchover, the follower dataset must be a subset of the leader dataset.
 This means that <%= vars.product_short %> has not written new data to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
 create a new <%= vars.single_leader_plan %> service instance and reconfigure replication using this new,
 empty instance as the follower.
-</p>
+  </p>
 
-#### Workflow for Reconfiguring <%= vars.single_leader_plan %>
+#### Workflow for reconfiguring <%= vars.single_leader_plan %>
 
 The following diagram describes the workflow for reconfiguring multi-site replication:
 
-![alt-text="Two boxes are shown side by side, labeled 'Primary Foundation' and 'Secondary Foundation'.
+![alt-text="Two boxes labeled 'Primary Foundation' and 'Secondary Foundation'.
 Six steps are shown. Steps 1 and 2 are in 'Primary Foundation';
 Steps 3, 4, and 5 are in 'Secondary Foundation',
 and Step 6 is in 'Primary Foundation'."](./images/switchover.png)
@@ -352,7 +350,7 @@ The steps shown in the diagram are:
 5. Record credentials service key.
 6. Update primary service instance with credentials service key.
 
-#### Procedure for Reconfiguring <%= vars.single_leader_plan %>
+#### Procedure for reconfiguring <%= vars.single_leader_plan %>
 
 To reconfigure replication for the service instances:
 
@@ -465,7 +463,7 @@ To reconfigure replication for the service instances:
     Creating service key cred-key for service instance secondary-node as user<span>@</span>example.com...
     OK
     </pre>
-    <p class="note"><strong>Note:</strong> The <code>-c </code> flag is different than the one in step 2.
+    <p> The <code>-c </code> flag is different than the one in step 2.
     </p>
 
 1. View the `replication-credentials` for your credentials service key by running:

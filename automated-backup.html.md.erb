@@ -36,27 +36,27 @@ You configure this schedule with a cron expression.
 To configure backups, follow the procedure for your external storage solution:
 
 + [Back up using SCP](#scp)
-+ [Back Up to Amazon S3 or Ceph](#ceph-or-s3)
-+ [Back Up to Amazon S3 with Instance Profile](#instance-profile)
-+ [Back Up to GCS](#gcs)
-+ [Back Up to Azure Storage](#azure)
++ [Back up to Amazon S3 or Ceph](#ceph-or-s3)
++ [Back up to Amazon S3 with instance profile](#instance-profile)
++ [Back up to GCS](#gcs)
++ [Back up to Azure Storage](#azure)
 
 ## <a id="scp"></a> Back up using SCP
 
-Secure copy protocol (SCP) enables operators to use any storage solution
+Secure copy protocol (SCP) enables you to use any storage solution
 on the destination VM. This is the fastest method for backing up your database.
 
 When you configure backups with SCP,
 <%= vars.product_short %> runs an SCP command that uses SFTP to securely copy backups to a VM
 or physical machine operating outside of your deployment.
-The operator provisions the backup machine separately from their installation.
+You provision the backup machine separately from their installation.
 
 To back up your database using SCP:
 
-+ [Create a Public and Private Key Pair](#scp-keys)
-+ [Configure Backups in <%= vars.ops_manager %>](#configure-scp)
++ [Create a public and private key pair](#scp-keys)
++ [Configure backups in <%= vars.ops_manager %>](#configure-scp)
 
-### <a id="scp-keys"></a> Create a public and private Key&#8209;Pair
+### <a id="scp-keys"></a> Create a public and private key&#8209;pair
 
 <%= vars.product_short %> accesses a remote host as a user with a private key for authentication.
 VMware recommends that this user and key-pair is only used for <%= vars.product_short %>.
@@ -64,10 +64,11 @@ VMware recommends that this user and key-pair is only used for <%= vars.product_
 1. Determine the remote host that you use to store backups for <%= vars.product_short %>.
    Ensure that the MySQL service instances can access the remote host.
 
-    <p> VMware recommends using a VM outside your deployment
-      for the destination of SCP backups. As a result,
-      you might need to enable public IPs for the MySQL VMs.
-    </p>
+   <p class="note">
+   <span class="note__title">Note</span> VMware recommends using a VM outside your deployment
+   for the destination of SCP backups. As a result,
+   you might need to enable public IPs for the MySQL VMs.
+   </p>
 
 1. (Recommended) Create a new user for <%= vars.product_short %> on the destination VM.
 
@@ -163,14 +164,14 @@ in the pane are described in the following table."](./images/scp-backups.png)
         </tr>
       </table>
 
-## <a id="ceph-or-s3"></a> Back Up to Amazon S3 or Ceph
+## <a id="ceph-or-s3"></a> Back up to Amazon S3 or Ceph
 
 When you configure backups for Amazon S3 or Ceph,
 <%= vars.product_short %> runs an Amazon S3 client that saves the backups to one of the following:
 
-+ an Amazon S3 bucket
-+ a Ceph storage cluster
-+ another S3-compatible endpoint certified by VMware
++ Amazon S3 bucket
++ Ceph storage cluster
++ S3-compatible endpoint certified by VMware
 
 For information about Amazon S3 buckets,
 see the [Amazon documentation](https://aws.amazon.com/documentation/s3/).
@@ -183,12 +184,12 @@ To back up your database to Amazon S3 or Ceph:
 + [Create a custom policy and access key](#access-key-aws)
 + [Configure backups in <%= vars.ops_manager %>](#configure-aws)
 
-### <a id="access-key-aws"></a> Create a Ccstom policy and access key
+### <a id="access-key-aws"></a> Create a custom policy and access key
 
 <%= vars.product_short %> accesses your S3 bucket through a user account.
 VMware recommends that this account be only used by <%= vars.product_short %>.
-You must apply a minimal policy that enables the user account upload backups to your S3 bucket. Then give the policy the
-permission to list and upload to buckets.
+You must apply a minimal policy that enables the user account upload backups to your S3 bucket. Then give
+the policy the permission to list and upload to buckets.
 
 The procedure in this section assumes that you are using an Amazon S3 bucket.
 If you are using a Ceph or another S3-compatible bucket to create the policy and access key,
@@ -238,8 +239,10 @@ the previous step.
 
 Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your S3 account.
 
-**Prerequisite:** Before beginning this procedure,
+<p class="note important">
+<span class="note__title"> Important</span> Before beginning this procedure,
 you must have an S3 bucket in which to store the backups.
+</p>
 
 1. In <%= vars.ops_manager %>, open the <%= vars.product_short %> tile **Backups** pane.
 
@@ -358,10 +361,10 @@ in the pane are described in the following table."](./images/S3-backups.png)
 ## <a id="instance-profile"></a> Back up to Amazon S3 with instance profile
 
 <p class="note important">
-<span class="note__title"> Important</span> Configuring this backup method requires operators to run the
-<code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.</p>
-   <br><br>
-   Backups fail until the service instance is upgraded.
+<span class="note__title"> Important</span> Configuring this backup method requires you to run the
+<code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.
+<br><br>
+Backups fail until the service instance is upgraded.</p>
 
 When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %>
 allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
@@ -370,18 +373,21 @@ new backups IAM role to a new EC2 instance.
 You can use the procedure in this section to allow <%= vars.product_short %> to upload backups to
 Amazon S3 without static credentials (Access and Secret Access Key ID).
 
-**Prerequisite:** You must be running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
+<p class="note important">
+<span class="note__title"> Important</span> You must be
+running <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) on AWS.
+</p>
 
-The process for configuring backups for an Amazon S3 with Instance Profile is:
+The process for configuring backups for an Amazon S3 with instance profile is:
 
-1. [Create an IAM Role with a custom policy](#ip-create-policy)
+1. [Create an IAM role with a custom policy](#ip-create-policy)
 1. [Add a policy to the existing <%= vars.ops_manager %> user or role](#ip-add-policy)
-1. [Configure a VM Extension](#ip-configure-vm)
- 1. [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops)
- 1. [Apply the VM Extension to the dedicated-mysql-broker Job](#ip-vm-job)
- 1. [Set the VM Extension Name](#ip-vm-tile)
+1. [Configure a VM extension](#ip-configure-vm)
+ 1. [Create a VM extension in <%= vars.ops_manager %>](#ip-vm-ops)
+ 1. [Apply the VM extension to the dedicated-mysql-broker Job](#ip-vm-job)
+ 1. [Set the VM extension name](#ip-vm-tile)
 1. [Apply changes and upgrade all service instances](#ip-apply-upgrade)
-1. [(Optional) Verify the IAM Role is associated with MySQL service instances](#ip-verify-instances)
+1. [(Optional) Verify the IAM role is associated with MySQL service instances](#ip-verify-instances)
 
 
 ### <a id="ip-create-policy"></a> Create an IAM role with a custom policy
@@ -426,12 +432,11 @@ To create an IAM Role with a custom policy:
     Where `BUCKET-NAME` is the name of the bucket.
 
 1. Record the Amazon Resource Name (ARN) of this new IAM role.
-   This is used in [Add a Policy to the Existing <%= vars.ops_manager %> User or Role](#ip-add-policy).
+   This is used in [Add a policy to the existing <%= vars.ops_manager %> user or role](#ip-add-policy).
 1. Record the name of the Instance Profile associated with this new IAM role.
-   This is used in [Create a VM Extension in <%= vars.ops_manager %>](#ip-vm-ops).
+   This is used in [Create a VM extension in <%= vars.ops_manager %>](#ip-vm-ops).
 
-
-### <a id="ip-add-policy"></a> Add a Policy to the existing <%= vars.ops_manager %> user or role
+### <a id="ip-add-policy"></a> Add a policy to the existing <%= vars.ops_manager %> user or role
 
 Next, you must add a new policy to the existing <%= vars.ops_manager %> IAM user or role that
 is configured in the **AWS Config** pane of the _BOSH Director for AWS_ tile.
@@ -440,11 +445,13 @@ This policy allows the IAM user or role used by BOSH to pass the new backups IAM
 Depending on your configuration, this is either a user or a role.
 To find the existing user or role and add a policy:
 
-1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
+1. Log into <%= vars.ops_manager %>. To log in,
+see [Log in to <%= vars.ops_manager %> for the first time](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/login.html).
 1. Click the **BOSH Director for AWS** tile.
 1. Select **AWS Config**.
 <br><br>
-The following tabs expand to show instructions depending on the type of **AWS Config** that is already configured: <br><br>
+The following tabs expand to show instructions depending on the type of **AWS Config** that is
+already configured: <br><br>
 
     <style>
     .btn.btn-default,
@@ -521,7 +528,7 @@ The following tabs expand to show instructions depending on the type of **AWS Co
               <br><br>
               To find retrieve your AWS Key information and find the existing IAM user,
               use the AWS Identity and Access Management (IAM) credentials that you generated in
-              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">
+              <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">
               Step 3: Create an IAM User for <%= vars.ops_manager %></a>
               in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
           </li>
@@ -538,7 +545,7 @@ The following tabs expand to show instructions depending on the type of **AWS Co
           <li>Find the name of the existing IAM role in the <strong>AWS IAM Instance Profile</strong> field.
               <br><br>
               For more information about this role, see
-              <a href="https://docs.pivotal.io/ops-manager/aws/prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+              <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
               in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
         </ul>
       </p>
@@ -567,15 +574,15 @@ The following tabs expand to show instructions depending on the type of **AWS Co
     Where `MYSQL-BACKUPS-ROLE` is the ARN of the role created in the previous section.
 
 
-### <a id="ip-configure-vm"></a> Configure a VM Extension
+### <a id="ip-configure-vm"></a> Configure a VM extension
 
-#### <a id="ip-vm-ops"></a> Create a VM Extension in <%= vars.ops_manager %>
+#### <a id="ip-vm-ops"></a> Create a VM extension in <%= vars.ops_manager %>
 
 There are two methods that you can use to create a VM Extension in <%= vars.ops_manager %>:
 
 * **Using the <%= vars.ops_manager %> API directly.**
 For more information, see
-[Create or Update a VM Extension](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#create-vm-extension)
+[Create or Update a VM Extension](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#create-vm-extension)
 in the <%= vars.ops_manager %> documentation.
 
 * **Using the <%= vars.ops_manager %> CLI (om) to create the VM extension.**
@@ -598,13 +605,13 @@ Where:
 * `INSTANCE-PROFILE-NAME` is the name of the instance profile created in
   [Create an IAM Role with a Custom Policy](#ip-create-policy).
 
-#### <a id="ip-vm-job"></a> Apply the VM Extension to the dedicated-mysql-broker job
+#### <a id="ip-vm-job"></a> Apply the VM extension to the dedicated-mysql-broker Job
 
 These are the following methods that you can use to apply the VM extension to the `dedicated-mysql-broker`
 job in the <%= vars.product_short %> tile:
 
 * **Using the <%= vars.ops_manager %> API directly.** For more information, see
-[Apply VM Extensions to a Job](https://docs.pivotal.io/ops-manager/install/custom-vm-extensions.html#apply-vm-extensions)
+[Apply VM Extensions to a Job](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html#apply-vm-extensions)
 in the <%= vars.ops_manager %> documentation.
 
 * **Using the om CLI to configure the tile.** Add the `additional_vm_extensions`
@@ -614,21 +621,20 @@ For information about configuring using a YAML configuration file, see
 [om configure-product](https://github.com/pivotal-cf/om/tree/main/docs/configure-product#configuring-via-yaml-config-file)
 in GitHub.
 
-
-#### <a id="ip-vm-tile"></a> Set the VM Extension name
+#### <a id="ip-vm-tile"></a> Set the VM extension name
 
 Now that you have created and applied the VM extension, you must set it in the <%= vars.product_short %> tile.
 
 To set the VM extension name:
 
-1. Log into <%= vars.ops_manager %>. To log in, see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.pivotal.io/ops-manager/login.html).
+1. Log into <%= vars.ops_manager %>. To log in,
+see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/login.html).
 1. Click the **<%= vars.product_short %>** tile.
 1. Select **Backups**.
 1. Select **Amazon S3 (with Instance Profiles)**
 
-![alt-text="Shows Amazon S3 (with Instance Profiles) selected. The remaining fields in the pane are
-described in the following table."](./images/S3-instance-profiles.png)
-
+![alt-text="Configure blobstore for MySQL backups pane shows
+Amazon S3 (with Instance Profiles) selected."](./images/S3-instance-profiles.png)
 
 1. Configure the fields as follows:
 
@@ -655,7 +661,7 @@ described in the following table."](./images/S3-instance-profiles.png)
                 The URL must start with <code>http://</code> or <code>https://</code>. <br>
                 The default is <code>https://s3.amazonaws.com</code>.<br>
                 If you are using a public S3 endpoint, see the S3 Endpoint procedure in
-                <a href="https://docs.pivotal.io/ops-manager/aws/config-manual.html#pcfaws-om-dirconfig">
+                <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">
                 Step 3: Director Config Page</a> in <em>Configuring BOSH Director on AWS</em>.
             </td>
         </tr>
@@ -739,7 +745,7 @@ described in the following table."](./images/S3-instance-profiles.png)
 1. Click **Save**.
 
 
-### <a id="ip-apply-upgrade"></a> Apply Ccanges and upgrade all service instances
+### <a id="ip-apply-upgrade"></a> Apply changes and upgrade all service instances
 
 The changes to your service instances are not complete until you apply your configuration changes.
 
@@ -786,8 +792,8 @@ You must apply a minimal policy that enables the service account to upload backu
 
 The service account needs the following permissions:
 
-* List and upload to buckets
-* (Optional) Create buckets if they do not already exist
+* List and upload to buckets.
+* (Optional) Create buckets if they do not already exist.
 
 To create a service account and private key in GCS:
 
@@ -807,8 +813,8 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
 
 1. Select **GCS**.
 
-![alt-text="Shows GCS radio button selected and the fields
-in the pane are described in the following table."](./images/gcs-backups.png)
+![alt-text="Backup configuration pane shows GCS radio button selected and the fields
+in the pane are described in the following table."](./images/gcs-backups.png")
 
 1. Configure the fields as follows:
 
@@ -853,7 +859,7 @@ in the pane are described in the following table."](./images/gcs-backups.png)
             <td>
                 Enter the contents of the service account JSON file that you downloaded
                 when creating a service account in
-               <a href="#service-account-gcs">Create a Service Account and Private Key</a>.
+               <a href="#service-account-gcs">Create a service account and private key</a>.
             </td>
         </tr>
         <tr>
@@ -866,15 +872,14 @@ in the pane are described in the following table."](./images/gcs-backups.png)
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-
                 <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
+                  For more information, see <a href="./change-default.html#backup-schedule">Backup schedule</a>.
                 </p>
             </td>
         </tr>
       </table>
 
-## <a id="azure"></a> Back Up to Azure storage
+## <a id="azure"></a> Back up to Azure Storage
 
 When you configure backups for Azure Storage,
 <%= vars.product_short %> runs an Azure SDK that saves backups to an Azure storage account.
@@ -895,8 +900,8 @@ You must apply a minimal policy that enables the storage account upload backups 
 
 The storage account needs the following permissions:
 
-* List and upload to buckets
-* (Optional) Create buckets if they do not already exist
+* List and upload to buckets.
+* (Optional) Create buckets if they do not already exist.
 
 To create a storage account and access key:
 
@@ -984,7 +989,6 @@ To back up your database to your Azure Storage account:
                 This overrides the default schedule for your service instance.
                 Test your cron expression using a website such as
                 <a href="https://crontab.guru/">Crontab Guru</a>.
-
                 <p> Developers can override the default for their service instance.
                   For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
                 </p>

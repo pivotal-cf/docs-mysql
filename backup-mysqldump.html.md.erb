@@ -8,10 +8,8 @@ owner: MySQL
 You can manually create a logical backup with `mysqldump` and
 restore a MySQL database with the backup.
 
-## <a id="overview"></a> Overview on Manually Creating a Logical Backup
-
 A logical backup reproduces the database table structure and data, without copying the InnoDB data files.
-The backup contains SQL statements to re-create the data.
+The backup contains SQL statements to recreate the data.
 Because of this, restoring a logical backup takes longer than restoring a physical backup.
 While the backup is running, operations against the database are stalled.
 
@@ -22,32 +20,33 @@ You might want to create a logical backup in the following use cases:
 + Editing table definitions or insert statements before restoring the <%= vars.product_short %> database.
 + Migrating an off-platform database with encryption at rest or the Percona PAM Authentication plug-in
 enabled to a <%= vars.product_short %> database.
-See [Restore from an Off-Platform Logical Backup](#external).
+See [Restore from an off-platform logical backup](#external).
 
 In most cases, if you want to copy a <%= vars.product_short %> database you can use the `migrate` command.
-For information about using the `migrate` command, see [About Data Migration in <%= vars.product_short %>](./about-migrate.html).
+For information about using the `migrate` command,
+see [About data migration in <%= vars.product_short %>](./about-migrate.html).
 
-You can create a physical backup by following the procedure in [Backing Up and Restoring <%= vars.product_full %> ](./backup-restore.html#backup).
+You can create a physical backup by following the
+procedure in [Backing up and restoring <%= vars.product_full %> ](./backup-restore.html#backup).
 
-Operators can configure physical backups of your MySQL database in <%= vars.product_short %>
+You can configure physical backups of your MySQL database in <%= vars.product_short %>
 tile.
 For information about backups configured by operators,
-see [Configuring Automated Backups](./automated-backup.html).
+see [Configuring automated backups](./automated-backup.html).
 
 <p> When you take a logical backup, <%= vars.product_short %>
 does not send an email notification.</p>
 
-
-## <a id="manual-backup"></a> Back Up and Restore a <%= vars.product_short %> Logical Backup
+## <a id="manual-backup"></a> Back up and restore a <%= vars.product_short %> logical backup
 
 To back up and restore a <%= vars.product_short %> logical backup:
 
-1. Create a logical backup of your database. See [Create a <%= vars.product_short %> Logical Backup](#create-backup).
+1. Create a logical backup of your database. See [Create a <%= vars.product_short %> logical backup](#create-backup).
 1. Restore the logical backup to a <%= vars.product_short %> service instance.
-For more information about restoring a logical backup, see [ Restore from a <%= vars.product_short %> Logical Backup](#restore-backup).
+For more information about restoring a logical backup, see [ Restore from a <%= vars.product_short %> logical backup](#restore-backup).
 
 
-### <a id="create-backup"></a> Create a <%= vars.product_short %> Logical Backup
+### <a id="create-backup"></a> Create a <%= vars.product_short %> logical backup
 
 <%= vars.product_short %> deactivates remote admin access to MySQL databases.
 You must create a read only service key to access the database for the service instance you want to back up.
@@ -55,18 +54,18 @@ You must create a read only service key to access the database for the service i
 To back up your <%= vars.product_short %> data manually:
 
 1. Create and retrieve read-only access credentials by following the procedure in
-[Create Read-only Access Credentials](./customize-access.html#read-only).
+[Create read-only access credentials](./customize-access.html#read-only).
 
 1. From the output of the previous step, record the following values:
-    * `hostname`: The MySQL BOSH DNS hostname
-    * `password`: The password for the user that can be used
-    for backups of the service instance database
+    * `hostname`: The MySQL BOSH DNS hostname.
+    * `password`: The password for the user that can be used.
+    for backups of the service instance database.
     * `username`: The username for the user that can be used for
-     backups of the service instance database
+     backups of the service instance database.
 
 1. Connect to your service instance, by either service-gateway access or an SSH tunnel.
-   For more information, see [Creating a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html)
-   or [Using SSH to Connect from Outside a Deployment](./establish.html).
+   For more information, see [Creating a service instance with Service-Gateway access](./create-service-gateway-instance.html)
+   or [Using SSH to connect from outside a deployment](./establish.html).
 
 1. View a list of your databases by running:
 
@@ -135,20 +134,20 @@ To back up your <%= vars.product_short %> data manually:
     [mysqldump](https://dev.mysql.com/doc/refman/5.7/en/using-mysqldump.html) in the MySQL Documentation.
 
 
-### <a id="restore-backup"></a> Restore from a <%= vars.product_short %> Logical backup
+### <a id="restore-backup"></a> Restore from a <%= vars.product_short %> logical backup
 
 To restore a logical backup:
 
 1. (Optional) If you want to create a new service instance,
-do the procedure in [Create a Service Instance](./use.html#create).
+do the procedure in [Create a service instance](./use.html#create).
 
 1. Retrieve the credentials for the service instance you are restoring the backup to by following steps 1 and 2 in
-[Create a <%= vars.product_short %> Logical Backup](#create-backup).
+[Create a <%= vars.product_short %> logical backup](#create-backup).
 You can either restore the backup to an existing service instance or the one you created in step 1.
 
 1. Connect to your service instance, by either service-gateway access or an SSH tunnel.
-   For more information, see [Creating a Service Instance with Service-Gateway Access](./create-service-gateway-instance.html)
-   or [Using SSH to Connect from Outside a Deployment](./establish.html).
+   For more information, see [Creating a service instance with Service-Gateway access](./create-service-gateway-instance.html)
+   or [Using SSH to connect from outside a deployment](./establish.html).
 
 1. Restore your data from the SQL file on your local machine by running:
 
@@ -163,7 +162,7 @@ You can either restore the backup to an existing service instance or the one you
     * `BACKUP-FILE` is the name of your backup artifact.
 
 
-## <a id="external"></a> Restore from an Off-Platform Logical Backup
+## <a id="external"></a> Restore from an off-platform logical backup
 
 This section assumes that you have already created a logical backup for your off-platform database
 using `mysqldump`.

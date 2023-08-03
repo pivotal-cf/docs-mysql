@@ -1,15 +1,13 @@
 ---
-title: About Multi-Site replication
+title: About multi-site replication
 owner: MySQL
 ---
 
 <strong><%= modified_date %></strong>
 
-This topic describes how the <%= vars.single_leader_plan_lc %> topology works in
-<%= vars.product_full %> and contains information to help users decide whether to use
+This topic tells you about how <%= vars.single_leader_plan_lc %> topology works in
+<%= vars.product_full %> and contains information to help you decide whether to use
 the <%= vars.single_leader_plan %> plan.
-
-##<a id='overview'></a> Overview on Multi-Site Replication
 
 The <%= vars.single_leader_plan_lc %> topology in <%= vars.product_short %>
 is a disaster recovery solution that enables developers to provision a leader-follower
@@ -36,7 +34,7 @@ a developer triggers a failover.
 <p> The <%= vars.single_leader_plan %> plan type is configured separately
   from the leader-follower service plan.</p>
 
-For information for operators about enabling <%= vars.single_leader_plan %>,
+For information about enabling <%= vars.single_leader_plan %>,
 see
 [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
 
@@ -44,14 +42,14 @@ For information for developers about using <%= vars.single_leader_plan %>,
 see
 [Using <%= vars.product_short %> for <%= vars.single_leader_plan %>](./use-multi-site.html).
 
-##<a id='benefits'></a> <%= vars.single_leader_plan %> Benefits
+## <a id='benefits'></a> <%= vars.single_leader_plan %> benefits
 
 The <%= vars.single_leader_plan %> plan has the following benefits:
 
 + **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
-see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
+see [Triggering <%= vars.single_leader_plan %> failover and switchover](./multi-site-trigger-failover.html).
 
 + **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
@@ -62,8 +60,8 @@ single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
 + **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
-For more information, see [About Active-Passive Topology](#active-passive)
-and [About App-Layer Active-Active Topology](#active-active).
+For more information, see [About Active-Passive topology](#active-passive)
+and [About App-Layer Active-Active topology](#active-active).
 
 
 ##<a id='active-passive'></a> About active-passive topology
@@ -76,7 +74,7 @@ VMware recommends using this topology when your secondary foundation is scaled d
 generally inactive, and does not receive significant app traffic.
 
 For information about active-passive failover and switchover,
-see [About Failover and Switchover](#failover-switchover).
+see [About failover and switchover](#failover-switchover).
 
 The following diagram describes the active-passive topology in a healthy state:
 
@@ -100,7 +98,7 @@ VMware recommends using this topology when both your primary and secondary found
 are scaled up and are expected to serve traffic.
 
 For information about app-layer active-active failover and switchover,
-see [About Failover and Switchover](#failover-switchover).
+see [About failover and switchover](#failover-switchover).
 
 The following diagram describes the app-layer active-active topology in a healthy state:
 
@@ -120,7 +118,7 @@ In the preceding diagram:
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
-<span class="note__title"> Important</span> In the <%= vars.single_leader_plan %> plan,
+<span class="note__title"> Important</span>  In the <%= vars.single_leader_plan %> plan,
 the app-layer active-active topology does not enable multi-primary replication.
 Therefore, the follower service instance is read-only.
 Apps can only write to the leader.
@@ -133,10 +131,9 @@ Apps can only write to the leader.
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
 and developers must manually trigger a failover or switchover.
 For instructions about triggering failover or switchover, see
-see [Triggering <%= vars.single_leader_plan %> Failover and Switchover](./multi-site-trigger-failover.html).
+see [Triggering <%= vars.single_leader_plan %> Failover and switchover](./multi-site-trigger-failover.html).
 
-
-The following table describes when you should trigger a failover or switchover:
+The following table describes when you can trigger a failover or switchover:
 
 <table>
   <tr>
@@ -166,10 +163,10 @@ The following table describes when you should trigger a failover or switchover:
 </table>
 
 For information about <%= vars.single_leader_plan_lc %> topologies
-in an healthy state, see [About Active-Passive Topology](#active-passive)
-and [About App-Layer Active-Active Topology](#active-active).
+in an healthy state, see [About active-passive topology](#active-passive)
+and [About app-layer active-active topology](#active-active).
 
-###<a id='failover'></a> About failover
+### <a id='failover'></a> Failover
 
 In both the active-passive and app-layer active-active topologies,
 if a developer triggers a failover,
@@ -230,18 +227,18 @@ In the preceding diagram:
   The apps in the primary and secondary foundation issue transactions to the leader service instance
   in the secondary foundation. <br><br>
   The app in the primary foundation issues transactions to the leader:
-      1. Connects to the follower service instance
-      1. Issues transactions to the follower service instance
-      1. Forwards the transactions from the follower service instance to the leader
+      1. Connects to the follower service instance.
+      1. Issues transactions to the follower service instance.
+      1. Forwards the transactions from the follower service instance to the leader.
 
 + The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
 ##<a id='infrastructure'></a> Infrastructure requirements for <%= vars.single_leader_plan %>
 
-Before using the <%= vars.single_leader_plan %> plan, consider the following requirements.
+Before you use the <%= vars.single_leader_plan %> plan, consider the following requirements.
 
-###<a id='capacity'></a> Capacity planning
+### <a id='capacity'></a> Capacity planning
 
 When calculating IaaS usage, you must take into account that each
 <%= vars.single_leader_plan %> instance requires two VMs.
@@ -249,13 +246,13 @@ Therefore, the resources used for <%= vars.single_leader_plan %> plan is
 twice the amount of single node plan.
 
 For more information,
-see [Setting Limits for On-Demand Service Instances](.//set-quotas.html) and
+see [Setting limits for on-demand service instances](.//set-quotas.html) and
 [Persistent Disk Usage](./recommended.html#persistent).
 
-###<a id='network'></a> Networking requirements
+### <a id='network'></a> Networking requirements
 
-Consider that <%= vars.single_leader_plan %> instances that are deployed in
-data centers that are geographically farther apart experience higher latencies.
+You must consider the <%= vars.single_leader_plan %> instances that are deployed in
+data centers are a geographically farther apart experience higher latencies.
 
 For information about the standard networking rules,
 see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
@@ -265,6 +262,6 @@ see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#
 
 The <%= vars.single_leader_plan %> plan has the following limitation:
 
-+ **Synchronous replication is not supported:**
-For <%= vars.single_leader_plan %> plans, any data that is written to the leader
-is asynchronously replicated to the follower.
+<p class="note important">
+<span class="note__title"> Important</span> Synchronous replication is not supported. For multi‑site
+replication plans, any data that is written to the leader is asynchronously replicated to the follower.</p>

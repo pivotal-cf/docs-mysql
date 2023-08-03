@@ -3,13 +3,10 @@ title: Accessing a database as an Admin User
 owner: MySQL
 ---
 
-This topic describes how to access a database as an admin user with
+You can access a database as an admin user with
 either CredHub credentials or BOSH SSH.
 
-
-## <a id="overview"></a> Overview on accessing a database
-
-You can access a database as an admin user to do actions that
+When you access a database as an admin user, you can do actions that
 cannot be done as a normal binding user.
 
 You can do the following actions as an admin user:
@@ -42,6 +39,6 @@ in the <%= vars.ops_manager %> documentation.
     mysql --defaults-file=/var/vcap/jobs/pxc-mysql/config/mylogin.cnf
 	```
 
-## <a id="instance-creds"></a> Connect to MySQL with CredHub Credentials
+## <a id="instance-creds"></a> Connect to MySQL with CredHub credentials
 
 <%= partial vars.path_to_partials + "/services-tshoot/tshoot-tech-instance-creds" %>

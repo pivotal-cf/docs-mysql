@@ -1,5 +1,5 @@
 ---
-title: Setting limits for On-Demand service instances
+title: Setting limits for on-demand service instances
 owner: London Services
 galera: true
 ---
@@ -22,12 +22,12 @@ by setting various **quotas** at these levels:
 
 After you set quotas, you can:
 
-* [View Current Org and Space-level Quotas](#view)
-* [Monitor Quota Use and Service Instance Count](#monitor)
-* [Calculate Resource Costs for On-Demand Plans](#calculate)
+* [View current org and space-level quotas](#view)
+* [Monitor quota use and service instance count](#monitor)
+* [Calculate resource costs for on-demand plans](#calculate)
 
 
-## <a id="global"></a> Create Global-level Quotas
+## <a id="global"></a> Create global-level quotas
 
 Each on-demand service has a separate service broker.
 A global quota at the service level sets the maximum number of service instances
@@ -42,7 +42,7 @@ you must set a separate global service quota for each of them.
 When the global quota is reached for a service, no more instances of that service
 can be created unless the quota is increased, or in some instances of that service are deleted.
 
-## <a id="plan"></a> Create Plan-level Quotas
+## <a id="plan"></a> Create plan-level quotas
 
 A service might offer one or more plans.
 You can set a separate quota per plan so that instances of that plan cannot exceed the plan quota.
@@ -55,7 +55,7 @@ If the plan quota field is blank, the plan quota is set to the global quota by d
 When the plan quota is reached, no more instances of that plan can be created
 unless the plan quota is increased or some instances of that plan are deleted.
 
-## <a id="org"></a> Create and Set Org-level Quotas
+## <a id="org"></a> Create and set org-level quotas
 
 An org-level quota applies to all on-demand services and sets the maximum number of
 service instances an organization can create within their foundation.
@@ -95,9 +95,9 @@ To create and set an org-level quota, do the following:
   <pre class="terminal">cf set-quota dev_org myquota</pre>
 
 For more information on managing org-level quotas,
-see [Creating and Modifying Quota Plans](https://docs.pivotal.io/pivotalcf/1-12/adminguide/quota-plans.html).
+see [Creating and modifying quota plans](https://docs.pivotal.io/pivotalcf/1-12/adminguide/quota-plans.html).
 
-## <a id="space"></a> Create and Set Space-level Quotas
+## <a id="space"></a> Create and set space-level quotas
 
 A space-level service quota applies to all on-demand services and sets the maximum
 number of service instances
@@ -142,9 +142,9 @@ To create and set a space-level quota, do the following:
   <pre class="terminal">cf set-space-quota myspace myspacequota</pre>
 
 For more information on managing space-level quotas,
-see [Creating and Modifying Quota Plans](https://docs.pivotal.io/pivotalcf/1-12/adminguide/quota-plans.html).
+see [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/quota-plans.html).
 
-## <a id="view"></a> View Current Org and Space-level Quotas
+## <a id="view"></a> View current org and space-level quotas
 
 To view **org** quotas, run the following command.
 
@@ -159,9 +159,9 @@ cf space SPACE-NAME
 ```
 
 For more information on managing org and space-level quotas,
-see the [Creating and Modifying Quota Plans](https://docs.pivotal.io/application-service/adminguide/quota-plans.html).
+see the [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/quota-plans.html).
 
-## <a id="monitor"></a> Monitor Quota Use and Service Instance Count
+## <a id="monitor"></a> Monitor quota use and service instance count
 
 Service-level and plan-level quota use, and total number of service instances,
 are available through the on-demand broker metrics emitted to Loggregator.
@@ -191,13 +191,14 @@ These are the metrics:
   </tr>
 </table>
 
-<p class="note"><strong>Note:</strong> Quota metrics are not emitted if no quota
+<p> Quota metrics are not emitted if no quota
   has been set.</p>
 
 You can also view service instance usage information in Apps Manager. For more information,
-see [Reporting Instance Usage with Apps Manager](https://docs.pivotal.io/pivotalcf/opsguide/accounting-report-apps-man.html).
+see
+[Reporting instance usage with Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/accounting-report-apps-man.html).
 
-## <a id="calculate"></a> Calculate Resource Costs for On-Demand Plans
+## <a id="calculate"></a> Calculate resource costs for on-demand plans
 
 On-demand plans use dedicated VMs, disks, and various other resources from an
 IaaS, such as AWS.
@@ -206,8 +207,8 @@ you multiply the quota by the cost of the resources selected in the plan
 configuration(s).
 The specific costs depend on your IaaS.
 
-
-To view configurations for your VMware SQL with MySQL for TAS on-demand plan, do the following:
+To view configurations for your VMware SQL with MySQL for TAS on-demand plan, do
+  the following:
 
 1. Go to **Ops Manager Installation Dashboard** > **VMware SQL with MySQL for Tanzu Application Service** > **Settings**.
 
@@ -284,14 +285,13 @@ field set to 15, MySQL VM type set to micro, Jumpbox VM type set to micro,
 MySQL persistent disk set to 20 GB, and Jumpbox persistent disk set to 20 GB"](./images/galera-plan.png)
 </div>
 
-<p class="note"><strong>Note:</strong>
-  Although operators can limit on-demand instances with plan quotas and a global
+<p> Although you can limit on-demand instances with plan quotas and a global
   quota, as described in the above topics,
         IaaS resource usage still varies based on the number of on-demand instances
         provisioned.</p>
 
 
-### <a id="calculate-per-plan"></a> Calculate Maximum Resource Cost Per On-Demand Plan
+### <a id="calculate-per-plan"></a> Calculate maximum resource cost per on-demand plan
 
 To calculate the maximum cost of VMs and persistent disk for each plan, do the
 following calculation:
@@ -308,7 +308,7 @@ cost of the resources selected by the plan quota:
 **(15 x cost of micro VM type) + (15 x cost of 20&nbsp;GB persistent disk) = max cost per plan**
 
 
-### <a id="calculate-all-plans"></a> Calculate Maximum Resource Cost for All On-Demand Plans
+### <a id="calculate-all-plans"></a> Calculate maximum resource cost for all on-demand plans
 
 To calculate the maximum cost for all plans combined, add together the maximum
 costs for each plan.
@@ -320,7 +320,7 @@ Here is an example:
 **(plan1 quota x plan1 resource cost) + ( plan2 quota x plan2 resource cost) = max cost for all plans**
 
 
-### <a id="calculate-actual"></a> Calculate Actual Resource Cost of all On-Demand Plans
+### <a id="calculate-actual"></a> Calculate actual resource cost of all on-demand plans
 
 To calculate the current actual resource cost across all your on-demand plans:
 

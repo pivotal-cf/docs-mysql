@@ -17,17 +17,19 @@ When replication fails, the canary cannot read the data from all the nodes and d
 following:
 
   - Sends a message that replication has failed to a configured email address.
-  For more on notification emails, see [Sample Notification Email](#sample-canary).
-  - Deactivates client access to the cluster. For more information on client access to the client, see [Determine If the Cluster Is Accessible](#access).
+  For more on notification emails, see [Sample notification email](#sample-canary).
+  - Deactivates client access to the cluster. For more information on client access to the client,
+  see [Determine if the cluster is accessible](#access).
 
   <p> When replication fails, data can be lost.
     Contact <a href="https://tanzu.vmware.com/support">Support</a> immediately in the case of
     replication failure.</p>
 
-## <a id="sample-canary"></a>Sample Notification Email
+## <a id="sample-canary"></a>Sample notification email
 
 If the canary detects replication failure, it immediately sends an email through the
-<%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) notification service. You must have configured email notifications in
+<%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) notification service. You must have
+configured email notifications in
 <%= vars.app_runtime_abbr %> for the replication canary to send emails.
 
 For more information about configuring email notifications, see the _Configure Email Notifications_
@@ -46,7 +48,7 @@ has detected an unsafe cluster condition in which replication is not
 performing as expected across all nodes.
 ```
 
-## <a id="access"></a> Determining if the cluster is accessible
+## <a id="access"></a> Determine if the cluster is accessible
 
 When the canary detects replication failure, it deactivates connections to the database cluster through
 the proxies. When the replication issue is resolved, the canary automatically restores client access to the

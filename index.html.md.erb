@@ -28,7 +28,7 @@ that the service meets user expectations for a general-use relational database.
 +  <%= vars.single_leader_plan %>. For more information,
     see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 
-## <a id='snapshot'></a> Product Snapshot
+## <a id='snapshot'></a> Product snapshot
 
 The following table provides version and version-support information about <%= vars.product_short %>.
 
@@ -76,14 +76,14 @@ The <%= vars.product_short %> on-demand service uses the on-demand service broke
 For information about the on-demand service
 broker, see [On-Demand Services SDK for VMware Tanzu](https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/index.html).
 
-### <a id="service"></a>On-Demand Service Plan
+### <a id="service"></a>On-demand service plan
 
 <%= vars.product_short %> offers an on-demand service plan called `p.mysql`.
 Operators can configure and update the plan settings.
 
-When operators update the VM or disk size these settings are
+When you update the VM or disk size these settings are
 applied to all existing instances.
-If an operator decreases the disk size, data loss might occur in existing instances.
+If you decreases the disk size, data loss might occur in existing instances.
 
 ##<a id="checklist"></a> Enterprise-ready checklist
 
@@ -97,23 +97,23 @@ Review the following table to determine if <%= vars.product_short %> has the fea
 <tr>
   <td>On-Demand, Dedicated-VM Plans</td>
   <td><%= vars.product_short %> provides on-demand service plans.</td>
-  <td><a href="./about.html">On-Demand Networking</a></td>
+  <td><a href="./about.html">On-demand networking</a></td>
 </tr>
 <tr>
   <td>Customizable Plans</td>
   <td>Operators can customize the VM, disk size, and availability zone for service plans.</td>
-  <td><a href="./install-config.html#active">Configure Service Plans</a></td>
+  <td><a href="./install-config.html#active">Configure service plans</a></td>
 </tr>
 <tr>
   <td>Custom Schemas</td>
   <td><%= vars.product_short %> supports custom schemas.
     Using custom schemas enables apps to share a MySQL service instance and
     isolate app data by schema.</td>
-    <td><a href="./use.html#schema">Use Custom Schemas</a></td>
+    <td><a href="./use.html#schema">Use Custom schemas</a></td>
   </tr>
 <tr><td>Share Service Instances</td>
   <td><%= vars.product_short %> supports sharing service instances between different orgs and spaces.</td>
-  <td><a href="use.html#share">Share Service Instances</a></td>
+  <td><a href="use.html#share">Share service instances</a></td>
 </tr>
 
 <tr>
@@ -147,8 +147,8 @@ Review the following table to determine if <%= vars.product_short %> has the fea
   <td>Backup and Restore</td>
   <td><%= vars.product_short %> provides backups to an external storage solution on a configurable schedule.
   <%= vars.product_short %> also provides a restore process.</td>
-<td><a href="./automated-backup.html">Configuring Automated Backups</a> and
-  <a href="./backup-restore.html">Backing Up and Restoring <%= vars.product_short %></a></td>
+<td><a href="./automated-backup.html">Configuring automated backups</a> and
+  <a href="./backup-restore.html">Backing up and restoring <%= vars.product_short %></a></td>
 </tr>
 
 <tr>
@@ -156,7 +156,7 @@ Review the following table to determine if <%= vars.product_short %> has the fea
 </tr>
 <tr>
   <td>Scaling</td><td>Operators can scale the size of VMs up, but not down.</td>
-  <td><a href="./install-config.html">Installing Configuring <%= vars.product_short %></a></td>
+  <td><a href="./install-config.html">Installing configuring <%= vars.product_short %></a></td>
 </tr>
 <tr>
   <td>Rolling Deployments</td>
@@ -169,7 +169,7 @@ Review the following table to determine if <%= vars.product_short %> has the fea
   <td>AZ Support</td>
   <td><%= vars.product_short %> can be deployed to multiple zones to ensure availability if an
     unplanned outage of a zone occurs.</td>
-  <td><a href="./recommended.html#azs">About Availability Zones</a></td>
+  <td><a href="./recommended.html#azs">About availability zones</a></td>
 </tr>
 
 <tr>
@@ -185,7 +185,7 @@ Review the following table to determine if <%= vars.product_short %> has the fea
 <tr>
 <td>Encrypted Communication in Transit</td>
 <td><%= vars.product_short %> has been tested successfully with the BOSH IPsec Add-on.</td>
-  <td><a href="https://docs.pivotal.io/addon-ipsec/index.html">IPsec Add-on</a></td>
+  <td><a href="https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html">IPsec add-on</a></td>
 </tr>
 </table>
 

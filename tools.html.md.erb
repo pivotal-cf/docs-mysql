@@ -8,15 +8,13 @@ owner: MySQL
 This topic provides instructions for tool developers to use for
 access to their <%= vars.product_full %> databases.
 
-## <a id="overview"></a>Overview
-
 You can access your <%= vars.product_short %> databases by using the following tools:
 
-+ [MySQLWeb Database Management App](#mysqlweb).
-+ [cf CLI MySQL Plug-in](#plugin).
-+ [Desktop Tools](#desktop).
++ [MySQLWeb debuggingatabase management app](#mysqlweb).
++ [cf CLI MySQL plug-in](#plugin).
++ [Desktop tools](#desktop).
 
-## <a id="mysqlweb"></a>MySQLWeb Database Management App
+## <a id="mysqlweb"></a>MySQLWeb Database management app
 
 The MySQLWeb app provides a web UI for managing <%= vars.product_short %> databases.
 The free app lets you view and operate on tables, indexes, constraints, and other database structures,
@@ -35,7 +33,7 @@ bind to a specific service instance.
 See the MySQLWeb [code repo](https://github.com/pivotal-cf/PivotalMySQLWeb)
 for how to install and run MySQLWeb.
 
-## <a id="plugin"></a>cf CLI MySQL Plug-in
+## <a id="plugin"></a>cf CLI MySQL plug-in
 
 To connect to your <%= vars.product_short %> databases from a command line, use the cf CLI MySQL plug-in.
 The plug-in lets you:
@@ -97,6 +95,6 @@ command:
 
 1. Configure an SSH tunnel using the values for `hostname` and `port` that you recorded in the previous step.
    For information on configuring an SSH tunnel,
-   see [Configure Your SSH Tunnel](https://docs.pivotal.io/application-service/devguide/deploy-apps/ssh-services.html#ssh-tunnel).
+   see [Configure your SSH tunnel](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/deploy-apps-ssh-services.html#ssh-tunnel).
 
 1. Configure a connection in your desktop tool using the values for `hostname`, `name`, `password`, `port`, and `username` that you recorded in the previous step.
