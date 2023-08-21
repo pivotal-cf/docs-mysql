@@ -64,6 +64,11 @@ To create and find read-only credentials for an existing service instance:
      "username": "973eb219bd554dfc9794bc29a301bcb1"
     }</pre>
 
+    <p class="note caution">
+    <span class="note__title">Caution</span> Version 8 of the cf-cli has a different response than lesser versions of cf-cli.
+    Version 8 of the cf-cli has a top-level `credentials` key. Lesser versions of the cf-cli do not have a top-level `credentials` key.
+    </p>
+
 ## <a id="username"></a> Creating custom username credentials
 
 <%= vars.product_short %> enables space developers to create custom usernames for service keys and service bindings. You can create these credentials for users that want to access the database with a specific username.
@@ -111,3 +116,8 @@ To create and find custom username credentials for an existing service instance:
      "uri": "mysql://myuser:bdjq5o19ax4suzmg@a7113e41-7254-4f5a-a0cf-a88b052c8b10.mysql.service.internal:3306/service_instance_db?reconnect=true",
      "username": "myuser"
     }</pre>
+
+    <p class="note caution">
+    <span class="note__title">Caution</span> Version 8 of the cf-cli has a different response than lesser versions of cf-cli.
+    Version 8 of the cf-cli has a top-level `credentials` key. Lesser versions of the cf-cli do not have a top-level `credentials` key.
+    </p>
