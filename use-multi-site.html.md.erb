@@ -215,18 +215,20 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     cf login PRIMARY-API-URL
     ```
 1. Update your primary service instance with the host-info service key by running:
-
+   ```
+   cf update-service PRIMARY-INSTANCE -c HOST-INFO
     ```
-    cf update-service PRIMARY-INSTANCE -c HOST-INFO
-    ```
-    Where:
+   Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-    step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `HOST-INFO` is the output you recorded in step 3.
 
-    For example:
-    <pre class="terminal">$ cf update-service primary-node -c '{"replication":{ \
+   For example:
+   1. Routable Foundations. See Multi-Site [Prerequisites](#prepare-multi-site.html#prerequisites).
+
+    <pre class="terminal">$ cf update-service primary-node -c '{
+    "replication":{ \
       "peer-info":{ \
           "hostname": "secondary.bosh", \
           "ip": "10.0.18.12", \
@@ -238,7 +240,24 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     }'<br>
     Updating service instance primary-node as admin...
     OK</pre>
-1. Watch the progress of the service instance by running:
+   2. Non-Routable Foundations. See Multi-Site [Prerequisites](#prepare-multi-site.html#prerequisites).
+   
+    <pre class="terminal">$ cf update-service primary-node -c '{
+    <text style="color:DodgerBlue;"><b>"enable_external_access": true, </b></text>
+    "replication":{ \
+      "peer-info":{ \
+          "hostname": "secondary.bosh", \
+          "ip": "10.0.18.12", \
+          "system_domain": "sys.secondary-domain.com", \
+          "uuid": "ab12cd34-5678-91e2-345f-67891h234567" \
+        },\
+      "role": "leader" \
+      } \
+    }'<br>
+    Updating service instance primary-node as admin...
+    OK</pre>
+   
+2. Watch the progress of the service instance by running:
 
     ```
     watch cf services
