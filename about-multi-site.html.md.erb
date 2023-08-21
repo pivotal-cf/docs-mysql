@@ -236,6 +236,24 @@ In the preceding diagram:
 + The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
+###<a id=enable-external-access></a> About enabling external access
+
+If external-access is enabled,
+replication can occur between to non-routable foundations. Replication traffic goes through tcp-router.
+
+The following diagram describes what happens when you enable external-access for multi-site replication:
+
+![alt-text=""](./images/multi-site-external-access.png)
+
+In the preceding diagram:
+
++ Before external-access is enabled, replication traffic goes directly to the follower.
+
++ After external-access is enabled, replication traffic goes through tcp-router to the follower.
+
+<a href="./images/multi-site-external-access.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+
 ##<a id='infrastructure'></a> Infrastructure requirements for <%= vars.single_leader_plan %>
 
 Before using the <%= vars.single_leader_plan %> plan, consider the following requirements.
