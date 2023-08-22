@@ -211,13 +211,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
         }
       }</pre>
    
-    <p class="note caution">
-    <span class="note__title">Caution</span> Version 8 of the cf CLI has a different response than lesser versions of cf CLI.
-    Version 8 of the cf CLI has a top-level `credentials` key. Lesser versions of the cf CLI do not have a top-level `credentials` key.
-    These docs assume version 8 of the cf CLI.
-    </p>
+    >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
    
-1. Record the output of the previous command and remove the `credentials` key.
+1. Record the output of the previous command, and remove the `credentials` key.
 1. Log in to the deployment for your primary foundation by running:
 
     ```
@@ -321,13 +317,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
         }
       }</pre>
 
-   <p class="note caution">
-   <span class="note__title">Caution</span> Version 8 of the cf CLI has a different response than lesser versions of cf CLI.
-   Version 8 of the cf CLI has a top-level `credentials` key. Lesser versions of the cf CLI do not have a top-level `credentials` key.
-   These docs assume less than version 8 of the cf CLI.
-   </p>
+   >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
 
-1. Record the output of the previous command and remove the `credentials` key.
+1. Record the output of the previous command, and remove the `credentials` key.
 1. Log in to the deployment for your secondary foundation by running:
 
     ```console
