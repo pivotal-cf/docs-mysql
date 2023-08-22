@@ -411,18 +411,22 @@ To reconfigure replication for the service instances:
     Getting key host-info-key for service instance primary-node as admin...
 
       {
-        "replication": {
-            "peer-info": {
-              "hostname": "primary.bosh",
-              "ip": "10.0.19.12",
-              "system_domain": "sys.primary-domain.com",
-              "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
-          },
-          "role": "leader"
+        "credentials": {
+            "replication": {
+                "peer-info": {
+                  "hostname": "primary.bosh",
+                  "ip": "10.0.19.12",
+                  "system_domain": "sys.primary-domain.com",
+                  "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
+              },
+              "role": "leader"
+            }
         }
       }</pre>
 
-1. Record the output of the previous command.
+    >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+
+1. Record the output of the previous command, and remove the `credentials` key.
 
 1. Log in to the deployment for your secondary foundation by running:
 
@@ -504,22 +508,26 @@ To reconfigure replication for the service instances:
     Getting key cred-key for service instance secondary as admin...
 
       {
-        "replication": {
-          "credentials": {
-            "password": "a22aaa2a2a2aaaaa",
-            "username": "6bf07ae455a14064a9073cec8696366c"
-          },
-          "peer-info": {
-            "hostname": "secondary.bosh",
-            "ip": "10.0.17.12",
-            "system_domain": "sys.secondary-domain.com",
-            "uuid": "zy98xw76-5432-19v8-765u-43219t876543"
-          },
-          "role": "follower"
+        "credentials": {
+            "replication": {
+              "credentials": {
+                "password": "a22aaa2a2a2aaaaa",
+                "username": "6bf07ae455a14064a9073cec8696366c"
+              },
+              "peer-info": {
+                "hostname": "secondary.bosh",
+                "ip": "10.0.17.12",
+                "system_domain": "sys.secondary-domain.com",
+                "uuid": "zy98xw76-5432-19v8-765u-43219t876543"
+              },
+              "role": "follower"
+            }
         }
       }</pre>
 
-1. Record the output of the previous command.
+   >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+
+1. Record the output of the previous command, and remove the `credentials` key.
 
 1. Log in to the deployment for your primary foundation by running:
 
