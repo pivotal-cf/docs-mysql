@@ -225,26 +225,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `HOST-INFO` is the output you recorded in step 3.
 
    For example:
-   1. Routable Foundations. See Multi-Site [Prerequisites](#prepare-multi-site.html#prerequisites).
-
     <pre class="terminal">$ cf update-service primary-node -c '{
-    "replication":{ \
-      "peer-info":{ \
-          "hostname": "secondary.bosh", \
-          "ip": "10.0.18.12", \
-          "system_domain": "sys.secondary-domain.com", \
-          "uuid": "ab12cd34-5678-91e2-345f-67891h234567" \
-        },\
-      "role": "leader" \
-      } \
-    }'<br>
-    Updating service instance primary-node as admin...
-    OK</pre>
-   2. Non-Routable Foundations.\
-   Manually add `"enable_external_access": true`. See Multi-Site [Prerequisites](#prepare-multi-site.html#prerequisites).
-   
-    <pre class="terminal">$ cf update-service primary-node -c '{
-    <text style="color:DodgerBlue;"><b>"enable_external_access": true, </b></text>
     "replication":{ \
       "peer-info":{ \
           "hostname": "secondary.bosh", \
