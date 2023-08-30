@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-You can use optional parameters to change server defaults.
+Yopu can use optional parameters to change server defaults.
 
 ## <a id="changes"></a>Optional Parameters to change server defaults
 
@@ -15,27 +15,25 @@ You might want to configure optional parameters in the following cases:
 + You have a read-heavy or write-heavy application.
 See [Workloads](#workload).
 + You are migrating from a case-insensitive database.
-See [Lowercase table names](#lowercase).
+See [Lowercase Table Names](#lowercase).
 + You want to use a different character set or collation than the default.
-See [Character sets](#character).
+See [Character Sets](#character).
 + You want to configure leader-follower replication.
-See [Synchronous replication](#synchronous-replication).
-+ You have heavy traffic, or spikes in traffic, while using a high availability topology.
-See [WSREP applier threads](#wsrep_applier_threads).
+See [Synchronous Replication](#synchronous-replication).
++ You have heavy traffic, or spikes in traffic, while using a high availability topology. See [WSREP Applier Threads](#wsrep_applier_threads).
 
 The procedures in this topic use the Cloud Foundry Command Line Interface
-([cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/services-managing-services.html)).
-You can also use [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/dev-console.html)
-to perform the same tasks using a graphical UI.
+([cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/services-managing-services.html)).
+You can also use [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/dev-console.html) to perform the same tasks using a graphical UI.
 
 
-<p> <%= vars.product_short %> service instances are configured by default with industry best practices.
+<p> The <%= vars.product_short %> service instances are configured by default with industry best practices.
 For information about the configured server defaults,
 see <a href="server-defaults.html">About MySQL Server Defaults.</a>
 </p>
 
 
-## <a id="parameters"></a> Set optional parameters
+## <a id="parameters"></a> Set Optional parameters
 
 You can change the default configuration of optional parameters by creating a new service instance or
 updating an existing service instance.
@@ -115,7 +113,7 @@ The following table describes how to use the `workload` optional parameter
 
 </table>
 
-### <a id='workload-type'></a> Workload profile types
+### <a id='workload-type'></a> Workload Profile Types
 
 The following table lists the workload profiles that developers
 can use to configure MySQL instances based on their specific app workloads:
@@ -129,7 +127,7 @@ can use to configure MySQL instances based on their specific app workloads:
             This workload is equally heavy on reads and writes. <br><br>
 
             The configuration for this profile is described in
-            <a href="./server-defaults.html">About MySQL server defaults</a>.
+            <a href="./server-defaults.html">About MySQL Server Defaults</a>.
     </tr>
 
     <tr>
@@ -137,7 +135,7 @@ can use to configure MySQL instances based on their specific app workloads:
         <td>For apps that have a large number of reads, you can configure your
           service instances with a read-heavy workload.<br><br>
           The read-heavy profile changes the following server defaults listed in
-          <a href="./server-defaults.html">About MySQL server defaults</a>:
+          <a href="./server-defaults.html">About MySQL Server Defaults</a>:
           <ul>
             <li><code>innodb_buffer_pool_size</code>
               is increased to 75% of the available memory on each service instance.</li>
@@ -150,7 +148,7 @@ can use to configure MySQL instances based on their specific app workloads:
         <td>For apps that write to the database frequently, you can configure your
           service instances with a write heavy workload.<br><br>
             The write heavy profile changes the following server defaults that are listed in
-                <a href="./server-defaults.html">About MySQL server defaults</a>:
+                <a href="./server-defaults.html">About MySQL Server Defaults</a>:
           <ul>
           <li><code>innodb_buffer_pool_size</code>
             is increased to 75% of the available memory on each service instance.</li>
@@ -194,11 +192,14 @@ The following table describes how to use the `enable_lower_case_table_names` opt
     <td>The operator can set a default for this parameter and permit developers to override the default.
        <br><br>
       If you set this to <code>true</code>, table names are stored in lowercase.
+
       See <a href="#lowercase">About lowercase table names</a>.
 
-      <p> Before you enable this feature,
+      <p class="note important">
+<span class="note__title"> Important</span> Before you enable this feature,
 ensure all tables have lowercase names. Tables with uppercase names are inaccessible
-after enabling lowercase table names.</p></td>
+after enabling lowercase table names.
+</p>
   </tr>
 
   <tr>
@@ -261,6 +262,7 @@ optional parameters to change the character sets used in databases:
     <th><strong>Description</strong></th>
     <td>The <code>default-collation</code> changes based on the <code>default-charset</code>.
       To set the <code>default-collation</code>, first set the <code>default-charset</code>. <br><br>
+
       For instructions for
       viewing available and default collations,
       see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
@@ -285,7 +287,7 @@ However, depending on latency, sync replication reduces the performance of write
 
 The following table describes how to use the `replication_mode` optional parameter:
 
-<p> </strong> <code>replication_mode</code> does not work
+<p> The b<code>replication_mode</code> does not work
 for single node, HA cluster, or multi-site replication plans.</p>
 
 <table>
@@ -318,12 +320,10 @@ for single node, HA cluster, or multi-site replication plans.</p>
   </tr>
 
 </table>
-
 <p> In <%= vars.product_short %>, replication is called sync, rather than semi-sync.
   This is because it is as synchronous as possible given the limits of MySQL. For more information about MySQL semi-sync
   replication,
   see the <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-semisync.html">MySQL documentation</a>.
-
 </p>
 
 ### <a id='replication-timeout'></a>Synchronous replication timeout
@@ -491,16 +491,19 @@ The following table describes how to use the `wsrep_applier_threads` optional pa
   <tr>
     <th><strong>Description</strong></th>
     <td>
-      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. <%= vars.product_short %> defaults to the number of available CPU cores, whereas Percona XtraDB Cluster 5.7 defaults to 1. To return the property to the default, use a value of -1.
-      For more information, see the
-      <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster documentation</a>.
+      Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults to 4 threads, whereas Percona XtraDB Cluster 5.7 defaults to 1.
 
-      <p> This parameter only applies to "high-availablity" service plans, and
-        is rejected for service plans using other topologies.</p>
+      For further details, see the
+      <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster Docs</a>.
+
+      <p class="note important">
+<span class="note__title"> Important</span> This parameter only applies to "high-availablity" service plans, and is rejected for service
+plans using other topologies.
+</p>
     </td>
 
   <tr>
     <th><strong>Usage</strong></th>
-    <td><code>create-service</code> or <code>update-service</code> as per <a href="#parameters">Set optional parameters</a></td>
+    <td><code>create-service</code> or <code>update-service</code> as per <a href="#parameters">Set Optional Parameters</a></td>
   </tr>
 </table>
