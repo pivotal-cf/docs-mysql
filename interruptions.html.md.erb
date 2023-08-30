@@ -5,13 +5,12 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic tells you about the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
+Learn about events in the lifecycle of a <%= vars.product_full %> service instance that might cause temporary service interruptions.
 
 ## <a id='service-update'></a>Stemcell or service update
 
-You can update a stemcell version or their version of <%= vars.product_short %>.
-
-- <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
+An operator can update a stemcell version or their version of <%= vars.product_short %>.
+Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to.
 The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the update deploys successfully, the apps automatically reconnect.
 
@@ -22,7 +21,7 @@ A developer can change their service instance to provide a different service pla
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %> updates the service instance they are bound to. The service resumes within 10-15 minutes.
 - <strong>Required Actions:</strong> None. If the plan change deploys successfully, apps reconnect automatically.
 
-## <a id='process-fail'></a>VM process failure
+## <a id='process-fail'></a>VM Process failure
 
 A process, like the MySQL server, fails on the service instance VM.
 
@@ -32,7 +31,7 @@ A process, like the MySQL server, fails on the service instance VM.
   - Until the process resumes, apps might be unable to use MySQL, metrics or logging can stop, and other features might be interrupted.
 - <strong>Required Actions:</strong> None. If the process resumes cleanly and without manual intervention, apps reconnect automatically.
 
-## <a id='vm-fail'></a>VM failure
+## <a id='vm-fail'></a>VM Failure
 
 A <%= vars.product_short %> VM fails and goes offline due to either a virtualization problem or a host hardware problem.
 
@@ -49,11 +48,10 @@ A <%= vars.product_short %> VM fails and goes offline due to either a virtualiza
   in _Running Errands_.
   - If the VM is not part of a leader-follower pair, when the VM comes back, no further action is required for the app developer to continue operations.
 
-## <a id='az-fail'></a>AZ failure
+## <a id='az-fail'></a>AZ Failure
 
 An availability zone (AZ) goes offline entirely or loses connectivity to other AZs (net split).
-This causes service interruption in multi-AZ deployments
-where [Diego](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/diego-diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
+This causes service interruption in multi-AZ deployments where [Diego](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/diego-diego-auction.html) has placed multiple instances of a MySQL-using app in different AZs.
 
 - <strong>Impact:</strong>
   - Some app instances can still be able to connect and continue operating.
