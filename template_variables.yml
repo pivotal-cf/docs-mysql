@@ -35,7 +35,7 @@ template_variables:
   service_name: VMware Tanzu SQL with MySQL for VMs
   service_name_article: VMware Tanzu SQL with MySQL for VMs
   service_name_article_full: the VMware Tanzu SQL with MySQL for VMs service
-  support_link: <a href="http://support.pivotal.io" target="_blank">Support</a>
+  support_link: <a href="https://tanzu.vmware.com/support" target="_blank">Support</a>
   support_call_to_action: <a href="http://support.io" target="_blank">Need Support?</a>
   support_url: http://support.pivotal.io
   path_to_partials: /p-mysql/partials
