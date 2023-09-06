@@ -17,6 +17,19 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ **MySQL Service bindings support MariaDB Connector/j v3.0 and later**:
+
+  By default, MariaDB Connector/j 3.0 and later only accepts `jdbc:mariadb` connection strings.
+  
+  The `jdbcUrl` parameter in service bindings created by the MySQL Tile now include the `permitMysqlScheme` option so
+  that apps using MariaDB Connector/j 3.0 and later will work with MySQL service bindings.
+
+
 ### Changes
 
 This release includes the following changes:
