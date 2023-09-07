@@ -13,6 +13,35 @@ and then upgrade to the latest patch available for the next minor release.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="3-0-2"></a> v3.0.2
+
+**Release Date: TBD**
+
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ **MySQL service bindings support MariaDB Connector/J v3.0 and later:**:
+
+  MariaDB Connector/J 3.0 and later, by default, accept only `jdbc:mariadb` connection strings.
+
+  In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
+
+
+
+### Changes
+
+TBD
+
+### Breaking Changes
+
+TBD
+
+### Compatibility
+
+TBD
+
 ## <a id="3-0-1"></a> v3.0.1
 
 **Release Date: Jul 20th, 2023**
