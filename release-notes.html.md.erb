@@ -24,7 +24,7 @@ This release resolves the following issues:
 
 + **MySQL service bindings support MariaDB Connector/J v3.0 and later:**:
 
-  MariaDB Connector/J 3.0 and later, by default, accepts only `jdbc:mariadb` connection strings.
+  MariaDB Connector/J 3.0 and later, by default, accept only `jdbc:mariadb` connection strings.
 
   In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
 
