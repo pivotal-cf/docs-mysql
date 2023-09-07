@@ -19,6 +19,35 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 + In the **Security** pane of the MySQL tile **Settings** page, setting **TLS Options** to **Optional** allows, but does not enforce, TLS connections between apps and <%= vars.product_full %> service instances.
 
+## <a id="2-10-12"></a> v2.10.12
+
+**Release Date: TBD**
+
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ **MySQL service bindings support MariaDB Connector/J v3.0 and later:**:
+
+  MariaDB Connector/J 3.0 and later, by default, accept only `jdbc:mariadb` connection strings.
+
+  In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
+
+
+
+### Changes
+
+TBD
+
+### Breaking Changes
+
+TBD
+
+### Compatibility
+
+TBD
+
 ## <a id="2-10-11"></a> v2.10.11
 
 **Release Date: Jul 17th, 2023**
