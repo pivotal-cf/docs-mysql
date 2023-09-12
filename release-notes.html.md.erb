@@ -15,8 +15,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="3-0-2"></a> v3.0.2
 
-**Release Date: TBD**
-
+**Release Date: Sep 12th, 2023**
 
 ### Resolved Issues
 
@@ -27,20 +26,11 @@ This release resolves the following issues:
   MariaDB Connector/J 3.0 and later, by default, accept only `jdbc:mariadb` connection strings.
 
   In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
+
 + **Percona 8.0.22: DROP USER fails with an error if any account to be dropped is named as the DEFINER attribute for any stored object.:**:
   
-  This breaking change has been addressed. There will no longer be a failure when deleting 
-  a service key when the user associated with that service key has been used to create stored objects.
-  The behavior will now be consistent with previous releases. Ie the objects will be orphaned.
-
-
-### Changes
-
-TBD
-
-### Breaking Changes
-
-TBD
+  This release addresses this breaking change in Percona. Deleting a service key no longer results in a failure when the user associated with the service key has been used to create stored objects.
+  Instead, as in previous releases, the objects will be orphaned.
 
 ### Compatibility
 
