@@ -231,15 +231,15 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `HOST-INFO` is the output you recorded in step 3.
 
     For example:
-    <pre class="terminal">$ cf update-service primary-node -c '{"replication":{ \
-      "peer-info":{ \
-          "hostname": "secondary.bosh", \
-          "ip": "10.0.18.12", \
-          "system_domain": "sys.secondary-domain.com", \
-          "uuid": "ab12cd34-5678-91e2-345f-67891h234567" \
-        },\
-      "role": "leader" \
-      } \
+    <pre class="terminal">$ cf update-service primary-node -c '{"replication":{
+      "peer-info":{
+          "hostname": "secondary.bosh",
+          "ip": "10.0.18.12",
+          "system_domain": "sys.secondary-domain.com",
+          "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
+        },
+      "role": "leader"
+      }
     }'<br>
     Updating service instance primary-node as admin...
     OK</pre>
@@ -337,19 +337,19 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `CREDENTIALS` is the output you recorded in step 8.
 
     For example:
-    <pre class="terminal">$ cf update-service secondary-node -c '{"replication": { \
-        "credentials": { \
-          "password": "a22aaa2a2a2aaaaa", \
-          "username": "6bf07ae455a14064a9073cec8696366c" \
-        }, \
-        "peer-info": { \
-          "hostname": "primary.bosh", \
-          "ip": "10.0.17.12", \
-          "system_domain": "sys.primary-domain.com", \
-          "uuid": "zy98xw76-5432-19v8-765u-43219t876543" \
-        }, \
-        "role": "follower" \
-      } \
+    <pre class="terminal">$ cf update-service secondary-node -c '{"replication": {
+        "credentials": {
+          "password": "a22aaa2a2a2aaaaa",
+          "username": "6bf07ae455a14064a9073cec8696366c"
+        },
+        "peer-info": {
+          "hostname": "primary.bosh",
+          "ip": "10.0.17.12",
+          "system_domain": "sys.primary-domain.com",
+          "uuid": "zy98xw76-5432-19v8-765u-43219t876543"
+        },
+        "role": "follower"
+      }
     }'<br>
     Updating service instance primary-node as admin...
     OK</pre>
