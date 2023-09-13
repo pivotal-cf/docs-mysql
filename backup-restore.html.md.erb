@@ -76,6 +76,15 @@ For instructions on how to troubleshoot persistent disk errors,
 see <a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.
 </p>
 
+<p class="note">Backups use the Percona Xtrabackup tool, which does not lock schemas that use
+the default InnoDB transactional storage engine. Backups do briefly lock non-transactional
+operations -- specifically DDL and MyISAM (non-InnoDB) storage engine operations.
+Developers should be aware of these backup DDL
+and MyISAM locks, and consider any impact on their running applications. More information
+on backup locking behavior can be found on the
+<a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona website</a>.
+</p>
+
 ## <a id="understanding-metadata"></a> About backup files and metadata
 
 When <%= vars.product_short %> runs a backup,
