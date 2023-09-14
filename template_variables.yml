@@ -49,6 +49,11 @@ template_variables:
   global_header_product_href: https://network.pivotal.io/
   global_header_product_link_text: Downloads
 
+  # Associated Tanzu Application Service for VMs version
+  current_tas_version: "4-0"
+  v_major_tas_version: "v4.0"
+  dot_major_tas_version: "4.0"
+
   mysql_metrics_origin: /p-mysql
   mysql_metrics_origin_v2: /p.mysql
 
