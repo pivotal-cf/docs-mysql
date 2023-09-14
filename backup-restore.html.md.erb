@@ -50,26 +50,26 @@ You might want to back up or restore a service instance in the following use cas
 
 ## <a id="about-backups"></a>About backups
 
-VMware SQL with MySQL for TAS includes an automated backup capability, which will:
+<% vars.product_short %> includes an automated backup capability, which:
 
-- Create and upload physical backups for restoring all of the databases used
+- Creates and uploads physical backups for restoring all of the databases used
 by a service instance.
-- Include a metadata file that contains the critical details for the backup,
+- Includes a metadata file that contains the critical details for the backup,
 including the calendar time of the backup.
-- Encrypt the backup artifact on the service instance's VM before uploading to Operator-configured offsite storage.
+- Encrypts the backup artifact on the service instance VM before uploading to offsite storage configured by the operator.
 Unencrypted data is never transferred outside the <%= vars.product_short %> deployment.
-- Run at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
-Developers can change that default schedule for an individual service instance using
-an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
+- Runs at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
+Developers can change the default schedule for an individual service instance using
+an arbitrary parameter. For information, see [Backup Schedule](./change-default.html#backup-schedule).
 - Can be manually triggered by a developer (described [below](#manually-back-up-a-service-instance-3)).
 
 Automated backups fail if the service broker is unavailable (for example during an upgrade).
 
-<p>Operators must configure automated backups' storage and default schedules in the  <%= vars.product_short %> tile. You cannot be deactivate this feature.
+<p>Operators must configure storage and default schedules for automated backups in the  <%= vars.product_short %> tile. You cannot deactivate this feature.
 </p>
 
 <p class="note important">
-<span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload a service instance's backup, the backup artifact remains on that service instance's persistent disk.
+<span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance.
 This can cause the persistent disk to fill up faster.
 If the persistent disk is full, apps become inoperable.
 For instructions on how to troubleshoot persistent disk errors,
@@ -78,11 +78,11 @@ see <a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.
 
 <p class="note">Backups use the Percona Xtrabackup tool, which does not lock schemas that use
 the default InnoDB transactional storage engine. Backups do briefly lock non-transactional
-operations -- specifically DDL and MyISAM (non-InnoDB) storage engine operations.
+operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations.
 Developers should be aware of these backup DDL
-and MyISAM locks, and consider any impact on their running applications. More information
-on backup locking behavior can be found on the
-<a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona website</a>.
+and MyISAM locks, and consider any impact on their running applications. For more information
+about backup locking behavior, see the
+<a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona documentation</a>.
 </p>
 
 ## <a id="understanding-metadata"></a> About backup files and metadata
