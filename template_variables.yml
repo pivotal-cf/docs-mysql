@@ -33,6 +33,9 @@ template_variables:
   v_major_tas_version: "v4.0"
   dot_major_tas_version: "4.0"
 
+  # TAS version... used in a partial, so we can't use the above TAS variables
+  current_major_version: "4.0"
+
   # Other variables
   tile_name: VMware SQL with MySQL for Tanzu Application Service
   product_url: https://network.pivotal.io/products/pivotal-cf
