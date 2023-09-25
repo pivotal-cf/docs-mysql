@@ -17,7 +17,6 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
-
 ### Resolved Issues
 
 This release resolves the following issues:
@@ -28,9 +27,9 @@ This release resolves the following issues:
 
   In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
 
-+ Removes obsoleted `syslog_migration_selector` certs field. These certificates eventually expire causing a certificate flag in Ops Manager, but the field was hidden which required manual intervention to address the flag
++ Removes obsolete `syslog_migration_selector` certificates field. The certificates eventually expire, causing a certificate flag in <%= vars.ops_manager %>, but the field was hidden, so manual intervention was required to address the flag.
 
-+ Fixes a bug where users were unable to delete service keys created for MySQL 8.0 instances with single node or leader-follower topologies
++ Fixes an issue where users were unable to delete service keys created for MySQL 8.0 service instances with single-node or leader-follower topologies.
 
 ### Changes
 
@@ -39,11 +38,11 @@ This release includes the following changes:
 + Adds dynamic configuration of wsrep_applier_threads. For information about
 this configuration, see [WSREP applier threads](./change-default.html#wsrep_applier_threads) in _Changing Defaults Using Arbitrary Parameters_.
 
-+ Sets `wsrep_applier_threads` value based on available CPUs to improve throughput
++ Sets `wsrep_applier_threads` value based on available CPUs to improve throughput.
 
-+ Loads named timezone data by default
++ Loads named time zone data by default.
 
-+ Multi-site topologies now support service gateway
++ Adds service-gateway support to multi-site topologies.
 
 ### Breaking Changes
 
