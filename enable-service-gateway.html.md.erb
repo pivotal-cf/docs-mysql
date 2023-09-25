@@ -115,7 +115,7 @@ To configure service-gateway access for the foundation:
 the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
 text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
-    This activates the feature and makes the domain and port range fields visible.
+    This activates the feature and makes the **External TCP Domain**, **External TCP Port Range**, and **Enable External Access for All Multi-Site Instances** fields visible.
 
 2. Configure the fields as follows:
 
@@ -139,9 +139,17 @@ text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
                 <strong>External TCP Port Range</strong>
             </td>
             <td>
-               Set this to the range of ports you configured for the external load balancer for MySQL
+               Enable this to the range of ports you configured for the external load balancer for MySQL
                service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
                to Redirect Traffic to the TCP Router</a>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Enforce External Access for All Multi-Site Instances</strong>
+            </td>
+            <td>
+               Set this to enforce the routing of a Multi-Site leader's replication traffic through the TCP router  <a href="./about-multi-site.html#enable-external-access">Enable External Access</a>.
             </td>
         </tr>
     </table>

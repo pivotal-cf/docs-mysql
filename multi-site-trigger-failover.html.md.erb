@@ -420,16 +420,18 @@ To reconfigure replication for the service instances:
 1. Update your leader service instance in the secondary foundation with the host-info service key
    by running:
 
+   ```
+   cf update-service SECONDARY-INSTANCE -c HOST-INFO
     ```
-    cf update-service SECONDARY-INSTANCE -c HOST-INFO
-    ```
-    Where:
+   Where:
 
-    + `SECONDARY-INSTANCE` is the name of the leader service instance in the secondary foundation.
-    + `HOST-INFO` is the output you recorded in previous step.
+    + `SECONDARY-INSTANCE` is the name of the primary service instance you created in
+      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    + `HOST-INFO` is the output you recorded in step 3.
 
-    For example:
-    <pre class="terminal">$ cf update-service secondary-node -c '{"replication":{ \
+   For example:
+    <pre class="terminal">$ cf update-service primary-node -c '{
+    "replication":{ \
       "peer-info":{ \
           "hostname": "primary.bosh", \
           "ip": "10.0.18.12", \
@@ -439,8 +441,8 @@ To reconfigure replication for the service instances:
       "role": "leader" \
       } \
     }'<br>
-  Updating service instance secondary-node as admin...
-  OK</pre>
+    Updating service instance primary-node as admin...
+    OK</pre>
 1.  Monitor the progress of the service instance update by running:
 
     ```
@@ -496,7 +498,12 @@ To reconfigure replication for the service instances:
                 "hostname": "secondary.bosh",
                 "ip": "10.0.17.12",
                 "system_domain": "sys.secondary-domain.com",
-                "uuid": "zy98xw76-5432-19v8-765u-43219t876543"
+                "uuid": "zy98xw76-5432-19v8-765u-43219t876543",
+                "ports": {
+                    "mysql":  3306,
+                    "agent":  8443,
+                    "backup": 8081   
+               }, 
               },
               "role": "follower"
             }
@@ -532,7 +539,12 @@ To reconfigure replication for the service instances:
           "hostname": "secondary.bosh", \
           "ip": "10.0.17.12", \
           "system_domain": "sys.secondary-domain.com", \
-          "uuid": "zy98xw76-5432-19v8-765u-43219t876543" \
+          "uuid": "zy98xw76-5432-19v8-765u-43219t876543", \
+          "ports": { \
+            "mysql":  3306, \
+            "agent":  8443, \
+            "backup": 8081  \
+           }, \
         }, \
         "role": "follower" \
       } \
