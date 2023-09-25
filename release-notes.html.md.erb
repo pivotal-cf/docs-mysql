@@ -17,7 +17,6 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
-
 ### Resolved Issues
 
 This release resolves the following issues:
@@ -28,7 +27,9 @@ This release resolves the following issues:
 
   In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
 
++ Removes obsolete `syslog_migration_selector` certificates field. The certificates eventually expire, causing a certificate flag in <%= vars.ops_manager %>, but the field was hidden, so manual intervention was required to address the flag.
 
++ Fixes an issue where users were unable to delete service keys created for MySQL 8.0 service instances with single-node or leader-follower topologies.
 
 ### Changes
 
@@ -36,6 +37,12 @@ This release includes the following changes:
 
 + Adds dynamic configuration of wsrep_applier_threads. For information about
 this configuration, see [WSREP applier threads](./change-default.html#wsrep_applier_threads) in _Changing Defaults Using Arbitrary Parameters_.
+
++ Sets `wsrep_applier_threads` value based on available CPUs to improve throughput.
+
++ Loads named time zone data by default.
+
++ Adds service-gateway support to multi-site topologies.
 
 ### Breaking Changes
 
@@ -46,4 +53,34 @@ this configuration, see [WSREP applier threads](./change-default.html#wsrep_appl
 
 ### Compatibility
 
-TBD
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>1.232*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.43-47*</td></tr>
+  <tr><td>Percona Server</td><td>8.0.33-25*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.42-31.65*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>8.0.33-25*</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
+  <tr><td>Percona XtraBackup</td><td>8.0.33-28*</td></tr>
+  <tr><td>adbr-release</td><td>0.89.0*</td></tr>
+  <tr><td>bpm-release</td><td>1.2.7*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.49.0*</td></tr>
+  <tr><td>cf-service-gateway-release</td><td>123.0.0*</td></tr>
+  <tr><td>count-cores-indicator-release</td><td>2.0.0</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.217.0*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.382.0*</td></tr>
+  <tr><td>loggregator-agent-release</td><td>7.6.2*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.31.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.4.0*</td></tr>
+  <tr><td>on-demand-service-broker-release</td><td>0.43.3*</td></tr>
+  <tr><td>pxc-release</td><td>1.0.17*</td></tr>
+  <tr><td>routing-release</td><td>0.281.0*</td></tr>
+  <tr><td>service-metrics-release</td><td>2.0.32*</td></tr>
+</table>
+
