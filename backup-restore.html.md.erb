@@ -60,8 +60,8 @@ including the calendar time of the backup.
 - Encrypts the backup artifact on the service instance VM before uploading to offsite storage configured by the operator.
 Unencrypted data is never transferred outside the <%= vars.product_short %> deployment.
 - Run at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
-Developers can override that default schedule on individual services instances by applying
-an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
+Developers can use an arbitrary parameter to override the default schedule on individual service instances. For more
+information, see [Backup Schedule](./change-default.html#backup-schedule).
 
 Developers can also manually trigger a backup of an individual service instance. For information about manually backing up a service instance, see [Manually back up a service instance](#backup) below.
 
