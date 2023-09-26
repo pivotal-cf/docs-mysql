@@ -59,15 +59,16 @@ by a service instance.
 including the calendar time of the backup.
 - Encrypts the backup artifact on the service instance VM before uploading to offsite storage configured by the operator.
 Unencrypted data is never transferred outside the <%= vars.product_short %> deployment.
-- Runs at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
-Developers can change the default schedule for an individual service instance using
-an arbitrary parameter. For information, see [Backup Schedule](./change-default.html#backup-schedule).
-- Can be manually triggered by a developer (described [below](#manually-back-up-a-service-instance-3)).
+- Run at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
+Developers can override that default schedule on individual services instances by applying
+an arbitrary parameter. For more information, see [Backup Schedule](./change-default.html#backup-schedule).
 
-Automated backups fail if the service broker is unavailable (for example during an upgrade).
+Developers can also manually trigger a backup of an individual service instance. For information about manually backing up a service instance, see [Manually back up a service instance](#backup) below.
 
 <p>Operators must configure storage and default schedules for automated backups in the  <%= vars.product_short %> tile. You cannot deactivate this feature.
 </p>
+
+Backups fail if the service broker is unavailable (for example, during an upgrade).
 
 <p class="note important">
 <span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance.
