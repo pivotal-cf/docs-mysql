@@ -7,23 +7,14 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 
 **Note**: Provide instructions in your PRs to indicate which branches you want Docs to apply your commits to.
 
-| Branch name | Use for… |
-|-------------| -------|
-| master      | "edge" branch for 2.x, publishes to https://docs-pcf-staging.cfapps.io/p-mysql/2-n/|
-| 2.9         | [v2.9.x](https://docs.pivotal.io/p-mysql/2-9) |
-| 2.8.3-174881244 | This is a temporary feature branch to prep for v2.8.3. |
-| 2.8         | v2.8.x |
-| 2.7         | v2.7.x |
-| 2.6         | v2.6.x |
-| 2.5         | DEPRECATED. DO NOT USE. |
-| 2.4         | DEPRECATED. DO NOT USE. |
-| 2.3         | DEPRECATED. DO NOT USE. |
-| 2.2         | v2.2.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.2.pdf |
-| 2.1         | v2.1.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.1.pdf |
-| 2.0         | v2.0.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-2.0.pdf |
-| 1.11        | There are no plans for a v1.11. However, because it publishes to the edge branch, you could use it to stage big changes for the v1.10.x without worrying they'll go to production prematurely. |
-| 1.10        | DEPRECATED. DO NOT USE. |
-| 1.9         | v1.9.x — PDFed: https://docs.pivotal.io/archives/mysql-docs-1.9.pdf |
+| Branch name  | Use for...                                                                                                                       |
+|--------------|----------------------------------------------------------------------------------------------------------------------------------|
+| master       | Not used                                                                                                                         |
+| 3.1          | 3.1                                                                                                                              |
+| 3.0.0        | [3.0.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/about_mysql_vms.html)   |
+| 2.10         | [2.10.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.10/mysql-for-tas/about_mysql_vms.html) |
+| 2.9          | [2.9.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.9/mysql-for-tas/about_mysql_vms.html)   |
+| 2.8, earlier | No longer used                                                                                                                   |
 
 **Note**: Branches v1.9 through v1.4, v2.0, v2.1 and v2.2 are no longer published as live documentation. However, documentation for those versions of PDFs is available as PDFs.
 
