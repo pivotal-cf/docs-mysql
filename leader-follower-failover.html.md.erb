@@ -69,6 +69,7 @@ for stopping the leader and promoting the follower:
     <pre class="terminal">$ cf service my-lf-instance --guid
     82ddc607-710a-404e-b1b8-a7e3ea7ec063
     </pre>
+
     If you do not know the name of the service instance, you can list service instances in the space with `cf services`.
 
 1. Follow the procedure at [Gather credential and IP Address information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1)
@@ -308,20 +309,19 @@ To start the former leader VM again and configure it as the new follower:
    For example:
    <pre class="terminal">$ bosh -d service-instance\_82ddc607-710a-404e-b1b8-a7e3ea7ec063 \
        run-errand inspect</pre>
+
    If the output displays one instance marked `Role: leader` and another instance marked `Role: follower`,
    then leader-follower replication and high availability are resumed.
    The deployment should be in its original, working state.
-   You can turn resurrection back on if you want too.
+   If you wish, you can re-enable resurrection.
 
 ## <a id='unbind-rebind'></a> Unbind and rebind the app
 
-To fail their apps over to the new leader VM,
-your developers must bind and rebind their apps to the leader-follower service instance:
+>**Note**
+>If you have BOSH DNS enabled in <%= vars.ops_manager %>, you do not need to unbind and re-bind your app to a leader-follower service instance to failover the app. The operator activates BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.
 
-<p> If you have BOSH DNS enabled in <%= vars.ops_manager %>,
-  you do not need to unbind and re-bind your app to a leader-follower service instance to failover the app.
-  The operator activates BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.
-</p>
+To fail their apps over to the new leader VM,
+your developers must bind and rebind their apps to the leader-follower service instance.
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
