@@ -145,7 +145,8 @@ To configure service-gateway access for the foundation:
   >**Important**
   >If you already have service instances using service-gateway, any modifications to this range must include ports that are already assigned to these service instances.  If the port range does not contain the ports already assigned to service instances, the upgrades for the service instances fail.  For example, if service-gateway access has the port range <code>1000-1005</code>, and there are service instances that correspond to ports <code>1000</code>, <code>1001</code>, and <code>1002</code>, then the new port range must have ports <code>1000</code>, <code>1001</code>, and <code>1002</code>.
 
-  If service-gateway access is deactivated and then activated again, app developers must create new service keys to obtain a new set of credentials for service-gateway access.
+  >**Note**
+  >If service-gateway access is deactivated and then activated again, app developers must create new service keys to obtain a new set of credentials for service-gateway access.
 
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 
