@@ -109,56 +109,43 @@ To configure service-gateway access for the foundation:
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
 
-![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
-the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
+  ![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
-    This activates the feature and makes the domain and port range fields visible.
+  This activates the feature and makes the domain and port range fields visible.
 
-2. Configure the fields as follows:
+1. Configure the fields as follows:
 
-    <table>
-       <col width="20%">
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        <tr>
-            <td>
-                <strong>External TCP Domain</strong>
-            </td>
-            <td>
-               Set this to the DNS entry for the external load balancer
-               that you recorded in <a href="#create-dns-record">Create a DNS Record That Maps to the Load Balancer</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>External TCP Port Range</strong>
-            </td>
-            <td>
-               Set this to the range of ports you configured for the external load balancer for MySQL
-               service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
-               to Redirect Traffic to the TCP Router</a>.
-            </td>
-        </tr>
-    </table>
-    <p class="note important">
-    <span class="note__title"> Important</span> If you already have service instances using service-gateway, any modifications to this range
-    must include ports that are already assigned to these service instances.
-    If the port range does not contain the ports already assigned to service instances, the
-    upgrades for the service instances fail.
-    For example, if service-gateway access has the port range <code>1000-1005</code>,
-    and there are service instances that correspond to ports <code>1000</code>, <code>1001</code>,
-    and <code>1002</code>, then the new port range must have ports <code>1000</code>,
-    <code>1001</code>, and <code>1002</code>.
-    </p>
+  <table>
+     <col width="20%">
+      <tr>
+          <th>Field</th>
+          <th>Instructions</th>
+      </tr>
+      <tr>
+          <td>
+              <strong>External TCP Domain</strong>
+          </td>
+          <td>
+             Set this to the DNS entry for the external load balancer
+             that you recorded in <a href="#create-dns-record">Create a DNS Record That Maps to the Load Balancer</a>.
+          </td>
+      </tr>
+      <tr>
+          <td>
+              <strong>External TCP Port Range</strong>
+          </td>
+          <td>
+             Set this to the range of ports you configured for the external load balancer for MySQL
+             service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
+             to Redirect Traffic to the TCP Router</a>.
+          </td>
+      </tr>
+  </table>
 
+  >**Important**
+  >If you already have service instances using service-gateway, any modifications to this range must include ports that are already assigned to these service instances.  If the port range does not contain the ports already assigned to service instances, the upgrades for the service instances fail.  For example, if service-gateway access has the port range <code>1000-1005</code>, and there are service instances that correspond to ports <code>1000</code>, <code>1001</code>, and <code>1002</code>, then the new port range must have ports <code>1000</code>, <code>1001</code>, and <code>1002</code>.
 
-    <p> If service-gateway access is deactivated and then activated again, app
-      developers must create new service keys to obtain a new set of credentials for service-gateway
-      access.
-    </p>
+  If service-gateway access is deactivated and then activated again, app developers must create new service keys to obtain a new set of credentials for service-gateway access.
 
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 
