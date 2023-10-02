@@ -53,4 +53,4 @@
         *   [Monitoring node health for HA clusters](./monitor-health.html)
         *   [Troubleshooting instances](./troubleshoot-instances.html)
 *   [Backing up and restoring VMware SQL with MySQL for TAS](./backup-restore.html)
-    [Monitoring and KPIs](./monitor.html)
+*   [Monitoring and KPIs](./monitor.html)
