@@ -27,7 +27,7 @@ you must have:
 Your operator configures this plan and enables access to it in your org and space.
 + Selected two foundations to deploy your <%= vars.single_leader_plan %> leader and follower VMs.
   Your operators must configure these foundations for <%= vars.single_leader_plan_lc %>.
-For more information configuring a <%= vars.single_leader_plan %> topology,
+For more information about configuring a <%= vars.single_leader_plan %> topology,
 see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
 
 ## <a id='create-multi-dc'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance
@@ -47,7 +47,7 @@ See [Bind a <%= vars.single_leader_plan %> leader-follower service instance to y
 See [Use the MySQL service in your app](./use.html#call).
 
 After you create a <%= vars.single_leader_plan %> leader-follower service instance,
-you can manage it over the life cycle of your apps and data.
+you can manage it over the lifecycle of your apps and data.
 For instructions on how to manage a <%= vars.product_short %> service instance,
 see [Manage service instances](./use.html#manage).
 
@@ -106,7 +106,7 @@ To create a multi-site replication service instance in both foundations:
         ```
 
         Wait for the `last operation` for your instance to show as `create succeeded`.
-        <br><br>
+
         For example:
 
         <pre class="terminal">$ watch cf services<br>
@@ -146,10 +146,10 @@ The steps shown in the diagram are as follows:
 
 1. Create host-info service key.
 2. Record host-info service key.
-3. Update secondary service instance with host-info service key.
+3. Update primary service instance with host-info service key.
 4. Create credentials service key.
 5. Record credentials service key.
-6. Update primary service instance with credentials service key.
+6. Update secondary service instance with credentials service key.
 
 #### Procedure for configuring <%= vars.single_leader_plan %>
 
@@ -172,7 +172,6 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
     step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY` is a name you choose for the host-info service key.
-    <br><br>
 
     For example:
     <pre class="terminal">$ cf create-service-key secondary-node host-info \
@@ -250,7 +249,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -258,7 +257,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     OK
     name           service       plan        bound apps    last operation
     primary-node   p.mysql       db-small                  update succeeded
-  </pre>
+    </pre>
 
     If you get an error, see [Troubleshooting instances](./troubleshoot-instances.html).
 1.  Create a credentials service key for the service instance in your primary foundation by
@@ -268,12 +267,12 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
     step 1 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
-    <br><br>
 
     For example:
     <pre class="terminal">$ cf create-service-key primary-node cred-key \
@@ -373,7 +372,7 @@ you must additionally bind your app to the secondary service instance in your se
 
 For information about active-passive and app-layer active-active topologies,
 see see [About active-passive topology](./about-multi-site.html#active-passive)
-and [About appp-layer active-active topology](./about-multi-site.html#active-active).
+and [About app-layer active-active topology](./about-multi-site.html#active-active).
 
 To bind an app to a leader-follower service instance:
 
@@ -387,7 +386,7 @@ To bind an app to a leader-follower service instance:
 
 1. (Optional) If you are using an active-active topology,
 you must bind the same app to your secondary service instance in your secondary foundation.
-To do this, repeat the previous steps and replace references to `primary` with `secondary`.
+To do this, repeat the previous steps and replace references to "primary" with "secondary".
 
 1. Modify your app to use the <%= vars.product_short %> service by using the procedure in
   [Use the MySQL service in your app](./use.html#call).
