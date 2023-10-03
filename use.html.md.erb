@@ -200,13 +200,13 @@ see [MySQL environment variables](#vcap).
 
 ### <a id="schema"></a>Use custom schemas
 
-  <%= vars.product_short %> supports multiple custom schemas.
-  You can use custom schemas with apps that share a MySQL service instance to isolate app data by schema.
-  By default, service bindings use the default schema `service_instance_db`.
+<%= vars.product_short %> supports multiple custom schemas.
+You can use custom schemas with apps that share a MySQL service instance to isolate app data by schema.
+By default, service bindings use the default schema `service_instance_db`.
 
-  To use custom schemas in your apps:
+To use custom schemas in your apps:
 
-  1. Bind your app to the custom schema by running:
+1. Bind your app to the custom schema by running:
 
   ```
   cf bind-service APP SERVICE-INSTANCE -c '{"schema":"CUSTOM-SCHEMA"}'
@@ -219,7 +219,7 @@ see [MySQL environment variables](#vcap).
   - `CUSTOM-SCHEMA` is the name of your custom schema. Valid characters include uppercase and lowercase
   letters, digits, `$`, and `_`.
 
-  1. Restart your app by running:
+1. Restart your app by running:
 
   ```
   cf restart APP
