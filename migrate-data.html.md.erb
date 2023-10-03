@@ -159,14 +159,15 @@ These values usually include:
     * `CREDS-STRUCT` is a JSON structure that contains the off-platform database access values you recorded in the previous step.
 
     For example:
-    <pre class="terminal noselect">$ cf cups migrating-db -p '{"hostname": "34.192.88.212", "name": "my\_db", \
+
+    <pre>$ cf cups migrating-db -p '{"hostname": "34.192.88.212", "name": "my\_db", \
     "username": "root", "password": "P455w0rD", "port": 3306}' <br>
     Creating user provided service migrating-db in org my-org / space my-space as admin...
     OK
     </pre>
 
-    <p><code>cf cups</code> is a shortcut for the <code>cf create-user-provided-service</code> command.
-    </p>
+    >**Note**
+    >`cf cups` is a shortcut for the `cf create-user-provided-service` command.
 
 1. After your user-provided service instance is created, continue to [Migrate data](#migrate-data).
 
@@ -336,4 +337,5 @@ To rebind and re-stage your apps and delete the source database instance:
     ```
     cf delete-service SOURCE-INSTANCE
     ```
+
     Where `SOURCE-INSTANCE` is the name of your source <%= vars.product_short %> service instance.
