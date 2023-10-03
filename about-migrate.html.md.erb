@@ -44,7 +44,7 @@ See [Use Cases Not Requiring the migrate Command](#update-service-cases).
 
 If your use case is not listed in this topic,
 you might need to manually back up and restore your database to migrate your data.
-See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html)
+See [Backing Up and Restoring with mysqldump](./backup-mysqldump.html).
 
 
 ### <a id='migrate-cases'></a> Use cases requiring the migrate command
@@ -151,12 +151,8 @@ For instructions about using the `update-service` command, see
 
 ## <a id='unsupported'></a>Omitted data
 
-<p class="note important">
-<span class="note__title"> Important</span> The <code>migrate</code> command does not migrate all stored programs.
-The command only migrates views and does not migrate triggers, routines, or events.
-To manually migrate triggers, routines,	or events,
-contact [VMware Tanzu Support](https://tanzu.vmware.com/support)</a>.
-</p>
+>**Important**
+>The `migrate` command does not migrate all stored programs. The command only migrates views and does not migrate triggers, routines, or events. To manually migrate triggers, routines,	or events, contact [VMware Tanzu Support](https://tanzu.vmware.com/support).
 
 The `migrate` command skips the following system schemas:
 
@@ -170,6 +166,6 @@ The `migrate` command skips the following system schemas:
 
 <p> <code>sys</code>, <code>performance_schema</code>,
   and <code>information_schema</code> change dynamically with changes on a <%= vars.product_short %>
-  service instance. These schemas are not migrated because the destination database has its' own version of the schemas.
+  service instance. These schemas are not migrated because the destination database has its own version of the schemas.
   You do not need to back up these schemas.
 </p>
