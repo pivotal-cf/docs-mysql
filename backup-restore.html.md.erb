@@ -43,7 +43,7 @@ You might want to back up or restore a service instance in the following use cas
 
 ## <a id="about-backups"></a>About backups
 
-<% vars.product_short %> includes an automated backup capability, which:
+<%= vars.product_short %> includes an automated backup capability, which:
 
 - Creates and uploads physical backups for restoring all of the databases used
 by a service instance.
@@ -62,22 +62,11 @@ Developers can also manually trigger a backup of an individual service instance.
 
 Backups fail if the service broker is unavailable (for example, during an upgrade).
 
-<p class="note important">
-<span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance.
-This can cause the persistent disk to fill up faster.
-If the persistent disk is full, apps become inoperable.
-For instructions on how to troubleshoot persistent disk errors,
-see <a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.
-</p>
+**Important**
+>If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance. This can cause the persistent disk to fill up faster. If the persistent disk is full, apps become inoperable. For instructions on how to troubleshoot persistent disk errors, see [Persistent disk is full](./troubleshoot.html#persistent-disk).
 
-<p class="note">Backups use the Percona Xtrabackup tool, which does not lock schemas that use
-the default InnoDB transactional storage engine. Backups do briefly lock non-transactional
-operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations.
-Developers should be aware of these backup DDL
-and MyISAM locks, and consider any impact on their running applications. For more information
-about backup locking behavior, see the
-<a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona documentation</a>.
-</p>
+>**Note**
+>Backups use the Percona Xtrabackup tool, which does not lock schemas that use the default InnoDB transactional storage engine. Backups do briefly lock non-transactional operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations. Developers should be aware of these backup DDL and MyISAM locks, and consider any impact on their running applications. For more information about backup locking behavior, see the [Percona documentation](https://docs.percona.com/percona-xtrabackup/8.0/).
 
 ## <a id="understanding-metadata"></a> About backup files and metadata
 
