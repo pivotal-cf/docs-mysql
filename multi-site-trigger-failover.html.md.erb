@@ -41,7 +41,7 @@ To verify the service instance:
     ```
 
     Where `SERVICE-INSTANCE-NAME ` is the name of the follower service instance.
-    <br><br>
+    
     For example:
     <pre class="terminal">$ cf service my-follower --guid
       12345678-90ab-cdef-1234-567890abcdef
@@ -95,14 +95,15 @@ To trigger a failover:
 
 ### <a id='promote-failover'></a> Promote the follower
 
-<p> If you try to promote a leader-follower,
-  highly available cluster, or single node service instance to leader
-  or make it read-only, you get an error message similar to:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
-      * the configuration parameter 'initiate-failover' is not a valid option</code>
-</p>
+>**Note**
+>If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to:
+>
+>```
+>Updating service instance haDB as admin...
+>FAILED
+>Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+>    * the configuration parameter 'initiate-failover' is not a valid option
+>```
 
 To promote the follower service instance to leader:
 
@@ -111,7 +112,8 @@ To promote the follower service instance to leader:
     ```
     cf login SECONDARY-API-URL
     ```
-    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation. <br>
+
+    Where `SECONDARY-API-URL` is the API endpoint for your secondary foundation.
 
 1. Promote the follower service instance to leader by running:
 
@@ -145,7 +147,7 @@ To promote the follower service instance to leader:
     ```
 
     Wait for the `last operation` for your instance to show as `update succeeded`.
-    <br><br>
+
     For example:
 
     <pre class="terminal">$ watch cf services<br>
@@ -235,14 +237,15 @@ To trigger a switchover:
 
 ### <a id='promote-switchover'></a> Promote the follower
 
-<p> If you try to promote a leader-follower,
-  highly available cluster, or single node service instance to leader
-  or make it read-only, you get an error message similar to the following:<br><br>
-<code>Updating service instance haDB as admin...
-  FAILED
-  Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
-      * the configuration parameter 'initiate-failover' is not a valid option</code>
-</p>
+>**Note**
+>If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to the following:
+>
+>```
+>Updating service instance haDB as admin...
+>FAILED
+>Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+>    * the configuration parameter 'initiate-failover' is not a valid option
+>```
 
 Before you promote the follower service instance,
 you must make the leader service instance, which is in the primary foundation, a read-only format.
@@ -546,9 +549,9 @@ To reconfigure replication for the service instances:
     watch cf services
     ```
 
-    Wait for the `last operation` for your instance to show as `update succeeded`. <br><br>
+    Wait for the `last operation` for your instance to show as `update succeeded`.
     You now have a leader-follower service instance successfully configured,
-    where the leader is in your secondary foundation and your follower is in the primary foundation. <br><br>
+    where the leader is in your secondary foundation and your follower is in the primary foundation.
     If this command fails and you get one of the following errors,
     you must create a new <%= vars.single_leader_plan %> service instance
     and reconfigure replication using this new, empty instance as the follower.
