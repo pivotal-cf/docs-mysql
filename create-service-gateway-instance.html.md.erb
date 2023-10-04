@@ -4,7 +4,7 @@ title: Creating a service instance with Service-Gateway access
 owner: MySQL
 ---
 
-You can reate a service instance with service-gateway access.
+You can create a service instance with service-gateway access.
 You can activate and deactivate service-gateway access on an existing service instance.
 
 For general information about service-gateway access, including about architecture and use cases,
@@ -19,10 +19,8 @@ These components are typically:
 + Apps running externally or running on other foundations.
 + Database administrative and management tools, for example, MySQL Workbench.
 
-<p> Apps that are deployed in the same foundation as the service instance,
-  can connect to the service instance directly without going through the service-gateway.
-</p>
-
+>**Note**
+>Apps that are deployed in the same foundation as the service instance, can connect to the service instance directly without going through the service-gateway.
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -65,13 +63,11 @@ To create a service instance that enables service-gateway access:
     - `SERVICE-KEY` is a name you choose for the service key. Choose a name that
       indicates that the key contains credentials for off-platform access.
 
-    <p> If you deactivate and then activate service-gateway access
-      again on the foundation, you must create new service keys to obtain a new set of credentials for
-      service-gateway access.
-    </p>
+    >**Note**
+    >If you deactivate and then activate service-gateway access again on the foundation, you must create new service keys to obtain a new set of credentials for service-gateway access.
 
 3. Use the keys in the service key to access the service instance
-   from outside the foundation.<br><br>
+   from outside the foundation.
 
     This is an example of a service key:
 
