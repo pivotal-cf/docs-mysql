@@ -174,38 +174,6 @@ The following diagram shows how persistent disk space is used:
 
 ![alt-text="Each `N` combined makes `2N`, as seen in the formula."](./images/persistent-disk-multi-site.png)
 
-
-<h3> <a id="ha-cluster-jumpbox"></a> HA cluster jumpbox </h3>
-
-You can configure the persistent disk size for HA cluster jumpbox VMs. For
-instructions for configuring disk size, see [Configure Service Plans](./install-config.html#active).
-
-Use the following table to determine the amount of persistent disk space you need:
-
-<table>
-  <tr>
-    <th>InnoDB Redo Logs</th>
-    <th>Total Disk Size</th>
-    <th>Minimum Total Disk Size</th>
-  </tr>
-  <tr>
-    <td>2 GB</td>
-    <td>2N + 2 GB</td>
-    <td>10 GB</td>
-  </tr>
-</table>
-
-
-In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
-
-- Data for copied backups.
-- Data for compression and encryption.
-
-Each `N` combined makes `2N`, as seen in the formula.
-
-The following diagram shows how persistent disk space is used:
-![alt-text="Persistent Disk diagram."](./images/persistent-disk-multi-site.png)
-
 <h3> <a id="ha-cluster-node"></a> HA cluster node </h3>
 
 You can configure the persistent disk size for HA cluster node VMs. For
