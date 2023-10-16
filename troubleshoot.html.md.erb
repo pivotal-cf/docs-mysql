@@ -3,7 +3,7 @@ title: Troubleshooting VMware Tanzu SQL with MySQL for VMs
 owner: MySQL
 ---
 
-<strong><%= modified_date %></strong>
+Learn about the basic instructions for troubleshooting on-demand <%= vars.product_full %>.
 
 This topic provides operators with basic instructions for troubleshooting on-demand <%= vars.product_full %>.
 For information about temporary <%= vars.product_short %> service interruptions, see
@@ -451,13 +451,9 @@ The following errors occur in multiple services:
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>To troubleshoot:
     <ol>
-    <li>Look at the errand output in the <%= vars.ops_manager %> log.</li>
-
-    <li>If an instance has failed to upgrade, debug and fix it before running the errand again
-    to prevent any failure issues from spreading to other on-demand instances.</li>
-
-    <li>After the <%= vars.ops_manager %> log no longer lists the deployment as <code>failing</code>,
-    <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
+    <li>Look at the errand output in the Tanzu Operations Manager log.</li>
+<li>If an instance has failed to upgrade, debug and fix it before running the errand again to prevent any failure issues from spreading to other on-demand instances.</li>
+<li>After the Tanzu Operations Manager log no longer lists the deployment as <code>failing</code>, <a href="#upgrade-all"> run the errand again </a> to upgrade the rest of the instances.</li>
     </ol>
 </td>
   </tr>
@@ -465,7 +461,15 @@ The following errors occur in multiple services:
 </table>
 </div>
 
-<a name="missing-logs"></a>
+<style>
+
+main table {
+  table-layout: fixed;
+}
+
+</style>
+
+<p><a name="missing-logs"></a></p>
 
 <div>
 
@@ -1592,7 +1596,8 @@ Updated: 2017-03-13T10:17:58Z
 
 
 <p>
-    You can <a href="https://docs.pivotal.io/pivotalcf/customizing/troubleshooting.html#component_logs">access logs using Ops Manager</a>
+    You can access logs
+    using Tanzu Operations Manager</a>
     by clicking on the <strong>Logs</strong> tab in the tile and downloading the broker logs.
 </p>
 
