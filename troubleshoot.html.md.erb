@@ -3,7 +3,7 @@ title: Troubleshooting VMware Tanzu SQL with MySQL for VMs
 owner: MySQL
 ---
 
-This topic provides you with basic instructions for troubleshooting on-demand <%= vars.product_full %>.
+Lerarn about the basic instructions for troubleshooting on-demand <%= vars.product_full %>.
 
 For information about temporary <%= vars.product_short %> service interruptions, see
 <a href="./upgrade.html#interruptions">Service interruptions</a>.
@@ -514,12 +514,8 @@ main table {
     <td>To troubleshoot:
     <ol>
     <li>Look at the errand output in the Tanzu Operations Manager log.</li>
-
-    <li>If an instance has failed to upgrade, debug and fix it before running the errand again
-    to prevent any failure issues from spreading to other on-demand instances.</li>
-
-    <li>After the Tanzu Operations Manager log no longer lists the deployment as <code>failing</code>,
-    <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
+<li>If an instance has failed to upgrade, debug and fix it before running the errand again to prevent any failure issues from spreading to other on-demand instances.</li>
+<li>After the Tanzu Operations Manager log no longer lists the deployment as <code>failing</code>, <a href="#upgrade-all"> run the errand again </a> to upgrade the rest of the instances.</li>
     </ol>
 </td>
   </tr>
@@ -528,7 +524,6 @@ main table {
 </div>
 
 <style>
-
 
 main table {
   table-layout: fixed;
@@ -1708,7 +1703,7 @@ Updated: 2017-03-13T10:17:58Z
 <h4 id="-access-broker-logs-and-vms"><a id="access-broker"></a>  Access Broker Logs and VMs</h4>
 
 <p>
-    You can <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/diagnostics.html#component_logs">access logs
+    You can access logs
     using Tanzu Operations Manager</a>
     by clicking on the <strong>Logs</strong> tab in the tile and downloading the broker logs.
 </p>
