@@ -94,9 +94,6 @@ To create and set an org-level quota, do the following:
 
   <pre class="terminal">cf set-quota dev_org myquota</pre>
 
-For more information on managing org-level quotas,
-see [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/quota-plans.html).
-
 ## <a id="space"></a> Create and set space-level quotas
 
 A space-level service quota applies to all on-demand services and sets the maximum
@@ -142,7 +139,7 @@ To create and set a space-level quota, do the following:
   <pre class="terminal">cf set-space-quota myspace myspacequota</pre>
 
 For more information on managing space-level quotas,
-see [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/quota-plans.html).
+see [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/quota-plans.html).
 
 ## <a id="view"></a> View current org and space-level quotas
 
@@ -157,9 +154,6 @@ To view **space** quotas, run the following command:
 ```
 cf space SPACE-NAME
 ```
-
-For more information on managing org and space-level quotas,
-see the [Creating and modifying quota plans](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.current_major_version %>/tas-for-vms/quota-plans.html).
 
 ## <a id="monitor"></a> Monitor quota use and service instance count
 
