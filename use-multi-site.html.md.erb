@@ -38,7 +38,7 @@ To create a leader-follower service across multiple foundations:
 foundations.
 See [Confirm the <%= vars.product_full %> service availability](use.html#marketplace).
 1. Create one <%= vars.single_leader_plan %>  service instance on each foundation.
-See [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+See [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
 1. Enable replication between the <%= vars.single_leader_plan %> service instances.
 See [Configure <%= vars.single_leader_plan %>](#create-service-key).
 1. Bind the <%= vars.single_leader_plan %> leader-follower service instance to your apps.
@@ -155,7 +155,7 @@ The steps shown in the diagram are as follows:
 <p> The following procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 You created these service instances in
-<a href="#create-multi-dc">Create <%= vars.single_leader_plan %> service instances</a>.
+<a href="#create-service-instance">Create <%= vars.single_leader_plan %> service instances</a>.
 </p>
 
 To configure replication for your <%= vars.single_leader_plan %> leader-follower service instance:
@@ -169,7 +169,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY` is a name you choose for the host-info service key.
     <br><br>
 
@@ -188,7 +188,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY` is the name of the host-info service key you created in step 1.
 
     For example:
@@ -225,7 +225,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
    Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `HOST-INFO` is the output you recorded in step 3.
 
    For example:
@@ -271,9 +271,9 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-    step 1 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 1 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
-    
+
     <br>(Note the <code>-c </code> flag is different than the flag used in step 1.)
 
     <br>
@@ -293,7 +293,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in step 1
-    of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 6.
 
     For example:
@@ -341,7 +341,7 @@ JSON is your "credentials *service* key".
     Where:
 
     + `SECONDARY-INSTANCE` is name of the secondary service instance you created in step 2 of
-    [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `CREDENTIALS` is the output you recorded in step 9.
 
     For example:

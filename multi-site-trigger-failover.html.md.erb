@@ -425,9 +425,9 @@ To reconfigure replication for the service instances:
     ```
    Where:
 
-    + `SECONDARY-INSTANCE` is the name of the primary service instance you created in
-      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
-    + `HOST-INFO` is the output you recorded in step 3.
+    + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
+      step 2 of [Creating <%= vars.single_leader_plan %> service instances](./use-multi-site.html#create-service-instance).
+    + `HOST-INFO` is the output you recorded in step 4 above.
 
    For example:
     <pre class="terminal">$ cf update-service secondary-node -c '{
