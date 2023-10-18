@@ -176,24 +176,31 @@ For more information about how to activate TLS for a service instance, see [Acti
 To establish a TLS connection to a service instance:
 
 1. Create a new service key for the service instance with TLS activated. For example:
-  <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
-  {
-   "hostname": "q-n3s3y1.q-g693.bosh",
-   "jdbcUrl": "jdbc:mysql<span>://</span>q-n3s3y1.q-g693.bosh:3306/service\_instance\_db?user=6bf07ae455a14064a9073cec8696366c\u0026password=a22aaa2a2a2aaaaa\u0026=true",
-   "name": "service\_instance\_db",
-   "password": "a22aaa2a2a2aaaaa",
-   "port": 3306,
-   "tls": {
-    "cert": {
-     "ca": "-----BEGIN CERTIFICATE-----\...n-----END CERTIFICATE-----\n"
-    }
-   },
-   "uri": "mysql<span>://</span>6bf07ae455a14064a9073cec8696366c:a22aaa2a2a2aaaaa<span>@</span>q-n3s3y1.q-g693.bosh:3306/service\_instance\_db?reconnect=true",
-   "username": "6bf07ae455a14064a9073cec8696366c"
-  }
-  </pre>
+   <pre class="terminal">$ cf create-service-key my-service-instance my-tls-service-key
+   Creating service key my-tls-service-key for service instance my-service-instance as admin...
+   OK
+   $ cf service-key my-service-instance my-tls-service-key
+     {
+       "credentials": {
+         "hostname": "27ce4cec-7d89-4e63-9a76-b8d9e4d57b61.mysql.service.internal",
+         "jdbcUrl": "jdbc:mysql://27ce4cec-7d89-4e63-9a76-b8d9e4d57b61.mysql.service.internal:3306/service_instance_db?permitMysqlScheme&user=f3867aa9bab54fa89661fb53d3d79c66&password=lfeykm0nbrphh7h7&sslMode=VERIFY_IDENTITY&useSSL=true&requireSSL=true&enabledTLSProtocols=TLSv1.2&serverSslCert=/etc/ssl/certs/ca-certificates.crt",
+         "name": "service_instance_db",
+         "password": "lfeykm0nbrphh7h7",
+         "port": 3306,
+         "tls": {
+           "cert": {
+             "ca": "-----BEGIN CERTIFICATE-----\...n-----END CERTIFICATE-----\n"
+           }
+         },
+         "uri": "mysql://f3867aa9bab54fa89661fb53d3d79c66:lfeykm0nbrphh7h7@27ce4cec-7d89-4e63-9a76-b8d9e4d57b61.mysql.service.internal:3306/service_instance_db?reconnect=true",
+         "username": "f3867aa9bab54fa89661fb53d3d79c66"
+       }
+     }
+   </pre>
 
-  If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale.
+   >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
+
+   If the service key does not have a CA certificate under `tls.cert.ca`, the service key might be stale.
   Create a new service key.
 
 2. Copy the contents of the CA certificate under `tls.cert.ca` and paste it into a file. For example:
@@ -218,9 +225,9 @@ To establish a TLS connection to a service instance:
 
   For example:
   <pre class="terminal">
-  $ mysql --hostname=q-n3s3y1.q-g693.bosh \
-    --user=6bf07ae455a14064a9073cec8696366c \
-    --password=a22aaa2a2a2aaaaa \
+  $ mysql --hostname=27ce4cec-7d89-4e63-9a76-b8d9e4d57b61.mysql.service.internal \
+    --user=f3867aa9bab54fa89661fb53d3d79c66 \
+    --password=lfeykm0nbrphh7h7 \
     --ssl-ca=root.pem \
     --ssl-verify-server-cert
   </pre>

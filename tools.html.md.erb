@@ -76,17 +76,19 @@ command:
     <pre class="terminal">
       $ cf service-key mydb mykey1<br>
       {
-        "hostname": "q-n3s3y1.q-g693.bosh",
-        "jdbcUrl": "jdbc:mysql<span>://</span>q-n3s3y1.q-g693.bosh:3306/service_instance_db?user=6bf07ae455a14064a9073cec8696366c\u0026password=a22aaa2a2a2aaaaa\u0026=true",
-        "name": "service\_instance\_db",
-        "password": "a22aaa2a2a2aaaaa",
-        "port": 3306,
-        "uri": "mysql<span>://</span>6bf07ae455a14064a9073cec8696366c:a22aaa2a2a2aaaaa<span>@</span>q-n3s3y1.q-g693.bosh:3306/service_instance_db?reconnect=true",
-        "username": "6bf07ae455a14064a9073cec8696366c"
+        "credentials": {
+          "hostname": "72c66633-8a60-466a-8f8a-8beee5e548b8.mysql.service.internal",
+          "jdbcUrl": "jdbc:mysql<span>://</span>72c66633-8a60-466a-8f8a-8beee5e548b8.mysql.service.internal:3306/service_instance_db?user=6bf07ae455a14064a9073cec8696366c\u0026password=a22aaa2a2a2aaaaa\u0026=true",
+          "name": "service\_instance\_db",
+          "password": "a22aaa2a2a2aaaaa",
+          "port": 3306,
+          "uri": "mysql<span>://</span>6bf07ae455a14064a9073cec8696366c:a22aaa2a2a2aaaaa<span>@</span>72c66633-8a60-466a-8f8a-8beee5e548b8.mysql.service.internal:3306/service_instance_db?reconnect=true",
+          "username": "6bf07ae455a14064a9073cec8696366c"
+        }
       }
     </pre>
 
-   >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key.
+    >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
 1. Record the values for the following:
     * `hostname`
