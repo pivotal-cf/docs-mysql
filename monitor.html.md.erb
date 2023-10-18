@@ -52,38 +52,6 @@ installing Healthwatch, see the [Healthwatch for VMware Tanzu documentation](htt
 For more information about using Grafana dashboards, see the
 [Healthwatch for VMware Tanzu documentation](https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/2.2/healthwatch/using-grafana.html).
 
-###  <a id="indicator"></a>Use the indicator protocol dashboard
-
-<p> This section requires Healthwatch v1.x.</p>
-
-You can use the Indicator Protocol dashboard to view Key Performance Indicators (KPIs)
-for <%= vars.product_short %> service instances. The dashboard includes a graphical
-  representation of the KPIs and information about recommended alert thresholds.
-
-For more information about the Indicator Protocol dashboard, see [Indicator protocol dashboard
-(Healthwatch for VMware Tanzu)](https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/2.2/healthwatch/index.html).
-
-For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi).
-
-To access KPIs using the Indicator Protocol dashboard:
-
-1. Install the Healthwatch tile in Tanzu Operations Manager. See [Installing and Configuring Healthwatch](https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/2.2/healthwatch/configuring-configuring-healthwatch.html).
-2. Enable the Indicator Protocol add-on in Tanzu Operations Manager. See [Enable the Indicator Protocol
-Add-on](https://docs.vmware.com/en/Healthwatch-for-VMware-Tanzu/index.html).
-1. View the Indicator Protocol Dashboard by navigating to:
-
-    ```
-    https://healthwatch.YOUR-SYSTEM-DOMAIN/indicator-dashboards
-    ```
-
-The following image shows an example of the Indicator Protocol dashboard for a highly available
-(HA) cluster service instance:
-
-![alt-text="The KPIs metrics for MySQL server availability, the percentage of available connections,
-CPU utilization percentage, queries delta, ephemeral disk percent, and persistent disk percent. The value of the
-metrics are shown as graphs over time."](./images/indicator-dash.png)
-
-<a href="./images/indicator-dash.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 ### <a id="log-cache"></a>Use Log Cache
