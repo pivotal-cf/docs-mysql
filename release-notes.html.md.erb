@@ -49,6 +49,23 @@ this configuration, see [WSREP applier threads](./change-default.html#wsrep_appl
 
 + Adds service-gateway support to multi-site topologies. For more information, see [About enabling external access](./about-multi-site.html#enable-external-access) in _About multi-site replication_.
 
+### Known Issues
+
+This release has the following known issues:
+
+There is a known issue for customers running multi-site instances, when upgrading to version 3.1.0.
+
+When <a href="./use-multi-site.html#upgrade">upgrading the follower</a> on the secondary foundation, the instance will fail to deploy because it will not be able to successfully communicate with the leader.
+
+This can be confirmed by reviewing the MySQL error logs for that follower instance:
+```bash
+2023-10-18T23:02:30.580265Z 1 [ERROR] Slave I/O for channel '': error connecting to master 'f5243b8fb7954c7887f8c30fb7536f00@0e8dbc3b-b23a-408c-b9b2-2a78f1218e16.mysql.internal:3306' - retry-time: 60  retries: 1, Error_code: 2005
+```
+
+The issue can be addressed by one of these solutions
++ Create a new instance on the secondary foundation, and set that instance to be the new follower
++ Upgrade to the newest version 3.1 patch release - a fix has been included in 3.1.1
+
 ### Breaking Changes
 
 + **Percona 8.0.22: DROP USER fails with an error if any account to be dropped is named as the DEFINER attribute for any stored object.:**:
