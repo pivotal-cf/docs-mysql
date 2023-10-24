@@ -23,6 +23,12 @@ This release includes the following changes:
 
 + A number of high and critical CVEs were addressed by updating the components to the latest version
 
+### Resolved Issues
+
+This release resolves the following issues:
++ Smoke tests could fail when service instance creation took longer than 10 minutes. This was a regression introduced in MySQL v3.0.2.
+The previous service instance creation timeout of 60 minutes has been restored.
+
 ### Compatibility
 
 The following components are compatible with this release:
