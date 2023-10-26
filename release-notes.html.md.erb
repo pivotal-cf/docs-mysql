@@ -13,15 +13,21 @@ and then upgrade to the latest patch available for the next minor release.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
-## <a id="3-0-3"></a> v3.0.3
+## <a id="3-0-4"></a> v3.0.4
 
-**Release Date: Oct 18th, 2023**
+**Release Date: Oct 24th, 2023**
 
 ### Changes
 
 This release includes the following changes:
 
 + A number of high and critical CVEs were addressed by updating the components to the latest version
+
+### Resolved Issues
+
+This release resolves the following issues:
++ Smoke tests could fail when service instance creation took longer than 10 minutes. This was a regression introduced in MySQL v3.0.2.
+The previous service instance creation timeout of 60 minutes has been restored.
 
 ### Compatibility
 
@@ -41,21 +47,25 @@ The following components are compatible with this release:
   <tr><td>Percona XtraDB Cluster</td><td>5.7.42-31.65</td></tr>
   <tr><td>Percona XtraBackup</td><td>8.0.33-28</td></tr>
   <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
-  <tr><td>adbr-release</td><td>0.91.0*</td></tr>
+  <tr><td>adbr-release</td><td>0.93.0*</td></tr>
   <tr><td>bpm-release</td><td>1.2.9*</td></tr>
-  <tr><td>cf-cli-release</td><td>1.49.0*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.50.0*</td></tr>
   <tr><td>cf-service-gateway-release</td><td>128.0.0*</td></tr>
   <tr><td>count-cores-indicator-release</td><td>2.0.0</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>0.187.24*</td></tr>
-  <tr><td>dedicated-mysql-adapter-release</td><td>0.340.32*</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.187.27*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.340.35*</td></tr>
   <tr><td>loggregator-agent-release</td><td>7.6.4*</td></tr>
   <tr><td>mysql-backup-release</td><td>2.32.0*</td></tr>
   <tr><td>mysql-monitoring-release</td><td>10.5.0*</td></tr>
   <tr><td>on-demand-service-broker-release</td><td>0.45.0*</td></tr>
   <tr><td>pxc-release</td><td>1.0.18*</td></tr>
-  <tr><td>routing-release</td><td>0.282.0*</td></tr>
+  <tr><td>routing-release</td><td>0.283.0*</td></tr>
   <tr><td>service-metrics-release</td><td>2.0.33*</td></tr>
 </table>
+
+## <a id="3-0-3"></a> v3.0.3
+
+**This version was an internal dev-release**
 
 ## <a id="3-0-2"></a> v3.0.2
 
