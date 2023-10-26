@@ -13,6 +13,63 @@ and then upgrade to the latest patch available for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
+## <a id="3-1-1"></a> v3.1.1
+
+**Release Date: Oct 26th, 2023**
+
+
+>**Important**
+> 3.1.x is the last version of <%= vars.product_full %> that supports MySQL 5.7.
+
+### Resolved Issues
+
+This release resolves the following issues:
+
++ A number of high and critical CVEs were addressed by updating the components to the latest version
+
+* Users who upgraded multi-site deployments from previous versions to 3.1.0 could experience leader/follower connectivity issues upon switchover. This release addresses that behavior.
+
+
+* Fixed an issue where smoke tests could time out prematurely when a high availability plan is configured as the first plan in the MySQL Tile.
+
+
+* Fixed a high-availability proxy dashboard access issue.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>1.260*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.43-47</td></tr>
+  <tr><td>Percona Server</td><td>8.0.33-25</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.43-31.65*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>8.0.33-25</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
+  <tr><td>Percona XtraBackup</td><td>8.0.33-28*</td></tr>
+  <tr><td>adbr-release</td><td>0.93.0*</td></tr>
+  <tr><td>bpm-release</td><td>1.2.9*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.50.0*</td></tr>
+  <tr><td>cf-service-gateway-release</td><td>128.0.0*</td></tr>
+  <tr><td>count-cores-indicator-release</td><td>2.0.0</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.217.6*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.382.13*</td></tr>
+  <tr><td>loggregator-agent-release</td><td>7.6.4*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.32.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.5.0*</td></tr>
+  <tr><td>on-demand-service-broker-release</td><td>0.45.0*</td></tr>
+  <tr><td>pxc-release</td><td>1.0.18*</td></tr>
+  <tr><td>routing-release</td><td>0.283.0*</td></tr>
+  <tr><td>service-metrics-release</td><td>2.0.33*</td></tr>
+</table>
+
+
+
 ## <a id="3-1-0"></a> v3.1.0
 
 **Release Date: Oct 4th, 2023**
@@ -89,3 +146,4 @@ The following components are compatible with this release:
   <tr><td>service-metrics-release</td><td>2.0.32*</td></tr>
 </table>
 
+  &#42; _Components marked with an asterisk have been updated_
