@@ -33,8 +33,10 @@ see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 The following table lists some key characteristics of the topologies to help you decide
 which one is best for your developers.
 
-<table class="nice">
+<table class="table">
+<thead>
   <tr><th>Topology</th><th>VMs needed</th><th>Pros</th><th>Cons</th></tr>
+  </thead>
   <tr><td><strong>Single node</strong></td><td>One</td>
       <td>
           <ul>
@@ -113,13 +115,15 @@ The following tables describe the RPOs and RTOs for the topologies.
 
 This table compares the recovery point objectives for the topologies:
 
-<table class="nice">
+<table class="table">
+<thead>
   <tr><th>Type of downtime</th>
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
     <th><%= vars.single_leader_plan %></th>
   </tr>
+  </thead>
   <tr><td><strong>Planned Maintenance</strong></td><td>Zero</td>
       <td>Zero</td><td>Zero</td><td>Zero</td></tr>
   <tr><td><strong>Unplanned Downtime</strong></td><td>Zero</td>
@@ -134,12 +138,14 @@ This table compares the recovery point objectives for the topologies:
 
 This table compares the recovery time objectives for the topologies:
 
-<table class="nice">
+<table class="table">
+<thead>
   <tr><th>Type of downtime</th>
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
     <th><%= vars.single_leader_plan %></th></tr>
+    </thead>
   <tr><td><strong>Planned Maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required depends on the type of maintenance</td>
       <td>Almost zero*</td>
@@ -169,10 +175,12 @@ Risk encompasses the likelihood of:
 Single node topology has the lowest risk.
 Highly available clusters have the highest risk.
 
-<table class="nice">
+<table class="table">
+<thead>
   <tr><th width=50%>Topology</th><th>Risk-level</th></tr>
   <tr><td><strong>Single node</strong></td><td>Low</td></tr>
   <tr><td><strong>Leader-follower</strong></td><td>Medium</td></tr>
   <tr><td><strong>Highly available cluster</strong></td><td>High</td></tr>
   <tr><td><strong><%= vars.single_leader_plan %></strong></td><td>Medium-high</td></tr>
+  </thead>
 </table>
