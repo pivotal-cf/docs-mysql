@@ -254,58 +254,58 @@ in the pane are described in the following table."](./images/S3-backups.png)
 
     <table class="table">
     <thead>
-<tr>
-<th>Field</th>
-<th>Instructions</th>
-</tr>
-</thead>
-<tr>
-<td>
-<strong>Access Key ID</strong> and <strong>Secret Access Key</strong>
-</td>
-<td>
-Enter the S3 Access Key ID and Secret Access Key that you created in
-<a href="#access-key-aws">Create a Custom Policy and Access Key</a>.
-</td>
-</tr>
-<tr>
-<td>
-<strong>Endpoint URL</strong>
-</td>
-<td>
-Enter the S3-compatible endpoint URL for uploading backups. <br>
-The URL must start with <code>http://</code> or <code>https://</code>. <br>
-The default is <code>https://s3.amazonaws.com</code>.<br>
-If you are using a public S3 endpoint, see the S3 Endpoint procedure in
-<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">Step 3: Director Config Page</a>.
-</td>
-</tr>
-<tr>
-<td>
-<strong>Region</strong>
-</td>
-<td>
-Enter the region where your bucket is located.
-</td>
-</tr>
-<tr>
-<td>
-<strong>Bucket Name</strong>
-</td>
-<td>
-Enter the name of your bucket. <br>
-Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
-VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
-For example, <code>sandbox-backups</code>.
-</td>
-</tr>
-<tr>
-<td>
-<strong>Force path style access to bucket</strong>
-</td>
-<td>
-The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-Select this check box if you use:
+        <tr>
+            <th>Field</th>
+            <th>Instructions</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>
+            </td>
+            <td>
+                Enter the S3 Access Key ID and Secret Access Key that you created in
+                <a href="#access-key-aws">Create a Custom Policy and Access Key</a>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Endpoint URL</strong>
+            </td>
+            <td>
+                Enter the S3-compatible endpoint URL for uploading backups. <br>
+                The URL must start with <code>http://</code> or <code>https://</code>. <br>
+                The default is <code>https://s3.amazonaws.com</code>.<br>
+                If you are using a public S3 endpoint, see the S3 Endpoint procedure in
+                <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">Step 3: Director Config Page</a>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Region</strong>
+            </td>
+            <td>
+                Enter the region where your bucket is located.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Bucket Name</strong>
+            </td>
+            <td>
+                Enter the name of your bucket. <br>
+                Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
+                VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
+                For example, <code>sandbox-backups</code>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Force path style access to bucket</strong>
+            </td>
+            <td>
+              The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
+              Select this check box if you use:
 
 <ul>
 <li>
