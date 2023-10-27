@@ -405,14 +405,14 @@ To configure global settings for all service instances:
 detailed description of the configurable fields."](./images/global-settings.png)
 
 1. Configure the fields as follows:
-    <table class="nice">
+    <table class="table">
       <col width="30%">
-      <tr><th>Field</th><th>Instructions</th></tr>
+     <thead><tr><th>Field</th><th>Instructions</th></tr>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
           <td>Select this check box if either of the following apply:<ul>
               <li>Your service instances need an external backup, blobstore, or syslog storage</li>
               <li>You have configured BOSH to use an external blobstore</li></ul>
-              </td></tr>
+              </td></tr></thead>
       <tr><td><strong>Maximum service instances</strong></td>
           <td>Enter the global quota for all on-demand instances summed across every on-demand plan.
               For information about determining global quotas, see <a href="recommended.html#serviceplan">
