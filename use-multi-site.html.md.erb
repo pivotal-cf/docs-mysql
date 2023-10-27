@@ -38,7 +38,7 @@ To create a leader-follower service across multiple foundations:
 foundations.
 See [Confirm the <%= vars.product_full %> service availability](use.html#marketplace).
 1. Create one <%= vars.single_leader_plan %>  service instance on each foundation.
-See [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+See [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
 1. Enable replication between the <%= vars.single_leader_plan %> service instances.
 See [Configure <%= vars.single_leader_plan %>](#create-service-key).
 1. Bind the <%= vars.single_leader_plan %> leader-follower service instance to your apps.
@@ -155,7 +155,7 @@ The steps shown in the diagram are as follows:
 <p> The following procedure assumes you created the leader service instance in
 the primary foundation and the follower service instance in the secondary foundation.
 You created these service instances in
-<a href="#create-multi-dc">Create <%= vars.single_leader_plan %> service instances</a>.
+<a href="#create-service-instance">Create <%= vars.single_leader_plan %> service instances</a>.
 </p>
 
 To configure replication for your <%= vars.single_leader_plan %> leader-follower service instance:
@@ -169,7 +169,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY` is a name you choose for the host-info service key.
     <br><br>
 
@@ -188,7 +188,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
-    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 2 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY` is the name of the host-info service key you created in step 1.
 
     For example:
@@ -200,17 +200,17 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
         "credentials": {
             "replication": {
                 "peer-info": {
-                  "hostname": "secondary.bosh",
+                  "hostname": "6497378d-f518-4922-92d5-9530d3dc634a.mysql.service.internal",
                   "ip": "10.0.19.12",
                   "system_domain": "sys.secondary-domain.com",
-                  "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
+                  "uuid": "6497378d-f518-4922-92d5-9530d3dc634a"
               },
               "role": "leader"
             }
         }
       }</pre>
 
-    >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+    >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
 1. Record the output of the previous command, and remove the top-level `credentials` key.
 1. Log in to the deployment for your primary foundation by running:
@@ -225,17 +225,17 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
    Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `HOST-INFO` is the output you recorded in step 3.
 
    For example:
     <pre class="terminal">$ cf update-service primary-node -c '{
     "replication":{ \
       "peer-info":{
-          "hostname": "secondary.bosh",
+          "hostname": "6497378d-f518-4922-92d5-9530d3dc634a.mysql.service.internal",
           "ip": "10.0.18.12",
           "system_domain": "sys.secondary-domain.com",
-          "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
+          "uuid": "6497378d-f518-4922-92d5-9530d3dc634a"
         },
       "role": "leader"
       }
@@ -271,9 +271,12 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
-    step 1 of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    step 1 of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
-    <br><br>
+
+    <br>(Note the <code>-c </code> flag is different than the flag used in step 1.)
+
+    <br>
 
     For example:
     <pre class="terminal">$ cf create-service-key primary-node cred-key \
@@ -281,7 +284,6 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
       Creating service key cred-key for service instance primary-node as admin...
       OK
     </pre>
-    <p> The <code>-c </code> flag is different than the one in step 1.
     </p>
 1. View the `replication-credentials` for your credentials service key by running:
 
@@ -291,7 +293,7 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in step 1
-    of [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
+    of [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
     + `SERVICE-KEY-NAME` is the name of the credentials service key you created in step 6.
 
     For example:
@@ -301,30 +303,31 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
 
       {
         "credentials": {
-            "replication": {
-              "credentials": {
-                "password": "a22aaa2a2a2aaaaa",
-                "username": "6bf07ae455a14064a9073cec8696366c"
-              },
-              "peer-info": {
-                "hostname": "primary.bosh",
-                "ip": "10.0.17.12",
-                "system_domain": "sys.primary-domain.com",
-                "uuid": "zy98xw76-5432-19v8-765u-43219t876543",
-                "ports": {
-                    "mysql":  3306,
-                    "agent":  8443,
-                    "backup": 8081   
+          "replication": {
+            "credentials": {
+              "password": "a22aaa2a2a2aaaaa",
+              "username": "6bf07ae455a14064a9073cec8696366c"
+            },
+            "peer-info": {
+              "hostname": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad.mysql.service.internal",
+              "ip": "10.0.17.12",
+              "ports": {
+                  "agent":  8443,
+                  "backup": 8081,   
+                  "mysql":  3306
                },
-              },
-              "role": "follower"
-            }
+              "system_domain": "sys.primary-domain.com",
+              "uuid": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad"
+            },
+            "role": "follower"
+          }
         }
       }</pre>
 
-   >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+    >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
-1. Record the output of the previous command, and remove the top-level `credentials` key.
+1. Record the output of the previous command, and remove the top-level `credentials` JSON key. The resulting
+JSON is your "credentials *service* key".
 1. Log in to the deployment for your secondary foundation by running:
 
     ```console
@@ -338,8 +341,8 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
     Where:
 
     + `SECONDARY-INSTANCE` is name of the secondary service instance you created in step 2 of
-    [Create <%= vars.single_leader_plan %> service instances](#create-multi-dc).
-    + `CREDENTIALS` is the output you recorded in step 8.
+    [Create <%= vars.single_leader_plan %> service instances](#create-service-instance).
+    + `CREDENTIALS` is the output you recorded in step 9.
 
     For example:
     <pre class="terminal">$ cf update-service secondary-node -c '{"replication": {
@@ -348,15 +351,15 @@ To configure replication for your <%= vars.single_leader_plan %> leader-follower
           "username": "6bf07ae455a14064a9073cec8696366c"
         },
         "peer-info": {
-          "hostname": "primary.bosh",
+          "hostname": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad.mysql.service.internal",
           "ip": "10.0.17.12",
-          "system_domain": "sys.primary-domain.com",
-          "uuid": "zy98xw76-5432-19v8-765u-43219t876543", \
           "ports": {
-            "mysql":  3306, \
-            "agent":  8443, \
-            "backup": 8081 \   
-           },\
+            "agent":  8443,
+            "backup": 8081,   
+            "mysql":  3306
+           },
+          "system_domain": "sys.primary-domain.com",
+          "uuid": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad"
         },
         "role": "follower"
       }

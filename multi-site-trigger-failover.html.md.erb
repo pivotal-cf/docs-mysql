@@ -397,17 +397,17 @@ To reconfigure replication for the service instances:
         "credentials": {
             "replication": {
                 "peer-info": {
-                  "hostname": "primary.bosh",
+                  "hostname": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad.mysql.service.internal",
                   "ip": "10.0.19.12",
                   "system_domain": "sys.primary-domain.com",
-                  "uuid": "ab12cd34-5678-91e2-345f-67891h234567"
+                  "uuid": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad"
               },
               "role": "leader"
             }
         }
       }</pre>
 
-    >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+   >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
 1. Record the output of the previous command, and remove the top-level `credentials` key.
 
@@ -425,23 +425,23 @@ To reconfigure replication for the service instances:
     ```
    Where:
 
-    + `SECONDARY-INSTANCE` is the name of the primary service instance you created in
-      step 1 of [Creating <%= vars.single_leader_plan %> service instances](#create-multi-dc).
-    + `HOST-INFO` is the output you recorded in step 3.
+    + `SECONDARY-INSTANCE` is the name of the secondary service instance you created in
+      step 2 of [Creating <%= vars.single_leader_plan %> service instances](./use-multi-site.html#create-service-instance).
+    + `HOST-INFO` is the output you recorded in step 4 above.
 
    For example:
-    <pre class="terminal">$ cf update-service primary-node -c '{
-    "replication":{ \
-      "peer-info":{ \
-          "hostname": "primary.bosh", \
-          "ip": "10.0.18.12", \
-          "system_domain": "sys.primary-domain.com", \
-          "uuid": "ab12cd34-5678-91e2-345f-67891h234567" \
-        },\
-      "role": "leader" \
-      } \
+    <pre class="terminal">$ cf update-service secondary-node -c '{
+    "replication":{
+      "peer-info":{
+          "hostname": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad.mysql.service.internal",
+          "ip": "10.0.18.12",
+          "system_domain": "sys.primary-domain.com",
+          "uuid": "878f5fb3-fcc5-43cd-8c1f-3018e9f277ad"
+        },
+      "role": "leader"
+      }
     }'<br>
-    Updating service instance primary-node as admin...
+    Updating service instance secondary-node as admin...
     OK</pre>
 1.  Monitor the progress of the service instance update by running:
 
@@ -495,7 +495,7 @@ To reconfigure replication for the service instances:
                 "username": "6bf07ae455a14064a9073cec8696366c"
               },
               "peer-info": {
-                "hostname": "secondary.bosh",
+                "hostname": "zy98xw76-5432-19v8-765u-43219t876543.mysql.service.internal",
                 "ip": "10.0.17.12",
                 "system_domain": "sys.secondary-domain.com",
                 "uuid": "zy98xw76-5432-19v8-765u-43219t876543",
@@ -510,7 +510,7 @@ To reconfigure replication for the service instances:
         }
       }</pre>
 
-   >**Caution** In cf CLI v8, the response includes a top-level `credentials` key. Earlier versions of the cf CLI do not include a top-level `credentials` key. This procedure assumes that you are using cf CLI v8.
+   >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
 1. Record the output of the previous command, and remove the top-level `credentials` key.
 
@@ -530,23 +530,23 @@ To reconfigure replication for the service instances:
     + `CREDENTIALS` is the output you recorded in the previous step.
 
     For example:
-    <pre class="terminal">$ cf update-service primary-node -c '{"replication": { \
-        "credentials": { \
-          "password": "a22aaa2a2a2aaaaa", \
-          "username": "6bf07ae455a14064a9073cec8696366c" \
-        }, \
-        "peer-info": { \
-          "hostname": "secondary.bosh", \
-          "ip": "10.0.17.12", \
-          "system_domain": "sys.secondary-domain.com", \
-          "uuid": "zy98xw76-5432-19v8-765u-43219t876543", \
-          "ports": { \
-            "mysql":  3306, \
-            "agent":  8443, \
-            "backup": 8081  \
-           }, \
-        }, \
-        "role": "follower" \
+    <pre class="terminal">$ cf update-service primary-node -c '{"replication": {
+        "credentials": {
+          "password": "a22aaa2a2a2aaaaa",
+          "username": "6bf07ae455a14064a9073cec8696366c"
+        },
+        "peer-info": {
+          "hostname": "zy98xw76-5432-19v8-765u-43219t876543.mysql.service.internal",
+          "ip": "10.0.17.12",
+          "ports": {
+            "agent":  8443,
+            "backup": 8081,
+            "mysql":  3306
+           },
+          "system_domain": "sys.secondary-domain.com",
+          "uuid": "zy98xw76-5432-19v8-765u-43219t876543"
+        },
+        "role": "follower"
       } \
     }'<br>
   Updating service instance primary-node as admin...
