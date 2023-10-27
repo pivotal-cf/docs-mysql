@@ -168,13 +168,13 @@ Before you begin the restore procedure review the following important concepts:
 You can only restore to a single node or a <%= vars.single_leader_plan %> service instance.
 If you want a different topology, update the instance after restoring the data:
 
-<table class="nice">
-<col width="33%">
-<col width="33%">
+<table class="table">
+<thead>
   <th>To restore to…</th>
   <th>First, restore to…</th>
   <th>Then, update to…</th>
   <tr>
+  </thead>
     <td>Leader-Follower</td>
     <td>Single node</td>
     <td>Leader-Follower</td>
@@ -207,11 +207,10 @@ see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
 There are some cases where you cannot use the following procedure:
 
-<table class="nice">
-<col width="50%">
-<col width="50%">
+<table class="table">
+<thead>
   <th>Do not use the procedure in this section to restore a backup…</th>
-  <th>Instead, see…</th>
+  <th>Instead, see…</th></thead>
   <tr>
     <td>from a deleted service instance</td>
     <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>

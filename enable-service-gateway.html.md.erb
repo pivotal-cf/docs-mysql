@@ -13,7 +13,7 @@ For a more detailed overview, see [About Service-Gateway access](./service-gatew
 
 To enable service-gateway access for an on-demand offering:
 
-- [ Activate TCP Routing using the <%= vars.app_runtime_abbr %> tile](#-activate-tcp-routing-using-the--varsapp_runtime_abbr--tile)
+- [ Activate TCP Routing using the \<%= vars.app\_runtime\_abbr %\> tile](#-activate-tcp-routing-using-the--varsapp_runtime_abbr--tile)
 - [ Configure the firewall to allow incoming traffic to the TCP Router](#-configure-the-firewall-to-allow-incoming-traffic-to-the-tcp-router)
 - [ Configure the Load Balancer in the IaaS to redirect traffic to the TCP Router](#-configure-the-load-balancer-in-the-iaas-to-redirect-traffic-to-the-tcp-router)
 - [ Create a DNS record that maps to the Load Balancer](#-create-a-dns-record-that-maps-to-the-load-balancer)
@@ -115,12 +115,14 @@ To configure service-gateway access for the foundation:
 
 1. Configure the fields as follows:
 
-  <table>
+  <table class="table">
      <col width="20%">
+      <thead>
       <tr>
           <th>Field</th>
           <th>Instructions</th>
       </tr>
+      </thead>
       <tr>
           <td>
               <strong>External TCP Domain</strong>
