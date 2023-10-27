@@ -33,13 +33,14 @@ The previous service instance creation timeout of 60 minutes has been restored.
 
 The following components are compatible with this release:
 
-<table border="1" class="nice">
+<table class="table">
+  <thead>
 
   <tr>
     <th>Component</th>
     <th>Version</th>
   </tr>
-
+</thead>
   <tr><td>Stemcell</td><td>1.260*</td></tr>
   <tr><td>Percona Server</td><td>8.0.33-25</td></tr>
   <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
@@ -82,7 +83,7 @@ This release resolves the following issues:
   In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
 
 + **Percona 8.0.22: DROP USER fails with an error if any account to be dropped is named as the DEFINER attribute for any stored object.:**:
-  
+
   This release addresses this breaking change in Percona. Deleting a service key no longer results in a failure when the user associated with the service key has been used to create stored objects.
   Instead, as in previous releases, the objects will be orphaned.
 
@@ -90,13 +91,14 @@ This release resolves the following issues:
 
 The following components are compatible with this release:
 
-<table border="1" class="nice">
+<table class="table">
+  <thead>
 
   <tr>
     <th>Component</th>
     <th>Version</th>
   </tr>
-
+</thead>
   <tr><td>Stemcell</td><td>1.222*</td></tr>
   <tr><td>Percona Server</td><td>8.0.33-25*</td></tr>
   <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
@@ -141,13 +143,14 @@ This release has the following known issues:
 
 The following components are compatible with this release:
 
-<table border="1" class="nice">
+<table class="table">
+  <thead>
 
   <tr>
     <th>Component</th>
     <th>Version</th>
   </tr>
-
+</thead>
   <tr><td>Stemcell</td><td>1.148</td></tr>
   <tr><td>Percona Server</td><td>8.0.32-24*</td></tr>
   <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
@@ -203,13 +206,14 @@ This release has the following known issues:
 
 The following components are compatible with this release:
 
-<table border="1" class="nice">
+<table class="table">
+  <thead>
 
   <tr>
     <th>Component</th>
     <th>Version</th>
   </tr>
-
+</thead>
   <tr><td>Stemcell</td><td>1.95</td></tr>
   <tr><td>Percona Server</td><td>8.0.31-23*</td></tr>
   <tr><td>Percona Server</td><td>5.7.40-43</td></tr>

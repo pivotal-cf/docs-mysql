@@ -32,11 +32,15 @@ see [Server defaults for <%= vars.single_leader_plan %> plans](#multi-site).
 The following table lists the <%= vars.product_short %> server defaults that are common
 to all service plans:
 
-<table>
+<table class="table">
+    <thead>
+    <tr>
     <th>Name</th>
     <th width="25%">Variable Name</th>
     <th>Default</th>
     <th width="45%">Notes</th>
+    </tr>
+    </thead>
     <tr>
         <td><strong>Applier Threads</strong></td>
         <td><code>wsrep_applier_threads</code></td>
@@ -205,11 +209,15 @@ to all service plans:
 In addition to the server default settings that are common to all plans, single node
 and leader-follower plans use the server defaults listed in the following table:
 
-<table>
+<table class="table">
+  <thead>
+    <tr>
     <th>Name</th>
     <th width="25%">Variable Name</th>
     <th>Default</th>
     <th width="45%">Notes</th>
+    </tr>
+    </thead>
     <tr>
         <td><strong>Max Connections</strong></td>
         <td><code>max-connections</code></td>
@@ -270,11 +278,15 @@ and leader-follower plans use the server defaults listed in the following table:
 In addition to the server default settings that are common to all plans,
 HA cluster plans use the server defaults listed in the following table:
 
-<table>
+<table class="table">
+  <thead>
+    <tr>
     <th>Name</th>
     <th width="25%">Variable Name</th>
     <th>Default</th>
     <th width="45%">Notes</th>
+    </tr>
+    </thead>
     <tr>
         <td><strong>Max Connections</strong></td>
         <td><code>max-connections</code></td>
@@ -332,11 +344,15 @@ HA cluster plans use the server defaults listed in the following table:
 In addition to the server default settings that are common to all plans,
 <%= vars.single_leader_plan_lc %> plans use the server defaults listed in the following table.
 
-<table>
+<table class="table">
+  <thead>
+    <tr>
     <th>Name</th>
     <th width="25%">Variable Name</th>
     <th>Default</th>
     <th width="45%">Notes</th>
+    </tr>
+    </thead>
     <tr>
         <td><strong>Max Connections</strong></td>
         <td><code>max-connections</code></td>
