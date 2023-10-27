@@ -40,6 +40,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -51,7 +52,7 @@ main table {
   <th colspan="2" style="text-align: left;"> <br>
     Failed Installation
   <br><br></th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th>Symptom</th>
@@ -94,7 +95,7 @@ main table {
     configuration matches that recommended by the service.</li>
     </ul></td>
   </tr>
-
+</thead>
 </table>
 </div>
 
@@ -112,6 +113,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -121,9 +123,10 @@ main table {
   <col width="80%">
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Cannot Create or Delete Service Instances
+    Canot Create or Delete Service Instances
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -195,6 +198,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -205,7 +209,9 @@ main table {
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Broker Request Timeouts
-  <br><br>
+  <br><br></th>
+  </tr>
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -257,6 +263,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -269,6 +276,7 @@ main table {
     Instance Does Not Exist
   <br><br></th>
   </tr>
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -320,6 +328,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -332,6 +341,7 @@ main table {
     Cannot Bind to or Unbind from Service Instances
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -390,6 +400,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -402,6 +413,7 @@ main table {
     Cannot Connect to a Service Instance
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that their app cannot use service instances that they have
@@ -470,6 +482,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -482,6 +495,7 @@ main table {
     Upgrade All Service Instances Errand Fails
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
@@ -519,6 +533,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -531,7 +546,7 @@ main table {
     Missing Logs and Metrics
   <br><br></th>
   </tr>
-
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>No logs are being emitted by the on-demand broker.</td>
@@ -600,7 +615,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -613,7 +629,7 @@ main table {
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>MySQL load is high</td>
@@ -654,6 +670,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -665,7 +682,7 @@ main table {
   <th colspan="2" style="text-align: left;"> <br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>
@@ -719,6 +736,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -731,6 +749,7 @@ main table {
     Unable to Determine Leader and Follower
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code>
@@ -825,8 +844,9 @@ main table {
 
 <div>
 
- <table class="table>
- <style>
+ <table class="table">
+  <thead>
+    <style>
       main table {
         table-layout: fixed;
       }
@@ -838,7 +858,7 @@ main table {
     Both Leader and Follower Instances Are Writable
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
@@ -979,6 +999,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -991,7 +1012,7 @@ main table {
     Both Leader and Follower Instances Are Read-Only
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
@@ -1084,6 +1105,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1096,7 +1118,7 @@ main table {
     Persistent Disk is Full
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that read, write, and cf CLI operations do not work.
@@ -1158,6 +1180,7 @@ main table {
 <div>
 
   <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1170,7 +1193,7 @@ main table {
     Cannot Access Database Table
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>When you query an existing table, you see an error similar to
@@ -1248,6 +1271,7 @@ main table {
 <div>
 
  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1271,7 +1295,7 @@ main table {
     </pre>
     </td>
   </tr>
-
+</thead>
   <tr>
     <th>Cause</th>
     <td>If the client is connected to a VMware SQL with MySQL for TAS cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
@@ -1348,6 +1372,7 @@ main table {
 <div>
 
  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1360,7 +1385,7 @@ main table {
     Many Replication Errors in Logs for Highly Available Clusters
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>You see many replication errors in the MySQL logs, like the following:
@@ -1383,11 +1408,12 @@ main table {
     <td>For solutions for the replication errors in MySQL log files, see the following table:
 
 <table class="table">
+  <thead>
   <tr>
     <th>Additional Error</th>
     <th>Solution</th>
   </tr>
-
+  </thead>
   <tr>
     <td>
       <code>ALTER TABLE</code>
@@ -1436,6 +1462,7 @@ main table {
 <div>
 
  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1463,6 +1490,7 @@ main table {
 </ul>
 </td>
   </tr>
+  </thead>
 
 
   <tr>
@@ -1540,13 +1568,14 @@ tab of the VMware Tanzu Application Service for VMs tile.
 </p>
 
 <table class="table">
+  <thead>
 <tr>
     <col width="50%">
     <col width="50%">
     <th>Issue</th>
     <th>Solution</th>
     </tr>
-
+    </thead>
     <tr>
         <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
         <td>Try again or improve network performance.</td>
@@ -1764,11 +1793,12 @@ Updated: 2017-03-13T10:17:58Z
 </p>
 
 <table class="table">
+  <thead>
   <tr>
     <th>Log Name</th>
     <th>Description</th>
     </tr>
-
+    </thead>
     <tr>
         <td>broker.stdout.log</td>
         <td>Requests to the on-demand broker and the actions the broker performs
@@ -2178,6 +2208,7 @@ in the Support Knowledge Base.</p>
 </p>
 
 <table class="table">
+  <thead>
     <tr>
       <th><strong>Metric Name</strong></th>
       <th><strong>Description</strong></th>
