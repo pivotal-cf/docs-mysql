@@ -39,7 +39,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -89,18 +90,12 @@ main table {
     <ul>
     <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
     To generate new certificates, contact <a href="https://tanzu.vmware.com/support">Support</a>.</li>
-
-    <li>Deploy fails: View the logs using Tanzu Operations Manager to determine why the deploy is failing.</li>
-
-    <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li>
-
-    <li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li>
-
-    <li>Resource sizing issues: Check your resource configuration in Tanzu Operations Manager and ensure that the
+        <li>Deploy fails: View the logs using Tanzu Operations Manager to determine why the deploy is failing.</li>
+    <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li><li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li><li>Resource sizing issues: Check your resource configuration in Tanzu Operations Manager and ensure that the
     configuration matches that recommended by the service.</li>
     </ul></td>
   </tr>
-
+</thead>
 </table>
 </div>
 
@@ -117,7 +112,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -130,7 +126,7 @@ main table {
     Cannot Create or Delete Service Instances
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -201,7 +197,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -214,7 +211,7 @@ main table {
     Broker Request Timeouts
   <br><br></th>
   </tr>
-
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -265,7 +262,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -278,7 +276,7 @@ main table {
     Instance Does Not Exist
   <br><br></th>
   </tr>
-
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -307,9 +305,7 @@ main table {
         </p>
         <code>bosh -d service-instance_GUID vms</code>
         </li>
-        </ol>
-
-        <p>
+        </o><p>
         If the BOSH deployment is not found, it has been deleted from BOSH.
         Contact Support for further assistance.
         </p></td>
@@ -331,7 +327,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -344,13 +341,12 @@ main table {
     Cannot Bind to or Unbind from Service Instances
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
     <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: There was a problem completing your request. Please contact your operations team providing the following information: service: example-service, service-instance-guid: 8d69de6c-88c6-4283-b8bc-1c46103714e2, broker-request-id: 15f4f87e-200a-4b1a-b76c-1c4b6597c2e1, operation: bind</pre></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>This might be due to authentication or network errors.</td>
@@ -403,7 +399,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -416,7 +413,7 @@ main table {
     Cannot Connect to a Service Instance
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that their app cannot use service instances that they have
@@ -485,7 +482,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -498,7 +496,7 @@ main table {
     Upgrade All Service Instances Errand Fails
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
@@ -535,7 +533,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -548,7 +547,7 @@ main table {
     Missing Logs and Metrics
   <br><br></th>
   </tr>
-
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>No logs are being emitted by the on-demand broker.</td>
@@ -671,7 +670,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -684,7 +684,7 @@ main table {
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>
@@ -739,7 +739,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -752,7 +753,7 @@ main table {
     Unable to Determine Leader and Follower
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code>
@@ -781,7 +782,6 @@ and topology without operator intervention to resolve the issue.
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
     <code>configure-leader-follower</code> errand. This is shown in the following example.<br><br>
     This example shows one outcome that the <code>inspect</code> errand can return: <br>
-
     <ol>
       <li>Use the
         <code>inspect</code>
@@ -811,8 +811,7 @@ and topology without operator intervention to resolve the issue.
                Replication Configured: true
       2 errand(s)
       Succeeded</pre>
-
-        In the previous scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
+    In the previous scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
         <a href="./backup-mysqldump.html#create-backup">Create a VMware SQL with MySQL for TAS Logical Backup</a>
@@ -827,8 +826,7 @@ and topology without operator intervention to resolve the issue.
           run-errand configure-leader-follower &#92;
           --instance=mysql/GUID-OF-LEADER</code>
         For example:
-
-        <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
+      <pre class="terminal">$ bosh -e my-env -d my-dep &#92;
           run-errand configure-leader-follower &#92;
           --instance=mysql/4ecad54b-0704-47eb-8eef-eb228cab9724</pre>
       </li>
@@ -851,7 +849,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+ <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -864,7 +863,7 @@ main table {
     Both Leader and Follower Instances Are Writable
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
@@ -893,13 +892,12 @@ and the errand logs contain the following:
         <li>
           Use the
           <code>inspect</code> errand to retrieve the GTID Executed set for each VM:
-
-          <pre class="terminal">$ bosh -e my-env -d my-dep run-errand inspect
-        [...]
-        Instance   mysql/4ecad54b-0704-47eb-8eef-eb228cab9724
-        Exit Code  0
-        Stdout     -
-        Stderr     2017/12/11 18:25:54 Started executing command: inspect
+      <pre class="terminal">$ bosh -e my-env -d my-dep run-errand inspect
+      [...]
+      Instance   mysql/4ecad54b-0704-47eb-8eef-eb228cab9724
+      Exit Code  0
+      Stdout     -
+      Stderr     2017/12/11 18:25:54 Started executing command: inspect
                  2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
                  2017/12/11 18:25:54
                  Has Data: true
@@ -910,16 +908,16 @@ and the errand logs contain the following:
         Exit Code  0
         Stdout     -
         Stderr     2017/12/11 18:25:54 Started executing command: inspect
-                 2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
-                 2017/12/11 18:25:54
-                 Has Data: true
-                 Read Only: false
-                 GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
-                 Replication Configured: false<br /><br />
-        2 errand(s)<br />
-        Succeeded
+                2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
+                2017/12/11 18:25:54
+                Has Data: true
+                Read Only: false
+                GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
+                Replication Configured: false<br /><br />
+      2 errand(s)<br />
+      Succeeded
       </pre>
-          If the GTID Executed sets for both instances are the same, continue to Step 2. If they are different, continue to Step 4.</li>
+      If the GTID Executed sets for both instances are the same, continue to Step 2. If they are different, continue to Step 4.</li>
         <li>Look at the value of GTID Executed for both instances.
           <ul>
             <li>If the range after the GUID is equivalent, either instance can be made read-only, as described in Step 3.</li>
@@ -1005,7 +1003,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1018,7 +1017,7 @@ main table {
     Both Leader and Follower Instances Are Read-Only
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
@@ -1110,7 +1109,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1123,7 +1123,7 @@ main table {
     Persistent Disk is Full
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that read, write, and cf CLI operations do not work.
@@ -1157,14 +1157,13 @@ main table {
                 Deleting binary logs is a destructive procedure and can result in MySQL data loss.
                 Only do this procedure with the assistance of <a href="https://tanzu.vmware.com/support">Support</a>.
                 </p>
-
             </li>
             <li>
               <strong>If the majority of your persistent disk are binary logs but it is not currently full,</strong>
               turn off binary logging.
               See
               <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base..
+              in the Knowledge Base.
             </li>
           </ul></td>
   </tr>
@@ -1185,7 +1184,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+  <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1198,7 +1198,7 @@ main table {
     Cannot Access Database Table
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>When you query an existing table, you see an error similar to
@@ -1210,16 +1210,12 @@ main table {
     <th>Cause</th>
     <td><p>This error occurs if you created an uppercase table name and then
       activated lowercase table names.</p>
-
-    <p>You activate lowercase table names either by:</p>
-
-    <ul>
-
-      <li>Setting the optional <code>enable_lower_case_table_names</code> parameter to <code>true</code>
+ <p>You activate lowercase table names either by:</p>
+<ul>
+<li>Setting the optional <code>enable_lower_case_table_names</code> parameter to <code>true</code>
       with the cf CLI. For more information about the parameter, see
       <a href='./change-default.html#lowercase'>Lowercase table names</a>.</li>
-
-      <li>Selecting <strong>Enable Lower Case Table Names</strong> in
+<li>Selecting <strong>Enable Lower Case Table Names</strong> in
       the <strong>Mysql Configuration</strong> pane of the tile. For more
       information about this configuration,
       see <a href='./install-config.html#mysql'>Configure MySQL</a>.</li>
@@ -1279,7 +1275,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+ <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1291,21 +1288,19 @@ main table {
   <th colspan="2" style="text-align: left;"> <br>
     Unresponsive Node in a Highly Available Cluster
   <br><br></th>
-  </tr>
-
+  </tr
   <tr>
-    <th>Symptom</th>
+  <th>Symptom</th>
     <td>
     A client connected to a VMware SQL with MySQL for TAS cluster node reports the following error:
-
-    <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
+<pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
     </pre>
     </td>
   </tr>
-
+</thead>
   <tr>
     <th>Cause</th>
     <td>If the client is connected to a VMware SQL with MySQL for TAS cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
@@ -1381,7 +1376,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+ <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1394,7 +1390,7 @@ main table {
     Many Replication Errors in Logs for Highly Available Clusters
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>You see many replication errors in the MySQL logs, like the following:
@@ -1416,11 +1412,13 @@ main table {
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>For solutions for the replication errors in MySQL log files, see the following table:
 
-<table class="nice">
+<table class="table">
+  <thead>
   <tr>
     <th>Additional Error</th>
     <th>Solution</th>
   </tr>
+  </thead>
   <tr>
     <td>
       <code>ALTER TABLE</code>
@@ -1468,7 +1466,8 @@ main table {
 
 <div>
 
-  <table class="nice">
+ <table class="table">
+  <thead>
     <style>
       main table {
         table-layout: fixed;
@@ -1481,7 +1480,6 @@ main table {
     Automated Backups or adbr Plug-in Backups Fail
   <br><br></th>
   </tr>
-
   <tr>
     <th>Symptom</th>
     <td>The following are true:<br><br>
@@ -1497,6 +1495,7 @@ main table {
 </ul>
 </td>
   </tr>
+  </thead>
 
   <tr>
     <th>Cause</th>
@@ -1572,11 +1571,15 @@ tab of the VMware Tanzu Application Service for VMs tile.
     Common issues with networking include:
 </p>
 
-<table class="nice">
+<table class="table">
+  <thead>
+<tr>
     <col width="50%">
     <col width="50%">
     <th>Issue</th>
     <th>Solution</th>
+    </tr>
+    </thead>
     <tr>
         <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
         <td>Try again or improve network performance.</td>
@@ -1793,9 +1796,13 @@ Updated: 2017-03-13T10:17:58Z
     The archive generated by BOSH includes the following logs:
 </p>
 
-<table class="nice">
+<table class="table">
+  <thead>
+  <tr>
     <th>Log Name</th>
     <th>Description</th>
+    </tr>
+    </thead>
     <tr>
         <td>broker.stdout.log</td>
         <td>Requests to the on-demand broker and the actions the broker performs
@@ -2204,7 +2211,7 @@ in the Support Knowledge Base.</p>
   metrics emitted to Loggregator. The metric names are shown in the following table:
 </p>
 
-<table>
+<table class="table">
   <thead>
     <tr>
       <th><strong>Metric Name</strong></th>
