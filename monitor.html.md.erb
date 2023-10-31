@@ -126,9 +126,9 @@ In addition to the KPIs, the MySQL service emits the followings metrics for moni
 The metrics that all <%= vars.product_short %> service instances emit:
 
 <table class="table">
-<tr>
+<thead><tr>
   <th colspan="2" style="text-align: center;"><a name="available-metrics"></a>/p.mysql/available</th>
-  </tr>
+  </tr></thead>
   <tr>
     <th width="20%">Description</th>
     <td>Indicates if the local database server is available and responding. </td>
@@ -139,7 +139,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
+  <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="max-connections"></a>/p.mysql/variables/max_connections</th>
   </tr></thead>
   <tr>
@@ -152,8 +152,8 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
-  <th colspan="2" style="text-align: center;"><a name="open-files-limit"></a>/p.mysql/variables/open_files_limit</th>
+  <thead><tr>
+  <th colspan="2" style="text-align: center;"><a name="open-files-limit"></a>/p.mysql/variables/open_files_limit</th></thead>
   </tr>
   <tr>
     <th width="20%">Description</th>
@@ -165,6 +165,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
+  <thead>
   <tr>
   <th colspan="2" style="text-align: center;"><a name="read-only"></a>/p.mysql/variables/read_only</th>
   </tr></thead>
@@ -178,7 +179,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
+  <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="questions-metrics"></a>/p.mysql/performance/questions</th>
   </tr></thead>
   <tr>
@@ -193,7 +194,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
+  <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="queries"></a>/p.mysql/performance/queries</th>
   </tr></thead>
   <tr>
@@ -207,7 +208,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
+  <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="queries-delta"></a>/p.mysql/performance/queries_delta</th>
   </tr></thead>
   <tr>
@@ -221,7 +222,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
   </tr>
 </table>
   <table class="table">
-  <tr>
+  <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-free"></a>/p.mysql/innodb/buffer_pool_pages_free</th>
   </tr></thead>
   <tr>
