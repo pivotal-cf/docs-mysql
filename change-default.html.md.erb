@@ -83,12 +83,12 @@ To set optional parameters:
 The following table describes how to use the `workload` optional parameter
  to adjust server default settings for different workload profiles:
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
 
     <th colspan="2" style="text-align:center;">workload</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>String</td>
@@ -119,8 +119,9 @@ The following table lists the workload profiles that developers
 can use to configure MySQL instances based on their specific app workloads:
 
 
-<table class="nice">
-    <th>Profile</th><th>Description</th>
+<table class="table">
+  <thead>
+    <th>Profile</th><th>Description</th></thead>
     <tr>
         <td>Mixed Workload</td>
         <td>By default, each MySQL service instance is configured for a mixed workload.
@@ -171,10 +172,11 @@ For more information, see the
 
 The following table describes how to use the `enable_lower_case_table_names` optional parameter:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">enable_lower_case_table_names</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -214,10 +216,11 @@ after enabling lowercase table names.
 The following table describes how to use the `default-charset` and  `default-collation`
 optional parameters to change the character sets used in databases:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">default-charset</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -242,11 +245,11 @@ optional parameters to change the character sets used in databases:
   </tr>
 
 </table>
-
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">default-collation</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -290,10 +293,11 @@ The following table describes how to use the `replication_mode` optional paramet
 <p> The b<code>replication_mode</code> does not work
 for single node, HA cluster, or multi-site replication plans.</p>
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">replication_mode</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -339,10 +343,11 @@ You can manually override this timeout by setting a lower value.
 
 The following table describes how to use the `semi_sync_ack_timeout_in_ms` optional parameter:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">semi_sync_ack_timeout_in_ms</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -371,10 +376,11 @@ The following table describes how to use the `semi_sync_ack_timeout_in_ms` optio
 
 The following table describes how to use the `backup-schedule` optional parameter:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">backup-schedule</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -409,10 +415,11 @@ The following table describes how to use the `backup-schedule` optional paramete
 
 The following table describes how to use the `optimize_for_short_words` optional parameter:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">optimize_for_short_words</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -473,10 +480,11 @@ The following table describes how to use the `optimize_for_short_words` optional
 
 The following table describes how to use the `wsrep_applier_threads` optional parameter:
 
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th colspan="2" style="text-align:center;">wsrep_applier_threads</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
