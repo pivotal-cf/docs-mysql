@@ -26,33 +26,17 @@ The following errors occur in multiple services:
 *   [Missing logs and metrics](#missing-logs)
 *   [MySQL Load is high with large number of CredHub encryption keys](#credhub-encryption-keys)
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="install-fail"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+  <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     Failed Installation
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>VMware SQL with MySQL for TAS fails to install.</td>
@@ -84,7 +68,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
     <ul>
     <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
@@ -94,36 +78,18 @@ main table {
     configuration matches that recommended by the service.</li>
     </ul></td>
   </tr>
-
-</table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
+  </table>
 
 <p><a name="cannot-create-delete"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
-  <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+    <thead>
+    <tr>
+  <th> <br>
     Cannot Create or Delete Service Instances
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -143,7 +109,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
         <ol>
         <li>
@@ -180,32 +146,18 @@ main table {
         </ul>
         </ol></td>
   </tr>
-
 </table>
-</div>
-
-<style>
-main table {
-  table-layout: fixed;
-}
-</style>
 
 <p><a name="timeouts"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+    <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Broker Request Timeouts
   <br><br>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -218,7 +170,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
         <ol>
         <li>
@@ -241,34 +193,17 @@ main table {
   </tr>
 
 </table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="instance-not-exist"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+   <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     Instance Does Not Exist
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -281,7 +216,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
         <ol>
         <li>
@@ -304,34 +239,17 @@ main table {
   </tr>
 
 </table>
-</div>
 
-
-<style>
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="cannot-bind"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+  <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     Cannot Bind to or Unbind from Service Instances
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -343,7 +261,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To find out the exact issue with the binding process:
     <ol>
     <li>
@@ -374,34 +292,16 @@ main table {
   </tr>
 
 </table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="cannot-connect"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+  <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Cannot Connect to a Service Instance
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that their app cannot use service instances that they have
@@ -415,7 +315,7 @@ successfully created and bound.
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>
     To solve this issue, ask the user to send application logs that show the connection error.
     If the error originates from the service, then follow VMware SQL with MySQL for TAS-specific instructions.
@@ -449,7 +349,6 @@ successfully created and bound.
     </li>
     </ol></td>
   </tr>
-
 </table>
 </div>
 
@@ -457,31 +356,16 @@ successfully created and bound.
   See <a href="./upgrade.html#interruptions">Service interruptions</a> for more information.
 </p>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="upgrade-all-fails"></a></p>
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+   <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     Upgrade All Service Instances Errand Fails
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
@@ -493,7 +377,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
     <ol>
     <li>Look at the errand output in the Ops Manager log.</li>
@@ -507,35 +391,16 @@ main table {
 </td>
   </tr>
 
-</table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
-
 <p><a name="missing-logs"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+    <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Missing Logs and Metrics
   <br><br></th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th>Symptom</th>
@@ -548,7 +413,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
     <ol>
     <li>
@@ -592,32 +457,17 @@ main table {
 </td>
   </tr>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="credhub-encryption-keys"></a></p>
 
-<div>
 
   <table class="nice">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+  <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th>Symptom</th>
@@ -631,7 +481,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>To troubleshoot:
     <ol>
     <li>
@@ -643,34 +493,18 @@ main table {
   </tr>
 
 </table>
-</div>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="credhub-encryption-keys"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+<thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>
@@ -685,7 +519,7 @@ main table {
     <td>Large number of CredHub encryption keys</td>
   </tr>
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
       <td>To troubleshoot:
         <ol>
           <li>
@@ -696,9 +530,8 @@ main table {
         </ol>
       </td>
   </tr>
-
 </table>
-</div>
+
 
 <h3 id="-leader-follower-service-instance-errors"><a id="l-f-errors"></a> Leader-Follower Service Instance Errors</h3>
 
@@ -710,32 +543,17 @@ main table {
 <li><a href="#both-read-only">Both leader and follower instances are read-only</a></li>
 </ul>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="unable-to-determine"></a></p>
 
-<div>
 
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+    <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th> <br>
     Unable to Determine Leader and Follower
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code>
@@ -757,7 +575,7 @@ and topology without operator intervention to resolve the issue.
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>Use the <code>inspect</code> errand to determine which instance can be the leader. Then, using the
     <a href="./about-leader-follower.html#errands">orchestration</a>
     errands and backup/restore, you can put the service instance into a safe topology, and then rerun the
@@ -813,37 +631,21 @@ and topology without operator intervention to resolve the issue.
       </li>
     </ol></td>
   </tr>
-
 </table>
 </div>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="both-writable"></a></p>
 
-<div>
 
- <table class="table>
- <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+ <table class="table">
+ <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Both Leader and Follower Instances Are Writable
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
@@ -966,36 +768,17 @@ and the errand logs contain the following:
       </ol>
     </td>
   </tr>
-
 </table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="both-read-only"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Both Leader and Follower Instances Are Read-Only
   <br><br></th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th>Symptom</th>
@@ -1062,7 +845,6 @@ main table {
     </ol>
    </td>
   </tr>
-
 </table>
 </div>
 
@@ -1075,33 +857,16 @@ main table {
 <li><a href="#access-table">Cannot Access Database Table</a></li>
 </ul>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
-
 <p><a name="persistent-disk"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Persistent Disk is Full
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that read, write, and cf CLI operations do not work.
@@ -1122,7 +887,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>
       To resolve this issue, do one of the following:<br><br>
           <ul>
@@ -1147,35 +912,17 @@ main table {
   </tr>
 
 </table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="access-table"></a></p>
 
-<div>
-
   <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+    <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Cannot Access Database Table
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>When you query an existing table, you see an error similar to
@@ -1201,7 +948,7 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td><p>To resolve this issue:</p>
     <ol>
       <li>Deactivate lowercase table names by doing one of the following:
@@ -1253,18 +1000,12 @@ main table {
 <div>
 
  <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Unresponsive Node in a Highly Available Cluster
   <br><br></th>
-  </tr
+  </tr></thead>
   <tr>
   <th>Symptom</th>
     <td>
@@ -1337,35 +1078,17 @@ main table {
   </tr>
 
 </table>
-</div>
-
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
 
 <p><a name="replication-errors"></a></p>
 
-<div>
-
  <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+    <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Many Replication Errors in Logs for Highly Available Clusters
   <br><br></th>
   </tr>
-
+</thead>
   <tr>
     <th>Symptom</th>
     <td>You see many replication errors in the MySQL logs, like the following:
@@ -1384,14 +1107,14 @@ main table {
   </tr>
 
   <tr>
-    <th style="vertical-align: top; padding-top: 1em;">Solution</th>
+    <th>Solution</th>
     <td>For solutions for the replication errors in MySQL log files, see the following table:
 
 <table class="table">
-  <tr>
+  <thead><tr>
     <th>Additional Error</th>
     <th>Solution</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <td>
@@ -1427,32 +1150,15 @@ or persistent disk or memory issues, you can ignore the replication errors.
 <p>If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plug-in fails,
 verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
 
-<style>
-
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
-
 <p><a name="unable-to-determine"></a></p>
 
-<div>
-
  <table class="table">
-    <style>
-      main table {
-        table-layout: fixed;
-      }
-    </style>
-  <col width="20%">
-  <col width="80%">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Automated Backups or adbr Plug-in Backups Fail
   <br><br></th>
-  </tr>
+  </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>The following are true:<br><br>
@@ -1545,12 +1251,12 @@ tab of the VMware Tanzu Application Service for VMs tile.
 </p>
 
 <table class="table">
-<tr>
+<thead><tr>
     <col width="50%">
     <col width="50%">
     <th>Issue</th>
     <th>Solution</th>
-    </tr>
+    </tr></thead>
 
     <tr>
         <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
@@ -1768,11 +1474,12 @@ Updated: 2017-03-13T10:17:58Z
 </p>
 
 <table class="table">
+<thead>
   <tr>
     <th>Log Name</th>
     <th>Description</th>
     </tr>
-
+</thead>
     <tr>
         <td>broker.stdout.log</td>
         <td>Requests to the on-demand broker and the actions the broker performs
@@ -2182,11 +1889,12 @@ in the Support Knowledge Base.</p>
 </p>
 
 <table class="table">
+<thead>
     <tr>
       <th><strong>Metric Name</strong></th>
       <th><strong>Description</strong></th>
     </tr>
-
+</thead>
   <tbody>
     <tr>
       <td><code>on-demand-broker/SERVICE-NAME-MARKETPLACE/quota_remaining</code></td>
