@@ -132,8 +132,9 @@ and networks for the broker and MySQL service instances:
 
 1. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
+<table class="table">
+<thead>
+    <tr><th>Field</th><th>Instructions</th></tr></thead>
     <tr><td><strong>Place singleton jobs in</strong></td>
         <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
     <tr><td><strong>Balance other jobs in</strong></td>
@@ -175,12 +176,13 @@ If you offer leader-follower or highly available (HA) cluster plans,
 then you must configure single-node or <%= vars.single_leader_plan %> plans that can be used
 to restore a multi-node plan from backup.
 
-<table class="nice">
+<table class="table">
+<thead>
 <col width="33%">
  <tr>
   <th>If you offer service plans of type…</th>
   <th>Then configure a service plan of type…</th>
- </tr>
+ </tr></thead>
  <tr>
   <td>leader-follower</td>
   <td>single node, with the persistent disk as large
@@ -302,8 +304,9 @@ For each plan that you want to use in your deployment:
 you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
 </p>
 
-  <table>
-    <tr><th>Field</th><th>Description</th></tr>
+<table class="table">
+<thead>
+    <tr><th>Field</th><th>Description</th></tr></thead>
     <tr><td><strong>MySQL Default Version</strong></td>
         <td>Select one of the following options:<br>
             <ul><li> <strong>MySQL 5.7</strong>: (Default selection) Sets MySQL 5.7 as the default version for the service plan.
@@ -407,7 +410,7 @@ detailed description of the configurable fields."](./images/global-settings.png)
 1. Configure the fields as follows:
     <table class="table">
       <col width="30%">
-     <thead><tr><th>Field</th><th>Instructions</th></tr>
+     <thead><tr><th>Field</th><th>Instructions</th></tr></thead>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
           <td>Select this check box if either of the following apply:<ul>
               <li>Your service instances need an external backup, blobstore, or syslog storage</li>
@@ -445,8 +448,9 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
 
 1. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
+<table class="table">
+<thead>
+    <tr><th>Field</th><th>Instructions</th></tr></thead>
     <tr><td><strong>Enable Lower Case Table Names</strong></td>
         <td>Select this check box to store all table names in lowercase.
             This sets the MySQL server system variable
@@ -531,9 +535,10 @@ To activate TLS for the MySQL service:
 
 1. Click **Security**.
 1. For **Enforce application TLS**, select one of the following:
-    <table class="nice">
+    <table class="table">
+<thead>
       <col width="30%">
-      <tr><th>State</th><th>Instructions</th></tr>
+      <tr><th>State</th><th>Instructions</th></tr></thead>
       <tr><td><strong>Unchecked</strong></td>
           <td>This enables developers to configure their MySQL service VMs to use TLS.
             <br><br>
@@ -635,8 +640,9 @@ To activate monitoring and logging in the MySQL service:
 
 2. Configure the fields as follows and then Click **Save**:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
+ <table class="table">
+<thead>
+    <tr><th>Field</th><th>Instructions</th></tr></thead>
     <tr><td><strong>Metrics Polling Interval</strong></td>
         <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
             All service instances emit metrics about the health and status of the MySQL server.</td></tr>
@@ -673,8 +679,9 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
 
 2. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
+ <table class="table">
+<thead>
+    <tr><th>Field</th><th>Instructions</th></tr></thead>
     <tr>
         <td><strong>Address</strong></td>
         <td>Enter the IP address or hostname of the syslog server for sending logs. For example:
@@ -717,8 +724,9 @@ To configure service instance upgrades.
 ![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
-    <table>
-      <tr><th>Field</th><th>Instructions</th></tr>
+    <table class="table">
+<thead>
+      <tr><th>Field</th><th>Instructions</th></tr></thead>
       <tr>
           <td><strong>Number of simultaneous upgrades</strong></td>
           <td>Enter the maximum number of service instances that can upgrade at the same time.
@@ -771,14 +779,15 @@ See the following step for detailed descriptions of the configurable drop-down m
 
 2. Review the settings for the following errands:
 
-<table>
+<table class="table">
+<thead>
     <tr>
       <th>Errand</th>
       <th>Description</th>
     </tr>
       <tr>
       <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
-    </tr>
+    </tr></thead>
     <tr>
       <td><strong>Register On-demand MySQL Broker</strong></td>
       <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
