@@ -1139,8 +1139,7 @@ This section provides solutions for the following errands:
         from the detached server node and creates a new copy of the cluster data on the node. For more
         information, see <a href="#manual-force">Force a Node to Rejoin a Highly Available Cluster Manually</a>.
         <p class="note warning">
-          <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
-          <a href="https://support.pivotal.io">Support</a>.
+          <strong>Warning</strong>: Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of <%= vars.support_link %>.
         </p>
       </li>
     </ul>
@@ -2410,7 +2409,7 @@ To check the replication status, do the following:
             | 10 | even more dummy data |
             +----+----------------------+
 
-7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://support.pivotal.io/)
+7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact <%= vars.support_link %>.
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 
