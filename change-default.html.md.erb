@@ -81,11 +81,10 @@ To set optional parameters:
 The following table describes how to use the `workload` optional parameter
  to adjust server default settings for different workload profiles:
 
-<table>
-  <tr>
-
-    <th colspan="2" style="text-align:center;">workload</th>
-  </tr>
+<tabl class="table">
+ <thead> <tr>
+  <th colspan="2" style="text-align:center;">workload</th>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -117,43 +116,43 @@ The following table lists the workload profiles that developers
 can use to configure MySQL instances based on their specific app workloads:
 
 
-<table class="nice">
-    <th>Profile</th><th>Description</th>
+<table class="table">
+    <thead><th>Profile</th><th>Description</th>
     <tr>
-        <td>Mixed Workload</td>
+        <td>Mixed workload</td>
         <td>By default, each MySQL service instance is configured for a mixed workload.
             This workload is equally heavy on reads and writes. <br><br>
 
-            The configuration for this profile is described in
+The configuration for this profile is described in
             <a href="./server-defaults.html">About MySQL server defaults</a>.
-    </tr>
+    </tr></thead>
 
-    <tr>
-        <td>Read-Heavy Workload</td>
-        <td>For apps that have a large number of reads, you can configure your
-          service instances with a read-heavy workload.<br><br>
-          The read-heavy profile changes the following server defaults listed in
-          <a href="./server-defaults.html">About MySQL server defaults</a>:
-          <ul>
-            <li><code>innodb_buffer_pool_size</code>
-              is increased to 75% of the available memory on each service instance.</li>
+<tr>
+<td>Read-heavy workload</td>
+<td>For apps that have a large number of reads, you can configure your
+service instances with a read-heavy workload.<br><br>
+The read-heavy profile changes the following server defaults listed in
+<a href="./server-defaults.html">About MySQL server defaults</a>:
+<ul>
+<li><code>innodb_buffer_pool_size</code>
+  is increased to 75% of the available memory on each service instance.</li>
 
-              <li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
-          </ul>
+  <li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
+</ul>
 
-    <tr>
-        <td>Write-Heavy Workload</td>
-        <td>For apps that write to the database frequently, you can configure your
-          service instances with a write heavy workload.<br><br>
-            The write heavy profile changes the following server defaults that are listed in
-                <a href="./server-defaults.html">About MySQL server defaults</a>:
-          <ul>
-          <li><code>innodb_buffer_pool_size</code>
-            is increased to 75% of the available memory on each service instance.</li>
-          <li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
-          <li><code>innodb_log_file_size</code> is increased to 1&nbsp;GB.</li>
-          <li><code>max_allowed_packets</code> is increased to 1&nbsp;GB.</li>
-          </ul>
+<tr>
+<td>Write-heavy workload</td>
+<td>For apps that write to the database frequently, you can configure your
+service instances with a write heavy workload.<br><br>
+The write heavy profile changes the following server defaults that are listed in
+    <a href="./server-defaults.html">About MySQL server defaults</a>:
+<ul>
+<li><code>innodb_buffer_pool_size</code>
+is increased to 75% of the available memory on each service instance.</li>
+<li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
+<li><code>innodb_log_file_size</code> is increased to 1&nbsp;GB.</li>
+<li><code>max_allowed_packets</code> is increased to 1&nbsp;GB.</li>
+</ul>
 </table>
 
 ## <a id="lowercase"></a>Lowercase table names
@@ -169,10 +168,10 @@ For more information, see the
 
 The following table describes how to use the `enable_lower_case_table_names` optional parameter:
 
-<table>
-  <tr>
+<table class="table>
+  <thead><tr>
     <th colspan="2" style="text-align:center;">enable_lower_case_table_names</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -191,9 +190,9 @@ The following table describes how to use the `enable_lower_case_table_names` opt
        <br><br>
       If you set this to <code>true</code>, table names are stored in lowercase.
 
-      See <a href="#lowercase">About lowercase table names</a>.
+  See <a href="#lowercase">About lowercase table names</a>.
 
-      <p class="note important">
+  <p class="note important">
 <span class="note__title"> Important</span> Before you enable this feature,
 ensure all tables have lowercase names. Tables with uppercase names are inaccessible
 after enabling lowercase table names.
@@ -212,10 +211,10 @@ after enabling lowercase table names.
 The following table describes how to use the `default-charset` and  `default-collation`
 optional parameters to change the character sets used in databases:
 
-<table>
-  <tr>
+<table class="table">
+    <thead> <tr>
     <th colspan="2" style="text-align:center;">default-charset</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -241,10 +240,10 @@ optional parameters to change the character sets used in databases:
 
 </table>
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
     <th colspan="2" style="text-align:center;">default-collation</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -261,10 +260,10 @@ optional parameters to change the character sets used in databases:
     <td>The <code>default-collation</code> changes based on the <code>default-charset</code>.
       To set the <code>default-collation</code>, first set the <code>default-charset</code>. <br><br>
 
-      For instructions for
-      viewing available and default collations,
-      see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
-      MySQL documentation</a>.</td>
+  For instructions for
+  viewing available and default collations,
+  see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
+  MySQL documentation</a>.</td>
   </tr>
 
   <tr>
@@ -288,10 +287,10 @@ The following table describes how to use the `replication_mode` optional paramet
 >**Note**
 >`replication_mode` does not work for single node, HA cluster, or multi-site replication plans.
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
     <th colspan="2" style="text-align:center;">replication_mode</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -337,10 +336,10 @@ You can manually override this timeout by setting a lower value.
 
 The following table describes how to use the `semi_sync_ack_timeout_in_ms` optional parameter:
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
     <th colspan="2" style="text-align:center;">semi_sync_ack_timeout_in_ms</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -369,10 +368,10 @@ The following table describes how to use the `semi_sync_ack_timeout_in_ms` optio
 
 The following table describes how to use the `backup-schedule` optional parameter:
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
     <th colspan="2" style="text-align:center;">backup-schedule</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -392,9 +391,9 @@ The following table describes how to use the `backup-schedule` optional paramete
       For example, entering a cron expression of <code>15 10 * * *</code> triggers a backup 10:15 AM every day.
       Test your cron expression using a website such as <a href="https://crontab.guru/">Crontab Guru</a>.
 
-      <p> Configuring a cron expression overrides the default schedule for your service instance.
-      </p>
-    </td>
+  <p> Configuring a cron expression overrides the default schedule for your service instance.
+  </p>
+</td>
   </tr>
 
   <tr>
@@ -407,10 +406,10 @@ The following table describes how to use the `backup-schedule` optional paramete
 
 The following table describes how to use the `optimize_for_short_words` optional parameter:
 
-<table>
-  <tr>
+<table class="table">
+ <thead> <tr>
     <th colspan="2" style="text-align:center;">optimize_for_short_words</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -455,10 +454,10 @@ The following table describes how to use the `optimize_for_short_words` optional
            so that the query behaves normally for other tables.</li>
     </ol>
 
-    For more information about InnoDB full-text index deletion,
-    see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html#innodb-fulltext-index-deletion">MySQL
-    documentation</a>.
-    </td>
+  For more information about InnoDB full-text index deletion,
+  see the <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-fulltext-index.html#innodb-fulltext-index-deletion">MySQL
+  documentation</a>.
+  </td>
   </tr>
 
   <tr>
@@ -471,10 +470,10 @@ The following table describes how to use the `optimize_for_short_words` optional
 
 The following table describes how to use the `wsrep_applier_threads` optional parameter:
 
-<table>
-  <tr>
+<table class="table">
+  <thead><tr>
     <th colspan="2" style="text-align:center;">wsrep_applier_threads</th>
-  </tr>
+  </tr></thead>
 
   <tr>
     <th><strong>Type</strong></th>
@@ -493,9 +492,9 @@ The following table describes how to use the `wsrep_applier_threads` optional pa
       For more information, see the
       <a href="https://docs.percona.com/percona-xtradb-cluster/5.7/wsrep-system-index.html#wsrep_slave_threads">Percona XtraDB Cluster documentation</a>.
 
-      <p> This parameter only applies to "high-availablity" service plans, and
-        is rejected for service plans using other topologies.</p>
-    </td>
+  <p> This parameter only applies to "high-availablity" service plans, and
+    is rejected for service plans using other topologies.</p>
+</td>
 
   <tr>
     <th><strong>Usage</strong></th>

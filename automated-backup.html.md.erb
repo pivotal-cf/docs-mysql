@@ -87,82 +87,82 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
 
 1. Configure the fields as follows:
 
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        </thead>
-        <tr>
-            <td>
-                <strong>Username</strong>
-            </td>
-            <td>
-                Enter the user that you created in
-                <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Private Key</strong>
-            </td>
-            <td>
-                 Enter the private key that you created in
-                 <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>. <br>
-                 Store the public key that is used for SSH and SCP access on the destination VM.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Hostname</strong>
-            </td>
-            <td>
-                Enter the IP address or DNS entry that is used to access the destination VM.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Destination Directory</strong>
-            </td>
-            <td>
-                Enter the directory that <%= vars.product_short %> uploads backups to.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>SCP Port</strong>
-            </td>
-            <td>
-               Enter the SCP port number for SSH.
-               This port usually is <code>22</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Cron Schedule</strong>
-            </td>
-            <td>
-                Enter a cron expression using standard syntax.
-                The cron expression sets the schedule for taking backups for each service instance.
-                This overrides the default schedule for your service instance.
-                Test your cron expression using a website such as
-                <a href="https://crontab.guru/">Crontab Guru</a>.
+<table class="table">
+<thead>
+<tr>
+<th>Field</th>
+<th>Instructions</th>
+</tr>
+</thead>
+<tr>
+    <td>
+        <strong>Username</strong>
+    </td>
+    <td>
+        Enter the user that you created in
+        <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Private key</strong>
+    </td>
+    <td>
+            Enter the private key that you created in
+            <a href="#scp-keys">Create a Public and Private Key&#8209;Pair</a>. <br>
+            Store the public key that is used for SSH and SCP access on the destination VM.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Hostname</strong>
+    </td>
+    <td>
+        Enter the IP address or DNS entry that is used to access the destination VM.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Destination directory</strong>
+    </td>
+    <td>
+        Enter the directory that <%= vars.product_short %> uploads backups to.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>SCP Port</strong>
+    </td>
+    <td>
+        Enter the SCP port number for SSH.
+        This port usually is <code>22</code>.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Cron schedule</strong>
+    </td>
+    <td>
+        Enter a cron expression using standard syntax.
+        The cron expression sets the schedule for taking backups for each service instance.
+        This overrides the default schedule for your service instance.
+        Test your cron expression using a website such as
+        <a href="https://crontab.guru/">Crontab Guru</a>.
 
-                <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
-                </p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Fingerprint</strong>
-            </td>
-            <td>
-                (Optional) Enter the fingerprint for the destination VM public key.
-                The fingerprint detects any changes to the destination VM.
-            </td>
-        </tr>
+<p> Developers can override the default for their service instance.
+    For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
+</p>
+</td>
+</tr>
+<tr>
+    <td>
+        <strong>Fingerprint</strong>
+    </td>
+    <td>
+        (Optional) Enter the fingerprint for the destination VM public key.
+        The fingerprint detects any changes to the destination VM.
+    </td>
+</tr>
       </table>
 
 ## <a id="ceph-or-s3"></a> Back up to Amazon S3 or Ceph
@@ -254,111 +254,111 @@ you must have an S3 bucket in which to store the backups.
 
 1. Configure the fields as follows:
 
-    <table class="table">
-    <thead>
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        </thead>
-        <tr>
-            <td>
-                <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>
-            </td>
-            <td>
-                Enter the S3 Access Key ID and Secret Access Key that you created in
-                <a href="#access-key-aws">Create a Custom Policy and Access Key</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Endpoint URL</strong>
-            </td>
-            <td>
-                Enter the S3-compatible endpoint URL for uploading backups. <br>
-                The URL must start with <code>http://</code> or <code>https://</code>. <br>
-                The default is <code>https://s3.amazonaws.com</code>.<br>
-                If you are using a public S3 endpoint, see the S3 Endpoint procedure in
-                <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">Step 3: Director Config Page</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Region</strong>
-            </td>
-            <td>
-                Enter the region where your bucket is located.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Name</strong>
-            </td>
-            <td>
-                Enter the name of your bucket. <br>
-                Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
-                VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
-                For example, <code>sandbox-backups</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Force path style access to bucket</strong>
-            </td>
-            <td>
-              The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              Select this check box if you use:
+<table class="table">
+<thead>
+<tr>
+    <th>Field</th>
+    <th>Instructions</th>
+</tr>
+</thead>
+<tr>
+    <td>
+        <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>
+    </td>
+    <td>
+        Enter the S3 Access Key ID and Secret Access Key that you created in
+        <a href="#access-key-aws">Create a Custom Policy and Access Key</a>.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Endpoint URL</strong>
+    </td>
+    <td>
+        Enter the S3-compatible endpoint URL for uploading backups. <br>
+        The URL must start with <code>http://</code> or <code>https://</code>. <br>
+        The default is <code>https://s3.amazonaws.com</code>.<br>
+        If you are using a public S3 endpoint, see the S3 Endpoint procedure in
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">Step 3: Director Config Page</a>.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Region</strong>
+    </td>
+    <td>
+        Enter the region where your bucket is located.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Bucket name</strong>
+    </td>
+    <td>
+        Enter the name of your bucket. <br>
+        Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
+        VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
+        For example, <code>sandbox-backups</code>.
+    </td>
+</tr>
+<tr>
+    <td>
+        <strong>Force path style access to bucket</strong>
+    </td>
+<td>
+The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
+Select this check box if you use:
 
-              <ul>
-                <li>
-                   Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
-                </li>
-                <li>
-                   An S3-compatible endpoint such as Minio that might require path-style URLs.
-                </li>
-              </ul>
+<ul>
+<li>
+    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
+</li>
+<li>
+    An S3-compatible endpoint such as Minio that might require path-style URLs.
+</li>
+</ul>
 
-              <p> If you are using a blobstore that uses a specific set of domains in its
-                server certificate, add a new wildcard domain or use path-style URLs if supported by the
-                blobstore.
-              </p>
+<p> If you are using a blobstore that uses a specific set of domains in its
+server certificate, add a new wildcard domain or use path-style URLs if supported by the
+blobstore.
+</p>
 
-               For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
-               <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
-               and the subsequent
-               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Path</strong>
-            </td>
-            <td>
-              (Optional) Enter the path in the bucket to store backups.<br>
-              You can use this to keep the backups from this foundation separate from those of other
-              foundations that might also backup to this bucket.
-              For example, <code>Foundation-1</code>.
+For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
+<a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
+and the subsequent
+<a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
+</td>
+</tr>
+<tr>
+    <td>
+        <strong>Bucket Path</strong>
+    </td>
+<td>
+    (Optional) Enter the path in the bucket to store backups.<br>
+    You can use this to keep the backups from this foundation separate from those of other
+    foundations that might also backup to this bucket.
+    For example, <code>Foundation-1</code>.
 
-              This field is only available as of v2.10.3.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Cron Schedule</strong>
-            </td>
-            <td>
-                Enter a cron expression using standard syntax.
-                The cron expression sets the schedule for taking backups for each service instance.
-                This overrides the default schedule for your service instance.
-                Test your cron expression using a website such as
-                <a href="https://crontab.guru/">Crontab Guru</a>.
+    This field is only available as of v2.10.3.
+</td>
+</tr>
+<tr>
+    <td>
+        <strong>Cron Schedule</strong>
+    </td>
+    <td>
+        Enter a cron expression using standard syntax.
+        The cron expression sets the schedule for taking backups for each service instance.
+        This overrides the default schedule for your service instance.
+        Test your cron expression using a website such as
+        <a href="https://crontab.guru/">Crontab Guru</a>.
 
-                <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
-                </p>
-            </td>
-        </tr>
-      </table>
+<p> Developers can override the default for their service instance.
+    For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
+</p>
+</td>
+</tr>
+</table>
 
 
 ## <a id="instance-profile"></a> Back up to Amazon S3 with instance profile
@@ -517,44 +517,44 @@ already configured: <br><br>
     </script>
 
 
-    <div class="tab">
-      <!- Tab headers and links ->
-      <button class="tablinks" onclick="openDocs(event, 'tab1')">Use AWS Keys</button>
-      <button class="tablinks active" onclick="openDocs(event, 'tab2')">Use AWS Instance Profile</button>
-    </div>
+<div class="tab">
+<!- Tab headers and links ->
+<button class="tablinks" onclick="openDocs(event, 'tab1')">Use AWS Keys</button>
+<button class="tablinks active" onclick="openDocs(event, 'tab2')">Use AWS Instance Profile</button>
+</div>
 
-    <div id="tab1" class="tabcontent">
-      <p>
-        <ul>
-          <li>You must find the existing IAM user associated with the static credentials that are used here.
-              The name of the IAM user is <i>not</i> listed here in the <strong>BOSH Director for AWS</strong> tile UI.
-              <br><br>
-              To find retrieve your AWS Key information and find the existing IAM user,
-              use the AWS Identity and Access Management (IAM) credentials that you generated in
-              <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">
-              Step 3: Create an IAM User for <%= vars.ops_manager %></a>
-              in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
-          </li>
-        </ul>
-      </p>
+<div id="tab1" class="tabcontent">
+<p>
+<ul>
+    <li>You must find the existing IAM user associated with the static credentials that are used here.
+        The name of the IAM user is <i>not</i> listed here in the <strong>BOSH Director for AWS</strong> tile UI.
+        <br><br>
+        To find retrieve your AWS Key information and find the existing IAM user,
+        use the AWS Identity and Access Management (IAM) credentials that you generated in
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">
+        Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+        in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
+    </li>
+</ul>
+</p>
 
-      <img src="./images/aws-config-aws-keys.png" alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Keys radio
-      button is selected." />
-    </div>
+<img src="./images/aws-config-aws-keys.png" alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Keys radio
+button is selected." />
+</div>
 
-    <div id="tab2" class="tabcontent" style="display:block">
-      <p>
-        <ul>
-          <li>Find the name of the existing IAM role in the <strong>AWS IAM Instance Profile</strong> field.
-              <br><br>
-              For more information about this role, see
-              <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
-              in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
-        </ul>
-      </p>
+<div id="tab2" class="tabcontent" style="display:block">
+<p>
+<ul>
+    <li>Find the name of the existing IAM role in the <strong>AWS IAM Instance Profile</strong> field.
+        <br><br>
+        For more information about this role, see
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-prepare-env-manual.html#create-iam">Step 3: Create an IAM User for <%= vars.ops_manager %></a>
+        in <em>Preparing to Deploy <%= vars.ops_manager %> on AWS Manually</em>.
+</ul>
+</p>
 
-      <img src="./images/aws-config-instance-profile.png" alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Instance Profile radio button is selected." />
-    </div>
+<img src="./images/aws-config-instance-profile.png" alt="The AWS Management Console Config pane in Ops Manager. The Use AWS Instance Profile radio button is selected." />
+</div>
 
 1. On the AWS Management Console, add a new policy to that IAM User or Role:
 
@@ -639,109 +639,109 @@ see [Log In to <%= vars.ops_manager %> For the First Time](https://docs.vmware.c
 
 1. Configure the fields as follows:
 
-    <table>
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        <tr>
-            <td>
-                <strong>Instance Profile VM Extension Name</strong>
-            </td>
-            <td>
-                Enter the <code>VM-EXTENSION-NAME</code> that you created in
-                <a href="#ip-vm-ops">Create a VM Extension in <%= vars.ops_manager %></a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Endpoint URL</strong>
-            </td>
-            <td>
-                Enter the S3-compatible endpoint URL for uploading backups. <br>
-                The URL must start with <code>http://</code> or <code>https://</code>. <br>
-                The default is <code>https://s3.amazonaws.com</code>.<br>
-                If you are using a public S3 endpoint, see the S3 Endpoint procedure in
-                <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">
-                Step 3: Director Config Page</a> in <em>Configuring BOSH Director on AWS</em>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Region</strong>
-            </td>
-            <td>
-                Enter the region where your bucket is located.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Name</strong>
-            </td>
-            <td>
-                Enter the name of your bucket. <br>
-                Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
-                VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
-                For example, <code>sandbox-backups</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Force path style access to bucket</strong>
-            </td>
-            <td>
-              The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
-              Select this check box if you use:
+<table class="table">
+<thead><tr>
+<th>Field</th>
+<th>Instructions</th>
+</tr></thead>
+<tr>
+<td>
+<strong>Instance profile VM extension name</strong>
+</td>
+<td>
+Enter the <code>VM-EXTENSION-NAME</code> that you created in
+<a href="#ip-vm-ops">Create a VM Extension in <%= vars.ops_manager %></a>.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Endpoint URL</strong>
+</td>
+<td>
+Enter the S3-compatible endpoint URL for uploading backups. <br>
+The URL must start with <code>http://</code> or <code>https://</code>. <br>
+The default is <code>https://s3.amazonaws.com</code>.<br>
+If you are using a public S3 endpoint, see the S3 Endpoint procedure in
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/aws-config-manual.html#pcfaws-om-dirconfig">
+Step 3: Director Config Page</a> in <em>Configuring BOSH Director on AWS</em>.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Region</strong>
+</td>
+<td>
+Enter the region where your bucket is located.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Bucket name</strong>
+</td>
+<td>
+Enter the name of your bucket. <br>
+Do not include an <code>s3://</code> prefix, a trailing <code>/</code>, or underscores.
+VMware recommends using the naming convention <code>DEPLOYMENT-backups</code>.
+For example, <code>sandbox-backups</code>.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Force path style access to bucket</strong>
+</td>
+<td>
+The default behavior in <%= vars.product_short %> 2.9 and later uses a virtual-style URL.<br>
+Select this check box if you use:
 
-              <ul>
-                <li>
-                   Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
-                </li>
-                <li>
-                   An S3-compatible endpoint such as Minio that might require path-style URLs.
-                </li>
-              </ul>
+<ul>
+<li>
+    Amazon S3 and your bucket name is not compatible with virtual hosted-style URLs.
+</li>
+<li>
+    An S3-compatible endpoint such as Minio that might require path-style URLs.
+</li>
+</ul>
 
-              <p> If you are using a blobstore that uses a specific set of domains in its
-                server certificate, add a new wildcard domain or use path-style URLs if supported by the
-                blobstore.</p>
+<p> If you are using a blobstore that uses a specific set of domains in its
+server certificate, add a new wildcard domain or use path-style URLs if supported by the
+blobstore.</p>
 
-               For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
-               <a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
-               and the subsequent
-               <a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Path</strong>
-            </td>
-            <td>
-              (Optional) Enter the path in the bucket to store backups.<br>
-              You can use this to keep the backups from this foundation separate from those of other
-              foundations that might also backup to this bucket.
-              For example, <code>Foundation-1</code>.
+For general information about the deprecation of S3 path-style URLs, see AWS blog posts:
+<a href="https://aws.amazon.com/blogs/aws/amazon-s3-path-deprecation-plan-the-rest-of-the-story/">Amazon S3 Path Deprecation Plan – The Rest of the Story</a>
+and the subsequent
+<a href="https://aws.amazon.com/blogs/storage/update-to-amazon-s3-path-deprecation-plan/">Update to Amazon S3 Path Deprecation Plan</a>.<br><br>
+</td>
+</tr>
+<tr>
+<td>
+<strong>Bucket path</strong>
+</td>
+<td>
+(Optional) Enter the path in the bucket to store backups.<br>
+You can use this to keep the backups from this foundation separate from those of other
+foundations that might also backup to this bucket.
+For example, <code>Foundation-1</code>.
 
-              This field is only available as of v2.10.3.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Cron Schedule</strong>
-            </td>
-            <td>
-                Enter a cron expression using standard syntax.
-                The cron expression sets the schedule for taking backups for each service instance.
-                This overrides the default schedule for your service instance.
-                Test your cron expression using a website such as
-                <a href="https://crontab.guru/">Crontab Guru</a>.
+This field is only available as of v2.10.3.
+</td>
+</tr>
+<tr>
+<td>
+<strong>Cron schedule</strong>
+</td>
+<td>
+Enter a cron expression using standard syntax.
+The cron expression sets the schedule for taking backups for each service instance.
+This overrides the default schedule for your service instance.
+Test your cron expression using a website such as
+<a href="https://crontab.guru/">Crontab Guru</a>.
 
-                <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
-                </p>
-            </td>
-        </tr>
-      </table>
+<p> Developers can override the default for their service instance.
+    For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
+</p>
+</td>
+</tr>
+</table>
 
 1. Click **Save**.
 
@@ -818,66 +818,66 @@ Use <%= vars.ops_manager %> to connect <%= vars.product_short %> to your GCS acc
 
 1. Configure the fields as follows:
 
-    <table>
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        <tr>
-            <td>
-                <strong>Project ID</strong>
-            </td>
-            <td>
-                Enter the Project ID for the Google Cloud project that you are using.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket name</strong>
-            </td>
-            <td>
-                Enter the bucket name that <%= vars.product_short %> uploads backups to.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Path</strong>
-            </td>
-            <td>
-              (Optional) Enter the path in the bucket to store backups.<br>
-              You can use this to keep the backups from this foundation separate from those of other
-              foundations that might also backup to this bucket.
-              For example, <code>Foundation-1</code>.
+    <table class="table">
+    <thead><tr>
+    <th>Field</th>
+    <th>Instructions</th>
+    </tr></thead>
+    <tr>
+    <td>
+    <strong>Project ID</strong>
+    </td>
+    <td>
+        Enter the Project ID for the Google Cloud project that you are using.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Bucket name</strong>
+    </td>
+    <td>
+        Enter the bucket name that <%= vars.product_short %> uploads backups to.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Bucket path</strong>
+    </td>
+    <td>
+        (Optional) Enter the path in the bucket to store backups.<br>
+        You can use this to keep the backups from this foundation separate from those of other
+        foundations that might also backup to this bucket.
+        For example, <code>Foundation-1</code>.
 
-              This field is only available as of v2.10.3.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Service Account JSON</strong>
-            </td>
-            <td>
-                Enter the contents of the service account JSON file that you downloaded
-                when creating a service account in
-               <a href="#service-account-gcs">Create a service account and private key</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Cron Schedule</strong>
-            </td>
-            <td>
-                Enter a cron expression using standard syntax.
-                The cron expression sets the schedule for taking backups for each service instance.
-                This overrides the default schedule for your service instance.
-                Test your cron expression using a website such as
-                <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup schedule</a>.
-                </p>
-            </td>
-        </tr>
-      </table>
+        This field is only available as of v2.10.3.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Service account JSON</strong>
+    </td>
+    <td>
+        Enter the contents of the service account JSON file that you downloaded
+        when creating a service account in
+        <a href="#service-account-gcs">Create a service account and private key</a>.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Cron schedule</strong>
+    </td>
+    <td>
+    Enter a cron expression using standard syntax.
+    The cron expression sets the schedule for taking backups for each service instance.
+    This overrides the default schedule for your service instance.
+    Test your cron expression using a website such as
+    <a href="https://crontab.guru/">Crontab Guru</a>.
+<p> Developers can override the default for their service instance.
+    For more information, see <a href="./change-default.html#backup-schedule">Backup schedule</a>.
+    </p>
+    </td>
+    </tr>
+    </table>
 
 ## <a id="azure"></a> Back up to Azure Storage
 
@@ -923,74 +923,74 @@ To back up your database to your Azure Storage account:
 
 1. Configure the fields as follows:
 
-    <table>
-        <tr>
-            <th>Field</th>
-            <th>Instructions</th>
-        </tr>
-        <tr>
-            <td>
-                <strong>Account</strong>
-            </td>
-            <td>
-               Enter the Azure Storage account name that you created in
-               <a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Azure Storage Access Key</strong>
-            </td>
-            <td>
-                Enter one of the storage access keys that you viewed in
-                <a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Container Name</strong>
-            </td>
-            <td>
-                Enter the container name that <%= vars.product_short %> uploads backups to.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Blob Store Base URL</strong>
-            </td>
-            <td>
-              To use an on-premise blob storage, enter the hostname of the blob storage.
-               By default, backups are sent to the public Azure blob storage.
-               The Blob Store Base URL must follow the format:
-               <code>my-storage-account.my-custom.domain/MY-CONTAINER-NAME</code>.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Bucket Path</strong>
-            </td>
-            <td>
-              (Optional) Enter the path in the bucket to store backups.<br>
-              You can use this to keep the backups from this foundation separate from those of other
-              foundations that might also backup to this bucket.
-              For example, <code>Foundation-1</code>.
+    <table class="table">
+    <thead> <tr>
+    <th>Field</th>
+    <th>Instructions</th>
+    </tr></thead>
+    <tr>
+    <td>
+     <strong>Account</strong>
+    </td>
+    <td>
+        Enter the Azure Storage account name that you created in
+        <a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
+    </td>
+    </tr>
+    <tr>
+    <td>
+     <strong>Azure storage access key</strong>
+    </td>
+    <td>
+        Enter one of the storage access keys that you viewed in
+    å<a href="#storage-account-azure">Create a Storage Account and Access Key</a>.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Container name</strong>
+    </td>
+    <td>
+        Enter the container name that <%= vars.product_short %> uploads backups to.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Blob store base URL</strong>
+    </td>
+    <td>
+    To use an on-premise blob storage, enter the hostname of the blob storage.
+        By default, backups are sent to the public Azure blob storage.
+        The Blob Store Base URL must follow the format:
+        <code>my-storage-account.my-custom.domain/MY-CONTAINER-NAME</code>.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Bucket path</strong>
+    </td>
+    <td>
+     (Optional) Enter the path in the bucket to store backups.<br>
+        You can use this to keep the backups from this foundation separate from those of other
+        foundations that might also backup to this bucket.
+        For example, <code>Foundation-1</code>.
 
-              This field is only available as of v2.10.3.
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <strong>Cron Schedule</strong>
-            </td>
-            <td>
-                Enter a cron expression using standard syntax.
-                The cron expression sets the schedule for taking backups for each service instance.
-                This overrides the default schedule for your service instance.
-                Test your cron expression using a website such as
-                <a href="https://crontab.guru/">Crontab Guru</a>.
-                <p> Developers can override the default for their service instance.
-                  For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
-                </p>
-            </td>
-        </tr>
-      </table>
+        This field is only available as of v2.10.3.
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <strong>Cron schedule</strong>
+    </td>
+    <td>
+    Enter a cron expression using standard syntax.
+        The cron expression sets the schedule for taking backups for each service instance.
+        This overrides the default schedule for your service instance.
+        Test your cron expression using a website such as
+        <a href="https://crontab.guru/">Crontab Guru</a>.
+<p> Developers can override the default for their service instance.
+        For more information, see <a href="./change-default.html#backup-schedule">Backup Schedule</a>.
+    </p>
+    </td>
+    </tr>
+    </table>

@@ -46,9 +46,9 @@ To ensure that connections are open, see the following table:
 
 <table class="table">
 <thead>
-	<th>Source Component</th>
-	<th>Destination Component</th>
-	<th>Default TCP Port</th>
+	<th>Source component</th>
+	<th>Destination component</th>
+	<th>Default TCP port</th>
 	<th>Notes</th>
 	</thead>
 	<tr>
@@ -148,7 +148,7 @@ To ensure that connections are open, see the following table:
 <thead>
 	<th>Source VM</th>
 	<th>Destination VM</th>
-	<th>Default TCP Port</th>
+	<th>Default TCP port</th>
 	<th>Notes</th>
 	</thead>
 	<tr>
@@ -174,7 +174,7 @@ To ensure that connections are open, see the following table:
 <thead>
 	<th>Source VM</th>
 	<th>Destination VM</th>
-	<th>Default TCP Port</th>
+	<th>Default TCP port</th>
 	<th>Notes</th>
 </thead>
 	<tr>
@@ -185,36 +185,36 @@ To ensure that connections are open, see the following table:
 			For more information, see <a href="./monitor-health.html">Monitoring node health (HA cluster)</a>.</td>
 	</tr>
 
-	<tr>
-		<td><strong>Jumpbox VM</strong></td>
-		<td><strong><%= vars.app_runtime_abbr %> UAA</strong></td>
-		<td>8443</td>
-		<td>This port is needed so that the replication canary can create a UAA client for sending email
-			notifications. For more information, see <a href="./replication-canary.html">About the replication canary</a>.</td>
-	</tr>
+<tr>
+	<td><strong>Jumpbox VM</strong></td>
+	<td><strong><%= vars.app_runtime_abbr %> UAA</strong></td>
+	<td>8443</td>
+	<td>This port is needed so that the replication canary can create a UAA client for sending email
+		notifications. For more information, see <a href="./replication-canary.html">About the replication canary</a>.</td>
+</tr>
 
-	<tr>
-		<td><strong>HA cluster node</strong></td>
-		<td><strong>HA cluster node</strong></td>
-		<td>4567<br>
-				4568<br>
-				4444
-		</td>
-		<td>This port is needed to maintain network connectivity between nodes in an HA cluster.
-			For more information,
-			see <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/security/secure-network.html#firewall-configuration">Firewall Configuration</a>
-			in the Percona documentation.<br><br>
-			The communication between these VMs is two way.
+<tr>
+	<td><strong>HA cluster node</strong></td>
+	<td><strong>HA cluster node</strong></td>
+	<td>4567<br>
+			4568<br>
+			4444
 	</td>
-	</tr>
-	<tr>
-		<td><strong>Galera healthcheck</strong></td>
-		<td><strong>Galera healthcheck</strong></td>
-		<td>9200</td>
-		<td>This port is for monitoring the health of nodes in an HA cluster.<br><br>
-			The communication between these VMs is two way.
-	</td>
-	</tr>
+	<td>This port is needed to maintain network connectivity between nodes in an HA cluster.
+		For more information,
+		see <a href="https://www.percona.com/doc/percona-xtradb-cluster/LATEST/security/secure-network.html#firewall-configuration">Firewall Configuration</a>
+		in the Percona documentation.<br><br>
+		The communication between these VMs is two way.
+</td>
+</tr>
+<tr>
+	<td><strong>Galera healthcheck</strong></td>
+	<td><strong>Galera healthcheck</strong></td>
+	<td>9200</td>
+	<td>This port is for monitoring the health of nodes in an HA cluster.<br><br>
+		The communication between these VMs is two way.
+</td>
+</tr>
 </table>
 
 <h3> <a id='multi-site-ports'></a> Required networking rules for <%= vars.single_leader_plan %> </h3>
@@ -228,7 +228,7 @@ To ensure that connections are open in both foundations, see the following table
 <thead>
 	<th>Source VM</th>
 	<th>Destination VM</th>
-	<th>Default TCP Port</th>
+	<th>Default TCP port</th>
 	<th>Notes</th>
 </thead>
 	<tr>

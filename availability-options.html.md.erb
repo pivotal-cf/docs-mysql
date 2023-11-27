@@ -118,17 +118,17 @@ This table compares the recovery point objectives for the topologies:
 <table class="table">
 <thead>
   <tr><th>Type of downtime</th>
-    <th>Single Node</th>
-    <th>Leader-Follower</th>
-    <th>Highly Available Cluster</th>
+    <th>Single node</th>
+    <th>Leader-follower</th>
+    <th>Highly available cluster</th>
     <th><%= vars.single_leader_plan %></th>
   </tr>
   </thead>
-  <tr><td><strong>Planned Maintenance</strong></td><td>Zero</td>
+  <tr><td><strong>Planned naintenance</strong></td><td>Zero</td>
       <td>Zero</td><td>Zero</td><td>Zero</td></tr>
-  <tr><td><strong>Unplanned Downtime</strong></td><td>Zero</td>
+  <tr><td><strong>Unplanned downtime</strong></td><td>Zero</td>
       <td>Replica lag, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td></tr>
-  <tr><td><strong>Data Recovery</strong></td><td>Time since last backup</td>
+  <tr><td><strong>Data recovery</strong></td><td>Time since last backup</td>
       <td>The time to initialize the follower VM, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td></tr>
 </table>
 
@@ -141,21 +141,21 @@ This table compares the recovery time objectives for the topologies:
 <table class="table">
 <thead>
   <tr><th>Type of downtime</th>
-    <th>Single Node</th>
-    <th>Leader-Follower</th>
-    <th>Highly Available Cluster</th>
+    <th>Single node</th>
+    <th>Leader-follower</th>
+    <th>Highly available cluster</th>
     <th><%= vars.single_leader_plan %></th></tr>
     </thead>
-  <tr><td><strong>Planned Maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
+  <tr><td><strong>Planned maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required depends on the type of maintenance</td>
       <td>Almost zero*</td>
     <td>Time for developer to initiate switchover and for switchover to complete</td></tr>
-  <tr><td><strong>Unplanned Downtime</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
+  <tr><td><strong>Unplanned downtime</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required to restore the VM or time for operator to initiate failover and
           for failover to complete</td>
       <td>Almost zero*</td>
     <td>Time for developer to initiate failover and for failover to complete</td></tr>
-  <tr><td><strong>Data Recovery</strong></td><td>Time to restore from backup</td>
+  <tr><td><strong>Data recovery</strong></td><td>Time to restore from backup</td>
       <td>Time for operator to initiate failover and for failover to complete</td><td>Almost zero*</td>
     <td>Time for developer to initiate failover and for failover to complete</td></tr>
 </table>

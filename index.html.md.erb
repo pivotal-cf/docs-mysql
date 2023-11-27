@@ -32,9 +32,9 @@ that the service meets user expectations for a general-use relational database.
 
 The following table provides version and version-support information about <%= vars.product_short %>.
 
-<table class="nice">
-<th>Element</th>
-<th>Details</th>
+<table class="tabel">
+<thead><th>Element</th>
+<th>Details</th></thead>
 <tr>
   <td>Version</td>
   <td>3.0.4</td>
@@ -89,62 +89,62 @@ If you decreases the disk size, data loss might occur in existing instances.
 
 Review the following table to determine if <%= vars.product_short %> has the features needed to support your enterprise:
 
-<table border="1" class="nice">
+<table class="table">
+<thead><tr>
+  <th colspan=2>Plans and instances</th>
+  <th>More information</th>
+</tr></thead>
 <tr>
-  <th colspan=2>Plans and Instances</th>
-  <th>More Information</th>
-</tr>
-<tr>
-  <td>On-Demand, Dedicated-VM Plans</td>
+  <td>On-demand, dedicated-VM plans</td>
   <td><%= vars.product_short %> provides on-demand service plans.</td>
   <td><a href="./about.html">On-demand networking</a></td>
 </tr>
 <tr>
-  <td>Customizable Plans</td>
+  <td>Customizable plans</td>
   <td>Operators can customize the VM, disk size, and availability zone for service plans.</td>
   <td><a href="./install-config.html#active">Configure service plans</a></td>
 </tr>
 <tr>
-  <td>Custom Schemas</td>
+  <td>Custom schemas</td>
   <td><%= vars.product_short %> supports custom schemas.
     Using custom schemas enables apps to share a MySQL service instance and
     isolate app data by schema.</td>
     <td><a href="./use.html#schema">Use Custom schemas</a></td>
   </tr>
-<tr><td>Share Service Instances</td>
+<tr><td>Share service instances</td>
   <td><%= vars.product_short %> supports sharing service instances between different orgs and spaces.</td>
   <td><a href="use.html#share">Share service instances</a></td>
 </tr>
 
 <tr>
-  <th colspan=2>Installation and Upgrades</th>
+  <th colspan=2>Installation and upgrades</th>
   <th>More Information</th>
 </tr>
 <tr>
-  <td>Product Upgrades</td>
+  <td>Product upgrades</td>
   <td><%= vars.product_short %> can be upgraded within the v2 tile series.</td>
    <td><a href="./upgrade.html">Upgrading <%= vars.product_short %></a></td>
  </tr>
 <tr>
-  <td>Deployment Smoke Tests</td>
+  <td>Deployment smoke tests</td>
   <td><%= vars.product_short %> installations and upgrades run
       a post-deployment BOSH errand that validates basic MySQL operations.</td>
   <td><a href="./errands.html#smoke-tests">smoke-tests</a></td>
 </tr>
 
 <tr>
-  <th colspan=2>Maintenance and Backups</th>
+  <th colspan=2>Maintenance and backups</th>
   <th>More Information</th>
 </tr>
 <tr>
-  <td>Operational Monitoring and Logging</td>
+  <td>Operational monitoring and logging</td>
   <td><%= vars.product_short %> provides metrics for monitoring service plan usage, service quotas,
     and MySQL component metrics.
     <%= vars.product_short %> can also forward metrics to an external service.</td>
   <td><a href="./monitor.html">Monitoring <%= vars.product_short %></a></td>
 </tr>
 <tr>
-  <td>Backup and Restore</td>
+  <td>Backup and restore</td>
   <td><%= vars.product_short %> provides backups to an external storage solution on a configurable schedule.
   <%= vars.product_short %> also provides a restore process.</td>
 <td><a href="./automated-backup.html">Configuring automated backups</a> and
@@ -152,21 +152,21 @@ Review the following table to determine if <%= vars.product_short %> has the fea
 </tr>
 
 <tr>
-  <th colspan=2>Scale and Availability</th><th>More Information</th>
+  <th colspan=2>Scale and availability</th><th>More information</th>
 </tr>
 <tr>
   <td>Scaling</td><td>Operators can scale the size of VMs up, but not down.</td>
   <td><a href="./install-config.html">Installing configuring <%= vars.product_short %></a></td>
 </tr>
 <tr>
-  <td>Rolling Deployments</td>
+  <td>Rolling deployments</td>
   <td><%= vars.product_short %> supports rolling deployments when upgrading HA clusters.
          However, single node and leader-follower service instances are unavailable during upgrades.
   </td>
   <td><a href="./upgrade.html">Upgrading <%= vars.product_short %></a></td>
 </tr>
 <tr>
-  <td>AZ Support</td>
+  <td>AZ support</td>
   <td><%= vars.product_short %> can be deployed to multiple zones to ensure availability if an
     unplanned outage of a zone occurs.</td>
   <td><a href="./recommended.html#azs">About availability zones</a></td>
@@ -174,16 +174,16 @@ Review the following table to determine if <%= vars.product_short %> has the fea
 
 <tr>
   <th colspan=2>Encryption</th>
-  <th>More Information</th>
+  <th>More information</th>
 </tr>
 <tr>
-  <td>Transport Layer Security (TLS)</td>
+  <td>Transport layer security (TLS)</td>
   <td><%= vars.product_short %> supports TLS. Enabling TLS provisions a MySQL server with a certificate
     so that apps and clients can establish an encrypted connection with the data service.</td>
   <td><a href="./prepare-tls.html">Preparing for TLS</a></td>
 </tr>
 <tr>
-<td>Encrypted Communication in Transit</td>
+<td>Encrypted communication in transit</td>
 <td><%= vars.product_short %> has been tested successfully with the BOSH IPsec Add-on.</td>
   <td><a href="https://docs.vmware.com/en/IPsec-for-VMware-Tanzu/1.9/documentation/GUID-index.html">IPsec add-on</a></td>
 </tr>
