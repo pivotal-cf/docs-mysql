@@ -78,6 +78,36 @@ For a list of all the <%= vars.product_short %> component metrics, see [Componen
 
 <%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/all-kpis' %>
 
+<!-- This content is copied from the mysql/monitoring/kpis partial in docs-partials -->
+
+### <a id="last-successful-backup"></a> Hours Since Last Successful Backup
+
+<table class="nice">
+  <tr>
+  <th colspan="2" style="text-align: center;"> <br>
+    <%= vars.mysql_metrics_origin_v2 %>/p.mysql/last_successful_backup
+  <br><br></th>
+  </tr>
+  <tr>
+    <th>Description</th>
+    <td>Using the configured backup schedule for the service instance as a threshold, this metric shows how many hours have passed since the last successful backup.</td>
+  </tr>
+  <tr>
+    <th>Recommended measurement</th>
+    <td>Hours elapsed since the last successful backup</td>
+  </tr>
+  <tr>
+    <th>Recommended alert thresholds</th>
+    <td><strong>Red critical</strong>: Metric exceeds your organization's policy for maximum backup interval.</td>
+  </tr>
+  <tr>
+    <th>Recommended response</th>
+    <td>Check the adbr-agent logs for the service instance to determine why recent automated backups are failing.</td>
+  </tr>
+</table>
+
+<!-- End of copied content -->
+
 <%= partial vars.path_to_partials + '/mysql/monitoring/kpis-metrics/2-9-and-later-kpis' %>
 
 ## <a id="component-metrics"></a>Component Metrics
