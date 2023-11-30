@@ -55,7 +55,7 @@ template_variables:
   mysql_metrics_origin: /p-mysql
   mysql_metrics_origin_v2: /p.mysql
 
-  current_minor_version: 3.0
+  current_minor_version: 3.2
 
   # Associated Tanzu Application Service for VMs version
   current_tas_version: "5-0"
