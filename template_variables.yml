@@ -56,4 +56,9 @@ template_variables:
 
   current_minor_version: 3.0
 
+  # Associated Tanzu Application Service for VMs version
+  current_tas_version: "5-0"
+  v_major_tas_version: "v5.0"
+  dot_major_tas_version: "5.0"
+
   switchboard_url: proxy-BOSH-JOB-INDEX.p-mysql.YOUR-SYSTEM-DOMAIN
