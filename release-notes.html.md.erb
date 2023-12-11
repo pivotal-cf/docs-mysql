@@ -19,6 +19,16 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 + In the **Security** pane of the MySQL tile **Settings** page, setting **TLS Options** to **Optional** allows, but does not enforce, TLS connections between apps and <%= vars.product_full %> service instances.
 
+## <a id="2-10-15"></a> v2.10.15
+
+**Release Date: TBD**
+
+### Breaking Changes
+- Brokers connect to Nats using TLS
+- Service Gateway connects to Routing using TLS
+
+These changes mean that VMware SQL with MySQL for Tanzu Application Service supports TAS versions starting at 2.11
+
 ## <a id="2-10-14"></a> v2.10.14
 
 **Release Date: Oct 24th, 2023**
