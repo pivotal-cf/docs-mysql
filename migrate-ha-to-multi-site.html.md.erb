@@ -1,0 +1,72 @@
+---
+title: Migrating HA instances for multi-site replication
+owner: MySQL
+---
+<strong><%= modified_date %></strong>
+
+A new feature in <%= vars.product_short %> v3.2 lets you configure newly-provisioned MySQL high-availability (HA) service instances to be the leader in a multi-site deployment. This new feature lets you:
+- create a new HA service instance in your Primary foundation to act as the leader,
+- create a <%= vars.single_leader_plan %> service instance (using a <%= vars.single_leader_plan %> service plan) in your Secondary foundation to be the follower, and
+- apply configuration to both instances, establishing replication between that Primary HA leader and your Secondary <%= vars.single_leader_plan %> follower.
+
+More information on multi-site configuration is in [Using Tanzu MySQL for VMs for multi-site replication](./use-multi-site.html).
+
+HA service instances created with pre-3.2 tiles can not be configured for multisite replication. To apply this new HA multi-site feature to older HA instances, you migrate that instance's data to a new HA instance via a backup and restore operation.
+
+This page contains instructions for performing this migration.
+
+## Migrating older high-availability instances for multi-site replication
+
+To enable multi-site replication of data hosted on an older (pre-3.2) high-availability service instance:
+
+1. [Backup and restore your old HA to a new <%= vars.single_leader_plan %> instance](#backup-old)
+1. [Scale up <%= vars.single_leader_plan %> instance to new HA](#scale-up)
+1. [Configure new HA as multi-site replication leader](#configure-ha-for-ms)
+
+
+### <a id='backup-old'></a>Backup and restore your old HA to a new <%= vars.single_leader_plan %> instance
+
+1. Create a new service instance from a <%= vars.single_leader_plan %> plan, following the procedure [Create a service instance](./use.html#create) in _Using <%= vars.product_full %>_.
+
+1. Create a manual backup of your old HA service instance, following the procedure [Manually back up a service instance](./backup-restore.html#backup) in _Backing up and restoring <%= vars.product_full %>_.
+
+1. Restore your manual backup to the new  <%= vars.single_leader_plan %> service instance you created in Step 1, following the procedure [Restore a service instance](./backup-restore.html#restore) in _Backing up and restoring <%= vars.product_full %>_.
+
+
+More information on backup and restore is in [Backing up and restoring VMware SQL with MySQL for Tanzu Application Service](./backup-restore.html).
+
+### <a id='scale-up'></a>Scale up <%= vars.single_leader_plan %> to new HA
+
+1. Update your new <%= vars.single_leader_plan %> service instance to a high-availability service instance by following the procedure in [Migrate data to a different plan](/use.html#migrate) in _Using <%= vars.product_full %>_. <br><br>
+  For example, if your new <%= vars.single_leader_plan %> instance is named `new-leader` and your HA configured plan name is `mysql-high-availability`, you would type:
+    ```
+    cf update-service new-leader -p mysql-high-availability
+    ```
+    Note:
+      - You may ignore those instructions' warning against running `cf update-service...` to migrate <%= vars.single_leader_plan %> instances to "a plan of another topology". That warning applies to instances _already configured for multi-site replication_ (which `cf update-service` breaks). Since we have not yet finished configuring multi-site replication, our <%= vars.single_leader_plan %> instance can be safely updated.
+
+
+1. Once that update is completed, migrate any application bindings and service keys from your old HA instance to this new HA instance.
+
+### <a id='configure-ha-for-ms'></a>Configure new HA as multi-site replication leader
+
+1. Log in to your Secondary foundation and create a <%= vars.single_leader_plan %> service instance from a multi-site plan, following the procedure in [Create Multi-Site Replication service instances](use-multi-site.html#create-service-instance).
+
+    Note:
+    - Skip the procedure's instructions for creating a service instance in your Primary foundation; the above HA instance is your primary service instance. You need only create a <%= vars.single_leader_plan %> service instance in your secondary foundation.
+    - Your secondary instance must be a <%= vars.single_leader_plan %> instance; you cannot replicate from one HA instance to a second HA instance. (If your secondary instance becomes the primary instance following a multi-site failover or switchover, it can be updated to an HA instance at that time.)
+
+
+1. Configure both your Primary HA and Secondary <%= vars.single_leader_plan %> service instances for multi-site replication, following the procedure in [Configure Multi-Site Replication](use-multi-site.html#create-service-key).
+
+    Note:
+    - That procedure references <%= vars.single_leader_plan %> instances in your primary and secondary foundations. That same procedure applies in our scenario where you are configuring a new high-availability instance in your primary foundation. For example, you will apply the `cf update-service PRIMARY-INSTANCE -c HOST-INFO` command to your primary HA instance.
+
+## Other Notes and Considerations
+
+### cf mysql-tools plugin HA leaders
+In the above [Configure new HA as multi-site replication leader](#configure-ha-for-ms) section, after you created your Secondary foundation <%= vars.single_leader_plan %> instance, you may use the `cf mysql-tools` plugin to perform the subsequent steps. The plugin supports configuring both <%= vars.single_leader_plan %> and also High-Availability instances as multi-site leaders.
+
+More information on the cf mysql-tools plugin can be found in [Create a leader-follower service instance using mysql-tools](use-multi-site.html#create-multi-dc-with-mysql-tools)
+
+
