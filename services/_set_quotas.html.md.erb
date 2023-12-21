@@ -40,9 +40,7 @@ A service may offer one or more plans.
 You can set a separate quota per plan so that instances of that plan cannot exceed the plan quota.
 For a service with multiple plans, the total number of instances created for all
 plans combined cannot exceed the [global quota](#global) for the service.
-<% if product_short.include?("SQL") %>
 If the plan quota field is blank, the plan quota is set to the global quota by default.
-<%end%>
 
 When the plan quota is reached, no more instances of that plan can be created
 unless the plan quota is increased or some instances of that plan are deleted.
@@ -200,34 +198,10 @@ To view configurations for your <%= product_short %> on-demand plan, do the foll
 
 1. Navigate to **<%= vars.ops_manager %> Installation Dashboard** > **<%= tile_name %>** > **Settings**.
 
-<%# Case statement to change the instructions to satisfy each service %>
-<% if product_short.include?("RabbitMQ") %>
-
-1. Click the section for the plan you want to view. For example, **On Demand Instance: Plan 1**.
-
-<% elsif product_short.include?("SQL")%>
-
 1. Click the section for the plan you want to view. For example, **Plan 1**.
-
-<% elsif product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-1. Click the section for the plan you want to view. For example, **Plan 1**.
-
-<% elsif product_short.include?("Redis")%>
-<%# Redis has different instructions in v2.3 and later %>
-<% if product_info['local_product_version'] == '2.1' || product_info['local_product_version'] == '2.2' %>
-1. Click the section for the plan you want to view. For example, **On-Demand Plan 1**.
-<% else %>
-1. Click **On-Demand Plans**.
-1. Click the dropdown for the plan you want to view. For example, **on-demand-cache**.
-<% end %>
-
-<% end %>
 
 The image below shows an example that includes the VM type and persistent disk
 selected for the server VMs, as well as the quota for this plan.
-<% if product_short.include?("Cloud Cache") || product_short.include?("Gemfire") %>
-The quota is shown in the **Maximum service instances** field.
-<% end %>
 
 See below for examples of each plan.
 
