@@ -53,6 +53,7 @@
         *   [Triggering multi-site replication failover and switchover](./multi-site-trigger-failover.html)
         *   [Backing up and restoring with mysqldump](./backup-mysqldump.html)
         *   [Monitoring node health for HA clusters](./monitor-health.html)
+        *   [Migrating HA instances for multi-site replication](./migrate-ha-to-multi-site.html)
         *   [Troubleshooting instances](./troubleshoot-instances.html)
 *   [Backing up and restoring VMware SQL with MySQL for TAS](./backup-restore.html)
     [Monitoring and KPIs](./monitor.html)
