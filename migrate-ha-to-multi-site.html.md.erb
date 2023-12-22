@@ -37,7 +37,7 @@ More information on backup and restore is in [Backing up and restoring VMware SQ
 
 ### <a id='scale-up'></a>Scale up <%= vars.single_leader_plan %> to new HA
 
-1. Update your new <%= vars.single_leader_plan %> service instance to a high-availability service instance by following the procedure in [Migrate data to a different plan](/use.html#migrate) in _Using <%= vars.product_full %>_. <br><br>
+1. Update your new <%= vars.single_leader_plan %> service instance to a high-availability service instance by following the procedure in [Migrate data to a different plan](./use.html#migrate) in _Using <%= vars.product_full %>_. <br><br>
   For example, if your new <%= vars.single_leader_plan %> instance is named `new-leader` and your HA configured plan name is `mysql-high-availability`, you would type:
     ```
     cf update-service new-leader -p mysql-high-availability
