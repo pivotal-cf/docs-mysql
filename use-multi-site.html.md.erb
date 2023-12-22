@@ -8,8 +8,8 @@ You can use <%= vars.product_full %> for replication
 across multiple foundations or data centers.
 
 You provision a leader-follower service instance across two foundations using the
-<%= vars.single_leader_plan %> topology. This leader-follower service instance is
-comprised of two single node instances that are configured for replication.
+<%= vars.single_leader_plan %> topology. This leader-follower service instance
+comprises two single node instances that are configured for replication.
 
 <p> The <%= vars.single_leader_plan %> plan type is configured separately
   from the leader-follower service plan.
@@ -29,6 +29,141 @@ Your operator configures this plan and enables access to it in your org and spac
   Your operators must configure these foundations for <%= vars.single_leader_plan_lc %>.
 For more information configuring a <%= vars.single_leader_plan %> topology,
 see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
+
+## <a id='create-multi-dc-with-mysql-tools'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance using mysql-tools
+
+To create a leader-follower service across multiple foundations with mysql-tools:
+
+1. Check the availability of the <%= vars.single_leader_plan %> plan in the Marketplace in both your
+   foundations.
+   See [Confirm the <%= vars.product_full %> service availability](use.html#marketplace).
+1. Download the latest version of the `mysql-tools` plugin. For more information about `mysql-tools` cf CLI plug-in,
+   see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
+1. Configure Replication between the primary and secondary foundation using mysql-tools. 
+See [Create <%= vars.single_leader_plan %> service instances using mysql-tools](#create-multi-dc-with-mysql-tools).
+1. Bind the <%= vars.single_leader_plan %> leader-follower service instance to your apps. 
+See [Bind a <%= vars.single_leader_plan %> leader-follower service instance to your app](#bind).
+1. Modify your app to use the <%= vars.product_short %> service. See [Use the MySQL service in your app](./use.html#call).
+
+### <a id='configure-replication-with-mysql-tools'></a>Setup <%= vars.single_leader_plan %> using mysql-tools
+
+To create a leader-follower service instance across two foundations with mysql-tools, you must:
+1. Use mysql-tools to save the cloudfoundry configuration for the primary foundation.
+1. Create a <%= vars.single_leader_plan %> service instance in the primary foundation.
+1. Use mysql-tools to save the cloudfoundry configuration for the secondary foundation.
+1. Create a <%= vars.single_leader_plan %> service instance in the secondary foundation.
+1. Use mysql-tools to configure replication between the primary and secondary foundations.
+
+<p> The secondary foundation is
+the foundation where the secondary VM is deployed, and usually is your disaster recovery
+site.
+</p>
+
+1. Create a <%= vars.single_leader_plan %> service instance in your primary foundation:
+
+    1. Log in to the deployment for your primary foundation by running:
+
+        ```
+        cf login PRIMARY-API-URL
+        ```
+       Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
+
+    2. Create a primary service instance by running:
+
+        ```
+        cf create-service p.mysql PLAN PRIMARY-INSTANCE
+        ```
+
+       Where:
+
+        - `PLAN` is the name of the <%= vars.single_leader_plan %> plan you want to use.
+        - `PRIMARY-INSTANCE` is a name you choose to identify the service instance.
+          This name appears under `service` in output from `cf services`.
+
+       For example:
+
+        <pre class="terminal">$ cf create-service p.mysql db-small primary-node<br>
+        Creating service primary-node in org my-org / space my-space as admin...
+        OK</pre>
+
+        <p> Do not name your service instance
+          <code>leader</code> or <code>follower</code>. If you trigger a failover or switchover,
+          the service instances in your primary and secondary foundations switch roles.
+          For more information,
+          see <a href="./multi-site-trigger-failover.html">Triggering multi-site replication failover and switchover</a>.
+        </p>
+
+    3. (Optional) Watch the progress of the service instance creation by running:
+
+        ```
+        watch cf services
+        ```
+
+       Wait for the `last operation` for your instance to show as `create succeeded`.
+       <br><br>
+       For example:
+
+        <pre class="terminal">$ watch cf services<br>
+        Getting services in org my-org / space my-space as admin...
+        OK
+        name           service       plan        bound apps    last operation
+        primary-node   p.mysql       db-small                  create succeeded
+        </pre>
+
+       If you get an error, see [Troubleshooting instances](./troubleshoot-instances.html).
+
+To save the cf config of the primary foundation:
+
+1. login to the primary foundation:
+
+    1. Log in to the deployment for your primary foundation by running:
+
+        ```
+        cf login PRIMARY-API-URL
+        ```
+       Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
+   2. Use mysql-tools to save the config
+
+        ```
+        cf mysql-tools save-target PRIMARY-TARGET-NAME
+        ```
+        Where `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
+
+2. Create a <%= vars.single_leader_plan %> service instance in your secondary
+   foundation by repeating step 1 and replacing references to `primary` with `secondary`.
+   Ensure that you log in to deployment for your secondary foundation.
+
+To save the cf config of the secondary foundation:
+
+1. login to the secondary foundation:
+
+    1. Log in to the deployment for your secondary foundation by running:
+
+        ```
+        cf login SECONDARY-API-URL
+        ```
+       Where `SECONDARY-API-URL` is the API endpoint for the primary foundation.
+    2. Use mysql-tools to save the config
+
+         ```
+         cf mysql-tools save-target SECONDARY-TARGET-NAME
+         ```
+        Where `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
+
+To configure replication between the primary and secondary foundations:
+
+1. Use mysql-tools to configure replication between the primary and secondary foundation:
+
+    1. Configure replication between the primary and secondary foundation by running:
+
+        ```
+        cf mysql-tools PRIMARY-TARGET-NAME PRIMARY-INSTANCE SECONDARY-TARGET-NAME SECONDARY-INSTANCE
+        ```
+       Where `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
+       Where `PRIMARY-INSTANCE` is your chosen name for the primary instance.
+       Where `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
+       Where `SECONDARY-INSTANCE` is your chosen name for the secondary instance.
+
 
 ## <a id='create-multi-dc'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance
 
