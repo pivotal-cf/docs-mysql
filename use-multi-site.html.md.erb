@@ -30,6 +30,55 @@ Your operator configures this plan and enables access to it in your org and spac
 For more information configuring a <%= vars.single_leader_plan %> topology,
 see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
 
+<table class="table">
+  <thead>
+  <tr>
+    <th width="33%">Leader Topology</th>
+    <th width="33%">Failover if...</th>
+    <th>Switchover if...</th>
+  </tr>
+  </thead>
+  <tr>
+    <td><%= vars.single_leader_plan %></td>
+    <td>
+      <ul>
+        <li>The leader MySQL process has crashed
+          or is unhealthy and is not automatically recovered by BOSH.</li>
+        <li>The leader VM is destroyed or unrecoverable.</li>
+        <li>The availability zone (AZ) for the leader VM experiences an unexpected outage.</li>
+        <li>The data center for the leader VM experiences an unexpected outage.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Both the leader and the follower instance are healthy. </li>
+        <li>You plan to do foundation or data center upgrades or maintenance on your primary site.
+          For example, upgrading stemcells or data center hardware.</li>
+        <li>You plan to degrade performance on the primary site.</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>High-Availability Cluster</td>
+    <td>
+      <ul>
+        <li>The entire leader cluster has crashed
+          or is unhealthy and is not automatically recovered by BOSH.</li>
+        <li>The availability zone (AZ) for the leader MySQL service instance experiences an unexpected outage.</li>
+        <li>The data center for the leader MySQL service instance experiences an unexpected outage.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Both the leader and the follower MySQL service instances are healthy. </li>
+        <li>You plan to do foundation or data center maintenance which can disable your HA cluster.
+          For example, upgrading data center hardware.</li>
+        <li>You plan to degrade performance on the primary site.</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
 ## <a id='create-multi-dc-with-mysql-tools'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance using mysql-tools
 
 To create a leader-follower service across multiple foundations with mysql-tools:
