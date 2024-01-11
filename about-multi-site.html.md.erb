@@ -7,15 +7,25 @@ owner: MySQL
 
 This topic tells you about how <%= vars.single_leader_plan_lc %> topology works in
 <%= vars.product_full %> and contains information to help you decide whether to use
-the <%= vars.single_leader_plan %> plan.
+multi-site replication.
 
-The <%= vars.single_leader_plan_lc %> topology in <%= vars.product_short %>
-is a disaster recovery solution that enables developers to provision a leader-follower
-instance across two foundations.
-This leader-follower service instance is comprised of two single node instances
-that are configured for replication.
+Multi-site capability in <%= vars.product_short %>
+is a disaster recovery solution that enables developers to provision a 
+pair of service instances across two foundations.
+These two instances are then configured to replicate from a designated leader instance
+to its follower instance in the other foundation.
 Operators can configure two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
+
+Within your primary foundation you have a choice of instance topologies for your replication leader:
+- <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
+The resulting configuration resembles a leader-follower service instance, but with the two single-node
+instances deployed and replicating across two separate foundations.
+- High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
+leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resiliance to
+in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
+
+The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the follower instance.
 
 The foundation types are:
 
@@ -31,21 +41,20 @@ or no traffic at all.
 a developer triggers a failover.
 
 
-<p> The <%= vars.single_leader_plan %> plan type is configured separately
-  from the leader-follower service plan.
+<p> The <%= vars.single_leader_plan %> and high-availability cluster plan types are configured separately
+  from the leader-follower plan type.
 </p>
 
-For information about enabling <%= vars.single_leader_plan %>,
+For information about enabling multi-site replication, see
+[Preparing for multi-site replication](./prepare-multi-site.html).
+
+For information for developers about using multi-site replication,
 see
-[Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
+[Using <%= vars.product_short %> for multi-site replication](./use-multi-site.html).
 
-For information for developers about using <%= vars.single_leader_plan %>,
-see
-[Using <%= vars.product_short %> for <%= vars.single_leader_plan %>](./use-multi-site.html).
+## <a id='benefits'></a>Multi-site replication benefits
 
-## <a id='benefits'></a> <%= vars.single_leader_plan %> benefits
-
-The <%= vars.single_leader_plan %> plan has the following benefits:
+Multi-site replication has the following benefits:
 
 + **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
@@ -121,11 +130,8 @@ In the previous diagram:
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
-<span class="note__title"> Important</span>  In the <%= vars.single_leader_plan %> plan,
-the app-layer active-active topology does not enable multi-primary replication.
-Therefore, the follower service instance is read-only.
-Apps can only write to the leader.
-</p>
+<span class="note__title"> Important</span>  The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
+Therefore the follower service instance is read-only; database writes on the Secondary Foundation get proxied to the Primary Foundation (and then replicated back to the Secondary). 
 
 
 ## <a id='failover-switchover'></a> Failover and switchover
@@ -148,19 +154,18 @@ The following table describes when you can trigger a failover or switchover:
   <tr>
     <td>
       <ul>
-        <li>The leader MySQL process has crashed
+        <li>The leader MySQL service instance has crashed
           or is unhealthy and is not automatically recovered by BOSH.</li>
-        <li>The leader VM is destroyed or unrecoverable.</li>
-        <li>The availability zone (AZ) for the leader VM experiences an unexpected outage.</li>
-        <li>The data center for the leader VM experiences an unexpected outage.</li>
+        <li>The leader MySQL service instance is destroyed and unrecoverable.</li>
+        <li>The availability zone (AZ) for the leader MySQL service instance experiences an unexpected outage.</li>
+        <li>The data center for the leader MySQL service instance experiences an unexpected outage.</li>
       </ul>
     </td>
-
     <td>
       <ul>
-        <li>Both the leader and the follower instance are healthy. </li>
+        <li>Both the leader and the follower MySQL service instances are healthy. </li>
         <li>You plan to do foundation or data center upgrades or maintenance on your primary site.
-          For example, upgrading stemcells or data center hardware.</li>
+          For example, data center hardware upgrades that may disable your leader service instance.</li>
         <li>You plan to degrade performance on the primary site.</li>
       </ul>
     </td>
@@ -265,8 +270,11 @@ Before you use the <%= vars.single_leader_plan %> plan, consider the following r
 
 When calculating IaaS usage, you must take into account that each
 <%= vars.single_leader_plan %> instance requires two VMs.
-Therefore, the resources used for <%= vars.single_leader_plan %> plan is
+Therefore, the resources used for multi-site replication with a <%= vars.single_leader_plan %> leader are
 twice the amount of single node plan.
+
+Each high-availability cluster instance requires four VMs. Therefore, the resources used for multi-site replication with a high-availability cluster leader are
+5x the amount of single node plan.
 
 For more information,
 see [Setting limits for on-demand service instances](.//set-quotas.html) and
