@@ -57,6 +57,15 @@ The proxies are updated to ensure that traffic is sent to the new primary.
 For more information about other availability options supported by <%= vars.product_short %>,
 see [Availability Options](availability-options.html).
 
+## <a id="requirements"></a> Using highly available deployments as a multi-site leader
+
+You may configure a HA cluster running MySQL 8.0.x (or greater) to act as the leader in a multi-site
+replication configuration. This configuration establishes a follower service instance of type
+<%= vars.single_leader_plan %> in a second foundation, and establishes replication from your leader HA cluster
+to that follower <%= vars.single_leader_plan %> instance.
+
+For more information, see [About multi-site replication](./about-multi-site.html).
+
 ## <a id="requirements"></a> Infrastructure Requirements for highly available deployments
 
  Before you decide to use HA clusters for <%= vars.product_short %> service plans, consider the
