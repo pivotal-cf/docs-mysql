@@ -4,31 +4,50 @@ owner: MySQL
 ---
 <strong><%= modified_date %></strong>
 
-This topic provides instructions for developers using the <%= vars.product_full %> for replication
+This topic provides instructions for developers configuring multi-site replication
 across multiple foundations or data centers.
 
-You provision a leader-follower service instance across two foundations using the
-<%= vars.single_leader_plan %> topology. This leader-follower service instance
-comprises two single node instances that are configured for replication.
+You provision a pair of service instances across two foundations. Your leader instance
+may be either a <%= vars.single_leader_plan %> topology or HA Cluster topology. Your follower
+instance must be a <%= vars.single_leader_plan %> topology. These two instances are then configured
+to replicate from the leader to the follower.
 
-<p> The <%= vars.single_leader_plan %> plan type is configured separately
-  from the leader-follower service plan.
+<p>Multi-site replication is configured separately
+  from the leader-follower service plan. Any mention on this page of "leader" and "follower"
+refers to the two service instances provisioned above for multi-site configuration (not to any
+service instance of type "leader-follower").
 </p>
 
 For more information about the <%= vars.single_leader_plan %> topology,
 see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
 
+For more information about the HA Cluster topology,
+see [About highly available clusters](./about-ha.html).
+
 ## <a id="prereq"></a>Prerequisites
 
 Before you use <%= vars.product_short %> across multiple foundations,
-you must have:
+you must:
 
-+ Access to the <%= vars.single_leader_plan %> plan.
-Your operator configures this plan and enables access to it in your org and space.
-+ Selected two foundations to deploy your <%= vars.single_leader_plan %> leader and follower VMs.
-  Your operators must configure these foundations for <%= vars.single_leader_plan_lc %>.
-For more information configuring a <%= vars.single_leader_plan %> topology,
++ Select two foundations to deploy your multi-site leader and follower
+  service instances.
++ Select which topology to use as your leader instance <%= vars.single_leader_plan %>
+    or HA Cluster.
++ Have access to the <%= vars.single_leader_plan %> plan on both foundations (even if choosing a HA Cluster
+as your leader instance).
+Your operator configures the <%= vars.single_leader_plan %> plan and enables access to it in your org and space.
++ Have access to a HA Cluster plan if you want a HA Cluster as your multi-site leader instance.
++ Verify that your operator has configured both foundations with a <%= vars.single_leader_plan_lc %> plan
+(and optionally with a HA Cluster plan).
+  + For more information configuring a <%= vars.single_leader_plan %> plan,
 see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
+  + For more information configuring a a high-availability cluster plan,
+    see [Preparing for high-availability clusters](./prepare-ha.html).
+
+
+
+## <a id="prereq"></a>Select a leader plan type
+
 
 <table class="table">
   <thead>
