@@ -32,6 +32,12 @@ see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
 
 ## <a id='create-multi-dc-with-mysql-tools'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance using mysql-tools
 
+<p class="note important">
+<span class="note__title"> Important</span>  The mysql-tools setup-replication command requires cf CLI v8.
+For more information, see https://docs.cloudfoundry.org/cf-cli/v8.html.
+</p>
+
+
 To create a leader-follower service across multiple foundations with mysql-tools:
 
 1. Check the availability of the <%= vars.single_leader_plan %> plan in the Marketplace in both your
@@ -157,7 +163,7 @@ To configure replication between the primary and secondary foundations:
     1. Configure replication between the primary and secondary foundation by running:
 
         ```
-        cf mysql-tools PRIMARY-TARGET-NAME PRIMARY-INSTANCE SECONDARY-TARGET-NAME SECONDARY-INSTANCE
+        cf mysql-tools setup-replication --primary-target=PRIMARY-TARGET-NAME --primary-instance=PRIMARY-INSTANCE --secondary-target=SECONDARY-TARGET-NAME --secondary-instance=SECONDARY-INSTANCE
         ```
        Where `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
        Where `PRIMARY-INSTANCE` is your chosen name for the primary instance.
