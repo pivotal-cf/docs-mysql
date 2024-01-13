@@ -41,59 +41,80 @@ your operator must configure the HA cluster plan and <%= vars.single_leader_plan
 exact same Availability Zones.
 For more information configuring a a high-availability cluster plan, see [About high-availability clusters](./about-ha.html).
 
+## <a id="prereq"></a>Select a multi-site leader topology
 
+Multi-site replication supports two topologies for the leader service instance:
+<%= vars.single_leader_plan %> and HA Cluster.
 
-## <a id="prereq"></a>Select a leader plan type
++ A <strong><%= vars.single_leader_plan %></strong> instance has comparatively simple initial setup and
+ongoing management. But it deploys MySQL running on a single VM, making it vulnerable to VM and infrastructure
+performance issues.
++ A <strong>HA Cluster</strong> instance has comparatively simple initial setup, but more involved ongoing
+management including multi-site switchover procedures. Since it deploys a 3-VM MySQL cluster, it is more resilient
+than a single-VM deployment.
 
+HA Cluster 
 
 <table class="table">
   <thead>
   <tr>
-    <th width="33%">Leader Topology</th>
-    <th width="33%">Failover if...</th>
-    <th>Switchover if...</th>
+    <th width="20%"></th>
+    <th width="40%"><%= vars.single_leader_plan %></th>
+    <th>High-Availability Cluster</th>
   </tr>
   </thead>
   <tr>
-    <td><%= vars.single_leader_plan %></td>
+    <td>Number of deployed VMs</td>
     <td>
-      <ul>
-        <li>The leader MySQL process has crashed
-          or is unhealthy and is not automatically recovered by BOSH.</li>
-        <li>The leader VM is destroyed or unrecoverable.</li>
-        <li>The availability zone (AZ) for the leader VM experiences an unexpected outage.</li>
-        <li>The data center for the leader VM experiences an unexpected outage.</li>
-      </ul>
+      1
     </td>
     <td>
-      <ul>
-        <li>Both the leader and the follower instance are healthy. </li>
-        <li>You plan to do foundation or data center upgrades or maintenance on your primary site.
-          For example, upgrading stemcells or data center hardware.</li>
-        <li>You plan to degrade performance on the primary site.</li>
-      </ul>
+      4 (3 MySQL cluster + 1 Jumpbox)
     </td>
   </tr>
   <tr>
-    <td>High-Availability Cluster</td>
+    <td>Resilience to VM failure</td>
     <td>
-      <ul>
-        <li>The entire leader cluster has crashed
-          or is unhealthy and is not automatically recovered by BOSH.</li>
-        <li>The availability zone (AZ) for the leader MySQL service instance experiences an unexpected outage.</li>
-        <li>The data center for the leader MySQL service instance experiences an unexpected outage.</li>
-      </ul>
+      Low. A VM outage may necessitate a failover from your multi-site leader to your follower
     </td>
     <td>
-      <ul>
-        <li>Both the leader and the follower MySQL service instances are healthy. </li>
-        <li>You plan to do foundation or data center maintenance which can disable your HA cluster.
-          For example, upgrading data center hardware.</li>
-        <li>You plan to degrade performance on the primary site.</li>
-      </ul>
+      High. Cluster replication lets your multi-site leader withstand and potentially recover from a single VM outage.
+  </tr>
+  <tr>
+    <td>Stemcell upgrade behavior</td>
+    <td>
+      Offline. The topology's single VM goes offline during stemcell upgrades (requiring multi-site switchover for continued uptime)
+    </td>
+    <td>
+      Online. Rolling upgrades impact only 1 cluster VM at a time.
     </td>
   </tr>
-</table>
+  <tr>
+    <td>Multi-site switchover complexity</td>
+    <td>
+      Moderate. Multiple steps are needed to switch the instance's leader and follower roles.
+    </td>
+    <td>
+      More Complex:
+<ul><li>HA Clusters cannot serve as multi-site followers. Therefore, switchover requires downscaling
+any HA Cluster leader into a single-VM <%= vars.single_leader_plan %> follower.
+<li>As switchover is promoting your secondary foundation's <%= vars.single_leader_plan %> instance from follower to leader,
+you may elect to upscale that (new follower) instance into a HA Cluster, adding some considerations
+to the switchover process.</li>
+    </td>
+  </tr>
+<tr>
+<td>For more information about this topology:</td>
+<td><ul><li>[Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html)</li>
+<li>foo</li></ul></td>
+<td><ul><li>[About high-availability clusters](./about-ha.html)</li>
+<li>[Monitoring node health](./monitor-health.html)</li></ul></td>
+</tr></table>
+
+Existing HA clusters created with <vars.product_short>
+version 3.2 or later may be configured to be multi-site leaders. HA clusters created with earlier versions may be configured as multi-site leaders via a
+migration process. For more information see [Migrating HA instances for multi-site replication](migrate-ha-to-multi-site.html).
+(In all cases these clusters must meet the above [Prerequisites]().)
 
 ## <a id='create-multi-dc-with-mysql-tools'></a>Create a <%= vars.single_leader_plan %> leader-follower service instance using mysql-tools
 
