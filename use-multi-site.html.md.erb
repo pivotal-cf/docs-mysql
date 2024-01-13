@@ -31,18 +31,15 @@ you must:
 
 + Select two foundations to deploy your multi-site leader and follower
   service instances.
-+ Select which topology to use as your leader instance <%= vars.single_leader_plan %>
++ Select which topology to use as your leader instance: <%= vars.single_leader_plan %>
     or HA Cluster.
-+ Have access to the <%= vars.single_leader_plan %> plan on both foundations (even if choosing a HA Cluster
-as your leader instance).
-Your operator configures the <%= vars.single_leader_plan %> plan and enables access to it in your org and space.
-+ Have access to a HA Cluster plan if you want a HA Cluster as your multi-site leader instance.
-+ Verify that your operator has configured both foundations with a <%= vars.single_leader_plan_lc %> plan
-(and optionally with a HA Cluster plan).
-  + For more information configuring a <%= vars.single_leader_plan %> plan,
-see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
-  + For more information configuring a a high-availability cluster plan,
-    see [Preparing for high-availability clusters](./prepare-ha.html).
++ Verify that, on each foundation, your operator has configured your access in your org and spaces to:
+  + a <%= vars.single_leader_plan_lc %> plan. For more information configuring a <%= vars.single_leader_plan %> plan,
+    see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
+  + a HA Cluster plan if you are considering using a HA cluster as multi-site leader. Within each foundation,
+your operator must configure the HA cluster plan and <%= vars.single_leader_plan %> plan within the
+exact same Availability Zones.
+For more information configuring a a high-availability cluster plan, see [About high-availability clusters](./about-ha.html).
 
 
 
