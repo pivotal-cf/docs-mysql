@@ -5,7 +5,7 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic tells you about how <%= vars.single_leader_plan_lc %> topology works in
+This topic tells you about how multi-site replication works in
 <%= vars.product_full %> and contains information to help you decide whether to use
 multi-site replication.
 
@@ -57,20 +57,20 @@ For information for developers about using multi-site replication,
 see
 [Using <%= vars.product_short %> for multi-site replication](./use-multi-site.html).
 
-## <a id='benefits'></a>Multi-site replication benefits
+## <a id='benefits'></a> Multi-site replication benefits
 
 Multi-site replication has the following benefits:
 
 + **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
-see [Triggering <%= vars.single_leader_plan %> failover and switchover](./multi-site-trigger-failover.html).
+see [Triggering multi-site replication failover and switchover](./multi-site-trigger-failover.html).
 
 + **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
 
 + **Support for Multiple Cloud Deployment Models:**
-Operators can configure <%= vars.single_leader_plan_lc %> with a
+Operators can configure multi-site replication with a
 single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
@@ -145,7 +145,7 @@ Therefore the follower service instance is read-only; database writes on the Sec
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
 and developers must manually trigger a failover or switchover.
 For instructions about triggering failover or switchover, see
-see [Triggering <%= vars.single_leader_plan %> Failover and switchover](./multi-site-trigger-failover.html).
+see [Triggering multi-wite replication failover and switchover](./multi-site-trigger-failover.html).
 
 The following table describes when you can trigger a failover or switchover:
 
@@ -178,7 +178,7 @@ The following table describes when you can trigger a failover or switchover:
 
 </table>
 
-For information about <%= vars.single_leader_plan_lc %> topologies
+For information about multi-site replication topologies
 in an healthy state, see [About Active-Passive topology](#active-passive)
 and [About App-Layer Active-Active topology](#active-active).
 
@@ -190,7 +190,7 @@ all app traffic is directed to the leader in the secondary foundation
 and the primary foundation receives no app traffic.
 
 The following diagram describes what happens when you trigger a failover
-for a <%= vars.single_leader_plan_lc %> topology:
+for a multi-site replication topology:
 
 ![This multi-site failover diagram is described here](images/multi-site-failover.png)
 
@@ -267,19 +267,25 @@ In the preceding diagram:
 
 <a href="./images/multi-site-external-access.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-## <a id='infrastructure'></a> Infrastructure requirements for <%= vars.single_leader_plan %>
+## <a id='infrastructure'></a> Infrastructure requirements for multi-site configuration
 
-Before you use the <%= vars.single_leader_plan %> plan, consider the following requirements.
+Before you deploy a multi-site configuration, consider the following requirements.
 
 ### <a id='capacity'></a> Capacity planning
 
-When calculating IaaS usage, you must take into account that each
-<%= vars.single_leader_plan %> instance requires two VMs.
-Therefore, the resources used for multi-site replication with a <%= vars.single_leader_plan %> leader are
-twice the amount of single node plan.
-
-Each high-availability cluster instance requires four VMs. Therefore, the resources used for multi-site replication with a high-availability cluster leader are
-5x the amount of single node plan.
+When calculating IaaS usage, take into account that each multi-site configuration deploys two service
+instances: a primary either of type <%= vars.single_leader_plan %> or HA cluster, and a
+secondary of type <%= vars.single_leader_plan %>.
+- Each <%= vars.single_leader_plan %> service instance deploys one VM. Therefore the smallest multi-site
+configuration deploys two VMs (one per foundation), twice the footprint of a service instance created from a
+single-node plan.
+- Each HA cluster service instance deploys four VMs. Therefore the largest multi-site configuration deploys
+five VMs, 5x the footprint of a service instance created from a single-node plan.
+- The above configurations initially deploy a single VM within your secondary foundation. During failover
+and switchover operations (which promote your secondary instance into a primary instance), you may elect to
+scale up your <%= vars.single_leader_plan %> secondary into a HA cluster primary. And a switchover from
+a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan %> secondary. These scaling
+operations impact the distribution of VMs across your two foundations.
 
 For more information,
 see [Setting limits for on-demand service instances](.//set-quotas.html) and
@@ -294,10 +300,11 @@ For information about the standard networking rules,
 see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
 
 
-## <a id='limitations'></a> <%= vars.single_leader_plan %> limitations
+## <a id='limitations'></a> Multi-site replication limitations
 
-The <%= vars.single_leader_plan %> plan has the following limitation:
+Multi-site replication has the following limitation:
 
 <p class="note important">
 <span class="note__title"> Important</span> Synchronous replication is not supported. For multi‑site
-replication plans, any data that is written to the leader is asynchronously replicated to the follower.</p>
+replication plans, any data written to the primary instance is asynchronously replicated to the
+secondary instance.</p>
