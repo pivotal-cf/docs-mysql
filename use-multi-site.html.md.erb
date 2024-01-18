@@ -124,13 +124,12 @@ than a single-VM deployment.
 any HA Cluster leader into a single-VM <%= vars.single_leader_plan %> follower.
 <li>As switchover is promoting your secondary foundation's <%= vars.single_leader_plan %> instance from follower to leader,
 you may elect to upscale that (new follower) instance into a HA Cluster, adding some considerations
-to the switchover process.</li>
+to the switchover process.</li></ul>
     </td>
   </tr>
 <tr>
 <td>For more information about this topology:</td>
-<td><ul><li>[Preparing for multi-site replication](./prepare-multi-site.html)</li>
-<li>foo</li></ul></td>
+<td>[Preparing for multi-site replication](./prepare-multi-site.html)</td>
 <td><ul><li>[About high-availability clusters](./about-ha.html)</li>
 <li>[Monitoring node health](./monitor-health.html)</li></ul></td>
 </tr></table>
@@ -277,7 +276,7 @@ have not alredy done so.
 1. Use mysql-tools to configure replication between the primary and secondary foundations.
 
        ```
-       cf mysql-tools setup-replication --primary-target PPRIMARY-TARGET-NAME --primary-instance PRIMARY-INSTANCE \
+       cf mysql-tools setup-replication --primary-target PRIMARY-TARGET-NAME --primary-instance PRIMARY-INSTANCE \
          --secondary-target SECONDARY-TARGET-NAME --secondary-instance SECONDARY-INSTANCE
        ```
 
@@ -286,11 +285,6 @@ have not alredy done so.
     - `PRIMARY-INSTANCE` is your chosen name for the primary instance.
     - `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
     - `SECONDARY-INSTANCE` is your chosen name for the secondary instance.
-
-    For example:
-      ```
-      cf mysql-tools setup-replication ...
-      ```
 
     Notes:
     - The mysql-tools plugin has shorthand flags for the above options. Type `cf mysql-tools setup-replication` for
@@ -305,9 +299,15 @@ have not alredy done so.
 
 1. The plugin output shows status lines showing checkpoints for the various configuration steps:
    ```
-   foo
+   Validating the primary instance: 'primary-db'.
+   Validating the secondary instance: 'secondary-db'.
+   Creating a 'host-info' service-key: 'MSHostInfo-1705540659' on the secondary instance: 'secondary-db'.
+   Getting the 'host-info' service-key from the secondary instance: 'secondary-db'.
+   Updating the primary with the secondary's 'host-info' service-key: 'MSHostInfo-1705540659'.
+   Creating a 'credentials' service-key: 'MSCredInfo-1705541348' on the primary instance: 'primary-db'.
+   Getting the 'credentials' service-key from the primary instance. 'primary-db'.
+   Updating the secondary instance with the primary's 'credentials' service-key: 'MSCredInfo-1705541348'.
    ```
-   
 
 1. Purge cf config information from your workstation:
 
