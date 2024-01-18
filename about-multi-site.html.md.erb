@@ -18,14 +18,14 @@ Operators can configure two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
 
 Within your primary foundation you have a choice of topologies for your replication leader instance:
-- <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
+- <%= vars.single_leader_plan_lc_lc %>: this provisions a single node instance.
 The resulting configuration resembles a leader-follower service instance, but with the two single-node
 instances deployed and replicating across two separate foundations.
 - High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
 leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resilience to
 in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
 
-The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the replication follower instance.
+The secondary foundation always uses a <%= vars.single_leader_plan_lc_lc %> for the replication follower instance.
 
 <p class="note important">
 <span class="note__title"> Important</span>  <%= vars.product_short %> supports using a High-availability cluster
@@ -46,7 +46,7 @@ or no traffic at all.
 a developer triggers a failover.
 
 
-<p> The <%= vars.single_leader_plan %> and high-availability cluster plan types are configured separately
+<p> The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately
   from the leader-follower plan type.
 </p>
 
@@ -274,17 +274,17 @@ Before you deploy a multi-site configuration, consider the following requirement
 ### <a id='capacity'></a> Capacity planning
 
 When calculating IaaS usage, take into account that each multi-site configuration deploys two service
-instances: a primary either of type <%= vars.single_leader_plan %> or HA cluster, and a
-secondary of type <%= vars.single_leader_plan %>.
-- Each <%= vars.single_leader_plan %> service instance deploys one VM. Therefore the smallest multi-site
+instances: a primary either of type <%= vars.single_leader_plan_lc %> or HA cluster, and a
+secondary of type <%= vars.single_leader_plan_lc %>.
+- Each <%= vars.single_leader_plan_lc %> service instance deploys one VM. Therefore the smallest multi-site
 configuration deploys two VMs (one per foundation), twice the footprint of a service instance created from a
 single-node plan.
 - Each HA cluster service instance deploys four VMs. Therefore the largest multi-site configuration deploys
 five VMs, 5x the footprint of a service instance created from a single-node plan.
 - The above configurations initially deploy a single VM within your secondary foundation. During failover
 and switchover operations (which promote your secondary instance into a primary instance), you may elect to
-scale up your <%= vars.single_leader_plan %> secondary into a HA cluster primary. And a switchover from
-a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan %> secondary. These scaling
+scale up your <%= vars.single_leader_plan_lc %> secondary into a HA cluster primary. And a switchover from
+a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan_lc %> secondary. These scaling
 operations impact the distribution of VMs across your two foundations.
 
 For more information,
@@ -293,11 +293,11 @@ see [Setting limits for on-demand service instances](.//set-quotas.html) and
 
 ### <a id='network'></a> Networking requirements
 
-You must consider the <%= vars.single_leader_plan %> instances that are deployed in
+You must consider the <%= vars.single_leader_plan_lc %> instances that are deployed in
 data centers are a geographically farther apart experience higher latencies.
 
 For information about the standard networking rules,
-see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
+see [Required Networking Rules for <%= vars.single_leader_plan_lc %>](./about.html#multi-site-ports).
 
 
 ## <a id='limitations'></a> Multi-site replication limitations

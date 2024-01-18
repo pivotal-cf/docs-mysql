@@ -8,8 +8,8 @@ This topic provides instructions for developers configuring multi-site replicati
 across multiple foundations or data centers.
 
 You provision two service instance -- one in each of two foundations. Your leader instance
-may be either a <%= vars.single_leader_plan %> topology or HA Cluster topology. Your follower
-instance must be a <%= vars.single_leader_plan %> topology. You then configure these two instances 
+may be either a <%= vars.single_leader_plan_lc %> topology or HA Cluster topology. Your follower
+instance must be a <%= vars.single_leader_plan_lc %> topology. You then configure these two instances 
 to replicate from the leader to the follower. You may establish this replication manually, or using
 the mysql-tools plugin to the CF cli.  
 
@@ -19,8 +19,8 @@ refers to the two service instances provisioned above for multi-site configurati
 service instance of type "leader-follower".
 </p>
 
-For more information about the <%= vars.single_leader_plan %> topology,
-see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
+For more information about the <%= vars.single_leader_plan_lc %> topology,
+see [About <%= vars.single_leader_plan_lc %>](./about-multi-site.html).
 
 For more information about the HA Cluster topology,
 see [About highly available clusters](./about-ha.html).
@@ -32,10 +32,10 @@ you must:
 
 + Select two foundations to deploy your multi-site leader and follower
   service instances.
-+ Select the topology for your leader instance: <%= vars.single_leader_plan %>
++ Select the topology for your leader instance: <%= vars.single_leader_plan_lc %>
     or HA Cluster.
 + Verify that, on each foundation, your operator has configured your access in your org and spaces to:
-  + a <%= vars.single_leader_plan_lc %> plan. For more information configuring a <%= vars.single_leader_plan %> plan,
+  + a <%= vars.single_leader_plan_lc_lc %> plan. For more information configuring a <%= vars.single_leader_plan %> plan,
     see [Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
   + a HA Cluster plan if you are considering using a HA cluster as multi-site leader. Within each foundation,
 your operator must configure the HA cluster plan and <%= vars.single_leader_plan %> plan within the

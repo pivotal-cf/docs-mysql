@@ -24,9 +24,9 @@ You can use this topology for apps where high availability is not important.
 Percona XtraDB Cluster (PXC), to provide the greatest availability of the topologies.
 For more information, see [About Highly Available Clusters](./about-ha.html).
 
-+ **<%= vars.single_leader_plan %>:** This two-VM topology enables you to provision a leader
++ **<%= vars.single_leader_plan_lc %>:** This two-VM topology enables you to provision a leader
 and follower VM in two different foundations. For more information about how to provision a leader and follower VM,
-see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
+see [About <%= vars.single_leader_plan_lc %>](./about-multi-site.html).
 
 ## <a id="pros-and-cons"></a> Pros and cons
 
@@ -140,7 +140,7 @@ This table compares the recovery point objectives for the topologies:
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan %></th>
+    <th><%= vars.single_leader_plan_lc %></th>
     <th>Highly Available Multi-Site Leader</th>
   </tr>
   </thead>
@@ -164,7 +164,7 @@ This table compares the recovery time objectives for the topologies:
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan %></th>
+    <th><%= vars.single_leader_plan_lc %></th>
     <th>Highly Available Multi-Site Leader</th></tr>
 </thead>
   <tr><td><strong>Planned Maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
@@ -202,7 +202,7 @@ Highly available clusters have the highest risk.
   <tr><td><strong>Single node</strong></td><td>Low</td></tr>
   <tr><td><strong>Leader-follower</strong></td><td>Medium</td></tr>
   <tr><td><strong>Highly available cluster</strong></td><td>High</td></tr>
-  <tr><td><strong><%= vars.single_leader_plan %></strong></td><td>Medium-high</td></tr>
+  <tr><td><strong><%= vars.single_leader_plan_lc %></strong></td><td>Medium-high</td></tr>
   <tr><td><strong>Highly Available Multi-Site Leader</strong></td><td>High</td></tr>
   </thead>
 </table>
