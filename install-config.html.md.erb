@@ -368,29 +368,21 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
         </td></tr>
   </table>
 
-<p class="note important">
-<span class="note__title"> Important</span> If you expect your developers
-to upgrade from one plan to another, do not place the plans in separate AZs.
-For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
-an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
-prevents them from losing their data by orphaning their disk in AZ1.<br><br>
+<span class="note__title"> Important</span> Transitioning between two different plans requires them to be in the same AZ's.
+  <ul>
+      <li>If you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive 
+      an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
+      prevents them from losing their data by orphaning their disk in AZ1.</li>
+      <li>If you anticipate configuring a HA cluster as a multi-site leader, 
+      then assign the same set of Availability Zones (AZs) to both (i) that
+      HA Cluster plan and (ii) your <%= vars.single_leader_plan %> plan.
+      This lets multi-site switchover and failover procedures transition 
+      instances between the plans as needed.<br>This guidance applies both to your primary foundation (with your multi-site leader instance) and
+      to your secondary foundation (with your multi-site follower instance). The foundations may have different
+      AZ's, but within each foundation, any plans used for multi-site configuration should share a common set of AZs.</li>
+   </ul>
 If you need to manually migrate the data from one AZ to another, see
 <a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/index.html">About Data Migration in <%= vars.product_short %></a>.
-</p>
-
-<p class="note important">
-<span class="note__title"> Important</span> If you anticipate configuring a HA cluster as a multi-site leader,
-then assign the same set of Availability Zones (AZs) to both (i) that
-HA Cluster plan and (ii)
- your <%= vars.single_leader_plan %> plan.
-This lets multi-site switchover and failover procedures
- transition instances between the plans as needed.</p>
-
-<p>This guidance applies both to your primary foundation (with your multi-site leader instance) and
-to your secondary foundation (with your multi-site follower instance). The foundations may have different
-AZ's, but within each foundation, any plans used for multi-site configuration should share a common set of AZs.
-
-</p>
 
 4. Click Save.
 
