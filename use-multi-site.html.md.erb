@@ -72,10 +72,10 @@ Multi-site replication supports two topologies for the leader service instance:
 <%= vars.single_leader_plan %> and HA Cluster.
 
 + A <strong><%= vars.single_leader_plan %></strong> instance has comparatively simple initial setup and
-ongoing management. But it deploys MySQL running on a single VM, making it vulnerable to VM and infrastructure
+ongoing management such as multi-site switchover procedures. But it deploys MySQL running on a single VM, making it vulnerable to VM and infrastructure
 performance issues.
 + A <strong>HA Cluster</strong> instance has comparatively simple initial setup, but more involved ongoing
-management including multi-site switchover procedures. Since it deploys a 3-VM MySQL cluster, it is more resilient to VM or node failures failure
+management such as multi-site switchover procedures. Since it deploys a 3-VM MySQL cluster, it is more resilient to VM or node failures failure
 than a single-VM deployment.
 
 
