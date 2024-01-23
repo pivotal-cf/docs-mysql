@@ -18,14 +18,14 @@ Operators can configure two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
 
 Within your primary foundation you have a choice of topologies for your replication leader instance:
-- <%= vars.single_leader_plan_lc_lc %>: this provisions a single node instance.
+- <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
 The resulting configuration resembles a leader-follower service instance, but with the two single-node
 instances deployed and replicating across two separate foundations.
 - High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
 leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resilience to
 in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
 
-The secondary foundation always uses a <%= vars.single_leader_plan_lc_lc %> for the replication follower instance.
+The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the replication follower instance.
 
 <p class="note important">
 <span class="note__title"> Important</span>  <%= vars.product_short %> supports using a High-availability cluster

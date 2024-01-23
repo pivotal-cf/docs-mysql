@@ -343,25 +343,25 @@ The following table lists migration use cases for the `update-service` command:
 
    <tr>
       <td>High Availability</td>
-      <td><%= vars.single_leader_plan_lc_lc %></td>
+      <td><%= vars.single_leader_plan_lc %></td>
    </tr>
 
    <tr>
-      <td><%= vars.single_leader_plan_lc_lc %></td>
+      <td><%= vars.single_leader_plan_lc %></td>
       <td>High Availability</td>
    </tr>
 </table>
 
 <p> You can only us <code>cf update-service</code>
-   to migrate data between an HA cluster plan and a <%= vars.single_leader_plan_lc_lc %> plan.
+   to migrate data between an HA cluster plan and a <%= vars.single_leader_plan_lc %> plan.
    If you want to do this with another plan, you must use the <code>cf mysql-tools</code> plug-in instead.
    For more information about migrating data,
    see <a href="./about-migrate.html">About data migration in <%= vars.product_full %></a>.
 </p>
 
-<p> If a <%= vars.single_leader_plan_lc_lc %> is being used,
+<p> If a <%= vars.single_leader_plan_lc %> is being used,
   it can only be updated to a HA Cluster plan.
-  If a <%= vars.single_leader_plan_lc_lc %> is updated with any other plan besides an HA Cluster plan, replication will break.
+  If a <%= vars.single_leader_plan_lc %> is updated with any other plan besides an HA Cluster plan, replication will break.
 </p>
 
 To migrate a service instance to another plan:
