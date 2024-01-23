@@ -24,9 +24,9 @@ You can use this topology for apps where high availability is not important.
 Percona XtraDB Cluster (PXC), to provide the greatest availability of the topologies.
 For more information, see [About Highly Available Clusters](./about-ha.html).
 
-+ **<%= vars.single_leader_plan %>:** This two-VM topology enables you to provision a leader
++ **<%= vars.single_leader_plan_lc %>:** This two-VM topology enables you to provision a leader
 and follower VM in two different foundations. For more information about how to provision a leader and follower VM,
-see [About <%= vars.single_leader_plan %>](./about-multi-site.html).
+see [About <%= vars.single_leader_plan_lc %>](./about-multi-site.html).
 
 ## <a id="pros-and-cons"></a> Pros and cons
 
@@ -34,72 +34,91 @@ The following table lists some key characteristics of the topologies to help you
 which one is best for your developers.
 
 <table class="table">
-<thead>
+  <thead>
   <tr><th>Topology</th><th>VMs needed</th><th>Pros</th><th>Cons</th></tr>
   </thead>
   <tr><td><strong>Single node</strong></td><td>One</td>
-      <td>
-          <ul>
-            <li>Simple</li>
-            <li>Least expensive</li>
-            <li>Straightforward operator experience</li>
-            <li>Easy for the developer</li>
-          </ul>
-       </td>
-      <td>
-          <ul>
-            <li>No redundancy</li>
-            <li>All data since last backup can be lost</li>
-            <li>Data recovery requires restore from backup</li>
-          </ul>
-       </td>
+    <td>
+      <ul>
+        <li>Simple</li>
+        <li>Least expensive</li>
+        <li>Straightforward operator experience</li>
+        <li>Easy for the developer</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>No redundancy</li>
+        <li>All data since last backup can be lost</li>
+        <li>Data recovery requires restore from backup</li>
+      </ul>
+    </td>
   </tr>
   <tr><td><strong>Leader-follower</strong></td><td>Two</td>
-      <td>
-          <ul>
-            <li>Two copies of the data</li>
-            <li>Data recovery is faster than single node</li>
-          </ul>
-       </td>
-      <td>
-          <ul>
-            <li>Less flexible tuning than single node</li>
-            <li>Developers require some technical understanding</li>
-            <li>Operator must initiate failover</li>
-          </ul>
-       </td>
+    <td>
+      <ul>
+        <li>Two copies of the data</li>
+        <li>Data recovery is faster than single node</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Less flexible tuning than single node</li>
+        <li>Developers require some technical understanding</li>
+        <li>Operator must initiate failover</li>
+      </ul>
+    </td>
   </tr>
   <tr><td><strong>Highly available cluster</strong></td><td>Three and a jumpbox VM</td>
-      <td>
-          <ul>
-            <li>Tightest RPO and RTO for downtime, including downtime for upgrades.<br>
-                See <a href="#rpo-and-rto">RPOs and RTOs</a>.</li>
-          </ul>
-       </td>
-      <td>
-          <ul>
-            <li>Most expensive</li>
-            <li>Less flexible tuning than single node</li>
-            <li>Developers require moderate technical understanding</li>
-          </ul>
-       </td>
+    <td>
+      <ul>
+        <li>Tightest RPO and RTO for downtime, including downtime for upgrades.<br>
+          See <a href="#rpo-and-rto">RPOs and RTOs</a>.</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Less flexible tuning than single node</li>
+        <li>Developers require moderate technical understanding</li>
+      </ul>
+    </td>
   </tr>
 
-  <tr><td><strong><%= vars.single_leader_plan %></strong></td><td>Two</td>
-      <td>
-          <ul>
-            <li>Two copies of the data</li>
-            <li>Data recovery is faster than single node</li>
-            <li>Resilience to data center outages and upgrades</li>
-            <li>Developers can initiate failover</li>
-          </ul>
-       </td>
-      <td>
-          <ul>
-            <li>Less flexible tuning than single node</li>
-            <li>Developers require some technical understanding</li>
-          </ul>
-       </td>
+  <tr><td><strong>Multi-Site Replication</strong></td><td>Two</td>
+    <td>
+      <ul>
+        <li>Two copies of the data</li>
+        <li>Data recovery is faster than single node</li>
+        <li>Resilience to data center outages and upgrades</li>
+        <li>Developers can initiate failover</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Less flexible tuning than single node</li>
+        <li>Developers require some technical understanding</li>
+      </ul>
+    </td>
+  </tr>
+  <tr><td><strong>Highly available Multi-Site Leader</strong></td><td>Six</td>
+    <td>
+      <ul>
+        <li>Two copies of the data</li>
+        <li>Data recovery is faster than single node</li>
+        <li>Resilience to data center outages</li>
+        <li>Resilience to upgrades</li>
+        <li>Resilience to vm failures within a datacenter</li>
+        <li>Developers can initiate failover</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>Most expensive</li>
+        <li>Less flexible tuning than single node</li>
+        <li>Developers require some technical understanding</li>
+        <li>Increased network traffic</li>
+      </ul>
+    </td>
   </tr>
 </table>
 
@@ -121,15 +140,16 @@ This table compares the recovery point objectives for the topologies:
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan %></th>
+    <th><%= vars.single_leader_plan_lc %></th>
+    <th>Highly Available Multi-Site Leader</th>
   </tr>
   </thead>
   <tr><td><strong>Planned Maintenance</strong></td><td>Zero</td>
-      <td>Zero</td><td>Zero</td><td>Zero</td></tr>
+      <td>Zero</td><td>Zero</td><td>Zero</td><td>Zero</td></tr>
   <tr><td><strong>Unplanned Downtime</strong></td><td>Zero</td>
-      <td>Replica lag, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td></tr>
+      <td>Replica lag, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td><td>Almost zero*</td></tr>
   <tr><td><strong>Data Recovery</strong></td><td>Time since last backup</td>
-      <td>The time to initialize the follower VM, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td></tr>
+      <td>The time to initialize the follower VM, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td><td>Almost zero*</td></tr>
 </table>
 
  *Database clients are notified that incomplete transactions are not saved.
@@ -144,20 +164,21 @@ This table compares the recovery time objectives for the topologies:
     <th>Single Node</th>
     <th>Leader-Follower</th>
     <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan %></th></tr>
-    </thead>
+    <th><%= vars.single_leader_plan_lc %></th>
+    <th>Highly Available Multi-Site Leader</th></tr>
+</thead>
   <tr><td><strong>Planned Maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required depends on the type of maintenance</td>
       <td>Almost zero*</td>
-    <td>Time for developer to initiate switchover and for switchover to complete</td></tr>
+    <td>Time for developer to initiate switchover and for switchover to complete</td><td>Almost zero*</td></tr>
   <tr><td><strong>Unplanned Downtime</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required to restore the VM or time for operator to initiate failover and
           for failover to complete</td>
       <td>Almost zero*</td>
-    <td>Time for developer to initiate failover and for failover to complete</td></tr>
+    <td>Time for developer to initiate failover and for failover to complete</td><td>Almost zero*</td></tr>
   <tr><td><strong>Data Recovery</strong></td><td>Time to restore from backup</td>
       <td>Time for operator to initiate failover and for failover to complete</td><td>Almost zero*</td>
-    <td>Time for developer to initiate failover and for failover to complete</td></tr>
+    <td>Time for developer to initiate failover and for failover to complete</td><td>Almost zero*</td></tr>
 </table>
 
  *This includes time for apps to reconnect to the MySQL service instance.
@@ -181,6 +202,7 @@ Highly available clusters have the highest risk.
   <tr><td><strong>Single node</strong></td><td>Low</td></tr>
   <tr><td><strong>Leader-follower</strong></td><td>Medium</td></tr>
   <tr><td><strong>Highly available cluster</strong></td><td>High</td></tr>
-  <tr><td><strong><%= vars.single_leader_plan %></strong></td><td>Medium-high</td></tr>
+  <tr><td><strong><%= vars.single_leader_plan_lc %></strong></td><td>Medium-high</td></tr>
+  <tr><td><strong>Highly Available Multi-Site Leader</strong></td><td>High</td></tr>
   </thead>
 </table>

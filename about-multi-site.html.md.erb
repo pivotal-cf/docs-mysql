@@ -5,17 +5,32 @@ owner: MySQL
 
 <strong><%= modified_date %></strong>
 
-This topic tells you about how <%= vars.single_leader_plan_lc %> topology works in
+This topic tells you about how multi-site replication works in
 <%= vars.product_full %> and contains information to help you decide whether to use
-the <%= vars.single_leader_plan %> plan.
+multi-site replication.
 
-The <%= vars.single_leader_plan_lc %> topology in <%= vars.product_short %>
-is a disaster recovery solution that enables developers to provision a leader-follower
-instance across two foundations.
-This leader-follower service instance is comprised of two single node instances
-that are configured for replication.
+Multi-site capability in <%= vars.product_short %>
+is a disaster recovery solution that enables developers to provision a 
+pair of service instances across two foundations.
+These two instances are then configured to replicate from a designated leader instance
+to its follower instance in the other foundation.
 Operators can configure two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
+
+Within your primary foundation you have a choice of topologies for your replication leader instance:
+- <%= vars.single_leader_plan_lc_lc %>: this provisions a single node instance.
+The resulting configuration resembles a leader-follower service instance, but with the two single-node
+instances deployed and replicating across two separate foundations.
+- High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
+leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resilience to
+in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
+
+The secondary foundation always uses a <%= vars.single_leader_plan_lc_lc %> for the replication follower instance.
+
+<p class="note important">
+<span class="note__title"> Important</span>  <%= vars.product_short %> supports using a High-availability cluster
+service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version
+is set in the plan definition section of Ops Manager; more information is in [Configuring Service Plans](install-config.html#procedure-for-configuring-service-plans-8)
 
 The foundation types are:
 
@@ -31,32 +46,31 @@ or no traffic at all.
 a developer triggers a failover.
 
 
-<p> The <%= vars.single_leader_plan %> plan type is configured separately
-  from the leader-follower service plan.
+<p> The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately
+  from the leader-follower plan type.
 </p>
 
-For information about enabling <%= vars.single_leader_plan %>,
+For information about enabling multi-site replication, see
+[Preparing for multi-site replication](./prepare-multi-site.html).
+
+For information for developers about using multi-site replication,
 see
-[Preparing for <%= vars.single_leader_plan %>](./prepare-multi-site.html).
+[Using <%= vars.product_short %> for multi-site replication](./use-multi-site.html).
 
-For information for developers about using <%= vars.single_leader_plan %>,
-see
-[Using <%= vars.product_short %> for <%= vars.single_leader_plan %>](./use-multi-site.html).
+## <a id='benefits'></a> Multi-site replication benefits
 
-## <a id='benefits'></a> <%= vars.single_leader_plan %> benefits
-
-The <%= vars.single_leader_plan %> plan has the following benefits:
+Multi-site replication has the following benefits:
 
 + **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
-see [Triggering <%= vars.single_leader_plan %> failover and switchover](./multi-site-trigger-failover.html).
+see [Triggering multi-site replication failover and switchover](./multi-site-trigger-failover.html).
 
 + **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
 
 + **Support for Multiple Cloud Deployment Models:**
-Operators can configure <%= vars.single_leader_plan_lc %> with a
+Operators can configure multi-site replication with a
 single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
@@ -121,11 +135,8 @@ In the previous diagram:
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
-<span class="note__title"> Important</span>  In the <%= vars.single_leader_plan %> plan,
-the app-layer active-active topology does not enable multi-primary replication.
-Therefore, the follower service instance is read-only.
-Apps can only write to the leader.
-</p>
+<span class="note__title"> Important</span>  The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
+Therefore the follower service instance is read-only; database writes on the Secondary Foundation get proxied to the Primary Foundation (and then replicated back to the Secondary). 
 
 
 ## <a id='failover-switchover'></a> Failover and switchover
@@ -134,7 +145,7 @@ Apps can only write to the leader.
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
 and developers must manually trigger a failover or switchover.
 For instructions about triggering failover or switchover, see
-see [Triggering <%= vars.single_leader_plan %> Failover and switchover](./multi-site-trigger-failover.html).
+see [Triggering multi-wite replication failover and switchover](./multi-site-trigger-failover.html).
 
 The following table describes when you can trigger a failover or switchover:
 
@@ -148,19 +159,18 @@ The following table describes when you can trigger a failover or switchover:
   <tr>
     <td>
       <ul>
-        <li>The leader MySQL process has crashed
+        <li>The leader MySQL service instance has crashed
           or is unhealthy and is not automatically recovered by BOSH.</li>
-        <li>The leader VM is destroyed or unrecoverable.</li>
-        <li>The availability zone (AZ) for the leader VM experiences an unexpected outage.</li>
-        <li>The data center for the leader VM experiences an unexpected outage.</li>
+        <li>The leader MySQL service instance is destroyed and unrecoverable.</li>
+        <li>The availability zone (AZ) for the leader MySQL service instance experiences an unexpected outage.</li>
+        <li>The data center for the leader MySQL service instance experiences an unexpected outage.</li>
       </ul>
     </td>
-
     <td>
       <ul>
-        <li>Both the leader and the follower instance are healthy. </li>
+        <li>Both the leader and the follower MySQL service instances are healthy. </li>
         <li>You plan to do foundation or data center upgrades or maintenance on your primary site.
-          For example, upgrading stemcells or data center hardware.</li>
+          For example, data center hardware upgrades that may disable your leader service instance.</li>
         <li>You plan to degrade performance on the primary site.</li>
       </ul>
     </td>
@@ -168,7 +178,7 @@ The following table describes when you can trigger a failover or switchover:
 
 </table>
 
-For information about <%= vars.single_leader_plan_lc %> topologies
+For information about multi-site replication topologies
 in an healthy state, see [About Active-Passive topology](#active-passive)
 and [About App-Layer Active-Active topology](#active-active).
 
@@ -180,7 +190,7 @@ all app traffic is directed to the leader in the secondary foundation
 and the primary foundation receives no app traffic.
 
 The following diagram describes what happens when you trigger a failover
-for a <%= vars.single_leader_plan_lc %> topology:
+for a multi-site replication topology:
 
 ![This multi-site failover diagram is described here](images/multi-site-failover.png)
 
@@ -257,16 +267,25 @@ In the preceding diagram:
 
 <a href="./images/multi-site-external-access.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
 
-## <a id='infrastructure'></a> Infrastructure requirements for <%= vars.single_leader_plan %>
+## <a id='infrastructure'></a> Infrastructure requirements for multi-site configuration
 
-Before you use the <%= vars.single_leader_plan %> plan, consider the following requirements.
+Before you deploy a multi-site configuration, consider the following requirements.
 
 ### <a id='capacity'></a> Capacity planning
 
-When calculating IaaS usage, you must take into account that each
-<%= vars.single_leader_plan %> instance requires two VMs.
-Therefore, the resources used for <%= vars.single_leader_plan %> plan is
-twice the amount of single node plan.
+When calculating IaaS usage, take into account that each multi-site configuration deploys two service
+instances: a primary either of type <%= vars.single_leader_plan_lc %> or HA cluster, and a
+secondary of type <%= vars.single_leader_plan_lc %>.
+- Each <%= vars.single_leader_plan_lc %> service instance deploys one VM. Therefore the smallest multi-site
+configuration deploys two VMs (one per foundation), twice the footprint of a service instance created from a
+single-node plan.
+- Each HA cluster service instance deploys four VMs. Therefore the largest multi-site configuration deploys
+five VMs, 5x the footprint of a service instance created from a single-node plan.
+- The above configurations initially deploy a single VM within your secondary foundation. During failover
+and switchover operations (which promote your secondary instance into a primary instance), you may elect to
+scale up your <%= vars.single_leader_plan_lc %> secondary into a HA cluster primary. And a switchover from
+a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan_lc %> secondary. These scaling
+operations impact the distribution of VMs across your two foundations.
 
 For more information,
 see [Setting limits for on-demand service instances](.//set-quotas.html) and
@@ -274,11 +293,11 @@ see [Setting limits for on-demand service instances](.//set-quotas.html) and
 
 ### <a id='network'></a> Networking requirements
 
-You must consider the <%= vars.single_leader_plan %> instances that are deployed in
+You must consider the <%= vars.single_leader_plan_lc %> instances that are deployed in
 data centers are a geographically farther apart experience higher latencies.
 
 For information about the standard networking rules,
-see [Required Networking Rules for <%= vars.single_leader_plan %>](./about.html#multi-site-ports).
+see [Required Networking Rules for <%= vars.single_leader_plan_lc %>](./about.html#multi-site-ports).
 
 ### <a id="avail-zones"></a> Availability zones
 
@@ -298,10 +317,11 @@ the HA plan must match those configured for the single node multisite plan.</p>
 For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
 in _<%= vars.product_full %> Recommended Usage and Limitations_.
 
-## <a id='limitations'></a> <%= vars.single_leader_plan %> limitations
+## <a id='limitations'></a> Multi-site replication limitations
 
-The <%= vars.single_leader_plan %> plan has the following limitation:
+Multi-site replication has the following limitation:
 
 <p class="note important">
 <span class="note__title"> Important</span> Synchronous replication is not supported. For multi‑site
-replication plans, any data that is written to the leader is asynchronously replicated to the follower.</p>
+replication plans, any data written to the primary instance is asynchronously replicated to the
+secondary instance.</p>
