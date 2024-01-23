@@ -299,6 +299,23 @@ data centers are a geographically farther apart experience higher latencies.
 For information about the standard networking rules,
 see [Required Networking Rules for <%= vars.single_leader_plan_lc %>](./about.html#multi-site-ports).
 
+### <a id="avail-zones"></a> Availability zones
+
+With the addition of a new feature that allows scaling up and down between
+single node multisite leaders and Highly Available (HA) leaders, extra care
+must be taken to ensure that the availability zones (AZ) are compatible between
+the two plans.
+
+To minimize impact of an availability zone (AZ) outage and to remove single points
+of failure, VMware recommends that you provision three AZs if using HA deployments.
+With three AZs, nodes are deployed to separate AZs.
+
+<p class="note important">
+<span class="note__title"> Important</span> In order to scale between the two plan types, the availability zones configured for
+the HA plan must match those configured for the single node multisite plan.</p>
+
+For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
+in _<%= vars.product_full %> Recommended Usage and Limitations_.
 
 ## <a id='limitations'></a> Multi-site replication limitations
 

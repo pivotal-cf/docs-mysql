@@ -331,6 +331,15 @@ set it to read-only by running:
         -c '{"initiate-failover":"make-leader-read-only"}'<br>
     Updating service instance primary-db as admin...
     OK</pre>
+   + The service instance can be made writable again by running:
+     ```
+     cf update-service --wait PRIMARY-INSTANCE -c '{"multisite": "make-leader-writeable"}''
+     ```
+     
+     For example:
+     <pre class="terminal">$ cf update-service --wait primary-node -c '{"multisite": "make-leader-writeable"}'<br>
+     Updating service instance primary-node as admin...
+     OK</pre>
 
   - To determine whether your leader was created from a <%= vars.single_leader_plan_lc%>
 or a HA cluster plan, run `cf services` and look in the "plan" column. Consult your
