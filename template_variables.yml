@@ -12,6 +12,7 @@ template_variables:
 
   product_full: VMware Tanzu SQL with MySQL for VMs
   product_short: Tanzu SQL for VMs
+  product_old: MySQL for Pivotal Cloud Foundry
 
   app_runtime_full: VMware Tanzu Application Service for VMs
   app_runtime_abbr: TAS for VMs
