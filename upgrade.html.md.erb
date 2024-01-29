@@ -51,6 +51,13 @@ By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
 [About individual service instance upgrades](#individual-upgrades).
 
+>**Important**
+> As of <%= vars.product_short %> v3.2.0, only MySQL 8.0 is supported. When upgrading any plans _previously configured_
+> with "MySQL Default Version" set to "5.7" must be updated to specify "8.0".  On upgrade, all previously created
+> MySQL v5.7 service instance will be updated to MySQL v8.0 when either the platform operator runs the
+> [upgrade-all-service-instances](./errands.html#upgrade-all-service-instances) errand or the developer
+> [individually upgrades a service instance](./use.html#upgrade-an-individual-service-instance) via the cf cli.
+
 1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
 see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
@@ -90,9 +97,10 @@ An operator updates a stemcell version or their version of <%= vars.product_shor
 ### <a id='change-plan'></a>Plan change
 
 A developer changes their service instance to provide a different service plan, using `cf update-service` or Apps Manager.
-This process is used to update Service Instances from Percona 5.7 to Percona 8.0. For example
+
+ For example
 ```
-cf update-service SERVICE-INSTANCE -p PLAN-WITH-8.0
+cf update-service SERVICE-INSTANCE -p NEW-PLAN
 ```
 
 - <strong>Impact:</strong> Apps lose access to the MySQL service while <%= vars.ops_manager %>

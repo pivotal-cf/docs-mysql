@@ -83,7 +83,7 @@ to all service plans:
         <td>3</td>
         <td>This setting is the number of days before binary log files are automatically removed. <br>
         For more information, see
-        the <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_expire_logs_days">MySQL documentation</a>.</td>
+        the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_binlog_expire_logs_seconds">MySQL documentation</a>.</td>
     </tr>
     <tr>
         <td><strong>InnoDB Transaction Log Durability</strong></td>
@@ -91,7 +91,7 @@ to all service plans:
         <td>1</td>
         <td>At each transaction commit, logs are written and flushed to disk.
             <br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_flush_log_at_trx_commit">
             MySQL documentation</a>.</td>
      </tr>
     <tr>
@@ -101,7 +101,7 @@ to all service plans:
         <td>
           This setting defines the method used to flush data to InnoDB data and log files. <br>
           For more information, see the
-          <a href="https://dev.mysql.com/doc/refman/5.7/en/innodb-parameters.html#sysvar_innodb_flush_method">MySQL documentation</a>.
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_flush_method">MySQL documentation</a>.
     </tr>
     <tr>
         <td><strong>InnoDB Auto Increment Lock Mode</strong></td>
@@ -111,6 +111,8 @@ to all service plans:
             This setting uses the interleaved mode.
             This enables multiple statements to execute at the same time.
             There can be gaps in auto-incrementing columns.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_autoinc_lock_mode">MySQL documentation</a>.
         </td>
     </tr>
     <tr>
@@ -118,14 +120,20 @@ to all service plans:
         <td><code>innodb-buffer-pool-size</code></td>
         <td>50% of the available memory on each service instance</td>
         <td>This setting is dynamically configured to be 50% of the available memory on each
-            service instance.</td>
+            service instance.
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_buffer_pool_size">MySQL documentation</a>.
+        </td>
     </tr>
      <tr>
         <td><strong>InnoDB Log Buffer Size</strong></td>
         <td><code>innodb-log-buffer-size</code></td>
         <td>32&nbsp;MB</td>
         <td>This setting defaults to 32&nbsp;MB to avoid excessive disk I/O when
-            issuing large transactions.</td>
+            issuing large transactions.
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_buffer_size">MySQL documentation</a>.
+        </td>
     </tr>
     <tr>
         <td><strong>Log Bin Trust Function Creators</strong></td>
@@ -134,7 +142,7 @@ to all service plans:
         <td>
             This setting relaxes constraints on how MySQL writes stored procedures
             to the binary log. <br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-binary-log.html#sysvar_log_bin_trust_function_creators">
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-binary-log.html#sysvar_log_bin_trust_function_creators">
                 MySQL documentation</a>.
         </td>
     </tr>
@@ -149,7 +157,7 @@ to all service plans:
             and permit developers to override the default when they create a
             service instance. <br>For more information about using lowercase
             table names, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/identifier-case-sensitivity.html">
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">
                 MySQL documentation</a>.
         </td>
     </tr>
@@ -164,7 +172,7 @@ to all service plans:
         <td><code>max_binlog_size default</code></td>
         <td>~1/3 of the Space Limit for Binary Logs if <strong>Limit binary log disk use</strong> is selected.
         <td>For more information, see <a href="install-config.html#mysql">Configure MySQL</a> and
-            <a href="https://www.percona.com/doc/percona-server/5.7/flexibility/max_binlog_files.html">
+            <a href="https://docs.percona.com/percona-server/8.0/binlog-space.html">
             Percona documentation</a>.<br>
             If <strong>Limit binary log disk use</strong> is not selected, then no maximum is set.</td>
     </tr>
@@ -177,6 +185,8 @@ to all service plans:
             <%= vars.product_short %> uses user credentials, rather than hostnames, to authenticate access.
             Therefore, most deployments do not need reverse DNS lookups.<br><br>
             To activate reverse name resolution, deselect this option.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_skip_name_resolve">MySQL documentation</a>.
         </td>
     </tr>
     <tr>
@@ -188,7 +198,7 @@ to all service plans:
             VMware recommends this security setting to prevent users from manipulating
             files on the server file system. <br>
             For more information, see
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/security-against-attack.html">
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/security-against-attack.html">
                 Making MySQL Secure Against Attackers</a>.
         </td>
     </tr>
@@ -198,7 +208,7 @@ to all service plans:
         <td>8192</td>
         <td>For information about changing this setting,
             see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_table_definition_cache">
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_table_definition_cache">
                 MySQL documentation</a>.
         </td>
     </tr>
@@ -224,17 +234,8 @@ and leader-follower plans use the server defaults listed in the following table:
         <td>5000 connections per service instance</td>
         <td>
             System processes count towards this limit.
-        </td>
-    </tr>
-    <tr>
-        <td><strong>MyISAM Recover Options</strong></td>
-        <td><code>myisam-recover-options</code></td>
-        <td>BACKUP, FORCE</td>
-        <td>
-            This setting enables <%= vars.product_short %> to recover from most MyISAM problems
-            without human intervention. <br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_myisam-recover-options">
-                MySQL documentation</a>.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections">MySQL documentation</a>.
         </td>
     </tr>
     <tr>
@@ -244,13 +245,18 @@ and leader-follower plans use the server defaults listed in the following table:
         <td>
             <%= vars.product_short %> enables the event scheduler so users can create and use
             events in their dedicated service instances.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_event_scheduler">MySQL documentation</a>.
         </td>
     </tr>
      <tr>
         <td><strong>InnoDB Log File Size</strong></td>
         <td><code>innodb-log-file-size</code></td>
         <td>256&nbsp;MB</td>
-        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.</td>
+        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size">MySQL documentation</a>.
+        </td>
     </tr>
 
     <tr>
@@ -259,7 +265,7 @@ and leader-follower plans use the server defaults listed in the following table:
         <td><code>utf8_general_ci</code></td>
         <td>You can override this during a session.<br>For instructions about
           viewing available and default collations,
-          see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
+          see the <a href="https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html">
         MySQL documentation</a>.</td>
     </tr>
     <tr>
@@ -268,7 +274,7 @@ and leader-follower plans use the server defaults listed in the following table:
         <td><code>ON</code></td>
         <td> When enabled, relay log recovery happens automatically after server startup.<br>
           For more information, see the
-        <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
+        <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
     </tr>
 </table>
 
@@ -293,17 +299,8 @@ HA cluster plans use the server defaults listed in the following table:
         <td>5000 connections per service instance</td>
         <td>
             System processes count towards this limit.
-        </td>
-    </tr>
-    <tr>
-        <td><strong>MyISAM Recover Options</strong></td>
-        <td><code>myisam-recover-options</code></td>
-        <td>OFF</td>
-        <td>
-            This setting enables <%= vars.product_short %> to recover from most MyISAM problems
-            without human intervention. <br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_myisam-recover-options">
-                MySQL documentation</a>.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections">MySQL documentation</a>.
         </td>
     </tr>
     <tr>
@@ -313,20 +310,25 @@ HA cluster plans use the server defaults listed in the following table:
         <td>
             <%= vars.product_short %> enables the event scheduler so users can create and use
             events in their dedicated service instances.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_event_scheduler">MySQL documentation</a>.
         </td>
     </tr>
      <tr>
         <td><strong>InnoDB Log File Size</strong></td>
         <td><code>innodb-log-file-size</code></td>
         <td>1024&nbsp;MB</td>
-        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.</td>
+        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size">MySQL documentation</a>.
+        </td>
     </tr>
     <tr>
         <td><strong>Collation Server</strong></td>
         <td><code>collation-server</code></td>
         <td><code>utf8_unicode_ci</code></td>
         <td>You can override this during a session. <br>For instructions about
-          viewing available and default collations, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
+          viewing available and default collations, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html">
         MySQL documentation</a>.</td>
     </tr>
     <tr>
@@ -335,7 +337,7 @@ HA cluster plans use the server defaults listed in the following table:
         <td><code>ON</code></td>
         <td> When enabled, relay log recovery happens automatically after server startup.<br>
           For more information, see the
-        <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
+        <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
     </tr>
 </table>
 
@@ -359,17 +361,8 @@ In addition to the server default settings that are common to all plans,
         <td>5000 connections per service instance</td>
         <td>
             System processes count towards this limit.
-        </td>
-    </tr>
-    <tr>
-        <td><strong>MyISAM Recover Options</strong></td>
-        <td><code>myisam-recover-options</code></td>
-        <td>OFF</td>
-        <td>
-            This setting activates <%= vars.product_short %> to recover from most MyISAM problems
-            without human intervention.<br>For more information, see the
-            <a href="https://dev.mysql.com/doc/refman/5.7/en/server-options.html#option_mysqld_myisam-recover-options">
-                MySQL documentation</a>.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_max_connections">MySQL documentation</a>.
         </td>
     </tr>
     <tr>
@@ -379,13 +372,18 @@ In addition to the server default settings that are common to all plans,
         <td>
             <%= vars.product_short %> activates the event scheduler so users can create and use
             events in their dedicated service instances.
+            For more information, see the
+            <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_event_scheduler">MySQL documentation</a>.
         </td>
     </tr>
      <tr>
         <td><strong>InnoDB Log File Size</strong></td>
         <td><code>innodb-log-file-size</code></td>
         <td>1024&nbsp;MB</td>
-        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.</td>
+        <td><%= vars.product_short %> clusters default to a log-file size of 256&nbsp;MB.
+          For more information, see the
+          <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-parameters.html#sysvar_innodb_log_file_size">MySQL documentation</a>.
+        </td>
     </tr>
 
     <tr>
@@ -394,7 +392,7 @@ In addition to the server default settings that are common to all plans,
         <td><code>utf8_unicode_ci</code></td>
         <td>You can override this setting during a session.<br>
           For instructions about
-          viewing available and default collations, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/charset-charsets.html">
+          viewing available and default collations, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/charset-charsets.html">
         MySQL documentation</a>.</td>
     </tr>
     <tr>
@@ -403,6 +401,6 @@ In addition to the server default settings that are common to all plans,
         <td><code>OFF</code></td>
         <td> When enabled, relay log recovery happens automatically after server startup.<br>
           For more information, see the
-        <a href="https://dev.mysql.com/doc/refman/5.7/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
+        <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-options-replica.html#sysvar_relay_log_recovery">MySQL documentation</a>.</td>
     </tr>
 </table>

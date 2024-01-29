@@ -17,10 +17,20 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
+>**Important**
+> 3.1.x is the last version of <%= vars.product_full %> that supports MySQL 5.7.
+> 3.2.0 and later only supports MySQL 8.0. If upgrading from an earlier <%= vars.product_short %> release, any plans previously configured with "MySQL Default Version" of 5.7 must be reconfigured to specify 8.0. See [Upgrading VMware SQL with MySQL for Tanzu Application Service](./upgrade.html) for details on upgrading the tile.
+
 
 This release includes the following changes:
 + Demoted multi-site leaders can be made writable again
 + A number of high and critical CVEs were addressed by updating the components to the latest version
+
+### Breaking Changes
+
++ **As of <%= vars.product_short %> v3.2.0, MySQL v5.7 is no longer supported.**:
+
+  Existing service plans that previously configured "MySQL Default Version" with "5.7" must be updated.   Service instances created with these plans will be updated to MySQL 8.0 when the instance is upgraded.  See [Upgrading VMware SQL with MySQL for Tanzu Application Service](./upgrade.html) for details on upgrading the tile.
 
 ### Resolved Issues
 
