@@ -7,6 +7,11 @@ owner: MySQL
 You can trigger a failover and switchover
  when using a multi-site configuration.
 
+A failover or switchover performs the following tasks:
+1. Redirects traffic from primary to secondary foundation
+1. Promotes original follower to be the leader
+1. Reconfigures replication
+
 These operations redirect
  traffic from your primary to your secondary foundation, and promote your secondary
 foundation's former follower to be the new leader. Failover discards your primary foundation's former

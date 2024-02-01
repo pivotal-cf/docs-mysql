@@ -136,21 +136,25 @@ This table compares the recovery point objectives for the topologies:
 
 <table class="table">
 <thead>
-  <tr><th>Type of downtime</th>
-    <th>Single Node</th>
-    <th>Leader-Follower</th>
-    <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan_lc %></th>
-    <th>Highly Available Multi-Site Leader</th>
+  <tr>
+    <th>Topology</th>
+    <th>Planned Maintenance</th>
+    <th>Unplanned Downtime</th>
+    <th>Data Recovery</th>
   </tr>
   </thead>
-  <tr><td><strong>Planned Maintenance</strong></td><td>Zero</td>
-      <td>Zero</td><td>Zero</td><td>Zero</td><td>Zero</td></tr>
-  <tr><td><strong>Unplanned Downtime</strong></td><td>Zero</td>
-      <td>Replica lag, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td><td>Almost zero*</td></tr>
-  <tr><td><strong>Data Recovery</strong></td><td>Time since last backup</td>
-      <td>The time to initialize the follower VM, or zero if in sync mode</td><td>Almost zero*</td><td>Replica lag</td><td>Almost zero*</td></tr>
+  <tr><td><strong>Single Node</strong></td><td>Zero</td>
+      <td>Zero</td><td>Time since last backup</td></tr>
+  <tr><td><strong>Leader-Follower</strong></td><td>Zero</td>
+      <td>Replica lag, or zero if in sync mode</td><td>The time to initialize the follower VM, or zero if in sync mode</td></tr>
+  <tr><td><strong>Highly Available Cluster</strong></td><td>Zero</td>
+      <td>Almost zero*</td><td>Almost zero*</td></tr>
+  <tr><td><strong><%= vars.single_leader_plan_lc %></strong></td><td>Zero</td>
+      <td>Replica lag</td><td>Replica lag</td></tr>
+  <tr><td><strong>Highly Available Multi-Site Leader</strong></td><td>Zero</td>
+      <td>Almost zero*</td><td>Almost zero*</td></tr>
 </table>
+
 
  *Database clients are notified that incomplete transactions are not saved.
 
@@ -160,29 +164,26 @@ This table compares the recovery time objectives for the topologies:
 
 <table class="table">
 <thead>
-  <tr><th>Type of downtime</th>
-    <th>Single Node</th>
-    <th>Leader-Follower</th>
-    <th>Highly Available Cluster</th>
-    <th><%= vars.single_leader_plan_lc %></th>
-    <th>Highly Available Multi-Site Leader</th></tr>
-</thead>
-  <tr><td><strong>Planned Maintenance</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
-      <td>Time required depends on the type of maintenance</td>
-      <td>Almost zero*</td>
-    <td>Time for developer to initiate switchover and for switchover to complete</td><td>Almost zero*</td></tr>
-  <tr><td><strong>Unplanned Downtime</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
-      <td>Time required to restore the VM or time for operator to initiate failover and
-          for failover to complete</td>
-      <td>Almost zero*</td>
-    <td>Time for developer to initiate failover and for failover to complete</td><td>Almost zero*</td></tr>
-  <tr><td><strong>Data Recovery</strong></td><td>Time to restore from backup</td>
-      <td>Time for operator to initiate failover and for failover to complete</td><td>Almost zero*</td>
-    <td>Time for developer to initiate failover and for failover to complete</td><td>Almost zero*</td></tr>
+  <tr>
+    <th>Topology</th>
+    <th>Planned Maintenance</th>
+    <th>Unplanned Downtime</th>
+    <th>Data Recovery</th>
+  </tr>
+  </thead>
+  <tr><td><strong>Single Node</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
+      <td>Time required to recreate the VM and reconnect to storage</td><td>Time to restore from backup</td></tr>
+  <tr><td><strong>Leader-Follower</strong></td><td>Time required depends on the type of maintenance</td>
+      <td>Time required to restore the VM or time for operator to initiate failover and for failover to complete</td><td>Time for operator to initiate failover and for failover to complete</td></tr>
+  <tr><td><strong>Highly Available Cluster</strong></td><td>Almost zero*</td>
+      <td>Almost zero*</td><td>Almost zero*</td></tr>
+  <tr><td><strong><%= vars.single_leader_plan_lc %></strong></td><td>Time for developer to initiate switchover and for switchover to complete</td>
+      <td>Time for developer to initiate failover and for failover to complete</td><td>Time for developer to initiate failover and for failover to complete</td></tr>
+  <tr><td><strong>Highly Available Multi-Site Leader</strong></td><td>Almost zero*</td>
+      <td>Almost zero*</td><td>Almost zero*</td></tr>
 </table>
 
  *This includes time for apps to reconnect to the MySQL service instance.
-
 
 ## <a id="risk"></a> Risk
 
