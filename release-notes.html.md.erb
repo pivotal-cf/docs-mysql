@@ -17,13 +17,15 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
-
 This release includes the following changes:
++ Multi-site replication can be configured using highly available (HA) leaders
 + Demoted multi-site leaders can be made writable again
 + A number of high and critical CVEs were addressed by updating the components to the latest version
 
 ### Resolved Issues
-
+This release resolves the following issues:
++ Database objects (stored procedures, functions, views) created by users are still available after those users are deleted. Previously,
+a user with the same username would need to be recreated.
 
 ### Compatibility
 
