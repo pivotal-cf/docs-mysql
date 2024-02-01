@@ -100,16 +100,11 @@ During follower promotion, you may optionally update it to a HA Cluster
 plan. See [Select a multi-site leader topology](./use-multi-site.html/#select-ms-leader-topology)
 for more information.
 
-Note that updating a follower to a high-availability cluster takes longer 
-than does retaining its existing <%= vars.single_leader_plan_lc%> topology. If rapid failover
-is your highest priority, then consider retaining the follower's
-<%= vars.single_leader_plan_lc%> service plan.
+Note that updating to a HA Cluster will require more time compared to keeping the existing <%= vars.single_leader_plan_lc%> plan type.
 
 ## <a id='failover'></a> Trigger a failover
 
-<p> Only trigger failover
-  if you do not need to recover the leader service instance.
-</p>
+<p> Only trigger failover if you do not need to recover the leader service instance. </p>
 
 To trigger a failover:
 
@@ -235,7 +230,7 @@ non-responsive, purge the service instance by doing the procedure [Purge a Servi
        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-backup-restore-restore-pcf-bbr.html">
          Restoring Deployments from Backup with BBR</a>.
      </p>
-  * If your service instance is still responsive:
+  + If your service instance is still responsive:
       1. Remove all app bindings by following the procedure [Unbind an App
     from a Service Instance](./use.html#unbind) in _Using <%= vars.product_full %>_.
 
@@ -258,14 +253,13 @@ To create a follower:
     ```
     Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
-1. Create a service instance using the a <%= vars.single_leader_plan_lc%> plan:
+1. Create a service instance using the <%= vars.single_leader_plan_lc%> plan:
     + Follow the procedure in [Create a Service Instance](./use.html#create)
     in _Using <%=vars.product_full %>_.
     + Do not name your service instance `follower` because, if in the future
     you trigger a failover or switchover, this instance can no longer be the follower.
 
 ### <a id='restore-follower'></a> Reconfigure multi-site replication
-URHERE: l/f verbiage
 The follower in the primary foundation needs to catch up to the newly promoted leader
 in the secondary foundation.
 
@@ -301,10 +295,8 @@ you will receive an error message similar to:<br><br>
     ```
    Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
-1. Set your leader to read-only, and downscale it from a high-availability
-cluster to a single-node <%= vars.single_leader_plan_lc%> service instance if it
-is using a HA cluster plan.
-  - If your leader is a HA cluster, set it to read-only and downscale it to a
+1. Set your leader to read-only.
+  - If your leader is a HA service instance, set it to read-only and downscale it to a
 single node by running:
 
     ```
@@ -323,7 +315,7 @@ the <%= vars.single_leader_plan_lc%> topology.
     Updating service instance primary-db as admin...
     OK</pre>
 
-  - If your leader was a single-node <%= vars.single_leader_plan_lc%> service instance,
+  - If your leader is a single-node <%= vars.single_leader_plan_lc%> service instance,
 set it to read-only by running:
 
     ```
