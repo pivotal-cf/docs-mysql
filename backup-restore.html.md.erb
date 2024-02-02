@@ -97,25 +97,24 @@ it uploads two files with Unix epoch-timestamped filenames:
 The metadata file contains information about the backup that looks similar to the following:
 
 ```
-ibbackup_version = 2.4.5
-end_time = 2017-04-24 21:00:03
+end_time = 2024-01-29 18:56:21
 lock_time = 0
-binlog_pos =
-incremental = N
-encrypted = N
-server_version = 5.7.16-10-log
-start_time = 2017-04-24 21:00:00
-tool_command = --user=admin --password=... --stream=tar tmp/
-innodb_from_lsn = 0
-innodb_to_lsn = 2491844
-format = tar
-compact = N
-name =
-tool_name = innobackupex
+innodb_to_lsn = 23136604
 partial = N
+tool_name = xtrabackup
+start_time = 2024-01-29 18:56:18
 compressed = N
-uuid = fd13cf26-2930-11e7-871e-42010a000807
-tool_version = 2.4.5
+encrypted = N
+incremental = N
+format = xbstream
+name =
+tool_command = --defaults-file=/var/vcap/jobs/streaming-mysql-backup-tool/config/mysql-defaults-file.cnf --backup --stream=xbstream --target-dir=/var/vcap/store/xtrabackup_tmp
+tool_version = 8.0.35-30
+binlog_pos = filename 'mysql-bin.000012', position '197', GTID of the last change 'cfe096a6-bebf-11ee-be4e-4fcff573e33e:1-345'
+uuid = 180170b2-bed8-11ee-9e4f-42010a000122
+ibbackup_version = 8.0.35-30
+server_version = 8.0.35-27
+innodb_from_lsn = 0
 ```
 
 The most important entries in the metadata file are the following:
