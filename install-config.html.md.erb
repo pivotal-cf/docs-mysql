@@ -305,7 +305,7 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
   <table>
     <tr><th>Field</th><th>Description</th></tr>
     <tr><td><strong>MySQL Default Version</strong></td>
-        <td><strong>MySQL 8.0</strong> will be selected as the default and only option.
+        <td><strong>MySQL 8.0</strong> is selected as the default and only option.
     </tr>
     <tr><td><strong>Service Plan Access</strong></td>
         <td>Select one of the following options:<br>
@@ -454,7 +454,7 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
             This sets the MySQL server system variable
             <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the following check box. <br>
-            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
+            For more information about <code>lower_case_table_names</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
             <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
@@ -645,7 +645,7 @@ To activate monitoring and logging in the MySQL service:
     <tr><td><strong>Enable User Statistics Logging</strong></td>
         <td>Select this check box to collect user statistics. You can use these statistics to better
           understand server activity and identify load sources.
-            For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">MySQL documentation</a>.
+            For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">Percona documentation</a>.
             </td></tr>
     <tr><td><strong>Enable Server Activity Logging</strong></td>
         <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.

@@ -429,14 +429,16 @@ To upgrade a single service instance:
 
 ####<a id="upgrade-mysql-8-0"></a> Upgrade a service instance to MySQL 8.0
 
-As of <%= vars.product_short %> v3.2, only MySQL 8.0 is supported.  If you created a service instance under a previous
-version of <%= vars.product_short %> then upgrading the service instance will force an upgrade to MySQL 8.0.
+As of <%= vars.product_short %> v3.2, only MySQL 8.0 is supported. If you created a service instance using a previous
+version of <%= vars.product_short %>, then upgrading the service instance will force an upgrade to MySQL 8.0.
 
-A service instance may be upgraded by running:
+To upgrade a service instance, run the following command:
 
   ```
   cf update-service SERVICE-INSTANCE-NAME --upgrade
   ```
+
+Where `SERVICE-INSTANCE-NAME` is the name of the service instance to upgrade.
 
 ###<a id="share"></a> Share service instances
 
