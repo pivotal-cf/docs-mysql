@@ -23,6 +23,13 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: Jan 19th, 2023**
 
+### Breaking Changes
+
+- Brokers connect to NATS using TLS.
+- Service Gateway connects to Routing using TLS.
+
+Because of these changes, <%= vars.product_full %> supports only <%= vars.app_runtime_full %> v2.11.x and later.
+
 ### Changes
 
 This release includes the following changes:
