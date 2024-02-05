@@ -305,12 +305,8 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
   <table>
     <tr><th>Field</th><th>Description</th></tr>
     <tr><td><strong>MySQL Default Version</strong></td>
-        <td>Select one of the following options:<br>
-            <ul><li> <strong>MySQL 5.7</strong>: (Default selection) Sets MySQL 5.7 as the default version for the service plan.
-                </li>
-                <li><strong>MySQL 8.0</strong>: Sets MySQL 8.0 as the default version for the service plan.
-                </li>
-        </ul></td></tr>
+        <td><strong>MySQL 8.0</strong> is selected as the default and only option.
+    </tr>
     <tr><td><strong>Service Plan Access</strong></td>
         <td>Select one of the following options:<br>
             <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
@@ -458,7 +454,7 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
             This sets the MySQL server system variable
             <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the following check box. <br>
-            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
+            For more information about <code>lower_case_table_names</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
             <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
@@ -468,7 +464,7 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
         <td>Select this check box to activate data downloading from the local file system of the client.
             VMware discourages selecting this check box. Before you activate local in-file,
             review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
+            See the <a href="https://dev.mysql.com/doc/refman/8.0/en/load-data-local-security.html">MySQL documentation</a>.
     </td></tr>
     <tr>
       <a name="limit-disk-use"></a>
@@ -480,7 +476,7 @@ a detailed description of the configurable fields."](./images/mysql-config.png)
     </td></tr>
     <tr><td><strong>Wait Timeout</strong></td>
         <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
     </td></tr>
   </table>
 
@@ -649,11 +645,11 @@ To activate monitoring and logging in the MySQL service:
     <tr><td><strong>Enable User Statistics Logging</strong></td>
         <td>Select this check box to collect user statistics. You can use these statistics to better
           understand server activity and identify load sources.
-            For more information about user statistics, see the <a href="https://www.percona.com/doc/percona-server/5.7/diagnostics/user_stats.html">MySQl documentation</a>.
+            For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">Percona documentation</a>.
             </td></tr>
     <tr><td><strong>Enable Server Activity Logging</strong></td>
         <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
-            For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
+            For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
             <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
             You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
           </p>

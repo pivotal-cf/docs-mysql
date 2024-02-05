@@ -17,13 +17,27 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 **Release Date: TBD**
 
+<p class="note important">
+<span class="note__title">Important</span>
+3.1.x is the last version of <%= vars.product_full %> that supports MySQL 5.7.
+<%= vars.product_short %> 3.2.0 and later only support MySQL 8.0. If you are upgrading from an earlier release of <%= vars.product_short %>, you must reconfigure any plans previously configured with "MySQL Default Version" of 5.7 to specify 8.0. For more information about upgrading <%= vars.product_short %>, see [Upgrading VMware SQL with MySQL for Tanzu Application Service](./upgrade.html).
+</p>
+
 This release includes the following changes:
 + Multi-site replication can be configured using highly available (HA) leaders
 + Demoted multi-site leaders can be made writable again
 + A number of high and critical CVEs were addressed by updating the components to the latest version
 
+### Breaking Changes
+
++ **MySQL v5.7 is no longer supported.**:
+
+  Existing service plans that used a "MySQL Default Version" of "5.7" must be updated. Any service instance created with one of these plans will be updated to MySQL 8.0 when the instance is upgraded. For more information about upgrading <%= vars.product_short %>, see [Upgrading VMware SQL with MySQL for Tanzu Application Service](./upgrade.html).
+
 ### Resolved Issues
+
 This release resolves the following issues:
+
 + Database objects (stored procedures, functions, views) created by users are still available after those users are deleted. Previously,
 a user with the same user name needed to be recreated.
 
