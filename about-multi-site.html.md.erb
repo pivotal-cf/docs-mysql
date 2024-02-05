@@ -10,12 +10,13 @@ This topic tells you about how multi-site replication works in
 multi-site replication.
 
 Multi-site capability in <%= vars.product_short %>
-is a disaster recovery solution that enables developers to provision a 
-pair of service instances across two foundations.
-These two instances are then configured to replicate from a designated leader instance
-to its follower instance in the other foundation.
+is a disaster recovery solution that enables developers to provision leader-follower
+instances across two foundations.
+These leader-follower service instances comprise instances
+that are configured for replication.
 Operators can configure two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
+
 
 Within your primary foundation you have a choice of topologies for your replication leader instance:
 - <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
@@ -136,7 +137,7 @@ replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
 <span class="note__title"> Important</span>  The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
-Therefore the follower service instance is read-only; database writes on the Secondary Foundation get proxied to the Primary Foundation (and then replicated back to the Secondary). 
+The follower service instance is read-only, and apps can write only to the leader.
 
 
 ## <a id='failover-switchover'></a> Failover and switchover
