@@ -100,11 +100,14 @@ During follower promotion, you may optionally update it to a HA Cluster
 plan. See [Select a multi-site leader topology](./use-multi-site.html/#select-ms-leader-topology)
 for more information.
 
-Note that updating to a HA Cluster will require more time compared to keeping the existing <%= vars.single_leader_plan_lc%> plan type.
+<p class="note">
+<span class="note__title">Note</span>
+Updating to an HA cluster requires more time than keeping the existing <%= vars.single_leader_plan_lc%> plan type.
+</p>
 
 ## <a id='failover'></a> Trigger a failover
 
-<p> Only trigger failover if you do not need to recover the leader service instance. </p>
+<p> Only trigger a failover if you do not need to recover the leader service instance. </p>
 
 To trigger a failover:
 
@@ -296,7 +299,7 @@ you will receive an error message similar to:<br><br>
    Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
 1. Set your leader to read-only.
-  - If your leader is a HA service instance, set it to read-only and downscale it to a
+  - If your leader is an HA service instance, set it to read-only and downscale it to a
 single node by running:
 
     ```
