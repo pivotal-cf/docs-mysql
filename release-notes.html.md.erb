@@ -15,7 +15,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="3-2-0"></a> v3.2.0
 
-**Release Date: TBD**
+**Release Date: February 9th, 2024**
 
 <p class="note important">
 <span class="note__title">Important</span>
@@ -52,256 +52,27 @@ The following components are compatible with this release:
     <th>Version</th>
   </tr>
 </thead>
-  <tr><td>Stemcell</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona Server</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona Server</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona XtraBackup</td><td>UPDATE ME</td></tr>
-  <tr><td>Percona XtraBackup</td><td>UPDATE ME</td></tr>
-  <tr><td>adbr-release</td><td>UPDATE ME</td></tr>
-  <tr><td>bpm-release</td><td>UPDATE ME</td></tr>
-  <tr><td>cf-cli-release</td><td>UPDATE ME</td></tr>
-  <tr><td>cf-service-gateway-release</td><td>UPDATE ME</td></tr>
-  <tr><td>count-cores-indicator-release</td><td>UPDATE ME</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>UPDATE ME</td></tr>
-  <tr><td>dedicated-mysql-adapter-release</td><td>UPDATE ME</td></tr>
-  <tr><td>loggregator-agent-release</td><td>UPDATE ME</td></tr>
-  <tr><td>mysql-backup-release</td><td>UPDATE ME</td></tr>
-  <tr><td>mysql-monitoring-release</td><td>UPDATE ME</td></tr>
-  <tr><td>on-demand-service-broker-release</td><td>UPDATE ME</td></tr>
-  <tr><td>pxc-release</td><td>UPDATE ME</td></tr>
-  <tr><td>routing-release</td><td>UPDATE ME</td></tr>
-  <tr><td>service-metrics-release</td><td>UPDATE ME</td></tr>
-</table>
-
-## <a id="3-1-0"></a> v3.1.0
-
-**Release Date: Oct 4th, 2023**
-
-This release allows application developers to set up multi-site plans between <%= vars.app_runtime_full %> foundations without the need for platform engineers to make the foundations routable.
-
-This release includes the following changes:
-
-+ A number of high and critical CVEs were addressed by updating the components to the latest version
-
-### Resolved Issues
-
-This release resolves the following issues:
-+ Smoke tests could fail when service instance creation takes longer than 10 minutes. This was a regression introduced in MySQL v3.0.2.
-The previous service instance creation timeout of 60 minutes has been restored.
-
-### Compatibility
-
-The following components are compatible with this release:
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>Component</th>
-    <th>Version</th>
-  </tr>
-</thead>
-  <tr><td>Stemcell</td><td>1.260*</td></tr>
-  <tr><td>Percona Server</td><td>8.0.33-25</td></tr>
-  <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>8.0.33-25</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.42-31.65</td></tr>
-  <tr><td>Percona XtraBackup</td><td>8.0.33-28</td></tr>
-  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
-  <tr><td>adbr-release</td><td>0.93.0*</td></tr>
-  <tr><td>bpm-release</td><td>1.2.9*</td></tr>
-  <tr><td>cf-cli-release</td><td>1.50.0*</td></tr>
-  <tr><td>cf-service-gateway-release</td><td>128.0.0*</td></tr>
+  <tr><td>Stemcell</td><td>1.351*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.44-48</td></tr>
+  <tr><td>Percona Server</td><td>8.0.35-27</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>5.7.44-31*</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>8.0.35-27</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.29</td></tr>
+  <tr><td>Percona XtraBackup</td><td>8.0.35-30*</td></tr>
+  <tr><td>adbr-release</td><td>0.99.0*</td></tr>
+  <tr><td>bpm-release</td><td>1.2.15*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.59.0</td></tr>
+  <tr><td>cf-service-gateway-release</td><td>143.0.0*</td></tr>
   <tr><td>count-cores-indicator-release</td><td>2.0.0</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>0.187.27*</td></tr>
-  <tr><td>dedicated-mysql-adapter-release</td><td>0.340.35*</td></tr>
-  <tr><td>loggregator-agent-release</td><td>7.6.4*</td></tr>
-  <tr><td>mysql-backup-release</td><td>2.32.0*</td></tr>
-  <tr><td>mysql-monitoring-release</td><td>10.5.0*</td></tr>
-  <tr><td>on-demand-service-broker-release</td><td>0.45.0*</td></tr>
-  <tr><td>pxc-release</td><td>1.0.18*</td></tr>
-  <tr><td>routing-release</td><td>0.283.0*</td></tr>
-  <tr><td>service-metrics-release</td><td>2.0.33*</td></tr>
-</table>
-
-## <a id="3-0-3"></a> v3.0.3
-
-**This version was an internal dev-release**
-
-## <a id="3-0-2"></a> v3.0.2
-
-**Release Date: Sep 12th, 2023**
-
-### Resolved Issues
-
-This release resolves the following issues:
-
-+ **MySQL service bindings support MariaDB Connector/J v3.0 and later:**:
-
-  MariaDB Connector/J 3.0 and later, by default, accept only `jdbc:mariadb` connection strings.
-
-  In service bindings created by the MySQL tile, the `jdbcUrl` parameter now includes the `permitMysqlScheme` option. This ensures that apps that use MariaDB Connector/J 3.0 and later are compatible with MySQL tile service bindings.
-
-+ Removes obsolete `syslog_migration_selector` certificates field. The certificates eventually expire, causing a certificate flag in <%= vars.ops_manager %>, but the field was hidden, so manual intervention was required to address the flag.
-
-+ Fixes an issue where users were unable to delete service keys created for MySQL 8.0 service instances with single-node or leader-follower topologies.
-
-### Changes
-
-This release includes the following changes:
-
-+ Adds dynamic configuration of wsrep_applier_threads. For information about
-this configuration, see [WSREP applier threads](./change-default.html#wsrep_applier_threads) in _Changing Defaults Using Arbitrary Parameters_.
-
-+ Sets `wsrep_applier_threads` value based on available CPUs to improve throughput.
-
-+ To support named time zones, time zone information is now loaded into the MySQL system database by default. For information about how to use this feature, see the [MySQL documentation](https://dev.mysql.com/doc/refman/8.0/en/time-zone-support.html).
-
-+ Adds service-gateway support to multi-site topologies. For more information, see [About enabling external access](./about-multi-site.html#enable-external-access) in _About multi-site replication_.
-
-### Breaking Changes
-
-+ **Percona 8.0.22: DROP USER fails with an error if any account to be dropped is named as the DEFINER attribute for any stored object.:**:
-
-  This release addresses this breaking change in Percona. Deleting a service key no longer results in a failure when the user associated with the service key has been used to create stored objects.
-  Instead, as in previous releases, the objects will be orphaned.
-
-### Compatibility
-
-The following components are compatible with this release:
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>Component</th>
-    <th>Version</th>
-  </tr>
-</thead>
-  <tr><td>Stemcell</td><td>1.222*</td></tr>
-  <tr><td>Percona Server</td><td>8.0.33-25*</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.42-31.65*</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>8.0.33-25*</td></tr>
-  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
-  <tr><td>Percona XtraBackup</td><td>8.0.33-28*</td></tr>
-  <tr><td>adbr-release</td><td>0.89.0*</td></tr>
-  <tr><td>bpm-release</td><td>1.2.7*</td></tr>
-  <tr><td>cf-cli-release</td><td>1.49.0*</td></tr>
-  <tr><td>cf-service-gateway-release</td><td>123.0.0*</td></tr>
-  <tr><td>count-cores-indicator-release</td><td>2.0.0</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>0.217.1*</td></tr>
-  <tr><td>dedicated-mysql-adapter-release</td><td>0.382.2*</td></tr>
-  <tr><td>loggregator-agent-release</td><td>7.6.2*</td></tr>
-  <tr><td>mysql-backup-release</td><td>2.31.0*</td></tr>
-  <tr><td>mysql-monitoring-release</td><td>10.4.0*</td></tr>
-  <tr><td>on-demand-service-broker-release</td><td>0.44.0*</td></tr>
-  <tr><td>pxc-release</td><td>1.0.17*</td></tr>
-  <tr><td>routing-release</td><td>0.281.0*</td></tr>
-  <tr><td>service-metrics-release</td><td>2.0.32*</td></tr>
-</table>
-
-## <a id="3-0-1"></a> v3.0.1
-
-**Release Date: Jul 20th, 2023**
-
-### Changes
-
-This release includes the following changes:
-
-+ A number of high and critical CVEs were addressed by updating the components to the latest version
-+ Customers who are enrolled to capture telemetry can additionally track the number of CPU cores consumed by all MySQL service instances within a foundation
-
-### Known Issues
-
-This release has the following known issues:
-
-<%= partial vars.path_to_partials + "/mysql/orphaned-stored-object" %>
-
-### Compatibility
-
-The following components are compatible with this release:
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>Component</th>
-    <th>Version</th>
-  </tr>
-</thead>
-  <tr><td>Stemcell</td><td>1.148</td></tr>
-  <tr><td>Percona Server</td><td>8.0.32-24*</td></tr>
-  <tr><td>Percona Server</td><td>5.7.42-46</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>8.0.32-24*</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.41-31.65*</td></tr>
-  <tr><td>Percona XtraBackup</td><td>8.0.32-26*</td></tr>
-  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
-  <tr><td>adbr-release</td><td>0.83.0*</td></tr>
-  <tr><td>bpm-release</td><td>1.2.4*</td></tr>
-  <tr><td>cf-cli-release</td><td>1.45.0*</td></tr>
-  <tr><td>cf-service-gateway-release</td><td>114.0.0*</td></tr>
-  <tr><td>count-cores-indicator-release</td><td>2.0.0*</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>0.187.14*</td></tr>
-  <tr><td>dedicated-mysql-adapter-release</td><td>0.340.12*</td></tr>
-  <tr><td>loggregator-agent-release</td><td>6.5.12*</td></tr>
-  <tr><td>mysql-backup-release</td><td>2.27.0*</td></tr>
-  <tr><td>mysql-monitoring-release</td><td>10.1.0*</td></tr>
-  <tr><td>on-demand-service-broker-release</td><td>0.43.2*</td></tr>
-  <tr><td>pxc-release</td><td>1.0.14*</td></tr>
-  <tr><td>routing-release</td><td>0.275.0*</td></tr>
-  <tr><td>service-metrics-release</td><td>2.0.30*</td></tr>
-</table>
-
-## <a id="3-0-0"></a> v3.0.0
-
-**Release Date: April 5th, 2023**
-
-### Changes
-
-This release includes the following changes:
-
-+ Support for MySQL 5.7 and 8.0: a new **MySQL Default Version** field for service plans enables operators to select either MySQL 5.7 or MySQL 8.0 as the default version for service instances created using the plan.
-+ The tile requires Ubuntu Jammy stemcell 1.95 or later.
-+ The number of available service plans has increased from 9 to 18.
-+ For HA service instances, all nodes use TLS for internal communication.
-+ VM extensions: a new field for service plans enables operators to configure a list of custom VM extensions that apply to VMs for service instances created using the plan.
-
-### Breaking Changes
-
-This release includes the following breaking changes:
-
-+ The `enable_tls` property has been renamed to `enforce_client_tls`.
-+ Ubuntu Jammy stemcells require TLS v1.2 or above.
-+ MySQL 8.0 service instances support both TLS v1.2 and TLS v1.3. MySQL 5.7 service instances support only TLS v1.2.
-
-### Known Issues
-
-This release has the following known issues:
-
-<%= partial vars.path_to_partials + "/mysql/orphaned-stored-object" %>
-
-### Compatibility
-
-The following components are compatible with this release:
-
-<table class="table">
-  <thead>
-  <tr>
-    <th>Component</th>
-    <th>Version</th>
-  </tr>
-</thead>
-  <tr><td>Stemcell</td><td>1.95</td></tr>
-  <tr><td>Percona Server</td><td>8.0.31-23*</td></tr>
-  <tr><td>Percona Server</td><td>5.7.40-43</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>8.0.31-23*</td></tr>
-  <tr><td>Percona XtraDB Cluster</td><td>5.7.40-31.63</td></tr>
-  <tr><td>Percona XtraBackup</td><td>8.0.32-25*</td></tr>
-  <tr><td>Percona XtraBackup</td><td>2.4.27</td></tr>
-  <tr><td>pxc-release</td><td>1.0.8*</td></tr>
-  <tr><td>mysql-backup-release</td><td>2.25.0*</td></tr>
-  <tr><td>mysql-monitoring-release</td><td>9.24.0*</td></tr>
-  <tr><td>dedicated-mysql-release</td><td>0.187.0*</td></tr>
-
+  <tr><td>dedicated-mysql-release</td><td>0.246.0*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.434.0*</td></tr>
+  <tr><td>loggregator-agent-release</td><td>7.7.4*</td></tr>
+  <tr><td>mysql-backup-release</td><td>2.39.0*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.11.0*</td></tr>
+  <tr><td>on-demand-service-broker-release</td><td>0.45.3</td></tr>
+  <tr><td>pxc-release</td><td>1.0.24*</td></tr>
+  <tr><td>routing-release</td><td>0.289.0*</td></tr>
+  <tr><td>service-metrics-release</td><td>2.0.35*</td></tr>
 </table>
 
 &#42; _Components marked with an asterisk have been updated_
