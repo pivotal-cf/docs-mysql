@@ -139,6 +139,13 @@ version 3.2 or later may be configured to be multi-site leaders. HA clusters cre
 migration process. For more information see [Migrating HA instances for multi-site replication](migrate-ha-to-multi-site.html).
 (In all cases these clusters must meet the above [Prerequisites](#prereq).)
 
+<p class="note important">
+    <span class="note__title"> Important</span>
+    Using highly available deployments as a multi-site leader requires that Service-Gateway is enabled, and that the leader instance is created with Service-Gateway access.
+
+    For more information, see <a href="./create-service-gateway-instance.html">Creating a service instance with Service-Gateway access</a>
+</p>
+
 ## <a id='create-multi-dc-service-instances'></a>Create multi-site service instances in your two foundations
 
 You will create one service instance in your primary foundation to act as the replication leader.

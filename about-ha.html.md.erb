@@ -66,6 +66,14 @@ to that follower <%= vars.single_leader_plan_lc %> instance.
 
 For more information, see [About multi-site replication](./about-multi-site.html).
 
+<p class="note important">
+    <span class="note__title"> Important</span>
+    Using highly available deployments as a multi-site leader requires that Service-Gateway is enabled, and that the leader instance is created with Service-Gateway access.
+
+    For general information about service-gateway access, including about architecture and use cases,
+    see <a href="./service-gateway-access.html">About Service-Gateway access</a>
+</p>
+
 ## <a id="requirements"></a> Infrastructure Requirements for highly available deployments
 
  Before you decide to use HA clusters for <%= vars.product_short %> service plans, consider the
