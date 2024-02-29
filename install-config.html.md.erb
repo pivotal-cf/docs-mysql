@@ -309,9 +309,9 @@ you must configure a <%= vars.single_leader_plan %> plan in both foundations usi
     <tr><th>Field</th><th>Description</th></tr></thead>
     <tr><td><strong>MySQL Default Version</strong></td>
         <td>Select one of the following options:<br>
-            <ul><li> <strong>MySQL 5.7</strong>: (Default selection) Sets MySQL 5.7 as the default version for the service plan.
+            <ul><li><strong>MySQL 8.0</strong>: (Default selection) Sets MySQL 8.0 as the default version for the service plan.
                 </li>
-                <li><strong>MySQL 8.0</strong>: Sets MySQL 8.0 as the default version for the service plan.
+                <li> <strong>MySQL 5.7</strong>: Sets MySQL 5.7 as the default version for the service plan.
                 </li>
         </ul></td></tr>
     <tr><td><strong>Service Plan Access</strong></td>
@@ -381,6 +381,12 @@ an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
 prevents them from losing their data by orphaning their disk in AZ1.<br><br>
 If you need to manually migrate the data from one AZ to another, see
 <a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/index.html">About Data Migration in <%= vars.product_short %></a>.
+</p>
+
+<p class="note important">
+<span class="note__title"> Important</span>"MySQL 8.0" is the "MySQL Default Version" assigned to any "Inactive" plans you choose to configure.
+<br>
+This includes plans previously configured and saved with "MySQL Default Version" set to "MySQL 5.7", and then later made "Inactive"; re-activating such a plan (by selecting its topology) resets its "MySQL Default Version" to "MySQL 8.0". Pay especially close attention to the "MySQL Default Version" in any plan you re-activate from an "Inactive" state.
 </p>
 
 ### <a id="inactive"></a> Deactivate Service Plan (Optional)
