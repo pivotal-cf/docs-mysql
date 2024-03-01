@@ -46,8 +46,7 @@ To create an ASG for <%= vars.product_short %>:
 
 1. Click your services network and record the **CIDR**.
 
-    ![alt-text="In the 'Create Networks' pane, in the 'Networks' section the 'services'
-    network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are shown."](./images/opsman-dir-reserved-ips.png)
+    ![alt-text="In the 'Create Networks' pane, in the 'Networks' section the 'services' network is expanded. The 'Name', 'Google Network Name', and 'CIDR', fields are shown."](./images/opsman-dir-reserved-ips.png)
 
 2. Create a JSON file named `mysql-asg.json` using the following template:
 
@@ -115,9 +114,7 @@ To download and import the <%= vars.product_short %> tile:
 
 1. Click the newly-added **<%= vars.product_short %>** tile to open its configuration panes.
 
-    ![alt-text="On the left side of the image, 'Assign AZs and Networks' is selected.
-    The 'AZ and Network Assignments' configuration pane is shown.
-    See the following section for a description of the fields in this pane."](./images/config-azs.png)
+    ![alt-text="On the left side of the image, 'Assign AZs and Networks' is selected. The 'AZ and Network Assignments' configuration pane is shown. See the following section for a description of the fields in this pane."](./images/config-azs.png)
 
 ## <a id="config-on-demand"></a> Configuring the tile
 
@@ -279,20 +276,16 @@ For each plan that you want to use in your deployment:
     </div>
 
     <div id="tab1" class="tabcontent" style="display:block">
-    ![alt-text="The 'Plan' section is shown and the radio button next to 'Single Node' is selected.
-    The table in the next step describes the fields that are revealed after selecting this plan."](./images/single-node-plan.png)
+      <img src="./images/single-node-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Single Node' is selected. The table in the next step describes the fields that are revealed after selecting this plan." />
     </div>
     <div id="tab2" class="tabcontent">
-    ![alt-text="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected.
-    The table in the next step describes the fields that are revealed after selecting this plan."](./images/leader-follower-plan.png)
+      <img src="./images/leader-follower-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Leader Follower' is selected. The table in the next step describes the fields that are revealed after selecting this plan." />
     </div>
     <div id="tab3" class="tabcontent">
-    ![alt-text="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected.
-    The table in the next step describes the fields that are revealed after selecting this plan."](./images/ha-plan.png)
+      <img src="./images/ha-plan.png" alt="The 'Plan' section is shown and the radio button next to 'HA cluster' is selected. The table in the next step describes the fields that are revealed after selecting this plan." />
     </div>
     <div id="tab4" class="tabcontent">
-    ![alt-text="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected.
-    The table in the next step describes the fields that are revealed after selecting this plan."](./images/multi-site-plan.png)
+      <img src="./images/multi-site-plan.png" alt="The 'Plan' section is shown and the radio button next to 'Multi-Site Replication' is selected. The table in the next step describes the fields that are revealed after selecting this plan." />
     </div>
 
 2. Configure the fields as follows:
@@ -403,8 +396,8 @@ To deactivate a service plan:
 To configure global settings for all service instances:
 
 1. Click **Settings**.
-![alt-text="The 'Settings' pane. See the following step for a
-detailed description of the configurable fields."](./images/global-settings.png)
+
+    ![alt-text="The 'Settings' pane. See the following step for a detailed description of the configurable fields."](./images/global-settings.png)
 
 1. Configure the fields as follows:
     <table class="table">
@@ -442,8 +435,7 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**.
 
-![alt-text="The 'Mysql Configuration' pane. See the following step for
-a detailed description of the configurable fields."](./images/mysql-config.png)
+    ![alt-text="The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields."](./images/mysql-config.png)
 
 1. Configure the fields as follows:
 
@@ -492,8 +484,7 @@ To configure backups:
 
 1. Click **Backups**.
 
-![alt-text="The radio buttons for backup configuration are
-Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
+    ![alt-text="The radio buttons for backup configuration are Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
 
 1. Select a **Backup configuration** and follow the procedure for your storage solution
 in the *Configuring Automated Backups* topic:
@@ -716,7 +707,7 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
+    ![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
     <table>
@@ -768,8 +759,7 @@ To review errands:
 
 1. Click **Errands**.
 
-![alt-text="Errand list for VMware Tanzu SQL with MySQL for VMs.
-See the following step for detailed descriptions of the configurable drop-down menus."](./images/errands.png)
+    ![alt-text="Errand list for VMware Tanzu SQL with MySQL for VMs. See the following step for detailed descriptions of the configurable drop-down menus."](./images/errands.png)
 
 2. Review the settings for the following errands:
 
