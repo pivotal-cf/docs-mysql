@@ -19,10 +19,11 @@ or spread across multiple data centers or geographical regions.
 
 
 Within your primary foundation you have a choice of topologies for your replication leader instance:
-- <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
+
+* <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
 The resulting configuration resembles a leader-follower service instance, but with the two single-node
 instances deployed and replicating across two separate foundations.
-- High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
+* High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
 leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resilience to
 in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
 
@@ -35,17 +36,12 @@ is set in the plan definition section of Ops Manager; more information is in [Co
 
 The foundation types are:
 
-* **Primary Foundation:** This foundation is deployed in your main data center.
-Generally, this data center receives the majority of app traffic.
-<%= vars.product_short %> assumes that the leader is deployed on this foundation when
-healthy.
-
-* **Secondary Foundation:** This foundation is deployed in your failover data center.
-Generally, this data center receives less app traffic than the primary foundation,
-or no traffic at all.
-<%= vars.product_short %> assumes that the follower is deployed on this foundation unless
-a developer triggers a failover.
-
+<ul>
+  <li><strong>Primary Foundation:</strong> This foundation is deployed in your main data center. Generally, this data center receives the majority of app traffic. <%= vars.product_short %> assumes that the leader is deployed on this foundation when healthy.</li>
+  <li>
+  <li><strong>Secondary Foundation:</strong> This foundation is deployed in your failover data center. Generally, this data center receives less app traffic than the primary foundation, or no traffic at all. <%= vars.product_short %> assumes that the follower is deployed on this foundation unless a developer triggers a failover.
+  </li>
+</ul>
 
 <p> The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately
   from the leader-follower plan type.
@@ -124,21 +120,22 @@ The following diagram describes the app-layer active-active topology in a health
 
 In the previous diagram:
 
-+ The GLB directs traffic to the apps in the primary and
-  secondary foundations.
-  The apps in the primary and secondary foundation issue transactions to the leader service instance. <br><br>
-  The app in the secondary foundation issues transactions to the leader:
-      1. Connects to the follower service instance
-      1. Issues transactions to the follower service instance
-      1. Forwards the transactions from the follower service instance to the leader
+* The GLB directs traffic to the apps in the primary and secondary foundations. The apps in the primary and secondary foundation issue transactions to the leader service instance.
 
-+ The follower service instance in the secondary foundation continuously
+  The app in the secondary foundation issues transactions to the leader:
+
+     1. Connects to the follower service instance
+     1. Issues transactions to the follower service instance
+     1. Forwards the transactions from the follower service instance to the leader
+
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
-<span class="note__title"> Important</span>  The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
+<span class="note__title"> Important</span>
+The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
 The follower service instance is read-only, and apps can write only to the leader.
-
+</p>
 
 ## <a id='failover-switchover'></a> Failover and switchover
 
@@ -277,16 +274,10 @@ Before you deploy a multi-site configuration, consider the following requirement
 When calculating IaaS usage, take into account that each multi-site configuration deploys two service
 instances: a primary either of type <%= vars.single_leader_plan_lc %> or HA cluster, and a
 secondary of type <%= vars.single_leader_plan_lc %>.
-- Each <%= vars.single_leader_plan_lc %> service instance deploys one VM. Therefore the smallest multi-site
-configuration deploys two VMs (one per foundation), twice the footprint of a service instance created from a
-single-node plan.
-- Each HA cluster service instance deploys four VMs. Therefore the largest multi-site configuration deploys
-five VMs, 5x the footprint of a service instance created from a single-node plan.
-- The above configurations initially deploy a single VM within your secondary foundation. During failover
-and switchover operations (which promote your secondary instance into a primary instance), you may elect to
-scale up your <%= vars.single_leader_plan_lc %> secondary into a HA cluster primary. And a switchover from
-a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan_lc %> secondary. These scaling
-operations impact the distribution of VMs across your two foundations.
+
+* Each <%= vars.single_leader_plan_lc %> service instance deploys one VM. Therefore the smallest multi-site configuration deploys two VMs (one per foundation), twice the footprint of a service instance created from a single-node plan.
+* Each HA cluster service instance deploys four VMs. Therefore the largest multi-site configuration deploys five VMs, 5x the footprint of a service instance created from a single-node plan.
+* The above configurations initially deploy a single VM within your secondary foundation. During failover and switchover operations (which promote your secondary instance into a primary instance), you may elect to scale up your <%= vars.single_leader_plan_lc %> secondary into a HA cluster primary. And a switchover from a HA cluster primary will downscale that instance to a <%= vars.single_leader_plan_lc %> secondary. These scaling operations impact the distribution of VMs across your two foundations.
 
 For more information,
 see [Setting limits for on-demand service instances](.//set-quotas.html) and
