@@ -30,9 +30,9 @@ in-foundation outages. More information on HA clusters can be found in [About hi
 The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the replication follower instance.
 
 <p class="note important">
-<span class="note__title"> Important</span>  <%= vars.product_short %> supports using a High-availability cluster
-service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version
-is set in the plan definition section of Ops Manager; more information is in [Configuring Service Plans](install-config.html#procedure-for-configuring-service-plans-8)
+  <span class="note__title"> Important</span>
+  <%= vars.product_short %> supports using a High-availability cluster service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version is set in the plan definition section of Ops Manager. For more information, see <a href="./install-config.html#procedure-for-configuring-service-plans-8">Configuring Service Plans</a>.
+</p>
 
 The foundation types are:
 
@@ -143,7 +143,7 @@ The follower service instance is read-only, and apps can write only to the leade
 Therefore, <%= vars.product_short %> does not trigger failover or switchover automatically
 and developers must manually trigger a failover or switchover.
 For instructions about triggering failover or switchover, see
-see [Triggering multi-wite replication failover and switchover](./multi-site-trigger-failover.html).
+[Triggering multi-wite replication failover and switchover](./multi-site-trigger-failover.html).
 
 The following table describes when you can trigger a failover or switchover:
 
