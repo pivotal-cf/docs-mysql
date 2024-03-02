@@ -36,16 +36,10 @@ The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the
 
 The foundation types are:
 
-<ul>
-  <li><strong>Primary Foundation:</strong> This foundation is deployed in your main data center. Generally, this data center receives the majority of app traffic. <%= vars.product_short %> assumes that the leader is deployed on this foundation when healthy.</li>
-  <li>
-  <li><strong>Secondary Foundation:</strong> This foundation is deployed in your failover data center. Generally, this data center receives less app traffic than the primary foundation, or no traffic at all. <%= vars.product_short %> assumes that the follower is deployed on this foundation unless a developer triggers a failover.
-  </li>
-</ul>
+* **Primary Foundation:** This foundation is deployed in your main data center. Generally, this data center receives the majority of app traffic. <%= vars.product_short %> assumes that the leader is deployed on this foundation when healthy.</li>
+* **Secondary Foundation:** This foundation is deployed in your failover data center. Generally, this data center receives less app traffic than the primary foundation, or no traffic at all. <%= vars.product_short %> assumes that the follower is deployed on this foundation unless a developer triggers a failover.
 
-<p> The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately
-  from the leader-follower plan type.
-</p>
+The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately from the leader-follower plan type.
 
 For information about enabling multi-site replication, see
 [Preparing for multi-site replication](./prepare-multi-site.html).
