@@ -401,12 +401,12 @@ To configure global settings for all service instances:
 1. Configure the fields as follows:
     <table class="table">
       <col width="30%">
-     <thead><tr><th>Field</th><th>Instructions</th></tr>
+      <thead><tr><th>Field</th><th>Instructions</th></tr></thead>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
           <td>Select this check box if either of the following apply:<ul>
               <li>Your service instances need an external backup, blobstore, or syslog storage</li>
               <li>You have configured BOSH to use an external blobstore</li></ul>
-              </td></tr></thead>
+              </td></tr>
       <tr><td><strong>Maximum service instances</strong></td>
           <td>Enter the global quota for all on-demand instances summed across every on-demand plan.
               For information about determining global quotas, see <a href="recommended.html#serviceplan">
@@ -762,12 +762,12 @@ To review errands:
 
 1. Review the settings for the following errands:
 
-<table>
+  <table>
     <tr>
       <th>Errand</th>
       <th>Description</th>
     </tr>
-      <tr>
+    <tr>
       <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
     </tr>
     <tr>
@@ -789,18 +789,18 @@ To review errands:
       <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
       <td>Upgrades existing instances of a service to its latest installed version.<br><br>
         If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.
-    </td>
+      </td>
+    </tr>
 
     <tr>
       <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
     </tr>
     <tr>
       <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
-      <td>Deletes all service instances and deregisters the broker.</td>
-
+      <td>Deletes all service instances and deregisters the broker.<br /><br />
       For more information about individual service instance upgrades,
-    see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>
-  </tr>
+      see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a></td>
+    </tr>
   </table>
 
 ### <a id="stemcell"></a> Verifying stemcell version and apply all changes
