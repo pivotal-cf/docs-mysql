@@ -20,6 +20,7 @@ confirm that you have done the following:
       a current version of <%= vars.product_short %>.
 
 1. Deployed both foundations. 
+
    1. **Routable Foundations**: the leader and follower service instances must be
    able to connect to each other on their respective IP addresses.
    You must verify that the CIDR ranges for the leader and follower nodes do not overlap.
@@ -48,8 +49,7 @@ foundations are in the Trusted Certificates field.
     The certificate for foundation 2 is on a new line directly after the certificate
 for foundation 1."](./images/multi-site-ca.png)
 
-1. Configure a <%= vars.single_leader_plan_lc %> plan on both foundations. See
-[Configure service plans](./install-config.html#active).
+1. Configure a <%= vars.single_leader_plan_lc %> plan on both foundations. For more information, see [Configure service plans](./install-config.html#active).
 
 1. If you want to enable developers to use high-availability instances as multi-site leaders, configure a high-availability
 plan on both foundations. Note you must assign the same Availability Zones (AZs) to both your high-availability plan and
