@@ -52,20 +52,20 @@ see
 
 Multi-site replication has the following benefits:
 
-+ **Resilience for Service Instances:** Developers can trigger a failover
+* **Resilience for Service Instances:** Developers can trigger a failover
 to maintain app uptime during a data center outage.
 For more information,
 see [Triggering multi-site replication failover and switchover](./multi-site-trigger-failover.html).
 
-+ **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
+* **Data Center Upgrades with Zero Downtime:** Operators can upgrade data centers
 without taking databases offline by triggering a switchover first.
 
-+ **Support for Multiple Cloud Deployment Models:**
+* **Support for Multiple Cloud Deployment Models:**
 Operators can configure multi-site replication with a
 single cloud or hybrid cloud deployment model.
 Both deployment models have the same end-user experience.
 
-+ **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
+* **Support for Active-Passive and App-Layer Active-Active Disaster Recovery:**
 For more information, see [About Active-Passive topology](#active-passive)
 and [About App-Layer Active-Active topology](#active-active).
 
@@ -90,9 +90,9 @@ The following diagram describes the active-passive topology in a healthy state:
 
 In the previous diagram:
 
-+ The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
+* The global DNS load balancer (GLB) directs traffic to the app in the primary foundation.
   This app issues transactions to the leader service instance.
-+ The follower service instance in the secondary foundation continuously
+* The follower service instance in the secondary foundation continuously
 replicates data from the leader service instance in the primary foundation.
 
 ##<a id='active-active'></a> App-Layer Active-Active topology
@@ -190,9 +190,9 @@ for a multi-site replication topology:
 
 In the previous diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation does not replicate data to another
+* The leader service instance in the secondary foundation does not replicate data to another
 service instance.
 
 ### <a id=active-passive-switchover></a> Active-Passive switchover
@@ -210,9 +210,9 @@ in an active-passive topology:
 
 In the preceding diagram:
 
-+ The GLB directs traffic to the app in the secondary foundation.
+* The GLB directs traffic to the app in the secondary foundation.
   This app issues transactions to the leader service instance in the secondary foundation.
-+ The leader service instance in the secondary foundation replicates data to the follower service
+* The leader service instance in the secondary foundation replicates data to the follower service
 instance in the primary foundation.
 
 ### <a id=active-active-switchover></a> App-Layer Active-Active switchover
@@ -230,16 +230,18 @@ in an active-active topology:
 
 In the preceding diagram:
 
-+ The GLB directs traffic to the apps in the primary and
+* The GLB directs traffic to the apps in the primary and
   secondary foundations.
   The apps in the primary and secondary foundation issue transactions to the leader service instance
-  in the secondary foundation. <br><br>
+  in the secondary foundation.
+
   The app in the primary foundation issues transactions to the leader:
+
       1. Connects to the follower service instance.
       1. Issues transactions to the follower service instance.
       1. Forwards the transactions from the follower service instance to the leader.
 
-+ The follower service instance in the primary foundation continuously
+* The follower service instance in the primary foundation continuously
 replicates data from the leader service instance in the secondary foundation
 
 ###<a id="enable-external-access"></a> About enabling external access
@@ -251,13 +253,13 @@ The following diagram describes what happens when you enable external-access for
 
 ![alt-text=""](./images/multi-site-external-access.png)
 
+<a href="./images/multi-site-external-access.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
 In the preceding diagram:
 
-+ Before external-access is enabled, replication traffic goes directly to the follower.
+* Before external-access is enabled, replication traffic goes directly to the follower.
 
-+ After external-access is enabled, replication traffic goes through tcp-router to the follower.
-
-<a href="./images/multi-site-external-access.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+* After external-access is enabled, replication traffic goes through tcp-router to the follower.
 
 ## <a id='infrastructure'></a> Infrastructure requirements for multi-site configuration
 
@@ -307,7 +309,6 @@ in _<%= vars.product_full %> Recommended Usage and Limitations_.
 
 Multi-site replication has the following limitation:
 
-<p class="note important">
-<span class="note__title"> Important</span> Synchronous replication is not supported. For multi‑site
+* Synchronous replication is not supported. For multi‑site
 replication plans, any data written to the primary instance is asynchronously replicated to the
-secondary instance.</p>
+secondary instance.
