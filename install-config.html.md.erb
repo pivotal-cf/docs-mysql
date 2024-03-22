@@ -129,29 +129,31 @@ and networks for the broker and MySQL service instances:
 
 1. Configure the fields as follows:
 
-<table class="table">
-<thead>
-    <tr><th>Field</th><th>Instructions</th></tr></thead>
-    <tr><td><strong>Place singleton jobs in</strong></td>
-        <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
-    <tr><td><strong>Balance other jobs in</strong></td>
-        <td>Ignore; not used.</td></tr>
-    <tr><td><strong>Network</strong></td>
-        <td>Select a subnet for the MySQL broker. This is typically the same subnet
-            that includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.<br>
-            This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
-            </td></tr>
-    <tr><td><strong>Service Network</strong></td>
-        <td>Select the subnet for the on-demand service instances.
-          This network is represented by the Service Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
-            <br><br>
-            If you are adding IPsec to encrypt MySQL communication, VMware recommends that you deploy MySQL to its own network
-            to avoid conflicts with services that are not IPsec compatible.
-         </td></tr>
-  </table>
+    <table class="table">
+        <thead>
+            <tr><th>Field</th><th>Instructions</th></tr>
+        </thead>
+        <tr><td><strong>Place singleton jobs in</strong></td>
+            <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
+        <tr><td><strong>Balance other jobs in</strong></td>
+            <td>Ignore; not used.</td></tr>
+        <tr><td><strong>Network</strong></td>
+            <td>Select a subnet for the MySQL broker. This is typically the same subnet
+                that includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.<br>
+                This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
+        </td></tr>
+        <tr><td><strong>Service Network</strong></td>
+            <td>Select the subnet for the on-demand service instances.
+              This network is represented by the Service Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
+                <br><br>
+                If you are adding IPsec to encrypt MySQL communication, VMware recommends that you deploy MySQL to its own network
+                to avoid conflicts with services that are not IPsec compatible.
+        </td></tr>
+    </table>
+
     <p class="note warning"><strong>Warning:</strong> You cannot change the regions or networks
     after you <strong>Apply Changes</strong>.
-  </p>
+    </p>
 
 3. Click **Save**.
 
@@ -292,77 +294,77 @@ For each plan that you want to use in your deployment:
 
 2. Configure the fields as follows:
 
-<p class="note important">
-<span class="note__title"> Important</span>  If you want to replicate data across multiple foundations or data centers,
-you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
-</p>
+    <p class="note important">
+    <span class="note__title"> Important</span>  If you want to replicate data across multiple foundations or data centers,
+    you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
+    </p>
 
-<table class="table">
-<thead>
-    <tr><th>Field</th><th>Description</th></tr></thead>
-    <tr><td><strong>MySQL Default Version</strong></td>
-        <td>Select one of the following options:<br>
-            <ul><li><strong>MySQL 8.0</strong>: (Default selection) Sets MySQL 8.0 as the default version for the service plan.
-                </li>
-                <li> <strong>MySQL 5.7</strong>: Sets MySQL 5.7 as the default version for the service plan.
-                </li>
-        </ul></td></tr>
-    <tr><td><strong>Service Plan Access</strong></td>
-        <td>Select one of the following options:<br>
-            <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
-              and displays the service plan to all developers in the Marketplace.
-                </li>
-                <li><strong>Disable:</strong> Deactivates access to all orgs and hides the service plan
-                  to all developers in the Marketplace.
-                  This deactivates creating new service instances of this plan.
-                </li>
-                <li><strong>Manual:</strong> Lets you manually control service access with the cf CLI.
-                    For more information, see <a href="./service-plan.html">Controlling Access to Service Plans by Org</a>.
-                </li>
-        </ul></td></tr>
-    <tr><td><strong>Plan Name</strong></td>
-        <td>Accept the default or enter a name.
-            This is the name that appears in the Marketplace for developers.</td></tr>
-    <tr><td><strong>Plan Description</strong></td>
-        <td>Accept the default or enter a description to help developers understand plan features.
-            VMware recommends adding VM type details and disk size to this field.
+    <table class="table">
+    <thead>
+        <tr><th>Field</th><th>Description</th></tr></thead>
+        <tr><td><strong>MySQL Default Version</strong></td>
+            <td>Select one of the following options:<br>
+                <ul><li><strong>MySQL 8.0</strong>: (Default selection) Sets MySQL 8.0 as the default version for the service plan.
+                    </li>
+                    <li> <strong>MySQL 5.7</strong>: Sets MySQL 5.7 as the default version for the service plan.
+                    </li>
+            </ul></td></tr>
+        <tr><td><strong>Service Plan Access</strong></td>
+            <td>Select one of the following options:<br>
+                <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
+                  and displays the service plan to all developers in the Marketplace.
+                    </li>
+                    <li><strong>Disable:</strong> Deactivates access to all orgs and hides the service plan
+                      to all developers in the Marketplace.
+                      This deactivates creating new service instances of this plan.
+                    </li>
+                    <li><strong>Manual:</strong> Lets you manually control service access with the cf CLI.
+                        For more information, see <a href="./service-plan.html">Controlling Access to Service Plans by Org</a>.
+                    </li>
+            </ul></td></tr>
+        <tr><td><strong>Plan Name</strong></td>
+            <td>Accept the default or enter a name.
+                This is the name that appears in the Marketplace for developers.</td></tr>
+        <tr><td><strong>Plan Description</strong></td>
+            <td>Accept the default or enter a description to help developers understand plan features.
+                VMware recommends adding VM type details and disk size to this field.
+            </td></tr>
+        <tr><td><strong>Plan Quota</strong></td>
+            <td>Enter the maximum number of service instances that can exist at one time.
+              If the plan quota field is blank, the plan quota is set to the global quota by default.
+              <br>
+            For information about the global quota, see <a href="./set-quotas.html">Setting Limits for On-Demand Service Instances</a>.</td></tr>
+        <tr><td><strong>Paid Plan</strong></td>
+            <td>Select this box to indicate that this service plan is paid.</td></tr>
+        <tr><td><strong>MySQL VM Type</strong></td>
+            <td>Select a VM type for the MySQL nodes.</td></tr>
+        <tr><td><strong>Jumpbox VM Type</strong></td>
+            <td>Only for highly available cluster plans. Select a VM type for the MySQL jumpbox node.
+                This VM is also called <code>mysql-monitor</code>. </td></tr>
+        <tr><td><strong>MySQL Persistent Disk</strong></td>
+            <td>Select a disk size. This disk stores the MySQL data.<br>
+                For sizing recommendations,
+                see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
         </td></tr>
-    <tr><td><strong>Plan Quota</strong></td>
-        <td>Enter the maximum number of service instances that can exist at one time.
-          If the plan quota field is blank, the plan quota is set to the global quota by default.
-          <br>
-        For information about the global quota, see <a href="./set-quotas.html">Setting Limits for On-Demand Service Instances</a>.</td></tr>
-    <tr><td><strong>Paid Plan</strong></td>
-        <td>Select this box to indicate that this service plan is paid.</td></tr>
-    <tr><td><strong>MySQL VM Type</strong></td>
-        <td>Select a VM type for the MySQL nodes.</td></tr>
-    <tr><td><strong>Jumpbox VM Type</strong></td>
-        <td>Only for highly available cluster plans. Select a VM type for the MySQL jumpbox node.
-            This VM is also called <code>mysql-monitor</code>. </td></tr>
-    <tr><td><strong>MySQL Persistent Disk</strong></td>
-        <td>Select a disk size. This disk stores the MySQL data.<br>
-            For sizing recommendations,
-            see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
-    </td></tr>
-    <tr><td><strong>Jumpbox Persistent Disk</strong></td>
-        <td>Only for highly available cluster plans. Select a disk size.
-          This disk stores backups. <br> For sizing recommendations,
-          see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.</td></tr>
-    <tr><td><strong>MySQL Availability Zone(s)</strong></td>
-        <td> BOSH deploys your service instances to the selected AZs.
-          If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
-        </td></tr>
-    <tr><td><strong>Plan VM Extensions</strong></td>
-        <td>Specify a comma-separated list of supported VM Extensions you want to
-          apply to service instances created under this plan. <br>
-          You can manage VM Extensions in Ops Manager or through the OM CLI.
-          For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html">
-          Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
-          in GitHub. <br>
-          If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
-          config), then instance creation attempts fail. <br>
-        </td></tr>
-  </table>
+        <tr><td><strong>Jumpbox Persistent Disk</strong></td>
+            <td>Only for highly available cluster plans. Select a disk size.
+              This disk stores backups. <br> For sizing recommendations,
+              see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.</td></tr>
+        <tr><td><strong>MySQL Availability Zone(s)</strong></td>
+            <td> BOSH deploys your service instances to the selected AZs.
+              If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
+            </td></tr>
+        <tr><td><strong>Plan VM Extensions</strong></td>
+            <td>Specify a comma-separated list of supported VM Extensions you want to
+              apply to service instances created under this plan. <br>
+              You can manage VM Extensions in Ops Manager or through the OM CLI.
+              For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html">
+              Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
+              in GitHub. <br>
+              If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
+              config), then instance creation attempts fail. <br>
+            </td></tr>
+      </table>
 
 4. Click Save.
 
@@ -445,39 +447,39 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Configure the fields as follows:
 
-<table class="table">
-<thead>
-    <tr><th>Field</th><th>Instructions</th></tr></thead>
-    <tr><td><strong>Enable Lower Case Table Names</strong></td>
-        <td>Select this check box to store all table names in lowercase.
-            This sets the MySQL server system variable
-            <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
-            To permit developers to override this default, see the following check box. <br>
-            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
-         </td></tr>
-    <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
-        <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
-            For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
-    <tr><td><strong>Enable Local Infile</strong></td>
-        <td>Select this check box to activate data downloading from the local file system of the client.
-            VMware discourages selecting this check box. Before you activate local in-file,
-            review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
-    </td></tr>
-    <tr>
-      <a name="limit-disk-use"></a>
-      <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
-      <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
-            with high-transaction rates.
-            Limiting the size of the transaction logs reduces the risk of the persistent disk
-            reaching capacity and causing service interruption.
-    </td></tr>
-    <tr><td><strong>Wait Timeout</strong></td>
-        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
-    </td></tr>
-  </table>
+    <table class="table">
+    <thead>
+        <tr><th>Field</th><th>Instructions</th></tr></thead>
+        <tr><td><strong>Enable Lower Case Table Names</strong></td>
+            <td>Select this check box to store all table names in lowercase.
+                This sets the MySQL server system variable
+                <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
+                To permit developers to override this default, see the following check box. <br>
+                For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
+                <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+             </td></tr>
+        <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
+            <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
+                For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
+        <tr><td><strong>Enable Local Infile</strong></td>
+            <td>Select this check box to activate data downloading from the local file system of the client.
+                VMware discourages selecting this check box. Before you activate local in-file,
+                review the security issues associated with <code>LOAD DATA LOCAL</code>.
+                See the <a href="https://dev.mysql.com/doc/refman/5.7/en/load-data-local-security.html">MySQL documentation</a>.
+        </td></tr>
+        <tr>
+          <a name="limit-disk-use"></a>
+          <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
+          <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
+                with high-transaction rates.
+                Limiting the size of the transaction logs reduces the risk of the persistent disk
+                reaching capacity and causing service interruption.
+        </td></tr>
+        <tr><td><strong>Wait Timeout</strong></td>
+            <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
+                For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+        </td></tr>
+      </table>
 
 ### <a id="backups"></a> Configuring backups
 
@@ -530,6 +532,7 @@ To activate TLS for the MySQL service:
 1. Do the procedures in [Preparing for TLS](prepare-tls.html).
 
 1. Click **Security**.
+
 1. For **Enforce application TLS**, select one of the following:
 
     <table class="table">
