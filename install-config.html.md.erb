@@ -781,44 +781,39 @@ To review errands:
 2. Review the settings for the following errands:
 
     <table class="table">
-    <thead>
+        <thead>
+            <tr>
+                <th>Errand</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
+            </tr>
+        </thead>
         <tr>
-          <th>Errand</th>
-          <th>Description</th>
+            <td><strong>Register On-demand MySQL Broker</strong></td>
+            <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
         </tr>
-          <tr>
-          <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
-        </tr></thead>
         <tr>
-          <td><strong>Register On-demand MySQL Broker</strong></td>
-          <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
+            <td><strong>Smoke Tests</strong></td>
+            <td>Validates basic MySQL operations.</td>
         </tr>
-
         <tr>
-          <td><strong>Smoke Tests</strong></td>
-          <td>Validates basic MySQL operations.</td>
+            <td><strong>Validate no IP-based bindings in use before upgrade-all-service-instances</strong></td>
+            <td>Checks if service instances have app bindings or service keys using IP addresses or have a TLS certificate that is signed with an IP address. If either is true, the installation fails.</td>
         </tr>
-
         <tr>
-          <td><strong>Validate no IP-based bindings in use before upgrade-all-service-instances</strong></td>
-          <td>Checks if service instances have app bindings or service keys using IP addresses or have a TLS certificate that is signed with an IP address. If either is true, the installation fails.</td>
+            <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
+            <td>Upgrades existing instances of a service to its latest installed version.<br><br>
+              If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>. For more information about individual service instance upgrades, see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>.
+            </td>
         </tr>
-
-        <tr>
-          <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
-          <td>Upgrades existing instances of a service to its latest installed version.<br><br>
-            If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.
-        </td>
-
         <tr>
           <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
         </tr>
         <tr>
           <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
           <td>Deletes all service instances and deregisters the broker.</td>
-
-          For more information about individual service instance upgrades,
-        see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>
       </tr>
     </table>
 
