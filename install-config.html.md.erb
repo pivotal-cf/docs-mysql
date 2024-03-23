@@ -431,43 +431,42 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**.
 
-![alt-text="The 'Mysql Configuration' pane. See the following step for
-a detailed description of the configurable fields."](./images/mysql-config.png)
+    ![alt-text="The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields."](./images/mysql-config.png)
 
 1. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Enable Lower Case Table Names</strong></td>
-        <td>Select this check box to store all table names in lowercase.
-            This sets the MySQL server system variable
-            <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
-            To permit developers to override this default, see the following check box. <br>
-            For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
-            <p> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
-         </td></tr>
-    <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
-        <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
-            For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
-    <tr><td><strong>Enable Local Infile</strong></td>
-        <td>Select this check box to activate data downloading from the local file system of the client.
-            VMware discourages selecting this check box. Before you activate local in-file,
-            review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/5.6/en/load-data-local-security.html">MySQL documentation</a>.
-    </td></tr>
-    <tr>
-      <a name="limit-disk-use"></a>
-      <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
-      <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
-            with high-transaction rates.
-            Limiting the size of the transaction logs reduces the risk of the persistent disk
-            reaching capacity and causing service interruption.
-    </td></tr>
-    <tr><td><strong>Wait Timeout</strong></td>
-        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
-    </td></tr>
-  </table>
+    <table>
+      <tr><th>Field</th><th>Instructions</th></tr>
+      <tr><td><strong>Enable Lower Case Table Names</strong></td>
+          <td>Select this check box to store all table names in lowercase.
+              This sets the MySQL server system variable
+              <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
+              To permit developers to override this default, see the following check box. <br>
+              For more information about <code>lower_case_table_names</code> , see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_lower_case_table_names">MySQL documentation</a>.
+              <p> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+           </td></tr>
+      <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
+          <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
+              For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
+      <tr><td><strong>Enable Local Infile</strong></td>
+          <td>Select this check box to activate data downloading from the local file system of the client.
+              VMware discourages selecting this check box. Before you activate local in-file,
+              review the security issues associated with <code>LOAD DATA LOCAL</code>.
+              See the <a href="https://dev.mysql.com/doc/refman/5.6/en/load-data-local-security.html">MySQL documentation</a>.
+      </td></tr>
+      <tr>
+        <a name="limit-disk-use"></a>
+        <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
+        <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
+              with high-transaction rates.
+              Limiting the size of the transaction logs reduces the risk of the persistent disk
+              reaching capacity and causing service interruption.
+      </td></tr>
+      <tr><td><strong>Wait Timeout</strong></td>
+          <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
+              For more information about <code>wait_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/5.7/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+      </td></tr>
+    </table>
 
 ### <a id="backups"></a> Configure backups
 
@@ -568,7 +567,7 @@ For more information about runtime CredHub, see [CredHub](<https://docs.vmware.c
 To store your service instance credentials in runtime CredHub:
 
 1. Ensure that you have configured the <%= vars.app_runtime_abbr %> tile to support securing service instance credentials in runtime CredHub.
-   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> tile](<https://docs.vmware.com/en/VMware-Tanzu-Application-Service/><%= vars.dot_major_tas_version %>/tas-for-vms/secure-si-creds.html#pas-config).
+   For instructions, see [Step 1: Configure the <%= vars.app_runtime_abbr %> tile](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/secure-si-creds.html#pas-config).
 1. Click **Security**.
 1. Select the **Enable Secure Service Instance Credentials** check box.
 1. Click **Save**.
@@ -704,7 +703,7 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
+    ![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
     <table>
@@ -773,46 +772,41 @@ To review errands:
 
 1. Review the settings for the following errands:
 
-<table>
-    <tr>
-      <th>Errand</th>
-      <th>Description</th>
-    </tr>
+    <table>
       <tr>
-      <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
-    </tr>
-    <tr>
-      <td><strong>Register On-demand MySQL Broker</strong></td>
-      <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
-    </tr>
-
-    <tr>
-      <td><strong>Smoke Tests</strong></td>
-      <td>Validates basic MySQL operations.</td>
-    </tr>
-
-    <tr>
-      <td><strong>Validate no IP-based bindings in use before upgrade-all-service-instances</strong></td>
-      <td>Checks if service instances have app bindings or service keys using IP addresses or have a TLS certificate that is signed with an IP address. If either is true, the installation fails.</td>
-    </tr>
-
-    <tr>
-      <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
-      <td>Upgrades existing instances of a service to its latest installed version.<br><br>
-        If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.
-    </td>
-
-    <tr>
-      <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
-    </tr>
-    <tr>
-      <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
-      <td>Deletes all service instances and de-registers the broker.</td>
-
-      For more information about individual service instance upgrades,
-    see <a href="./upgrade.html#individual-upgrades">About individual service instance upgrades</a>
-    </tr>
-  </table>
+        <th>Errand</th>
+        <th>Description</th>
+      </tr>
+        <tr>
+        <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
+      </tr>
+      <tr>
+        <td><strong>Register On-demand MySQL Broker</strong></td>
+        <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
+      </tr>
+      <tr>
+        <td><strong>Smoke Tests</strong></td>
+        <td>Validates basic MySQL operations.</td>
+      </tr>
+      <tr>
+        <td><strong>Validate no IP-based bindings in use before upgrade-all-service-instances</strong></td>
+        <td>Checks if service instances have app bindings or service keys using IP addresses or have a TLS certificate that is signed with an IP address. If either is true, the installation fails.</td>
+      </tr>
+      <tr>
+        <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
+        <td>Upgrades existing instances of a service to its latest installed version.<br><br>
+          If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.
+          For more information about individual service instance upgrades, see <a href="./upgrade.html#individual-upgrades">About individual service instance upgrades</a>.
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
+      </tr>
+      <tr>
+        <td><strong>Delete All Service Instances and Deregister Broker</strong></td>
+        <td>Deletes all service instances and de-registers the broker.</td>
+      </tr>
+    </table>
 
 ### <a id="stemcell"></a> Verify stemcell version and apply all changes
 
