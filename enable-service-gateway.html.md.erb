@@ -43,9 +43,7 @@ TCP router.
 1. From the **Status** tab of the <%= vars.app_runtime_abbr %> tile, record the cloud identity (CID) of
 the TCP router.
 
-![alt-text="Ops Manager UI with the 'Status' tab selected."](./images/TCP-router-CID.png)
-
-    <a href="./images/TCP-router-CID.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
+    ![alt-text="Ops Manager UI with the 'Status' tab selected."](./images/TCP-router-CID.png)
 
 ## <a id='configure-firewall'></a> Configure the firewall to allow incoming traffic to the TCP Router
 
@@ -111,9 +109,7 @@ To configure service-gateway access for the foundation:
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
 
-![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
-the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
+    ![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
     This activates the feature and makes the domain and port range fields visible.
 
@@ -145,6 +141,7 @@ text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
             </td>
         </tr>
     </table>
+
     <p class="note important">
     <span class="note__title"> Important</span> If you already have service instances using service-gateway, any modifications to this range
     must include ports that are already assigned to these service instances.
@@ -156,11 +153,7 @@ text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
     <code>1001</code>, and <code>1002</code>.
     </p>
 
-
-    <p> If service-gateway access is deactivated and then activated again, app
-      developers must create new service keys to obtain a new set of credentials for service-gateway
-      access.
-    </p>
+    If service-gateway access is deactivated and then activated again, app developers must create new service keys to obtain a new set of credentials for service-gateway access.
 
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 
@@ -169,9 +162,7 @@ text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
 
 ## <a id='disable-service-gateway-access'></a> Deactivate Service-Gateway access
 
-<p> If service-gateway access is deactivated and then activated again, app developers
-  must create new service keys to obtain a new set of credentials for service-gateway access.
-</p>
+If service-gateway access is deactivated and then activated again, app developers must create new service keys to obtain a new set of credentials for service-gateway access.
 
 To deactivate service-gateway access:
 
