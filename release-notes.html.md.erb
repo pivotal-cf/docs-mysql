@@ -13,9 +13,9 @@ and then upgrade to the latest patch available for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
-## <a id="3-2-0"></a> v3.2.0
+## <a id="3-2-0"></a> v3.3.0
 
-**Release Date: February 16th, 2024**
+**Release Date: TBD**
 
 <p class="note important">
 <span class="note__title">Important</span>
@@ -25,8 +25,8 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 This release includes the following changes:
 
-* Multi-site replication can be configured using highly available (HA) leaders
-* Demoted multi-site leaders can be made writable again
+* The bootstrap errand no longer requires an `--instance` designation when run; it self-selects a
+high-availability cluster instance node to run on.
 * A number of high and critical CVEs were addressed by updating the components to the latest version
 
 ### Breaking Changes
@@ -39,8 +39,7 @@ This release includes the following changes:
 
 This release resolves the following issues:
 
-* Database objects (stored procedures, functions, views) created by users are still available after those users are deleted. Previously,
-a user with the same user name needed to be recreated.
+* ...
 
 ### Compatibility
 
