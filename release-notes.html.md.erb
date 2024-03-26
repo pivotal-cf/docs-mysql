@@ -15,7 +15,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="3-1-4"></a> v3.1.4
 
-**Release Date: TBD 2024**
+**Release Date: Mar 26th, 2024**
 
 >**Important**
 > 3.1.x is the last version of <%= vars.product_full %> that supports MySQL 5.7.
@@ -26,6 +26,42 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 This release includes the following changes:
 
 + When you configure a previously inactive plan, the <strong>MySQL Default Version</strong> text box for the plan is set to <strong>MySQL 8.0</strong> by default, instead of the previous default value <strong>MySQL 5.7</strong>.
++ Added additional verbosity (innodb,query_plan,microtime) to the slow_query_log.
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table class="table">
+  <thead>
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+</thead>
+  <tr><td>Stemcell</td><td>1.406*</td></tr>
+  <tr><td>Percona Server</td><td>5.7.44-48</td></tr>
+  <tr><td>Percona Server</td><td>8.0.35-27</td></tr>
+  <tr><td>Percona XtraDB cluster</td><td>5.7.44-31.65</td></tr>
+  <tr><td>Percona XtraDB Cluster</td><td>8.0.35-27</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.29</td></tr>
+  <tr><td>Percona XtraBackup</td><td>8.0.35-30</td></tr>
+  <tr><td>adbr-release</td><td>0.102.0*</td></tr>
+  <tr><td>bpm-release</td><td>1.2.17*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.59.0*</td></tr>
+  <tr><td>cf-service-gateway-release</td><td>146.0.0*</td></tr>
+  <tr><td>count-cores-indicator-release</td><td>2.0.0*</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.217.40*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.382.50*</td></tr>
+  <tr><td>loggregator-agent-release</td><td>7.7.5*</td></tr>
+  <tr><td>mysql-backup-release</td><td>*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.11.0*</td></tr>
+  <tr><td>on-demand-service-broker-release</td><td>0.45.3*</td></tr>
+  <tr><td>pxc-release</td><td>1.0.24*</td></tr>
+  <tr><td>routing-release</td><td>0.294.0*</td></tr>
+  <tr><td>service-metrics-release</td><td>2.0.36*</td></tr>
+</table>
 
 
 ## <a id="3-1-3"></a> v3.1.3
