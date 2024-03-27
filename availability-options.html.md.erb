@@ -35,7 +35,11 @@ which one is best for your developers.
 
 <table class="table">
   <thead>
-  <tr><th>Topology</th><th>VMs needed</th><th>Pros</th><th>Cons</th></tr>
+  <tr>
+    <th>Topology</th>
+    <th>VMs needed</th><th>Pros</th>
+    <th>Cons</th>
+  </tr>
   </thead>
   <tr><td><strong>Single node</strong></td><td>One</td>
     <td>
@@ -142,7 +146,7 @@ This table compares the recovery point objectives for the topologies:
     <th>Unplanned Downtime</th>
     <th>Data Recovery</th>
   </tr>
-  </thead>
+</thead>
   <tr><td><strong>Single Node</strong></td><td>Zero</td>
       <td>Zero</td><td>Time since last backup</td></tr>
   <tr><td><strong>Leader-Follower</strong></td><td>Zero</td>
@@ -170,7 +174,7 @@ This table compares the recovery time objectives for the topologies:
     <th>Unplanned Downtime</th>
     <th>Data Recovery</th>
   </tr>
-  </thead>
+</thead>
   <tr><td><strong>Single Node</strong></td><td>Time required to recreate the VM and reconnect to storage</td>
       <td>Time required to recreate the VM and reconnect to storage</td><td>Time to restore from backup</td></tr>
   <tr><td><strong>Leader-Follower</strong></td><td>Time required depends on the type of maintenance</td>
@@ -200,10 +204,10 @@ Highly available clusters have the highest risk.
 <table class="table">
 <thead>
   <tr><th width=50%>Topology</th><th>Risk-level</th></tr>
+</thead>
   <tr><td><strong>Single node</strong></td><td>Low</td></tr>
   <tr><td><strong>Leader-follower</strong></td><td>Medium</td></tr>
   <tr><td><strong>Highly available cluster</strong></td><td>High</td></tr>
   <tr><td><strong><%= vars.single_leader_plan_lc %></strong></td><td>Medium-high</td></tr>
   <tr><td><strong>Highly Available Multi-Site Leader</strong></td><td>High</td></tr>
-  </thead>
 </table>

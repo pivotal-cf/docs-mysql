@@ -129,28 +129,30 @@ and networks for the broker and MySQL service instances:
 
 1. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Place singleton jobs in</strong></td>
-        <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
-    <tr><td><strong>Balance other jobs in</strong></td>
-        <td>Ignore; not used.</td></tr>
-    <tr><td><strong>Network</strong></td>
-        <td>Select a subnet for the MySQL broker. This is typically the same subnet
-            that includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.<br>
-            This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
-            </td></tr>
-    <tr><td><strong>Service Network</strong></td>
-        <td>Select the subnet for the on-demand service instances.
-          This network is represented by the Service Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
-            <br><br>
-            If you are adding IPsec to encrypt MySQL communication, VMware recommends that you deploy MySQL to its own network
-            to avoid conflicts with services that are not IPsec compatible.
-         </td></tr>
-  </table>
-    <p class="note warning"><strong>Warning:</strong> You cannot change the regions or networks
-    after you <strong>Apply Changes</strong>.
-  </p>
+    <table>
+      <tr><th>Field</th><th>Instructions</th></tr>
+      <tr><td><strong>Place singleton jobs in</strong></td>
+          <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
+      <tr><td><strong>Balance other jobs in</strong></td>
+          <td>Ignore; not used.</td></tr>
+      <tr><td><strong>Network</strong></td>
+          <td>Select a subnet for the MySQL broker. This is typically the same subnet
+              that includes the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) component VMs.<br>
+              This network is represented by the Default Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
+              </td></tr>
+      <tr><td><strong>Service Network</strong></td>
+          <td>Select the subnet for the on-demand service instances.
+            This network is represented by the Service Network in diagram in <a href="./about.html#on-demand">Default Network and Service Network</a>.
+              <br><br>
+              If you are adding IPsec to encrypt MySQL communication, VMware recommends that you deploy MySQL to its own network
+              to avoid conflicts with services that are not IPsec compatible.
+          </td></tr>
+    </table>
+
+    <p class="note caution">
+    <span class="note__title">Caution</span>
+    You cannot change the regions or networks
+    after you <strong>Apply Changes</strong>.</p>
 
 1. Click **Save**.
 
@@ -446,7 +448,9 @@ To set MySQL defaults and enable developers to customize their instances:
             <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
             To permit developers to override this default, see the following check box. <br>
             For more information about <code>lower_case_table_names</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
-            <p class="note warning"><strong>Warning:</strong> Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+            <p class="note caution">
+            <span class="note__title">Caution</span>
+            Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
          </td></tr>
     <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
@@ -640,9 +644,10 @@ To activate monitoring and logging in the MySQL service:
     <tr><td><strong>Enable Server Activity Logging</strong></td>
         <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
             For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
-            <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-            You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
-          </p>
+            <p class="note">
+            <span class="note__title">Note</span>
+            MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
+            You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.</p>
            </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
         <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
@@ -715,8 +720,9 @@ To configure service instance upgrades.
           <td><strong>Number of simultaneous upgrades</strong></td>
           <td>Enter the maximum number of service instances that can upgrade at the same time.
           The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
-          <p class="note"><strong>Note:</strong> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.
-          </p>
+          <p class="note">
+          <span class="note__title">Note</span>
+          To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director Config</strong> and locate the value of <strong>Director Workers</strong>.</p>
           </td>
       </tr>
       <tr><td><strong>Number of upgrade canary instances</td>

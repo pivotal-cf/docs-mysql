@@ -82,8 +82,8 @@ Use <%= vars.ops_manager %> to configure <%= vars.product_short %> to back up us
 
 1. Select **SCP**.<br/>
 
-![alt-text="Backup configuration pane shows SCP radio button selected and the fields
-in the pane are described in the following table."](./images/scp-backups.png)
+![Backup configuration pane shows SCP radio button selected and the fields
+in the pane are described in the following table.](./images/scp-backups.png)
 
 1. Configure the fields as follows:
 
@@ -93,7 +93,7 @@ in the pane are described in the following table."](./images/scp-backups.png)
             <th>Field</th>
             <th>Instructions</th>
         </tr>
-        </thead>
+    </thead>
         <tr>
             <td>
                 <strong>Username</strong>
@@ -258,7 +258,7 @@ in the pane are described in the following table."](./images/S3-backups.png)
             <th>Field</th>
             <th>Instructions</th>
         </tr>
-        </thead>
+    </thead>
         <tr>
             <td>
                 <strong>Access Key ID</strong> and <strong>Secret Access Key</strong>
@@ -362,10 +362,11 @@ in the pane are described in the following table."](./images/S3-backups.png)
 ## <a id="instance-profile"></a> Back up to Amazon S3 with instance profile
 
 <p class="note important">
-<span class="note__title"> Important</span> Configuring this backup method requires operators to run the
+<span class="note__title">Important</span>
+Configuring this backup method requires operators to run the
 <code>upgrade-all-service-instances</code> errand during <strong>Apply Changes</strong>.</p>
-   <br><br>
-   Backups fail until the service instance is upgraded.
+
+Backups fail until the service instance is upgraded.
 
 When you configure backups for Amazon S3 with Instance Profile, <%= vars.product_short %>
 allows the Identity and Access Management (IAM) user or role used by BOSH to pass the
@@ -637,10 +638,12 @@ described in the following table."](./images/S3-instance-profiles.png)
 1. Configure the fields as follows:
 
     <table>
+    <thead>
         <tr>
             <th>Field</th>
             <th>Instructions</th>
         </tr>
+    </thead>
         <tr>
             <td>
                 <strong>Instance Profile VM Extension Name</strong>
@@ -817,10 +820,12 @@ in the pane are described in the following table."](./images/gcs-backups.png)
 1. Configure the fields as follows:
 
     <table>
+    <thead>
         <tr>
             <th>Field</th>
             <th>Instructions</th>
         </tr>
+    </thead>
         <tr>
             <td>
                 <strong>Project ID</strong>
@@ -918,16 +923,18 @@ To back up your database to your Azure Storage account:
 
 1. Select **Azure**.
 
-    <![alt-text="Backup configuration pane shows Azure radio button selected and the fields
-     in the pane are described in the following table."](./images/azure-backups.png)/>
+    ![Backup configuration pane shows Azure radio button selected and the fields
+     in the pane are described in the following table.](./images/azure-backups.png)/
 
 1. Configure the fields as follows:
 
     <table>
+    <thead>
         <tr>
             <th>Field</th>
             <th>Instructions</th>
         </tr>
+    </thead>
         <tr>
             <td>
                 <strong>Account</strong>

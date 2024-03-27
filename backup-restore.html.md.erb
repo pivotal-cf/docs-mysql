@@ -70,14 +70,17 @@ Developers can also manually trigger a backup of an individual service instance.
 Backups fail if the service broker is unavailable (for example, during an upgrade).
 
 <p class="note important">
-<span class="note__title"> Important</span> If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance.
+<span class="note__title">Important</span>
+If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance.
 This can cause the persistent disk to fill up faster.
 If the persistent disk is full, apps become inoperable.
 For instructions on how to troubleshoot persistent disk errors,
 see <a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.
 </p>
 
-<p class="note">Backups use the Percona Xtrabackup tool, which does not lock schemas that use
+<p class="note">
+<span class="note__title">Note</span>
+Backups use the Percona Xtrabackup tool, which does not lock schemas that use
 the default InnoDB transactional storage engine. Backups do briefly lock non-transactional
 operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations.
 Developers should be aware of these backup DDL
@@ -197,7 +200,7 @@ If you want a different topology, update the instance after restoring the data:
   <th>First, restore to…</th>
   <th>Then, update to…</th>
   <tr>
-  </thead>
+</thead>
     <td>Leader-Follower</td>
     <td>Single node</td>
     <td>Leader-Follower</td>
@@ -233,7 +236,8 @@ There are some cases where you cannot use the following procedure:
 <table class="table">
 <thead>
   <th>Do not use the procedure in this section to restore a backup…</th>
-  <th>Instead, see…</th></thead>
+  <th>Instead, see…</th>
+</thead>
   <tr>
     <td>from a deleted service instance</td>
     <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>

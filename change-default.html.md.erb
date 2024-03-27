@@ -85,32 +85,26 @@ The following table describes how to use the `workload` optional parameter
 
 <table>
   <tr>
-
     <th colspan="2" style="text-align:center;">workload</th>
   </tr>
-
   <tr>
     <th><strong>Type</strong></th>
     <td>String</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td><code>mixed</code></td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>Set this parameter to  <code>mixed</code>,
       <code>read-heavy</code> or <code>write-heavy</code>.
       See <a href="#workload-type">Workload Profile Types</a>.</td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
 
 ### <a id='workload-type'></a> Workload Profile Types
@@ -120,29 +114,29 @@ can use to configure MySQL instances based on their specific app workloads:
 
 
 <table class="nice">
+<thead>
+  <tr>
     <th>Profile</th><th>Description</th>
+  </tr>
+</thead>
     <tr>
-        <td>Mixed Workload</td>
-        <td>By default, each MySQL service instance is configured for a mixed workload.
-            This workload is equally heavy on reads and writes. <br><br>
-
-            The configuration for this profile is described in
-            <a href="./server-defaults.html">About MySQL Server Defaults</a>.
+      <td>Mixed Workload</td>
+      <td>By default, each MySQL service instance is configured for a mixed workload.
+          This workload is equally heavy on reads and writes. <br><br>
+          The configuration for this profile is described in
+          <a href="./server-defaults.html">About MySQL Server Defaults</a>.
     </tr>
-
     <tr>
-        <td>Read-Heavy Workload</td>
-        <td>For apps that have a large number of reads, you can configure your
-          service instances with a read-heavy workload.<br><br>
-          The read-heavy profile changes the following server defaults listed in
-          <a href="./server-defaults.html">About MySQL Server Defaults</a>:
-          <ul>
-            <li><code>innodb_buffer_pool_size</code>
+      <td>Read-Heavy Workload</td>
+      <td>For apps that have a large number of reads, you can configure your
+      service instances with a read-heavy workload.<br><br>
+       The read-heavy profile changes the following server defaults listed in
+      <a href="./server-defaults.html">About MySQL Server Defaults</a>:
+      <ul>
+        <li><code>innodb_buffer_pool_size</code>
               is increased to 75% of the available memory on each service instance.</li>
-
-              <li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
-          </ul>
-
+        <li><code>innodb_flush_method</code> is set to <code>O_DIRECT</code>.</li>
+      </ul>
     <tr>
         <td>Write-Heavy Workload</td>
         <td>For apps that write to the database frequently, you can configure your
@@ -175,38 +169,31 @@ The following table describes how to use the `enable_lower_case_table_names` opt
   <tr>
     <th colspan="2" style="text-align:center;">enable_lower_case_table_names</th>
   </tr>
-
   <tr>
     <th><strong>Type</strong></th>
     <td>Boolean</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td>Set by the operator in the <strong>Mysql Configuration</strong> pane in the tile. See
-      <a href="./install-config.html#mysql">Configure MySQL</a>.</td>
+    <a href="./install-config.html#mysql">Configure MySQL</a>.</td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>The operator can set a default for this parameter and permit developers to override the default.
        <br><br>
-      If you set this to <code>true</code>, table names are stored in lowercase.
-
+      If you set this to <code>true</code>, table names are stored in lowercase. 
       See <a href="#lowercase">About lowercase table names</a>.
-
       <p class="note important">
-<span class="note__title"> Important</span> Before you enable this feature,
-ensure all tables have lowercase names. Tables with uppercase names are inaccessible
-after enabling lowercase table names.
-</p>
+      <span class="note__title"> Important</span> 
+      Before you enable this feature,
+      ensure all tables have lowercase names. Tables with uppercase names are inaccessible
+      after enabling lowercase table names.</p>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
 
 ## <a id='character'></a>Character sets
@@ -215,65 +202,58 @@ The following table describes how to use the `default-charset` and  `default-col
 optional parameters to change the character sets used in databases:
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">default-charset</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>String</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td><code>utf8</code></td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>You can set this to any MySQL supported character set.
       For information about character sets and collations,
       see the  <a href="https://dev.mysql.com/doc/refman/8.0/en/charset-mysql.html">MySQL documentation</a>.</td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">default-collation</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>String</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td><code>utf8_general_ci</code></td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>The <code>default-collation</code> changes based on the <code>default-charset</code>.
       To set the <code>default-collation</code>, first set the <code>default-charset</code>. <br><br>
-
       For instructions for
       viewing available and default collations,
       see the <a href="https://dev.mysql.com/doc/refman/8.0/en/charset-mysql.html">
       MySQL documentation</a>.</td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
 
 ## <a id='synchronous-replication'></a>Synchronous replication for leader-follower
@@ -287,24 +267,25 @@ However, depending on latency, sync replication reduces the performance of write
 
 The following table describes how to use the `replication_mode` optional parameter:
 
-<p> The b<code>replication_mode</code> does not work
+<p class="note">
+<span class="note__title">Note</span>
+The <code>replication_mode</code> does not work
 for single node, HA cluster, or multi-site replication plans.</p>
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">replication_mode</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>String</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td><code>async</code></td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>Set this parameter to one of the following:
@@ -313,18 +294,18 @@ for single node, HA cluster, or multi-site replication plans.</p>
         <li><code>async:</code> This restores the default asynchronous replication for a leader-follower service instance.</li>
       </ul>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
-<p> In <%= vars.product_short %>, replication is called sync, rather than semi-sync.
-  This is because it is as synchronous as possible given the limits of MySQL. For more information about MySQL semi-sync
-  replication,
-  see the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-semisync.html">MySQL documentation</a>.
-</p>
+
+<p class="note">
+<span class="note__title">Note</span>
+In <%= vars.product_short %>, replication is called sync, rather than semi-sync.
+This is because it is as synchronous as possible given the limits of MySQL. For more information about MySQL semi-sync
+replication,
+see the <a href="https://dev.mysql.com/doc/refman/8.0/en/replication-semisync.html">MySQL documentation</a>.</p>
 
 ### <a id='replication-timeout'></a>Synchronous replication timeout
 
@@ -332,38 +313,34 @@ By default, the timeout for sync replication is set to approximately 292 million
 the leader always waits for the follower to confirm receipt of the transaction. This guarantees that
 if the leader is lost, a redundant copy of the data exists on the follower.
 
-<p> When the replication mode timeout is reached,
+When the replication mode timeout is reached,
 the replication mode automatically reverts to asynchronous without any user intervention.
 You can manually override this timeout by setting a lower value.
-</p>
 
 The following table describes how to use the `semi_sync_ack_timeout_in_ms` optional parameter:
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">semi_sync_ack_timeout_in_ms</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>Integer</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td>2<sup>63</sup> milliseconds</td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>Sets the timeout in milliseconds for the leader to acknowledge a replication operation. </td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
   </tr>
-
 </table>
 
 
@@ -372,20 +349,19 @@ The following table describes how to use the `semi_sync_ack_timeout_in_ms` optio
 The following table describes how to use the `backup-schedule` optional parameter:
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">backup-schedule</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>Cron expression</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td>The operator sets the default</td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>
@@ -393,12 +369,10 @@ The following table describes how to use the `backup-schedule` optional paramete
       The cron expression sets the backup schedule for your service instance.
       For example, entering a cron expression of <code>15 10 * * *</code> triggers a backup 10:15 AM every day.
       Test your cron expression using a website such as <a href="https://crontab.guru/">Crontab Guru</a>.
-
-      <p> Configuring a cron expression overrides the default schedule for your service instance.
-      </p>
+      <br>
+      Configuring a cron expression overrides the default schedule for your service instance.
     </td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
@@ -410,20 +384,19 @@ The following table describes how to use the `backup-schedule` optional paramete
 The following table describes how to use the `optimize_for_short_words` optional parameter:
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">optimize_for_short_words</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>Boolean</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td><code>false</code></td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>
@@ -456,13 +429,10 @@ The following table describes how to use the `optimize_for_short_words` optional
        <li>When the optimization is done, set <code>innodb_optimize_fulltext_only=OFF</code>
            so that the query behaves normally for other tables.</li>
     </ol>
-
     For more information about InnoDB full-text index deletion,
-    see the <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-fulltext-index.html#innodb-fulltext-index-deletion">MySQL
-    documentation</a>.
+    see the <a href="https://dev.mysql.com/doc/refman/8.0/en/innodb-fulltext-index.html#innodb-fulltext-index-deletion">MySQL documentation</a>.
     </td>
   </tr>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code></td>
@@ -497,9 +467,9 @@ The following table describes how to use the `wsrep_applier_threads` optional pa
       <a href="https://docs.percona.com/percona-xtradb-cluster/8.0/wsrep-system-index.html#wsrep_applier_threads">Percona XtraDB Cluster Docs</a>.
 
       <p class="note important">
-<span class="note__title"> Important</span> This parameter only applies to "high-availablity" service plans, and is rejected for service
-plans using other topologies.
-</p>
+      <span class="note__title">Important</span>
+      This parameter only applies to "high-availability" service plans, and is rejected for service
+      plans using other topologies.</p>
     </td>
 
   <tr>
