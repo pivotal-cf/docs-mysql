@@ -111,48 +111,47 @@ To configure service-gateway access for the foundation:
 
 1. Under **Enable off-platform access of MySQL service instances**, click **Enabled**.
 
-![alt-text="Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
-the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
-text 1024-1123 is entered."](./images/global-settings-off-platform-access.png)
+    ![Example of the Settings pane. Enabled is selected to reveal the External TCP Domain field where
+    the text tcp.turtlegreen.cf-app.com is entered and the External TCP Port Range field where the
+    text 1024-1123 is entered.](./images/global-settings-off-platform-access.png)
 
     This activates the feature and makes the **External TCP Domain**, **External TCP Port Range**, and **Enable External Access for All Multi-Site Instances** fields visible.
 
 2. Configure the fields as follows:
 
-  <table class="table">
-     <col width="20%">
-      <thead>
-      <tr>
-          <th>Field</th>
-          <th>Instructions</th>
-      </tr>
-      </thead>
-      <tr>
-          <td>
-              <strong>External TCP Domain</strong>
-          </td>
-          <td>
-             Set this to the DNS entry for the external load balancer
-             that you recorded in <a href="#create-dns-record">Create a DNS Record That Maps to the Load Balancer</a>.
-          </td>
-      </tr>
-      <tr>
-          <td>
-              <strong>External TCP Port Range</strong>
-          </td>
-          <td>
-             Set this to the range of ports you configured for the external load balancer for MySQL
-             service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
-             to Redirect Traffic to the TCP Router</a>.
-          </td>
-      </tr>
-  </table>
+    <table class="table">
+      <col width="20%">
+        <thead>
+        <tr>
+            <th>Field</th>
+            <th>Instructions</th>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <strong>External TCP Domain</strong>
+            </td>
+            <td>
+              Set this to the DNS entry for the external load balancer
+              that you recorded in <a href="#create-dns-record">Create a DNS Record That Maps to the Load Balancer</a>.
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>External TCP Port Range</strong>
+            </td>
+            <td>
+              Set this to the range of ports you configured for the external load balancer for MySQL
+              service instances in <a href="#configure-lb">Configure the Load Balancer in the IaaS
+              to Redirect Traffic to the TCP Router</a>.
+            </td>
+        </tr>
+    </table>
 
 
-    <p> If service-gateway access is deactivated and then activated again, app
-      developers must create new service keys to obtain a new set of credentials for service-gateway
-      access.
-    </p>
+    If service-gateway access is deactivated and then activated again, app
+    developers must create new service keys to obtain a new set of credentials for service-gateway
+    access.
 
 1. Go back to **<%= vars.ops_manager %> Installation Dashboard &gt; Review Pending Changes**.
 

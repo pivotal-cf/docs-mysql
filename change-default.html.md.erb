@@ -444,34 +444,30 @@ The following table describes how to use the `optimize_for_short_words` optional
 The following table describes how to use the `wsrep_applier_threads` optional parameter:
 
 <table>
+<thead>
   <tr>
     <th colspan="2" style="text-align:center;">wsrep_applier_threads</th>
   </tr>
-
+</thead>
   <tr>
     <th><strong>Type</strong></th>
     <td>Integer</td>
   </tr>
-
   <tr>
     <th><strong>Default</strong></th>
     <td>4</td>
   </tr>
-
   <tr>
     <th><strong>Description</strong></th>
     <td>
       Specifies the number of threads that can apply replication transactions in parallel in a high-availability cluster. VMware MySQL for VMs defaults the number of threads to match the number of vCPUs on the MySQL VM, whereas Percona XtraDB Cluster defaults to 1.
-
       For further details, see the
       <a href="https://docs.percona.com/percona-xtradb-cluster/8.0/wsrep-system-index.html#wsrep_applier_threads">Percona XtraDB Cluster Docs</a>.
-
       <p class="note important">
       <span class="note__title">Important</span>
       This parameter only applies to "high-availability" service plans, and is rejected for service
       plans using other topologies.</p>
     </td>
-
   <tr>
     <th><strong>Usage</strong></th>
     <td><code>create-service</code> or <code>update-service</code> as per <a href="#parameters">Set Optional Parameters</a></td>

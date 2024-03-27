@@ -83,11 +83,13 @@ For a list of all the <%= vars.product_short %> component metrics, see [Componen
 ### <a id="last-successful-backup"></a> Hours Since Last Successful Backup
 
 <table class="nice">
+<thead>
   <tr>
   <th colspan="2" style="text-align: center;"> <br>
     <%= vars.mysql_metrics_origin_v2 %>/p.mysql/last_successful_backup
   <br><br></th>
   </tr>
+</thead>
   <tr>
     <th>Description</th>
     <td>Using the configured backup schedule for the service instance as a threshold, this metric shows how many hours have passed since the last successful backup.</td>
@@ -126,7 +128,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
 <tr>
   <th colspan="2" style="text-align: center;"><a name="available-metrics"></a>/p.mysql/available</th>
   </tr>
-  </thead>
+</thead>
   <tr>
     <th width="20%">Description</th>
     <td>Indicates if the local database server is available and responding. </td>
@@ -140,7 +142,8 @@ The metrics that all <%= vars.product_short %> service instances emit:
 <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="max-connections"></a>/p.mysql/variables/max_connections</th>
-  </tr></thead>
+  </tr>
+  </thead>
   <tr>
     <th width="20%">Description</th>
     <td>The maximum permitted number of simultaneous client connections. </td>
@@ -152,7 +155,8 @@ The metrics that all <%= vars.product_short %> service instances emit:
 </table>
   <table class="table">
   <thead><tr>
-  <th colspan="2" style="text-align: center;"><a name="open-files-limit"></a>/p.mysql/variables/open_files_limit</th></thead>
+  <th colspan="2" style="text-align: center;"><a name="open-files-limit"></a>/p.mysql/variables/open_files_limit</th>
+  </thead>
   </tr>
   <tr>
     <th width="20%">Description</th>
@@ -163,11 +167,13 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>files</td>
   </tr>
 </table>
+
   <table class="table">
   <thead>
   <tr>
   <th colspan="2" style="text-align: center;"><a name="read-only"></a>/p.mysql/variables/read_only</th>
-  </tr></thead>
+  </tr>
+  </thead>
   <tr>
     <th width="20%">Description</th>
     <td>Whether the server is in read-only mode </td>
@@ -177,10 +183,11 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>boolean</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
-  <th colspan="2" style="text-align: center;"><a name="questions-metrics"></a>/p.mysql/performance/questions</th>
-  </tr></thead>
+  <th colspan="2" style="text-align: center;"><a name="questions-metrics"></a>/p.mysql/performance/questions</th></tr>
+  </thead>
   <tr>
     <th width="20%">Description</th>
     <td>The number of statements run by the server since the server started or the last <code>FLUSH STATUS</code>. This includes only statements sent to the server by clients and not statements run within stored programs, unlike the <code>queries</code> variable.
@@ -191,10 +198,12 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="queries"></a>/p.mysql/performance/queries</th>
-  </tr></thead>
+  </tr>
+  </thead>
   <tr>
     <th width="20%">Description</th>
     <td>The number of statements run by the server, excluding <code>COM&#95;PING</code> and <code>COM&#95;STATISTICS</code>. Differs from <code>questions</code> in that it also counts statements run within stored programs. Not affected by <code>FLUSH STATUS</code>.
@@ -205,6 +214,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="queries-delta"></a>/p.mysql/performance/queries_delta</th>
@@ -219,6 +229,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>integer greater than or equal to zero</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-free"></a>/p.mysql/innodb/buffer_pool_pages_free</th>
@@ -232,6 +243,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-total"></a>/p.mysql/innodb/buffer_pool_pages_total</th>
@@ -245,6 +257,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="buffer-pool-data"></a>/p.mysql/innodb/buffer_pool_pages_data</th>
@@ -258,6 +271,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="row-current-wait"></a>/p.mysql/innodb/row_lock_current_waits</th>
@@ -271,6 +285,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="data-read"></a>/p.mysql/innodb/data_read</th>
@@ -284,6 +299,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>bytes</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="data-written"></a>/p.mysql/innodb/data_written</th>
@@ -297,6 +313,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>bytes</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="os-waits"></a>/p.mysql/innodb/mutex_os_waits</th>
@@ -310,6 +327,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="spin-rounds"></a>/p.mysql/innodb/mutex_spin_rounds</th>
@@ -323,6 +341,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="spin-waits"></a>/p.mysql/innodb/mutex_spin_waits</th>
@@ -336,6 +355,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>events/second</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="log-fsyncs"></a>/p.mysql/innodb/os_log_fsyncs</th>
@@ -349,6 +369,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="row-time"></a>/p.mysql/innodb/row_lock_time</th>
@@ -362,6 +383,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>milliseconds</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="row-wait"></a>/p.mysql/innodb/row_lock_waits</th>
@@ -375,6 +397,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="connections-metrics"></a>/p.mysql/net/connections</th>
@@ -388,6 +411,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="used-connections"></a>/p.mysql/net/max_used_connections</th>
@@ -401,6 +425,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-delete"></a>/p.mysql/performance/com_delete</th>
@@ -415,6 +440,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-delete-multi"></a>/p.mysql/performance/com_delete_multi</th>
@@ -429,6 +455,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-insert"></a>/p.mysql/performance/com_insert</th>
@@ -443,6 +470,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-insert-select"></a>/p.mysql/performance/com_insert_select</th>
@@ -457,6 +485,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-replace"></a>/p.mysql/performance/com_replace_select</th>
@@ -471,6 +500,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-select"></a>/p.mysql/performance/com_select</th>
@@ -485,6 +515,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-update"></a>/p.mysql/performance/com_update</th>
@@ -499,6 +530,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="com-update-multi"></a>/p.mysql/performance/com_update_multi</th>
@@ -513,6 +545,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="tmp-tables"></a>/p.mysql/performance/created_tmp_disk_tables</th>
@@ -526,6 +559,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="tmp-files"></a>/p.mysql/performance/created_tmp_files</th>
@@ -539,6 +573,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="created-tables"></a>/p.mysql/performance/created_tmp_tables</th>
@@ -552,6 +587,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="cpu-util-per"></a>/p.mysql/performance/cpu_utilization_percent</th>
@@ -565,6 +601,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>percent</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="open-files"></a>/p.mysql/performance/open_files</th>
@@ -578,6 +615,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="open-tables"></a>/p.mysql/performance/open_tables</th>
@@ -591,6 +629,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="opened-tables"></a>/p.mysql/performance/opened_tables</th>
@@ -604,6 +643,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="table-def"></a>/p.mysql/performance/open_table_definitions</th>
@@ -618,6 +658,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="opened-def"></a>/p.mysql/performance/opened_table_definitions</th>
@@ -632,6 +673,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="qcache-hits"></a>/p.mysql/performance/qcache_hits</th>
@@ -645,6 +687,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="slow-queries"></a>/p.mysql/performance/slow_queries</th>
@@ -659,6 +702,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="locks-waited"></a>/p.mysql/performance/table_locks_waited</th>
@@ -672,6 +716,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="threads-connected"></a>/p.mysql/performance/threads_connected</th>
@@ -685,6 +730,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="threads-run"></a>/p.mysql/performance/threads_running</th>
@@ -698,6 +744,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-wait-time"></a>/p.mysql/rpl_semi_sync_master_tx_avg_wait_time</th>
@@ -711,6 +758,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>microseconds</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-no-tax"></a>/p.mysql/rpl_semi_sync_master_no_tx</th>
@@ -724,6 +772,7 @@ The metrics that all <%= vars.product_short %> service instances emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="rpl-wait-sessions"></a>/p.mysql/rpl_semi_sync_master_wait_sessions</th>
@@ -756,6 +805,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>percent</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="disk-used"></a>/p.mysql/system/persistent_disk_used</th>
@@ -769,6 +819,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>KB</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="disk-free"></a>/p.mysql/system/persistent_disk_free</th>
@@ -782,6 +833,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>KB</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="inodes-used-percent"></a>/p.mysql/system/persistent_disk_inodes_used_percent</th>
@@ -796,6 +848,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>percent</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="inodes-used"></a>/p.mysql/system/persistent_disk_inodes_used</th>
@@ -809,6 +862,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="inodes-free"></a>/p.mysql/system/persistent_disk_inodes_free</th>
@@ -822,6 +876,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-inodes-used-percent"></a>/p.mysql/system/ephemeral_disk_used_percent</th>
@@ -835,6 +890,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>percent</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-disk-used"></a>/p.mysql/system/ephemeral_disk_used</th>
@@ -848,6 +904,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>KB</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-disk-free"></a>/p.mysql/system/ephemeral_disk_free</th>
@@ -861,6 +918,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>KB</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-inodes-percent"></a>/p.mysql/system/ephemeral_disk_inodes_used_percent</th>
@@ -875,6 +933,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>percent</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-inodes-used"></a>/p.mysql/system/ephemeral_disk_inodes_used</th>
@@ -888,6 +947,7 @@ The disk usage metrics that all <%= vars.product_short %> services emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="eph-inodes-free"></a>/p.mysql/system/ephemeral_disk_inodes_free</th>
@@ -919,22 +979,23 @@ The metrics that leader-follower VMs emit:
     <td>boolean</td>
   </tr>
 </table>
+
   <table class="table">
-  <tr>
+  <tr><thead>
   <th colspan="2" style="text-align: center;"><a name="seconds-behind"></a>/p.mysql/follower/seconds_behind_master</th>
   </tr></thead>
   <tr>
     <th width="20%">Description</th>
-    <td>The number of seconds the follower is behind in applying writes from
-      the leader.
-      For example, a follower might have copied writes from the leader that are timestamped up to 11:00am,
-      but has only applied writes up to 8:00am. Normal values for this metric depend on your apps. </td>
+    <td>The number of seconds the follower is behind in applying writes from the leader.
+    For example, a follower might have copied writes from the leader that are timestamped up to 11:00am,
+    but has only applied writes up to 8:00am. Normal values for this metric depend on your apps. </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
     <td>seconds</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="seconds-since"></a>/p.mysql/follower/seconds_since_leader_heartbeat</th>
@@ -942,15 +1003,16 @@ The metrics that leader-follower VMs emit:
   <tr>
     <th width="20%">Description</th>
     <td>The number of seconds that elapse between the leader heartbeat and the
-      replication of the heartbeat in the follower.
-      You can use this metric to determine how far behind the follower is from the leader.
-      Normal values for this metric depends on your app. </td>
+    replication of the heartbeat in the follower.
+    You can use this metric to determine how far behind the follower is from the leader.
+    Normal values for this metric depends on your app. </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
     <td>seconds</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="log-space"></a>/p.mysql/follower/relay_log_space</th>
@@ -964,6 +1026,7 @@ The metrics that leader-follower VMs emit:
     <td>bytes</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="io-running"></a>/p.mysql/follower/slave_io_running</th>
@@ -977,6 +1040,7 @@ The metrics that leader-follower VMs emit:
     <td>boolean</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="sql-running"></a>/p.mysql/follower/slave_sql_running</th>
@@ -1008,6 +1072,7 @@ The metrics that HA clusters emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="queue"></a>/p.mysql/galera/wsrep_local_recv_queue</th>
@@ -1021,6 +1086,7 @@ The metrics that HA clusters emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="send-queue"></a>/p.mysql/galera/wsrep_local_send_queue</th>
@@ -1034,6 +1100,7 @@ The metrics that HA clusters emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="local-index"></a>/p.mysql/galera/wsrep_local_index</th>
@@ -1047,6 +1114,7 @@ The metrics that HA clusters emit:
     <td>count</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="local-state"></a>/p.mysql/galera/wsrep_local_state</th>
@@ -1054,19 +1122,20 @@ The metrics that HA clusters emit:
   <tr>
     <th width="20%">Description</th>
     <td>The local state of the node. Possible states include:
-<ul>
-<li>1 = <code>JOINING</code></li>
-<li>2 = <code>DONOR/DESYNCED</code></li>
-<li>3 = <code>JOINED</code></li>
-<li>4 = <code>SYNCED</code></li>
-</ul>
- </td>
+      <ul>
+      <li>1 = <code>JOINING</code></li>
+      <li>2 = <code>DONOR/DESYNCED</code></li>
+      <li>3 = <code>JOINED</code></li>
+      <li>4 = <code>SYNCED</code></li>
+      </ul>
+    </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
     <td>integer</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="ready"></a>/p.mysql/galera/wsrep_ready</th>
@@ -1080,6 +1149,7 @@ The metrics that HA clusters emit:
     <td>boolean</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="status"></a>/p.mysql/galera/wsrep&#95;cluster&#95;status</th>
@@ -1087,18 +1157,19 @@ The metrics that HA clusters emit:
   <tr>
     <th width="20%">Description</th>
     <td>Shows the primary status of the cluster component that the node is in. Values are:
- <ul>
-   <li> <code>Primary</code>: Node has a quorum.</li>
-   <li> <code>Non-primary</code>:  Node has lost a quorum. </li>
-   <li> <code>Disconnected</code>: Node is unable to connect to other nodes.</li>
-  </ul>
- </td>
+    <ul>
+      <li> <code>Primary</code>: Node has a quorum.</li>
+      <li> <code>Non-primary</code>:  Node has lost a quorum. </li>
+      <li> <code>Disconnected</code>: Node is unable to connect to other nodes.</li>
+    </ul>
+   </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
     <td>Status code</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name="flow-control"></a>/p.mysql/galera/wsrep_flow_control_paused</th>
@@ -1106,13 +1177,14 @@ The metrics that HA clusters emit:
   <tr>
     <th width="20%">Description</th>
     <td>Proportion of time, as a unit interval (0 to 1), that replication was paused due to flow control since the server started or last <code>FLUSH STATUS</code>. This metric is a measure of how much replication lag is slowing down the cluster.
- </td>
+    </td>
   </tr>
   <tr>
     <th width="15%">Unit</th>
     <td>float</td>
   </tr>
 </table>
+
   <table class="table">
   <thead><tr>
   <th colspan="2" style="text-align: center;"><a name=""></a>/p.mysql/galera/wsrep_flow_control_sent</th>

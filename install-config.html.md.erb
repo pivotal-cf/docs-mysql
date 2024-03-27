@@ -130,7 +130,9 @@ and networks for the broker and MySQL service instances:
 1. Configure the fields as follows:
 
     <table>
+    <thead>
       <tr><th>Field</th><th>Instructions</th></tr>
+    </thead>
       <tr><td><strong>Place singleton jobs in</strong></td>
           <td>Select the AZ that you want the MySQL broker VM to run in. The broker runs as a singleton job.</td></tr>
       <tr><td><strong>Balance other jobs in</strong></td>
@@ -164,9 +166,10 @@ Each service plan has a corresponding section in the tile configuration, such as
 By default, plans 1 through 3 are active and plans 4 through 9 are inactive.
 The following procedures describe how to change these defaults.
 
-<p> You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
-  If you deactivate <strong>Plan 1</strong>, your installation fails when you apply changes.
-</p>
+<p class="note important">
+<span class="note__title">Important</span>
+You must not set <strong>Plan 1</strong> to <strong>Inactive</strong>.
+If you deactivate <strong>Plan 1</strong>, your installation fails when you apply changes.</p>
 
 #### <a name="one-node-plans"></a> About creating plans for restoring multi-node service instances
 
@@ -182,19 +185,17 @@ to restore a multi-node plan from backup.
  </tr></thead>
  <tr>
   <td>leader-follower</td>
-  <td>single node, with the persistent disk as large
-                    as the largest leader-follower plan offered.</td>
+  <td>single node, with the persistent disk as large as the largest leader-follower plan offered.</td>
  </tr>
  <tr>
   <td>HA cluster</td>
-  <td><%= vars.single_leader_plan %>, with the persistent disk as large
-                    as the largest HA cluster plan offered.</td>
+  <td><%= vars.single_leader_plan %>, with the persistent disk as large as the largest HA cluster plan offered.</td>
  </tr>
 </table>
 
 For information about how multi-node service instances are restored,
 see <a href="./backup-restore.html#restore">Restore a Service Instance</a>
-in <em>Backing Up and Restoring <%= vars.product_full %></em>.
+in <em>Backing up and Restoring <%= vars.product_full %></em>.
 
 ### Procedure for configuring service plans
 
@@ -204,7 +205,7 @@ For each plan that you want to use in your deployment:
 
 1. Select the plan for your desired topology.
 
-    ![alt-text="The Plan' section is shown. The radio button for 'Inactive' is selected."](./images/plan-types-3-0.png)
+    ![The Plan' section is shown. The radio button for 'Inactive' is selected.](./images/plan-types-3-0.png)
 
     The following tabs expand to show an example image  of each plan:
 
@@ -292,87 +293,89 @@ For each plan that you want to use in your deployment:
 
 1. Configure the fields as follows:
 
-  <p class="note important">
-  <span class="note__title"> Important</span>  If you want to replicate data across multiple foundations or data centers,
-  you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.
-  </p>
+    <p class="note important">
+    <span class="note__title"> Important</span>
+    If you want to replicate data across multiple foundations or data centers,
+    you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.</p>
 
-  <table>
-    <tr><th>Field</th><th>Description</th></tr>
-    <tr><td><strong>MySQL Default Version</strong></td>
-        <td><strong>MySQL 8.0</strong> is selected as the default and only option.
-    </tr>
-    <tr><td><strong>Service Plan Access</strong></td>
-        <td>Select one of the following options:<br>
-            <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
-              and displays the service plan to all developers in the Marketplace.
-                </li>
-                <li><strong>Disable:</strong> Deactivates access to all orgs and hides the service plan
-                  to all developers in the Marketplace.
-                  This deactivates creating new service instances of this plan.
-                </li>
-                <li><strong>Manual:</strong> Lets you manually control service access with the cf CLI.
-                    For more information, see <a href="./service-plan.html">Controlling Access to Service Plans by Org</a>.
-                </li>
-        </ul></td></tr>
-    <tr><td><strong>Plan Name</strong></td>
-        <td>Accept the default or enter a name.
-            This is the name that appears in the Marketplace for developers.</td></tr>
-    <tr><td><strong>Plan Description</strong></td>
-        <td>Accept the default or enter a description to help developers understand plan features.
-            VMware recommends adding VM type details and disk size to this field.
-        </td></tr>
-    <tr><td><strong>Plan Quota</strong></td>
-        <td>Enter the maximum number of service instances that can exist at one time.
-          If the plan quota field is blank, the plan quota is set to the global quota by default.
-          <br>
-        For information about the global quota, see <a href="./set-quotas.html">Setting Limits for On-Demand Service Instances</a>.</td></tr>
-    <tr><td><strong>Paid Plan</strong></td>
-        <td>Select this box to indicate that this service plan is paid.</td></tr>
-    <tr><td><strong>MySQL VM Type</strong></td>
-        <td>Select a VM type for the MySQL nodes.</td></tr>
-    <tr><td><strong>Jumpbox VM Type</strong></td>
-        <td>Only for highly available cluster plans. Select a VM type for the MySQL jumpbox node.
-            This VM is also called <code>mysql-monitor</code>. </td></tr>
-    <tr><td><strong>MySQL Persistent Disk</strong></td>
-        <td>Select a disk size. This disk stores the MySQL data.<br>
-            For sizing recommendations,
-            see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
-    </td></tr>
-    <tr><td><strong>Jumpbox Persistent Disk</strong></td>
-        <td>Only for highly available cluster plans. Select a disk size.
-          This disk stores backups. <br> For sizing recommendations,
-          see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.</td></tr>
-    <tr><td><strong>MySQL Availability Zone(s)</strong></td>
-        <td> BOSH deploys your service instances to the selected AZs.
-          If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
-        </td></tr>
-    <tr><td><strong>Plan VM Extensions</strong></td>
-        <td>Specify a comma-separated list of supported VM Extensions you want to
-          apply to service instances created under this plan. <br>
-          You can manage VM Extensions in Ops Manager or through the OM CLI.
-          For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html">
-          Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
-          in GitHub. <br>
-          If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
-          config), then instance creation attempts fail. <br>
-        </td></tr>
-  </table>
+    <table>
+    <thead>
+      <tr><th>Field</th><th>Description</th></tr>
+    </thead>
+      <tr><td><strong>MySQL Default Version</strong></td>
+          <td><strong>MySQL 8.0</strong> is selected as the default and only option.
+      </tr>
+      <tr><td><strong>Service Plan Access</strong></td>
+          <td>Select one of the following options:<br>
+              <ul><li> <strong>Enable (Default):</strong> Gives access to all orgs
+                and displays the service plan to all developers in the Marketplace.
+                  </li>
+                  <li><strong>Disable:</strong> Deactivates access to all orgs and hides the service plan
+                    to all developers in the Marketplace.
+                    This deactivates creating new service instances of this plan.
+                  </li>
+                  <li><strong>Manual:</strong> Lets you manually control service access with the cf CLI.
+                      For more information, see <a href="./service-plan.html">Controlling Access to Service Plans by Org</a>.
+                  </li>
+          </ul></td></tr>
+      <tr><td><strong>Plan Name</strong></td>
+          <td>Accept the default or enter a name.
+              This is the name that appears in the Marketplace for developers.</td></tr>
+      <tr><td><strong>Plan Description</strong></td>
+          <td>Accept the default or enter a description to help developers understand plan features.
+              VMware recommends adding VM type details and disk size to this field.
+          </td></tr>
+      <tr><td><strong>Plan Quota</strong></td>
+          <td>Enter the maximum number of service instances that can exist at one time.
+            If the plan quota field is blank, the plan quota is set to the global quota by default.
+            <br>
+          For information about the global quota, see <a href="./set-quotas.html">Setting Limits for On-Demand Service Instances</a>.</td></tr>
+      <tr><td><strong>Paid Plan</strong></td>
+          <td>Select this box to indicate that this service plan is paid.</td></tr>
+      <tr><td><strong>MySQL VM Type</strong></td>
+          <td>Select a VM type for the MySQL nodes.</td></tr>
+      <tr><td><strong>Jumpbox VM Type</strong></td>
+          <td>Only for highly available cluster plans. Select a VM type for the MySQL jumpbox node.
+              This VM is also called <code>mysql-monitor</code>. </td></tr>
+      <tr><td><strong>MySQL Persistent Disk</strong></td>
+          <td>Select a disk size. This disk stores the MySQL data.<br>
+              For sizing recommendations,
+              see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.
+      </td></tr>
+      <tr><td><strong>Jumpbox Persistent Disk</strong></td>
+          <td>Only for highly available cluster plans. Select a disk size.
+            This disk stores backups. <br> For sizing recommendations,
+            see <a href="recommended.html#persistent"> Persistent Disk Usage</a>.</td></tr>
+      <tr><td><strong>MySQL Availability Zone(s)</strong></td>
+          <td> BOSH deploys your service instances to the selected AZs.
+            If more than one AZ is selected, BOSH randomizes which AZ to place each VM. <br>
+          </td></tr>
+      <tr><td><strong>Plan VM Extensions</strong></td>
+          <td>Specify a comma-separated list of supported VM Extensions you want to
+            apply to service instances created under this plan. <br>
+            You can manage VM Extensions in Ops Manager or through the OM CLI.
+            For more information, see <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-custom-vm-extensions.html">
+            Create or Update a VM Extension</a> or <a href="https://github.com/pivotal-cf/om/blob/main/docs/create-vm-extension/README.md">om create-vm-extension</a>
+            in GitHub. <br>
+            If you specify an extension that is not supported by Ops Manager (not present in the BOSH cloud
+            config), then instance creation attempts fail. <br>
+          </td></tr>
+    </table>
 
-  Transitioning between two different plans requires them to be in the same AZ's.
+    Transitioning between two different plans requires them to be in the same AZ's.
 
-  * If you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive 
-  an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
-  prevents them from losing their data by orphaning their disk in AZ1.
-  * If you anticipate configuring a HA cluster as a multi-site leader, 
-  then assign the same set of Availability Zones (AZs) to both (i) that
-  HA Cluster plan and (ii) your <%= vars.single_leader_plan %> plan.
-  This lets multi-site switchover and failover procedures transition 
-  instances between the plans as needed.
+    * If you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
+    an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
+    prevents them from losing their data by orphaning their disk in AZ1.
+    * If you anticipate configuring a HA cluster as a multi-site leader,
+    then assign the same set of Availability Zones (AZs) to both (i) that
+    HA Cluster plan and (ii) your <%= vars.single_leader_plan %> plan.
+    This lets multi-site switchover and failover procedures transition 
+    instances between the plans as needed.
 
-  This guidance applies both to your primary foundation (with your multi-site leader instance) and to your secondary foundation (with your multi-site follower instance). The foundations may have different AZ's, but within each foundation, any plans used for multi-site configuration should share a common set of AZs.
+    This guidance applies both to your primary foundation (with your multi-site leader instance) and to your secondary foundation (with your multi-site follower instance). The foundations may have different AZ's, but within each foundation, any plans used for multi-site configuration should share a common set of AZs.
 
-  If you need to manually migrate the data from one AZ to another, see <a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/index.html">About Data Migration in <%= vars.product_short %></a>.
+    If you need to manually migrate the data from one AZ to another, see <a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/index.html">About Data Migration in <%= vars.product_short %></a>.
 
 1. Click Save.
 
@@ -398,12 +401,14 @@ To configure global settings for all service instances:
 
 1. Click **Settings**.
 
-    ![alt-text="The 'Settings' pane. See the following step for a detailed description of the configurable fields."](./images/global-settings.png)
+    ![The Settings pane. See the following step for a detailed description of the configurable fields.](./images/global-settings.png)
 
 1. Configure the fields as follows:
     <table class="table">
       <col width="30%">
-      <thead><tr><th>Field</th><th>Instructions</th></tr></thead>
+      <thead>
+      <tr><th>Field</th><th>Instructions</th></tr>
+      </thead>
       <tr><td><strong>Provide public IP addresses to all Service VMs</strong></td>
           <td>Select this check box if either of the following apply:<ul>
               <li>Your service instances need an external backup, blobstore, or syslog storage</li>
@@ -436,76 +441,82 @@ To set MySQL defaults and enable developers to customize their instances:
 
 1. Click **Mysql Configuration**.
 
-    ![alt-text="The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields."](./images/mysql-config.png)
+    ![The 'Mysql Configuration' pane. See the following step for a detailed description of the configurable fields.](./images/mysql-config.png)
 
 1. Configure the fields as follows:
 
-  <table>
-    <tr><th>Field</th><th>Instructions</th></tr>
-    <tr><td><strong>Enable Lower Case Table Names</strong></td>
-        <td>Select this check box to store all table names in lowercase.
-            This sets the MySQL server system variable
-            <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
-            To permit developers to override this default, see the following check box. <br>
-            For more information about <code>lower_case_table_names</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
-            <p class="note caution">
-            <span class="note__title">Caution</span>
-            Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
-         </td></tr>
-    <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
+    <table>
+    <thead>
+      <tr>
+        <th>Field</th>
+        <th>Instructions</th>
+      </tr>
+    </thead>
+      <tr><td><strong>Enable Lower Case Table Names</strong></td>
+          <td>Select this check box to store all table names in lowercase.
+          This sets the MySQL server system variable
+          <code>lower_case_table_names</code> to <code>1</code> on all <%= vars.product_short %> instances by default. <br>
+          To permit developers to override this default, see the following check box. <br>
+          For more information about <code>lower_case_table_names</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/identifier-case-sensitivity.html">MySQL documentation</a>.
+          <p class="note caution">
+          <span class="note__title">Caution</span>
+          Before you activate this feature, ensure all tables have lowercase names. Tables with uppercase names are inaccessible after enabling lowercase table names.</p>
+      </td></tr>
+      <tr><td><strong>Allow Developers To Override Lower Case Table Names</strong></td>
         <td>Select this check box to permit developers to override the configured default <strong>Enable Lower Case Table Names</strong> value.
-            For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
-    <tr><td><strong>Enable Local Infile</strong></td>
-        <td>Select this check box to activate data downloading from the local file system of the client.
-            VMware discourages selecting this check box. Before you activate local in-file,
-            review the security issues associated with <code>LOAD DATA LOCAL</code>.
-            See the <a href="https://dev.mysql.com/doc/refman/8.0/en/load-data-local-security.html">MySQL documentation</a>.
-    </td></tr>
-    <tr>
-      <a name="limit-disk-use"></a>
-      <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
-      <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
-            with high-transaction rates.
-            Limiting the size of the transaction logs reduces the risk of the persistent disk
-            reaching capacity and causing service interruption.
-    </td></tr>
-    <tr><td><strong>Wait Timeout</strong></td>
-        <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
-            For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
-    </td></tr>
-  </table>
+        For more information, see <a href="./change-default.html#configuring">Optional Parameters for the <%= vars.product_short %> Service Instances</a>.</td></tr>
+      <tr><td><strong>Enable Local Infile</strong></td>
+          <td>Select this check box to activate data downloading from the local file system of the client.
+          VMware discourages selecting this check box. Before you activate local in-file,
+          review the security issues associated with <code>LOAD DATA LOCAL</code>.
+          See the <a href="https://dev.mysql.com/doc/refman/8.0/en/load-data-local-security.html">MySQL documentation</a>.
+      </td></tr>
+      <tr>
+        <a name="limit-disk-use"></a>
+        <td><strong>Limit binary log disk use to 33% of disk capacity</strong></td>
+        <td>Select this check box if you have leader-follower or <%= vars.single_leader_plan %> instances
+        with high-transaction rates.
+        Limiting the size of the transaction logs reduces the risk of the persistent disk
+        reaching capacity and causing service interruption.
+      </td></tr>
+      <tr><td><strong>Wait Timeout</strong></td>
+          <td>Enter the amount of time in seconds that MySQL waits to close inactive connections.
+          For more information about <code>wait\_timeout</code>, see the <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_wait_timeout">MySQL documentation</a>.
+      </td></tr>
+    </table>
 
 ### <a id="backups"></a> Configuring backups
 
 To learn how backups work, see [About Backups](./backup-restore.html#about-backups).
 
-<p>
+<p class="note important">
+<span class="note__title">Important</span>
 You must configure backups.
-  You cannot deactivate this feature.
-</p>
+You cannot deactivate this feature.</p>
+
 To configure backups:
 
 1. Click **Backups**.
 
-    ![alt-text="The radio buttons for backup configuration are Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure."](./images/backups.png)
+    ![The radio buttons for backup configuration are Ceph or Amazon S3, Amazon S3 (with Instance Profiles), SCP, GCS, and Azure.](./images/backups.png)
 
-1. Select a **Backup configuration** and follow the procedure for your storage solution
+2. Select a **Backup configuration** and follow the procedure for your storage solution
 in the *Configuring Automated Backups* topic:
 
-+ **Ceph or Amazon S3:** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
-    that saves backups to an S3 bucket,
-    a [Ceph](https://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by VMware.<br>
-    For instructions about using Ceph or Amazon S3 for backups, see [Back Up to Ceph or S3](./automated-backup.html#ceph-or-s3).<br><br>
-+ **SCP:** <%= vars.product_short %> runs an Secure Copy Protocol (SCP) command that secure-copies backups to a VM
-    or physical machine operating outside of your deployment. This is the fastest option. <br>
-    SCP enables you to securely transfer files between two hosts.
-    You can provision the backup machine separately from your installation.
-     <br>For instructions about using SCP for backups, see [Back Up with SCP](./automated-backup.html#scp).<br><br>
-+ **GCS:** <%= vars.product_short %> runs a [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) SDK
-    that saves backups to an GCS bucket. <br>For instructions about using GCS for backups, see [Back Up to GCS](./automated-backup.html#gcs). <br><br>
-+ **Azure:** <%= vars.product_short %> runs an [Azure](https://docs.microsoft.com/en-us/azure/storage/)
-    SDK that saves backups to an Azure storage account.<br>For instructions about using Azure for backups,
-    see [Back Up to Azure Storage](./automated-backup.html#azure).
+   + **Ceph or Amazon S3:** <%= vars.product_short %> runs an [Amazon S3](https://aws.amazon.com/documentation/s3/) client
+       that saves backups to an S3 bucket,
+       a [Ceph](https://docs.ceph.com/en/latest/) storage cluster, or another S3-compatible endpoint certified by VMware.<br>
+       For instructions about using Ceph or Amazon S3 for backups, see [Back Up to Ceph or S3](./automated-backup.html#ceph-or-s3).<br><br>
+   + **SCP:** <%= vars.product_short %> runs an Secure Copy Protocol (SCP) command that secure-copies backups to a VM
+       or physical machine operating outside of your deployment. This is the fastest option. <br>
+       SCP enables you to securely transfer files between two hosts.
+       You can provision the backup machine separately from your installation.
+        <br>For instructions about using SCP for backups, see [Back Up with SCP](./automated-backup.html#scp).<br><br>
+   + **GCS:** <%= vars.product_short %> runs a [Google Cloud Storage (GCS)](https://cloud.google.com/storage/) SDK
+       that saves backups to an GCS bucket. <br>For instructions about using GCS for backups, see [Back Up to GCS](./automated-backup.html#gcs). <br><br>
+   + **Azure:** <%= vars.product_short %> runs an [Azure](https://docs.microsoft.com/en-us/azure/storage/)
+       SDK that saves backups to an Azure storage account.<br>For instructions about using Azure for backups,
+       see [Back Up to Azure Storage](./automated-backup.html#azure).
 
 ### <a id="security"></a> Configuring security
 
@@ -514,10 +525,10 @@ To configure the security settings for the MySQL service, do one or both:
 + Enable TLS for the MySQL service. See [Configure TLS](#security-tls).
 + Store your service instance credentials in runtime CredHub. See [Configure Secure Service Instance Credentials](#security-service-instance-creds).
 
-![alt-text="The Security pane. The following TLS Options are listed: Not Configured,
+![The Security pane. The following TLS Options are listed: Not Configured,
 Optional - Developers can configure their service VMs to use TLS, and
 Required - All connections MUST use TLS.
-Any application that is not using TLS communication with MySQL breaks."](./images/security.png)
+Any application that is not using TLS communication with MySQL breaks.](./images/security.png)
 
 #### <a id="security-tls"></a> Configure TLS
 
@@ -527,9 +538,12 @@ To activate TLS for the MySQL service:
 
 1. Click **Security**.
 1. For **Enforce application TLS**, select one of the following:
+    
     <table class="nice">
       <col width="30%">
+      <thead>
       <tr><th>State</th><th>Instructions</th></tr>
+      </thead>
       <tr><td><strong>Unchecked</strong></td>
           <td>This enables developers to configure their MySQL service VMs to use TLS.
             <br><br>
@@ -553,16 +567,18 @@ To activate TLS for the MySQL service:
           </td></tr>
     </table>
 
-    <p>Enforcing TLS v1.2 has the following effects:
-      <ul>
-        <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
-        <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
-      </ul>
-      The TLS v1.2 restriction is a global setting, so it applies to every service instance.
-      Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
+    <div class="note important">
+    <span class="note__title">Important</span>
+    Enforcing TLS v1.2 has the following effects:
+    <ul>
+      <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
+      <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
+    </ul>
+    The TLS v1.2 restriction is a global setting, so it applies to every service instance.
+    Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
     </div>
-1. Click **Save**.
-1. After deploying the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
+2. Click **Save**.
+3. After deploying the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
 
 #### <a id="security-service-instance-creds"></a> Configuring secure service instance credentials
@@ -627,35 +643,38 @@ To activate monitoring and logging in the MySQL service:
 
 1. Click **Monitoring**.
 
-    ![alt-text="Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields."](./images/monitoring.png)
+    ![Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields.](./images/monitoring.png)
 
-1. Configure the fields as follows and then Click **Save**:
+2. Configure the fields as follows and then Click **Save**:
 
   <table>
+  <thead>
     <tr><th>Field</th><th>Instructions</th></tr>
+  </thead>
     <tr><td><strong>Metrics Polling Interval</strong></td>
         <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
-            All service instances emit metrics about the health and status of the MySQL server.</td></tr>
+        All service instances emit metrics about the health and status of the MySQL server.
+    </td></tr>
     <tr><td><strong>Enable User Statistics Logging</strong></td>
         <td>Select this check box to collect user statistics. You can use these statistics to better
           understand server activity and identify load sources.
-            For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">Percona documentation</a>.
-            </td></tr>
+        For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">Percona documentation</a>.
+    </td></tr>
     <tr><td><strong>Enable Server Activity Logging</strong></td>
         <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
-            For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
-            <p class="note">
-            <span class="note__title">Note</span>
-            MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-            You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.</p>
-           </td></tr>
+        For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
+        <p class="note">
+        <span class="note__title">Note</span>
+        MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
+        You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.</p>
+    </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
         <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
-            This user can be used for auditing and monitoring without risking
-            mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
-            <br><br>
-            For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
-            The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
+        This user can be used for auditing and monitoring without risking
+        mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
+        <br><br>
+        For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
+        The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
   </table>
 
 ### <a id="syslog"></a> Configuring system logging
@@ -666,12 +685,14 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
 
 1. Click **Yes**.
 
-    ![alt-text="Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields."](./images/syslog.png)
+    ![Fields for configuring syslog. See the following step for detailed descriptions of the configurable fields.](./images/syslog.png)
 
-1. Configure the fields as follows:
+2. Configure the fields as follows:
 
   <table>
+  <thead>
     <tr><th>Field</th><th>Instructions</th></tr>
+  </thead>
     <tr>
         <td><strong>Address</strong></td>
         <td>Enter the IP address or hostname of the syslog server for sending logs. For example:
@@ -711,11 +732,14 @@ To configure service instance upgrades.
 
 1. Click **Service Instance Upgrades**.
 
-    ![alt-text="Screenshot of service instance upgrades section in the MySQL tile in Ops Manager."](./images/service-instance-upgrades.png)
+    ![Screenshot of service instance upgrades section in the MySQL tile in Ops Manager.](./images/service-instance-upgrades.png)
 
 1. Configure the fields as follows:
+
     <table>
+    <thead>
       <tr><th>Field</th><th>Instructions</th></tr>
+    </thead>
       <tr>
           <td><strong>Number of simultaneous upgrades</strong></td>
           <td>Enter the maximum number of service instances that can upgrade at the same time.
@@ -735,7 +759,7 @@ To configure service instance upgrades.
       </tr>
     </table>
 
-1. Click **Save**.
+2. Click **Save**.
 
 ### <a id="errands"></a> Review errands (Optional)
 
@@ -743,10 +767,11 @@ Errands are scripts that run at specific times to do various tasks.
 <%= vars.product_short %> can run errands to manage the broker and service instances.
 You do not need to change the default configurations for errands.
 
-<p> The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
+<p class="note important">
+<span class="note__title">Important</span>
+The <strong>Delete All Service Instances and Deregister Broker</strong> errand does
 necessary cleanup tasks when you delete the <%= vars.product_short %> tile or re-define plans. Setting this errand to <strong>Off</strong> can cause
-problems when attempting to install the tile again or re-define plans. VMware recommends that you do not set this errand to <strong>Off</strong>.
-</p>
+problems when attempting to install the tile again or re-define plans. VMware recommends that you do not set this errand to <strong>Off</strong>.</p>
 
 <%= vars.product_short %> uses the following types of errands:
 
@@ -764,15 +789,17 @@ To review errands:
 
 1. Click **Errands**.
 
-    ![alt-text="Errand list for VMware Tanzu SQL with MySQL for VMs. See the following step for detailed descriptions of the configurable drop-down menus."](./images/errands.png)
+    ![Errand list for VMware Tanzu SQL with MySQL for VMs. See the following step for detailed descriptions of the configurable drop-down menus.](./images/errands.png)
 
 1. Review the settings for the following errands:
 
   <table>
+  <thead>
     <tr>
       <th>Errand</th>
       <th>Description</th>
     </tr>
+  </thead>
     <tr>
       <th colspan="2" style="text-align:center;">Post-Deploy Errands</th>
     </tr>
@@ -780,26 +807,22 @@ To review errands:
       <td><strong>Register On-demand MySQL Broker</strong></td>
       <td>Registers a broker with the Cloud Controller and lists it in the Marketplace.</td>
     </tr>
-
     <tr>
       <td><strong>Smoke Tests</strong></td>
       <td>Validates basic MySQL operations.</td>
     </tr>
-
     <tr>
       <td><strong>Validate no IP-based bindings in use before upgrade-all-service-instances</strong></td>
       <td>Checks if service instances have app bindings or service keys using IP addresses or have a TLS certificate that is signed with an IP address. If either is true, the installation fails.</td>
     </tr>
-
     <tr>
       <td><strong>Upgrade all On-demand MySQL Service Instances</strong></td>
       <td>Upgrades existing instances of a service to its latest installed version.<br><br>
-        If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.<br /><br />
-        For more information about individual service instance upgrades,
-        see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>.
+      If you want developers to individually upgrade service instances, set this errand to <code>OFF</code>.<br /><br />
+      For more information about individual service instance upgrades,
+      see <a href="./upgrade.html#individual-upgrades">About Individual Service Instance Upgrades</a>.
       </td>
     </tr>
-
     <tr>
       <th colspan="2" style="text-align:center;">Pre-Delete Errands</th>
     </tr>
