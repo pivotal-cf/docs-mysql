@@ -1185,21 +1185,22 @@ tab of the VMware Tanzu Application Service for VMs tile.</p>
 
 <h4> Validate service broker connectivity to service instances
 
-To validate connectivity, do the following:
+<p>To validate connectivity, do the following:</p>
 
-1.  View the BOSH deployment name for your service broker by running:
-
-    ```
+<ol>
+  <li>View the BOSH deployment name for your service broker by running:<br>
+    <code>
     bosh deployments
-    ```
-
-2.  SSH into the Tanzu SQL for VMs service broker by running:
-
-    ```
+    </code>
+  </li>
+  <li>SSH into the Tanzu SQL for VMs service broker by running:<br>
+    <code>
     bosh -d DEPLOYMENT-NAME ssh
-    ```
-
-3.  If no BOSH `task-id` appears in the error message, look in the broker log using the `broker-request-id` from the task.
+    </code>
+  </li>
+  <li>If no BOSH <code>task-id</code> appears in the error message, look in the broker log using the `broker-request-id` from the task.
+  </li>
+</ol>
 
 
 <h4 id="-validate-app-access-to-service-instance"><a id="app-to-instances"></a>  Validate app access to service instance</h4>
@@ -1214,56 +1215,61 @@ To validate connectivity, do the following:
 
 <h4> Plan quota issues
 
-If developers report errors such as:
+<p>If developers report errors such as:</p>
 
-```
+<pre>
 Message: Service broker error: The quota for this service plan has been exceeded.
 Please contact your Operator for help.
-```
+</pre>
 
-1.  Check your current plan quota.
-2.  Increase the plan quota.
-3.  Log in to Ops Manager.
-4.  Reconfigure the quota on the plan page.
-5.  Deploy the tile.
-6.  Find who is using the plan quota and take the appropriate action.
+<ol>
+  <li>Check your current plan quota.</li>
+  <li>Increase the plan quota.</li>
+  <li>Log in to Ops Manager.</li>
+  <li>Reconfigure the quota on the plan page.</li>
+  <li>Deploy the tile.</li>
+  <li>Find who is using the plan quota and take the appropriate action.</li>
+</ol>
 
-#### Global quota issues
+<h4> Global quota issues
 
-If developers report errors such as:
+<p>If developers report errors such as:</p>
 
-```
+<pre>
 Message: Service broker error: The quota for this service has been exceeded.
 Please contact your Operator for help.
-```
+</pre>
 
-1.  Check your current global quota.
-2.  Increase the global quota.
-3.  Log in to Ops Manager.
-4.  Reconfigure the quota on the on-demand settings page.
-5.  Deploy the tile.
-6.  Find out who is using the quota and take the appropriate action.
+<ol>
+  <li>Check your current global quota.</li>
+  <li>Increase the global quota.</li>
+  <li>Log in to Ops Manager.</li>
+  <li>Reconfigure the quota on the on-demand settings page.</li>
+  <li>Deploy the tile.</li>
+  <li>Find out who is using the quota and take the appropriate action.</li>
 
 <h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a> Failing jobs and unhealthy instances</h3>
 
-To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:
+<p>To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:</p>
 
-1.  Inspect the VMs by running:
-
-    ```
+<ol>
+  <li>Inspect the VMs by running:<br>
+    <code>
     bosh -d service-instance_GUID vms --vitals
-    ```
-
-2.  For additional information, run:
-
-    ```
+    </code>
+  </li>  
+  <li>For additional information, run:<br>
+    <code>
     bosh -d service-instance_GUID instances --ps --vitals
-    ```
+    </code>
+  </li>
+</ol>
 
-If the VM is failing, follow the service-specific information. Any unadvised corrective actions (such as running BOSH `restart` on a VM) can cause issues in the service instance.
+<p>If the VM is failing, follow the service-specific information. Any unadvised corrective actions (such as running BOSH <code>restart</code> on a VM) can cause issues in the service instance.</p>
 
-A failing process or failing VM might come back automatically after a temporary service outage. See
-[VM process failure](./interruptions.html#process-fail) and [VM failure](./interruptions.html#vm-fail).
+<p>A failing process or failing VM might come back automatically after a temporary service outage. See
+<a href="./interruptions.html#process-fail">VM process failure</a> and
+<a href="./interruptions.html#vm-fail">VM failure</a>.</p>
 
 <h3 id="-az-or-region-failure"><a id="az-region-fail"></a>  AZ or region failure</h3>
 
@@ -1283,7 +1289,7 @@ instance BOSH deployments, and on performing general maintenance and housekeepin
   You can retrieve the error message later by running the cf CLI command <code>cf service INSTANCE-NAME</code>.
 </p>
 
-```
+<pre>
 $ cf service myservice
 
 Service instance: myservice
@@ -1306,7 +1312,7 @@ Message: Instance provisioning failed: There was a problem completing your reque
      operation: create
 Started: 2017-03-13T10:16:55Z
 Updated: 2017-03-13T10:17:58Z
-```
+</pre>
 
 <p>
   Use the information in the <code>Message</code> field to debug further.
