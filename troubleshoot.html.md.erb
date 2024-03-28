@@ -1183,7 +1183,7 @@ tab of the VMware Tanzu Application Service for VMs tile.</p>
     </tr>
 </table>
 
-#### Validate service broker connectivity to service instances
+<h4> Validate service broker connectivity to service instances
 
 To validate connectivity, do the following:
 
@@ -1210,9 +1210,9 @@ To validate connectivity, do the following:
   <code>VCAP_SERVICES</code> environment variable.
 </p>
 
-### <a id="quotas"></a> Quotas
+<h3 id="quotas"></a> Quotas
 
-#### Plan quota issues
+<h4> Plan quota issues
 
 If developers report errors such as:
 
@@ -1970,7 +1970,7 @@ To manually force a node to rejoin the cluster, do the following:</p>
 
 <h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check replication status in a highly available cluster</h3>
 
-If you see stale data in your cluster, you can check whether replication is functioning normally.
+<p> If you see stale data in your cluster, you can check whether replication is functioning normally.</p>
 
 To check the replication status, do the following:
 
@@ -1979,9 +1979,9 @@ To check the replication status, do the following:
     2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
 2.  Create a dummy database in the first node by running:
 
-    ```
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -e "create database verify_healthy;"
-    ```
+    </code>
 
     Where:
 
@@ -1990,21 +1990,21 @@ To check the replication status, do the following:
 
 3.  Create a dummy table in the dummy database by running:
 
-    ```
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u your-identity \ -p -D verify_healthy \ -e "create table dummy_table (id int not null primary key auto_increment, info text) \ engine='innodb';"
-    ```
+    </code>
 
 4.  Insert data into the dummy table by running:
 
-    ```
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"
-    ```
+    </code>
 
 5.  Query the table and verify that the three rows of dummy data exist on the first node by running:
 
-    ```
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "select * from dummy_table;"
-    ```
+    </code>
 
     When prompted for a password, provide the `password` value recorded in step 1.
     The previous command returns output similar to the following:
@@ -2021,19 +2021,19 @@ To check the replication status, do the following:
 
 6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
     1.  Query the dummy table by running :
-        ```
+        <code>
         mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"
-        ```
+        </code>
         When prompted for a password, provide the `password` value recorded in step 1.
 
     2.  Verify that the node contains the same three rows of dummy data as the other nodes by running:
 
-        ```
+        <code>
         mysql -h NEXT-NODE-IP-ADDRESS \\
                   -u YOUR-IDENTITY \\
                   -p -D verify\\\_healthy \\
                   -e "select \* from dummy\\\_table;"
-        ```
+        </code>
         When prompted for a password, provide the `password` value recorded in step 1.
 
 
