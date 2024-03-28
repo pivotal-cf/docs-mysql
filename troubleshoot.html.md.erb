@@ -16,23 +16,23 @@ This section provides information on how to troubleshoot specific errors or erro
 
 The following errors occur in multiple services:
 
-*   [Failed installation](#install-fail)
-*   [Cannot create or delete service instances](#cannot-create-delete)
-*   [Broker request timeouts](#timeouts)
-*   [Instance does not exist](#instance-not-exist)
-*   [Cannot bind to or unbind from service instances](#cannot-bind)
-*   [Cannot connect to a service instance](#cannot-connect)
-*   [Upgrade all service instances errand fails](#upgrade-all-fails)
-*   [Missing logs and metrics](#missing-logs)
-*   [MySQL Load is high with large number of CredHub encryption keys](#credhub-encryption-keys)
+* [Failed installation](#install-fail)
+* [Cannot create or delete service instances](#cannot-create-delete)
+* [Broker request timeouts](#timeouts)
+* [Instance does not exist](#instance-not-exist)
+* [Cannot bind to or unbind from service instances](#cannot-bind)
+* [Cannot connect to a service instance](#cannot-connect)
+* [Upgrade all service instances errand fails](#upgrade-all-fails)
+* [Missing logs and metrics](#missing-logs)
+* [MySQL Load is high with large number of CredHub encryption keys](#credhub-encryption-keys)
 
 
 <p><a name="install-fail"></a></p>
 
-  <table class="table">
-  <thead>
+<table class="table">
+<thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Failed Installation
   <br><br></th>
   </tr>
@@ -41,7 +41,6 @@ The following errors occur in multiple services:
     <th>Symptom</th>
     <td>VMware SQL with MySQL for TAS fails to install.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Reasons for a failed installation include:
@@ -66,14 +65,13 @@ The following errors occur in multiple services:
     <li>Other service-specific issues.</li>
     </ul></td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
     <ul>
     <li>Certificate issues: Ensure that your certificates are valid and generate new ones if necessary.
     To generate new certificates, contact <a href="https://tanzu.vmware.com/support">Support</a>.</li>
-        <li>Deploy fails: View the logs using Tanzu Operations Manager to determine why the deploy is failing.</li>
+    <li>Deploy fails: View the logs using Tanzu Operations Manager to determine why the deploy is failing.</li>
     <li>Networking problems: For how to troubleshoot, see <a href="#network">Networking problems</a>. </li><li>Register broker errand fails: For how to troubleshoot, see <a href="#register-broker">Register broker errand</a>.</li><li>Resource sizing issues: Check your resource configuration in Tanzu Operations Manager and ensure that the
     configuration matches that recommended by the service.</li>
     </ul></td>
@@ -84,19 +82,19 @@ The following errors occur in multiple services:
 
 
   <table class="table">
-    <thead>
+  <thead>
     <tr>
-  <th> <br>
+    <th colspan="2" style="text-align: left;"><br>
     Cannot Create or Delete Service Instances
-  <br><br></th>
-  </tr></thead>
+    <br><br></th>
+    </tr>
+  </thead>
   <tr>
     <th>Symptom</th>
-    <td>If developers report errors such as:
+    <td>Developers report errors such as:
         <pre class="terminal">Instance provisioning failed: There was a problem completing your
         request. Contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</pre></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Reasons include:
@@ -107,7 +105,6 @@ The following errors occur in multiple services:
       <li>Quota errors</li>
     </ul></td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
@@ -152,7 +149,7 @@ The following errors occur in multiple services:
 
 
   <table class="table">
-    <thead>
+  <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Broker Request Timeouts
@@ -163,12 +160,10 @@ The following errors occur in multiple services:
     <td>If developers report errors such as:
         <pre class="terminal">Server error, status code: 504, error code: 10001, message: The request to the service broker timed out: https://BROKER-URL/v2/service_instances/e34046d3-2379-40d0-a318-d54fc7a5b13f/service_bindings/aa635a3b-ef6d-41c3-a23f-55752f3f651b</pre></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Cloud Foundry might not be connected to the service broker, or there might be a large number of queued tasks.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
@@ -191,16 +186,14 @@ The following errors occur in multiple services:
         </li>
         </ol></td>
   </tr>
-
 </table>
 
 <p><a name="instance-not-exist"></a></p>
 
-
-  <table class="table">
-   <thead>
+<table class="table">
+  <thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Instance Does Not Exist
   <br><br></th>
   </tr></thead>
@@ -209,35 +202,32 @@ The following errors occur in multiple services:
     <td>If developers report errors such as:
         <pre class="terminal">Server error, status code: 502, error code: 10001, message: Service broker error: instance does not exist`</pre></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>The instance might have been deleted.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
-        <ol>
-        <li>
-        <p>
-        Confirm that the VMware SQL with MySQL for TAS instance exists in BOSH and
-        obtain the GUID CF by running:
-        </p>
-        <code>cf service MY-INSTANCE --guid</code>
-        </li>
-        <li>
-        <p>
-        Using the GUID that you obtained previously, run:
-        </p>
-        <code>bosh -d service-instance_GUID vms</code>
-        </li>
-        </o><p>
-        If the BOSH deployment is not found, it has been deleted from BOSH.
-        Contact Support for further assistance.
-        </p></td>
+      <ol>
+      <li>
+      <p>
+      Confirm that the VMware SQL with MySQL for TAS instance exists in BOSH and
+      obtain the GUID CF by running:
+      </p>
+      <code>cf service MY-INSTANCE --guid</code>
+      </li>
+      <li>
+      <p>
+      Using the GUID that you obtained previously, run:
+      </p>
+      <code>bosh -d service-instance_GUID vms</code>
+      </li>
+      </o><p>
+      If the BOSH deployment is not found, it has been deleted from BOSH.
+      Contact Support for further assistance.
+      </p></td>
   </tr>
-
 </table>
 
 
@@ -246,10 +236,11 @@ The following errors occur in multiple services:
   <table class="table">
   <thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Cannot Bind to or Unbind from Service Instances
   <br><br></th>
-  </tr></thead>
+  </tr>
+  </thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
@@ -259,7 +250,6 @@ The following errors occur in multiple services:
     <th>Cause</th>
     <td>This might be due to authentication or network errors.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To find out the exact issue with the binding process:
@@ -290,7 +280,6 @@ The following errors occur in multiple services:
     </li>
     </ol></td>
   </tr>
-
 </table>
 
 <p><a name="cannot-connect"></a></p>
@@ -298,7 +287,7 @@ The following errors occur in multiple services:
   <table class="table">
   <thead>
   <tr>
-  <th colspan="2" style="text-align: left;"> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Cannot Connect to a Service Instance
   <br><br></th>
   </tr></thead>
@@ -308,12 +297,10 @@ The following errors occur in multiple services:
 successfully created and bound.
 </td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>The error might originate from the service or be network related.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>
@@ -356,62 +343,56 @@ successfully created and bound.
   See <a href="./upgrade.html#interruptions">Service interruptions</a> for more information.
 </p>
 
-
 <p><a name="upgrade-all-fails"></a></p>
 
-  <table class="table">
-   <thead>
+<table class="table">
+<thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Upgrade All Service Instances Errand Fails
   <br><br></th>
-  </tr></thead>
+  </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>The <a href="#upgrade-all"><code>upgrade-all-service-instances</code></a> errand fails.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>There might be a problem with a particular instance.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
     <ol>
     <li>Look at the errand output in the Ops Manager log.</li>
-
     <li>If an instance has failed to upgrade, debug and fix it before running the errand again
     to prevent any failure issues from spreading to other on-demand instances.</li>
-
     <li>After the Ops Manager log no longer lists the deployment as <code>failing</code>,
     <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
     </ol>
-</td>
+  </td>
   </tr>
+</table>
 
 <p><a name="missing-logs"></a></p>
 
-
-  <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Missing Logs and Metrics
   <br><br></th>
-  </tr></thead>
-
+  </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>No logs are being emitted by the on-demand broker.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Syslog might not be configured correctly, or you might have network access issues.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
@@ -457,51 +438,45 @@ successfully created and bound.
 </td>
   </tr>
 
-
 <p><a name="credhub-encryption-keys"></a></p>
 
-
-  <table class="nice">
-  <thead>
+<table class="nice">
+<thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
-  </tr></thead>
-
+  </tr>
+</thead>
   <tr>
     <th>Symptom</th>
-    <td>MySQL load is high</td>
-    <td>Slow CredHub queries</td>
+    <td>
+      <ul>
+        <li>MySQL load is high</li>
+        <li>Slow CredHub queries</li>
+      </ul>
+    </td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Large number of CredHub encryption keys</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
-    <ol>
-    <li>
     <p>
     For information about resolving this issue, see <a href="https://community.pivotal.io/s/article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
     </p>
-    </li>
     </td>
   </tr>
-
 </table>
-
 
 <p><a name="credhub-encryption-keys"></a></p>
 
-
-  <table class="table">
+<table class="table">
 <thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
   </tr></thead>
@@ -521,17 +496,12 @@ successfully created and bound.
   <tr>
     <th>Solution</th>
       <td>To troubleshoot:
-        <ol>
-          <li>
-            <p>
-            For information about resolving this issue, see <a href="https://community.pivotal.io/s/article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
-            </p>
-          </li>
-        </ol>
+        <p>
+        For information about resolving this issue, see <a href="https://community.pivotal.io/s/article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
+        </p>
       </td>
   </tr>
 </table>
-
 
 <h3 id="-leader-follower-service-instance-errors"><a id="l-f-errors"></a> Leader-Follower Service Instance Errors</h3>
 
@@ -543,37 +513,33 @@ successfully created and bound.
 <li><a href="#both-read-only">Both leader and follower instances are read-only</a></li>
 </ul>
 
-
 <p><a name="unable-to-determine"></a></p>
 
-
-  <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
-  <th> <br>
+  <th colspan="2" style="text-align: left;"><br>
     Unable to Determine Leader and Follower
   <br><br></th>
-  </tr></thead>
+  </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code>
-errand fails because it cannot determine the VM roles. <br><br>
-
-The <code>configure-leader-follower</code> errand exits with <code>1</code>
-and the errand logs contain the following:
-
-<pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
-</td>
+    errand fails because it cannot determine the VM roles. <br><br>
+    The <code>configure-leader-follower</code> errand exits with <code>1</code>
+    and the errand logs contain the following:
+    <pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
+    </td>
   </tr>
   <tr>
     <th>Cause</th>
     <td>
-Something has happened to the instances, such as a failure or manual intervention.
-As a result, there is not enough information available to determine the correct state
-and topology without operator intervention to resolve the issue.
-</td>
+    Something has happened to the instances, such as a failure or manual intervention.
+    As a result, there is not enough information available to determine the correct state
+    and topology without operator intervention to resolve the issue.
+    </td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>Use the <code>inspect</code> errand to determine which instance can be the leader. Then, using the
@@ -586,30 +552,30 @@ and topology without operator intervention to resolve the issue.
         <code>inspect</code>
         errand to retrieve relevant information about the two VMs:
         <pre class="terminal">$ bosh -e my-env -d my-dep run-errand inspect
-      [...]
-      Instance   mysql/4ecad54b-0704-47eb-8eef-eb228cab9724
-      Exit Code  0
-      Stdout     -
-      Stderr   2017/12/11 18:25:54 Started executing command: inspect
-               2017/12/11 18:25:54 Started GET https<span>:</span>//127.0.0.1:8443/status
-               2017/12/11 18:25:54
-               Has Data: false
-               Read Only: true
-               GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
-               Replication Configured: false
-      Instance   mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
-      Exit Code  0
-      Stdout     -
-      Stderr   2017/12/11 18:25:54 Started executing command: inspect
-               2017/12/11 18:25:54
-               Started GET https<span>:</span>//127.0.0.1:8443/status
-               2017/12/11 18:25:54
-               Has Data: true
-               Read Only: true
-               GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
-               Replication Configured: true
-      2 errand(s)
-      Succeeded</pre>
+        [...]
+        Instance   mysql/4ecad54b-0704-47eb-8eef-eb228cab9724
+        Exit Code  0
+        Stdout     -
+        Stderr   2017/12/11 18:25:54 Started executing command: inspect
+        2017/12/11 18:25:54 Started GET https<span>:</span>//127.0.0.1:8443/status
+        2017/12/11 18:25:54
+        Has Data: false
+        Read Only: true
+        GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
+        Replication Configured: false
+        Instance   mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
+        Exit Code  0
+        Stdout     -
+        Stderr   2017/12/11 18:25:54 Started executing command: inspect
+        2017/12/11 18:25:54
+        Started GET https<span>:</span>//127.0.0.1:8443/status
+        2017/12/11 18:25:54
+        Has Data: true
+        Read Only: true
+        GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
+        Replication Configured: true
+        2 errand(s)
+        Succeeded</pre>
     In the previous scenario, the first instance is missing data but does not have replication configured. The second instance has data, and also has replication configured. The following instructions resolve this by copying data to the first instance, and
         resuming replication.</li>
       <li>Take a backup of the second instance using the
@@ -634,28 +600,24 @@ and topology without operator intervention to resolve the issue.
 </table>
 </div>
 
-
 <p><a name="both-writable"></a></p>
 
-
- <table class="table">
- <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Both Leader and Follower Instances Are Writable
+    Both Leader and Follower Instances are Writable
   <br><br></th>
   </tr>
 </thead>
   <tr>
     <th>Symptom</th>
     <td>This problem happens when the <code>configure-leader-follower</code> errand fails because both VMs are writable and the VMs might hold differing data. <br><br>
-The <code>configure–leader-follower</code> errand exits with <code>1</code>
-and the errand logs contain the following:
-
-<pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</pre>
-</td>
-  </tr>
-
+    The <code>configure–leader-follower</code> errand exits with <code>1</code>
+    and the errand logs contain the following:
+    <pre class="terminal">$ Both mysql instances are writable. Please ensure no divergent data and set one instance to read-only mode.</pre>
+    </td>
+    </tr>
   <tr>
     <th>Cause</th>
     <td>VMware SQL with MySQL for TAS tries to ensure that there is only one writable instance of the
@@ -666,7 +628,6 @@ and the errand logs contain the following:
       to ensure that the correct instance is promoted and reduce the potential for data divergence.
     </td>
   </tr>
-
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>
@@ -680,23 +641,23 @@ and the errand logs contain the following:
       Exit Code  0
       Stdout     -
       Stderr     2017/12/11 18:25:54 Started executing command: inspect
-                 2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
-                 2017/12/11 18:25:54
-                 Has Data: true
-                 Read Only: false
-                 GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-23
-                 Replication Configured: false<br /><br />
-        Instance   mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
-        Exit Code  0
-        Stdout     -
-        Stderr     2017/12/11 18:25:54 Started executing command: inspect
-                2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
-                2017/12/11 18:25:54
-                Has Data: true
-                Read Only: false
-                GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
-                Replication Configured: false<br /><br />
-      2 errand(s)<br />
+      2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
+      2017/12/11 18:25:54
+      Has Data: true
+      Read Only: false
+      GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-23
+      Replication Configured: false<br /><br />
+      Instance   mysql/e0b94ade-0114-4d49-a929-ce1616d8beda
+      Exit Code  0
+      Stdout     -
+      Stderr     2017/12/11 18:25:54 Started executing command: inspect
+      2017/12/11 18:25:54 Started GET https<span>:</span>127.0.0.1:8443/status
+      2017/12/11 18:25:54
+      Has Data: true
+      Read Only: false
+      GTID Executed: 1d774323-de9e-11e7-be01-42010a001014:1-25
+      Replication Configured: false<br>
+      2 errand(s)<br>
       Succeeded
       </pre>
       If the GTID Executed sets for both instances are the same, continue to Step 2. If they are different, continue to Step 4.</li>
@@ -772,26 +733,24 @@ and the errand logs contain the following:
 
 <p><a name="both-read-only"></a></p>
 
-  <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Both Leader and Follower Instances Are Read-Only
+    Both Leader and Follower Instances are Read-Only
   <br><br></th>
-  </tr></thead>
-
+  </tr>
+</thead>
   <tr>
     <th>Symptom</th>
     <td>Developers report that apps cannot write to the database. In a leader-follower topology, the leader VM is writable and the follower VM is read-only.
     However, if both VMs are read-only, apps cannot write to the database.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>This problem happens if the leader VM fails and the BOSH Resurrector is activated.
     When the leader is resurrected, it is set as read-only.</td>
   </tr>
-
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>
@@ -804,29 +763,29 @@ and the errand logs contain the following:
       </li>
       <li>Examine the output and locate the information about the leader-follower VMware SQL with MySQL for TAS VMs:
         <pre class="terminal">
-    Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
-    Exit Code  0
-    Stdout     -
-    Stderr     2017/12/11 18:25:54 Started executing command: inspect
-             2017/12/11 18:25:54 Started GET https<span>:</span>999.0.0.1:8443/status
-             2017/12/11 18:25:54
-             Has Data: true
-             Read Only: true
-             GTID Executed: 1d779999-de9e-11e7-be01-42010a009999:1-23
-             Replication Configured: true<br /><br />
-    Instance   mysql/e0exampleade-0114-4d49-a929-cexample8beda
-    Exit Code  0
-    Stdout     -
-    Stderr     2017/12/11 18:25:54 Started executing command: inspect
-             2017/12/11 18:25:54 Started GET https<span>:</span>999.0.0.1:8443/status
-             2017/12/11 18:25:54
-             Has Data: true
-             Read Only: true
-             GTID Executed: 1d779999-de9e-11e7-be01-42010a009999:1-25
-             Replication Configured: false<br /><br />
-    2 errand(s)<br />
-    Succeeded
-    </pre>
+        Instance   mysql/4eexample54b-0704-47eb-8eef-eb2example724
+        Exit Code  0
+        Stdout     -
+        Stderr     2017/12/11 18:25:54 Started executing command: inspect
+        2017/12/11 18:25:54 Started GET https<span>:</span>999.0.0.1:8443/status
+        2017/12/11 18:25:54
+        Has Data: true
+        Read Only: true
+        GTID Executed: 1d779999-de9e-11e7-be01-42010a009999:1-23
+        Replication Configured: true<br />
+        Instance   mysql/e0exampleade-0114-4d49-a929-cexample8beda
+        Exit Code  0
+        Stdout     -
+        Stderr     2017/12/11 18:25:54 Started executing command: inspect
+        2017/12/11 18:25:54 Started GET https<span>:</span>999.0.0.1:8443/status
+        2017/12/11 18:25:54
+        Has Data: true
+        Read Only: true
+        GTID Executed: 1d779999-de9e-11e7-be01-42010a009999:1-25
+        Replication Configured: false<br />
+        2 errand(s)<br />
+        Succeeded
+        </pre>
       </li>
       <li>
         If Read Only is set to
@@ -837,10 +796,10 @@ and the errand logs contain the following:
           --instance=mysql/GUID-OF-LEADER</code>
         For example, if the second instance is the leader:
         <pre class="terminal">
-    $ bosh -e my-env -d my-dep &#92;
-      run-errand configure-leader-follower &#92;
-      --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
-    </pre>
+        $ bosh -e my-env -d my-dep &#92;
+          run-errand configure-leader-follower &#92;
+          --instance=mysql/e0exampleade-0114-4d49-a929-cexample8beda
+        </pre>
       </li>
     </ol>
    </td>
@@ -859,7 +818,7 @@ and the errand logs contain the following:
 
 <p><a name="persistent-disk"></a></p>
 
-  <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -874,7 +833,6 @@ and the errand logs contain the following:
     If your persistent disk is full, apps become inoperable.
     In this state, read, write, and Cloud Foundry Command-Line Interface (cf CLI) operations do not work.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>This problem happens if your persistent disk is full.
@@ -885,38 +843,35 @@ and the errand logs contain the following:
     You can also turn off binary logging before developers do large data uploads or if their
     databases have a high transaction volume.</td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>
       To resolve this issue, do one of the following:<br><br>
-          <ul>
-            <li><strong>If your persistent disk is already full,</strong> delete binary logs.
-              See
-              <a href="https://community.pivotal.io/s/article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full">MySQL for PCF hangs when server VM persistent disk is full</a>
-              in the Knowledge Base.
-                <p class="note caution">
-                <span class="note__title">Caution</span>
-                Deleting binary logs is a destructive procedure and can result in MySQL data loss.
-                Only do this procedure with the assistance of <a href="https://tanzu.vmware.com/support">Support</a>.
-                </p>
-            </li>
-            <li>
-              <strong>If the majority of your persistent disk are binary logs but it is not currently full,</strong>
-              turn off binary logging.
-              See
-              <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base.
-            </li>
-          </ul></td>
+        <ul>
+          <li><strong>If your persistent disk is already full,</strong> delete binary logs.
+          See
+          <a href="https://community.pivotal.io/s/article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full">MySQL for PCF hangs when server VM persistent disk is full</a>
+          in the Knowledge Base.
+          <p class="note caution">
+          <span class="note__title">Caution</span>
+          Deleting binary logs is a destructive procedure and can result in MySQL data loss.
+          Only do this procedure with the assistance of <a href="https://tanzu.vmware.com/support">Support</a>.</p>
+          </li>
+          <li>
+            <strong>If the majority of your persistent disk are binary logs but it is not currently full,</strong>
+            turn off binary logging.
+            See
+            <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
+            in the Knowledge Base.
+          </li>
+        </ul></td>
   </tr>
-
 </table>
 
 <p><a name="access-table"></a></p>
 
-  <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Cannot Access Database Table
@@ -929,24 +884,22 @@ and the errand logs contain the following:
     the following:
     <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</code></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td><p>This error occurs if you created an uppercase table name and then
-      activated lowercase table names.</p>
- <p>You activate lowercase table names either by:</p>
-<ul>
-<li>Setting the optional <code>enable_lower_case_table_names</code> parameter to <code>true</code>
-      with the cf CLI. For more information about the parameter, see
-      <a href='./change-default.html#lowercase'>Lowercase table names</a>.</li>
-<li>Selecting <strong>Enable Lower Case Table Names</strong> in
-      the <strong>Mysql Configuration</strong> pane of the tile. For more
-      information about this configuration,
-      see <a href='./install-config.html#mysql'>Configure MySQL</a>.</li>
+    activated lowercase table names.</p>
+    <p>You activate lowercase table names either by:</p>
+    <ul>
+    <li>Setting the optional <code>enable_lower_case_table_names</code> parameter to <code>true</code>
+          with the cf CLI. For more information about the parameter, see
+          <a href='./change-default.html#lowercase'>Lowercase table names</a>.</li>
+    <li>Selecting <strong>Enable Lower Case Table Names</strong> in
+          the <strong>Mysql Configuration</strong> pane of the tile. For more
+          information about this configuration,
+          see <a href='./install-config.html#mysql'>Configure MySQL</a>.</li>
     </ul>
 </td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td><p>To resolve this issue:</p>
@@ -959,21 +912,18 @@ and the errand logs contain the following:
             <li>Activate lowercase table names in the tile:
               <ol>
               <li>Deselect <strong>Enable Lower Case Table Names</strong> in
-            the <strong>Mysql Configuration</strong> pane of the tile.</li>
+              the <strong>Mysql Configuration</strong> pane of the tile.</li>
               <li> Go to the Ops Manager Installation Dashboard,
-        click <strong>Review Pending Changes</strong>, and then click
-        <strong>Apply Changes</strong>.</li>
+              click <strong>Review Pending Changes</strong>, and then click
+              <strong>Apply Changes</strong>.</li>
             </ol></li>
         </ul>
       </li>
-
-      <li>
-        (Optional) If you want to activate lowercase table names again,
-        rename your table to lowercase and then activate lowercase table names.
+      <li>(Optional) If you want to activate lowercase table names again,
+      rename your table to lowercase and then activate lowercase table names.
       </li>
     </ol></td>
   </tr>
-
 </table>
 </div>
 
@@ -998,36 +948,33 @@ main table {
 <p><a name="unresponsive"></a></p>
 
 <div>
-
- <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Unresponsive Node in a Highly Available Cluster
   <br><br></th>
-  </tr></thead>
+  </tr>
+</thead>
   <tr>
   <th>Symptom</th>
     <td>
     A client connected to a VMware SQL with MySQL for TAS cluster node reports the following error:
-<pre class="terminal">WSREP has not yet prepared this node for application use</pre>
+    <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
     </pre>
     </td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>If the client is connected to a VMware SQL with MySQL for TAS cluster node and that node loses connection to the rest of the cluster, the node stops accepting writes. If the connection to this node is made through the proxy, the proxy automatically
     re-routes further connections to a different node.</td>
   </tr>
-
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>A node can become unresponsive for a number of reasons. For solutions, see the following:
-
 <ul>
   <li>
     <strong>Network Latency</strong>: If network latency causes a node to become unresponsive, the node drops but eventually rejoins. The node automatically rejoins only if one node has left the cluster. Consult your IaaS network settings to reduce your network latency. <hr></li>
@@ -1067,7 +1014,7 @@ main table {
         the node to rejoin the cluster. This removes all of the unsynchronized data
         from the detached server node and creates a new copy of the cluster data on the node. For more
         information, see <a href="#manual-force">Force a node to rejoin a highly available cluster manually</a>.
-        <p> Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
+        <p>Forcing a node to rejoin the cluster is a destructive procedure. Only do this procedure with the assistance of
           <a href="https://tanzu.vmware.com/support">Support</a>.
         </p>
       </li>
@@ -1081,8 +1028,8 @@ main table {
 
 <p><a name="replication-errors"></a></p>
 
- <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Many Replication Errors in Logs for Highly Available Clusters
@@ -1092,15 +1039,13 @@ main table {
   <tr>
     <th>Symptom</th>
     <td>You see many replication errors in the MySQL logs, like the following:
-
-<pre class="terminal">
-160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
-160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
-160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
-</pre>
-</td>
+    <pre class="terminal">
+    160318 9:25:16 [Warning] WSREP: RBR event 1 Query apply warning: 1, 16992456
+    160318 9:25:16 [Warning] WSREP: Ignoring error for TO isolated action: source: abcd1234-abcd-1234-abcd-1234abcd1234 version: 3 local: 0 state: APPLYING flags: 65 conn_id: 246804 trx_id: -1 seqnos (l: 865022, g: 16992456, s: 16992455, d: 16992455, ts: 2530660989030983)
+    160318 9:25:16 [ERROR] Slave SQL: Error 'Duplicate column name 'number'' on query. Default database: 'cf_0123456_1234_abcd_1234_abcd1234abcd'. Query: 'ALTER TABLE ...'
+    </pre>
+    </td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>This problem happens when there are errors in SQL statements.</td>
@@ -1110,38 +1055,34 @@ main table {
     <th>Solution</th>
     <td>For solutions for the replication errors in MySQL log files, see the following table:
 
-<table class="table">
-  <thead><tr>
-    <th>Additional Error</th>
-    <th>Solution</th>
-  </tr></thead>
-
-  <tr>
-    <td>
-      <code>ALTER TABLE</code>
-      errors</td>
-    <td>Fix the
-      <code>ALTER TABLE</code>
-      error.<br>
-      This error can occur when an app issues an invalid data definition statement. Other nodes log this problem as a replication error because they fail to replicate the
-      <code>ALTER TABLE</code>.</td>
-  </tr>
-  <tr>
-    <td>Increased persistent disk usage or running out of working memory</td>
-    <td>Decode the
-      <code>GRA_*.log</code>
-      files and look for errors. See
-      <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-PCF-v1-10">
+  <table class="table">
+    <thead><tr>
+      <th>Additional Error</th>
+      <th>Solution</th>
+    </tr></thead>
+    <tr>
+      <td>
+        <code>ALTER TABLE</code>
+        errors</td>
+      <td>Fix the
+        <code>ALTER TABLE</code>
+        error.<br>
+        This error can occur when an app issues an invalid data definition statement. Other nodes log this problem as a replication error because they fail to replicate the
+        <code>ALTER TABLE</code>.</td>
+    </tr>
+    <tr>
+      <td>Increased persistent disk usage or running out of working memory</td>
+      <td>Decode the <code>GRA_*.log</code>
+        files and look for errors. See
+        <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-PCF-v1-10">
         How to decode Galera GRA log files</a>
-      in the Support knowledge base. The GRA log files contain failing DDL statements.</td>
+        in the Support knowledge base. The GRA log files contain failing DDL statements.</td>
+    </tr>
+  </table>
+  If you see replication errors, but no <code>ALTER TABLE</code>
+  or persistent disk or memory issues, you can ignore the replication errors.
+  </td>
   </tr>
-</table>
-
-If you see replication errors, but no <code>ALTER TABLE</code>
-or persistent disk or memory issues, you can ignore the replication errors.
-</td>
-  </tr>
-
 </table>
 </div>
 
@@ -1152,7 +1093,7 @@ verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
 
 <p><a name="unable-to-determine"></a></p>
 
- <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -1162,34 +1103,30 @@ verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
   <tr>
     <th>Symptom</th>
     <td>The following are true:<br><br>
-<ul>
-  <li>The backup fails.</li>
-  <li>The adbr-api logs for the broker show:
-   <pre class="terminal">backup failed with response: 502 Bad Gateway: Registered endpoint failed to handle the request.</pre>
-  </li>
-  <li>The gorouter logs on the TAS for VMs deployment show:
-   <pre class="terminal">adbr-api.SYSTEM-DOMAIN - [2021-01-20T19:30:00.911080271Z] "POST /service_instances/acb85c98-151e-4f13-9f0f-de057ef18d67/backup HTTP/1.1" 502 ... x_cf_routererror:"endpoint_failure" ...</pre>
-   Where <code>SYSTEM-DOMAIN</code> is your system domain.
-  </li>
-</ul>
-</td>
+    <ul>
+      <li>The backup fails.</li>
+      <li>The adbr-api logs for the broker show:
+      <pre class="terminal">backup failed with response: 502 Bad Gateway: Registered endpoint failed to handle the request.</pre>
+      </li>
+      <li>The gorouter logs on the TAS for VMs deployment show:
+      <pre class="terminal">adbr-api.SYSTEM-DOMAIN - [2021-01-20T19:30:00.911080271Z] "POST /service_instances/acb85c98-151e-4f13-9f0f-de057ef18d67/backup HTTP/1.1" 502 ... x_cf_routererror:"endpoint_failure" ...</pre>
+      Where <code>SYSTEM-DOMAIN</code> is your system domain.
+      </li>
+    </ul>
+    </td>
   </tr>
-
-
   <tr>
     <th>Cause</th>
     <td>Port 2345 that allows communication between the TAS for VMs and ODB components is closed.
 </td>
   </tr>
-
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Open port 2345 from the TAS for VMs component to the ODB component.
-See <a href="about.html#mysql-ports">Required networking rules for VMware SQL with MySQL for TAS</a>
-in <em>On-Demand Networking</em>.
-</td>
+    See <a href="about.html#mysql-ports">Required networking rules for VMware SQL with MySQL for TAS</a>
+    in <em>On-Demand Networking</em>.
+    </td>
   </tr>
-
 </table>
 </div>
 
@@ -1228,21 +1165,19 @@ in <em>On-Demand Networking</em>.
 
 <h4 id="-uaa-changes"><a id="uaa-change"></a> UAA changes</h4>
 
-
 <p>
     If you have rotated any UAA user credentials then you might see authentication
     issues in the service broker logs.
 </p>
-
 <p>
     To resolve this, redeploy the VMware SQL with MySQL for TAS tile in Ops Manager.
     This provides the broker with the latest configuration.
 </p>
+
 <p class="note important">
 <span class="note__title"> Important</span> You must ensure that any changes to UAA
 credentials are reflected in the Ops Manager <code>credentials</code>
-tab of the VMware Tanzu Application Service for VMs tile.
-</p>
+tab of the VMware Tanzu Application Service for VMs tile.</p>
 
 <h3 id="-networking"><a id="network"></a> Networking</h3>
 
@@ -1256,8 +1191,8 @@ tab of the VMware Tanzu Application Service for VMs tile.
     <col width="50%">
     <th>Issue</th>
     <th>Solution</th>
-    </tr></thead>
-
+    </tr>
+</thead>
     <tr>
         <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
         <td>Try again or improve network performance.</td>
@@ -1536,7 +1471,6 @@ Updated: 2017-03-13T10:17:58Z
 
 <h3 id="-run-service-broker-errands-to-manage-brokers-and-instances"><a id="broker-errands"></a> Run service broker errands to manage brokers and instances</h3>
 
-
 <p>
   From the BOSH CLI, you can run service broker errands that manage the service
   brokers and perform mass operations on the service instances that the brokers created.
@@ -1589,7 +1523,6 @@ Updated: 2017-03-13T10:17:58Z
 
 <h4 id="-register-broker"><a id="register-broker"></a> Register broker</h4>
 
-
 <p>
   The <code>register-broker</code> errand does the following:
 </p>
@@ -1617,7 +1550,6 @@ Updated: 2017-03-13T10:17:58Z
 
 <h4 id="-deregister-broker"><a id="deregister-broker"></a> Deregister broker</h4>
 
-
 <p>
   This errand deregisters a broker from Cloud Foundry.
 </p>
@@ -1634,7 +1566,6 @@ Updated: 2017-03-13T10:17:58Z
 <p>Use the <a href="#delete-all">
   Delete All Service Instances errand</a> to delete any existing service instances.
 </p>
-
 <p>
   To run the errand, run the following command:
 </p>
@@ -1668,7 +1599,6 @@ Updated: 2017-03-13T10:17:58Z
 
 <h4 id="-delete-all-service-instances"><a id="delete-all"></a> Delete all service instances</h4>
 
-
 <p>
   This errand uses the Cloud Controller API to delete all instances of your broker’s
   service offering in every Cloud Foundry org and space. It only deletes instances
@@ -1680,7 +1610,6 @@ Updated: 2017-03-13T10:17:58Z
   While rare, orphan deployments can occur. Use the <code>orphan-deployments</code>
   errand to identify them.
 </p>
-
 <p>
   The <code>delete-all-service-instances</code> errand does the following:
 </p>
@@ -1842,7 +1771,6 @@ in the Support Knowledge Base.</p>
 </ol>
 
 <h3 id="-identify-apps-using-a-service-instance"><a id="id-instance-owner"></a> Identify apps using a service instance</h3>
-
 
 <p>
   To identify which apps are using a specific service instance from the
@@ -2111,7 +2039,7 @@ To check the replication status, do the following:
 
     <pre class="terminal">
     +----+----------------------+
-     | id | info                 |
+    | id | info                 |
     +----+----------------------+
     |  4 | dummy data           |
     |  7 | more dummy data      |
