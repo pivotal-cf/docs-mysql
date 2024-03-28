@@ -23,10 +23,10 @@ For more information on how to establish a TLS connection, see [Establish a TLS 
 <p class="note caution">
 <span class="note__title">Caution</span>
 Mutual TLS (mTLS) is not supported in <%= vars.product_short %>.
-   Because of this, the server certificate does not validate apps.
-   If an app presents a certificate to the MySQL server,
-   the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate
- 	mTLS in your apps.
+Because of this, the server certificate does not validate apps.
+If an app presents a certificate to the MySQL server,
+the connection closes and a network error appears in the app logs. To resolve this issue, you must deactivate
+mTLS in your apps.
 </p>
 
 ## <a id='enable'></a> Activate TLS

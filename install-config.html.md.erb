@@ -294,7 +294,7 @@ For each plan that you want to use in your deployment:
 1. Configure the fields as follows:
 
     <p class="note important">
-    <span class="note__title"> Important</span>
+    <span class="note__title">Important</span>
     If you want to replicate data across multiple foundations or data centers,
     you must configure a <%= vars.single_leader_plan %> plan in both foundations using the same configurations.</p>
 
@@ -577,6 +577,7 @@ To activate TLS for the MySQL service:
     The TLS v1.2 restriction is a global setting, so it applies to every service instance.
     Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
     </div>
+
 2. Click **Save**.
 3. After deploying the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).

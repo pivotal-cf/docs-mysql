@@ -428,15 +428,15 @@ you must reconfigure replication. Reconfiguring replication is similar to the pr
 primary foundation service instance becomes the new follower and the secondary foundation service instance
  becomes the new leader.
 
-  <p class="note caution">
-  <span class="note__title">Caution</span>
-  To successfully trigger a switchover, the follower dataset must be a subset of the leader dataset.
+<p class="note caution">
+<span class="note__title">Caution</span>
+ To successfully trigger a switchover, the follower dataset must be a subset of the leader dataset.
 This means that multi-site replication has not written new data exclusively to the follower.
 The follower must also be no more than 3 days behind the leader. <br><br>
 If your follower instance does not satisfy these requirements, you must
 create a new <%= vars.single_leader_plan_lc%> service instance and reconfigure replication using this new,
 empty instance as the follower.
-  </p>
+</p>
 
 #### Workflow for reconfiguring multi-site replication
 

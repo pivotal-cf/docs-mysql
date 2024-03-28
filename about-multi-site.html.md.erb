@@ -30,8 +30,8 @@ in-foundation outages. For more information, see [About highly available cluster
 The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the replication follower instance.
 
 <p class="note important">
-  <span class="note__title">Important</span>
-  <%= vars.product_short %> supports using a High-availability cluster service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version is set in the plan definition section of Ops Manager. For more information, see <a href="./install-config.html#procedure-for-configuring-service-plans-8">Configuring Service Plans</a>.
+<span class="note__title">Important</span>
+<%= vars.product_short %> supports using a High-availability cluster service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version is set in the plan definition section of Ops Manager. For more information, see <a href="./install-config.html#procedure-for-configuring-service-plans-8">Configuring Service Plans</a>.
 </p>
 
 The foundation types are:
@@ -301,7 +301,7 @@ With three AZs, nodes are deployed to separate AZs.
 <p class="note important">
 <span class="note__title">Important</span>
 Important</span> In order to scale between the two plan types, the availability zones configured for
-the HA plan must match those configured for the single node multisite plan.</p>
+the HA plan must match those configured for the single node multi-site plan.</p>
 
 For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
 in _<%= vars.product_full %> Recommended Usage and Limitations_.
