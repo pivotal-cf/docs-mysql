@@ -26,9 +26,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 This release includes the following changes:
 
 + When you configure a previously inactive plan, the <strong>MySQL Default Version</strong> text box for the plan is set to <strong>MySQL 8.0</strong> by default, instead of the previous default value <strong>MySQL 5.7</strong>.
-* The bootstrap errand no longer requires an `--instance` designation when run; it self-selects a
-high-availability cluster instance node to run on.
-
++ The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 
 ## <a id="3-1-3"></a> v3.1.3
 
