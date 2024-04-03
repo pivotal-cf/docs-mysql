@@ -271,7 +271,106 @@ Reconfigure multi-site replication so that the primary foundation follower
 
 To reconfigure, follow the procedure in [Reconfigure multi-site replication](#reconfigure).
 
-## <a id='switchover'></a> Trigger a Switchover
+## <a id='switchover-mysql-tools'></a>Trigger a switchover using the mysql-tools plug-in
+
+To reduce the complexity of managing multi-site instance replication, <%= vars.product_short %> offers the mysql-tools plug-in for the cf CLI. You can use this plugin to automatically trigger the switchover. After the switchover is completed, the new leader instance on the secondary foundation has the same plan type as the original leader instance, and the new follower instance also has the same plan type as the original follower instance.
+
+To perform a switchover using the mysql-tools plugin, you need:
+
+* The cf CLI v8 or later. Earlier cf CLI versions are not compatible with the latest version of the mysql-tools plug-in. For more information, see the [VMware Tanzu Application Service documentation](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/5.0/tas-for-vms/v8.html).
+* The latest version of the mysql-tools cf CLI plug-in. For more information about the plug-in, see the [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) repository on GitHub.
+* Plan types that are available on both the primary foundation and the secondary foundation.
+
+To perform a switchover across foundations using the mysql-tools plugin:
+
+1. Save the Cloud Foundry configuration for targeting the primary foundation.
+
+    1. Log in to the deployment for the primary foundation:
+
+        ```
+        cf login PRIMARY-API-URL
+        ```
+
+        Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
+
+   1. Use the mysql-tools plug-in to save the configuration:
+
+        ```
+        cf mysql-tools save-target PRIMARY-TARGET-NAME
+        ```
+
+        Where `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
+
+1. Save the Cloud Foundry configuration for targeting the secondary foundation.
+
+    1. Log in to the deployment for the secondary foundation:
+
+        ```
+        cf login SECONDARY-API-URL
+        ```
+
+        Where `SECONDARY-API-URL` is the API endpoint for the secondary foundation.
+
+    1. Use the mysql-tools plug-in to save the configuration:
+
+        ```
+        cf mysql-tools save-target SECONDARY-TARGET-NAME
+        ```
+
+        Where `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
+
+1. Use the mysql-tools plug-in to perform the switchover:
+
+    ```
+    cf mysql-tools switchover --primary-target PRIMARY-TARGET-NAME --primary-instance PRIMARY-INSTANCE \
+     --secondary-target SECONDARY-TARGET-NAME --secondary-instance SECONDARY-INSTANCE
+    ```
+
+    Where:
+
+    * `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
+    * `PRIMARY-INSTANCE` is your chosen name for the primary instance.
+    * `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
+    * `SECONDARY-INSTANCE` is your chosen name for the secondary instance.
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    This step leverages tokens from the first two steps of this procedure, and must be performed before those tokens expire (within minutes of performing the first two steps).
+    </p>
+
+    This process may take several minutes to complete, depending on your selected service instances and foundation configurations. Any <%= vars.single_leader_plan %>
+  instances will experience downtime as the leader and follower instances are re-deployed.
+
+    The plugin output includes status lines that show checkpoints for the various configuration steps:
+
+    ```
+    When successful, leader will become secondary and follower will become primary. Do you want to continue? [yN]: y
+    [leader-foundation] Checking whether instance 'primary' exists
+    [follower-foundation] Checking whether plan 'multisite' exists
+    [follower-foundation] Checking whether instance 'secondary' exists
+    [leader-foundation] Checking whether plan 'multisite' exists
+    [leader-foundation] Demoting primary instance 'primary'
+    [follower-foundation] Promoting secondary instance 'secondary'
+    [leader-foundation] Retrieving information for new secondary instance 'primary'
+    [follower-foundation] Registering secondary instance information on new primary instance 'secondary'
+    [follower-foundation] Retrieving replication configuration from new primary instance 'secondary'
+    [leader-foundation] Updating new secondary instance 'primary' with replication configuration
+    Successfully switched replication roles. primary = [follower-foundation] follower, secondary = [leader-foundation] leader
+    ```
+
+1. Purge the Cloud Foundry configuration information from your computer:
+
+    ```
+    cf mysql-tools remove-target PRIMARY-TARGET-NAME
+    cf mysql-tools remove-target SECONDARY-TARGET-NAME
+    ```
+
+    Where:
+
+    * `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
+    * `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
+
+## <a id='switchover'></a> Trigger a Switchover Manually
 
 To trigger a switchover:
 
