@@ -15,7 +15,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 ## <a id="3-1-4"></a> v3.1.4
 
-**Release Date: Mar 26th, 2024**
+**Release Date: April 8th, 2024**
 
 >**Important**
 > 3.1.x is the last version of <%= vars.product_full %> that supports MySQL 5.7.
@@ -27,6 +27,13 @@ This release includes the following changes:
 + When you configure a previously inactive plan, the <strong>MySQL Default Version</strong> text box for the plan is set to <strong>MySQL 8.0</strong> by default, instead of the previous default value <strong>MySQL 5.7</strong>.
 + The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 + Added additional verbosity (innodb,query_plan,microtime) to the slow_query_log.
++ A number of high and critical CVEs were addressed by updating the components to the latest version.
+
+### Resolved Issues
+
+* Binding creation is further isolated from ongoing transaction execution. Previously, creating a binding during an active transaction
+  could intermittently fail the creation or abort the transaction.
+* MySQL service instances are better able to recover from a VM reboot.
 
 ### Compatibility
 
