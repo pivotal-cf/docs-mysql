@@ -13,9 +13,9 @@ and then upgrade to the latest patch available for the next minor release.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
-## <a id="3-0-7"></a> v3.0.7 (DRAFT/INCOMPLETE)
+## <a id="3-0-7"></a> v3.0.7
 
-**Release Date: TBD 2024**
+**Release Date: April 8th, 2024**
 
 ### Changes
 
@@ -23,6 +23,16 @@ This release includes the following changes:
 
 + When you configure an inactive plan, the <strong>MySQL Default Version</strong> text box for the plan is set to </strong>MySQL 8.0</strong> by default, instead of the previous default value <strong>MySQL 5.7</strong>.
 + The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
++ A number of high and critical CVEs were addressed by updating the components to the latest version
+
+### Resolved Issues
+
+This release resolves the following issues:
+
+* Binding creation is further isolated from ongoing transaction execution. Previously, creating a binding during an active transaction
+  could intermittently fail the creation or abort the transaction.
+* MySQL service instances are better able to recover from a VM reboot.
+* The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 
 ## <a id="3-0-6"></a> v3.0.6
 
