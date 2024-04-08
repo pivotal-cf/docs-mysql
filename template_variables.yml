@@ -58,6 +58,7 @@ template_variables:
   current_minor_version: 3.1
 
   # Associated Tanzu Application Service for VMs version
+  current_major_version: "5.0"
   current_tas_version: "5-0"
   v_major_tas_version: "v5.0"
   dot_major_tas_version: "5.0"
