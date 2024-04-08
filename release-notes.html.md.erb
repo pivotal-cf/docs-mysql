@@ -28,7 +28,7 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 This release includes the following changes:
 
-* A number of high and critical CVEs were addressed by updating the components to the latest version.
+* A number of high and critical CVEs are addressed by updating components to the latest version.
 
 ### Breaking Changes
 
@@ -40,9 +40,9 @@ Existing service plans that used a "MySQL Default Version" of "5.7" must be upda
 
 This release resolves the following issues:
 
-* Binding creation is further isolated from ongoing transaction execution. Previously, creating a binding during an active transaction
-could intermittently fail the creation or abort the transaction.
-* MySQL service instances are better able to recover from a VM reboot.
+* Binding creation is further isolated from ongoing transaction execution. Previously, binding creation during an active transaction
+sometimes failed or aborted the transaction.
+* Improved recovery of MySQL service instances after a VM reboot.
 * The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 
 ### Compatibility
@@ -91,7 +91,7 @@ This release includes the following changes:
 
 * Multi-site replication can be configured using highly available (HA) leaders.
 * Demoted multi-site leaders can be made writable again.
-* A number of high and critical CVEs were addressed by updating the components to the latest version.
+* A number of high and critical CVEs are addressed by updating components to the latest version.
 
 ### Breaking Changes
 
