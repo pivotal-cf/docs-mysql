@@ -27,13 +27,13 @@ This release includes the following changes:
 + When you configure a previously inactive plan, the <strong>MySQL Default Version</strong> text box for the plan is set to <strong>MySQL 8.0</strong> by default, instead of the previous default value <strong>MySQL 5.7</strong>.
 + The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 + Added additional verbosity (innodb,query_plan,microtime) to the slow_query_log.
-+ A number of high and critical CVEs were addressed by updating the components to the latest version.
++ A number of high and critical CVEs are addressed by updating components to the latest version.
 
 ### Resolved Issues
 
-* Binding creation is further isolated from ongoing transaction execution. Previously, creating a binding during an active transaction
-  could intermittently fail the creation or abort the transaction.
-* MySQL service instances are better able to recover from a VM reboot.
+* Binding creation is further isolated from ongoing transaction execution. Previously, binding creation during an active transaction
+  sometimes failed or aborted the transaction.
+* Improved recovery of MySQL service instances after a VM reboot.
 
 ### Compatibility
 
