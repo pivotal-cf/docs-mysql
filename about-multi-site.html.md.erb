@@ -9,47 +9,26 @@ This topic tells you about how multi-site replication works in
 <%= vars.product_full %> and contains information to help you decide whether to use
 multi-site replication.
 
-Multi-site capability in <%= vars.product_short %>
-is a disaster recovery solution that enables developers to provision leader-follower
-instances across two foundations.
-These leader-follower service instances comprise instances
-that are configured for replication.
-Operators can configure two foundations to be in the same data center
+##<a id='overview'></a> Overview of Multi-Site Replication
+
+Multi-site replication in <%= vars.product_short %>
+is a disaster recovery solution that lets developers provision two instances across two foundations,
+and then configure cross-foundation replication from the "leader" instance to the "follower" instance.
+Operators can configure the two foundations to be in the same data center
 or spread across multiple data centers or geographical regions.
-
-
-Within your primary foundation you have a choice of topologies for your replication leader instance:
-- <%= vars.single_leader_plan_lc %>: this provisions a single node instance.
-The resulting configuration resembles a leader-follower service instance, but with the two single-node
-instances deployed and replicating across two separate foundations.
-- High-Availability Cluster (MySQL 8.0 only): this provisions a high-availability cluster in your
-leader foundation (comprising three nodes plus a fourth jumbbox VM), offering greater resilience to
-in-foundation outages. More information on HA clusters can be found in [About highly available clusters](./about-ha.html)
-
-The secondary foundation always uses a <%= vars.single_leader_plan_lc %> for the replication follower instance.
-
-<p class="note important">
-<span class="note__title"> Important</span>  <%= vars.product_short %> supports using a High-availability cluster
-service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version
-is set in the plan definition section of Ops Manager; more information is in [Configuring Service Plans](install-config.html#procedure-for-configuring-service-plans-8)
 
 The foundation types are:
 
 * **Primary Foundation:** This foundation is deployed in your main data center.
-Generally, this data center receives the majority of app traffic.
-<%= vars.product_short %> assumes that the leader is deployed on this foundation when
-healthy.
+  Generally, this data center receives the majority of app traffic.
+  <%= vars.product_short %> assumes that the leader is deployed on this foundation when it is
+  healthy.
 
 * **Secondary Foundation:** This foundation is deployed in your failover data center.
-Generally, this data center receives less app traffic than the primary foundation,
-or no traffic at all.
-<%= vars.product_short %> assumes that the follower is deployed on this foundation unless
-a developer triggers a failover.
-
-
-<p> The <%= vars.single_leader_plan_lc %> and high-availability cluster plan types are configured separately
-  from the leader-follower plan type.
-</p>
+  Generally, this data center receives less app traffic than the primary foundation,
+  or no traffic at all.
+  <%= vars.product_short %> assumes that the follower is deployed on this foundation unless
+  a developer triggers a failover.
 
 For information about enabling multi-site replication, see
 [Preparing for multi-site replication](./prepare-multi-site.html).
@@ -57,6 +36,45 @@ For information about enabling multi-site replication, see
 For information for developers about using multi-site replication,
 see
 [Using <%= vars.product_short %> for multi-site replication](./use-multi-site.html).
+
+##<a id='overview'></a>Multi-Site Replication Plans
+
+In your secondary foundation, you always use a <%= vars.single_leader_plan_lc %> for the replication follower instance.
+
+In your primary foundation, you have a choice of service plan types for your replication leader instance:
+- <%= vars.single_leader_plan_lc %>: this provisions a single node instance  that can support multi-site replication.
+The resulting configuration resembles a leader-follower service instance, but with the two single-node
+instances deployed and replicating across two separate foundations.
+  ![This multi-site topology diagram is described here](images/multi-site-ms-topology.png)
+
+  <a href="./images/multi-site-ms-topology.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+- High-Availability Cluster (MySQL 8.0 only): this provisions a HA cluster of three database VM nodes in your
+  leader foundation. 
+  
+  ![This high-availability topology diagram is described here](images/multi-site-ha-topology.png)
+
+  <a href="./images/multi-site-ha-topology.png" target="_blank" aria-hidden="true">View a larger version of this diagram.</a>
+
+
+  A HA cluster offers greater resilience to
+  in-foundation outages. More information about HA clusters can be found in [About highly available clusters](./about-ha.html).
+
+  <p class="note important">
+  <span class="note__title">Important</span>
+  <%= vars.product_short %> supports using a High-availability cluster
+  service instance as a multi-site leader only for clusters running MySQL version 8.0.x or greater. The MySQL version
+  is set in the plan definition section of Ops Manager; also see <a href="install-config.html#procedure-for-configuring-service-plans">Configuring Service Plans</a>.</p>
+
+  To support multi-site replication from an HA cluster leader, the Operator must introduce TCP Routing by enabling Service-Gateway access for <%= vars.product_short %>. More information about Service-Gateway       access can be found in [About Service-Gateway access](service-gateway-access.html) and
+  and [Enabling Service-Gateway access](enable-service-gateway.html).
+
+  <p class="note">
+  <span class="note__title">Note</span>
+  Service instances of type "Leader Follower"
+  are not used for multi-site replication. This page uses the terms "leader" and "follower" to describe configuration of the two supported service instance types "Multi-Site Replication", and "HA cluster".
+  For more information about Leader Follower service instances, see <a href="about-leader-follower.html">About Leader-Follower topology</a>.</p>
+
 
 ## <a id='benefits'></a> Multi-site replication benefits
 
@@ -136,8 +154,9 @@ In the previous diagram:
 replicates data from the leader service instance in the primary foundation.
 
 <p class="note important">
-<span class="note__title"> Important</span>  The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
-The follower service instance is read-only, and apps can write only to the leader.
+<span class="note__title">Important</span>
+The app-layer active-active topology does not enable multi-primary (bidirectional) replication.
+The follower service instance is read-only, and apps can write only to the leader.</p>
 
 
 ## <a id='failover-switchover'></a> Failover and switchover
@@ -176,7 +195,6 @@ The following table describes when you can trigger a failover or switchover:
       </ul>
     </td>
   </tr>
-
 </table>
 
 For information about multi-site replication topologies
@@ -312,7 +330,8 @@ of failure, VMware recommends that you provision three AZs if using HA deploymen
 With three AZs, nodes are deployed to separate AZs.
 
 <p class="note important">
-<span class="note__title"> Important</span> In order to scale between the two plan types, the availability zones configured for
+<span class="note__title">Important</span>
+In order to scale between the two plan types, the availability zones configured for
 the HA plan must match those configured for the single node multisite plan.</p>
 
 For more information, see [Availability Using Multiple AZs](./recommended.html#azs)
@@ -323,6 +342,7 @@ in _<%= vars.product_full %> Recommended Usage and Limitations_.
 Multi-site replication has the following limitation:
 
 <p class="note important">
-<span class="note__title"> Important</span> Synchronous replication is not supported. For multi‑site
+<span class="note__title">Important</span>
+Synchronous replication is not supported. For multi‑site
 replication plans, any data written to the primary instance is asynchronously replicated to the
 secondary instance.</p>
