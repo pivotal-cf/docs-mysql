@@ -16,7 +16,7 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 | 2.9          | [2.9.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.9/mysql-for-tas/about_mysql_vms.html)   |
 | 2.8, earlier | No longer used                                                                                                                   |
 
-**Note**: Branches v1.9 through v1.4, v2.0, v2.1 and v2.2 are no longer published as live documentation. However, documentation for those versions of PDFs is available as PDFs.
+**Note**: Branches v1.9 through v1.4, v2.0 through v2.9 are no longer published as live HTML documentation. However, documentation for those versions of PDFs is available as PDFs.
 
 ## Where is the book repository?
 
