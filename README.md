@@ -10,10 +10,11 @@ Docs for VMware Tanzu SQL with MySQL for VMs
 | Branch name  | Use for...                                                                                                                       |
 |--------------|----------------------------------------------------------------------------------------------------------------------------------|
 | master       | Not used                                                                                                                         |
-| 3.1          | 3.1                                                                                                                              |
+| 3.2          | [3.2](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.2/mysql-for-tas/about_mysql_vms.html)     |
+| 3.1          | [3.1](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.1/mysql-for-tas/about_mysql_vms.html)     |
 | 3.0.0        | [3.0.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/about_mysql_vms.html)   |
 | 2.10         | [2.10.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.10/mysql-for-tas/about_mysql_vms.html) |
-| 2.9          | [2.9.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.9/mysql-for-tas/about_mysql_vms.html)   |
+| 2.9 (EOGS)   | [2.9.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.9/mysql-for-tas.pdf)                    |
 | 2.8, earlier | No longer used                                                                                                                   |
 
 **Note**: Branches v1.9 through v1.4, v2.0 through v2.9 are no longer published as live HTML documentation. However, documentation for those versions of PDFs is available as PDFs.
