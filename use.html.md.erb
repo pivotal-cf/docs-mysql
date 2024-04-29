@@ -438,6 +438,11 @@ that is configured to use MySQL 8.0:
   cf update-service SERVICE-INSTANCE-NAME -p new-8-0-plan
   ```
 
+<p class="note important">
+<span class="note__title">Important</span>
+The MySQL version cannot be downgraded from 8.0 to 5.7.
+</p>
+
 ###<a id="share"></a> Share service instances
 
 In <%= vars.product_short %> you can share service instances between different orgs and spaces using `cf share-service`.
