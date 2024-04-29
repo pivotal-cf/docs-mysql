@@ -1,0 +1,115 @@
+---
+title: VMware SQL with MySQL for Tanzu Application Service
+---
+
+<!--- KB /article/Using-Rolling-Schema-Upgrade?language=en_US
+--->
+
+This topic explains how to run a rolling schema upgrade (RSU) in MySQL for VMware Tanzu. More specifically, it covers how to check the ephemeral disk size, retrieve a node ID, and apply a new schema.
+
+## Prerequisites
+
+Before you run an RSU, you must have the following:
+
+* A generated SQL file to perform data imports and run MySQL commands.
+* An ephemeral disk with enough space for your largest IBD data file. See [Check Ephemeral Disk Size](#check-ephemeral-disk-size) below.
+
+## Check Ephemeral Disk Size
+
+Running an RSU on a large table can fill up your ephemeral disk. MySQL for VMware Tanzu cannot function properly if there is not sufficient free space on file systems. Before running an RSU, confirm that your ephemeral disk is large enough to run the upgrade.
+
+To check the size of your ephemeral disk, tell your operator to do the following:
+
+1. To SSH into a node, follow the procedure in BOSH SSH.
+1. To view your data directory, run the following command:
+
+    ```
+    /var/vcap/store/pxc-mysql
+    ```
+
+1. To retrieve the size of your largest IDB file, run the following command and record the size of the largest IDB file:
+
+    ```
+    ls -l -ahS
+    ```
+
+1. To retrieve your ephemeral disk usage, do the procedure in [Run mysql-diag Using the BOSH Command Line Interface (CLI)](../mysql-diag.html.md.erb#bosh-v2) and record the size of the ephemeral disk being used.
+
+2. If there is not enough free space to add the largest IBD file to the ephemeral disk, update your service plan to one with a larger ephemeral disk.
+
+## Run an RSU
+
+To run an RSU, ask your operator to do the following:
+
+1. Retrieve the ID for each node in your High Availability (HA) cluster. See [Retrieve Node ID](#retrieve-node-id).
+2. Run the RSU on each node in your deployment. See [Apply a New Schema](#apply-a-new-schema).
+
+### Retrieve Node ID
+
+You need the ID for each of your nodes to run an RSU.
+
+To retrieve the IDs for your nodes, do the following:
+
+1. To retrieve your service instance GUID, run the following command:
+
+    ```
+    cf service MY-INSTANCE --guid
+    ```
+
+    Where `YOUR-INSTANCE` is the name of your MySQL for VMware Tanzu service instance. Record the guid returned in the output.
+
+1. To identify the nodes in your HA cluster, run the following command:
+
+    ```
+    bosh -d service-instance_GUID vms
+    ```
+
+    Where `GUID` is the guid you recorded in the previous step.
+
+### Apply a New Schema
+
+To run an RSU to apply a new schema on each node in your deployment, do the following:
+
+1. To BOSH SSH into your node, do the procedure in [BOSH SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-ssh) in the Tanzu Operations Manager documentation.
+2. To set enable global read_only as an admin user, run the following command:
+
+    ```
+    mysql --defaults-file=/var/vcap/jobs/pxc-mysql/config/mylogin.cnf -e "set global read_only=on;"
+    ```
+
+1. To verify that the node is unhealthy, do the procedure described here: [Monitoring Node Health](../monitor-health.html.md.erb).
+
+1. Add the following to the SQL file you generated:
+
+   * set wsrep_osu_method=rsu; to the top of the import file.
+   * set global wsrep_desync=on; to the top of the import file.
+   * set global wsrep_desync=off; to the bottom of the import file.
+
+   For example:
+   ```
+   set wsrep_osu_method=rsu;
+   set global wsrep_desync=on;
+   ...
+   set global wsrep_desync=off;
+    ```
+
+1. To execute the SQL file, run the following command:
+
+    ```
+    mysql --defaults-file=/var/vcap/jobs/pxc-mysql/config/mylogin.cnf -e -D DATABASE-NAME < SQL-FILE-PATH
+    ```
+
+    Where:
+
+    * DATABASE-NAME is the name of the database to use.
+    * SQL-FILE-PATH is the path to your import file.
+
+1. To disable global `read_only`, run the following command:
+
+    ```
+    $ mysql --defaults-file=/var/vcap/jobs/pxc-mysql/config/mylogin.cnf -e "set global read_only=off;""
+    ```
+
+2. To verify that the node is healthy, do the procedure here: [Monitoring Node Health](../monitor-health.html.md.erb).
+
+3. Repeat the above procedure for your next node.
