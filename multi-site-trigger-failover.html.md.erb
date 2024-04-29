@@ -95,15 +95,17 @@ To trigger a failover:
 
 ### <a id='promote-failover'></a> Promote the follower
 
->**Note**
->If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to:
->
->```
->Updating service instance haDB as admin...
->FAILED
->Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
->    * the configuration parameter 'initiate-failover' is not a valid option
->```
+<div class="note">
+<span class="note__title">Note</span>
+If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to:
+<br>
+<pre>
+Updating service instance haDB as admin...
+FAILED
+Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+    * the configuration parameter 'initiate-failover' is not a valid option
+</pre>
+</div>
 
 To promote the follower service instance to leader:
 
@@ -237,15 +239,17 @@ To trigger a switchover:
 
 ### <a id='promote-switchover'></a> Promote the follower
 
->**Note**
->If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to the following:
->
->```
->Updating service instance haDB as admin...
->FAILED
->Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
->    * the configuration parameter 'initiate-failover' is not a valid option
->```
+<div class="note">
+<span class="note__title">Note</span>
+If you try to promote a leader-follower, highly available cluster, or single node service instance to leader or make it read-only, you get an error message similar to the following:
+<br>
+<pre>
+Updating service instance haDB as admin...
+FAILED
+Server error, status code: 502, error code: 10001, message: Service broker error: 1 error occurred:
+    * the configuration parameter 'initiate-failover' is not a valid option
+</pre>
+</div>
 
 Before you promote the follower service instance,
 you must make the leader service instance, which is in the primary foundation, a read-only format.

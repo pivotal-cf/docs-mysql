@@ -8,17 +8,20 @@ owner: MySQL
 You can back up and restore a physical backup
 to a <%= vars.product_full %> service instance.
 
->**Note**
->The backup and restore capability described in this topic restores a _running_ service instance's backup to a new instance.  It is not intended to list or restore backups created by a deleted service instance.
->
->For more information about restoring a backup from a deleted service instance, see [Manually restoring from backup](./manual-restore.html).
+<p class="note">
+<span class="note__title">Note</span>
+The backup and restore capability described in this topic restores a _running_ service instance's backup to a new instance.  It is not intended to list or restore backups created by a deleted service instance.
+<br>
+For more information about restoring a backup from a deleted service instance, see
+<a href="./manual-restore.html">Manually restoring from backup</a>.</p>
 
 Both operators and developers can use the procedures in this topic.
 
->**Note**
->In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore (adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
->
->As of v2.9.3, backup artifacts are organized under subfolders in external storage. They are now stored under `p.mysql > service-instance_GUID > yyyy > mm > dd`. Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the adbr plug-in.
+<p class="note">
+<span class="note__title">Note</span>
+In <%= vars.product_short %> v2.9.0 to v2.9.2, the ApplicationDeveloperBackupRestore (adbr) feature stored backup artifacts in the <i>root</i> directory in external storage.
+<br>
+As of v2.9.3, backup artifacts are organized under subfolders in external storage. They are now stored under <code>p.mysql > service-instance_GUID > yyyy > mm > dd`</code> Old backup artifacts stored in the root directory can still be accessed through the cf CLI using the adbr plug-in.</p>
 
 Operators can configure automated backups in the <%= vars.product_short %> tile by following the procedures in
 [Configuring automated backups](./automated-backup.html).
@@ -57,16 +60,21 @@ information, see [Backup Schedule](./change-default.html#backup-schedule).
 
 Developers can also manually trigger a backup of an individual service instance. For information about manually backing up a service instance, see [Manually back up a service instance](#backup) below.
 
->**Note**
->Operators must configure storage and default schedules for automated backups in the  <%= vars.product_short %> tile. You cannot deactivate this feature.
+<p class="note">
+<span class="note__title">Note</span>
+Operators must configure storage and default schedules for automated backups in the  <%= vars.product_short %> tile. You cannot deactivate this feature.</p>
 
 Backups fail if the service broker is unavailable (for example, during an upgrade).
 
-**Important**
->If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance. This can cause the persistent disk to fill up faster. If the persistent disk is full, apps become inoperable. For instructions on how to troubleshoot persistent disk errors, see [Persistent disk is full](./troubleshoot.html#persistent-disk).
+<p class="note important">
+<span class="note__title">Important</span>
+If <%= vars.product_short %> fails to upload the backup for a service instance, the backup artifact remains on the persistent disk of that service instance. This can cause the persistent disk to fill up faster. If the persistent disk is full, apps become inoperable. For instructions on how to troubleshoot persistent disk errors, see
+<a href="./troubleshoot.html#persistent-disk">Persistent disk is full</a>.</p>
 
->**Note**
->Backups use the Percona Xtrabackup tool, which does not lock schemas that use the default InnoDB transactional storage engine. Backups do briefly lock non-transactional operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations. Developers should be aware of these backup DDL and MyISAM locks, and consider any impact on their running applications. For more information about backup locking behavior, see the [Percona documentation](https://docs.percona.com/percona-xtrabackup/8.0/).
+<p class="note">
+<span class="note__title">Note</span>
+>Backups use the Percona Xtrabackup tool, which does not lock schemas that use the default InnoDB transactional storage engine. Backups do briefly lock non-transactional operations, specifically DDL and MyISAM (non-InnoDB) storage engine operations. Developers should be aware of these backup DDL and MyISAM locks, and consider any impact on their running applications. For more information about backup locking behavior, see the
+<a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona documentation</a>.</p>
 
 ## <a id="understanding-metadata"></a> About backup files and metadata
 
@@ -108,8 +116,9 @@ when restoring an instance with the backup artifact.
 
 The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
 
->**Note**
->The metadata file sets `compressed` `encrypted` as `N`, which indicates that the backup is not compressed or encrypted. However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted. This is a known issue.
+<p class="note">
+<span class="note__title">Note</span>
+The metadata file sets <code>compressed</code> <code>encrypted<code> as <code>N</code>, which indicates that the backup is not compressed or encrypted. However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted. This is a known issue.</p>
 
 ## <a id='prerequisite'></a> Prerequisite: adbr plug-in
 
@@ -122,8 +131,10 @@ To install the plug-in, run:
 ```
 cf install-plugin -r CF-Community "ApplicationDataBackupRestore"
 ```
-
->**Caution** The procedures on this page assume that you are using the adbr plug-in v0.3.0 or later.
+	
+<p class="note important">
+<span class="note__title">Important</span>
+The procedures on this page assume that you are using the adbr plug-in v0.3.0 or later.</p>
 
 ## <a id="backup"></a> Manually back up a service instance
 

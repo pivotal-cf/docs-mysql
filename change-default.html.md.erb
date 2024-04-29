@@ -7,7 +7,9 @@ owner: MySQL
 
 You can use optional parameters to change server defaults.
 
->**Note**<%= vars.product_short %> service instances are configured by default with industry best practices. For information about the configured server defaults, see <a href="server-defaults.html">About MySQL server defaults.
+<p class="note">
+<span class="note__title">Note</span>
+<%= vars.product_short %> service instances are configured by default with industry best practices. For information about the configured server defaults, see <a href="server-defaults.html">About MySQL server defaults</a>.</p>
 
 ## <a id="changes"></a>Optional parameters to change server defaults
 
@@ -25,11 +27,12 @@ See [Synchronous replication](#synchronous-replication).
 + You have heavy traffic, or spikes in traffic, while using a high availability topology.
 See [WSREP applier threads](#wsrep_applier_threads).
 
->**Note**
->The procedures in this topic use the Cloud Foundry Command Line Interface ([cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/services-managing-services.html)).
->
->You can also use [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/dev-console.html)
-to perform the same tasks using a graphical UI.
+<p class="note">
+<span class="note__title">Note</span>
+The procedures in this topic use the Cloud Foundry Command Line Interface ([cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/services-managing-services.html)).
+<br>
+You can also use [Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/dev-console.html)
+to perform the same tasks using a graphical UI.</p>
 
 ## <a id="parameters"></a> Set optional parameters
 
@@ -284,8 +287,9 @@ However, depending on latency, sync replication reduces the performance of write
 
 The following table describes how to use the `replication_mode` optional parameter:
 
->**Note**
->`replication_mode` does not work for single node, HA cluster, or multi-site replication plans.
+<p class="note">
+<span class="note__title">Note</span>
+<code>replication_mode</code> does not work for single node, HA cluster, or multi-site replication plans.</p>
 
 <table class="table">
   <thead><tr>

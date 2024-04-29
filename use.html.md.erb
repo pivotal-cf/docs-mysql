@@ -32,10 +32,13 @@ you can manage it over the life cycle of your apps and data.
 
 For more information on managing services instances, see [Manage service instances](#manage).
 
->**Note**
->The following procedures use the Cloud Foundry Command Line Interface (cf CLI). For more information, see [Managing service instances with the cf CLI](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/services-managing-services.html).
->
->You can also use Apps Manager to do the same tasks using a graphical UI. For more information, see [Managing apps and service instances using Apps Manager](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/manage-apps.html).
+<p class="note">
+<span class="note__title">Note</span>
+The following procedures use the Cloud Foundry Command Line Interface (cf CLI). For more information, see
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/services-managing-services.html">Managing service instances with the cf CLI</a>.
+<br>
+You can also use Apps Manager to do the same tasks using a graphical UI. For more information, see
+<a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/manage-apps.html">Managing apps and service instances using Apps Manager</a>.</p>
 
 ## <a id="prereqs"></a>Prerequisites
 
@@ -104,8 +107,10 @@ To confirm that a <%= vars.product_short %> instance is running in the space:
 On-demand services are created asynchronously, not immediately.
 The `watch` command shows you when your service instance is ready to bind and use.
 
->**Note**
->If you are deploying a leader-follower service instance across multiple foundations, follow the procedure in [Using <%= vars.product_short %> for <%= vars.single_leader_plan %>](./use-multi-site.html).
+<p class="note">
+<span class="note__title">Note</span>
+If you are deploying a leader-follower service instance across multiple foundations, follow the procedure in
+<a href="./use-multi-site.html">Using <%= vars.product_short %> for <%= vars.single_leader_plan %></a>.</p>
 
 To create an instance of the <%= vars.product_short %> service:
 
@@ -271,9 +276,11 @@ The `credentials` property can be used to provide access to the MySQL protocol.
 If you modify your service instance,
 you must `cf unbind-service`, `cf bind-service` and `cf restage`
 your app to apply the changes to `VCAP_SERVICES`.
-
->**Note**
->If you use MySQL Connector/J 8.0.13 or later with <%= vars.product_short %>, you must modify the JDBC URL in <code>VCAP_SERVICES</code> to include <code>sslMode=VERIFY_IDENTITY</code> and <code>verifyServerCertificate=true</code>. MySQL Connector/J 8.0.13 and later does not verify TLS connections. For more information about JDBC URL syntax, see the [MySQL documentation](https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html).
+	
+<p class="note">
+<span class="note__title">Note</span>
+If you use MySQL Connector/J 8.0.13 or later with <%= vars.product_short %>, you must modify the JDBC URL in <code>VCAP_SERVICES</code> to include <code>sslMode=VERIFY_IDENTITY</code> and <code>verifyServerCertificate=true</code>. MySQL Connector/J 8.0.13 and later does not verify TLS connections. For more information about JDBC URL syntax, see the
+<a href="https://dev.mysql.com/doc/connector-j/8.0/en/connector-j-reference-jdbc-url-format.html">MySQL documentation</a>.</p>
 
 <%= partial vars.path_to_partials + "/mysql/rebind-warning" %>
 
@@ -359,8 +366,9 @@ To migrate a service instance to another plan:
 
 ### <a id="single"></a> Upgrade an individual service instance
 
->**Note**
->Before you individually upgrade service instances you must have cf CLI v6.46.0 or later.
+<p class="note important">
+<span class="note__title">Important</span>
+Before you individually upgrade service instances you must have cf CLI v6.46.0 or later.</p>
 
 You can use <code>cf update-service</code> with the <code>--upgrade</code> flag to individually upgrade
 on-demand service instances to the latest version of <%= vars.product_short %>.

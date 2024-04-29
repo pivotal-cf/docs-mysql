@@ -317,8 +317,9 @@ To start the former leader VM again and configure it as the new follower:
 
 ## <a id='unbind-rebind'></a> Unbind and rebind the app
 
->**Note**
->If you have BOSH DNS enabled in <%= vars.ops_manager %>, you do not need to unbind and re-bind your app to a leader-follower service instance to failover the app. The operator activates BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.
+<p class="note">
+<span class="note__title">Note</span>
+If you have BOSH DNS enabled in <%= vars.ops_manager %>, you do not need to unbind and re-bind your app to a leader-follower service instance to failover the app. The operator activates BOSH DNS in <strong>BOSH Director</strong> > <strong>BOSH DNS Config</strong>.</p>
 
 To fail their apps over to the new leader VM,
 your developers must bind and rebind their apps to the leader-follower service instance.

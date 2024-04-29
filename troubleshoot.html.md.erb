@@ -2049,8 +2049,9 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
   To clean up orphaned instances, run the following command on each instance:
 </p>
 
->**Important**
->Running this command might leave IaaS resources in an unusable state.
+<p class="note caution">
+<span class="note__title">Caution</span>
+Running this command might leave IaaS resources in an unusable state.</p>
 
 <code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
 
