@@ -386,11 +386,11 @@ The process for configuring backups for an Amazon S3 with instance profile is:
 1. [Create an IAM role with a custom policy](#ip-create-policy)
 1. [Add a policy to the existing <%= vars.ops_manager %> user or role](#ip-add-policy)
 1. [Configure a VM extension](#ip-configure-vm)
- 1. [Create a VM extension in <%= vars.ops_manager %>](#ip-vm-ops)
- 1. [Apply the VM extension to the dedicated-mysql-broker Job](#ip-vm-job)
- 1. [Set the VM extension name](#ip-vm-tile)
-1. [Apply changes and upgrade all service instances](#ip-apply-upgrade)
-1. [(Optional) Verify the IAM role is associated with MySQL service instances](#ip-verify-instances)
+    1. [Create a VM extension in <%= vars.ops_manager %>](#ip-vm-ops)
+    2. [Apply the VM extension to the dedicated-mysql-broker Job](#ip-vm-job)
+    3. [Set the VM extension name](#ip-vm-tile)
+2. [Apply changes and upgrade all service instances](#ip-apply-upgrade)
+3. [(Optional) Verify the IAM role is associated with MySQL service instances](#ip-verify-instances)
 
 
 ### <a id="ip-create-policy"></a> Create an IAM role with a custom policy
@@ -761,8 +761,13 @@ To apply changes and upgrade all service instances for <%= vars.product_short %>
 1. Click **Review Pending Changes**.
 1. Deselect the check boxes for all products except **BOSH Director** and
 **<%= vars.product_full %>**.
-1. Verify that the check box for the <code>Upgrade all On-demand MySQL Service Instances</code> errand is activated.
+1. Verify that the check box for the **Upgrade all On-demand MySQL Service Instances** errand is selected.
 1. Click **Apply Changes**.
+
+<p class="note caution">
+<span class="note__title">Caution</span>
+When you use the <strong>Upgrade all Service Instances</strong> errand, all service instances will be upgraded to the MySQL version set in the MySQL 3.0 tile.
+</p>
 
 ### <a id="ip-verify-instances"></a> (Optional) Verify the IAM role is associated with MySQL service instances
 
