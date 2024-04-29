@@ -361,14 +361,13 @@ For each plan that you want to use in your deployment:
 
 4. Click Save.
 
-<p> If you expect your developers
-  to upgrade from one plan to another, do not place the plans in separate AZs.
-  For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
-  an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
-  prevents them from losing their data by orphaning their disk in AZ1.<br><br>
-  If you need to manually migrate the data from one AZ to another, see
-  <a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.10/mysql-for-tas/index.html">About data migration in <%= vars.product_short %></a>.
-</p>
+If you expect your developers
+to upgrade from one plan to another, do not place the plans in separate AZs.
+For example, if you create Plan 1 in AZ1 and Plan 2 in AZ2, developers receive
+an error and cannot continue if they try to upgrade from Plan 1 to Plan 2. This
+prevents them from losing their data by orphaning their disk in AZ1.<br><br>
+If you need to manually migrate the data from one AZ to another, see
+<a href="https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/2.10/mysql-for-tas/index.html">About data migration in <%= vars.product_short %></a>.
 
 <p class="note important">
 <span class="note__title"> Important</span><strong>MySQL 8.0</strong> is the <strong>MySQL Default Version</strong> assigned to any "Inactive" plans that you configure. This includes plans that you previously configured and saved with <strong>MySQL Default Version</strong> set to <strong>MySQL 5.7</strong>, and then later made <strong>Inactive</strong>. If you re-activate such a plan (by selecting its topology), its <strong>MySQL Default Version</strong> is reset to <strong>MySQL 8.0</strong>.<br /><br />
@@ -526,42 +525,17 @@ To activate TLS for the MySQL service:
 1. Do the procedures in [Preparing for TLS](prepare-tls.html).
 
 1. Click **Security**.
-1. For **Enforce application TLS**, select one of the following:
-    <table class="table">
-      <col width="30%">
-      <thead><tr><th>State</th><th>Instructions</th></tr></thead>
-      <tr><td><strong>Unchecked</strong></td>
-  <td>This enables developers to configure their MySQL service VMs to use TLS.
-    <br><br>
-    <ul>
-      <li><strong>Accept only TLS v1.2 connections:</strong> Selecting this check box enforces TLS v1.2
-        as the minimum TLS version for client connections.
-      </li>
-    </ul>
-  </td></tr>
-      <tr><td><strong>Checked</strong></td>
-  <td>This enables developers to configure their MySQL service VMs to use TLS
-    and requires all MySQL service VMs to only accept secure connections.
-    <br><br>
-    <ul>
-      <li><strong>Accept only TLS v1.2 connections:</strong> Selecting this check box enforces TLS v1.2
-        as the minimum TLS version for client connections.
-      </li>
-    </ul>
-  <p> Selecting <strong>Required</strong> breaks any
-    apps that are not currently connecting over TLS.</p>
-  </td></tr>
-    </table>
-
-    Enforcing TLS v1.2 has the following effects:
-      <ul>
-        <li>For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.</li>
-        <li>For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.</li>
-      </ul>
+1. For **Enforce application TLS**, if you select **Accept only TLS v1.2 connections**, TLS v1.2 is enforced as the minimum TLS version for client connections. 
+  In addition, selecting **Required** breaks any apps that are not currently connecting over TLS.
+  
+   Enforcing TLS v1.2 has the following effects:
+    * For apps using MySQL Connector/J 5.1.44 and earlier, apps might break.
+    * For apps using MySQL Connector/J 5.1.44 to 5.1.48, developers have to rebind the apps.
       The TLS v1.2 restriction is a global setting, so it applies to every service instance.
       Any apps in the foundation using an old version of MySQL Connector/J fail to connect to MySQL after this new setting is applied.
+
 1. Click **Save**.
-1. After you deploy the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
+2. After you deploy the tile, notify your developers that they must activate TLS for their service instances and activate TLS for their apps.
 See [Using TLS](using-tls.html).
 
 #### <a id="security-service-instance-creds"></a> Configure secure service instance credentials
@@ -627,33 +601,35 @@ To activate monitoring and logging in the MySQL service:
 
     ![alt-text="Fields for configuring monitoring. See the following step for detailed descriptions of the configurable fields."](./images/monitoring.png)
 
-2. Configure the fields as follows and then Click **Save**:
+2. Configure the fields as follows:
 
-  <table class="table">
-   <thead> <tr><th>Field</th><th>Instructions</th></tr></thead>
-    <tr><td><strong>Metrics polling interval</strong></td>
-        <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
-            All service instances emit metrics about the health and status of the MySQL server.</td></tr>
-    <tr><td><strong>Enable user statistics logging</strong></td>
-        <td>Select this check box to collect user statistics. You can use these statistics to better
-          understand server activity and identify load sources.
-            For more information about user statistics, see the <a href="https://www.percona.com/doc/percona-server/5.7/diagnostics/user_stats.html">MySQl documentation</a>.
-            </td></tr>
-    <tr><td><strong>Enable server activity logging</strong></td>
-        <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
-      For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
-      <p> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-      You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
-    </p>
-      </td></tr>
-    <tr><td><strong>Enable read only admin user</strong></td>
-  <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
-      This user can be used for auditing and monitoring without risking
-      mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
-      <br><br>
-      For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
-      The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
-  </table>
+    <table class="table">
+    <thead> <tr><th>Field</th><th>Instructions</th></tr></thead>
+      <tr><td><strong>Metrics polling interval</strong></td>
+          <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
+              All service instances emit metrics about the health and status of the MySQL server.</td></tr>
+      <tr><td><strong>Enable user statistics logging</strong></td>
+          <td>Select this check box to collect user statistics. You can use these statistics to better
+            understand server activity and identify load sources.
+              For more information about user statistics, see the <a href="https://www.percona.com/doc/percona-server/5.7/diagnostics/user_stats.html">MySQl documentation</a>.
+              </td></tr>
+      <tr><td><strong>Enable server activity logging</strong></td>
+          <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
+        For more information, see the <a href="https://www.percona.com/doc/percona-server/5.7/management/audit_log_plugin.html">Percona documentation</a>
+        <p> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
+        You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
+      </p>
+        </td></tr>
+      <tr><td><strong>Enable read only admin user</strong></td>
+    <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
+        This user can be used for auditing and monitoring without risking
+        mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
+        <br><br>
+        For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
+        The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
+    </table>
+
+1. Click **Save**.
 
 ### <a id="syslog"></a> Configure system logging
 
@@ -667,33 +643,33 @@ To activate RFC 5424 system logging for the MySQL broker and service instance VM
 
 2. Configure the fields as follows:
 
-  <table class="table">
-    <thead><tr><th>Field</th><th>Instructions</th></tr></thead>
-    <tr>
-  <td><strong>Address</strong></td>
-  <td>Enter the IP address or hostname of the syslog server for sending logs. For example:
-      <code>logmanager.example.com</code>.</td></tr>
-    <tr><td><strong>Port</strong></td>
-        <td>Enter the port of the syslog server for sending logs. For example: <code>29279</code>.</td></tr>
-    <tr><td><strong>Transport protocol</strong></td>
-        <td>Select the protocol you want to use to send system logs. VMware recommends using TCP.</td></tr>
-    <tr><td><strong>Enable TLS</strong></td>
-    <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
-    <tr><td><strong>Permitted Peer</strong></td>
-  <td>Enter either:
-    <ul>
-      <li>The accepted fingerprint in SHA1 format.</li>
-      <li>The name of the remote peer. For example: <code>*.example.com</code>.</li>
-    </ul>
-  </td></tr>
-    <tr><td><strong>SSL certificate</strong></td>
-        <td>Enter the SSL certificates for the syslog server. This ensures the logs are transported securely.</td></tr>
-  </table>
-  <p> If your syslog server is external to your deployment,
-    you might need to select
-    <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.
-    See <a href="#global">Configure global settings</a>.
-  <p>
+    <table class="table">
+      <thead><tr><th>Field</th><th>Instructions</th></tr></thead>
+      <tr>
+    <td><strong>Address</strong></td>
+    <td>Enter the IP address or hostname of the syslog server for sending logs. For example:
+        <code>logmanager.example.com</code>.</td></tr>
+      <tr><td><strong>Port</strong></td>
+          <td>Enter the port of the syslog server for sending logs. For example: <code>29279</code>.</td></tr>
+      <tr><td><strong>Transport protocol</strong></td>
+          <td>Select the protocol you want to use to send system logs. VMware recommends using TCP.</td></tr>
+      <tr><td><strong>Enable TLS</strong></td>
+      <td>If you select TCP, you can also select to send logs encrypted over TLS.</td></tr>
+      <tr><td><strong>Permitted Peer</strong></td>
+    <td>Enter either:
+      <ul>
+        <li>The accepted fingerprint in SHA1 format.</li>
+        <li>The name of the remote peer. For example: <code>*.example.com</code>.</li>
+      </ul>
+    </td></tr>
+      <tr><td><strong>SSL certificate</strong></td>
+          <td>Enter the SSL certificates for the syslog server. This ensures the logs are transported securely.</td></tr>
+    </table>
+    
+      If your syslog server is external to your deployment,
+      you might need to select
+      <strong>Provide public IP addresses to all Service VMs</strong> on the <strong>Settings</strong> page.
+      See <a href="#global">Configure global settings</a>.
 
 4. Click **Save**.
 
@@ -718,22 +694,21 @@ To configure service instance upgrades.
       <td>Enter the maximum number of service instances that can upgrade at the same time.
       The minimum value is 0 and the maximum is 1 less than the number of BOSH workers. Increasing this value reduces the runtime of service instance upgrades.
 
-      <p> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director config</strong> and locate the value of <strong>Director Workers</strong>.
-      </p>
+      <p> To determine the number of BOSH workers, go to <strong>BOSH Director</strong> > <strong>Director config</strong> and locate the value of <strong>Director Workers</strong>.</p>
       </td>
       </tr>
       <tr><td><strong>Number of upgrade canary instances</td>
-  <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
+      <td>Enter the number of service instances to upgrade first before upgrading the rest of the instances.
       Increasing this value activates service instance upgrades to fail faster.</td>
       </tr>
       <tr><td><strong>BOSH upgrade timeout</td>
-  <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
+      <td>Enter the amount of time in seconds to wait for BOSH to respond before timing out when upgrading service instances.
       Increasing this value activates service instance upgrades to fail faster.</td>
       </tr>
       <tr>
-    <td>
+      <td>
       <strong>Please type 'X' to acknowledge that you have run...</strong>
-    </td>
+      </td>
       <td>
         If this is a fresh installation, enter `X`. Do not be concerned with the
         label instructions.
