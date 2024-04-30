@@ -635,7 +635,7 @@ To activate monitoring and logging in the MySQL service:
         <p class="note">
         <span class="note__title">Note</span>
         MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-        You can use the <a href="https://community.pivotal.io/s/article/script-to-download-mysql-logs-for-pas-tile-ha-clusters"<code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.</p>
+        You can use the <a href="./kb-articles/script-to-download-mysql-logs.html">download-logs script</a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.</p>
     </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
         <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
@@ -645,7 +645,8 @@ To activate monitoring and logging in the MySQL service:
         For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
         The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
   </table>
-      <table class="table">
+  
+  <table class="table">
      <thead>
       <tr><th>Field</th><th>Instructions</th></tr></thead>
         <tr><td><strong>Metrics Polling Interval</strong></td>

@@ -1,0 +1,92 @@
+---
+title: Script to download MySQL logs for TA or Tile HA Clusters
+---
+
+<!--- KB /article/script-to-download-mysql-logs-for-pas-tile-ha-clusters?language=en_US
+--->
+
+This topic describes the `download-logs` script, which is used to download MySQL logs for TAS for VMs or Tile HA Clusters.
+
+1. Get the latest `download-logs` tool from the MySQL tile downloads on https://network.pivotal.io/products/pivotal-mysql/
+
+1. Confirm that the `download-logs` script is executable. Then run `download-logs` with no arguments to see the help text:
+
+    ```
+    $ chmod +x download-logs
+    $ ./download-logs
+    BOSH_DEPLOYMENT, BOSH_ENVIRONMENT, BOSH_CLIENT_SECRET, BOSH_CLIENT, and BOSH_CA_CERT are required environment variables
+    Usage:
+    -o (Required) The output directory
+    -X (Optional) Include audit and binary logs
+
+    This tool requires the bosh v2 cli and the following environment variables to be set:
+        BOSH_ENVIRONMENT
+        BOSH_CLIENT_SECRET
+        BOSH_CLIENT
+        BOSH_CA_CERT
+        BOSH_DEPLOYMENT
+
+    Optionally if you require communicating with your BOSH director through a gateway, you must set:
+        BOSH_GW_PRIVATE_KEY
+        BOSH_GW_USER
+        BOSH_GW_HOST
+    ```
+
+1. Get the environment variable information from the Director credentials under **Bosh Commandline Credentials**.
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    These will be at https://OPS-MANAGERFQDN/api/v0/deployed/director/credentials/bosh_commandline_credentials.</p>
+
+1. Get the deployment name by running:
+
+    ```
+    bosh deployments --column=name
+    ```
+
+1. Set the variables for the BOSH CLI and the deployment. For example, when running `download-logs` for this TAS deployment, the output looks like the example below:
+
+    ```
+    $ export BOSH_CLIENT=ops_manager BOSH_CLIENT_SECRET=<secret> BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate BOSH_ENVIRONMENT=<bosh_director_ip>
+
+    $ export BOSH_DEPLOYMENT=<deployment_name>
+    ```
+
+3. Run `download-logs` (on the Director VM). For example:
+
+    ```
+    $ ./download-logs -o /tmp -X
+    Retrieving deployment and vm info...
+    Downloading deployment logs...
+    Using environment '10.193.78.11' as user 'admin' (bosh.*.read, openid, bosh.*.admin, bosh.read, bosh.admin)
+    Using deployment 'service-instance_ab436820-4d83-4ee6-b0f8-6606e749e405'
+
+    Task 71673 | 20:20:00 | Fetching logs for mysql/9abc28fa-fc09-4e32-9a25-3b6c979e4614 (0): Finding and packing log files (00:00:03)
+    Task 71673 | 20:20:01 | Fetching logs for mysql/c0bace44-6fb0-489b-b101-bf8de085766c (1): Finding and packing log files (00:00:04)
+    Task 71673 | 20:20:02 | Fetching group of logs: Packing log files together
+
+    Task 71673 Started  Wed Jun 12 20:19:57 UTC 2019
+    Task 71673 Finished Wed Jun 12 20:20:02 UTC 2019
+    Task 71673 Duration 00:00:05
+    Task 71673 done
+
+    Downloading resource 'aca9b560-0618-4b9a-b127-aa3ec3cc9cce' to '/tmp/tmp.vjOqu015YS/service-instance_ab436820-4d83-4ee6-b0f8-6606e749e405-20190612-202004-901615727.tgz'...
+                                                                                0.00%
+    Succeeded
+
+    Downloading logs for: mysql/9abc28fa-fc09-4e32-9a25-3b6c979e4614
+    Downloading logs for: mysql/c0bace44-6fb0-489b-b101-bf8de085766c
+    Specify a passphrase of 6-8 words long. Do not use a private passphrase, you will need to share this passphrase with anyone who will decrypt this archive.
+    gpg: gpg-agent is not available in this session
+    Encrypted logs saved at /tmp/2019-06-12-20-19-54-mysql-logs.tar.gz.gpg
+    ```
+
+1. Using the script, move the resulting file `FILENAME.tar.gz.gpg` to some location with access to the Pivotal or VMware support portal, upload it to the support request (SR), and provide support with the passphrase used.
+
+1. Optional. If you want to extract the archive, you can use the following commands:
+
+    ```
+    $ sudo gpg -d /tmp/FILENAME.tar.gz.gpg > /tmp/mysql-logs.tar.gz
+
+    $ sudo tar -zxvf /tmp/mysql-logs.tar.gz
+    ```
