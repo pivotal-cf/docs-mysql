@@ -19,9 +19,59 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 + In the **Security** pane of the MySQL tile **Settings** page, setting **TLS Options** to **Optional** allows, but does not enforce, TLS connections between apps and <%= vars.product_full %> service instances.
 
+## <a id="2-10-17"></a> v2.10.17
+
+**Release Date: Apr 29th, 2024**
+
+### Breaking Changes
+
+### Changes
+
+This release includes the following changes:
+
++ A number of high and critical CVEs were addressed by updating the components to the latest version.
+
+### Resolved Issues
+
+This release includes the following changes:
+
++ A number of high and critical CVEs were addressed by updating the components to the latest version.
++ MySQL service instances can automatically recover from an unexpected reboot
+
+### Compatibility
+
+The following components are compatible with this release:
+
+<table border="1" class="nice">
+
+  <tr>
+    <th>Component</th>
+    <th>Version</th>
+  </tr>
+
+  <tr><td>Stemcell</td><td>621.924*</td></tr>
+  <tr><td>Percona server</td><td>5.7.43-47</td></tr>
+  <tr><td>Percona XtraDB cluster</td><td>5.7.43-31.65</td></tr>
+  <tr><td>Percona XtraBackup</td><td>2.4.28</td></tr>
+  <tr><td>adbr-release</td><td>0.105.0*</td></tr>
+  <tr><td>bpm-release</td><td>1.2.18*</td></tr>
+  <tr><td>cf-cli-release</td><td>1.59.0*</td></tr>
+  <tr><td>cf-service-gateway-release</td><td>149.0.0*</td></tr>
+  <tr><td>count-cores-indicator-release</td><td>2.0.0*</td></tr>
+  <tr><td>dedicated-mysql-release</td><td>0.164.63*</td></tr>
+  <tr><td>dedicated-mysql-adapter-release</td><td>0.298.91*</td></tr>
+  <tr><td>loggregator-agent-release</td><td>7.7.6*</td></tr>
+  <tr><td>mysql-backup-release</td><td>*</td></tr>
+  <tr><td>mysql-monitoring-release</td><td>10.13.0*</td></tr>
+  <tr><td>on-demand-service-broker-release</td><td>0.45.4*</td></tr>
+  <tr><td>pxc-release</td><td>0.61.0*</td></tr>
+  <tr><td>routing-release</td><td>0.296.0*</td></tr>
+  <tr><td>service-metrics-release</td><td>2.0.37*</td></tr>
+</table>
+
 ## <a id="2-10-16"></a> v2.10.16
 
-**Release Date: Jan 19th, 2023**
+**Release Date: Jan 19th, 2024**
 
 ### Breaking Changes
 
