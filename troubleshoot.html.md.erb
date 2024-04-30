@@ -1034,13 +1034,6 @@ main table {
         This error can occur when an app issues an invalid data definition statement. Other nodes log this problem as a replication error because they fail to replicate the
         <code>ALTER TABLE</code>.</td>
     </tr>
-    <tr>
-      <td>Increased persistent disk usage or running out of working memory</td>
-      <td>Decode the <code>GRA_*.log</code>
-        files and look for errors. See
-        <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-PCF-v1-10">
-        How to decode Galera GRA log files</a>. The GRA log files contain failing DDL statements.</td>
-    </tr>
   </table>
   If you see replication errors, but no <code>ALTER TABLE</code>
   or persistent disk or memory issues, you can ignore the replication errors.
