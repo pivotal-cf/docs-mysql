@@ -1,0 +1,98 @@
+---
+title: Turn off Binary Logs Filling up the Persistent Disk VMware Tanzu SQL (MYSQL) [VMs]
+---
+
+<!--- KB /article/turning-off-binary-logging?language=en_US
+--->
+
+If your MySQL persistent disk is full, your apps become inoperable. In this state, read, write, and cf CLI operations do not work.
+
+Increased persistent disk usage can be caused by large quantities of binary logs. The majority of your persistent disk can become binary logs during large data uploads or with databases with a high transaction volume.
+
+If the majority of your persistent disk usage is for binary logging, an operator can turn off binary logging to free up space. You can turn off binary logging:
+
+* Temporarily on the server
+* Temporarily for an operator session
+* Permanently by granting developers SUPER privileges
+
+## Method 1: Temporarily on the server
+
+1. As the operator, SSH onto your MySQL service instance that you want to turn of binary logging for:
+
+    ```
+    $ bosh -e <ENV NAME> -d $service-instance_$(cf service <SERVICE NAME> --guid) ssh mysql/0
+    ```
+
+1. Add  skip-log-bin to the the /var/vcap/jobs/mysql/config/my.cnf file and restart MySQL:
+
+    ```
+    $ sudo -i
+
+    $ echo "skip-log-bin" >> /var/vcap/jobs/mysql/config/my.cnf 
+
+    $ monit restart all
+    ```
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    If you do not want this change to persist, you can recreate the service instance or back out the change by deleting <code>skip-log-bin</code> and restarting MySQL.</p>
+
+## Method 2: Temporarily for an operator session
+
+1. Edit the SQL dump to turn off binary logging:
+
+    ```
+    $ SET sql_log_bin = 0;
+    ...
+    <SQL DUMP CONTENTS>
+    ```
+
+1. Securely copy the SQL dump onto the VM:
+
+    ```
+    $ bosh -e <ENV NAME> -d $service-instance_$(cf service <SERVICE NAME> --guid) scp <THE SQL DUMP FILE> mysql/0:/tmp/sql-dump.sql
+    ```
+
+1. (Optional) If you want to import the file into the service instance you turned off binary logging for: 
+
+    ```
+    $ bosh -e <ENV NAME> -d $service-instance_$(cf service <SERVICE NAME> --guid) ssh mysql/0
+
+    $ bosh -e <ENV NAME> -d $service-instance_$(cf service <SERVICE NAME> --guid) ssh mysql/0
+    ```
+
+## Method 3: Permanently by granting developers SUPER privilege
+
+1. As an operator, SSH onto the service instance you want to grant privileges to developers to:
+
+    ```
+    $ bosh -e <ENV NAME> -d $service-instance_$(cf service <SERVICE NAME> --guid) ssh mysql/0
+    ```
+
+1. Find the binding user:
+
+    ```
+    $ mysql --defaults-file=/var/vcap/jobs/mysql/config/mylogin.cnf
+
+    $ mysql> SHOW FULL PROCESSLIST;
+    ```
+
+    From the output, you can identify the binding user by its generated UUID. For example: 8d8c4b58fc8a4ceaaee7d440459e943a. The user will also have a database associated with. For example: service_instance_db.
+
+2. Grant `SUPER` privileges to that user:
+
+    ```
+    $ mysql GRANT SUPER ON *.* TO 8d8c4b58fc8a4ceaaee7d440459e943a@'%';
+
+    $ mysql FLUSH PRIVILEGES;
+    ```
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    This is a permanent change that can be dangerous unless backed out after doing the data import. The application will need to re-establish a connection in order to be able to set <code>SET sql_log_bin = 0</code>.</p>
+
+3. Inform developers that they can turn off binary logging by setting:
+
+    ```
+    $ mysql SET sql_log_bin = 0;
+    ```
