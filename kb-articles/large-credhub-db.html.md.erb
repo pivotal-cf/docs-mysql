@@ -1,0 +1,195 @@
+---
+title: What can lead to a large CredHub database
+---
+
+<!--- KB /article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US
+second part
+--->
+
+Here is a scenario that can lead to a large CredHub database. In this scenario, thousands of entries needed to be removed from CredHub. We have replicated this scenario in a lab and this topic walks through it for reference, in case you run into this situation.
+
+The MySQL for TAS tile configures on-demand Service Instances (SIs) to generate backups at a specified `cron` schedule. Whenever the backup is taken, it is encrypted and the encryption key for the backup is saved in the Tanzu Application Service CredHub. For more information about these backups, see [Backup MySQL](../backup-restore.html#about-backups).
+
+## Secenario
+
+If an environment has a large number of on demand MySQL Service Instances (SIs) configured with a `cron` schedule that collects multiple backups per day, then over time, this can build up many entries in the CredHub database because a new encryption key is generated for each backup, for each SI.
+
+Restoring a MySQL backup requires the key that encrypted it. Due to customer retention policy and requirements, there is currently no cleanup logic to remove old encryption keys from TAS CredHub.
+
+## Example
+
+For this repro we created 5 MySQL Service Instances. We then configured our MySQL backup cron schedule at once per minute.  5 SIs * 1 backup per minute = 7,200 CredHub entries created per day total for all SIs collectively. We let this run for a few days before reverting the cron schedule to once weekly. Finally, we deleted one of the SIs that we no longer need, thereby we have entries in CredHub for a SI that no longer exists. We currently have 24,861 entries in CredHub:
+
+This would be equivalent to an environment with 40 SIs at 3 backups per day for a duration of roughly 207 days. 
+
+Now that we have our setup, let us define our goals.
+
+* We want to keep the last 7 backup encryption keys in CredHub for each actively deployed SI.
+* We only want to remove older unneeded mysql backup encryption keys.
+* We want to automate this as there will be a large number of entries to delete. 
+
+To accomplish our goals we will perform the following:
+A - Generate a CredHub backup prior to any modifications. (Step 2 in procedure outlined in this KB)
+B - Generate a list of all CredHub names currently in CredHub. (Step 3 in procedure outlined in this KB)
+C - Generate a list of all MySQL SI guids. 
+D - Generate a sorted list of all CredHub names that pertain to MySQL encryption keys.
+E - Generate the list of the encryption keys to keep.
+F - Generate the list of the encryption keys to prune.
+G - Initiate the delete script that removes all entries listed in the prune list.
+
+We created a folder at ~/credhub-cleanup-working-dir to store all of our files for this repro.
+
+### Step A
+
+```
+~/credhub-cleanup-working-dir$ credhub export -f credhub-export-$(date '+%Y-%m-%d-T%H-%M-%S').yml
+
+~/credhub-cleanup-working-dir$ ls | grep credhub
+credhub-export-2022-07-22-T16-03-25.yml
+```
+
+### Step B
+
+```
+~/credhub-cleanup-working-dir$ credhub find | grep name | cut -d' ' -f3 > credhub-names-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+
+~/credhub-cleanup-working-dir$ ls | grep credhub
+credhub-export-2022-07-22-T16-03-25.yml
+credhub-names-2022-07-22-T16-24-48.txt
+```
+
+### Step C
+
+We created a script and leveraged v3 CAPI to retrieve all SI guids and filtered with jq for the SIs that were only associated with MySQL. We appended the guids to a list and this list is all MySQL SI guids that are currently deployed. This script is named `obtain-all-mysql-SI-guids.sh` and it will generate a file named `currently-deployed-mysql-SI-guids-<DATE>.txt`.
+
+```
+~/credhub-cleanup-working-dir$ cat obtain-all-mysql-SI-guids.sh 
+#!/bin/bash
+ 
+for i in `cf curl /v3/service_instances?per_page=100 | jq -r '.resources[] | select(.maintenance_info.description != null) | select(.maintenance_info.description | startswith("MySQL")) | .guid'`
+do
+    SI_GUID=$i
+    echo "$SI_GUID" >> currently-deployed-mysql-SI-guids-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+done
+```
+
+```
+~/credhub-cleanup-working-dir$ ./obtain-all-mysql-SI-guids.sh
+
+~/credhub-cleanup-working-dir$ ls 
+credhub-export-2022-07-22-T16-03-25.yml  currently-deployed-mysql-SI-guids-2022-07-22-T16-48-51.txt
+credhub-names-2022-07-22-T16-24-48.txt       obtain-all-mysql-SI-guids.sh
+```
+
+### Step D
+We need to generate a sorted list of all CredHub entries that pertain to only MySQL backup encryption keys. We will call this list `all-mysql-encryption-key-names-in-credhub-<DATE>.txt`.
+
+```
+~/credhub-cleanup-working-dir$ grep '/tanzu-mysql/backups/' credhub-names-2022-07-22-T16-24-48.txt | sort > all-encryption-key-names-in-credhub-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+
+~/credhub-cleanup-working-dir$ ls
+build-unique-mysql-names-without-timestamp-suffix.sh
+credhub-export-2022-07-22-T16-03-25.yml
+credhub-names-2022-07-22-T16-24-48.txt
+currently-deployed-mysql-SI-guids-2022-07-22-T16-48-51.txt
+all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt
+obtain-all-mysql-SI-guids.sh
+unique-mysql-names-without-timestamp-suffix-2022-07-22-T17-21-35.txt
+```
+
+### Step E
+
+We created a script that will generate a list of the latest 7 entries in CredHub per currently deployed SI. The script is named `obtain-credhub-entries-to-keep.sh` and will generate a file named `credhub-entries-to-be-kept-<DATE>.txt`. This list will represent the entries that we wish to keep in CredHub. This list can be generated from `all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt` and `currently-deployed-mysql-SI-guids-2022-07-22-T16-48-51.txt.` We want to iterate over every SI guid and pull the latest 7 entries from `all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt` and append to `credhub-entries-to-be-kept-<DATE>.txt`.
+
+```
+~/credhub-cleanup-working-dir$ cat obtain-credhub-entries-to-keep.sh 
+#!/bin/bash
+
+for i in `cat currently-deployed-mysql-SI-guids-2022-07-22-T16-48-51.txt`
+do
+  grep $i all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt | tail -7 >> credhub-entries-to-be-kept-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+done
+```
+```
+~/credhub-cleanup-working-dir$ cat credhub-entries-to-be-kept-2022-07-22-T19-02-47.txt 
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157360
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157420
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157480
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157540
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157601
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157660
+/tanzu-mysql/backups/ee47d2fb-b7ca-40dd-b156-35d9d3ffa067_1658157720
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157480
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157540
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157601
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157660
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157720
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157780
+/tanzu-mysql/backups/52da6b5f-c944-486f-9b89-eef47e9e2edf_1658157840
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157480
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157540
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157601
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157660
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157720
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157780
+/tanzu-mysql/backups/bc909a4e-05f4-45f4-82e8-aca76893e4c6_1658157840
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157480
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157540
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157601
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157660
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157720
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157780
+/tanzu-mysql/backups/8ccc0ec8-dfde-4e74-b63b-4cfef5ed27f8_1658157840
+```
+
+### Step F
+
+To generate the list of names to prune, we will compare the 2 files `credhub-entries-to-be-kept-2022-07-22-T19-02-47.txt` and `all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt` for their differences and redirect to another file called `credhub-entries-to-be-prune-<DATE>.txt`.
+
+```
+~/credhub-cleanup-working-dir$ grep -vf credhub-entries-to-be-kept-2022-07-22-T19-02-47.txt all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt > credhub-entries-to-be-prune-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+
+~/credhub-cleanup-working-dir$ ls -ltr
+total 7864
+-rw-r--r-- 1 ubuntu ubuntu 2883889 Jul 22 16:22 credhub-export-2022-07-22-T16-03-25.yml
+-rw-rw-r-- 1 ubuntu ubuntu 1715409 Jul 22 16:24 credhub-names-2022-07-22-T16-24-48.txt
+-rwxrwxr-x 1 ubuntu ubuntu     354 Jul 22 16:48 obtain-all-mysql-SI-guids.sh
+-rw-rw-r-- 1 ubuntu ubuntu     148 Jul 22 16:48 currently-deployed-mysql-SI-guids-2022-07-22-T16-48-51.txt
+-rw-rw-r-- 1 ubuntu ubuntu 1715409 Jul 22 18:54 all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt
+-rwxrwxr-x 1 ubuntu ubuntu     240 Jul 22 19:02 obtain-credhub-entries-to-keep.sh
+-rw-rw-r-- 1 ubuntu ubuntu    1932 Jul 22 19:02 credhub-entries-to-be-kept-2022-07-22-T19-02-47.txt
+-rw-rw-r-- 1 ubuntu ubuntu 1713477 Jul 22 19:19 credhub-entries-to-be-prune-2022-07-22-T19-19-14.txt
+We want to ensure that the size of credhub-entries-to-be-kept-2022-07-22-T19-02-47.txt + credhub-entries-to-be-prune-2022-07-22-T19-19-14.txt = all-encryption-key-names-in-credhub-2022-07-22-T18-54-38.txt. 1713477 + 1932 = 1715409. 
+```
+
+### Step G
+
+We now have the necessary lists generated so that we can proceed to automate deleting unneeded entries from CredHub. We created a script that will do this for us named `prune-not-needed-credhub-entries.sh`. Sometimes the prune list can be large and the deletion process can take several hours, depending on how many entries need to be removed and/or resource constraint on the associated VMs. The CredHub CLI's token can expire after some time and because of this we added logic to re-login every 85 iterations.
+ 
+```
+~/credhub-cleanup-working-dir$ cat prune-not-needed-credhub-entries.sh 
+#!/bin/bash
+
+COUNT=1
+for i in `cat credhub-entries-to-be-prune-2022-07-22-T19-19-14.txt`
+do
+echo "Pruning $i $(credhub delete -n $i)"
+(( COUNT++ ))
+if [[ $COUNT -eq 85 ]]; then
+  COUNT=0
+  credhub login  --client-name=credhub_admin_client --client-secret=<SECRET HERE>
+fi
+done
+~/credhub-cleanup-working-dir$ nohup ./prune-not-needed-credhub-entries.sh &
+[1] 13989
+We are using nohup with our script and throwing its process in the background in case our terminal session gets disconnected. When using nohup, it will create a PID (PID is 13989 in this example) to do the work in and write the output to a file in the present working directory called nohup.out. By reviewing the nohup.out file, we can see which entries were successfully deleted and which ones were not. Example:
+
+~/credhub-cleanup-working-dir$ tail nohup.out 
+Pruning /tanzu-mysql/backups/174fb5a3-9c0c-4581-8024-4b28b3e7d3f1_1657884780 Credential successfully deleted
+Pruning /tanzu-mysql/backups/174fb5a3-9c0c-4581-8024-4b28b3e7d3f1_1657884841 Credential successfully deleted
+Since the output is on one line, we can use logic similar to the following to review which entries were unsuccessful:
+
+cat nohup.out | grep Pruning  | grep -v success | cut -d' ' -f2
+```
+
+If there are any credentials that did not get deleted from the script, just redo this process and/or manually remove them.
