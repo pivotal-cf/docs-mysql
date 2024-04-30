@@ -1,0 +1,55 @@
+---
+title: Cleaning up TAS for VMs CredHub
+---
+
+<!--- KB /article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US
+--->
+
+This topic provides the steps for cleaning up Tanzu Application Service (TAS for VMs) CredHub entries that are no longer needed.
+
+To interact with the CredHub service we can use either the [HTTP API](https://docs.cloudfoundry.org/api/credhub/version/2.9/) or the [CredHub CLI]((https://github.com/cloudfoundry/credhub-cli)). These instructions use the CLI that is included on the Tanzu Operations Manager VM.
+
+Tanzu Support recommends capturing a backup of CredHub prior to any modifications.
+
+<p class="note important">
+<span class="note__title">Important</span>
+It is important to remeber that when a CredHub entry is deleted, it is permanently gone. It cannot be retrieved.</p>
+
+## Delete CredHub entries that are no longer needed
+
+1. [SSH into Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html) and follow the steps in [Accessing Tanzu Application Service CredHub](./access-tas-credhub-w-cli.html) to connect to TAS CredHub.
+
+1. Create a working directory for the artifacts and proceed to generate a CredHub backup. It is paramount to perform this backup prior to any modifications:
+
+    ```
+    $ mkdir ~/credhub-cleanup-working-dir
+
+    $ cd ~/credhub-cleanup-working-dir
+
+    ~/credhub-cleanup-working-dir$ credhub export -f credhub-export-$(date '+%Y-%m-%d-T%H-%M-%S').yml
+    ```
+
+    The `-f` flag points to the file i which to save the export.
+    The date command within the filename will indicate the date and time of the backup.
+
+    Exporting a backup can take some time if there are many entries. To see the API calls made by the CredHub CLI command run `export CREDHUB_DEBUG=true` prior to CredHub CLI command. If exporting the backup fails, contact [Tanzu Support](https://tanzu.vmware.com/support).
+
+1. Generate a list of all CredHub names:
+
+    ```
+    $ credhub find | grep name | cut -d' ' -f3 > credhub-names-$(date '+%Y-%m-%d-T%H-%M-%S').txt
+    ```
+
+1. Review the list of CredHub names obtained in an earlier step and issue a `credhub delete` command on every name that is no longer desired or needed.
+
+    Remember, once the credential is deleted, it is unrecoverable. Ensure that you have captured a backup first.
+
+    Example of a `credhub delete` command:
+
+    ```
+    credhub delete -n /tanzu-mysql/backups/952615b9-7bb7-4773-b82a-b0d711318992_1657645964302
+    ```
+
+Repeat this step for all undesired CredHub entries.
+
+See also [What can lead to a large CredHub database](./large-credhub-db.html).
