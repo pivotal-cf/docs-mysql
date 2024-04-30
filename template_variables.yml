@@ -39,8 +39,8 @@ template_variables:
 
   # Other variables
   tile_name: VMware SQL with MySQL for Tanzu Application Service
-  product_url: https://network.pivotal.io/products/pivotal-cf
-  product_link: <div class="header-item"><a href="https://network.pivotal.io/products/VMware Tanzu-cf">Back to Product Page</a></div>
+  product_url: https://network.tanzu.vmware.com/products/pivotal-mysql/
+  product_link: <div class="header-item"><a href="https://network.tanzu.vmware.com/">Back to Product Page</a></div>
   service_name: VMware SQL with MySQL for Tanzu Application Service
   service_name_article: VMware SQL with MySQL for Tanzu Application Service
   service_name_article_full: the VMware SQL with MySQL for Tanzu Application Service service
@@ -55,7 +55,7 @@ template_variables:
   gtm_account_id: GTM-MM86KCJ
 
   use_global_header: true
-  global_header_product_href: https://network.pivotal.io/
+  global_header_product_href: https://network.tanzu.vmware.com/
   global_header_product_link_text: Downloads
 
   mysql_metrics_origin: /p-mysql
