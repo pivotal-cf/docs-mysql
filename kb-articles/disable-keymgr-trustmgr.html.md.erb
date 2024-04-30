@@ -1,0 +1,78 @@
+---
+title: Disabling KeyManager and TrustManger in Java buildpack
+---
+
+<!--- KB /article/how-to-disable-keymanager-and-or-trustmanager-in-container-security-provider-framework-in-the-java-buildpack?language=en_US
+--->
+
+This topic provides the steps for disabling KeyManager and/or TrustManager in Container Security Provider Framework in Java buildpack.
+
+The Container Security Provider Framework, introduced in Java buildpack 3.17, adds a Security Provider to the Java Virtual Machine (JVM) that automatically includes BOSH trusted certificates, Diego identity certificates, and private keys.
+
+In some cases, you may want to disable either the KeyManager, the TrustManager, or both.
+
+Often, the Container Security Provider does the right thing and work properly. There are a few occasions where it can cause problems. The most common is with  KeyManager only.
+
+For example, if you have a Java application running in Tanzu Application Service for VMs (TAS for VMs) Foundation A that is accessing another app running in TAS for VMs Foundation B, you may encounter issues if TAS for VMs Foundation B is configured to support mutual Transport Layer Security (TLS) and validate client certificates. Foundation B does not need to be configured to require mutual TLS certificates, this issue will happen even if Foundation B is configured with mutual TLS certificates as optional.
+
+The Container Security Provider automatically adds the Diego issued application instance ID cert to outbound requests. Regardless of the way Gorouter is configured, required or optional, it will always validate a mutual TLS cert if the client includes one. The Container Security Provider always includes a cert and the Gorouter will always validate it. By default, Foundation B is not configured to trust Diego Instance ID certs issued by Foundation A and you will get the error, "bad_certificate".
+
+Issues with TrustManager are much less common and you generally want to keep this enabled, even when disabling KeyManager. TrustManager is responsible for automatically making sure that the JVM trusts any BOSH deployed trusted TLS certificate authorities.
+
+In most cases, you can trust these. However, if trusting them creates problems or if you need to be more restrictive about the certificate authorities that you trust, you can disable TrustManager.
+
+## Disabling KeyManager
+
+To disable KeyManager, use the application environment variable `JBP_CONFIG_CONTAINER_SECURITY_PROVIDER`. Set the `key_manager_enabled` key to false. For example:
+
+```
+cf set-env <JAVA-APP-NAME> JBP_CONFIG_CONTAINER_SECURITY_PROVIDER '{key_manager_enabled: false}'
+```
+
+## Disabling TrustManager
+
+To disable TrustManager, use the application environment variable, `JBP_CONFIG_CONTAINER_SECURITY_PROVIDER`, and set the `trust_manager_enabled` key to false. For example:
+
+```
+cf set-env <JAVA-APP-NAME> JBP_CONFIG_CONTAINER_SECURITY_PROVIDER '{trust_manager_enabled: false}'
+```
+
+## Disabling both KeyManager and Trust Manager
+
+To disable KeyManager and TrustManager at the same time, see the following example:
+
+```
+cf set-env <JAVA-APP-NAME> JBP_CONFIG_CONTAINER_SECURITY_PROVIDER '{key_manager_enabled: false, trust_manager_enabled: false}'
+```
+
+Restage the application to ensure the change to environment variable that the buildpack consumes takes effect.
+
+```
+cf restage <JAVA-APP-NAME>
+```
+
+The staging process has access to environment variables, so the environment can affect the contents of the droplet. Restaging the application compiles a new droplet from your application without updating your app source.
+
+For more information, refer to Container Security Provider.
+
+## Known Issue
+
+A very rare bug has been identified in the Container Security Provider Framework that may contribute to communication errors for an application when reaching out to other endpoints using mutual TLS. An application's Diego Instance Identity certificate and key pair are reloaded every 24 hours and the Framework watches these files to update
+the Security Provider accordingly. A low level concurrency bug makes it possible for a mismatching certificate and key pair to be loaded in the Security Provider and when this occurs, TLS negotiations might fail until the application is restarted or the Instance Identity certificate and key are rotated again.The error state might appear as "bad_certificate" or "handshake_failure".
+
+Initial log for when the Instance Identity certificate and key are rotated:
+
+```
+o.c.s.FileWatchingX509ExtendedKeyManager.run - Updated KeyManager for /etc/cf-instance-credentials/instance.key and /etc/cf-instance-credentials/instance.crt
+```
+
+TLS failure Immediately following the rotation of the Instance Identity certificate and key when the error state is present:
+
+```
+I/O error on GET request for \""https://credhub.service.cf.internal:8844/api/v1/data\"": Received fatal alert: handshake_failure; nested exception is javax.net.ssl.SSLHandshakeException: Received fatal alert: handshake_failure]
+```
+```
+I/O error on GET request for ""https://credhub.service.cf.internal:8844/api/v1/data"": readHandshakeRecord; nested exception is javax.net.ssl.SSLException: readHandshakeRecord] with root cause"
+```
+
+This issue has been fixed in Java buildpack v4.57. Until upgrade your apps with the fixed Java buildpack, the workaround is to restart the application instance facing this error.
