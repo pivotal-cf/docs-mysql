@@ -1,0 +1,69 @@
+---
+title: MySQL for TAS hangs when server VM persistent disk is full
+---
+
+<!--- KB /article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full?language=en_US
+--->
+
+To free space on a MySQL VM persistent disk, some of the older binary logs can be purged. To do this, follow the instructions below:
+
+If MySQL is responsive, you can run queries to identify and clear the binary logs.
+
+1. Connect to MySQL using the following command:
+
+    ```
+    sudo mysql --defaults-file=/var/vcap/jobs/mysql/config/mylogin.cnf
+    ```
+
+1. On your MySQL leader or single node, run `SHOW BINARY LOGS`. The output is similar to the following:
+
+    ```
+    mysql> SHOW BINARY LOGS;
+    +------------------+-----------+
+    | Log_name         | File_size |
+    +------------------+-----------+
+    | mysql-bin.000001 |       177 |
+    | mysql-bin.000002 |      3658 |
+    | mysql-bin.000003 |    204594 |
+    | mysql-bin.000004 |       217 |
+    | mysql-bin.000005 |       217 |
+    | mysql-bin.000006 |       552 |
+    +------------------+-----------+
+    6 rows in set (0.00 sec)
+    ```
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    If you have a follower, use the <code>SHOW SLAVE STATUS</code> command to check the log file it is reading.</p>
+
+1. To free up persistent disk space, purge the older binary logs using a query similar to:
+
+    ```
+    PURGE BINARY LOGS TO 'mysql-bin.000005';
+    ```
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    In this example, binary logs 000001 through 000005 will be purged.</p>
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    If MySQL is not responsive and does not process queries, the binary logs can be deleted from the <code>/var/vcap/store/mysql</code> directory using the <code>rm</code> command. The mysql-bin.index file may need to be updated to take into account the binary logs that were manually deleted if mysql isn't running and the PURGE query cannot be run.</p>
+
+1. In this example, run the following command to identify the binary logs:
+
+    ```
+    ls -l /var/vcap/store/mysql/mysql-bin.*
+    ```
+
+1. Remove the binary logs that are outputted by the query above:
+
+    ```
+    rm -f /var/vcap/store/mysql/mysql-bin.00000[1-5]
+    ```
+
+1. After about a minute, re-run the query below to keep the database in sync with the manually deleted binary logs:
+
+    ```
+    PURGE BINARY LOGS TO 'mysql-bin.000005';
+    ```
