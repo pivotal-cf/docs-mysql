@@ -35,6 +35,7 @@ The following errors occur in multiple services:
   <th> <br>
     Failed Installation
   <br><br></th>
+  <th></tr>
   </tr>
 </thead>
   <tr>
@@ -486,7 +487,7 @@ successfully created and bound.
     <ol>
     <li>
     <p>
-    For information about resolving this issue, see <a href="https://community.pivotal.io/s/article/How-to-clean-up-Tanzu-Application-Service-Credhub?language=en_US">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
+    For information about resolving this issue, see <a href="./kb-articles/clean-up-tas-credhub.html">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
     </p>
     </li>
     </td>
@@ -892,21 +893,18 @@ and the errand logs contain the following:
       To resolve this issue, do one of the following:<br><br>
           <ul>
             <li><strong>If your persistent disk is already full,</strong> delete binary logs.
-              See
-              <a href="https://community.pivotal.io/s/article/mysql-for-pcf-hangs-when-server-vm-persistent-disk-is-full">MySQL for PCF hangs when server VM persistent disk is full</a>
-              in the Knowledge Base.
+              See <a href="./kb-articles/mysql-hangs-full-disk.html">MySQL for TAS hangs when server VM persistent disk is full</a>.
                 <p class="note caution">
                 <span class="note__title">Caution</span>
                 Deleting binary logs is a destructive procedure and can result in MySQL data loss.
-                Only do this procedure with the assistance of <a href="https://tanzu.vmware.com/support">Support</a>.
+                Use this procedure only with the assistance of <a href="https://tanzu.vmware.com/support">Support</a>.
                 </p>
             </li>
             <li>
               <strong>If the majority of your persistent disk are binary logs but it is not currently full,</strong>
               turn off binary logging.
               See
-              <a href="https://community.pivotal.io/s/article/turning-off-binary-logging">Binary Logs Filling up the Persistent Disk</a>
-              in the Knowledge Base.
+              <a href="./kb-articles/turn-off-binary-logs.html">Binary Logs Filling up the Persistent Disk</a>.
             </li>
           </ul></td>
   </tr>
@@ -1126,15 +1124,6 @@ main table {
       This error can occur when an app issues an invalid data definition statement. Other nodes log this problem as a replication error because they fail to replicate the
       <code>ALTER TABLE</code>.</td>
   </tr>
-  <tr>
-    <td>Increased persistent disk usage or running out of working memory</td>
-    <td>Decode the
-      <code>GRA_*.log</code>
-      files and look for errors. See
-      <a href="https://community.pivotal.io/s/article/How-to-decode-Galera-GRA-logs-for-MySQL-for-PCF-v1-10">
-        How to decode Galera GRA log files</a>
-      in the Support knowledge base. The GRA log files contain failing DDL statements.</td>
-  </tr>
 </table>
 
 If you see replication errors, but no <code>ALTER TABLE</code>
@@ -1193,7 +1182,7 @@ in <em>On-Demand Networking</em>.
 </table>
 </div>
 
-<h2 id="-troubleshoot-components"><a id="components"></a> Troubleshoot components</h2>
+<h2 id="-troubleshoot-components"><a id="components"></a>Troubleshoot components</h2>
 
 <p>This section provides guidance on checking for and fixing issues in on-demand service components.</p>
 
@@ -1216,7 +1205,7 @@ in <em>On-Demand Networking</em>.
 
 <h3 id="-configuration"><a id="bosh-config"></a> Configuration</h3>
 
-<h4 id="-service-instances-in-failing-state"><a id="bosh-instance-fail"></a> Service instances in failing state</h4>
+<h4 id="-service-instances-in-failing-state"><a id="bosh-instance-fail"></a>Service instances in failing state</h4>
 
 <p>
   The VM or Disk type that you configured in the plan page of the tile in Ops Manager
@@ -1243,7 +1232,7 @@ in <em>On-Demand Networking</em>.
 credentials are reflected in the Ops Manager <code>credentials</code>
 tab of the VMware Tanzu Application Service for VMs tile.
 </p>
-
+ 
 <h3 id="-networking"><a id="network"></a> Networking</h3>
 
 <p>
@@ -1299,7 +1288,7 @@ To validate connectivity, do the following:
 3.  If no BOSH `task-id` appears in the error message, look in the broker log using the `broker-request-id` from the task.
 
 
-<h4 id="-validate-app-access-to-service-instance"><a id="app-to-instances"></a>  Validate app access to service instance</h4>
+<h4 id="-validate-app-access-to-service-instance"><a id="app-to-instances"></a>Validate app access to service instance</h4>
 
 <p>
   Use <code>cf ssh</code> to access to the app container, then try connecting to
@@ -1368,12 +1357,12 @@ A failing process or failing VM might come back automatically after a temporary 
 can interrupt service and require manual restoration.
 See <a href="./interruptions.html#az-fail">AZ failure</a> and <a href="./interruptions.html#region-fail">Region failure</a>.</p>
 
-<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a>  Techniques for troubleshooting</h2>
+<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a>Techniques for troubleshooting</h2>
 
 <p>Instructions on interacting with the on-demand service broker and on-demand service
 instance BOSH deployments, and on performing general maintenance and housekeeping tasks</p>
 
-<h3 id="-parse-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a> Parse a Cloud Foundry error message</h3>
+<h3 id="-parse-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Parse a Cloud Foundry error message</h3>
 
 <p>
   Failed operations (create, update, bind, unbind, delete) result in an error message.
@@ -1423,7 +1412,7 @@ Updated: 2017-03-13T10:17:58Z
   If you have more than one broker instance, repeat this process for each instance.
 </p>
 
-<h3 id="-access-broker-and-instance-logs-and-vms"><a id="bosh-cf-access"></a>  Access broker and instance logs and VMs</h3>
+<h3 id="-access-broker-and-instance-logs-and-vms"><a id="bosh-cf-access"></a>Access broker and instance logs and VMs</h3>
 
 <p>
   Before following these procedures, log in to the
@@ -1504,7 +1493,7 @@ Updated: 2017-03-13T10:17:58Z
     </tr>
 </table>
 
-<h4 id="-access-service-instance-logs-and-vms"><a id="access-instance"></a> Access service instance logs and VMs</h4>
+<h4 id="-access-service-instance-logs-and-vms"><a id="access-instance"></a>Access service instance logs and VMs</h4>
 
 <ol>
     <li>
@@ -1814,11 +1803,11 @@ Errand 'orphan-deployments' completed successfully (exit code 0)
 
 <code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
 
-<h3 id="-reinstall-a-tile"><a id="reinstall"></a>  Reinstall a tile</h3>
+<h3 id="-reinstall-a-tile"><a id="reinstall"></a>Reinstall a tile</h3>
 
-<p>To reinstall the Tanzu SQL for VMs tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for Pivotal Cloud Foundry version 2 and higher</a>.</p>
+<p>To reinstall the Tanzu SQL for VMs tile, see <a href="https://community.pivotal.io/s/article/Reinstalling-MySQL-for-Pivotal-Cloud-Foundry-version-2-and-above">Reinstalling MySQL for TAS version 2 and higher</a>.</p>
 
-<h3 id="-view-resource-saturation-and-scaling"><a id="view-resources"></a>  View resource saturation and scaling</h3>
+<h3 id="-view-resource-saturation-and-scaling"><a id="view-resources"></a>View resource saturation and scaling</h3>
 
 
 <p>
