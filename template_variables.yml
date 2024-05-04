@@ -58,4 +58,7 @@ template_variables:
   v_major_tas_version: "v5.0"
   dot_major_tas_version: "5.0"
 
+  mysql_metrics_origin: /p-mysql
+  mysql_metrics_origin_v2: /p.mysql
+
   switchboard_url: proxy-BOSH-JOB-INDEX.p-mysql.YOUR-SYSTEM-DOMAIN
