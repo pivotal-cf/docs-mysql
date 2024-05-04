@@ -10,6 +10,7 @@ Docs for VMware SQL with MySQL for Tanzu Application Service
 | Branch name  | Use for... |
 |--------------|------------|
 | master       | Not used   |
+| 3.3          | [3.3 staging](https://docs-staging.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.3/mysql-for-tas/about_mysql_vms.html) |
 | 3.2          | [3.2](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.2/mysql-for-tas/about_mysql_vms.html)  |
 | 3.1          | [3.1](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.1/mysql-for-tas/about_mysql_vms.html)  |
 | 3.0.0        | [3.0.x](https://docs.vmware.com/en/VMware-SQL-with-MySQL-for-Tanzu-Application-Service/3.0/mysql-for-tas/about_mysql_vms.html)  |
