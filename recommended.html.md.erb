@@ -201,23 +201,22 @@ Use the following table to determine the amount of persistent disk space you nee
   <thead>
   <tr>
     <th>InnoDB Redo Logs</th>
-    <th>Total Disk Size</th>
+    <th>App Data</th>
     <th>Minimum Total Disk Size</th>
   </tr>
   </thead>
   <tr>
     <td>2 GB</td>
-    <td>N + 2 GB</td>
+    <td>3 GB</td>
     <td>5 GB</td>
   </tr>
 </table>
 
-In the **Total Disk Size** formula from the previous table, `N` represents maximum app data. You must include binlogs in your size
-estimate for app data.
+You must include binlogs in your size estimate for app data.
 
 The following diagram shows how persistent disk space is used:
 
-![alt-text="The `N` represents maximum app data. Remember to include binlogs in your size estimate for app data."](./images/persistent-disk-ha-node.png)
+![alt-text="Remember to include binlogs in your size estimate for app data."](./images/persistent-disk-ha-node.png)
 
 
 
