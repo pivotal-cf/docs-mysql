@@ -114,28 +114,20 @@ Use the following table to determine the amount of persistent disk space you nee
   <thead>
   <tr>
     <th>InnoDB Redo Logs</th>
-    <th>Total Disk Size</th>
+    <th>App Data</th>
     <th>Minimum Total Disk Size</th>
   </tr>
   </thead>
   <tr>
     <td>2 GB</td>
-    <td>3N + 2 GB</td>
-    <td>5 GB</td>
+    <td>1 GB</td>
+    <td>3 GB</td>
   </tr>
 </table>
 
-
-In the **Total Disk Size** formula from the previous table, `N` represents the following items in equal value:
-
-- Maximum app data. Remember to include binlogs in your size estimate for app data.
-- Data for copied backups.
-- Data for compression and encryption.
-
-Each `N` combined makes `3N`, as seen in the formula.
-
 The following diagram shows how persistent disk space is used:
-![alt-text="Persistent Disk diagram.
+
+![alt-text="How persistent disk space is used."](./images/persistent-disk-multi-site.png)
 
 <h3> <a id="ha-cluster-jumpbox"></a> HA Cluster Jumpbox </h3>
 
