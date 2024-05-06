@@ -30,7 +30,6 @@ origin:"p.mysql" eventType:ValueMetric timestamp:1496776477930669688 deployment:
 
 To access MySQL metrics:
 
-+ [Use the Indicator Protocol Dashboard](#indicator). This method requires Healthwatch v1.x.
 + [Use Grafana](#grafana). This method requires Healthwatch v2.x.
 + [Use Log Cache](#log-cache)
 
@@ -48,37 +47,6 @@ You can use Grafana to visually view metrics for <%= vars.product_short %> servi
     ```
 
 For more information about using Grafana dashboards, see the [Healthwatch for VMware Tanzu documentation](https://docs.pivotal.io/healthwatch/2-2/using-grafana.html).
-
-###  <a id="indicator"></a>Use the indicator protocol dashboard
-
-<p> This section requires Healthwatch v1.x.</p>
-
-You can use the Indicator Protocol dashboard to view Key Performance Indicators (KPIs)
-for <%= vars.product_short %> service instances. The dashboard includes a graphical representation of the KPIs and information about recommended alert thresholds.
-
-For more information about the Indicator Protocol dashboard, see [Indicator Protocol Dashboard
-(Beta)](https://docs.pivotal.io/platform/healthwatch/indicator-protocol.html).
-
-For information about <%= vars.product_short %> KPIs, see [KPIs for MySQL Service Instances](#kpi).
-
-To access KPIs using the Indicator Protocol dashboard:
-
-1. Install the Healthwatch tile in <%= vars.ops_manager %>. See [Installing and Configuring Pivotal Healthwatch](https://docs.pivotal.io/healthwatch/1-8/installing.html).
-1. Enable the Indicator Protocol add-on in <%= vars.ops_manager %>. See [Enable the Indicator Protocol
-Add-on](https://docs.pivotal.io/healthwatch/1-8/indicator-protocol.html#enable-add-on).
-1. View the Indicator Protocol Dashboard by navigating to:
-
-    ```
-    https://healthwatch.YOUR-SYSTEM-DOMAIN/indicator-dashboards
-    ```
-
-The following image shows an example of the Indicator Protocol dashboard for a highly available
-(HA) cluster service instance:
-
-![alt-text="This screenshot shows KPIs metrics for MySQL server availability, the percentage of available connections,
-CPU utilization percentage, queries delta, ephemeral disk percent, and persistent disk percent."](./images/indicator-dash.png)
-
-<a href="./images/indicator-dash.png" target="_blank" aria-hidden="true">View a larger version of this image</a>
 
 <!-- The following partial is in https://github.com/pivotal-cf/docs-partials -->
 ### <a id="log-cache"></a>Use Log Cache
