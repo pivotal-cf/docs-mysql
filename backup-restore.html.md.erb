@@ -89,47 +89,9 @@ about backup locking behavior, see the
 ## <a id="understanding-metadata"></a> About backup files and metadata
 
 When <%= vars.product_short %> runs a backup,
-it uploads two files with Unix epoch-timestamped filenames:
+it uploads one file:
 
-  * The encrypted data backup file, `mysql-backup-TIMESTAMP.tar.gpg`
-  * A metadata file, `mysql-backup-TIMESTAMP.txt`
-
-The metadata file contains information about the backup that looks similar to the following:
-
-```
-end_time = 2024-01-29 18:56:21
-lock_time = 0
-innodb_to_lsn = 23136604
-partial = N
-tool_name = xtrabackup
-start_time = 2024-01-29 18:56:18
-compressed = N
-encrypted = N
-incremental = N
-format = xbstream
-name =
-tool_command = --defaults-file=/var/vcap/jobs/streaming-mysql-backup-tool/config/mysql-defaults-file.cnf --backup --stream=xbstream --target-dir=/var/vcap/store/xtrabackup_tmp
-tool_version = 8.0.35-30
-binlog_pos = filename 'mysql-bin.000012', position '197', GTID of the last change 'cfe096a6-bebf-11ee-be4e-4fcff573e33e:1-345'
-uuid = 180170b2-bed8-11ee-9e4f-42010a000122
-ibbackup_version = 8.0.35-30
-server_version = 8.0.35-27
-innodb_from_lsn = 0
-```
-
-The most important entries in the metadata file are the following:
-
-+ `start_time`: Use this to determine which transactions are captured in the backup.
-+ `server_version`: Use this to determine potential incompatibilities
-when restoring an instance with the backup artifact.
-
-The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
-
-<p> The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
-  indicates that the backup is not compressed or encrypted.
-  However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted.
-  This is a known issue.
-</p>
+  * The encrypted data backup file, `artifact`
 
 ## <a id='prerequisite'></a> Prerequisite: adbr plug-in
 
