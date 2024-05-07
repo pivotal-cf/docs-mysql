@@ -6,6 +6,11 @@ title: What can lead to a large CredHub database
 second part
 --->
 
+<p class="note important">
+<span class="note__title">Important</span>
+<%= vars.product_short %> 3.3.0 and greater encrypts backups with one credential per service instance. This issue is unlikely to affect customers using <%= vars.product_short %> 3.3.0 and greater.
+</p>
+
 Here is a scenario that can lead to a large CredHub database. In this scenario, thousands of entries needed to be removed from CredHub. We have replicated this scenario in a lab and this topic walks through it for reference, in case you run into this situation.
 
 The MySQL for TAS tile configures on-demand Service Instances (SIs) to generate backups at a specified `cron` schedule. Whenever the backup is taken, it is encrypted and the encryption key for the backup is saved in the Tanzu Application Service CredHub. For more information about these backups, see [Backup MySQL](../backup-restore.html#about-backups).
