@@ -12,62 +12,39 @@ For information about temporary <%= vars.product_short %> service interruptions,
 
 This section provides information on how to troubleshoot specific errors or error messages.
 
-### <a id="x-product"></a> Common services errors
+### <a name="install-fail"></a>Failed Installation
 
-The following errors occur in multiple services:
-
-*   [Failed installation](#install-fail)
-*   [Cannot create or delete service instances](#cannot-create-delete)
-*   [Broker request timeouts](#timeouts)
-*   [Instance does not exist](#instance-not-exist)
-*   [Cannot bind to or unbind from service instances](#cannot-bind)
-*   [Cannot connect to a service instance](#cannot-connect)
-*   [Upgrade all service instances errand fails](#upgrade-all-fails)
-*   [Missing logs and metrics](#missing-logs)
-*   [MySQL Load is high with large number of CredHub encryption keys](#credhub-encryption-keys)
-
-
-<p><a name="install-fail"></a></p>
-
-  <table class="table">
+<table class="table">
   <thead>
   <tr>
-  <th> <br>
+    <th colspan="2"><br>
     Failed Installation
-  <br><br></th>
-  <th></tr>
+    <br><br></th>
   </tr>
 </thead>
   <tr>
     <th>Symptom</th>
     <td>VMware SQL with MySQL for TAS fails to install.</td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Reasons for a failed installation include:
     <ul>
-    <li>
-    Certificate issues: The on-demand broker (ODB) requires valid certificates.
-    </li>
-    <li>Deploy fails. This could be due to a variety of reasons.
-    </li>
-    <li>Networking problems: </li>
-    <ul>
-    <li>Cloud Foundry cannot reach the VMware SQL with MySQL for TAS broker</li>
-    <li>Cloud Foundry cannot reach the service instances</li>
-    <li>The service network cannot access the BOSH director </li>
-    </ul>
-    <li>The Register broker errand fails.</li>
-    <li>The smoke test errand fails.</li>
-    <li>
-    Resource sizing issues: These occur when the resource sizes selected for a
-    given plan are less than VMware SQL with MySQL for TAS requires to function.
-    </li>
-    <li>Other service-specific issues.</li>
+      <li>Certificate issues: The on-demand broker (ODB) requires valid certificates.</li>
+      <li>Deploy fails. This could be due to a variety of reasons.</li>
+      <li>Networking problems:</li>
+        <ul>
+        <li>Cloud Foundry cannot reach the VMware SQL with MySQL for TAS broker</li>
+        <li>Cloud Foundry cannot reach the service instances</li>
+        <li>The service network cannot access the BOSH director </li>
+        </ul>
+      <li>The Register broker errand fails.</li>
+      <li>The smoke test errand fails.</li>
+      <li>Resource sizing issues: These occur when the resource sizes selected for a
+      given plan are less than VMware SQL with MySQL for TAS requires to function.</li>
+      <li>Other service-specific issues.</li>
     </ul></td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
@@ -81,23 +58,21 @@ The following errors occur in multiple services:
   </tr>
   </table>
 
-<p><a name="cannot-create-delete"></a></p>
+### <a name="cannot-create-delete"></a>Cannot Create or Delete Service Instances
 
-
-  <table class="table">
+<table class="table">
     <thead>
     <tr>
-  <th> <br>
-    Cannot Create or Delete Service Instances
-  <br><br></th>
-  </tr></thead>
+      <th colspan="2"><br>
+      Cannot Create or Delete Service Instances
+      <br><br></th>
+      </tr></thead>
   <tr>
     <th>Symptom</th>
     <td>If developers report errors such as:
         <pre class="terminal">Instance provisioning failed: There was a problem completing your
         request. Contact your operations team providing the following information: service: redis-acceptance, service-instance-guid: ae9e232c-0bd5-4684-af27-1b08b0c70089, broker-request-id: 63da3a35-24aa-4183-aec6-db8294506bac, task-id: 442, operation: create</pre></td>
   </tr>
-
   <tr>
     <th>Cause</th>
     <td>Reasons include:
@@ -108,7 +83,6 @@ The following errors occur in multiple services:
       <li>Quota errors</li>
     </ul></td>
   </tr>
-
   <tr>
     <th>Solution</th>
     <td>To troubleshoot:
@@ -122,7 +96,7 @@ The following errors occur in multiple services:
         <li>
         <p>
         To continue troubleshooting,
-        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>
+        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm">SSH Into the BOSH Director VM</a>
         and target the VMware SQL with MySQL for TAS instance using the instructions
         on <a href="#parse-error">parsing a Cloud Foundry error message</a>.
         </p>
@@ -151,8 +125,7 @@ The following errors occur in multiple services:
 
 <p><a name="timeouts"></a></p>
 
-
-  <table class="table">
+<table class="table">
     <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -197,11 +170,10 @@ The following errors occur in multiple services:
 
 <p><a name="instance-not-exist"></a></p>
 
-
-  <table class="table">
+<table class="table">
    <thead>
   <tr>
-  <th> <br>
+  <th colspan="2"><br>
     Instance Does Not Exist
   <br><br></th>
   </tr></thead>
@@ -241,13 +213,12 @@ The following errors occur in multiple services:
 
 </table>
 
-
 <p><a name="cannot-bind"></a></p>
 
-  <table class="table">
+<table class="table">
   <thead>
   <tr>
-  <th> <br>
+  <th colspan="2"><br>
     Cannot Bind to or Unbind from Service Instances
   <br><br></th>
   </tr></thead>
