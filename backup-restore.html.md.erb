@@ -184,7 +184,7 @@ Before you begin the restore procedure review the following important concepts:
 
 + [The topology of the instance you restore to](#instance-types)
 + [When to use a different restore method](#different-cases)
-+ [The new database must be empty](#empty-database)
++ [Restoring to a non-empty database](#non-empty-database)
 
 ####<a name="instance-types"></a> The topology of the instance you restore to
 
@@ -244,18 +244,32 @@ There are some cases where you cannot use the following procedure:
   </tr>
 </table>
 
-####<a name="empty-database"></a> The new database must be empty
+####<a name="non-empty-database"></a> Restoring to a non-empty database
 
-Do not write anything to the database in the new service instance
-until after you have restored the backup to it.
+Double check it is safe to overwrite the database.
 For example, the following actions write to the database:
 
 + You create service keys.
 + You configure the service instance for <%= vars.single_leader_plan %>.
 + <%= vars.product_short %> takes an automatic backup.
 
-If the database is not empty, then the adbr plug-in fails to restore the data and
-you need to delete the service instance and create another.
+There are three ways to restore to non-empty databases, provide the `--force` or `-f` flag or provide manual confirmation.
+
+1. Provide manual confirmation
+    ```
+    cf adbr restore DESTINATION-INSTANCE BACKUP-ID
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    Really restore the service instance DESTINATION-INSTANCE? [yN]: y
+    OK
+    ```
+1. Provide the `--force` or `-f` flag
+    ```
+    cf adbr restore DESTINATION-INSTANCE BACKUP-ID --force
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    OK
+    ```
 
 
 ###<a id="procedure"></a> Restore a service instance
@@ -305,8 +319,12 @@ To restore a service instance:
 
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    Really restore the service instance DESTINATION-INSTANCE? [yN]: y
+    OK
     ```
-    Where is `BACKUP-ID` is the ID you recorded in the revious step. <br><br>
+    Where is `BACKUP-ID` is the ID you recorded in the previous step. <br><br>
 
     For example:
 
