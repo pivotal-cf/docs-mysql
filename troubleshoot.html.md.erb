@@ -56,12 +56,12 @@ This section provides information on how to troubleshoot specific errors or erro
     configuration matches that recommended by the service.</li>
     </ul></td>
   </tr>
-  </table>
+</table>
 
 ### <a name="cannot-create-delete"></a>Cannot Create or Delete Service Instances
 
 <table class="table">
-    <thead>
+   <thead>
     <tr>
       <th colspan="2"><br>
       Cannot Create or Delete Service Instances
@@ -123,7 +123,7 @@ This section provides information on how to troubleshoot specific errors or erro
   </tr>
 </table>
 
-<p><a name="timeouts"></a></p>
+### <a name="timeouts"></a>Broker Request Timeouts
 
 <table class="table">
     <thead>
@@ -168,10 +168,10 @@ This section provides information on how to troubleshoot specific errors or erro
 
 </table>
 
-<p><a name="instance-not-exist"></a></p>
+### <a name="instance-not-exist"></a>Instance Dees Not Exist
 
 <table class="table">
-   <thead>
+  <thead>
   <tr>
   <th colspan="2"><br>
     Instance Does Not Exist
@@ -213,7 +213,7 @@ This section provides information on how to troubleshoot specific errors or erro
 
 </table>
 
-<p><a name="cannot-bind"></a></p>
+### <a name="cannot-bind"></a>Cannot Bind to or Unbind from Service Instances
 
 <table class="table">
   <thead>
@@ -262,12 +262,11 @@ This section provides information on how to troubleshoot specific errors or erro
     </li>
     </ol></td>
   </tr>
-
 </table>
 
-<p><a name="cannot-connect"></a></p>
+### <a name="cannot-connect"></a>Cannot Connect to a Service Instance
 
-  <table class="table">
+<table class="table">
   <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -295,7 +294,7 @@ successfully created and bound.
     <ol>
     <li>
     <p>
-    Check that <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/app-sec-groups.html"/>application security groups</a>
+    Check that <a href="https://docs.vmware.com/en/VMware-Tanzu-Application-Service/<%= vars.dot_major_tas_version %>/tas-for-vms/app-sec-groups.html">application security groups</a>
     are configured correctly.
     Access can be configured for the service network that the tile is deployed to.
     </p>
@@ -324,17 +323,15 @@ successfully created and bound.
 </table>
 </div>
 
-<p> Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
-  See <a href="./upgrade.html#interruptions">Service interruptions</a> for more information.
-</p>
+Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
+See <a href="./upgrade.html#interruptions">Service interruptions</a> for more information.
 
-
-<p><a name="upgrade-all-fails"></a></p>
+### <a name="upgrade-all-fails"></a>Upgrade All Service Instances Errand Fails
 
   <table class="table">
    <thead>
   <tr>
-  <th> <br>
+  <th colspan="2"><br>
     Upgrade All Service Instances Errand Fails
   <br><br></th>
   </tr></thead>
@@ -353,20 +350,18 @@ successfully created and bound.
     <td>To troubleshoot:
     <ol>
     <li>Look at the errand output in the Ops Manager log.</li>
-
     <li>If an instance has failed to upgrade, debug and fix it before running the errand again
     to prevent any failure issues from spreading to other on-demand instances.</li>
-
     <li>After the Ops Manager log no longer lists the deployment as <code>failing</code>,
     <a href="#upgrade-all">re-run the errand</a> to upgrade the rest of the instances.</li>
     </ol>
-</td>
+    </td>
   </tr>
+</table>
 
-<p><a name="missing-logs"></a></p>
+### <a name="missing-logs"></a>Missing Logs and Metrics
 
-
-  <table class="table">
+<table class="table">
     <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -398,7 +393,7 @@ successfully created and bound.
     <p>
     Ensure that you have network connectivity between the networks that the tile
     is using and the syslog destination.
-    If the destination is external, you need to use the <a href="https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-tile.html#optional-allow-public-ip-addresses-for-ondemand-service-instance-groups-5">public ip</a>
+    If the destination is external, you need to use the <a href="https://docs.vmware.com/en/On-Demand-Services-SDK-for-VMware-Tanzu/0.42/on-demand-services-sdk/GUID-tile.html#optional-allow-public-ip-addresses-for-ondemand-service-instance-groups">public ip</a>
     VM extension feature available in your Ops Manager tile configuration settings.
     </p>
     </li>
@@ -428,52 +423,14 @@ successfully created and bound.
     </ol>
 </td>
   </tr>
-
-
-<p><a name="credhub-encryption-keys"></a></p>
-
-
-  <table class="nice">
-  <thead>
-  <tr>
-  <th> <br>
-    MySQL Load is High with Large Number of CredHub Encryption Keys
-  <br><br></th>
-  </tr></thead>
-
-  <tr>
-    <th>Symptom</th>
-    <td>MySQL load is high</td>
-    <td>Slow CredHub queries</td>
-  </tr>
-
-  <tr>
-    <th>Cause</th>
-    <td>Large number of CredHub encryption keys</td>
-  </tr>
-
-  <tr>
-    <th>Solution</th>
-    <td>To troubleshoot:
-    <ol>
-    <li>
-    <p>
-    For information about resolving this issue, see <a href="./kb-articles/clean-up-tas-credhub.html">How to clean up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
-    </p>
-    </li>
-    </td>
-  </tr>
-
 </table>
 
+### <a name="credhub-encryption-keys"></a>MySQL Load is High with Large Number of CredHub Encryption Keys
 
-<p><a name="credhub-encryption-keys"></a></p>
-
-
-  <table class="table">
-<thead>
+<table class="nice">
+  <thead>
   <tr>
-  <th> <br>
+  <th colspan="2"><br>
     MySQL Load is High with Large Number of CredHub Encryption Keys
   <br><br></th>
   </tr></thead>
@@ -484,7 +441,7 @@ successfully created and bound.
         <li>MySQL load is high</li>
         <li>Slow CredHub queries</li>
       </ul>
-     </td>
+    </td>
   </tr>
   <tr>
     <th>Cause</th>
@@ -492,27 +449,26 @@ successfully created and bound.
   </tr>
   <tr>
     <th>Solution</th>
-      <td>To troubleshoot:
-        <ol>
-          <li>
-            <p>
-            For information about resolving this issue, see <a href="./kb-articles/clean-up-tas-credhub.html">Cleaning up Tanzu Application Service Credhub</a>.
-            </p>
-          </li>
-        </ol>
-      </td>
+    <td>To troubleshoot:
+    <ol>
+    <li>
+    <p>
+    For information about resolving this issue, see <a href="./kb-articles/clean-up-tas-credhub.html">Cleaning up Tanzu Application Service Credhub</a> in the VMware Tanzu Support Hub.
+    </p>
+    </li>
+    </td>
   </tr>
 </table>
 
 
-<h3 id="-leader-follower-service-instance-errors"><a id="l-f-errors"></a> Leader-Follower Service Instance Errors</h3>
+### <a id="l-f-errors"></a> Leader-Follower Service Instance Errors
 
-<p>This section provides solutions for the following errands:</p>
+This section provides solutions for the following errands:
 
 <ul>
-<li><a href="#unable-to-determine">Unable to determine leader and follower</a></li>
-<li><a href="#both-writable">Both leader and follower instances are writable</a></li>
-<li><a href="#both-read-only">Both leader and follower instances are read-only</a></li>
+  <li><a href="#unable-to-determine">Unable to determine leader and follower</a></li>
+  <li><a href="#both-writable">Both leader and follower instances are writable</a></li>
+  <li><a href="#both-read-only">Both leader and follower instances are read-only</a></li>
 </ul>
 
 
@@ -522,7 +478,7 @@ successfully created and bound.
   <table class="table">
     <thead>
   <tr>
-  <th> <br>
+  <th colspan="2"> <br>
     Unable to Determine Leader and Follower
   <br><br></th>
   </tr></thead>
