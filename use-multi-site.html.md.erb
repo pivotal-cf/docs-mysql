@@ -37,7 +37,7 @@ To create a multi-site replication configuration across multiple foundations:
 1. Check the availability of the <%= vars.single_leader_plan %> plan in the Marketplace in both your
    foundations.
    See [Confirm the <%= vars.product_full %> service availability](use.html#marketplace).
-1. Create a service instance on each foundation -- a leader of your selected topology on your primary foundation,
+1. Create a service instance on each foundation: A leader of your selected topology on your primary foundation,
    and a follower of type <%= vars.single_leader_plan %> on your secondary foundation.
    See [Create multi-site replication service instances](#create-service-instances).
 1. Configure replication from your leader to your follower service instances.
@@ -54,21 +54,22 @@ see [Manage service instances](./use.html#manage).
 
 ## <a id='create-multi-dc-service-instances'></a>Create multi-site service instances in your two foundations
 
-You will create one service instance in your primary foundation to act as the replication leader.
-And you will create a second service instance in your secondary foundation (usually your disaster
+Create one service instance in your primary foundation to act as the replication leader.
+Create a second service instance in your secondary foundation (usually your disaster
 recovery site) to serve as the replication follower. Later sections establish the replication between
 these two service instances.
 
 1. Check the availability of the <%= vars.single_leader_plan %> plan in the Marketplace in both your
    foundations. See [Confirm the <%= vars.product_full %> service availability](use.html#marketplace).
 
-1. In your primary foundation, create a leader service instance
+1. In your primary foundation, create a leader service instance:
 
     1. Log in to the deployment for your primary foundation by running:
 
         ```
         cf login PRIMARY-API-URL
         ```
+
        Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
 
     2. Create a primary service instance by running:
@@ -121,7 +122,7 @@ foundation by repeating step 1, replacing references to `primary` with `secondar
 selecting a <%= vars.single_leader_plan %> plan within your secondary foundation.
 
 
-## <a id='configure-multi-site-with-mysql-tools'></a>Configure multi-site using the mysql-tools plug-in
+## <a id='configure-multi-site-with-mysql-tools'></a>Configure multi-site by using the mysql-tools plug-in
 
 To reduce the complexity of configuring multi-site instance replication, <%= vars.product_short %> offers the mysql-tools
 plug-in to the cf CLI. This plug-in automates some
@@ -140,15 +141,16 @@ the latest version of the `mysql-tools` cf CLI plug-in. For more information abo
 For more information, see https://docs.cloudfoundry.org/cf-cli/v8.html.
 </p>
 
-To configure multi-site replication across foundations with mysql-tools, you will:
+To configure multi-site replication across foundations with mysql-tools:
+
 - Save cloudfoundry targeting information for the primary foundation.
 - Save cloudfoundry targeting information for the secondary foundation.
 - Use mysql-tools to automatically establish replication between your instances in your primary and secondary foundations.
 
 1. Create a leader service instance in your primary foundation and follower in your secondary foundation if you
-have not alredy done so.
+have not already done so.
 
-    More information is in [Create multi-site service instances in your two foundations](#create-multi-dc-service-instances).
+    For more information, see [Create multi-site service instances in your two foundations](#create-multi-dc-service-instances).
 
 
 1. Save the cf config to target your primary foundation:
@@ -159,7 +161,7 @@ have not alredy done so.
         cf login PRIMARY-API-URL
         ```
        Where `PRIMARY-API-URL` is the API endpoint for the primary foundation.
-   2. Use mysql-tools to save the config
+   1. Use mysql-tools to save the config
 
         ```
         cf mysql-tools save-target PRIMARY-TARGET-NAME
@@ -168,7 +170,7 @@ have not alredy done so.
 
 
 
-1. Save the cf config to target your the secondary foundation:
+2. Save the cf config to target your secondary foundation:
 
     1. Log in to the deployment for your secondary foundation by running:
 
@@ -183,7 +185,7 @@ have not alredy done so.
          ```
         Where `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
 
-1. Use mysql-tools to configure replication between the primary and secondary foundations.
+3. Use mysql-tools to configure replication between the primary and secondary foundations.
 
        ```
        cf mysql-tools setup-replication --primary-target PRIMARY-TARGET-NAME --primary-instance PRIMARY-INSTANCE \
@@ -197,17 +199,18 @@ have not alredy done so.
     - `SECONDARY-INSTANCE` is your chosen name for the secondary instance.
 
     Notes:
-    - The mysql-tools plugin has shorthand flags for the above options. Type `cf mysql-tools setup-replication` for
+    - The mysql-tools plug-in has shorthand flags for the preceding options. Type `cf mysql-tools setup-replication` for
       a help message listing the options.
-    - This step re-deploys both your leader and follower instances. Any <%= vars.single_leader_plan %>
-      instances will experience downtime during these redeploys.
-    - The entire process may take several minutes
+    - This step redeploys both your leader and follower instances. <%= vars.single_leader_plan %>
+      instances experience downtime during these redeploys.
+    - The entire process can take several minutes
       or longer to complete, depending on your selected service instances and foundation configurations.
-    - This step leverages tokens from your above foundation `cf login` commands, and therefore
-      should be launched shortly after performing those logins (e.g. within minutes) before those tokens expire.
+    - This step leverages tokens from your preceding foundation `cf login` commands, and therefore
+      should be launched within minutes of performing those logins before those tokens expire.
 
 
-1. The plugin output shows status lines showing checkpoints for the various configuration steps:
+4. The plug-in output shows status lines showing checkpoints for the various configuration steps:
+
    ```
    Validating the primary instance: 'primary-db'.
    Validating the secondary instance: 'secondary-db'.
@@ -219,7 +222,7 @@ have not alredy done so.
    Updating the secondary instance with the primary's 'credentials' service-key: 'MSCredInfo-1705541348'.
    ```
 
-1. Purge cf config information from your workstation:
+5. Purge cf config information from your workstation:
 
    ```
    cf mysql-tools remove-target PRIMARY-TARGET-NAME
@@ -229,10 +232,10 @@ have not alredy done so.
 
 ## <a id='create-multi-dc'></a>Configure multi-site manually
 
-You may manually establish replication between your two foundations. You may want to do this if you want to
-avoid briefly saving cloud foundry targeting information, or want to control the names of the service keys used
+You can manually establish replication between your two foundations. You might want to do this to
+avoid briefly saving Cloud Foundry targeting information, or to control the names of the service keys used
 to establish replication. When the manual steps are properly executed, the resulting configuration is
-functionally identical to one created by the mysql-tools plugin.
+functionally identical to one created by the mysql-tools plug-in.
 
 
 ### <a id='create-service-key'></a>Steps to configure multi-site replication manually
@@ -242,16 +245,14 @@ you must configure replication between the two service instances.
 
 You configure replication using service keys to pass connection information
 between the leader and follower service instances.
-You must not use these service keys for any other use case besides establishing
+You must not use these service keys for any other use besides establishing
 multi-site replication.
 
 #### Workflow for configuring multi-site replication
 
 The following diagram describes the workflow for configuring multi-site replication:
 
-![alt-text="Two boxes labeled 'Secondary Foundation' and 'Primary Foundation'.
-Six steps are shown. Steps 1 and 2 are in 'Secondary Foundation', Steps 3, 4, and 5 are in 'Primary Foundation',
-and Step 6 is in 'Secondary Foundation'."](./images/configure-multi-site.png)
+![alt-text="Two boxes labeled Secondary Foundation and Primary Foundation with 6 steps shown. Steps 1, 2, 6 are in Secondary Foundation, Steps 3, 4, and 5 are in Primary Foundation."](./images/configure-multi-site.png)
 
 <a href="./images/configure-multi-site.png" target="_blank" aria-hidden="true">View a larger version of this diagram</a>
 
@@ -278,6 +279,7 @@ You created these service instances in
     cf create-service-key SECONDARY-INSTANCE SERVICE-KEY \
       -c '{"replication-request": "host-info"}'
     ```
+    
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the follower service instance you created in
@@ -322,7 +324,7 @@ You created these service instances in
         }
       }</pre>
 
-    >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
+    >**Caution** This procedure assumes you are using cf CLI v8 or later. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
 1. Record the output of the previous command, and remove the top-level `credentials` key.
 1. Log in to the deployment for your primary foundation by running:
@@ -386,7 +388,7 @@ You created these service instances in
     step 1 of [Create multi-site replication service instances](#create-service-instances).
     + `SERVICE-KEY-NAME` is a name you choose for the credentials service key.
 
-    <br>(Note the <code>-c </code> flag is different than the flag used in step 1.)
+    <br>(The <code>-c </code> flag is different than the flag used in step 1.)
 
     <br>
 
@@ -436,9 +438,9 @@ You created these service instances in
         }
       }</pre>
 
-    >**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
+    >**Caution** This procedure assumes you are using cf CLI v8 or later. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
-1. Record the output of the previous command, and remove the top-level `credentials` JSON key. The resulting
+1. Record the output of the previous command and remove the top-level `credentials` JSON key. The resulting
 JSON is your "credentials *service* key".
 1. Log in to the deployment for your secondary foundation by running:
 
