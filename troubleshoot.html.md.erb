@@ -1073,71 +1073,57 @@ verify that the 2345 port from the TAS for VMs to the ODB component is open.
   </tr>
 </table>
 
-<h2 id="-troubleshoot-components"><a id="components"></a>Troubleshoot components</h2>
+## <a id="-troubleshoot-components"></a>Troubleshoot components
 
-<p>This section provides guidance on checking for and fixing issues in on-demand service components.</p>
+This section provides guidance on checking for and fixing issues in on-demand service components.
 
-<h3 id="-bosh-problems"><a id="bosh"></a> BOSH problems</h3>
+### <a id="bosh"></a>BOSH problems
 
-<h4 id="-large-bosh-queue"><a id="large-queue"></a> Large BOSH queue</h4>
+#### <a id="large-queue"></a>Large BOSH queue
 
-<p>
-  On-demand service brokers add tasks to the BOSH request queue, which can back up
-  and cause delay under heavy loads.
-  An app developer who requests a new VMware SQL with MySQL for TAS instance sees
-  <code>create in progress</code> in the Cloud Foundry Command Line Interface (cf CLI) until
-  BOSH processes the queued request.
-</p>
+On-demand service brokers add tasks to the BOSH request queue, which can back up and cause delay under heavy loads.
+An app developer who requests a new VMware SQL with MySQL for TAS instance sees `create in progress` in the Cloud Foundry Command Line Interface (cf CLI) until
+BOSH processes the queued request.
 
-<p>
-  Ops Manager currently deploys two BOSH workers to process its queue.
-  Users of future versions of Ops Manager can configure the number of BOSH workers.
-</p>
+Ops Manager currently deploys two BOSH workers to process its queue.
+Users of future versions of Ops Manager can configure the number of BOSH workers.
 
-<h3 id="-configuration"><a id="bosh-config"></a> Configuration</h3>
+### <a id="bosh-config"></a>Configuration
 
-<h4 id="-service-instances-in-failing-state"><a id="bosh-instance-fail"></a>Service instances in failing state</h4>
+#### <a id="bosh-instance-fail"></a>Service instances in failing state
 
-<p>
-  The VM or Disk type that you configured in the plan page of the tile in Ops Manager
-  might not be large enough for the VMware SQL with MySQL for TAS service instance to start.
-  See tile-specific guidance on resource requirements.
-</p>
+The VM or Disk type that you configured in the plan page of the tile in Ops Manager
+might not be large enough for the VMware SQL with MySQL for TAS service instance to start.
+See tile-specific guidance on resource requirements.
 
-<h3 id="-authentication"><a id="auth"></a> Authentication</h3>
+### <a id="auth"></a>Authentication
 
-<h4 id="-uaa-changes"><a id="uaa-change"></a> UAA changes</h4>
+#### <a id="uaa-change"></a>UAA changes
 
+If you have rotated any UAA user credentials then you might see authentication
+issues in the service broker logs.
 
-<p>
-    If you have rotated any UAA user credentials then you might see authentication
-    issues in the service broker logs.
-</p>
+To resolve this, redeploy the VMware SQL with MySQL for TAS tile in Ops Manager.
+This provides the broker with the latest configuration.
 
-<p>
-    To resolve this, redeploy the VMware SQL with MySQL for TAS tile in Ops Manager.
-    This provides the broker with the latest configuration.
-</p>
 <p class="note important">
-<span class="note__title"> Important</span> You must ensure that any changes to UAA
+<span class="note__title">Important</span>
+You must ensure that any changes to UAA
 credentials are reflected in the Ops Manager <code>credentials</code>
 tab of the VMware Tanzu Application Service for VMs tile.
 </p>
  
-<h3 id="-networking"><a id="network"></a> Networking</h3>
+### <a id="network"></a>Networking
 
-<p>
-    Common issues with networking include:
-</p>
+Common issues with networking include:
 
 <table class="table">
 <thead><tr>
     <col width="50%">
-    <col width="50%">
     <th>Issue</th>
     <th>Solution</th>
-    </tr></thead>
-
+    </tr>
+</thead>
     <tr>
         <td>Latency when connecting to the VMware SQL with MySQL for TAS service instance to create or delete a binding.</td>
         <td>Try again or improve network performance.</td>
@@ -1178,14 +1164,11 @@ To validate connectivity, do the following:
 
 3.  If no BOSH `task-id` appears in the error message, look in the broker log using the `broker-request-id` from the task.
 
+#### <a id="app-to-instances"></a>Validate app access to service instance
 
-<h4 id="-validate-app-access-to-service-instance"><a id="app-to-instances"></a>Validate app access to service instance</h4>
-
-<p>
-  Use <code>cf ssh</code> to access to the app container, then try connecting to
-  the VMware SQL with MySQL for TAS service instance using the binding included in the
-  <code>VCAP_SERVICES</code> environment variable.
-</p>
+Use `cf ssh` to access to the app container, then try connecting to
+the VMware SQL with MySQL for TAS service instance using the binding included in the
+`VCAP_SERVICES` environment variable.
 
 ### <a id="quotas"></a> Quotas
 
@@ -1221,7 +1204,7 @@ Please contact your Operator for help.
 5.  Deploy the tile.
 6.  Find out who is using the quota and take the appropriate action.
 
-<h3 id="-failing-jobs-and-unhealthy-instances"><a id="failing-jobs"></a> Failing jobs and unhealthy instances</h3>
+### <a id="failing-jobs"></a>Failing jobs and unhealthy instances
 
 To determine whether there is an issue with the VMware SQL with MySQL for TAS deployment:
 
@@ -1242,23 +1225,21 @@ If the VM is failing, follow the service-specific information. Any unadvised cor
 A failing process or failing VM might come back automatically after a temporary service outage. See
 [VM process failure](./interruptions.html#process-fail) and [VM failure](./interruptions.html#vm-fail).
 
-<h3 id="-az-or-region-failure"><a id="az-region-fail"></a>  AZ or region failure</h3>
+### <a id="az-region-fail"></a>AZ or region failure
 
-<p>Failures at the IaaS level, such as Availability Zone (AZ) or region failures,
+Failures at the IaaS level, such as Availability Zone (AZ) or region failures,
 can interrupt service and require manual restoration.
-See <a href="./interruptions.html#az-fail">AZ failure</a> and <a href="./interruptions.html#region-fail">Region failure</a>.</p>
+See <a href="./interruptions.html#az-fail">AZ failure</a> and <a href="./interruptions.html#region-fail">Region failure</a>.
 
-<h2 id="-techniques-for-troubleshooting"><a id="techniques"></a>Techniques for troubleshooting</h2>
+## <a id="techniques"></a>Techniques for troubleshooting
 
-<p>Instructions on interacting with the on-demand service broker and on-demand service
-instance BOSH deployments, and on performing general maintenance and housekeeping tasks</p>
+This section contains instructions on interacting with the on-demand service broker and on-demand service
+instance BOSH deployments, and on performing general maintenance and housekeeping tasks.
 
-<h3 id="-parse-a-cloud-foundry-(cf)-error-message"><a id="parse-error"></a>Parse a Cloud Foundry error message</h3>
+### <a id="parse-error"></a>Parse a Cloud Foundry error message
 
-<p>
-  Failed operations (create, update, bind, unbind, delete) result in an error message.
-  You can retrieve the error message later by running the cf CLI command <code>cf service INSTANCE-NAME</code>.
-</p>
+Failed operations (create, update, bind, unbind, delete) result in an error message.
+You can retrieve the error message later by running the cf CLI command `cf service INSTANCE-NAME`.
 
 ```
 $ cf service myservice
@@ -1285,25 +1266,19 @@ Started: 2017-03-13T10:16:55Z
 Updated: 2017-03-13T10:17:58Z
 ```
 
-<p>
-  Use the information in the <code>Message</code> field to debug further.
-  Provide this information to Support when filing a ticket.
-</p>
+Use the information in the <code>Message</code> field to debug further.
+Provide this information to Support when filing a ticket.
 
-<p>
-  The <code>task-id</code> field maps to the BOSH task ID.
-  For more information on a failed BOSH task, use the <code>bosh task TASK-ID</code>.
-</p>
+The <code>task-id</code> field maps to the BOSH task ID.
+For more information on a failed BOSH task, use the <code>bosh task TASK-ID</code>.
 
-<p>
-  The <code>broker-request-guid</code> maps to the portion of the On-Demand Broker log
-  containing the failed step.
-  Access the broker log through your syslog aggregator, or access BOSH logs for
-  the broker by typing <code>bosh logs broker 0</code>.
-  If you have more than one broker instance, repeat this process for each instance.
-</p>
+The <code>broker-request-guid</code> maps to the portion of the On-Demand Broker log
+containing the failed step.
+Access the broker log through your syslog aggregator, or access BOSH logs for
+the broker by typing <code>bosh logs broker 0</code>.
+If you have more than one broker instance, repeat this process for each instance.
 
-<h3 id="-access-broker-and-instance-logs-and-vms"><a id="bosh-cf-access"></a>Access broker and instance logs and VMs</h3>
+### <a id="bosh-cf-access"></a>Access broker and instance logs and VMs
 
 <p>
   Before following these procedures, log in to the
