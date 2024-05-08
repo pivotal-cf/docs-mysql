@@ -321,7 +321,6 @@ successfully created and bound.
     </ol></td>
   </tr>
 </table>
-</div>
 
 Service instances can also become temporarily inaccessible during upgrades and VM or network failures.
 See <a href="./upgrade.html#interruptions">Service interruptions</a> for more information.
@@ -766,7 +765,6 @@ and the errand logs contain the following:
    </td>
   </tr>
 </table>
-</div>
 
 ### <a id="apps-inoperable"></a>Inoperable app and database errors
 
@@ -880,40 +878,24 @@ This section provides a solution for the following errors:
             </ol></li>
         </ul>
       </li>
-
       <li>
         (Optional) If you want to activate lowercase table names again,
         rename your table to lowercase and then activate lowercase table names.
       </li>
     </ol></td>
   </tr>
-
 </table>
-</div>
 
-<h3 id="highly-available-cluster-errors"><a id="ha"></a>Highly available cluster errors</h3>
+### <a id="ha"></a>Highly available cluster errors
 
-<p>This section provides solutions for the following errands:</p>
+This section provides solutions for the following errands:
 
-<ul>
-<li><a href="#unresponsive">Unresponsive Node in a Highly Available Cluster</a></li>
-<li><a href="#replication-errors">Many Replication Errors in Logs for Highly Available Clusters</a></li>
-</ul>
+* <a href="#unresponsive">Unresponsive Node in a Highly Available Cluster</a>
+* <a href="#replication-errors">Many Replication Errors in Logs for Highly Available Clusters</a>
 
-<style>
+#### <a name="unresponsive"></a>Unresponsive Node in a Highly Available Cluster
 
-
-main table {
-  table-layout: fixed;
-}
-
-</style>
-
-<p><a name="unresponsive"></a></p>
-
-<div>
-
- <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -924,7 +906,7 @@ main table {
   <th>Symptom</th>
     <td>
     A client connected to a VMware SQL with MySQL for TAS cluster node reports the following error:
-<pre class="terminal">WSREP has not yet prepared this node for application use</pre>
+    <pre class="terminal">WSREP has not yet prepared this node for application use</pre>
     Some clients might instead return the following:
     <pre class="terminal">
       unknown error
@@ -990,13 +972,12 @@ main table {
 </ul>
 </td>
   </tr>
-
 </table>
 
-<p><a name="replication-errors"></a></p>
+#### <a name="replication-errors"></a></p>Many Replication Errors in Logs for Highly Available Clusters
 
- <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Many Replication Errors in Logs for Highly Available Clusters
@@ -1046,14 +1027,12 @@ If you see replication errors, but no <code>ALTER TABLE</code>
 or persistent disk or memory issues, you can ignore the replication errors.
 </td>
   </tr>
-
 </table>
-</div>
 
-<h3 id="failed-backups"><a id="failed-adbr-backups"></a>Failed backups</h3>
+### </a>Failed backups
 
-<p>If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plug-in fails,
-verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
+If an automated backup or a backup initiated from the ApplicationDataBackupRestore (adbr) plug-in fails,
+verify that the 2345 port from the TAS for VMs to the ODB component is open.
 
 <p><a name="unable-to-determine"></a></p>
 
@@ -1079,8 +1058,6 @@ verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
 </ul>
 </td>
   </tr>
-
-
   <tr>
     <th>Cause</th>
     <td>Port 2345 that allows communication between the TAS for VMs and ODB components is closed.
@@ -1090,13 +1067,11 @@ verify that the 2345 port from the TAS for VMs to the ODB component is open.</p>
   <tr>
     <th style="vertical-align: top; padding-top: 1em;">Solution</th>
     <td>Open port 2345 from the TAS for VMs component to the ODB component.
-See <a href="about.html#mysql-ports">Required networking rules for VMware SQL with MySQL for TAS</a>
-in <em>On-Demand Networking</em>.
-</td>
+    See <a href="about.html#mysql-ports">Required networking rules for VMware SQL with MySQL for TAS</a>
+    in <em>On-Demand Networking</em>.
+    </td>
   </tr>
-
 </table>
-</div>
 
 <h2 id="-troubleshoot-components"><a id="components"></a>Troubleshoot components</h2>
 
