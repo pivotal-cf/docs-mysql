@@ -133,12 +133,12 @@ To configure multi-site replication across multiple foundations with mysql-tools
 the latest version of the `mysql-tools` cf CLI plug-in. For more information about the `mysql-tools` cf CLI plug-in,
    see [mysql-cli-plugin](https://github.com/pivotal-cf/mysql-cli-plugin) in GitHub.
 
->**Caution** This procedure assumes you are using cf CLI v8 or greater. Earlier cf CLI versions are not compatible
+>**Caution** This procedure assumes you are using cf CLI v8 or later. Earlier cf CLI versions are not compatible
 > with the latest mysql-tools plug-in release.
 
 <p class="note important">
 <span class="note__title"> Important</span>  The mysql-tools setup-replication command requires cf CLI v8.
-For more information, see https://docs.cloudfoundry.org/cf-cli/v8.html.
+For more information, see [Upgrading to cf CLI v8](https://docs.cloudfoundry.org/cf-cli/v8.html) in the Cloud Foundry documentation.
 </p>
 
 To configure multi-site replication across foundations with mysql-tools:
@@ -177,12 +177,15 @@ have not already done so.
         ```
         cf login SECONDARY-API-URL
         ```
+
        Where `SECONDARY-API-URL` is the API endpoint for the primary foundation.
+
     2. Use mysql-tools to save the config
 
          ```
          cf mysql-tools save-target SECONDARY-TARGET-NAME
          ```
+
         Where `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
 
 3. Use mysql-tools to configure replication between the primary and secondary foundations.
@@ -193,12 +196,14 @@ have not already done so.
        ```
 
     Where:
+
     - `PRIMARY-TARGET-NAME` is your chosen name for the primary foundation.
     - `PRIMARY-INSTANCE` is your chosen name for the primary instance.
     - `SECONDARY-TARGET-NAME` is your chosen name for the secondary foundation.
     - `SECONDARY-INSTANCE` is your chosen name for the secondary instance.
 
     Notes:
+
     - The mysql-tools plug-in has shorthand flags for the preceding options. Type `cf mysql-tools setup-replication` for
       a help message listing the options.
     - This step redeploys both your leader and follower instances. <%= vars.single_leader_plan %>
@@ -299,6 +304,7 @@ You created these service instances in
     ```console
     cf service-key SECONDARY-INSTANCE SERVICE-KEY
     ```
+    
     Where:
 
     + `SECONDARY-INSTANCE` is the name of the follower service instance you created in
@@ -332,10 +338,13 @@ You created these service instances in
     ```
     cf login PRIMARY-API-URL
     ```
+
 1. Update your primary service instance with the host-info service key by running:
+   
    ```
    cf update-service PRIMARY-INSTANCE -c HOST-INFO
     ```
+
    Where:
 
     + `PRIMARY-INSTANCE` is the name of the primary service instance you created in
@@ -382,6 +391,7 @@ You created these service instances in
     cf create-service-key PRIMARY-INSTANCE SERVICE-KEY-NAME \
       -c '{"replication-request": "credentials"}'
     ```
+
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the leader service instance you created in
@@ -393,17 +403,19 @@ You created these service instances in
     <br>
 
     For example:
+
     <pre class="terminal">$ cf create-service-key primary-db cred-key \
           -c '{"replication-request": "credentials" }' <br>
       Creating service key cred-key for service instance primary-db as admin...
       OK
     </pre>
     </p>
-1. View the `replication-credentials` for your credentials service key by running:
+2. View the `replication-credentials` for your credentials service key by running:
 
     ```
     cf service-key PRIMARY-INSTANCE SERVICE-KEY-NAME
     ```
+
     Where:
 
     + `PRIMARY-INSTANCE` is the name of the leader service instance you created in step 1
@@ -440,18 +452,20 @@ You created these service instances in
 
     >**Caution** This procedure assumes you are using cf CLI v8 or later. Earlier cf CLI versions do not include the top-level `credentials` JSON key in their `cf service-key` response.
 
-1. Record the output of the previous command and remove the top-level `credentials` JSON key. The resulting
+3. Record the output of the previous command and remove the top-level `credentials` JSON key. The resulting
 JSON is your "credentials *service* key".
 1. Log in to the deployment for your secondary foundation by running:
 
     ```console
     cf login SECONDARY-API-URL
     ```
-1. Update your follower service instance with the credentials service key by running:
+
+2. Update your follower service instance with the credentials service key by running:
 
     ```console
     cf update-service SECONDARY-INSTANCE -c CREDENTIALS
     ```
+    
     Where:
 
     + `SECONDARY-INSTANCE` is name of the secondary service instance you created in step 2 of
