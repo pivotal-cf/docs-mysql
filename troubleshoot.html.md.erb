@@ -465,18 +465,14 @@ See <a href="./upgrade.html#interruptions">Service interruptions</a> for more in
 
 This section provides solutions for the following errands:
 
-<ul>
-  <li><a href="#unable-to-determine">Unable to determine leader and follower</a></li>
-  <li><a href="#both-writable">Both leader and follower instances are writable</a></li>
-  <li><a href="#both-read-only">Both leader and follower instances are read-only</a></li>
-</ul>
+* <a href="#unable-to-determine">Unable to determine leader and follower</a>
+* <a href="#both-writable">Both leader and follower instances are writable</a>
+* <a href="#both-read-only">Both leader and follower instances are read-only</a>
 
+#### <a name="unable-to-determine"></a>Unable to Determine Leader and Follower
 
-<p><a name="unable-to-determine"></a></p>
-
-
-  <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2"> <br>
     Unable to Determine Leader and Follower
@@ -484,22 +480,21 @@ This section provides solutions for the following errands:
   </tr></thead>
   <tr>
     <th>Symptom</th>
-    <td>This problem happens when the <code>configure-leader-follower</code>
-errand fails because it cannot determine the VM roles. <br><br>
+    <td>This problem happens when the <code>configure-leader-follower</code> errand fails because it cannot determine the VM roles. <br><br>
 
-The <code>configure-leader-follower</code> errand exits with <code>1</code>
-and the errand logs contain the following:
+    The <code>configure-leader-follower</code> errand exits with <code>1</code>
+    and the errand logs contain the following:
 
-<pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
-</td>
+    <pre class="terminal">$ Unable to determine leader and follower based on transaction history.</pre>
+    </td>
   </tr>
   <tr>
     <th>Cause</th>
     <td>
-Something has happened to the instances, such as a failure or manual intervention.
-As a result, there is not enough information available to determine the correct state
-and topology without operator intervention to resolve the issue.
-</td>
+    Something has happened to the instances, such as a failure or manual intervention.
+    As a result, there is not enough information available to determine the correct state
+    and topology without operator intervention to resolve the issue.
+    </td>
   </tr>
 
   <tr>
@@ -560,17 +555,14 @@ and topology without operator intervention to resolve the issue.
     </ol></td>
   </tr>
 </table>
-</div>
 
+#### <a name="both-writable"></a>Both Leader and Follower Instances are Writable
 
-<p><a name="both-writable"></a></p>
-
-
- <table class="table">
- <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Both Leader and Follower Instances Are Writable
+    Both Leader and Follower Instances are Writable
   <br><br></th>
   </tr>
 </thead>
@@ -698,13 +690,13 @@ and the errand logs contain the following:
   </tr>
 </table>
 
-<p><a name="both-read-only"></a></p>
+#### <a name="both-read-only"></a>Both Leader and Follower Instances are Read-Only
 
-  <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
-    Both Leader and Follower Instances Are Read-Only
+    Both Leader and Follower Instances are Read-Only
   <br><br></th>
   </tr></thead>
 
@@ -776,18 +768,16 @@ and the errand logs contain the following:
 </table>
 </div>
 
-<h3 id="inoperable-app-and-database-errors"><a id="apps-inoperable"></a>Inoperable app and database errors</h3>
+### <a id="apps-inoperable"></a>Inoperable app and database errors
 
-<p>This section provides a solution for the following errors:</p>
+This section provides a solution for the following errors:
 
-<ul>
-<li><a href="#persistent-disk">Persistent Disk is Full</a></li>
-<li><a href="#access-table">Cannot Access Database Table</a></li>
-</ul>
+* <a href="#persistent-disk">Persistent Disk is Full</a>
+* <a href="#access-table">Cannot Access Database Table</a>
 
-<p><a name="persistent-disk"></a></p>
+#### <a name="persistent-disk"></a>Persistent Disk is Full
 
-  <table class="table">
+<table class="table">
 <thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
@@ -835,13 +825,12 @@ and the errand logs contain the following:
             </li>
           </ul></td>
   </tr>
-
 </table>
 
-<p><a name="access-table"></a></p>
+#### <a name="access-table"></a>Cannot Access Database Table
 
-  <table class="table">
-    <thead>
+<table class="table">
+<thead>
   <tr>
   <th colspan="2" style="text-align: left;"> <br>
     Cannot Access Database Table
