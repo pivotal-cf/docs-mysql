@@ -839,7 +839,7 @@ This section provides a solution for the following errors:
     <th>Symptom</th>
     <td>When you query an existing table, you see an error similar to
     the following:
-    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</code></td>
+    <pre class='terminal'>ERROR 1146 (42S02): Table 'mysql.foobar' doesn't exist</td>
   </tr>
 
   <tr>
@@ -1408,7 +1408,7 @@ bosh -d my-deployment run-errand deregister-broker
 
 #### <a id="register-broker"></a>Register broker
 
-The <code>register-broker</code> errand does the following:
+The `register-broker` errand does the following:
 
 * Registers the service broker with Cloud Controller.
 * Activates service access for any plans that are activated on the tile.
@@ -1465,7 +1465,7 @@ Orphan BOSH deployments do not correspond to a known service instance.
 While rare, orphan deployments can occur. Use the `orphan-deployments`
 errand to identify them.
 
-The <code>delete-all-service-instances</code> errand does the following:
+The `delete-all-service-instances` errand does the following:
 
 1. Unbinds all apps from the service instances.
 1.  Deletes all service instances sequentially. Each service instance deletion includes:
@@ -1508,8 +1508,8 @@ bosh -d DEPLOYMENT-NAME run-errand orphan-deployments
 **If orphan deployments exist**: The errand script does the following:
 
 * Exit with exit code 10
-* Output a list of deployment names under a <code>[stdout]</code> header
-* Provide a detailed error message under a <code>[stderr]</code> header
+* Output a list of deployment names under a `[stdout]` header
+* Provide a detailed error message under a `[stderr]` header
 
 For example:
 
@@ -1524,7 +1524,7 @@ Errand 'orphan-deployments' completed with error (exit code 10)
 </pre>
 
 
-These details are also available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
+These details are also available through the BOSH `/tasks/` API endpoint for use in scripting:
 
 <pre class="terminal">
 $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-id/output?type=result' | jq .
@@ -1585,7 +1585,7 @@ To view usage statistics for any service, do the following:
 1. To view process-level information, run:
 
     ```
-    bosh -d DEPLOYMENT-NAME instances --ps</code>
+    bosh -d DEPLOYMENT-NAME instances --ps
     ```
 
 ### <a id="id-instance-owner"></a> Identify apps using a service instance
@@ -1700,7 +1700,8 @@ This procedure removes all the data on the node, forces the node to join the clu
 and creates a new copy of the cluster data on the node.
 
 <p class="note important">
-<span class="note__title"> Important</span>   If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
+<span class="note__title">Important</span>
+If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
 <a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
@@ -1735,42 +1736,36 @@ To manually force a node to rejoin the cluster, do the following:
     /var/vcap/jobs/pxc-mysql/bin/pre-start
     ```
 
-5. Restart the <code>mysqld</code> process by running:
+5. Restart the `mysqld` process by running:
     
     ```
     monit start galera-init
     ```
 
-<h3 id="re-create-a-corrupted-vm-in-a-highly-available-cluster"><a id="recreate-VM"></a>Recreate a corrupted VM in a highly available cluster</h3>
+### <a id="recreate-VM"></a>Recreate a corrupted VM in a highly available cluster
 
 To re-create a corrupted VM:
 
-<ol>
-  <li>To log in to the BOSH Director VM by doing the following procedures:
-    <ol>
-      <li>Gather the information needed to log in to the BOSH Director VM by doing the procedure in
-        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>&#46;</li>
-      <li>Log in to the Ops Manager VM by doing the procedure in
-        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">Log in to the Ops Manager VM with SSH</a>&#46;</li>
-      <li>Log in to the BOSH Director VM by doing the procedure in
-        <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>&#46;</li>
-    </ol>
-  </li>
-  <li>
-    Identify and re-create the unresponsive node with
-    <code>bosh cloudcheck</code>, by doing the procedure in
-    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-cloud-check-14">BOSH Cloud Check</a>
-    and run
-    <code>Recreate VM using last known apply spec</code>.
-    <p> Recreating a node clears the logs. Ensure the node is completely down before recreating it.
-    </p>
-    <p> Only recreate one node. Do not recreate the entire cluster. If more than one node is down, contact
-      <a href="https://tanzu.vmware.com/support">Support</a>.
-    </p>
-  </li>
-</ol>
+1. To log in to the BOSH Director VM by doing the following procedures:
+   
+    1. Gather the information needed to log in to the BOSH Director VM by doing the procedure in
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information">Gather Credential and IP Address Information</a>.
+    2. Log in to Ops Manager VM by doing the procedure in
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh">Log in to the Ops Manager VM with SSH</a>.
+    3. Log in to BOSH Director VM by doing the procedure in
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm">SSH I
+    into the BOSH Director VM</a>.
 
-<h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check replication status in a highly available cluster</h3>
+1. Identify and re-create the unresponsive node with
+  `bosh cloudcheck`, by doing the procedure in
+  <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#bosh-cloud-check-14">BOSH Cloud Check</a>
+  and run `Recreate VM using last known apply spec`.
+  Recreating a node clears the logs. Ensure the node is completely down before recreating it.
+  <br>
+  Only recreate one node. Do not recreate the entire cluster. If more than one node is down, contact
+  <a href="https://tanzu.vmware.com/support">Support</a>.
+
+### <a id="check-replication"></a>Check replication status in a highly available cluster
 
 If you see stale data in your cluster, you can check whether replication is functioning normally.
 
@@ -1779,6 +1774,7 @@ To check the replication status, do the following:
 1.  To log in to the BOSH Director VM, do the following:
     1.  Gather the information needed to log in to the BOSH Director VM by using the procedure in [Gather credential and IP Address information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
     2.  Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
+
 2.  Create a dummy database in the first node by running:
 
     ```
@@ -1822,6 +1818,7 @@ To check the replication status, do the following:
     </pre>
 
 6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
+    
     1.  Query the dummy table by running :
         ```
         mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"
@@ -1853,56 +1850,60 @@ To check the replication status, do the following:
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
 
-<h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for troubleshooting</h2>
+## <a id="tools"></a>Tools for troubleshooting
 
-<p>The troubleshooting techniques described here  use the following tools.</p>
+The troubleshooting techniques described here  use the following tools.
 
-<h3 id="download-logs"><a id="download-logs"></a>download-logs</h3>
+### <a id="download-logs"></a>download-logs
 
-<p><code>download-logs</code> is a script that you can run from your Ops Manager VM to aggregate
+`download-logs` is a script you can run from your Ops Manager VM to aggregate
 logs from your VMware SQL with MySQL for TAS cluster nodes, proxies, and, with highly available clusters,
-the jumpbox VM.</p>
+the jumpbox VM.
 
-<p>To use the <code>download-logs</code> script:</p>
+To use the `download-logs` script:
 
-<ol>
-<li><p>Download and unzip the <code>download-logs</code> script from
-<a href="https://network.tanzu.vmware.com/products/pivotal-mysql/">VMware Tanzu Network</a>.</p></li>
-<li><p>From the Ops Manager Installation Dashboard, go to <strong>BOSH Director</strong> &gt; <strong>Credentials</strong>.</p></li>
-<li><p>Click <strong>Link to Credential</strong> for the <strong>Bosh Commandline Credentials</strong>.</p></li>
-<li><p>From the plaintext file that opens, record the values for the following:</p>
+1. Download and unzip the `download-logs` script from
+<a href="https://network.tanzu.vmware.com/products/pivotal-mysql/">VMware Tanzu Network</a>.
+1. From the Ops Manager Installation Dashboard, go to BOSH Director &gt; **Credentials**.
+2. Click **Link to Credential** for the **Bosh Commandline Credentials**.
+3. From the plaintext file that opens, record the values for the following:
 
-<ul>
-<li><code>BOSH_CLIENT</code></li>
-<li><code>BOSH_CLIENT_SECRET</code></li>
-<li><code>BOSH_CA_CERT</code></li>
-<li><code>BOSH_ENVIRONMENT</code></li>
-</ul></li>
-<li><p>From the BOSH CLI, view the name of the BOSH deployment for VMware SQL with MySQL for TAS by running:</p>
-<code>bosh deployments</code>
+    * `BOSH_CLIENT`
+    * `BOSH_CLIENT_SECRET`
+    * `BOSH_CA_CERT`
+    * `BOSH_ENVIRONMENT`
 
-<p>Record the name of the BOSH deployment.</p></li>
-<li><p>SSH into your Ops Manager VM by doing the procedures in
+4. From the BOSH CLI, view the name of the BOSH deployment for VMware SQL with MySQL for TAS by running:
+
+    ```
+    bosh deployments
+    ```
+
+    Record the name of the BOSH deployment.
+
+5. SSH into your Ops Manager VM by doing the procedures in
 <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>
-and <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">SSH into Ops Manager</a>.</p></li>
-<li><p>File transfer or copy-paste the <code>download-logs</code> script to a working directory on the Ops Manager VM.</p></li>
-<li><p>Set local environment variables to the same BOSH variable values that you recorded earlier,
-including <code>BOSH_DEPLOYMENT</code> for the deployment name.
+and <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">SSH into Ops Manager</a>.
+1. File transfer or copy-paste the `download-logs` script to a working directory on the Ops Manager VM.
+2. Set local environment variables to the same BOSH variable values that you recorded earlier,
+including `BOSH_DEPLOYMENT` for the deployment name.
 <br><br>
-For example:
-<pre class="terminal">$ BOSH_CLIENT=ops_manager \
-  BOSH_CLIENT_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
-  BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate \
-  BOSH_ENVIRONMENT=10.0.0.5 \
-  BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
-  </p></li>
-<li><p>Run the <code>download-logs</code> script by running:</p>
-<code>./download-logs -o .</code>
+  For example:
+  <pre class="terminal">
+  $ BOSH_CLIENT=ops_manager \
+    BOSH_CLIENT_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
+    BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate \
+    BOSH_ENVIRONMENT=10.0.0.5 \
+    BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
+  
+1. Run the `download-logs` script by running:
 
-<p>The script saves a compressed file of logs combined from all VMware SQL with MySQL for TAS VMs.
-The filename has the form <code>TIMESTAMP-mysql-logs.tar.gz.gpg</code>.</p></li>
-</ol>
+    ```
+    ./download-logs -o .
+    ```
 
+    The script saves a compressed file of logs combined from all VMware SQL with MySQL for TAS VMs.
+    The filename has the form `TIMESTAMP-mysql-logs.tar.gz.gpg`.
 
 ### <a id="mysql-diag"></a>mysql-diag
 
@@ -1910,15 +1911,12 @@ The `mysql-diag` tools outputs the current status of a highly available (HA) VMw
 
 For more information, see [Running mysql-diag](mysql-diag.html).
 
-<h2 id="-knowledge-base-(community)"><a id="kb"></a> Knowledge Base (Community)</h2>
+## <a id="kb"></a>Knowledge Base (Community)
 
+Find the answer to your question and browse product discussions and solutions by
+searching the <a href="https://kb.vmware.com/s/">VMware Tanzu Knowledge Base</a>.
 
-<p>
-  Find the answer to your question and browse product discussions and solutions by
-  searching the <a href="https://kb.vmware.com/s/">VMware Tanzu Knowledge Base</a>.
-</p>
-
-<h2 id="-file-a-support-ticket"><a id="support"></a>  File a support ticket</h2>
+## <a id="support"></a>File a support ticket
 
 You can file a ticket with [Support](https://tanzu.vmware.com/support). Be sure to provide the error message from `cf service YOUR-SERVICE-INSTANCE`.
 
