@@ -1593,24 +1593,24 @@ To view usage statistics for any service, do the following:
 To identify which apps are using a specific service instance from the
 name of the BOSH deployment:
 
-1. Take the deployment name and strip the <code>service-instance_</code> leaving you with the GUID.
-1. Log in to CF as an admin.
-1.  Obtain a list of all service bindings by running the following:
-<code>cf curl /v2/service_instances/GUID/service_bindings</code>
-1. The output from the curl gives you a list of <code>resources</code>,
-  with each item referencing a service binding, which contains the <code>APP-URL</code>.
+1. Take the deployment name and strip the `service-instance_` leaving you with the GUID.
+2. Log in to CF as an admin.
+3.  Obtain a list of all service bindings by running the following:
+`cf curl /v2/service_instances/GUID/service_bindings`
+1. The output from the curl gives you a list of `resources`,
+  with each item referencing a service binding, which contains the `APP-URL`.
   To find the name, org, and space for the app, run the following:
     
-    1. <code>cf curl APP-URL</code> and record the app name under <code>entity.name</code>.
-    2. <code>cf curl SPACE-URL</code> to obtain the space, using the <code>entity.space_url</code> from the curl. Record the space name under <code>entity.name</code>.
-    3. <code>cf curl ORGANIZATION-URL</code> to obtain the org, using the
-    <code>entity.organization_url</code> from the curl.
-    Record the organization name under <code>entity.name</code>.
+    1. `cf curl APP-URL` and record the app name under `entity.name`.
+    2. `cf curl SPACE-URL` to obtain the space, using the `entity.space_url` from the curl. Record the space name under `entity.name`.
+    3. `cf curl ORGANIZATION-URL` to obtain the org, using the
+    `entity.organization_url` from the curl.
+    Record the organization name under `entity.name`.
  
-When you run <code>cf curl</code> ensure that you query
+When you run `cf curl`, ensure that you query
 all pages, because the responses are limited to a certain number of bindings per page.
 The default is 50.
-To find the next page curl the value under <code>next_url</code>.
+To find the next page curl the value under `next_url`.
 
 ### <a id="monitor-quota"></a>  Monitor quota saturation and service instance count
 
@@ -1653,98 +1653,97 @@ gathering information to diagnose the type of failure the cluster is experiencin
 
 1. Consult solutions for common errors. See
     <a href="#ha">Highly Available Cluster Troubleshooting Errors</a>.
-  </li>
-1. Use <code>mysql-diag</code>
+2. Use `mysql-diag`
     to view a summary of the network, disk, and replication state of each cluster node. Depending on the output from
-    <code>mysql-diag</code>, you might recover your cluster with the following troubleshooting techniques:
+    `mysql-diag`, you might recover your cluster with the following troubleshooting techniques:
     
- * To force a node to rejoin the cluster, see
-     <a href="#manual-force">Force a node to rejoin a highly available cluster manually</a>.
- * To recreate a corrupted VM, see
-     <a href="#recreate-VM">Recreate a corrupted VM in a highly available cluster</a>.
- * To check if replication is working, see
-     <a href="#check-replication">Check replication in a highly available cluster</a>.
- For more information about <code>mysql-diag</code>, see
- <a href="./mysql-diag.html">Running mysql-diag</a>.
+    * To force a node to rejoin the cluster, see
+        <a href="#manual-force">Force a node to rejoin a highly available cluster manually</a>.
+    * To recreate a corrupted VM, see
+        <a href="#recreate-VM">Recreate a corrupted VM in a highly available cluster</a>.
+    * To check if replication is working, see
+        <a href="#check-replication">Check replication in a highly available cluster</a>.
+    For more information about `mysql-diag`, see
+    <a href="./mysql-diag.html">Running mysql-diag</a>.
 
-1. Run <code>download-logs</code> against each node in your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM.
-    You must run
-    <code>download-logs</code> before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
+3. Run `download-logs` against each node in your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. You must run
+    `download-logs` before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
     <br>
     For more information, see the <a href="#download-logs">download-logs</a>
     section.
     <br>
-    VMware recommends that you use the <code>-X</code> flag to get the complete
+    VMware recommends that you use the `-X` flag to get the complete
     set of available logs. However, if your cluster processes a high volume of
     transactions, the complete set might be too large and you can omit this flag
     to fetch the essential set of logs.
 
-1. If you are uncertain about the recovery steps to take, submit a ticket through
+4. If you are uncertain about the recovery steps to take, submit a ticket through
 <a href="https://tanzu.vmware.com/support">Support</a>. When you submit a ticket provide the following information:
 
-  * **mysql-diag output:** A summary of the network, disk, and replication state. The
-        <a href="./mysql-diag.html">Running mysql-diag</a>
-        topic explains how to run **mysql-diag**.
-  * **download-logs logs:** Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
-  <a href="#download-logs">download-logs</a>
-  section explains how to run **download-logs**.
-  * **Deployment environment:** The environment that VMware SQL with MySQL for TAS is running in such as VMware Tanzu Application Service for VMs or a service tile.
-  * **Version numbers:** The versions of the installed Ops Manager, TAS for VMs, and VMware SQL with MySQL for TAS.
+     * **mysql-diag output:** A summary of the network, disk, and replication state. The         <a href="./mysql-diag.html">Running mysql-diag</a>
+           topic explains how to run **mysql-diag**.
+     * **download-logs logs:** Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
+     <a href="#download-logs">download-logs</a>
+     section explains how to run **download-logs**.
+     * **Deployment environment:** The environment that VMware SQL with MySQL for TAS is running in such as VMware Tanzu Application Service for VMs or a service tile.
+     * **Version numbers:** The versions of the installed Ops Manager, TAS for VMs, and VMware SQL with MySQL for TAS.
 
 <p class="note important">
 <span class="note__title"> Important</span>  Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
 <a href="https://tanzu.vmware.com/support">Support</a>.</p>
 
-<h3 id="-force-a-node-to-rejoin-a-highly-available-cluster-manually"><a id="manual-force"></a> Force a node to rejoin a highly available cluster manually</h3>
+### <a id="manual-force"></a> Force a node to rejoin a highly available cluster manually
 
-<p>If a detached node fails to rejoin the cluster after a configured grace period,
+If a detached node fails to rejoin the cluster after a configured grace period,
 you can manually force the node to rejoin the cluster.
 This procedure removes all the data on the node, forces the node to join the cluster,
-and creates a new copy of the cluster data on the node.</p>
+and creates a new copy of the cluster data on the node.
 
 <p class="note important">
 <span class="note__title"> Important</span>   If you manually force a node to rejoin the cluster, data stored on the local node is lost. Do not force nodes to rejoin the cluster if you want to preserve unsynchronized data. Only do this procedure with the assistance of
-  <a href="https://tanzu.vmware.com/support">Support</a>.
+<a href="https://tanzu.vmware.com/support">Support</a>.
 </p>
 
-<p>Before following this procedure, try to bootstrap the cluster. For more information, see
+Before following this procedure, try to bootstrap the cluster. For more information, see
 <a href="./bootstrapping.html">Bootstrapping</a>.
-<br><br>
-To manually force a node to rejoin the cluster, do the following:</p>
 
-<ol>
-  <li>
-    SSH into the node by following the procedure in
-    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm-11">SSH Into the BOSH Director VM</a>.
-  </li>
-  <li>
-    Become root by running:
-    <code> sudo su</code>
-  </li>
-  <li>
-    Shut down the
-    <code>mysqld</code>
-    process on the node by running:
-    <code>  monit stop galera-init </code>
-  </li>
-  <li>
-    Remove the unsynchronized data on the node by running:
-    <code>  rm -rf /var/vcap/store/pxc-mysql</code>
-  </li>
-  <li>
-    Prepare the node before restarting by running:
-    <code>  /var/vcap/jobs/pxc-mysql/bin/pre-start</code>
-  </li>
-  <li>Restart the
-    <code>mysqld</code>
-    process by running:
-    <code> monit start galera-init</code>
-  </li>
-</ol>
+To manually force a node to rejoin the cluster, do the following:
+
+1. SSH into the node by following the procedure in
+    <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#ssh-into-the-bosh-director-vm">SSH Into the BOSH Director VM</a>.
+1. Become root by running:
+
+    ```
+    sudo su
+    ```
+
+2. Shut down the `mysqld` process on the node by running:
+
+    ```
+    monit stop galera-init
+    ```
+
+3. Remove the unsynchronized data on the node by running:
+
+    ```
+    rm -rf /var/vcap/store/pxc-mysql
+    ```
+
+4. Prepare the node before restarting by running:
+
+    ```
+    /var/vcap/jobs/pxc-mysql/bin/pre-start
+    ```
+
+5. Restart the <code>mysqld</code> process by running:
+    
+    ```
+    monit start galera-init
+    ```
 
 <h3 id="re-create-a-corrupted-vm-in-a-highly-available-cluster"><a id="recreate-VM"></a>Recreate a corrupted VM in a highly available cluster</h3>
 
-<p>To re-create a corrupted VM:</p>
+To re-create a corrupted VM:
 
 <ol>
   <li>To log in to the BOSH Director VM by doing the following procedures:
