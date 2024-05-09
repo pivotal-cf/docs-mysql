@@ -1511,32 +1511,32 @@ bosh -d DEPLOYMENT-NAME run-errand orphan-deployments
 * Output a list of deployment names under a `[stdout]` header
 * Provide a detailed error message under a `[stderr]` header
 
-For example:
+  For example:
 
-<pre class="terminal">
-[stdout]
-[{"deployment\_name":"service-instance\_80e3c5a7-80be-49f0-8512-44840f3c4d1b"}]
+  <pre class="terminal">
+  [stdout]
+  [{"deployment\_name":"service-instance\_80e3c5a7-80be-49f0-8512-44840f3c4d1b"}]
 
-[stderr]
-Orphan BOSH deployments detected with no corresponding service instance in Cloud Foundry. Before deleting any deployment it is recommended to verify the service instance no longer exists in Cloud Foundry and any data is safe to delete.
+  [stderr]
+  Orphan BOSH deployments detected with no corresponding service instance in Cloud Foundry. Before deleting any deployment it is recommended to verify the service instance no longer exists in Cloud Foundry and any data is safe to delete.
 
-Errand 'orphan-deployments' completed with error (exit code 10)
-</pre>
+  Errand 'orphan-deployments' completed with error (exit code 10)
+  </pre>
 
 
-These details are also available through the BOSH `/tasks/` API endpoint for use in scripting:
+  These details are also available through the BOSH `/tasks/` API endpoint for use in scripting:
 
-<pre class="terminal">
-$ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-id/output?type=result' | jq .
-{
-  "exit_code": 10,
-  "stdout": "[{"deployment_name":"service-instance_80e3c5a7-80be-49f0-8512-44840f3c4d1b"}]\n",
-  "stderr": "Orphan BOSH deployments detected with no corresponding service instance in Cloud Foundry. Before deleting any deployment it is recommended to verify the service instance no longer exists in Cloud Foundry and any data is safe to delete.\n",
-  "logs": {
-    "blobstore_id": "d830c4bf-8086-4bc2-8c1d-54d3a3c6d88d"
+  <pre class="terminal">
+  $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-id/output?type=result' | jq .
+  {
+    "exit_code": 10,
+    "stdout": "[{"deployment_name":"service-instance_80e3c5a7-80be-49f0-8512-44840f3c4d1b"}]\n",
+    "stderr": "Orphan BOSH deployments detected with no corresponding service instance in Cloud Foundry. Before deleting any deployment it is recommended to verify the service instance no longer exists in Cloud Foundry and any data is safe to delete.\n",
+    "logs": {
+      "blobstore_id": "d830c4bf-8086-4bc2-8c1d-54d3a3c6d88d"
+    }
   }
-}
-</pre>
+  </pre>
 
 **If no orphan deployments exist**: The errand script does the following:
 
@@ -1544,15 +1544,15 @@ $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-i
 * Stdout is an empty list of deployments
 * Stderr is `None`
 
-<pre class="terminal">
-[stdout]
-[]
+  <pre class="terminal">
+  [stdout]
+  []
 
-[stderr]
-None
+  [stderr]
+  None
 
-Errand 'orphan-deployments' completed successfully (exit code 0)
-</pre>
+  Errand 'orphan-deployments' completed successfully (exit code 0)
+  </pre>
 
 **If the errand encounters an error during running**: The errand script does the following:
 
@@ -1864,7 +1864,7 @@ To use the `download-logs` script:
 
 1. Download and unzip the `download-logs` script from
 <a href="https://network.tanzu.vmware.com/products/pivotal-mysql/">VMware Tanzu Network</a>.
-1. From the Ops Manager Installation Dashboard, go to BOSH Director &gt; **Credentials**.
+1. From the Ops Manager Installation Dashboard, go to **BOSH Director** &gt; **Credentials**.
 2. Click **Link to Credential** for the **Bosh Commandline Credentials**.
 3. From the plaintext file that opens, record the values for the following:
 
