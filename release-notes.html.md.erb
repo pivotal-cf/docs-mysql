@@ -26,7 +26,6 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 This release includes the following changes:
 
 * Backups and restores use less persistent disk space thanks to a new streaming format (xbstream) and more efficient compression (zstd).
-* Backups are encrypted with one credential per service instance. Previously,a new credential was generated per backup. Manually <a href="./kb-articles/clean-up-tas-credhub.html">cleaning up Tanzu Application Service Credhub</a> becomes a significantly less frequent process.
 * Users can restore into a non-empty database.
 * The bootstrap errand self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 * A number of high and critical CVEs are addressed by updating components to the latest versions.

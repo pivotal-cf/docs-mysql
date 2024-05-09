@@ -54,7 +54,8 @@ You might want to back up or restore a service instance in the following use cas
 
 - Creates and uploads physical backups for restoring all of the databases used
 by a service instance.
-- Encrypts the backup with one credential per service instance.
+- Includes a metadata file that contains the critical details for the backup,
+including the calendar time of the backup.
 - Encrypts the backup artifact on the service instance VM before uploading to offsite storage configured by the operator.
 Unencrypted data is never transferred outside the <%= vars.product_short %> deployment.
 - Run at a scheduled time. Operators configure the default schedule in <%= vars.ops_manager %>.
