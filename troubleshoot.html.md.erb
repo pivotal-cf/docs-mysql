@@ -1490,39 +1490,28 @@ To run the errand, run the following command:
 bosh -d service-instance_GUID delete-deployment
 ```
 
-<h3 id="-detect-orphaned-service-instances"><a id="detect-orphans"></a> Detect orphaned service instances</h3>
+### <a id="detect-orphans"></a> Detect orphaned service instances
 
+A service instance is defined as &ldquo;orphaned&rdquo; when the BOSH deployment for the
+instance is still running, but the service is no longer registered in Cloud Foundry.
 
-<p>
-  A service instance is defined as &ldquo;orphaned&rdquo; when the BOSH deployment for the
-  instance is still running, but the service is no longer registered in Cloud Foundry.
-</p>
+The `orphan-deployments` errand collates a list of service deployments that have
+no matching service instances in Cloud Foundry and return the list to the operator.
+It is then up to the operator to remove the orphaned BOSH deployments.
 
-<p>
-  The <code>orphan-deployments</code> errand collates a list of service deployments that have
-  no matching service instances in Cloud Foundry and return the list to the operator.
-  It is then up to the operator to remove the orphaned BOSH deployments.
-</p>
+To run the errand, run the following command:
 
-<p>
-  To run the errand, run the following command:
-</p>
+```
+bosh -d DEPLOYMENT-NAME run-errand orphan-deployments
+```
 
-<code>bosh -d DEPLOYMENT-NAME run-errand orphan-deployments</code>
+**If orphan deployments exist**: The errand script does the following:
 
-<p>
-  <strong>If orphan deployments exist</strong>&mdash;The errand script does the following:
-</p>
+* Exit with exit code 10
+* Output a list of deployment names under a <code>[stdout]</code> header
+* Provide a detailed error message under a <code>[stderr]</code> header
 
-<ul>
-  <li>Exit with exit code 10</li>
-  <li>Output a list of deployment names under a <code>[stdout]</code> header</li>
-  <li>Provide a detailed error message under a <code>[stderr]</code> header</li>
-</ul>
-
-<p>
-  For example:
-</p>
+For example:
 
 <pre class="terminal">
 [stdout]
@@ -1534,9 +1523,8 @@ Orphan BOSH deployments detected with no corresponding service instance in Cloud
 Errand 'orphan-deployments' completed with error (exit code 10)
 </pre>
 
-<p>
-  These details are also available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
-</p>
+
+These details are also available through the BOSH <code>/tasks/</code> API endpoint for use in scripting:
 
 <pre class="terminal">
 $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-id/output?type=result' | jq .
@@ -1550,15 +1538,11 @@ $ curl 'https<span>:</span>//bosh-user:bosh-password@bosh-url:25555/tasks/task-i
 }
 </pre>
 
-<p>
-  <strong>If no orphan deployments exist</strong>&mdash;The errand script does the following:
-</p>
+**If no orphan deployments exist**: The errand script does the following:
 
-<ul>
-  <li>Exit with exit code 0</li>
-  <li>Stdout is an empty list of deployments</li>
-  <li>Stderr is <code>None</code></li>
-</ul>
+* Exit with exit code 0
+* Stdout is an empty list of deployments
+* Stderr is `None`
 
 <pre class="terminal">
 [stdout]
@@ -1570,24 +1554,19 @@ None
 Errand 'orphan-deployments' completed successfully (exit code 0)
 </pre>
 
-<p>
-  <strong>If the errand encounters an error during running</strong>&mdash;The errand script does the following:
-</p>
+**If the errand encounters an error during running**: The errand script does the following:
 
-<ul>
-  <li>Exit with exit 1</li>
-  <li>Stdout is empty</li>
-  <li>Any error messages are under stderr</li>
-</ul>
+* Exit with exit 1
+* Stdout is empty
+* Any error messages are under stderr
 
-<p>
-  To clean up orphaned instances, run the following command on each instance:
-</p>
+To clean up orphaned instances, run the following command on each instance:
 
-<p> Running this command might leave IaaS resources in an unusable state.
-</p>
+Running this command might leave IaaS resources in an unusable state.
 
-<code>bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID</code>
+```
+bosh delete-deployment service-instance_SERVICE-INSTANCE-GUID
+```
 
 <h3 id="-reinstall-a-tile"><a id="reinstall"></a>Reinstall a tile</h3>
 
