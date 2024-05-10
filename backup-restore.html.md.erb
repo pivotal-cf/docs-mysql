@@ -86,7 +86,7 @@ about backup locking behavior, see the
 <a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona documentation</a>.
 </p>
 
-## <a id="understanding-metadata"></a> About backup files and metadata
+## <a id="understanding-metadata"></a> About backup files
 
 When <%= vars.product_short %> runs a backup,
 it uploads one file:
@@ -208,14 +208,16 @@ There are some cases where you cannot use the following procedure:
 
 ####<a name="non-empty-database"></a> Restoring to a non-empty database
 
-Double check it is safe to overwrite the database.
+You can restore to either a newly-created "empty" database service instance, or to a running "non-empty" database service instance that is actively hosting data. 
+
+Restoring to a non-empty database is destructive; you will lose any data in that database. Before restoring, first double check it is safe to overwrite the database.
 For example, the following actions write to the database:
 
 + You create service keys.
 + You configure the service instance for <%= vars.single_leader_plan %>.
 + <%= vars.product_short %> takes an automatic backup.
 
-There are three ways to restore to non-empty databases, provide the `--force` or `-f` flag or provide manual confirmation.
+There are two ways to restore to non-empty databases: provide manual confirmation, or provide the `--force` or `-f` flag.
 
 1. Provide manual confirmation
     ```
