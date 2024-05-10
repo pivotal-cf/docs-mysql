@@ -37,6 +37,9 @@ This release includes the following changes:
 
 + A number of high and critical CVEs were addressed by updating the components to the latest version.
 + MySQL service instances can automatically recover from an unexpected reboot
++ Fixed an issue where certain configurations of the backup Cron schedule could cause an error updating the service
+instance and `cf update-service` would fail with `The service broker has been updated, and this service instance is out of date`
+
 
 ### Compatibility
 
