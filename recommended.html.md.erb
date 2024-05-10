@@ -58,15 +58,9 @@ see [RPOs and RTOs](.//availability-options.html#rpo-and-rto).
 
 ## <a id="persistent"></a> Persistent disk usage
 
-The persistent disk receives, temporarily stores, and encrypts MySQL backups.
-This results in increased disk usage while backups are being processed.
-For single node and leader-follower service plans, backups are processed on the MySQL VM.
-For highly available (HA) clusters, backups are processed on the jumpbox VM.
-
-In addition to backups, the persistent disk also stores InnoDB redo logs and binlogs.
-InnoDB redo logs use a static amount of disk size.
-If your app is write-heavy,
-increase your persistent disk to accommodate the binlogs.
+Persistent disks store your application data, InnoDB redo logs and binlogs.
+If your app is write-heavy, increase your persistent disk to accommodate the binlogs. InnoDB redo logs use a static amount of disk size.
+HA cluster jumpboxes require persistent disk sufficient to hold backup artifacts during certain database restore operations.
 
 For the amount of persistent disk required for your service plan, see the following sections:
 
@@ -75,7 +69,9 @@ For the amount of persistent disk required for your service plan, see the follow
 * [HA cluster jumpbox](#ha-cluster-jumpbox)
 * [HA cluster node](#ha-cluster-node)
 
-[//]: # (Edit the following diagrams here: https://docs.google.com/presentation/d/1G-4BYAt0TI7XIXlS8ahHWzgnAZX6-8Ux9B9y73JV9u4/edit?usp=sharing)
+In the below discussion, `N` represents your expected application data volume in GB.
+
+[//]: # (Edit the following diagrams here: https://lucid.app/lucidspark/69dc37df-76a5-4323-bbea-f2f21f53878a/edit)
 
 <h3> <a id="single-node"></a> Single node and leader-follower</h3>
 
