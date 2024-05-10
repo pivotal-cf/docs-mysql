@@ -32,7 +32,15 @@ To restore a <%= vars.product_short %> instance from a backup:
 4. [Restore the service instance](#restore-instance)
 5. [Restage the service instance](#restage)
 
-##<a id="download"></a> Identify and download the backup artifact
+## <a id="download"></a> Identify and download the backup artifact
+
+<p class="note important"> This section describes how to retrieve a backup artifact created
+from <%= vars.product_short %> v3.3 or later. To retrieve a backup artifact from
+<%= vars.product_short %> v3.2 or earlier, consult this same section in your
+earlier version's documentation. After retrieving an earlier artifict, continue following
+this page's instructions to <a href="#restore-instance">Restore</a> and <a href="#restage">Restage</a>
+your new service instance from that earlier artifact.
+</p>
 
 The procedure you need to find and download the backup artifact depends on whether
 or not the service instance was deleted.
