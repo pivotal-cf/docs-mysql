@@ -68,7 +68,7 @@ and then download the backup artifact.
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
 
 2. Identify and download the backup artifact.
-   The directory of the file contains the GUID and an epoch timestamp.
+   It is a single file named `artifact` in a directory named with the service instance GUID and an epoch timestamp.
    For example, `../6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440/artifact`.
 
 3. Record the backup ID, which is the name of the directory.
@@ -116,7 +116,7 @@ and a timestamp for the backup.
     6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440   Fri Aug 21 22:37:20 UTC 2020
     </pre>
 
-3. If the service instance is running, download the backup artifact.
+3. Download the backup artifact.
    Your backup storage system is whatever you configured in [Configuring automated backups](automated-backup.html).
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
 
@@ -265,14 +265,14 @@ To prepare a new service instance for restore:
     Where:
 
     - `GUID` is the service instance GUID.
-    - `mysql-backup-STRING` is the backup file you downloaded
+    - `mysql-backup-artifact` is the backup artifact file you downloaded
        in [Identify and download the backup artifact](#download).
     - `BOSH-INSTANCE-GUID` is the BOSH instance GUID you recorded in the previous step.
     - `DESTINATION-PATH` is where the backup file saves on the BOSH VM.
 
     For example:
     <pre class="terminal">$ bosh -e my-env -d service-instance_12345678-90ab-cdef-1234-567890abcdef \
-        scp mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0 \
+        scp mysql-backup-artifact \
         mysql/d7ff8d46-c3e8-449f-aea7-5a05b0a1929c:/tmp/</pre>
 
 ## <a id="restore-instance"></a> Restore the service instance
@@ -316,7 +316,7 @@ in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Opera
 
     For example:
 
-    <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0</pre>
+    <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-artifact</pre>
 
 ## <a id="restage"></a> Restage the service instance
 
