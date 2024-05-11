@@ -164,9 +164,7 @@ Restoring to a non-empty database is destructive; you will lose any data in that
 + automatic backup configuration
 + any replication configuration if restoring to a <%= vars.single_leader_plan %> service instance,
 
-Before restoring, first double check it is safe to overwrite the database.
-
-There are two ways to restore to non-empty databases: provide manual confirmation, or provide the `--force` or `-f` flag.
+Before restoring, first confirm it is safe to overwrite the database. During the restore, the `cf adbr` cli plugin asks you to provide manual confirmation, or provide the `--force` or `-f` flag.
 
 1. Provide manual confirmation
     ```
@@ -204,7 +202,7 @@ There are some cases where you cannot use the following procedure:
 </table>
 
 
-###<a id="procedure"></a> Restore a service instance
+### <a id="procedure"></a> Restore a service instance
 
 To restore a service instance:
 
