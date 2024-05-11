@@ -145,77 +145,26 @@ Finally, you rebind and restage apps that use the service instance.
 Before you begin the restore procedure review the following important concepts:
 
 + [The topology of the instance you restore to](#instance-types)
-+ [When to use a different restore method](#different-cases)
 + [Restoring to a non-empty database](#non-empty-database)
++ [When to use a different restore method](#different-cases)
 
-####<a name="instance-types"></a> The topology of the instance you restore to
+#### <a name="instance-types"></a> The topology of the instance you restore to
 
-You can only restore to a single node or a <%= vars.single_leader_plan %> service instance.
-If you want a different topology, update the instance after restoring the data:
-
-<table class="table">
-<thead>
-  <th>To restore to…</th>
-  <th>First, restore to…</th>
-  <th>Then, update to…</th>
-  <tr>
-  </thead>
-    <td>Leader-Follower</td>
-    <td>Single node</td>
-    <td>Leader-Follower</td>
-  </tr>
-  <tr>
-    <td>HA cluster</td>
-    <td><%= vars.single_leader_plan %></td>
-    <td>HA cluster</td>
-  </tr>
-  <tr>
-    <td><%= vars.single_leader_plan %></td>
-    <td><%= vars.single_leader_plan %></td>
-    <td><em>n/a</em></td>
-  </tr>
-  <tr>
-    <td>Single node</td>
-    <td>Single node</td>
-    <td><em>n/a</em></td>
-  </tr>
-</table>
-
-You must ensure that the persistent disk in the single node plan is at least as large
-as the persistent disk of the largest leader-follower plan.
-Similarly, they must ensure that the persistent disk in the <%= vars.single_leader_plan %> plan
-is at least as large as the persistent disk of the largest HA cluster plan.
+You may restore to service instances of any topology type. Whatever topology you choose, be sure the
+destination service instance has sufficient persistent disk to accommodate the restore's data volume.
 For information about persistent disk sizing recommendations,
 see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
-####<a name="different-cases"></a> When to use a different restore method
+#### <a name="non-empty-database"></a> Restoring to a non-empty database
 
-There are some cases where you cannot use the following procedure:
+You can restore to either a newly-created "empty" database service instance, or to a running "non-empty" database service instance that is actively hosting data.
 
-<table class="table">
-<thead>
-  <th>Do not use the procedure in this section to restore a backup…</th>
-  <th>Instead, see…</th></thead>
-  <tr>
-    <td>from a deleted service instance</td>
-    <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>
-  </tr>
-  <tr>
-    <td>to a different foundation</td>
-    <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>
-  </tr>
-</table>
+Restoring to a non-empty database is destructive; you will lose any data in that database. This includes not just application data but ancillary configuration data such as:
++ application bindings and service keys you have created
++ automatic backup configuration
++ any replication configuration if restoring to a <%= vars.single_leader_plan %> service instance,
 
-####<a name="non-empty-database"></a> Restoring to a non-empty database
-
-You can restore to either a newly-created "empty" database service instance, or to a running "non-empty" database service instance that is actively hosting data. 
-
-Restoring to a non-empty database is destructive; you will lose any data in that database. Before restoring, first double check it is safe to overwrite the database.
-For example, the following actions write to the database:
-
-+ You create service keys.
-+ You configure the service instance for <%= vars.single_leader_plan %>.
-+ <%= vars.product_short %> takes an automatic backup.
+Before restoring, first double check it is safe to overwrite the database.
 
 There are two ways to restore to non-empty databases: provide manual confirmation, or provide the `--force` or `-f` flag.
 
@@ -234,6 +183,25 @@ There are two ways to restore to non-empty databases: provide manual confirmatio
     This action will overwrite all data in this service instance.
     OK
     ```
+
+
+#### <a name="different-cases"></a> When to use a different restore method
+
+There are some cases where you cannot use the following procedure:
+
+<table class="table">
+<thead>
+  <th>Do not use the procedure in this section to restore a backup…</th>
+  <th>Instead, see…</th></thead>
+  <tr>
+    <td>from a deleted service instance</td>
+    <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>
+  </tr>
+  <tr>
+    <td>to a different foundation</td>
+    <td><a href="manual-restore.html">Manually Restoring from Backup</a>.</td>
+  </tr>
+</table>
 
 
 ###<a id="procedure"></a> Restore a service instance
@@ -306,15 +274,8 @@ To restore a service instance:
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
       [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
-    If the status is `Restore failed`, see [The new database must be empty](#empty-database).
+    If the status is `Restore failed`, see [Troubleshooting the adbr plug-in](#troubleshooting-adbr).
 
-1. If you are restoring a leader-follower or HA cluster service instance,
-    update the plan by running:
-
-    ```
-    cf update-service DESTINATION-INSTANCE -p PLAN
-    ```
-    Where `PLAN` is the plan for the topology that you want to restore.
 
 1. Determine if your app is bound to a service instance by running:
 
@@ -351,13 +312,13 @@ To restore a service instance:
     cf restage APP-NAME
     ```
 
-##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr plug-in
+## <a id="troubleshooting-adbr"></a> Troubleshooting the adbr plug-in
 
 If you get HTTP error codes when working with the adbr plug-in,
 see [Failed backup or restore with adbr plug-in](troubleshoot-instances.html#failed-adbr)
 in _Troubleshooting on-demand instances_.
 
-##<a id="monitor-backups"></a> Monitor backups
+## <a id="monitor-backups"></a> Monitor backups
 
 It is particularly important to verify that automated backups are being taken according to schedule.
 A common cause of failure for automated backups is the persistent disk filling up.
