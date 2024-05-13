@@ -150,23 +150,25 @@ Before you begin the restore procedure review the following important concepts:
 
 #### <a name="instance-types"></a> The topology of the instance you restore to
 
-You may restore to service instances of any topology type. Whatever topology you choose, be sure the
+You can restore to service instances of any topology type. Whatever topology you choose, be sure the
 destination service instance has sufficient persistent disk to accommodate the restore's data volume.
 For information about persistent disk sizing recommendations,
 see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
 #### <a name="non-empty-database"></a> Restoring to a non-empty database
 
-You can restore to either a newly-created "empty" database service instance, or to a running "non-empty" database service instance that is actively hosting data.
+You can restore to either a newly-created _empty_ database service instance, or to a running _non-empty_ database service instance that is actively hosting data.
 
-Restoring to a non-empty database is destructive; you will lose any data in that database. This includes not just application data but ancillary configuration data such as:
-+ application bindings and service keys you have created
-+ automatic backup configuration
-+ any replication configuration if restoring to a <%= vars.single_leader_plan %> service instance,
+Restoring to a non-empty database is destructive; you lose any data in that database. This includes not just application data but ancillary configuration data such as:
 
-Before restoring, first confirm it is safe to overwrite the database. During the restore, the `cf adbr` cli plugin asks you to provide manual confirmation, or provide the `--force` or `-f` flag.
++ Application bindings and service keys you have created.
++ Automatic backup configuration.
++ Any replication configuration if restoring to a <%= vars.single_leader_plan %> service instance.
 
-1. Provide manual confirmation
+Before restoring, first confirm it is safe to overwrite the database. During the restore, the `cf adbr` cli plug-in asks you to provide manual confirmation or provide the `--force` or `-f` flag.
+
+1. Provide manual confirmation:
+
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
     Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
@@ -174,7 +176,9 @@ Before restoring, first confirm it is safe to overwrite the database. During the
     Really restore the service instance DESTINATION-INSTANCE? [yN]: y
     OK
     ```
-1. Provide the `--force` or `-f` flag
+
+2. Provide the `--force` or `-f` flag:
+   
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID --force
     Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
@@ -254,6 +258,7 @@ To restore a service instance:
     Really restore the service instance DESTINATION-INSTANCE? [yN]: y
     OK
     ```
+    
     Where `BACKUP-ID` is the ID you recorded in the previous step. <br><br>
 
     For example:
