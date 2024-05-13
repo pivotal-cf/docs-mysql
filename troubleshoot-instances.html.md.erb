@@ -458,25 +458,19 @@ Getting status of service instance myTargetDB in org my-org / space system as ad
 
   <tr>
     <th>Cause</th>
-    <td>A possible cause is that the database on the new service instance is not empty.
-    For more information, see <a href="backup-restore.html#empty-database">The New Database Must Be Empty</a>
-    in <em>Backing Up and Restoring VMware SQL with MySQL for Tanzu Application Service.</em></td>
+    <td>A possible cause is that the database or infrastructure issues are preventing a
+      successful restore.
   </tr>
 
   <tr>
     <th>Solution</th>
-    <td><p>To resolve the error and complete the restore:</p>
+    <td><p>To investigate the restore:</p>
                 <ol>
                  <li>
-                     Determine if the database is empty by reviewing the log <code>/var/vcap/sys/log/mysql-restore/mysql-restore.stderr.log</code>
-                     on the service instance.
+                     If restoring to a non-empty database, try creating a new service instance and
+                   retrying the restore to that empty database.
                   </li>
                   <li>
-                     If any GTIDs (global transaction identifiers) are printed in the logs, then the database is not empty.<br>
-                     Delete the service instance and create a new service instance to restore the backup to.
-                  </li>
-                  <li>
-                     If the log does not contain any GTIDs, then the restore failed for another reason.
                      Review other logs on the service instance and, if necessary, contact Support.
                   </li>
                  </ol> </td>

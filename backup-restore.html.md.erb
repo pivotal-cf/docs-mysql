@@ -86,50 +86,12 @@ about backup locking behavior, see the
 <a href="https://docs.percona.com/percona-xtrabackup/8.0/">Percona documentation</a>.
 </p>
 
-## <a id="understanding-metadata"></a> About backup files and metadata
+## <a id="understanding-metadata"></a> About backup files
 
 When <%= vars.product_short %> runs a backup,
-it uploads two files with Unix epoch-timestamped filenames:
+it uploads one file:
 
-  * The encrypted data backup file, `mysql-backup-TIMESTAMP.tar.gpg`
-  * A metadata file, `mysql-backup-TIMESTAMP.txt`
-
-The metadata file contains information about the backup that looks similar to the following:
-
-```
-end_time = 2024-01-29 18:56:21
-lock_time = 0
-innodb_to_lsn = 23136604
-partial = N
-tool_name = xtrabackup
-start_time = 2024-01-29 18:56:18
-compressed = N
-encrypted = N
-incremental = N
-format = xbstream
-name =
-tool_command = --defaults-file=/var/vcap/jobs/streaming-mysql-backup-tool/config/mysql-defaults-file.cnf --backup --stream=xbstream --target-dir=/var/vcap/store/xtrabackup_tmp
-tool_version = 8.0.35-30
-binlog_pos = filename 'mysql-bin.000012', position '197', GTID of the last change 'cfe096a6-bebf-11ee-be4e-4fcff573e33e:1-345'
-uuid = 180170b2-bed8-11ee-9e4f-42010a000122
-ibbackup_version = 8.0.35-30
-server_version = 8.0.35-27
-innodb_from_lsn = 0
-```
-
-The most important entries in the metadata file are the following:
-
-+ `start_time`: Use this to determine which transactions are captured in the backup.
-+ `server_version`: Use this to determine potential incompatibilities
-when restoring an instance with the backup artifact.
-
-The backup process does not interrupt the MySQL service, however backups only reflect transactions that are completed before the `start_time`.
-
-<p> The metadata file sets <code>compressed</code> <code>encrypted</code> as <code>N</code>, which
-  indicates that the backup is not compressed or encrypted.
-  However, the backup uploaded by <%= vars.product_short %> is both compressed and encrypted.
-  This is a known issue.
-</p>
+  * The encrypted data backup file, `artifact`
 
 ## <a id='prerequisite'></a> Prerequisite: adbr plug-in
 
@@ -183,50 +145,45 @@ Finally, you rebind and restage apps that use the service instance.
 Before you begin the restore procedure review the following important concepts:
 
 + [The topology of the instance you restore to](#instance-types)
++ [Restoring to a non-empty database](#non-empty-database)
 + [When to use a different restore method](#different-cases)
-+ [The new database must be empty](#empty-database)
 
-####<a name="instance-types"></a> The topology of the instance you restore to
+#### <a name="instance-types"></a> The topology of the instance you restore to
 
-You can only restore to a single node or a <%= vars.single_leader_plan %> service instance.
-If you want a different topology, update the instance after restoring the data:
-
-<table class="table">
-<thead>
-  <th>To restore to…</th>
-  <th>First, restore to…</th>
-  <th>Then, update to…</th>
-  <tr>
-  </thead>
-    <td>Leader-Follower</td>
-    <td>Single node</td>
-    <td>Leader-Follower</td>
-  </tr>
-  <tr>
-    <td>HA cluster</td>
-    <td><%= vars.single_leader_plan %></td>
-    <td>HA cluster</td>
-  </tr>
-  <tr>
-    <td><%= vars.single_leader_plan %></td>
-    <td><%= vars.single_leader_plan %></td>
-    <td><em>n/a</em></td>
-  </tr>
-  <tr>
-    <td>Single node</td>
-    <td>Single node</td>
-    <td><em>n/a</em></td>
-  </tr>
-</table>
-
-You must ensure that the persistent disk in the single node plan is at least as large
-as the persistent disk of the largest leader-follower plan.
-Similarly, they must ensure that the persistent disk in the <%= vars.single_leader_plan %> plan
-is at least as large as the persistent disk of the largest HA cluster plan.
+You may restore to service instances of any topology type. Whatever topology you choose, be sure the
+destination service instance has sufficient persistent disk to accommodate the restore's data volume.
 For information about persistent disk sizing recommendations,
 see <a href="recommended.html#persistent"> Persistent disk usage</a>.
 
-####<a name="different-cases"></a> When to use a different restore method
+#### <a name="non-empty-database"></a> Restoring to a non-empty database
+
+You can restore to either a newly-created "empty" database service instance, or to a running "non-empty" database service instance that is actively hosting data.
+
+Restoring to a non-empty database is destructive; you will lose any data in that database. This includes not just application data but ancillary configuration data such as:
++ application bindings and service keys you have created
++ automatic backup configuration
++ any replication configuration if restoring to a <%= vars.single_leader_plan %> service instance,
+
+Before restoring, first confirm it is safe to overwrite the database. During the restore, the `cf adbr` cli plugin asks you to provide manual confirmation, or provide the `--force` or `-f` flag.
+
+1. Provide manual confirmation
+    ```
+    cf adbr restore DESTINATION-INSTANCE BACKUP-ID
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    Really restore the service instance DESTINATION-INSTANCE? [yN]: y
+    OK
+    ```
+1. Provide the `--force` or `-f` flag
+    ```
+    cf adbr restore DESTINATION-INSTANCE BACKUP-ID --force
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    OK
+    ```
+
+
+#### <a name="different-cases"></a> When to use a different restore method
 
 There are some cases where you cannot use the following procedure:
 
@@ -244,21 +201,8 @@ There are some cases where you cannot use the following procedure:
   </tr>
 </table>
 
-####<a name="empty-database"></a> The new database must be empty
 
-Do not write anything to the database in the new service instance
-until after you have restored the backup to it.
-For example, the following actions write to the database:
-
-+ You create service keys.
-+ You configure the service instance for <%= vars.single_leader_plan %>.
-+ <%= vars.product_short %> takes an automatic backup.
-
-If the database is not empty, then the adbr plug-in fails to restore the data and
-you need to delete the service instance and create another.
-
-
-###<a id="procedure"></a> Restore a service instance
+### <a id="procedure"></a> Restore a service instance
 
 To restore a service instance:
 
@@ -305,8 +249,12 @@ To restore a service instance:
 
     ```
     cf adbr restore DESTINATION-INSTANCE BACKUP-ID
+    Restoring service instance DESTINATION-INSTANCE in org $ORG / space $SPACE as $USER...
+    This action will overwrite all data in this service instance.
+    Really restore the service instance DESTINATION-INSTANCE? [yN]: y
+    OK
     ```
-    Where is `BACKUP-ID` is the ID you recorded in the revious step. <br><br>
+    Where `BACKUP-ID` is the ID you recorded in the previous step. <br><br>
 
     For example:
 
@@ -324,15 +272,8 @@ To restore a service instance:
       Getting status of service instance myTargetDB in org my-org / space my-space as user...
       [Mon May 31 22:29:24 UTC 2021] Status: Restore was successful </pre>
 
-    If the status is `Restore failed`, see [The new database must be empty](#empty-database).
+    If the status is `Restore failed`, see [Troubleshooting the adbr plug-in](#troubleshooting-adbr).
 
-1. If you are restoring a leader-follower or HA cluster service instance,
-    update the plan by running:
-
-    ```
-    cf update-service DESTINATION-INSTANCE -p PLAN
-    ```
-    Where `PLAN` is the plan for the topology that you want to restore.
 
 1. Determine if your app is bound to a service instance by running:
 
@@ -369,13 +310,13 @@ To restore a service instance:
     cf restage APP-NAME
     ```
 
-##<a id="troubleshooting-adbr"></a> Troubleshooting the adbr plug-in
+## <a id="troubleshooting-adbr"></a> Troubleshooting the adbr plug-in
 
 If you get HTTP error codes when working with the adbr plug-in,
 see [Failed backup or restore with adbr plug-in](troubleshoot-instances.html#failed-adbr)
 in _Troubleshooting on-demand instances_.
 
-##<a id="monitor-backups"></a> Monitor backups
+## <a id="monitor-backups"></a> Monitor backups
 
 It is particularly important to verify that automated backups are being taken according to schedule.
 A common cause of failure for automated backups is the persistent disk filling up.

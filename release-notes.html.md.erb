@@ -13,7 +13,7 @@ and then upgrade to the latest patch available for the next minor.
 Because VMware uses the Percona Distribution for MySQL, expect a time lag between Oracle releasing a
 MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
-## <a id="3-2-0"></a> v3.3.0
+## <a id="3-3-0"></a> v3.3.0
 
 **Release Date: TBD**
 
@@ -25,7 +25,9 @@ MySQL patch and VMware releasing <%= vars.product_full %> containing that patch.
 
 This release includes the following changes:
 
-* The bootstrap errand now self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
+* Backups and restores use less persistent disk space thanks to a new streaming format (xbstream) and more efficient compression (zstd).
+* Users can restore into a non-empty database.
+* The bootstrap errand self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 * A number of high and critical CVEs are addressed by updating components to the latest versions.
 
 ### Breaking Changes

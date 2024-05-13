@@ -32,7 +32,15 @@ To restore a <%= vars.product_short %> instance from a backup:
 4. [Restore the service instance](#restore-instance)
 5. [Restage the service instance](#restage)
 
-##<a id="download"></a> Identify and download the backup artifact
+## <a id="download"></a> Identify and download the backup artifact
+
+<p class="note important"> This section describes how to retrieve a backup artifact created
+from <%= vars.product_short %> v3.3 or later. To retrieve a backup artifact from
+<%= vars.product_short %> v3.2 or earlier, consult this same section in your
+earlier version's documentation. After retrieving an earlier artifict, continue following
+this page's instructions to <a href="#restore-instance">Restore</a> and <a href="#restage">Restage</a>
+your new service instance from that earlier artifact.
+</p>
 
 The procedure you need to find and download the backup artifact depends on whether
 or not the service instance was deleted.
@@ -67,18 +75,12 @@ and then download the backup artifact.
    Your backup storage system is whatever you configured in [Configuring automated backups](automated-backup.html).
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
 
-2. Identify and download the backup artifact, the tarfile.
-   The name of the tarfile contains the GUID and an epoch timestamp.
-   For example, `6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440.tar`.
+2. Identify and download the backup artifact.
+   It is a single file named `artifact` in a directory named with the service instance GUID and an epoch timestamp.
+   For example, `../6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440/artifact`.
 
-3. Record the backup ID, which is the name of the TAR file without the `.tar` extension.
+3. Record the backup ID, which is the name of the directory.
    In the example, the backup ID is `6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440`.
-
-4. Untar the backup artifact. Keep the backup file with the `tar.gpg` extension.
-
-    The file with the `.txt` extension  contains metadata to help identify the backup,
-    but this text file is not needed for the restore procedure.
-
 
 ### <a id="different-foundation"></a>If Restoring to a different foundation
 
@@ -122,14 +124,9 @@ and a timestamp for the backup.
     6c1db434-29ef-47c4-9f22-59fe53676b07_1598049440   Fri Aug 21 22:37:20 UTC 2020
     </pre>
 
-3. If the service instance is running, download the backup tarfile.
+3. Download the backup artifact.
    Your backup storage system is whatever you configured in [Configuring automated backups](automated-backup.html).
    For example, it might be an S3 bucket or a file system on a backup host (SCP).
-
-4. Untar the backup artifact. Keep the backup file with the `tar.gpg` extension.
-
-    The file with the `.txt` extension  contains metadata to help identify the backup,
-    but this text file is not needed for the restore procedure.
 
 ##<a id="retrieve-key"></a> Retrieve backup encryption key
 
@@ -149,7 +146,7 @@ To retrieve the backup encryption key:
     bosh -d pivotal-mysql-GUID ssh
     ```
 
-    Where is `GUID` is the GUID you recorded in step 1.
+    Where `GUID` is the GUID you recorded in step 1.
 
     For example:
 
@@ -269,21 +266,21 @@ To prepare a new service instance for restore:
 
     ```
     bosh -e BOSH-ENVIRONMENT  -d service-instance_GUID \
-      scp mysql-backup-STRING.tar.gpg \
+      scp mysql-backup-STRING \
       mysql/BOSH-INSTANCE-GUID:DESTINATION-PATH
     ```
 
     Where:
 
     - `GUID` is the service instance GUID.
-    - `mysql-backup-STRING.tar.gpg` is the backup file you downloaded
+    - `mysql-backup-artifact` is the backup artifact file you downloaded
        in [Identify and download the backup artifact](#download).
     - `BOSH-INSTANCE-GUID` is the BOSH instance GUID you recorded in the previous step.
     - `DESTINATION-PATH` is where the backup file saves on the BOSH VM.
 
     For example:
     <pre class="terminal">$ bosh -e my-env -d service-instance_12345678-90ab-cdef-1234-567890abcdef \
-        scp mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg \
+        scp mysql-backup-artifact \
         mysql/d7ff8d46-c3e8-449f-aea7-5a05b0a1929c:/tmp/</pre>
 
 ## <a id="restore-instance"></a> Restore the service instance
@@ -299,7 +296,7 @@ The restore utility is packaged with the <%= vars.product_full %> tile.
 The restore utility does the following:
 
 * Deletes any existing data.
-* Decrypts and unzips the backup artifact.
+* Decrypts the backup artifact.
 * Restores the backup artifact into the MySQL data directory.
 
 To restore a service instance:
@@ -327,7 +324,7 @@ in [SSH into the BOSH Director VM](https://docs.vmware.com/en/VMware-Tanzu-Opera
 
     For example:
 
-    <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-1595910545-b42f275a-c355-49c3-9e33-bda6fcf2ffd0.tar.gpg</pre>
+    <pre class="terminal">$ mysql-restore --encryption-key NWjbvbB3pjOC --restore-file /tmp/mysql-backup-artifact</pre>
 
 ## <a id="restage"></a> Restage the service instance
 
