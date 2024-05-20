@@ -30,6 +30,16 @@ This release includes the following changes:
 * The bootstrap errand self-selects a high-availability cluster instance node on which to run, and no longer requires the `--instance` flag.
 * A number of high and critical CVEs are addressed by updating components to the latest versions.
 
+### Performance Improvements
+With the change to the compression algorithm, there has been a substantial improvement to the backup performance.
+
+Benchmark tests were performed against an arbitrary data set of around 150 GiB, and using a range of compute options (2 core / 2GB, 4 core / 16GB, 8 core / 64GB). Given those conditions, upgrading to version 3.3.0 of <%= vars.product_full %> resulted in approximately 8X faster backups and a 13% smaller backup artifact.
+![alt-text="MySQL v3.3 improvements, approximately 8 times faster backup, 13% smaller artifact"](./images/3.2-backup-performance.png)
+
+>**Important**
+>These estimates are based on a limited set of testing, against an arbitrary dataset using hardware that is representative of a few, but not inclusive of all, use cases and workloads.
+>Real performance will be unique to your specific use case and application.
+
 ### Breaking Changes
 
 This release includes the following breaking changes:
