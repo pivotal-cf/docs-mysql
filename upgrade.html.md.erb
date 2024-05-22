@@ -71,6 +71,21 @@ Upgrading the <%= vars.product_short %> service and service instances can tempor
 the service.
 For more information, see [Service interruptions](#interruptions).
 
+### <a id="57-to-80-upgrade"></a> Upgrading from MySQL 5.7 to 8.0
+
+After upgrading to <%= vars.product_short %> v3.x, you can upgrade your service instances from Percona 5.7 to Percona 8.0. Percona 8.0 includes significant changes.
+<%= vars.product_short %> v3.x addresses the major upgrade incompatibilities, but in some cases, client applications that are bound to a service instance that uses Percona v5.7 might have compatibility issues when the service instance is upgraded to use Percona 8.0.
+
+To better understand the possible compatibility issues, consider the following options:
+
++ Read the [compatibility documentation from Percona](https://dev.mysql.com/doc/refman/8.0/en/mysql-nutshell.html#mysql-nutshell-removals). This provides details on where application SQL might fail to execute correctly.
++ Consider making a backup of the current (Percona 5.7) database and restoring from the backup to a new 8.0 service instance in a non-production environment. See [Backup and Restore](./backup-restore.html). Then connect the relevant application and execute the appropriate tests for functionality and performance, if available.
++ Percona have a set of [compatibility testing tools](https://www.percona.com/blog/percona-utilities-that-make-major-mysql-version-upgrades-easier) which can be used to run existing queries against an upgraded schema. This process provides a mechanism to thoroughly test the application against the upgraded database. It can highlight potential incompatibility errors and performance changes.
++ MySQL also offers a comprehensive [upgrade guide](https://dev.mysql.com/doc/refman/8.0/en/upgrading.html) with a special section highlighting [best practices](https://dev.mysql.com/doc/refman/8.0/en/upgrade-best-practices.html)
+
+>**Note**
+>These tools are an optional source of feedback that can provide additional confidence while evaluating an upgrade from MySQL 5.7 to 8.0. No individual tool can guarantee a successful upgrade. It is your responsibility to fully review your unique database configuration.
+
 ### <a id="individual-upgrades"></a> About individual service instance upgrades
 
 <%= partial vars.path_to_partials + '/services/devs-can-upgrade-one-si' %>
