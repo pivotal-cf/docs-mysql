@@ -50,15 +50,13 @@ to the **Errands** pane and select **Off** for **Upgrade all On-demand MySQL Ser
 By default, the `upgrade-all-service-instances` errand runs after each upgrade.
 For more information, see
 [About individual service instance upgrades](#individual-upgrades).
-
->**Important**
-> As of <%= vars.product_short %> v3.2.0, only MySQL 8.0 is supported. When upgrading, you must update any plans
-> _previously configured_ with a "MySQL Default Version" of "5.7", and specify "8.0". On upgrade, all previously
-> created MySQL v5.7 service instances are updated to MySQL v8.0, either when the platform operator runs the
-> [upgrade-all-service-instances](./errands.html#upgrade-all-service-instances) errand or when the developer
-> [individually upgrades a service instance](./use.html#upgrade-an-individual-service-instance) using the cf
-> CLI.
-
+    >**Important**
+    > As of <%= vars.product_short %> v3.2.0, only MySQL 8.0 is supported. When upgrading, you must update any plans
+    > _previously configured_ with a "MySQL Default Version" of "5.7", and specify "8.0". On upgrade, all previously
+    > created MySQL v5.7 service instances are updated to MySQL v8.0, either when the platform operator runs the
+    > [upgrade-all-service-instances](./errands.html#upgrade-all-service-instances) errand or when the developer
+    > [individually upgrades a service instance](./use.html#upgrade-an-individual-service-instance) using the cf
+    > CLI.
 1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
 see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
