@@ -80,7 +80,22 @@ To better understand the possible compatibility issues, consider the following o
 
 ### <a id="individual-upgrades"></a> About individual service instance upgrades
 
-<%= partial vars.path_to_partials + '/services/devs-can-upgrade-one-si' %>
+<p class="note important">
+<span class="note__title">Important</span>
+To allow developers to upgrade individual service
+instances, you must use <%= vars.app_runtime_full %> v2.7 or later.
+</p>
+
+After you upgrade the <%= vars.product_short %> tile, existing service instances must be upgraded to
+use the latest version of the tile.
+Developers cannot create new bindings to service instances that have not been upgraded.
+
+MySQL Tile versions 3.0 and 3.1 allow plans to be configured with either MySQL versions 5.7 and 8.0.
+When you upgrade the tile, configured plans retain their MySQL version, and unused plans you
+newly-configure default to MySQL 8.0. You configure the MySQL plan version in each plan's
+topology section; select the desired MySQL version from the dropdown:
+
+<img src="../images/mysql-5.7-8.0-dropdown.png" alt="MySQL 5.7 and 8.0 version dropdown">
 
 ## <a id="interruptions"></a>Service interruptions
 
