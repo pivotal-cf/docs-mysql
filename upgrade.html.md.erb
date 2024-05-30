@@ -55,8 +55,7 @@ For more information, see
     > _previously configured_ with a "MySQL Default Version" of "5.7", and specify "8.0". On upgrade, all previously
     > created MySQL v5.7 service instances are updated to MySQL v8.0, either when the platform operator runs the
     > [upgrade-all-service-instances](./errands.html#upgrade-all-service-instances) errand or when the developer
-    > [individually upgrades a service instance](./use.html#upgrade-an-individual-service-instance) using the cf
-    > CLI.
+    > [individually upgrades a service instance](./use.html#upgrade-an-individual-service-instance) by using the cf CLI.
 1. Go to **<%= vars.ops_manager %> Dashboard** > **Review Pending Changes**.
 For more information about this <%= vars.ops_manager %> page,
 see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
@@ -101,7 +100,7 @@ When you upgrade the tile, configured plans retain their MySQL version, and unus
 newly configure default to MySQL 8.0. You configure the MySQL plan version in each plan's
 topology section; select the desired MySQL version from the drop-down menu:
 
-<img src="../images/mysql-5.7-8.0-dropdown.png" alt="MySQL 5.7 and 8.0 version drop-down menu.">
+![alt-text="MySQL 5.7 and 8.0 version drop-down menu."](./images/mysql-5.7-8.0-dropdown.png)
 
 ## <a id="interruptions"></a>Service interruptions
 
