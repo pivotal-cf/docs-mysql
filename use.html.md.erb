@@ -406,7 +406,7 @@ To upgrade a single service instance:
 
 1. When you are prompted, confirm that you want to upgrade.
 
-####<a id="upgrade-mysql-8-0"></a> Upgrade a service instance to MySQL 8.0
+#### <a id="upgrade-mysql-8-0"></a> Upgrade a service instance to MySQL 8.0
 
 When you upgrade a service instance using the `cf update-service` command with the
 `--upgrade` flag, the service instance continues to use MySQL 5.7. To upgrade a service
@@ -427,12 +427,11 @@ that is configured to use MySQL 8.0:
   cf update-service SERVICE-INSTANCE-NAME -p new-8-0-plan
   ```
 
-<p class="note important">
-<span class="note__title">Important</span>
-The MySQL version cannot be downgraded from 8.0 to 5.7.
-</p>
+Where `SERVICE-INSTANCE-NAME` is the name of the service instance to upgrade. The MySQL 8.0
+version of the plan will be applied to the service instance, triggering the service instance upgrade from 5.7
+to 8.0.
 
-###<a id="share"></a> Share service instances
+### <a id="share"></a> Share service instances
 
 In <%= vars.product_short %> you can share service instances between different orgs and spaces using `cf share-service`.
 Service instance sharing is enabled by default.

@@ -102,6 +102,23 @@ topology section; select the desired MySQL version from the drop-down menu:
 
 ![alt-text="MySQL 5.7 and 8.0 version drop-down menu."](./images/mysql-5.7-8.0-dropdown.png)
 
+### <a id="individual-upgrades"></a> About MySQL 5.7 to 8.0 upgrades
+
+MySQL Tile versions 3.0 and 3.1 allow plans to be configured with either MySQL versions 5.7 and 8.0.
+When you upgrade the tile, configured plans retain their MySQL version, and unused plans you
+newly-configure default to MySQL 8.0. You configure the MySQL plan version in each plan's
+topology section; select the desired MySQL version from the dropdown:
+
+<img src="images/mysql-5.7-8.0-dropdown.png" alt="MySQL 5.7 and 8.0 version dropdown">
+
+Note:
+- If you change a plan's MySQL version from 5.7 to 8.0, then any subsequent updates to a service instance
+  created with that plan will effect an upgrade of that instance's MySQL from 5.7 to 8.0. This includes
+  both batch updates to all service instances via the "upgrade-all-service-instances" errand, and also
+  individual service instance updates via a "cf update-service --upgrade" command.
+  to a service instance created with that plan
+- Service instances may only be upgraded, downgrades are not supported.
+
 ## <a id="interruptions"></a>Service interruptions
 
 Service changes, upgrades, and failures at the process, VM, and IaaS level can cause outages
