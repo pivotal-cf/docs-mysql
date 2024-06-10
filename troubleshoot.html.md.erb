@@ -1849,67 +1849,7 @@ To check the replication status, do the following:
 7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
-
-## <a id="tools"></a>Tools for troubleshooting
-
-The troubleshooting techniques described here  use the following tools.
-
-### <a id="download-logs"></a>download-logs
-
-`download-logs` is a script you can run from your Ops Manager VM to aggregate
-logs from your VMware SQL with MySQL for TAS cluster nodes, proxies, and, with highly available clusters,
-the jumpbox VM.
-
-To use the `download-logs` script:
-
-1. Download and unzip the `download-logs` script from
-<a href="https://network.tanzu.vmware.com/products/pivotal-mysql/">VMware Tanzu Network</a>.
-1. From the Ops Manager Installation Dashboard, go to **BOSH Director** &gt; **Credentials**.
-2. Click **Link to Credential** for the **Bosh Commandline Credentials**.
-3. From the plaintext file that opens, record the values for the following:
-
-    * `BOSH_CLIENT`
-    * `BOSH_CLIENT_SECRET`
-    * `BOSH_CA_CERT`
-    * `BOSH_ENVIRONMENT`
-
-4. From the BOSH CLI, view the name of the BOSH deployment for VMware SQL with MySQL for TAS by running:
-
-    ```
-    bosh deployments
-    ```
-
-    Record the name of the BOSH deployment.
-
-5. SSH into your Ops Manager VM by doing the procedures in
-<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>
-and <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">SSH into Ops Manager</a>.
-1. File transfer or copy-paste the `download-logs` script to a working directory on the Ops Manager VM.
-2. Set local environment variables to the same BOSH variable values that you recorded earlier,
-including `BOSH_DEPLOYMENT` for the deployment name.
-<br><br>
-  For example:
-  <pre class="terminal">
-  $ BOSH_CLIENT=ops_manager \
-    BOSH_CLIENT_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
-    BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate \
-    BOSH_ENVIRONMENT=10.0.0.5 \
-    BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
-  
-1. Run the `download-logs` script by running:
-
-    ```
-    ./download-logs -o .
-    ```
-
-    The script saves a compressed file of logs combined from all VMware SQL with MySQL for TAS VMs.
-    The filename has the form `TIMESTAMP-mysql-logs.tar.gz.gpg`.
-
-### <a id="mysql-diag"></a>mysql-diag
-
-The `mysql-diag` tools outputs the current status of a highly available (HA) VMware SQL with MySQL for TAS cluster and suggests recovery actions if the cluster fails.
-
-For more information, see [Running mysql-diag](mysql-diag.html).
+<%= partial vars.path_to_partials + "/services-tshoot/tshoot-tools" %>
 
 ## <a id="kb"></a>Knowledge Base (Community)
 
