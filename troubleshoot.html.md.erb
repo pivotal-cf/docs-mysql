@@ -1235,9 +1235,9 @@ main table {
     <strong>Network Latency</strong>: If network latency causes a node to become unresponsive, the node drops but eventually rejoins. The node automatically rejoins only if one node has left the cluster. Consult your IaaS network settings to reduce your network latency. <hr></li>
   <li>
     <strong>MySQL Process Failure:</strong> If the MySQL process fails, <code>monit</code>
-    then BOSH restores the process. If the process is not restored, run the
-    <code>download-logs</code> tool and consult the error logs it generates. For more information, see the
-    <a href="#download-logs">download-logs</a> section.<hr>
+    then BOSH restores the process. If the process is not restored, use "bosh logs" to retrieve
+    logs from the failing database or mysql jobs, and inspect the error logs returned. For more information, see the
+    <a href="#downloading-logs">Downloading logs</a> section.<hr>
   </li>
   <li>
     <strong>Firewall Rule Change:</strong>
@@ -2169,49 +2169,24 @@ gathering information to diagnose the type of failure the cluster is experiencin
     <a href="./mysql-diag.html">Running mysql-diag</a>.
   </li>
 
-  <li>
-    Run <code>download-logs</code> against each node in your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM.
-    You must run
-    <code>download-logs</code> before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
+3. Run `bosh logs` targeting each of the VMs in your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox to retrieve the VM logs. You must run
+    `bosh logs` before attempting recovery because any failures in the recovery procedure can result in logs being lost or made inaccessible.
     <br>
-    For more information, see the <a href="#download-logs">download-logs</a>
-    section.
+   For more information, see the <a href="#downloading-logs">Downloading logs</a>
+   section.
     <br>
-    <p> VMware recommends that you use the <code>-X</code> flag to get the complete
-      set of available logs. However, if your cluster processes a high volume of
-      transactions, the complete set might be too large and you can omit this flag
-      to fetch the essential set of logs.
-    </p>
-  </li>
 
-  <li>
-    If you are uncertain about the recovery steps to take, submit a ticket through
-    <a href="https://tanzu.vmware.com/support">Support</a>. When you submit a ticket provide the following information:
-    <ul>
-      <li>
-        <strong>mysql-diag output:</strong>
-        A summary of the network, disk, and replication state. The
-        <a href="./mysql-diag.html">Running mysql-diag</a>
-        topic explains how to run
-        <strong>mysql-diag</strong>.
-      </li>
-      <li>
-        <strong>download-logs logs:</strong>
-        Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
-        <a href="#download-logs" ">download-logs</a>
-        section explains how to run
-        <strong>download-logs</strong>.
-      </li>
-      <li>
-        <strong>Deployment environment:</strong>
-        The environment that VMware SQL with MySQL for TAS is running in such as VMware Tanzu Application Service for VMs or a service tile.</li>
-      <li>
-        <strong>Version numbers:</strong>
-        The versions of the installed Tanzu Operations Manager, TAS for VMs, and Tanzu SQL for VMs.
-      </li>
-    </ul>
-  </li>
-</ol>
+4. If you are uncertain about the recovery steps to take, submit a ticket through
+<a href="https://tanzu.vmware.com/support">Support</a>. When you submit a ticket provide the following information:
+
+     * **mysql-diag output:** A summary of the network, disk, and replication state. The         <a href="./mysql-diag.html">Running mysql-diag</a>
+           topic explains how to run **mysql-diag**.
+     * **downloaded logs:** Logs from your VMware SQL with MySQL for TAS cluster, proxies, and jumpbox VM. The
+     <a href="#downloading-logs">Downloading logs</a>
+     section explains how to obtain these.
+     * **Deployment environment:** The environment that VMware SQL with MySQL for TAS is running in such as VMware Tanzu Application Service for VMs or a service tile.
+     * **Version numbers:** The versions of the installed Ops Manager, TAS for VMs, and VMware SQL with MySQL for TAS.
+
 <p class="note important">
 <span class="note__title"> Important</span>  Do not attempt to resolve cluster issues by reconfiguring the cluster, such as changing the number of nodes or networks. Only follow the diagnosis steps in this document. If you are unsure how to proceed, contact
 <a href="https://tanzu.vmware.com/support">Support</a>.
@@ -2376,63 +2351,7 @@ To check the replication status, do the following:
 
     **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
 
-
-<h2 id="-tools-for-troubleshooting"><a id="tools"></a>  Tools for troubleshooting</h2>
-
-<p>The troubleshooting techniques described here  use the following tools.</p>
-
-<h3 id="download-logs"><a id="download-logs"></a>download-logs</h3>
-
-<p><code>download-logs</code> is a script that you can run from your Tanzu Operations Manager VM to aggregate
-logs from your Tanzu SQL for VMs cluster nodes, proxies, and, with highly available clusters,
-the jumpbox VM.</p>
-
-<p>To use the <code>download-logs</code> script:</p>
-
-<ol>
-<li><p>Download and unzip the <code>download-logs</code> script from
-<a href="https://network.tanzu.vmware.com/products/pivotal-mysql/">VMware Tanzu Network</a>.</p></li>
-<li><p>From the Tanzu Operations Manager Installation Dashboard, go to <strong>BOSH Director</strong> &gt; <strong>Credentials</strong>.</p></li>
-<li><p>Click <strong>Link to Credential</strong> for the <strong>Bosh Commandline Credentials</strong>.</p></li>
-<li><p>From the plaintext file that opens, record the values for the following:</p>
-
-<ul>
-<li><code>BOSH_CLIENT</code></li>
-<li><code>BOSH_CLIENT_SECRET</code></li>
-<li><code>BOSH_CA_CERT</code></li>
-<li><code>BOSH_ENVIRONMENT</code></li>
-</ul></li>
-<li><p>From the BOSH CLI, view the name of the BOSH deployment for VMware SQL with MySQL for TAS by running:</p>
-<code>bosh deployments</code>
-
-<p>Record the name of the BOSH deployment.</p></li>
-<li><p>SSH into your Tanzu Operations Manager VM by doing the procedures in
-<a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#gather-credential-and-ip-address-information-1">Gather Credential and IP Address Information</a>
-and <a href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html#log-in-to-the-ops-manager-vm-with-ssh-2">Log in to the Tanzu Operations Manager VM with SSH</a>.</p></li>
-<li><p>File transfer or copy-paste the <code>download-logs</code> script to a working directory on the Tanzu Operations Manager VM.</p></li>
-<li><p>Set local environment variables to the same BOSH variable values that you recorded earlier,
-including <code>BOSH_DEPLOYMENT</code> for the deployment name.
-<br><br>
-For example:
-<pre class="terminal">$ BOSH_CLIENT=ops_manager \
-  BOSH_CLIENT_SECRET=a123bc-E_4Ke3fb-gImbl3xw4a7meW0rY
-  BOSH_CA_CERT=/var/tempest/workspaces/default/root_ca_certificate \
-  BOSH_ENVIRONMENT=10.0.0.5 \
-  BOSH_DEPLOYMENT=pivotal-mysql-14c4</pre>
-  </p></li>
-<li><p>Run the <code>download-logs</code> script by running:</p>
-<code>./download-logs -o .</code>
-
-<p>The script saves a compressed file of logs combined from all VMware SQL with MySQL for TAS VMs.
-The filename has the form <code>TIMESTAMP-mysql-logs.tar.gz.gpg</code>.</p></li>
-</ol>
-
-
-### <a id="mysql-diag"></a>mysql-diag
-
-The `mysql-diag` tools outputs the current status of a highly available (HA) VMware SQL with MySQL for TAS cluster and suggests recovery actions if the cluster fails.
-
-For more information, see [Running mysql-diag](mysql-diag.html).
+<%= partial vars.path_to_partials + "/services-tshoot/tshoot-tools" %>
 
 <h2 id="-knowledge-base-(community)"><a id="kb"></a> Knowledge Base (Community)</h2>
 
