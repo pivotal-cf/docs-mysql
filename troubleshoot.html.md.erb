@@ -2296,75 +2296,73 @@ To manually force a node to rejoin the cluster, do the following:</p>
 
 <h3 id="check-replication-status-in-a-highly-available-cluster"><a id="check-replication"></a>Check replication status in a highly available cluster</h3>
 
-If you see stale data in your cluster, you can check whether replication is functioning normally.
+<p> If you see stale data in your cluster, you can check whether replication is functioning normally.</p>
 
-To check the replication status, do the following:
+<p>To check the replication status, do the following:</p>
 
-1.  To log in to the BOSH Director VM, do the following:
-    1.  Gather the information needed to log in to the BOSH Director VM by using the procedure in [Gather credential and IP Address information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).
-    2.  Log in to the Tanzu Operations Manager VM by doing the procedure in [Log in to the Tanzu Operations Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).
-2.  Create a dummy database in the first node by running:
-
-    ```
+<ol> 
+  <li>
+  To log in to the BOSH Director VM, do the following:
+    <ol>
+    <li>Gather the information needed to log in to the BOSH Director VM by using the procedure in [Gather credential and IP Address information](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-trouble-advanced.html).</li>
+    <li>Log in to the Ops Manager VM by doing the procedure in [Log in to the Ops Manager VM with SSH](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-ssh-login.html).</li>
+    </ol>
+  </li>
+  <li>Create a dummy database in the first node by running:<br>
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -e "create database verify_healthy;"
-    ```
-
+    </code>
     Where:
-
-    *   `FIRST-NODE-IP-ADDRESS` is the IP address of the first node you recorded in step 1.
-    *   `YOUR-IDENTITY` is the value of `identity` that you recorded in step 1.
-
-3.  Create a dummy table in the dummy database by running:
-
-    ```
+    <ul>
+      <li><code>FIRST-NODE-IP-ADDRESS</code> is the IP address of the first node you recorded in step 1.</li>
+      <li><code>YOUR-IDENTITY</code> is the value of <code>identity</code> that you recorded in step 1.</li>
+    </ul>
+  </li>
+  <li>Create a dummy table in the dummy database by running:<br>
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u your-identity \ -p -D verify_healthy \ -e "create table dummy_table (id int not null primary key auto_increment, info text) \ engine='innodb';"
-    ```
-
-4.  Insert data into the dummy table by running:
-
-    ```
+    </code>
+  </li>
+  <li>Insert data into the dummy table by running:<br>
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "insert into dummy_table(info) values ('dummy data'),('more dummy data'),('even more dummy data');"
-    ```
-
-5.  Query the table and verify that the three rows of dummy data exist on the first node by running:
-
-    ```
+    </code>
+  </li>
+  <li>Query the table and verify that the three rows of dummy data exist on the first node by running:<br>
+    <code>
     mysql -h FIRST-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify_healthy \ -e "select * from dummy_table;"
-    ```
-
+    </code>
     When prompted for a password, provide the `password` value recorded in step 1.
     The previous command returns output similar to the following:
-
     <pre class="terminal">
     +----+----------------------+
-     | id | info                 |
+    | id | info                 |
     +----+----------------------+
     |  4 | dummy data           |
     |  7 | more dummy data      |
     | 10 | even more dummy data |
     +----+----------------------+
     </pre>
-
-6.  Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
-    1.  Query the dummy table by running :
-        ```
+  </li>
+  <li>Verify that the other nodes contain the same dummy data by doing the following for each of the remaining MySQL server IP addresses:
+    <ol>
+      <li>Query the dummy table by running:<br>
+        <code>
         mysql -h NEXT-NODE-IP-ADDRESS \ -u YOUR-IDENTITY \ -p -D verify\_healthy \ -e "select * from dummy_table;"
-        ```
+        </code>
         When prompted for a password, provide the `password` value recorded in step 1.
-
-    2.  Verify that the node contains the same three rows of dummy data as the other nodes by running:
-
-        ```
+      </li>
+      <li>Verify that the node contains the same three rows of dummy data as the other nodes by running:<br>
+        <code>
         mysql -h NEXT-NODE-IP-ADDRESS \\
                   -u YOUR-IDENTITY \\
                   -p -D verify\\\_healthy \\
                   -e "select \* from dummy\\\_table;"
-        ```
+        </code>
         When prompted for a password, provide the `password` value recorded in step 1.
-
-
-    3.  Verify that the previous command returns output similar to the following:
-
+      </li>
+      <li>Verify that the previous command returns output similar to the following:<br>
+            <pre>
             +----+----------------------+
             | id | info                 |
             +----+----------------------+
@@ -2372,9 +2370,13 @@ To check the replication status, do the following:
             |  7 | more dummy data      |
             | 10 | even more dummy data |
             +----+----------------------+
-
-7.  **If each MySQL server instance does not return the same result,** before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support)
-    **If each MySQL server instance returns the same result,** then you can safely proceed to scaling down your cluster to a single node.
+            </pre>
+      </li>
+    </ol>
+  <li><b>If each MySQL server instance does not return the same result</b>, before proceeding further or making any changes to your deployment, contact [Support](https://tanzu.vmware.com/support).<br>
+  <b>If each MySQL server instance returns the same result</b>, then you can safely proceed to scaling down your cluster to a single node.
+  </li>
+</ol>
 
 <%= partial vars.path_to_partials + "/services-tshoot/tshoot-tools" %>
 
