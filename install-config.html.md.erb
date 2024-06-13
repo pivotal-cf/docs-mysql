@@ -642,7 +642,6 @@ To activate monitoring and logging in the MySQL service:
         <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
             For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
             <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
-            You can use the <a href="./kb-articles/script-to-download-mysql-logs.html"><code>download-logs</code></a> script to retrieve the logs, which each MySQL cluster node VM stores in <code>/var/vcap/store/mysql_audit_logs/</code>.
           </p>
            </td></tr>
     <tr><td><strong>Enable Read Only Admin User</strong></td>
