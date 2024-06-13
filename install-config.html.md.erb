@@ -611,7 +611,35 @@ To activate monitoring and logging in the MySQL service:
 
 2. Configure the fields as follows:
 
-      <table class="table">
+  <table>
+  <thead>
+    <tr><th>Field</th><th>Instructions</th></tr>
+  </thead>
+    <tr><td><strong>Metrics Polling Interval</strong></td>
+        <td>Enter the amount of time in seconds for the frequency that the monitor polls for metrics.
+        All service instances emit metrics about the health and status of the MySQL server.
+    </td></tr>
+    <tr><td><strong>Enable User Statistics Logging</strong></td>
+        <td>Select this check box to collect user statistics. You can use these statistics to better
+          understand server activity and identify load sources.
+        For more information about user statistics, see the <a href="https://docs.percona.com/percona-server/8.0/user-stats.html">Percona documentation</a>.
+    </td></tr>
+    <tr><td><strong>Enable Server Activity Logging</strong></td>
+        <td>Select this check box to record that connects to the servers and what queries are processed using the Percona Audit Log Plugin.
+            For more information, see the <a href="https://docs.percona.com/percona-server/8.0/audit-log-plugin.html">Percona documentation</a>
+            <p class="note"><strong>Note:</strong> MySQL audit logs are not forwarded to the syslog server because they can contain personally identifying information (PII) and secrets.<br>
+          </p>
+           </td></tr>
+    <tr><td><strong>Enable Read Only Admin User</strong></td>
+        <td>Select this check box to create a read-only admin user, named <code>roadmin</code>, on each service instance.
+        This user can be used for auditing and monitoring without risking
+        mutating or changing any data. This is because <code>roadmin</code> cannot make changes to data.
+        <br><br>
+        For instructions about retrieving the credentials for <code>roadmin</code>, see <a href="./troubleshoot.html#instance-creds">Retrieve Admin and Read-Only Admin Credentials for a Service Instance</a>.
+        The read-only admin user is always named <code>roadmin</code>, however, the password varies by service instance.</td></tr>
+  </table>
+  
+  <table class="table">
      <thead>
       <tr><th>Field</th><th>Instructions</th></tr></thead>
         <tr><td><strong>Metrics Polling Interval</strong></td>
