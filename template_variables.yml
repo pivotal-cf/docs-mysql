@@ -26,7 +26,7 @@ template_variables:
 
   ops_manager: Tanzu Operations Manager
 
-  product_network: VMware Tanzu Network
+  product_network: Broadcom Support
 
   # Associated Tanzu Application Service for VMs version
   current_major_version: "5.0"
