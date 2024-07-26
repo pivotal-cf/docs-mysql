@@ -28,7 +28,7 @@ template_variables:
 
   ops_manager: Ops Manager
 
-  product_network: VMware Tanzu Network
+  product_network: Broadcom Support
 
   # Other variables
   company_name: VMware
